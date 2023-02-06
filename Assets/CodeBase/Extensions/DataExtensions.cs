@@ -2,11 +2,9 @@
 
 namespace CodeBase.Extensions
 {
-    public class Converter
+    public static class DataExtensions
     {
-        public static MapData ToMapData(this string)
-        {
-            
-        }
+        public static MapData ToMapData(this string text)
+            => new MapData(text);
     }
 }
