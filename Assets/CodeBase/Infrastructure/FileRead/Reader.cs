@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.FileRead
+namespace CodeBase.Infrastructure.FileRead
 {
     public class Reader
     {

@@ -1,10 +1,8 @@
-﻿using CodeBase.FileRead;
+﻿using CodeBase.Data;
 
 namespace CodeBase.Extensions
 {
     public static class DataExtensions
     {
-        public static MapData ToMapData(this string text)
-            => new MapData(text);
     }
 }

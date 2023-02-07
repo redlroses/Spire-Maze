@@ -1,12 +1,17 @@
-﻿namespace CodeBase.FileRead
+﻿using CodeBase.Level;
+using UnityEngine;
+
+namespace CodeBase.Data
 {
     public readonly struct MapData
     {
-        public readonly string Data;
+        public readonly CellType[] Data;
+        public readonly Vector2 Size;
 
-        public MapData(string data)
+        public MapData(CellType[] data)
         {
             Data = data;
+            Size = new Vector2(16, 5);
         }
     }
 }
