@@ -16,8 +16,6 @@ namespace CodeBase.Tools
         [SerializeField] private float _arcGrade;
         [SerializeField] private float _floorHeight;
 
-        private LevelMapData _mapData;
-
         [ContextMenu("Build")]
         private void Build()
         {
@@ -62,9 +60,9 @@ namespace CodeBase.Tools
 
         private bool CheckForMissedPlate(int wallIndex)
         {
-            float upperCellIndex = wallIndex + _levelMapData.Width;
+            int upperCellIndex = wallIndex + _levelMapData.Width;
 
-            if (wallIndex + _levelMapData.Width >= _levelMapData.Size)
+            if (upperCellIndex >= _levelMapData.Size)
             {
                 return false;
             }
