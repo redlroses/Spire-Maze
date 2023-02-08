@@ -3,6 +3,9 @@
     public enum CellType : byte
     {
         Air,
-        Plate
+        Plate,
+        Wall,
+        Door,
+        Key
     }
 }
