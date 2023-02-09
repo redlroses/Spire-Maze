@@ -39,7 +39,7 @@ namespace CodeBase.Editor
             {
                 if (GUILayout.Button(AddFloor))
                 {
-                    _height.intValue = 1;
+                    AddNewFloor(0, data.Width);
                 }
             }
 
@@ -91,14 +91,19 @@ namespace CodeBase.Editor
         {
             if (GUILayout.Button(Plus))
             {
-                for (int i = 0; i < length; i++)
-                {
-                    _map.InsertArrayElementAtIndex(fromIndex + length + i);
-                    _map.GetArrayElementAtIndex(fromIndex + length + i).enumValueIndex = (int) CellType.Air;
-                }
-
-                _height.intValue++;
+                AddNewFloor(fromIndex + length, length);
             }
+        }
+
+        private void AddNewFloor(int fromIndex, int length)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                _map.InsertArrayElementAtIndex(fromIndex + i);
+                _map.GetArrayElementAtIndex(fromIndex + i).enumValueIndex = (int) CellType.Air;
+            }
+
+            _height.intValue++;
         }
 
         private void DrawCell(int index)
