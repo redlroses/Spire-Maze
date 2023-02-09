@@ -127,6 +127,7 @@ namespace CodeBase.Editor
                 CellType.Wall => Color.red,
                 CellType.Door => Color.yellow,
                 CellType.Key => Color.magenta,
+                CellType.MovingPlate => Color.blue,
                 _ => throw new ArgumentOutOfRangeException(nameof(by), by, null)
             };
         }

@@ -16,6 +16,7 @@ namespace CodeBase.Tools
         [SerializeField] private GameObject _defaultWall;
         [SerializeField] private GameObject _defaultDoor;
         [SerializeField] private GameObject _defaultKey;
+        [SerializeField] private GameObject _defaultMovingPlate;
 
         [Space] [Header("Settings")]
         [SerializeField] private Transform _levelContainer;
@@ -110,6 +111,9 @@ namespace CodeBase.Tools
                     break;
                 case CellType.Key:
                     Instantiate(_defaultKey, Vector3.zero, rotation, parent);
+                    break;
+                case CellType.MovingPlate:
+                    Instantiate(_defaultMovingPlate, Vector3.zero, rotation, parent);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(by), by, null);

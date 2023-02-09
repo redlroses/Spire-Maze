@@ -6,6 +6,7 @@
         Plate,
         Wall,
         Door,
-        Key
+        Key,
+        MovingPlate
     }
 }
