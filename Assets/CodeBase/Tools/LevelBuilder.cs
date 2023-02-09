@@ -1,5 +1,4 @@
 using System;
-using CodeBase.Data;
 using CodeBase.Level;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -9,12 +8,21 @@ namespace CodeBase.Tools
     [ExecuteAlways]
     public class LevelBuilder : MonoBehaviour
     {
+        [Header("LevelData")]
         [SerializeField] private LevelStaticData _levelMapData;
-        [SerializeField] private Transform _parent;
+
+        [Space] [Header("Prefabs")]
         [SerializeField] private GameObject _defaultArc;
         [SerializeField] private GameObject _defaultWall;
+        [SerializeField] private GameObject _defaultDoor;
+        [SerializeField] private GameObject _defaultKey;
+
+        [Space] [Header("Settings")]
+        [SerializeField] private Transform _levelContainer;
+
         [SerializeField] private float _arcGrade;
         [SerializeField] private float _floorHeight;
+
 
         [ContextMenu("Build")]
         private void Build()
@@ -26,36 +34,48 @@ namespace CodeBase.Tools
         [ContextMenu("Clear")]
         private void Clear()
         {
-            foreach (Transform plate in _parent)
+            for (int i = 0; i < 100; i++)
             {
-                DestroyImmediate(plate.gameObject);
+                foreach (Transform plate in _levelContainer)
+                {
+                    DestroyImmediate(plate.gameObject);
+                }
             }
         }
 
         private void BuildLevel(LevelStaticData mapData)
         {
-            float floor = 0;
-            float arc = 0;
-            int cellIndex = 0;
+            int floor = 0;
 
             for (int i = 0; i < mapData.Height; i++)
             {
-                for (int j = 0; j < mapData.Width; j++)
-                {
-                    Cell(mapData.CellMap[cellIndex], new Vector3(0, floor, 0), Quaternion.Euler(new Vector3(0, arc, 0)));
-
-                    if (CheckForMissedPlate(cellIndex))
-                    {
-                        Cell(CellType.Plate, new Vector3(0, floor + _floorHeight, 0), Quaternion.Euler(new Vector3(0, arc, 0)));
-                    }
-
-                    arc += _arcGrade;
-                    cellIndex++;
-                }
-
-                floor += _floorHeight;
-                arc = 0;
+                BuildFloor(mapData, floor);
+                floor++;
             }
+        }
+
+        private void BuildFloor(LevelStaticData mapData, int floor)
+        {
+            float arcGrade = 0;
+            int cellIndex = _levelMapData.Width * floor;
+
+            Transform floorParent = new GameObject($"Floor{floor}").transform;
+            floorParent.parent = _levelContainer;
+
+            for (int j = 0; j < mapData.Width; j++)
+            {
+                SpawnCell(mapData.CellMap[cellIndex], arcGrade, floorParent);
+
+                // if (mapData.CellMap[cellIndex] == CellType.Wall && CheckForMissedPlate(cellIndex))
+                // {
+                //     SpawnCell(CellType.Plate, arcGrade, floorParent);
+                // }
+
+                arcGrade += _arcGrade;
+                cellIndex++;
+            }
+
+            floorParent.transform.position = new Vector3(0, floor * _floorHeight, 0);
         }
 
         private bool CheckForMissedPlate(int wallIndex)
@@ -67,25 +87,29 @@ namespace CodeBase.Tools
                 return false;
             }
 
-            CellType upperCell = _levelMapData.CellMap[wallIndex + _levelMapData.Width];
+            CellType upperCell = _levelMapData.CellMap[upperCellIndex];
             return upperCell == CellType.Air || upperCell == CellType.Wall;
         }
 
-        private void Cell(CellType by, Vector3 at, Quaternion rotation)
+        private void SpawnCell(CellType by, float grade, Transform parent)
         {
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, grade, 0));
+
             switch (by)
             {
                 case CellType.Air:
                     break;
                 case CellType.Plate:
-                    Instantiate(_defaultArc, at, rotation, _parent);
+                    Instantiate(_defaultArc, Vector3.zero, rotation, parent);
                     break;
                 case CellType.Wall:
-                    Instantiate(_defaultWall, at, rotation, _parent);
+                    Instantiate(_defaultWall, Vector3.zero, rotation, parent);
                     break;
                 case CellType.Door:
+                    Instantiate(_defaultDoor, Vector3.zero, rotation, parent);
                     break;
                 case CellType.Key:
+                    Instantiate(_defaultKey, Vector3.zero, rotation, parent);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(by), by, null);
