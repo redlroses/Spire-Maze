@@ -20,10 +20,8 @@ namespace CodeBase.Tools
 
         [Space] [Header("Settings")]
         [SerializeField] private Transform _levelContainer;
-
         [SerializeField] private float _arcGrade;
         [SerializeField] private float _floorHeight;
-
 
         [ContextMenu("Build")]
         private void Build()
