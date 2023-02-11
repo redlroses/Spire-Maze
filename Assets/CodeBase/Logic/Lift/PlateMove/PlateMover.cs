@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Lift.PlateMove
 {
+    [RequireComponent(typeof(LiftPlate))]
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class PlateMover<T> : MonoCache
+    public abstract class PlateMover<T> : MonoCache, IPlateMover
     {
         private const int FinalTranslateValue = 1;
 
@@ -14,6 +15,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         private T _from;
         private T _to;
         private float _delta;
+        private float _distance;
 
         protected Rigidbody RigidBody => _rigidBody;
 
@@ -30,12 +32,14 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected abstract T GetTransform(LiftDestinationMarker from);
         protected abstract void SetNewPosition(T from, T to, float delta);
+        protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
 
         public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
         {
             enabled = true;
             _from = GetTransform(from);
             _to = GetTransform(to);
+            _distance = GetDistance(from, to);
             _delta = 0;
         }
 
@@ -48,7 +52,7 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         private void UpdateDelta()
         {
-            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.fixedDeltaTime);
+            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.fixedDeltaTime / _distance);
         }
 
         private void CheckIsComplete()

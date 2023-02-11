@@ -2,12 +2,21 @@
 
 namespace CodeBase.Logic.Lift.PlateMove
 {
-    public sealed class PlateHorizontalMover : PlateMover<Quaternion>
+    public sealed class PlateHorizontalMoverNew : PlateMover<float>
     {
-        protected override void SetNewPosition(Quaternion from, Quaternion to, float delta) =>
-            RigidBody.rotation = Quaternion.Lerp(from, to, delta);
+        protected override void SetNewPosition(float from, float to, float delta)
+        {
+            float deltaAngle = Mathf.Lerp(from, to, delta);
+            RigidBody.rotation = Quaternion.AngleAxis(deltaAngle, Vector3.up);
+        }
 
-        protected override Quaternion GetTransform(LiftDestinationMarker from) =>
-            Quaternion.Euler(0, from.Position.Angle, 0);
+        protected override float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to) =>
+            Mathf.Abs(from.Position.Angle - to.Position.Angle);
+
+        protected override float GetTransform(LiftDestinationMarker from)
+        {
+            Debug.Log(from.Position.Angle);
+            return from.Position.Angle;
+        }
     }
 }

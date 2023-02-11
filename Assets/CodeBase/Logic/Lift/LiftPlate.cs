@@ -10,7 +10,7 @@ namespace CodeBase.Logic.Lift
         [SerializeField] private LiftDestinationMarker _defaultInitialMarker;
         [SerializeField] private LiftDestinationMarker _defaultDestinationMarker;
 
-        private PlateHorizontalMover _plateHorizontalMover;
+        private IPlateMover _plateHorizontalMover;
         private LiftDestinationMarker _currentMarker;
         private LiftDestinationMarker _destinationMarker;
 
@@ -18,7 +18,7 @@ namespace CodeBase.Logic.Lift
 
         private void Awake()
         {
-            _plateHorizontalMover = Get<PlateHorizontalMover>();
+            _plateHorizontalMover = Get<IPlateMover>();
             _currentMarker = _defaultInitialMarker;
             _destinationMarker = _defaultDestinationMarker;
         }
