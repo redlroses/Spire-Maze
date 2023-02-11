@@ -1,4 +1,5 @@
-﻿using NTC.Global.Cache;
+﻿using CodeBase.Logic.Lift.PlateMove;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift
