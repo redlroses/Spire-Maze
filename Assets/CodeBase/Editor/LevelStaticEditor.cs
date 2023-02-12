@@ -33,6 +33,7 @@ namespace CodeBase.Editor
         {
             base.OnInspectorGUI();
             _cellStyle = EditorStyles.miniLabel;
+            _cellStyle.fontSize = 11;
             LevelStaticData data = (LevelStaticData) target;
 
             if (_height.intValue <= 0)
@@ -100,7 +101,7 @@ namespace CodeBase.Editor
             for (int i = 0; i < length; i++)
             {
                 _map.InsertArrayElementAtIndex(fromIndex + i);
-                _map.GetArrayElementAtIndex(fromIndex + i).enumValueIndex = (int) CellType.Air;
+                _map.GetArrayElementAtIndex(fromIndex + i).enumValueFlag = (int) CellType.Air;
             }
 
             _height.intValue++;
@@ -113,14 +114,15 @@ namespace CodeBase.Editor
             if (arrayElementAtIndex == null)
             {
                 _map.InsertArrayElementAtIndex(index);
-                arrayElementAtIndex.enumValueIndex = (int) CellType.Air;
+                arrayElementAtIndex.enumValueFlag = (int) CellType.Air;
             }
 
-            SetColor((CellType) arrayElementAtIndex.enumValueIndex);
+            SetColor((CellType) arrayElementAtIndex.enumValueFlag);
 
-            CellType cellType = (CellType) EditorGUILayout.EnumPopup(GUIContent.none,
-                (CellType) arrayElementAtIndex.enumValueIndex, _cellStyle, GUILayout.MinWidth(5f));
-            arrayElementAtIndex.enumValueIndex = (int) cellType;
+            CellType cellType = (CellType) EditorGUILayout.EnumFlagsField(GUIContent.none,
+                (CellType) arrayElementAtIndex.enumValueFlag, _cellStyle, GUILayout.MinWidth(5f));
+            UnityEngine.Debug.Log((int) cellType);
+            arrayElementAtIndex.enumValueFlag = (int) cellType;
         }
 
         private void SetColor(CellType by)
@@ -131,9 +133,16 @@ namespace CodeBase.Editor
                 CellType.Plate => Color.green,
                 CellType.Wall => Color.red,
                 CellType.Door => Color.yellow,
-                CellType.Key => Color.magenta,
-                CellType.MovingPlate => Color.blue,
-                _ => throw new ArgumentOutOfRangeException(nameof(by), by, null)
+                CellType.Key => new Color32(114, 173, 114, 255),
+                CellType.MovingMarkerLeft => Color.grey,
+                CellType.MovingMarkerUp => Color.grey,
+                CellType.MovingMarkerRight => Color.grey,
+                CellType.MovingMarkerDown => Color.grey,
+                CellType.MovingPlate | CellType.MovingMarkerLeft => Color.blue,
+                CellType.MovingPlate | CellType.MovingMarkerUp => Color.blue,
+                CellType.MovingPlate | CellType.MovingMarkerRight => Color.blue,
+                CellType.MovingPlate | CellType.MovingMarkerDown => Color.blue,
+                _ => Color.black
             };
         }
     }

@@ -1,12 +1,33 @@
-﻿namespace CodeBase.Level
+﻿using System;
+
+namespace CodeBase.Level
 {
-    public enum CellType : byte
+    [Flags]
+    public enum CellType
     {
-        Air,
-        Plate,
-        Wall,
-        Door,
-        Key,
-        MovingPlate
+        Air = 0,
+        Plate = 1 << 0,
+        Wall = 1 << 1,
+        Door = (1 << 2) | Plate,
+        Key = (1 << 3) | Plate,
+        MovingMarkerLeft = 1 << 4,
+        MovingMarkerUp = 1 << 5,
+        MovingMarkerRight = 1 << 6,
+        MovingMarkerDown = 1 << 7,
+        MovingPlate = 1 << 8,
     }
+
+    // public enum CellType : short
+    // {
+    //     Air,
+    //     Plate,
+    //     Wall,
+    //     Door,
+    //     Key,
+    //     MovingMarkerLeft,
+    //     MovingMarkerUp,
+    //     MovingMarkerRight,
+    //     MovingMarkerDown,
+    //     MovingPlate
+    // }
 }
