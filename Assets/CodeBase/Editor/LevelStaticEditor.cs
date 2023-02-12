@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Level;
+using CodeBase.LevelSpecification;
 using CodeBase.StaticData;
 using UnityEditor;
 using UnityEngine;
@@ -64,7 +64,7 @@ namespace CodeBase.Editor
         {
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandHeight(false));
 
-            for (int i = length - 1; i >= 0; i--)
+            for (int i = 0; i < length; i++)
             {
                 DrawCell(fromIndex + i);
             }
@@ -121,7 +121,6 @@ namespace CodeBase.Editor
 
             CellType cellType = (CellType) EditorGUILayout.EnumFlagsField(GUIContent.none,
                 (CellType) arrayElementAtIndex.enumValueFlag, _cellStyle, GUILayout.MinWidth(5f));
-            UnityEngine.Debug.Log((int) cellType);
             arrayElementAtIndex.enumValueFlag = (int) cellType;
         }
 

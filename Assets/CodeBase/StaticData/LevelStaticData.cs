@@ -1,4 +1,4 @@
-﻿using CodeBase.Level;
+﻿using CodeBase.LevelSpecification;
 using UnityEngine;
 
 namespace CodeBase.StaticData

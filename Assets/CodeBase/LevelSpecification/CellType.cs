@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Level
+namespace CodeBase.LevelSpecification
 {
     [Flags]
     public enum CellType
