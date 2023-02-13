@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.LevelSpecification
@@ -9,13 +10,16 @@ namespace CodeBase.LevelSpecification
         private int _currentIndex;
 
         public int Height => Container.Count;
+
         public int Width => Container[0].Container.Count;
+
         public int Size => Height * Width;
 
         public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
+
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
 
-        public Level(Transform selfTransform, int size) : base(selfTransform, size)
+        public Level(int size, Transform selfTransform, List<Floor> container = null) : base(size, selfTransform, container)
         {
         }
 
@@ -32,7 +36,7 @@ namespace CodeBase.LevelSpecification
         }
 
         IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator() =>
-            this;
+            new Level(Size, SelfTransform, Container);
 
         public IEnumerator GetEnumerator() =>
             this;

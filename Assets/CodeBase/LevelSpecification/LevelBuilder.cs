@@ -8,11 +8,11 @@ namespace CodeBase.LevelSpecification
     [ExecuteAlways]
     public class LevelBuilder : MonoBehaviour
     {
-        [Header("LevelData")]
-        [SerializeField] private LevelStaticData _levelMapData;
+        [Header("LevelData")] [SerializeField] private LevelStaticData _levelMapData;
 
         [Space] [Header("Settings")]
         [SerializeField] private Transform _levelContainer;
+        [SerializeField] private float _radius;
         [SerializeField] private float _arcGrade;
         [SerializeField] private float _floorHeight;
 
@@ -43,7 +43,7 @@ namespace CodeBase.LevelSpecification
         private void BuildLevelNew(LevelStaticData mapData)
 
         {
-            _level = new Level(_levelContainer, mapData.Height);
+            _level = new Level(mapData.Height, _levelContainer);
 
             for (int i = mapData.Height - 1; i >= 0; i--)
             {
@@ -57,13 +57,14 @@ namespace CodeBase.LevelSpecification
 
         private Floor BuildFloorNew(CellType[] floorCells, Transform container)
         {
-            Floor floor = new Floor(container, floorCells.Length);
+            Floor floor = new Floor(floorCells.Length, container);
 
             for (int i = 0; i < floorCells.Length; i++)
             {
-                Vector3 containerPosition = Vector3.zero;
-                Quaternion containerRotation = Quaternion.Euler(0, i * _arcGrade, 0);
-                Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}", container, containerPosition, containerRotation);
+                Vector3 containerPosition = GetPosition(i * _arcGrade, _radius);
+                Quaternion containerRotation = GetRotation(i * _arcGrade);
+                Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}", container,
+                    containerPosition, containerRotation);
                 Cell cell = new Cell(floorCells[i], cellContainer);
                 floor.Add(cell);
             }
@@ -75,7 +76,7 @@ namespace CodeBase.LevelSpecification
         {
             Transform floorContainer = new GameObject(name).transform;
             floorContainer.parent = parent;
-            floorContainer.position = position;
+            floorContainer.localPosition = position;
             return floorContainer;
         }
 
@@ -83,9 +84,19 @@ namespace CodeBase.LevelSpecification
         {
             Transform floorContainer = new GameObject(name).transform;
             floorContainer.parent = parent;
-            floorContainer.position = position;
-            floorContainer.rotation = rotation;
+            floorContainer.localPosition = position;
+            floorContainer.localRotation = rotation;
             return floorContainer;
+        }
+
+        private Quaternion GetRotation(float grade) =>
+            Quaternion.Euler(0, -grade - _arcGrade, 0);
+
+        private Vector3 GetPosition(float byArcGrade, float radius)
+        {
+            float posX = Mathf.Cos(byArcGrade * Mathf.Deg2Rad) * radius;
+            float posZ = Mathf.Sin(byArcGrade * Mathf.Deg2Rad) * radius;
+            return new Vector3(posX, 0, posZ);
         }
     }
 }

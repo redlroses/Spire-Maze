@@ -6,10 +6,12 @@ namespace CodeBase.LevelSpecification
     public abstract class CellContainer<T>
     {
         public readonly List<T> Container;
+        public Transform SelfTransform;
 
-        protected CellContainer(Transform selfTransform, int size)
+        protected CellContainer(int size, Transform selfTransform, List<T> container = null)
         {
-            Container = new List<T>(size);
+            SelfTransform = selfTransform;
+            Container = container ?? new List<T>(size);
         }
 
         public void Add(T item)

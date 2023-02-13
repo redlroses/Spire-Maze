@@ -9,7 +9,7 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                CellFactory.InstantiateCell<TCell>(cell.Container);
+                CellFactory.InstantiatePlate(cell.Container);
                 PlateExampleSetup();
             }
         }
