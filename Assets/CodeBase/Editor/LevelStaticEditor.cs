@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CodeBase.Editor
 {
     [CustomEditor(typeof(LevelStaticData))]
-    public class LevelStaticEditor : UnityEditor.Editor
+    public partial class LevelStaticEditor : UnityEditor.Editor
     {
         private const string Munus = "-";
         private const string Plus = "+";

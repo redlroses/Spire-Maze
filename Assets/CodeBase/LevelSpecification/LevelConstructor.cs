@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using CodeBase.LevelSpecification.Cells;
+using CodeBase.LevelSpecification.Constructor;
 using UnityEngine;
 
 namespace CodeBase.LevelSpecification
@@ -12,8 +15,12 @@ namespace CodeBase.LevelSpecification
         [SerializeField] private GameObject _defaultKey;
         [SerializeField] private GameObject _defaultMovingPlate;
 
+        private CellConstructor _cellConstructor = new CellConstructor();
+
         public void Construct(Level level)
         {
+            _cellConstructor.Construct<Plate>(level.Where(cell => cell.CellType == CellType.Plate).ToArray());
+            _cellConstructor.Construct<Wall>(level.Where(cell => cell.CellType == CellType.Wall).ToArray());
             Debug.Log("Constructed");
         }
 
@@ -28,31 +35,29 @@ namespace CodeBase.LevelSpecification
             return upperCell == CellType.Air || upperCell == CellType.Wall;
         }
 
-        private void SpawnCell(CellType by, float grade, Transform parent)
+        private void SpawnCell(Cell cell)
         {
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, grade, 0));
-
-            switch (by)
+            switch (cell.CellType)
             {
                 case CellType.Air:
                     break;
                 case CellType.Plate:
-                    Instantiate(_defaultArc, Vector3.zero, rotation, parent);
+                    Instantiate(_defaultArc, Vector3.zero, Quaternion.identity);
                     break;
                 case CellType.Wall:
-                    Instantiate(_defaultWall, Vector3.zero, rotation, parent);
+                    Instantiate(_defaultWall, Vector3.zero, Quaternion.identity);
                     break;
                 case CellType.Door:
-                    Instantiate(_defaultDoor, Vector3.zero, rotation, parent);
+                    Instantiate(_defaultDoor, Vector3.zero, Quaternion.identity);
                     break;
                 case CellType.Key:
-                    Instantiate(_defaultKey, Vector3.zero, rotation, parent);
+                    Instantiate(_defaultKey, Vector3.zero, Quaternion.identity);
                     break;
                 case CellType.MovingPlate:
-                    Instantiate(_defaultMovingPlate, Vector3.zero, rotation, parent);
+                    Instantiate(_defaultMovingPlate, Vector3.zero, Quaternion.identity);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(by), by, null);
+                    throw new ArgumentOutOfRangeException(nameof(cell.CellType), cell.CellType, null);
             }
         }
     }

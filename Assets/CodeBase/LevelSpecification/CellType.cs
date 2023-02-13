@@ -16,18 +16,4 @@ namespace CodeBase.LevelSpecification
         MovingMarkerDown = 1 << 7,
         MovingPlate = 1 << 8,
     }
-
-    // public enum CellType : short
-    // {
-    //     Air,
-    //     Plate,
-    //     Wall,
-    //     Door,
-    //     Key,
-    //     MovingMarkerLeft,
-    //     MovingMarkerUp,
-    //     MovingMarkerRight,
-    //     MovingMarkerDown,
-    //     MovingPlate
-    // }
 }
