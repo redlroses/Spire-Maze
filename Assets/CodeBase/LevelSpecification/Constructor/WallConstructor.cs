@@ -1,5 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
-using UnityEngine;
+using CodeBase.LevelSpecification.Cells;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -9,14 +9,8 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                CellFactory.InstantiateWall(cell.Container);
-                PlateExampleSetup();
+                CellFactory.InstantiateCell<Wall>(cell.Container);
             }
-        }
-
-        private void PlateExampleSetup()
-        {
-            Debug.Log("PlateSetup");
         }
     }
 }

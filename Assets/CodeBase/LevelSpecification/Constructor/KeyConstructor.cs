@@ -3,13 +3,13 @@ using CodeBase.LevelSpecification.Cells;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
-    public class PlateConstructor : ICellConstructor
+    public class KeyConstructor : ICellConstructor
     {
         public void Construct<TCell>(Cell[] cells)
         {
             foreach (var cell in cells)
             {
-                CellFactory.InstantiateCell<Plate>(cell.Container);
+                CellFactory.InstantiateCell<Key>(cell.Container);
             }
         }
     }

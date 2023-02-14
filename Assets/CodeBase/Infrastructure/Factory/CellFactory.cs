@@ -1,21 +1,20 @@
-﻿using UnityEngine;
+﻿using CodeBase.LevelSpecification;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
 {
     public class CellFactory : MonoBehaviour
     {
-        public static GameObject InstantiatePlate(Transform container)
+        private const string CellPath = "Prefabs/";
+
+        public static GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell =>
+            InstantiateObject(container, CellPath + typeof(TCell).Name);
+
+        private static GameObject InstantiateObject(Transform container, string path)
         {
-            GameObject prefabPlate = Resources.Load<GameObject>("Prefabs/ArcPlate");
+            GameObject prefabPlate = Resources.Load<GameObject>(path);
             Debug.Log($"{prefabPlate} inst");
             return Instantiate(prefabPlate, container);
-        }
-
-        public static GameObject InstantiateWall(Transform container)
-        {
-            GameObject prefabWall = Resources.Load<GameObject>("Prefabs/ArcWall");
-            Debug.Log($"{prefabWall} inst");
-            return Instantiate(prefabWall, container);
         }
     }
 }

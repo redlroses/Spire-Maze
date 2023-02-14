@@ -90,7 +90,7 @@ namespace CodeBase.LevelSpecification
         }
 
         private Quaternion GetRotation(float grade) =>
-            Quaternion.Euler(0, -grade - _arcGrade, 0);
+            Quaternion.Euler(0, -grade, 0);
 
         private Vector3 GetPosition(float byArcGrade, float radius)
         {
