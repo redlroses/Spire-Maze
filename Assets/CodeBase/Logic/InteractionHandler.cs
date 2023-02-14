@@ -10,7 +10,7 @@ namespace CodeBase.Logic
 
         private void OnCollisionPlate(Collision collision)  
         {
-            if (collision.collider.TryGetComponent(out Plate plate))  // Гетает при входе в каждую платформу, подумать как оптимизировать
+            if (collision.collider.TryGetComponent(out Plate plate))  // Убрать проверку столкновения с землей
             {
                 PlacedPlates?.Invoke();
             }
