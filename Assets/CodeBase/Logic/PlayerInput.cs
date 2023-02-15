@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using CodeBase.Services.Input;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
@@ -27,20 +26,20 @@ public class PlayerInput : MonoCache
     protected override void OnEnabled()
     {
         _inputController.Player.Enable();
-        _inputController.Player.Jump.performed += OnJump;
-        _inputController.Player.Movement.performed += OnMove;
-        _inputController.Player.Movement.canceled += OnMove;
+        _inputController.Player.Jump.performed += context => OnJump();
+        _inputController.Player.Movement.performed += context => OnMove();
+        _inputController.Player.Movement.canceled += context => OnMove();
     }
 
     protected override void OnDisabled()
     {
         _inputController.Player.Disable();
-        _inputController.Player.Jump.performed -= OnJump;
-        _inputController.Player.Movement.performed -= OnMove;
-        _inputController.Player.Movement.canceled -= OnMove;
+        _inputController.Player.Jump.performed -= context => OnJump();
+        _inputController.Player.Movement.performed -= context => OnMove();
+        _inputController.Player.Movement.canceled -= context => OnMove();
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    private void OnMove()
     {
         int MoveInput = Mathf.RoundToInt(_inputController.Player.Movement.ReadValue<float>());
         MoveDiraction diraction = (MoveDiraction)MoveInput;
@@ -48,5 +47,5 @@ public class PlayerInput : MonoCache
         Mover.Move(diraction);
     }
 
-    private void OnJump(InputAction.CallbackContext context) => Jumper.Jump();
+    private void OnJump() => Jumper.Jump();
 }
