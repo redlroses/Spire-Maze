@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Tools.Constants;
+using UnityEngine;
 
 namespace CodeBase.Logic.Lift.PlateMove
 {
@@ -12,12 +13,10 @@ namespace CodeBase.Logic.Lift.PlateMove
         }
 
         protected override float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to) =>
-            Mathf.Abs(from.Position.Angle - to.Position.Angle);
+            Mathf.PI * Radius * Mathf.Abs(from.Position.Angle - to.Position.Angle) / Trigonometry.PiGrade;
 
-        protected override float GetTransform(LiftDestinationMarker from)
-        {
-            return from.Position.Angle;
-        }
+        protected override float GetTransform(LiftDestinationMarker from) =>
+            from.Position.Angle;
 
         private Vector3 GetPosition(float byArcGrade, float radius)
         {

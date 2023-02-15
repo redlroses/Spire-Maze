@@ -10,5 +10,7 @@
             Height = height;
             Angle = angle;
         }
+
+        public override string ToString() => $"Height: {Height}, Angle: {Angle}";
     }
 }

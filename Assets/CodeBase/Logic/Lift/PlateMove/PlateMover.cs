@@ -9,7 +9,7 @@ namespace CodeBase.Logic.Lift.PlateMove
     {
         private const int FinalTranslateValue = 1;
 
-        [SerializeField] protected float _speed = 20f;
+        [SerializeField] protected float _speed = 3f;
 
         protected float Radius;
 
