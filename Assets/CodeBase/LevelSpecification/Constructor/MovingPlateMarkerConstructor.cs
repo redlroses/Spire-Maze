@@ -13,7 +13,6 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class MovingPlateMarkerConstructor : ICellConstructor
     {
-        
         private readonly Dictionary<CellType, MovingDirection> _directions;
 
         private Cell[] _cells;
@@ -195,8 +194,6 @@ namespace CodeBase.LevelSpecification.Constructor
                 _markers.Where(cell =>
                     cell.Position.Angle.EqualsApproximately(movingPlateCell.Position.Angle) &&
                     cell.IsTypeOf(type)).ToList();
-
-            Debug.Log(filtered.Count);
             return filtered;
         }
     }
