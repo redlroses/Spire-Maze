@@ -41,17 +41,6 @@ namespace CodeBase.Editor
                 CheckMonoCache(property, targetType);
         }
 
-        private void CheckMonoCache(SerializedProperty property, Type targetType)
-        {
-            MonoCache field = property.objectReferenceValue as MonoCache;
-
-            if (field.GetComponent(targetType) == null)
-            {
-                property.objectReferenceValue = null;
-                Debug.LogError("MonoBehavior must contain component implemented " + targetType + " interface");
-            }
-        }
-
         private void CheckMonoBehavior(SerializedProperty property, Type targetType)
         {
             MonoBehaviour field = property.objectReferenceValue as MonoBehaviour;
@@ -60,6 +49,17 @@ namespace CodeBase.Editor
             {
                 property.objectReferenceValue = null;
                 Debug.LogError("MonoBehavior must contain component implemented " + targetType + " interface");
+            }
+        }
+
+        private void CheckMonoCache(SerializedProperty property, Type targetType)
+        {
+            MonoCache field = property.objectReferenceValue as MonoCache;
+
+            if (field.GetComponent(targetType) == null)
+            {
+                property.objectReferenceValue = null;
+                Debug.LogError("MonoCache must contain component implemented " + targetType + " interface");
             }
         }
 
