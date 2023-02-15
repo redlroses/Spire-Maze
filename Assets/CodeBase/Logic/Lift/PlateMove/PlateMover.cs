@@ -9,7 +9,9 @@ namespace CodeBase.Logic.Lift.PlateMove
     {
         private const int FinalTranslateValue = 1;
 
-        [SerializeField] protected float _speed = 1f;
+        [SerializeField] protected float _speed = 3f;
+
+        protected float Radius;
 
         private Rigidbody _rigidBody;
         private T _from;
@@ -22,6 +24,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         private void Awake()
         {
             _rigidBody = Get<Rigidbody>();
+            Radius = new Vector2(transform.parent.position.x, transform.parent.position.z).magnitude;
             enabled = false;
         }
 

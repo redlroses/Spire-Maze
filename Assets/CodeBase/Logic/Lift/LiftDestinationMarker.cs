@@ -4,15 +4,13 @@ namespace CodeBase.Logic.Lift
 {
     public class LiftDestinationMarker : MonoBehaviour
     {
-        [SerializeField] private MovingDirection _direction;
-        [SerializeField] private float _angle;
-
-        public MovingDirection Direction => _direction;
+        public MovingDirection Direction { get; private set; }
         public CellPosition Position { get; private set; }
 
-        private void Awake()
+        public void Construct(CellPosition cellPosition, MovingDirection direction)
         {
-            Position = new CellPosition(transform.position.y, _angle);
+            Position = cellPosition;
+            Direction = direction;
         }
     }
 }

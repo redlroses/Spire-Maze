@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Level;
+using CodeBase.LevelSpecification;
 using CodeBase.StaticData;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CodeBase.Editor
 {
     [CustomEditor(typeof(LevelStaticData))]
-    public class LevelStaticEditor : UnityEditor.Editor
+    public partial class LevelStaticEditor : UnityEditor.Editor
     {
         private const string Munus = "-";
         private const string Plus = "+";
@@ -64,7 +64,7 @@ namespace CodeBase.Editor
         {
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandHeight(false));
 
-            for (int i = length - 1; i >= 0; i--)
+            for (int i = 0; i < length; i++)
             {
                 DrawCell(fromIndex + i);
             }
@@ -121,7 +121,6 @@ namespace CodeBase.Editor
 
             CellType cellType = (CellType) EditorGUILayout.EnumFlagsField(GUIContent.none,
                 (CellType) arrayElementAtIndex.enumValueFlag, _cellStyle, GUILayout.MinWidth(5f));
-            UnityEngine.Debug.Log((int) cellType);
             arrayElementAtIndex.enumValueFlag = (int) cellType;
         }
 
@@ -134,14 +133,14 @@ namespace CodeBase.Editor
                 CellType.Wall => Color.red,
                 CellType.Door => Color.yellow,
                 CellType.Key => new Color32(114, 173, 114, 255),
-                CellType.MovingMarkerLeft => Color.grey,
-                CellType.MovingMarkerUp => Color.grey,
-                CellType.MovingMarkerRight => Color.grey,
-                CellType.MovingMarkerDown => Color.grey,
-                CellType.MovingPlate | CellType.MovingMarkerLeft => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerUp => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerRight => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerDown => Color.blue,
+                CellType.Left => Color.grey,
+                CellType.Up => Color.grey,
+                CellType.Right => Color.grey,
+                CellType.Down => Color.grey,
+                CellType.MovingPlate | CellType.Left => Color.blue,
+                CellType.MovingPlate | CellType.Up => Color.blue,
+                CellType.MovingPlate | CellType.Right => Color.blue,
+                CellType.MovingPlate | CellType.Down => Color.blue,
                 _ => Color.black
             };
         }

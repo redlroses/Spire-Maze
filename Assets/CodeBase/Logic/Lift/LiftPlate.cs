@@ -7,26 +7,24 @@ namespace CodeBase.Logic.Lift
     public class LiftPlate : MonoCache, ILiftPlate
     {
         [SerializeField] private LiftState _state;
-        [SerializeField] private LiftDestinationMarker _defaultInitialMarker;
-        [SerializeField] private LiftDestinationMarker _defaultDestinationMarker;
 
-        private IPlateMover _plateHorizontalMover;
+        private IPlateMover _plateMover;
         private LiftDestinationMarker _currentMarker;
         private LiftDestinationMarker _destinationMarker;
 
         public LiftState State => _state;
 
-        private void Awake()
+        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover)
         {
-            _plateHorizontalMover = Get<IPlateMover>();
-            _currentMarker = _defaultInitialMarker;
-            _destinationMarker = _defaultDestinationMarker;
+            _currentMarker = initialMarker;
+            _destinationMarker = destinationMarker;
+            _plateMover = mover;
         }
 
         [ContextMenu("Move")]
         public void Move()
         {
-            _plateHorizontalMover.Move(_currentMarker, _destinationMarker);
+            _plateMover.Move(_currentMarker, _destinationMarker);
             SwitchMarkers();
         }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8869848473154311947}
   - component: {fileID: 6700511240641815489}
   m_Layer: 0
-  m_Name: ArcPlate
+  m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5187024206962360852}
-  m_Mesh: {fileID: -3796300582984652964, guid: 92591cd90eca7964b9788270e03ec57d, type: 3}
+  m_Mesh: {fileID: -3796300582984652964, guid: a65ee83eef7214c4d907e099d07b80c9, type: 3}
 --- !u!23 &6700511240641815489
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8637527682490492027, guid: 92591cd90eca7964b9788270e03ec57d, type: 3}
+  - {fileID: 8637527682490492027, guid: a65ee83eef7214c4d907e099d07b80c9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
