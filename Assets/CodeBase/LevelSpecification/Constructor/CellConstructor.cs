@@ -16,7 +16,6 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Wall)] = new WallConstructor(),
                 [typeof(Key)] = new KeyConstructor(),
                 [typeof(Door)] = new DoorConstructor(),
-                [typeof(MovingPlate)] = new MovingPlateConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),
             };
         }

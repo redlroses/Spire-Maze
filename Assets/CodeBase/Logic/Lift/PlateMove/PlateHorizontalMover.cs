@@ -16,7 +16,6 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected override float GetTransform(LiftDestinationMarker from)
         {
-            Debug.Log(from.Position.Angle);
             return from.Position.Angle;
         }
 

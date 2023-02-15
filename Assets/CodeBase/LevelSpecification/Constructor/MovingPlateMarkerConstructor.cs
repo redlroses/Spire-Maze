@@ -7,7 +7,6 @@ using CodeBase.Logic.Lift;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -47,8 +46,6 @@ namespace CodeBase.LevelSpecification.Constructor
                 CellFactory.InstantiateCell<MovingPlateMarker>(cell.Container);
             }
 
-            Debug.Log($"MovingPlate position: height {_movingPlates.First().CellPosition.Height}, angle {_movingPlates.First().CellPosition.Angle}");
-
             foreach (var movingPlates in _movingPlates)
             {
                 ApplyMovingPlate(movingPlates);
@@ -72,48 +69,97 @@ namespace CodeBase.LevelSpecification.Constructor
             liftPlate.Construct(initialMarker, destinationMarker, mover);
         }
 
-        private Cell FindPair(Cell movingPlateCell)
+        private Cell FindPair(Cell movingPlateCell) =>
+            movingPlateCell.IsTypeOf(CellType.Right | CellType.Left)
+                ? FindHorizontalPair(movingPlateCell)
+                : FindVerticalPair(movingPlateCell);
+
+        private Cell FindVerticalPair(Cell movingPlateCell)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Cell FindHorizontalPair(Cell movingPlateCell)
         {
             float movingPlateAngle = movingPlateCell.CellPosition.Angle;
-            bool isIncreaseAngle = false;
-            Cell target = null;
 
-            if ((movingPlateCell.CellType & CellType.Left) != 0)
+            if (movingPlateCell.IsTypeOf(CellType.Left))
             {
-                List<Cell> filtered =
-                    _markers.Where(cell =>
-                        cell.CellPosition.Height.EqualsApproximately(movingPlateCell.CellPosition.Height) &&
-                        cell.IsTypeOf(CellType.Right)).ToList();
+                List<Cell> filtered = GetFilteredByHeight(movingPlateCell, CellType.Right);
+                return GetClosestRightPair(filtered, movingPlateAngle);
+            }
+            else
+            {
+                List<Cell> filtered = GetFilteredByHeight(movingPlateCell, CellType.Left);
+                return GetClosestLeftPair(filtered, movingPlateAngle);
+            }
+        }
 
-                List<Cell> possibleMarkers = null;
+        private Cell GetClosestLeftPair(IReadOnlyCollection<Cell> filtered, float movingPlateAngle)
+        {
+            List<Cell> possibleMarkers = null;
+            bool isIncreaseAngle = false;
 
-                for (int i = 0; i <= 1; i++)
+            for (int i = 0; i <= 1; i++)
+            {
+                possibleMarkers = filtered.Where(cell =>
+                    cell.CellPosition.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0).ToList();
+
+                if (possibleMarkers.Any())
                 {
-                    possibleMarkers = filtered.Where(cell =>
-                        cell.CellPosition.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0).ToList();
-
-                    if (possibleMarkers.Any())
-                    {
-                        break;
-                    }
-
-                    isIncreaseAngle = true;
+                    break;
                 }
 
-                target = (possibleMarkers ?? throw new ArgumentNullException(nameof(possibleMarkers)))
-                    .OrderBy(cell => cell.CellPosition.Angle).First();
+                isIncreaseAngle = true;
+            }
 
-                Debug.Log(target.CellPosition.Angle);
-                if (isIncreaseAngle)
-                {
-                    target.AddTwoPiToAngle();
-                }
-                Debug.Log(target.CellPosition.Angle);
+            Cell target = (possibleMarkers ?? throw new ArgumentNullException(nameof(possibleMarkers)))
+                .OrderBy(cell => cell.CellPosition.Angle).Last();
 
-                Debug.Log($"Marker position: height {target.CellPosition.Height}, angle {target.CellPosition.Angle}");
+            if (isIncreaseAngle)
+            {
+                target.RemoveTwoPiFromAngle();
             }
 
             return target;
+        }
+
+        private Cell GetClosestRightPair(IReadOnlyCollection<Cell> filtered, float movingPlateAngle)
+        {
+            List<Cell> possibleMarkers = null;
+            bool isIncreaseAngle = false;
+
+            for (int i = 0; i <= 1; i++)
+            {
+                possibleMarkers = filtered.Where(cell =>
+                    cell.CellPosition.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0).ToList();
+
+                if (possibleMarkers.Any())
+                {
+                    break;
+                }
+
+                isIncreaseAngle = true;
+            }
+
+            Cell target = (possibleMarkers ?? throw new ArgumentNullException(nameof(possibleMarkers)))
+                .OrderBy(cell => cell.CellPosition.Angle).First();
+
+            if (isIncreaseAngle)
+            {
+                target.AddTwoPiToAngle();
+            }
+
+            return target;
+        }
+
+        private List<Cell> GetFilteredByHeight(Cell movingPlateCell, CellType type = CellType.All)
+        {
+            List<Cell> filtered =
+                _markers.Where(cell =>
+                    cell.CellPosition.Height.EqualsApproximately(movingPlateCell.CellPosition.Height) &&
+                    cell.IsTypeOf(type)).ToList();
+            return filtered;
         }
     }
 }

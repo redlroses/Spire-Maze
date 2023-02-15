@@ -15,7 +15,6 @@ namespace CodeBase.LevelSpecification
             _cellConstructor.Construct<Plate>(level.Where(cell => (cell.CellType & CellType.Plate) == CellType.Plate).ToArray());
             _cellConstructor.Construct<Key>(level.Where(cell => cell.CellType == CellType.Key).ToArray());
             _cellConstructor.Construct<Door>(level.Where(cell => cell.CellType == CellType.Door).ToArray());
-            _cellConstructor.Construct<MovingPlate>(level.Where(cell => cell.CellType == CellType.MovingPlate).ToArray());
             _cellConstructor.Construct<MovingPlateMarker>(level.Where(cell => (int) (cell.CellType & CellType.MovingMarker) > 1).ToArray());
         }
     }

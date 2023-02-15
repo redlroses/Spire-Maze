@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.LevelSpecification
 {
     public sealed class Level : CellContainer<Floor>, IEnumerable<Cell>, IEnumerator<Cell>
     {
-        private int _currentIndex;
+        private int _currentIndex = -1;
 
         public int Height => Container.Count;
 
@@ -31,7 +30,7 @@ namespace CodeBase.LevelSpecification
 
         public void Reset()
         {
-            _currentIndex = 0;
+            _currentIndex = -1;
             MoveNext();
         }
 

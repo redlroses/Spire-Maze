@@ -21,5 +21,10 @@ namespace CodeBase.LevelSpecification
         {
             CellPosition = new CellPosition(CellPosition.Height, CellPosition.Angle + Trigonometry.TwoPiGrade);
         }
+
+        public void RemoveTwoPiFromAngle()
+        {
+            CellPosition = new CellPosition(CellPosition.Height, CellPosition.Angle - Trigonometry.TwoPiGrade);
+        }
     }
 }
