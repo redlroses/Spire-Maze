@@ -13,7 +13,6 @@ namespace CodeBase.Infrastructure.Factory
         private static GameObject InstantiateObject(Transform container, string path)
         {
             GameObject prefabPlate = Resources.Load<GameObject>(path);
-            Debug.Log($"{prefabPlate} inst");
             return Instantiate(prefabPlate, container);
         }
     }

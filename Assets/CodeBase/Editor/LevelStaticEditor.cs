@@ -133,14 +133,14 @@ namespace CodeBase.Editor
                 CellType.Wall => Color.red,
                 CellType.Door => Color.yellow,
                 CellType.Key => new Color32(114, 173, 114, 255),
-                CellType.MovingMarkerLeft => Color.grey,
-                CellType.MovingMarkerUp => Color.grey,
-                CellType.MovingMarkerRight => Color.grey,
-                CellType.MovingMarkerDown => Color.grey,
-                CellType.MovingPlate | CellType.MovingMarkerLeft => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerUp => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerRight => Color.blue,
-                CellType.MovingPlate | CellType.MovingMarkerDown => Color.blue,
+                CellType.Left => Color.grey,
+                CellType.Up => Color.grey,
+                CellType.Right => Color.grey,
+                CellType.Down => Color.grey,
+                CellType.MovingPlate | CellType.Left => Color.blue,
+                CellType.MovingPlate | CellType.Up => Color.blue,
+                CellType.MovingPlate | CellType.Right => Color.blue,
+                CellType.MovingPlate | CellType.Down => Color.blue,
                 _ => Color.black
             };
         }

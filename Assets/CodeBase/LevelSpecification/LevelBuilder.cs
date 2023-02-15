@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -19,11 +20,16 @@ namespace CodeBase.LevelSpecification
         private LevelConstructor _levelConstructor;
         private Level _level;
 
+        private void Awake()
+        {
+            Build();
+        }
+
         [ContextMenu("Build")]
         private void Build()
         {
             Clear();
-            BuildLevelNew(_levelMapData);
+            BuildLevel(_levelMapData);
             _levelConstructor ??= GetComponent<LevelConstructor>();
             _levelConstructor.Construct(_level);
         }
@@ -40,7 +46,7 @@ namespace CodeBase.LevelSpecification
             }
         }
 
-        private void BuildLevelNew(LevelStaticData mapData)
+        private void BuildLevel(LevelStaticData mapData)
 
         {
             _level = new Level(mapData.Height, _levelContainer);
@@ -50,12 +56,12 @@ namespace CodeBase.LevelSpecification
                 Vector3 containerPosition = new Vector3(0, i * _floorHeight, 0);
                 Transform floorContainer = CreateContainer($"Floor {i + 1}", _levelContainer, containerPosition);
                 CellType[] floorCells = mapData.CellMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
-                Floor floor = BuildFloorNew(floorCells, floorContainer);
+                Floor floor = BuildFloor(floorCells, floorContainer);
                 _level.Add(floor);
             }
         }
 
-        private Floor BuildFloorNew(CellType[] floorCells, Transform container)
+        private Floor BuildFloor(CellType[] floorCells, Transform container)
         {
             Floor floor = new Floor(floorCells.Length, container);
 
@@ -84,8 +90,7 @@ namespace CodeBase.LevelSpecification
         {
             Transform floorContainer = new GameObject(name).transform;
             floorContainer.parent = parent;
-            floorContainer.localPosition = position;
-            floorContainer.localRotation = rotation;
+            floorContainer.SetLocalPositionAndRotation(position, rotation);
             return floorContainer;
         }
 

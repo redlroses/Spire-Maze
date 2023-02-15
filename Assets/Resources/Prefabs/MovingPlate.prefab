@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6460857807628151836}
   - component: {fileID: 9101041163656026326}
   - component: {fileID: 5272379439785042178}
+  - component: {fileID: -460353984038943939}
+  - component: {fileID: -775770549204709863}
   m_Layer: 0
   m_Name: MovingPlate
   m_TagString: Untagged
@@ -97,5 +99,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _defaultInitialMarker: {fileID: 0}
-  _defaultDestinationMarker: {fileID: 0}
+--- !u!54 &-460353984038943939
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299658556792600835}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &-775770549204709863
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299658556792600835}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3796300582984652964, guid: f77e178da6068d141bbef9c767a7fe71, type: 3}

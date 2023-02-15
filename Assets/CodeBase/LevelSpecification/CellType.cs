@@ -10,10 +10,13 @@ namespace CodeBase.LevelSpecification
         Wall = 1 << 1,
         Door = (1 << 2) | Plate,
         Key = (1 << 3) | Plate,
-        MovingMarkerLeft = 1 << 4,
-        MovingMarkerUp = 1 << 5,
-        MovingMarkerRight = 1 << 6,
-        MovingMarkerDown = 1 << 7,
+        Left = 1 << 4,
+        Up = 1 << 5,
+        Right = 1 << 6,
+        Down = 1 << 7,
         MovingPlate = 1 << 8,
+        MovingMarker = Down | Left |
+                       Right | Up,
+        All = ~0
     }
 }

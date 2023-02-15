@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Tools.Extension
+﻿using UnityEngine;
+
+namespace CodeBase.Tools.Extension
 {
     public static class AngleExtension
     {
@@ -12,6 +14,18 @@
             }
 
             return angle;
+        }
+
+        public static Vector3 ClampY360(this Vector3 rotation)
+        {
+            float angle = rotation.y % Constants.Trigonometry.TwoPiGrade;
+
+            if (angle < 0)
+            {
+                angle += Constants.Trigonometry.TwoPiGrade;
+            }
+
+            return new Vector3(rotation.x, angle, rotation.z);
         }
     }
 }

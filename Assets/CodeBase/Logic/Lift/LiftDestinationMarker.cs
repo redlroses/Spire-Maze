@@ -11,8 +11,6 @@ namespace CodeBase.Logic.Lift
         {
             Position = cellPosition;
             Direction = direction;
-
-            Debug.Log(direction);
         }
     }
 }
