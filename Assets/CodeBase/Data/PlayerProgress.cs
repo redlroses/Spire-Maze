@@ -9,7 +9,6 @@ namespace CodeBase.Data
     public WorldData WorldData;
     public Stats HeroStats;
 
-
     public PlayerProgress(string initialLevel)
     {
       WorldData = new WorldData(initialLevel);
