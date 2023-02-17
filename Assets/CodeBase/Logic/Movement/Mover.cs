@@ -8,12 +8,13 @@ namespace CodeBase.Logic.Movement
     public class Mover : MonoCache, IMover
     {
         [SerializeField] private float _speed;
+        [SerializeField] private float _bonusSpeed;
         [SerializeField] private Transform _spire;
 
         private const float DistanceForSpire = 6f;
 
         private Rigidbody _rigidbody;
-        private MoveDiraction _direction;
+        private MoveDirection _direction;
 
         private void Awake()
         {
@@ -25,23 +26,23 @@ namespace CodeBase.Logic.Movement
             ApplyMove();
         }
 
-        public void Move(MoveDiraction direction) => _direction = direction;
+        public void Move(MoveDirection direction) => _direction = direction;
 
         private void ApplyMove()
         {
             _rigidbody.velocity = new Vector3(0f, _rigidbody.velocity.y, 0f);
 
-            if (_direction == MoveDiraction.Stop)
+            if (_direction == MoveDirection.Stop)
                 return;
 
-            Vector3 velocity = CalculateVelocity(_spire.position, _rigidbody.position, _direction) * _speed;
+            Vector3 velocity = CalculateVelocity(_spire.position, _rigidbody.position, _direction) * (_speed + _bonusSpeed);
             _rigidbody.velocity = CorrectVelocity(velocity.ExcludeAxisY(), _rigidbody.position.ExcludeAxisY());
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
             _rigidbody.MoveRotation(targetRotation);
         }
 
-        private Vector3 CalculateVelocity(Vector3 anchorPoint, Vector3 currentPoint, MoveDiraction direction)
+        private Vector3 CalculateVelocity(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
         {
             Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
 
@@ -52,7 +53,7 @@ namespace CodeBase.Logic.Movement
         {
             Vector2 uncorrectedNextPosition = currentPosition + currentVelocity * Time.fixedDeltaTime;
             Vector2 pointOnArc = uncorrectedNextPosition.normalized * DistanceForSpire;
-            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * _speed;
+            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * (_speed + _bonusSpeed);
 
             return new Vector3(correctedVelocity.x, _rigidbody.velocity.y, correctedVelocity.y);
         }

@@ -43,9 +43,9 @@ namespace CodeBase.Services.Input
         private void OnMove()
         {
             int MoveInput = Mathf.RoundToInt(_inputController.Player.Movement.ReadValue<float>());
-            MoveDiraction diraction = (MoveDiraction)MoveInput;
+            MoveDirection direction = (MoveDirection)MoveInput;
 
-            Mover.Move(diraction);
+            Mover.Move(direction);
         }
 
         private void OnJump() => Jumper.Jump();

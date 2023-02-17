@@ -1,6 +1,6 @@
 namespace CodeBase.Logic.Movement
 {
-    public enum MoveDiraction
+    public enum MoveDirection
     {
         Left = -1,
         Stop = 0,
