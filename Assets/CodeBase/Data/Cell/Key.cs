@@ -2,13 +2,10 @@
 
 namespace CodeBase.Data.Cell
 {
-    public class Key : Plate
+    public class Key : ColoredCell
     {
-        public Colors Color;
-
-        public Key(Texture2D texture, Colors colorType = Colors.None) : base(texture)
+        public Key(Texture2D texture, Colors colorType = Colors.None) : base(texture, colorType)
         {
-            Color = colorType;
         }
     }
 }

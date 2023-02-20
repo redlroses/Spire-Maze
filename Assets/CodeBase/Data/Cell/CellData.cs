@@ -17,7 +17,8 @@ namespace CodeBase.Data.Cell
                 Plate plate => new Plate(cellData.Texture),
                 Air air => new Air(cellData.Texture),
                 Wall wall => new Wall(cellData.Texture),
-                _ => new Air(cellData.Texture)
+                MovingMarker marker => new MovingMarker(cellData.Texture, marker.Direction, marker.IsLiftHolder),
+                _ => throw new ArgumentException(nameof(cellData)),
             };
         }
 

@@ -26,11 +26,12 @@ namespace CodeBase.Editor.LevelEditor
 
             switch (_cellData.managedReferenceValue)
             {
-                case Key key:
-                    key.Color = (Colors) EditorGUILayout.EnumPopup("Color", key.Color);
+                case ColoredCell cell:
+                    cell.Color = (Colors) EditorGUILayout.EnumPopup("Color", cell.Color);
                     break;
-                case Door door:
-                    door.Color = (Colors) EditorGUILayout.EnumPopup("Color", door.Color);
+                case MovingMarker plate:
+                    plate.Direction = (PlateMoveDirection) EditorGUILayout.EnumPopup("Direction", plate.Direction);
+                    plate.IsLiftHolder = EditorGUILayout.Toggle("Is lift holder", plate.IsLiftHolder);
                     break;
             }
         }
@@ -43,17 +44,14 @@ namespace CodeBase.Editor.LevelEditor
         {
             switch (_cellData.managedReferenceValue)
             {
-                case Key key:
+                case ColoredCell cell:
                 {
-                    // var newKey = new Key(_editor.GetTextureByType(key, key.Color), key.Color);
-                    key.SetTexture(_editor.GetTextureByType(key, key.Color));
-                    key.Color = key.Color;
+                    cell.SetTexture(_editor.GetTextureByType(cell));
                     break;
                 }
-                case Door door:
+                case MovingMarker cell:
                 {
-                    var newDoor = new Door(_editor.GetTextureByType(door, door.Color), door.Color);
-                    door.SetTexture(newDoor.Texture);
+                    cell.SetTexture(_editor.GetTextureByType(cell));
                     break;
                 }
             }

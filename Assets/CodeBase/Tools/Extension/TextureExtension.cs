@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CodeBase.Data.Cell;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace CodeBase.Tools.Extension
                 }
                 else
                 {
-                    newData[i] = new Color32(0,0,0,0);
+                    newData[i] = new Color32(0, 0, 0, 0);
                 }
             }
 
@@ -44,6 +45,62 @@ namespace CodeBase.Tools.Extension
             for (int i = 0; i < textureData.Length; i++)
             {
                 newData[i] = textureData[i].Multiply(color);
+            }
+
+            Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);
+            newTexture.SetPixelData(newData, 0);
+            newTexture.Apply();
+            return newTexture;
+        }
+
+        public static Texture2D RotateTo(this Texture2D texture, PlateMoveDirection direction)
+        {
+            NativeArray<Color32> textureData = texture.GetRawTextureData<Color32>();
+            NativeArray<Color32> newData = new NativeArray<Color32>(textureData.Length, Allocator.Temp);
+            int width = texture.width;
+            int height = texture.height;
+            int iRotated;
+            int iOriginal;
+
+            if (direction == PlateMoveDirection.Right)
+            {
+                for (int j = 0; j < height; ++j)
+                {
+                    for (int i = 0; i < width; ++i)
+                    {
+                        iRotated = (i + 1) * height - j - 1;
+                        iOriginal = textureData.Length - 1 - (j * width + i);
+                        newData[iRotated] = textureData[iOriginal];
+                    }
+                }
+            }
+            else if (direction == PlateMoveDirection.Left)
+            {
+                for (int j = 0; j < height; ++j)
+                {
+                    for (int i = 0; i < width; ++i)
+                    {
+                        iRotated = (i + 1) * height - j - 1;
+                        iOriginal = j * width + i;
+                        newData[iRotated] = textureData[iOriginal];
+                    }
+                }
+            }
+            else if (direction == PlateMoveDirection.Down)
+            {
+                for (int j = 0; j < height; ++j)
+                {
+                    for (int i = 0; i < width; ++i)
+                    {
+                        iRotated = (height - 1 - j) * width + i;
+                        iOriginal = j * width + i;
+                        newData[iRotated] = textureData[iOriginal];
+                    }
+                }
+            }
+            else
+            {
+                newData = textureData;
             }
 
             Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);

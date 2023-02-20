@@ -28,7 +28,7 @@ namespace CodeBase.Editor.LevelEditor
         private CellData[] _palette;
 
         private Dictionary<Type, Texture2D> _baseTextures;
-        private Dictionary<Type, Func<Colors, Texture2D>> _textures;
+        private Dictionary<Type, Func<CellData, Texture2D>> _textures;
         private Dictionary<Type, Color32> _colors;
 
         private bool _isPaletteShow;
@@ -39,17 +39,24 @@ namespace CodeBase.Editor.LevelEditor
             _width = serializedObject.FindProperty("Width");
             _height = serializedObject.FindProperty("Height");
 
-            _textures = new Dictionary<Type, Func<Colors, Texture2D>>
+            _textures = new Dictionary<Type, Func<CellData, Texture2D>>
             {
-                [typeof(Air)] = color => _baseTextures[typeof(Air)].Tint(_colors[typeof(Air)]),
-                [typeof(Plate)] = color => _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)]),
-                [typeof(Wall)] = color => _baseTextures[typeof(Wall)].Tint(_colors[typeof(Wall)]),
-                [typeof(Door)] = color =>
+                [typeof(Air)] = data => _baseTextures[typeof(Air)].Tint(_colors[typeof(Air)]),
+                [typeof(Plate)] = data => _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)]),
+                [typeof(Wall)] = data => _baseTextures[typeof(Wall)].Tint(_colors[typeof(Wall)]),
+                [typeof(Door)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
-                        .CombineTexture(_baseTextures[typeof(Door)].Tint(GetColor32(color))),
-                [typeof(Key)] = color =>
+                        .CombineTexture(_baseTextures[typeof(Door)]
+                            .Tint(GetColor32(((Door) data)?.Color ?? Colors.None))),
+                [typeof(Key)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
-                        .CombineTexture(_baseTextures[typeof(Key)].Tint(GetColor32(color))),
+                        .CombineTexture(_baseTextures[typeof(Key)]
+                            .Tint(GetColor32(((Key) data)?.Color ?? Colors.None))),
+                [typeof(MovingMarker)] = data =>
+                    _baseTextures[typeof(MovingMarker)].Tint(_colors[typeof(MovingMarker)]).RotateTo(((MovingMarker) data)?.Direction ?? PlateMoveDirection.None)
+                        .CombineTexture(((MovingMarker) data)?.IsLiftHolder == true
+                            ? _baseTextures[typeof(MovingPlate)].Tint(_colors[typeof(MovingPlate)])
+                            : _baseTextures[typeof(Air)]),
             };
 
             _baseTextures = new Dictionary<Type, Texture2D>
@@ -59,6 +66,8 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Wall)] = Resources.Load<Texture2D>("Textures/WallIcon"),
                 [typeof(Door)] = Resources.Load<Texture2D>("Textures/DoorIcon"),
                 [typeof(Key)] = Resources.Load<Texture2D>("Textures/KeyIcon"),
+                [typeof(MovingMarker)] = Resources.Load<Texture2D>("Textures/MovingMarkerIcon"),
+                [typeof(MovingPlate)] = Resources.Load<Texture2D>("Textures/MovingPlateIcon"),
             };
 
             _colors = new Dictionary<Type, Color32>
@@ -66,6 +75,8 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Air)] = new Color32(0, 0, 0, 0),
                 [typeof(Plate)] = new Color32(57, 181, 94, 255),
                 [typeof(Wall)] = new Color32(57, 181, 94, 255),
+                [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
+                [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
             };
 
             _palette = new CellData[]
@@ -74,7 +85,8 @@ namespace CodeBase.Editor.LevelEditor
                 new Plate(GetTextureByType<Plate>()),
                 new Wall(GetTextureByType<Wall>()),
                 new Key(GetTextureByType<Key>()),
-                new Door(GetTextureByType<Door>())
+                new Door(GetTextureByType<Door>()),
+                new MovingMarker(GetTextureByType<MovingMarker>()),
             };
 
             UpdateTextures();
@@ -85,19 +97,6 @@ namespace CodeBase.Editor.LevelEditor
             for (int i = 0; i < _width.intValue * _height.intValue; i++)
             {
                 CellData managedReferenceValue = _dataMap.GetArrayElementAtIndex(i).managedReferenceValue as CellData;
-
-                if (managedReferenceValue is Key key)
-                {
-                    managedReferenceValue.SetTexture(GetTextureByType(managedReferenceValue, key.Color));
-                    continue;
-                }
-
-                if (managedReferenceValue is Door door)
-                {
-                    managedReferenceValue.SetTexture(GetTextureByType(managedReferenceValue, door.Color));
-                    continue;
-                }
-
                 managedReferenceValue.SetTexture(GetTextureByType(managedReferenceValue));
             }
         }
@@ -132,16 +131,16 @@ namespace CodeBase.Editor.LevelEditor
             serializedObject.ApplyModifiedProperties();
         }
 
-        public Texture2D GetTextureByType(CellData cellData, Colors color = Colors.None)
+        public Texture2D GetTextureByType(CellData cellData)
         {
-            Texture2D texture2D = _textures[cellData.GetType()].Invoke(color);
+            Texture2D texture2D = _textures[cellData.GetType()].Invoke(cellData);
             texture2D.Apply();
             return texture2D;
         }
 
-        public Texture2D GetTextureByType<TCell>(Colors color = Colors.None)
+        public Texture2D GetTextureByType<TCell>()
         {
-            Texture2D texture2D = _textures[typeof(TCell)].Invoke(color);
+            Texture2D texture2D = _textures[typeof(TCell)].Invoke(null);
             texture2D.Apply();
             return texture2D;
         }
