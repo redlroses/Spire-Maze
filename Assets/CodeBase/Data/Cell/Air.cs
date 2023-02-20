@@ -4,9 +4,8 @@ namespace CodeBase.Data.Cell
 {
     public class Air : CellData
     {
-        public Air()
+        public Air(Texture2D texture) : base(texture)
         {
-            Texture = Resources.Load<Texture2D>("Textures/AirIcon");
         }
     }
 }

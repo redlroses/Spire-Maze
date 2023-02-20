@@ -7,14 +7,14 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class Cell
     {
-        public readonly CellData CellType;
+        public readonly CellData CellData;
         public readonly Transform Container;
 
         public CellPosition Position;
 
-        public Cell(CellData cellType, Transform container)
+        public Cell(CellData cellData, Transform container)
         {
-            CellType = cellType;
+            CellData = cellData;
             Container = container;
             Position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
         }

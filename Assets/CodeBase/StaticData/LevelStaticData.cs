@@ -1,5 +1,4 @@
 ﻿using CodeBase.Data.Cell;
-using CodeBase.LevelSpecification;
 using UnityEngine;
 
 namespace CodeBase.StaticData
@@ -9,9 +8,8 @@ namespace CodeBase.StaticData
     {
         public string LevelKey;
         [HideInInspector] public int Width = 16;
-        [HideInInspector] public int Height = 0;
-        // public CellType[] CellMap;
-        [SerializeReference] public CellData[] CellDataMap;
+        public int Height = 0;
+        [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
     }

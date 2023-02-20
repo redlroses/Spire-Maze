@@ -5,7 +5,7 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class Plate : Cell
     {
-        public Plate(CellData cellType, Transform container) : base(cellType, container)
+        public Plate(CellData cellData, Transform container) : base(cellData, container)
         {
         }
     }

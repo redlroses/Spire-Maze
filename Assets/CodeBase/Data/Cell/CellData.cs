@@ -6,29 +6,31 @@ namespace CodeBase.Data.Cell
     [Serializable]
     public class CellData
     {
-        public Texture2D Texture;
-
-        protected CellData(Texture2D texture = null)
-        {
-            Texture = texture;
-        }
-
-        public void SetTexture(Texture2D texture)
-        {
-            Texture = texture;
-        }
+        [SerializeField] public Texture2D Texture;
 
         public static CellData Copy(CellData cellData)
         {
             return cellData switch
             {
-                Key key => new Key(key.Color),
-                Door door => new Door(door.Color),
-                Plate plate => new Plate(),
-                Air air => new Air(),
-                Wall wall => new Wall(),
-                _ => new Air()
+                Key key => new Key(cellData.Texture, key.Color),
+                Door door => new Door(cellData.Texture, door.Color),
+                Plate plate => new Plate(cellData.Texture),
+                Air air => new Air(cellData.Texture),
+                Wall wall => new Wall(cellData.Texture),
+                _ => new Air(cellData.Texture)
             };
+        }
+
+        public void SetTexture(Texture2D texture)
+        {
+            Texture = texture;
+            Texture.Apply();
+        }
+
+        public CellData(Texture2D texture)
+        {
+            Texture = texture;
+            Texture.Apply();
         }
     }
 }

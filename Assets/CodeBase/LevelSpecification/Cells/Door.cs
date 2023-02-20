@@ -5,7 +5,7 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class Door : Cell
     {
-        public Door(CellData cellType, Transform container) : base(cellType, container)
+        public Door(CellData cellData, Transform container) : base(cellData, container)
         {
         }
     }

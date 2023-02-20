@@ -5,7 +5,7 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class MovingPlateMarker : Cell
     {
-        public MovingPlateMarker(CellData cellType, Transform container) : base(cellType, container)
+        public MovingPlateMarker(CellData cellData, Transform container) : base(cellData, container)
         {
         }
     }

@@ -6,12 +6,15 @@ namespace CodeBase.Editor.LevelEditor
 {
     public class CellSettings : PopupWindowContent
     {
-        private SerializedProperty _cellData;
+        private readonly SerializedProperty _cellData;
+        private readonly LevelStaticDataEditor _editor;
+
         private Colors _color;
 
-        public CellSettings(ref SerializedProperty cellData)
+        public CellSettings(ref SerializedProperty cellData, LevelStaticDataEditor editor)
         {
             _cellData = cellData;
+            _editor = editor;
         }
 
         public override Vector2 GetWindowSize() =>
@@ -42,13 +45,14 @@ namespace CodeBase.Editor.LevelEditor
             {
                 case Key key:
                 {
-                    var newKey = new Key(key.Color);
-                    key.SetTexture(newKey.Texture);
+                    // var newKey = new Key(_editor.GetTextureByType(key, key.Color), key.Color);
+                    key.SetTexture(_editor.GetTextureByType(key, key.Color));
+                    key.Color = key.Color;
                     break;
                 }
                 case Door door:
                 {
-                    var newDoor = new Door(door.Color);
+                    var newDoor = new Door(_editor.GetTextureByType(door, door.Color), door.Color);
                     door.SetTexture(newDoor.Texture);
                     break;
                 }

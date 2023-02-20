@@ -59,8 +59,8 @@ namespace CodeBase.LevelSpecification.Constructor
             LiftDestinationMarker destinationMarker = pairMarker.Container.GetComponentInChildren<LiftDestinationMarker>();
             LiftPlate liftPlate = movingPlate.Container.GetComponentInChildren<LiftPlate>();
 
-            initialMarker.Construct(movingPlate.Position, _directions[movingPlate.CellType & CellType.MovingMarker]);
-            destinationMarker.Construct(pairMarker.Position, _directions[pairMarker.CellType & CellType.MovingMarker]);
+            // initialMarker.Construct(movingPlate.Position, _directions[movingPlate.CellType & CellType.MovingMarker]);
+            // destinationMarker.Construct(pairMarker.Position, _directions[pairMarker.CellType & CellType.MovingMarker]);
 
             IPlateMover mover = movingPlate.IsTypeOf(CellType.Left | CellType.Right)
                 ? (IPlateMover) liftPlate.gameObject.AddComponent<PlateHorizontalMover>()
