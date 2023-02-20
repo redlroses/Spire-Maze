@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.LevelSpecification;
+﻿using CodeBase.LevelSpecification;
 using CodeBase.StaticData;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine;
 namespace CodeBase.Editor
 {
     [CustomEditor(typeof(LevelStaticData))]
-    public partial class LevelStaticEditor : UnityEditor.Editor
+    public class LevelStaticEditor : UnityEditor.Editor
     {
         private const string Munus = "-";
         private const string Plus = "+";
