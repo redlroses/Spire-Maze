@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using CodeBase.Data.Cell;
+using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Cells
 {
     public class MovingPlate : Cell
     {
-        public MovingPlate(CellType cellType, Transform container) : base(cellType, container)
+        public MovingPlate(CellData cellType, Transform container) : base(cellType, container)
         {
         }
     }

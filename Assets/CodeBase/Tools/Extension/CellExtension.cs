@@ -1,4 +1,5 @@
 ﻿using CodeBase.LevelSpecification;
+using CodeBase.LevelSpecification.Cells;
 
 namespace CodeBase.Tools.Extension
 {

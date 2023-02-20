@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
 
 namespace CodeBase.LevelSpecification

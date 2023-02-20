@@ -1,39 +1,56 @@
-﻿using CodeBase.LevelSpecification;
+﻿using CodeBase.Data.Cell;
 using CodeBase.StaticData;
 using UnityEditor;
 using UnityEngine;
 
-namespace CodeBase.Editor
+namespace CodeBase.Editor.LevelEditor
 {
     [CustomEditor(typeof(LevelStaticData))]
-    public class LevelStaticEditor : UnityEditor.Editor
+    public class LevelStaticDataEditor : UnityEditor.Editor
     {
         private const string Munus = "-";
         private const string Plus = "+";
         private const string AddFloor = "Add floor";
 
+        private CellData[] _cellsData;
+        private Rect _buttonRect;
+
         private LevelStaticData _target;
-        private SerializedProperty _map;
-        private SerializedProperty _levelKey;
+        private SerializedProperty _dataMap;
         private SerializedProperty _width;
         private SerializedProperty _height;
 
         private GUIStyle _cellStyle;
+        private CellData _pipetteCell;
+        private CellData[] _palette;
+
+        private bool _isPaletteShow;
 
         private void OnEnable()
         {
-            _map = serializedObject.FindProperty("CellMap");
-            _levelKey = serializedObject.FindProperty("LevelKey");
+            _dataMap = serializedObject.FindProperty("CellDataMap");
             _width = serializedObject.FindProperty("Width");
             _height = serializedObject.FindProperty("Height");
+
+            _palette = new CellData[] {new Air(), new Plate(), new Wall(), new Key(), new Door()};
+            _cellStyle = new GUIStyle(EditorStyles.iconButton)
+            {
+                stretchHeight = false, stretchWidth = false, fixedHeight = 0, fixedWidth = 0,
+                alignment = TextAnchor.MiddleCenter
+            };
         }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            _cellStyle = EditorStyles.miniLabel;
-            _cellStyle.fontSize = 11;
             LevelStaticData data = (LevelStaticData) target;
+
+            _isPaletteShow = EditorGUILayout.Toggle("Edit palette mode", _isPaletteShow);
+
+            if (_isPaletteShow)
+            {
+                DrawPalette();
+            }
 
             if (_height.intValue <= 0)
             {
@@ -45,6 +62,60 @@ namespace CodeBase.Editor
 
             DrawMatrix(data.Width, data.Height);
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawPalette()
+        {
+            EditorGUILayout.BeginHorizontal();
+
+            foreach (var paletteCell in _palette)
+            {
+                DrawPaletteButton(paletteCell);
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private void DrawPaletteButton(CellData cellData)
+        {
+            if (GUILayout.Button(new GUIContent(cellData.Texture),
+                _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10), GUILayout.MaxHeight(Screen.width / (float) _width.intValue)))
+            {
+                _pipetteCell = cellData;
+            }
+        }
+
+        private void DrawCell(int index)
+        {
+            SerializedProperty arrayElementAtIndex = _dataMap.GetArrayElementAtIndex(index);
+
+            if (GUILayout.Button(new GUIContent(((CellData) arrayElementAtIndex.managedReferenceValue).Texture),
+                _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10), GUILayout.MaxHeight(Screen.width / (_width.intValue + 1f))))
+            {
+                if (_isPaletteShow)
+                {
+                    arrayElementAtIndex.managedReferenceValue = (CellData.Copy(_pipetteCell));
+                }
+                else
+                {
+                    PopupWindow.Show(_buttonRect, new CellSettings(ref arrayElementAtIndex));
+                }
+            }
+
+            if (Event.current.type == EventType.Repaint)
+            {
+                DrawPopup();
+            }
+        }
+
+        private void DrawPopup()
+        {
+            Rect buttonRect = GUILayoutUtility.GetLastRect();
+
+            if (buttonRect.Contains(Event.current.mousePosition))
+            {
+                _buttonRect = buttonRect;
+            }
         }
 
         private void DrawMatrix(int width, int height)
@@ -68,28 +139,45 @@ namespace CodeBase.Editor
                 DrawCell(fromIndex + i);
             }
 
-            DrawAddFloorButton(fromIndex, length);
-            DrawDeleteFloorButton(fromIndex, length);
+            if (Screen.width > 700)
+            {
+                EditorGUILayout.BeginVertical();
 
-            EditorGUILayout.EndVertical();
+                DrawAddFloorButton(fromIndex, length);
+                DrawDeleteFloorButton(fromIndex, length);
+
+                EditorGUILayout.EndVertical();
+            }
+            else
+            {
+                DrawAddFloorButton(fromIndex, length);
+                DrawDeleteFloorButton(fromIndex, length);
+            }
+
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawDeleteFloorButton(int fromIndex, int length)
         {
-            if (GUILayout.Button(Munus))
+            if (GUILayout.Button(Munus, GUILayout.ExpandHeight(true), GUILayout.MinHeight(5)))
             {
-                for (int i = 0; i < length; i++)
-                {
-                    _map.DeleteArrayElementAtIndex(fromIndex);
-                }
-
-                _height.intValue--;
+                DeleteFloor(fromIndex, length);
             }
+        }
+
+        private void DeleteFloor(int fromIndex, int length)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                _dataMap.DeleteArrayElementAtIndex(fromIndex);
+            }
+
+            _height.intValue--;
         }
 
         private void DrawAddFloorButton(int fromIndex, int length)
         {
-            if (GUILayout.Button(Plus))
+            if (GUILayout.Button(Plus, GUILayout.ExpandHeight(true), GUILayout.MinHeight(5)))
             {
                 AddNewFloor(fromIndex + length, length);
             }
@@ -99,49 +187,11 @@ namespace CodeBase.Editor
         {
             for (int i = 0; i < length; i++)
             {
-                _map.InsertArrayElementAtIndex(fromIndex + i);
-                _map.GetArrayElementAtIndex(fromIndex + i).enumValueFlag = (int) CellType.Air;
+                _dataMap.InsertArrayElementAtIndex(fromIndex + i);
+                _dataMap.GetArrayElementAtIndex(fromIndex + i).managedReferenceValue = new Plate();
             }
 
             _height.intValue++;
-        }
-
-        private void DrawCell(int index)
-        {
-            SerializedProperty arrayElementAtIndex = _map.GetArrayElementAtIndex(index);
-
-            if (arrayElementAtIndex == null)
-            {
-                _map.InsertArrayElementAtIndex(index);
-                arrayElementAtIndex.enumValueFlag = (int) CellType.Air;
-            }
-
-            SetColor((CellType) arrayElementAtIndex.enumValueFlag);
-
-            CellType cellType = (CellType) EditorGUILayout.EnumFlagsField(GUIContent.none,
-                (CellType) arrayElementAtIndex.enumValueFlag, _cellStyle, GUILayout.MinWidth(5f));
-            arrayElementAtIndex.enumValueFlag = (int) cellType;
-        }
-
-        private void SetColor(CellType by)
-        {
-            _cellStyle.normal.textColor = by switch
-            {
-                CellType.Air => Color.cyan,
-                CellType.Plate => Color.green,
-                CellType.Wall => Color.red,
-                CellType.Door => Color.yellow,
-                CellType.Key => new Color32(114, 173, 114, 255),
-                CellType.Left => Color.grey,
-                CellType.Up => Color.grey,
-                CellType.Right => Color.grey,
-                CellType.Down => Color.grey,
-                CellType.MovingPlate | CellType.Left => Color.blue,
-                CellType.MovingPlate | CellType.Up => Color.blue,
-                CellType.MovingPlate | CellType.Right => Color.blue,
-                CellType.MovingPlate | CellType.Down => Color.blue,
-                _ => Color.black
-            };
         }
     }
 }

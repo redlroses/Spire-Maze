@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using CodeBase.Data.Cell;
+using CodeBase.LevelSpecification.Cells;
 using CodeBase.StaticData;
 using UnityEngine;
 
@@ -55,13 +57,13 @@ namespace CodeBase.LevelSpecification
             {
                 Vector3 containerPosition = new Vector3(0, i * _floorHeight, 0);
                 Transform floorContainer = CreateContainer($"Floor {i + 1}", _levelContainer, containerPosition);
-                CellType[] floorCells = mapData.CellMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
+                CellData[] floorCells = mapData.CellDataMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
                 Floor floor = BuildFloor(floorCells, floorContainer);
                 _level.Add(floor);
             }
         }
 
-        private Floor BuildFloor(CellType[] floorCells, Transform container)
+        private Floor BuildFloor(CellData[] floorCells, Transform container)
         {
             Floor floor = new Floor(floorCells.Length, container);
 

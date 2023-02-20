@@ -7,7 +7,6 @@ using CodeBase.Logic.Lift;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -56,8 +55,6 @@ namespace CodeBase.LevelSpecification.Constructor
         private void ApplyMovingPlate(Cell movingPlate)
         {
             Cell pairMarker = FindPair(movingPlate);
-            Debug.Log(pairMarker);
-            Debug.Log(pairMarker.Position.ToString());
             LiftDestinationMarker initialMarker = movingPlate.Container.GetComponentInChildren<LiftDestinationMarker>();
             LiftDestinationMarker destinationMarker = pairMarker.Container.GetComponentInChildren<LiftDestinationMarker>();
             LiftPlate liftPlate = movingPlate.Container.GetComponentInChildren<LiftPlate>();
