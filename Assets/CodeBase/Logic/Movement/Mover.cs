@@ -10,9 +10,6 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _speed;
         [SerializeField] private float _bonusSpeed;
         [SerializeField] private float _durationBonusSpeed;
-        [SerializeField] private Transform _spire;
-
-        private const float DistanceForSpire = 6f;
 
         private Rigidbody _rigidbody;
         private MoveDirection _direction;
@@ -62,7 +59,7 @@ namespace CodeBase.Logic.Movement
             if (_direction == MoveDirection.Stop)
                 return;
 
-            Vector3 velocity = CalculateVelocity(_spire.position, _rigidbody.position, _direction) * _speed;
+            Vector3 velocity = CalculateVelocity(Spire.Position, _rigidbody.position, _direction) * _speed;
             _rigidbody.velocity = CorrectVelocity(velocity.ExcludeAxisY(), _rigidbody.position.ExcludeAxisY());
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
@@ -79,7 +76,7 @@ namespace CodeBase.Logic.Movement
         private Vector3 CorrectVelocity(Vector2 currentVelocity, Vector2 currentPosition)
         {
             Vector2 uncorrectedNextPosition = currentPosition + currentVelocity * Time.fixedDeltaTime;
-            Vector2 pointOnArc = uncorrectedNextPosition.normalized * DistanceForSpire;
+            Vector2 pointOnArc = uncorrectedNextPosition.normalized * Spire.DistanceToCenter;
             Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * _speed;
 
             return new Vector3(correctedVelocity.x, _rigidbody.velocity.y, correctedVelocity.y);
