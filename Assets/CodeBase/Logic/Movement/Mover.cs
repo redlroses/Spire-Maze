@@ -9,12 +9,15 @@ namespace CodeBase.Logic.Movement
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _bonusSpeed;
+        [SerializeField] private float _durationBonusSpeed;
         [SerializeField] private Transform _spire;
 
         private const float DistanceForSpire = 6f;
 
         private Rigidbody _rigidbody;
         private MoveDirection _direction;
+        private float _timerBonusSpeed;
+        private bool _isBonusSpeedEnabled;
 
         private void Awake()
         {
@@ -24,9 +27,33 @@ namespace CodeBase.Logic.Movement
         protected override void FixedRun()
         {
             ApplyMove();
+
+            if (_timerBonusSpeed <= 0)
+                DisableBonusSpeed();
+            else
+                _timerBonusSpeed -= Time.fixedDeltaTime;
         }
 
         public void Move(MoveDirection direction) => _direction = direction;
+
+        public void EnableBonusSpeed()
+        {
+            if (_isBonusSpeedEnabled == true)
+                return;
+
+            _speed += _bonusSpeed;
+            _isBonusSpeedEnabled = true;
+            _timerBonusSpeed = _durationBonusSpeed;
+        }
+
+        public void DisableBonusSpeed()
+        {
+            if (_isBonusSpeedEnabled == false)
+                return;
+
+            _speed -= _bonusSpeed;
+            _isBonusSpeedEnabled = false;
+        }
 
         private void ApplyMove()
         {
@@ -35,7 +62,7 @@ namespace CodeBase.Logic.Movement
             if (_direction == MoveDirection.Stop)
                 return;
 
-            Vector3 velocity = CalculateVelocity(_spire.position, _rigidbody.position, _direction) * (_speed + _bonusSpeed);
+            Vector3 velocity = CalculateVelocity(_spire.position, _rigidbody.position, _direction) * _speed;
             _rigidbody.velocity = CorrectVelocity(velocity.ExcludeAxisY(), _rigidbody.position.ExcludeAxisY());
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
@@ -53,7 +80,7 @@ namespace CodeBase.Logic.Movement
         {
             Vector2 uncorrectedNextPosition = currentPosition + currentVelocity * Time.fixedDeltaTime;
             Vector2 pointOnArc = uncorrectedNextPosition.normalized * DistanceForSpire;
-            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * (_speed + _bonusSpeed);
+            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * _speed;
 
             return new Vector3(correctedVelocity.x, _rigidbody.velocity.y, correctedVelocity.y);
         }
