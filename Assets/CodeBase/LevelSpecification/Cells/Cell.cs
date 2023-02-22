@@ -1,19 +1,20 @@
-﻿using CodeBase.Logic.Lift;
+﻿using CodeBase.Data.Cell;
+using CodeBase.Logic.Lift;
 using CodeBase.Tools.Constants;
 using UnityEngine;
 
-namespace CodeBase.LevelSpecification
+namespace CodeBase.LevelSpecification.Cells
 {
     public class Cell
     {
-        public readonly CellType CellType;
+        public readonly CellData CellData;
         public readonly Transform Container;
 
         public CellPosition Position;
 
-        public Cell(CellType cellType, Transform container)
+        public Cell(CellData cellData, Transform container)
         {
-            CellType = cellType;
+            CellData = cellData;
             Container = container;
             Position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
         }

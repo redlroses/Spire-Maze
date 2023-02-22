@@ -1,4 +1,6 @@
-﻿namespace CodeBase.LevelSpecification.Constructor
+﻿using CodeBase.LevelSpecification.Cells;
+
+namespace CodeBase.LevelSpecification.Constructor
 {
     public interface ICellConstructor
     {

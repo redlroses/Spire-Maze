@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using CodeBase.Data.Cell;
+using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Cells
 {
     public class MovingPlateMarker : Cell
     {
-        public MovingPlateMarker(CellType cellType, Transform container) : base(cellType, container)
+        public MovingPlateMarker(CellData cellData, Transform container) : base(cellData, container)
         {
         }
     }
