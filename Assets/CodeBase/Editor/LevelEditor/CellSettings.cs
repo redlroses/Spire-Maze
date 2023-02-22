@@ -18,10 +18,11 @@ namespace CodeBase.Editor.LevelEditor
         }
 
         public override Vector2 GetWindowSize() =>
-            new Vector2(200, 100);
+            new Vector2(150, 100);
 
         public override void OnGUI(Rect rect)
         {
+            EditorGUIUtility.labelWidth = 80;
             GUILayout.Label("Cell Settings", EditorStyles.boldLabel);
 
             switch (_cellData.managedReferenceValue)

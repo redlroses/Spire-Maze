@@ -96,7 +96,7 @@ namespace CodeBase.Editor.LevelEditor
         {
             for (int i = 0; i < _width.intValue * _height.intValue; i++)
             {
-                CellData managedReferenceValue = _dataMap.GetArrayElementAtIndex(i).managedReferenceValue as CellData;
+                CellData managedReferenceValue = (CellData) _dataMap.GetArrayElementAtIndex(i).managedReferenceValue;
                 managedReferenceValue.SetTexture(GetTextureByType(managedReferenceValue));
             }
         }
@@ -112,7 +112,7 @@ namespace CodeBase.Editor.LevelEditor
             base.OnInspectorGUI();
             LevelStaticData data = (LevelStaticData) target;
 
-            _isPaletteShow = EditorGUILayout.Toggle("Edit palette mode", _isPaletteShow);
+            _isPaletteShow = EditorGUILayout.Toggle("Edit mode on", _isPaletteShow);
 
             if (_isPaletteShow)
             {
@@ -138,7 +138,7 @@ namespace CodeBase.Editor.LevelEditor
             return texture2D;
         }
 
-        public Texture2D GetTextureByType<TCell>()
+        private Texture2D GetTextureByType<TCell>()
         {
             Texture2D texture2D = _textures[typeof(TCell)].Invoke(null);
             texture2D.Apply();

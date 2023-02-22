@@ -6,7 +6,7 @@ namespace CodeBase.Data.Cell
     [Serializable]
     public class CellData
     {
-        [SerializeField] public Texture2D Texture;
+        public Texture2D Texture;
 
         public static CellData Copy(CellData cellData)
         {

@@ -59,54 +59,64 @@ namespace CodeBase.Tools.Extension
             NativeArray<Color32> newData = new NativeArray<Color32>(textureData.Length, Allocator.Temp);
             int width = texture.width;
             int height = texture.height;
-            int iRotated;
-            int iOriginal;
 
-            if (direction == PlateMoveDirection.Right)
+            newData = direction switch
             {
-                for (int j = 0; j < height; ++j)
-                {
-                    for (int i = 0; i < width; ++i)
-                    {
-                        iRotated = (i + 1) * height - j - 1;
-                        iOriginal = textureData.Length - 1 - (j * width + i);
-                        newData[iRotated] = textureData[iOriginal];
-                    }
-                }
-            }
-            else if (direction == PlateMoveDirection.Left)
-            {
-                for (int j = 0; j < height; ++j)
-                {
-                    for (int i = 0; i < width; ++i)
-                    {
-                        iRotated = (i + 1) * height - j - 1;
-                        iOriginal = j * width + i;
-                        newData[iRotated] = textureData[iOriginal];
-                    }
-                }
-            }
-            else if (direction == PlateMoveDirection.Down)
-            {
-                for (int j = 0; j < height; ++j)
-                {
-                    for (int i = 0; i < width; ++i)
-                    {
-                        iRotated = (height - 1 - j) * width + i;
-                        iOriginal = j * width + i;
-                        newData[iRotated] = textureData[iOriginal];
-                    }
-                }
-            }
-            else
-            {
-                newData = textureData;
-            }
+                PlateMoveDirection.Right => RotateToRight(height, width, textureData, newData),
+                PlateMoveDirection.Left => RotateToLeft(height, width, newData, textureData),
+                PlateMoveDirection.Down => RotateToDown(height, width, newData, textureData),
+                _ => textureData
+            };
 
             Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);
             newTexture.SetPixelData(newData, 0);
             newTexture.Apply();
             return newTexture;
+        }
+
+        private static NativeArray<Color32> RotateToDown(int height, int width, NativeArray<Color32> newData, NativeArray<Color32> textureData)
+        {
+            for (int j = 0; j < height; ++j)
+            {
+                for (int i = 0; i < width; ++i)
+                {
+                    int iRotated = (height - 1 - j) * width + i;
+                    int iOriginal = j * width + i;
+                    newData[iRotated] = textureData[iOriginal];
+                }
+            }
+
+            return newData;
+        }
+
+        private static NativeArray<Color32> RotateToLeft(int height, int width, NativeArray<Color32> newData, NativeArray<Color32> textureData)
+        {
+            for (int j = 0; j < height; ++j)
+            {
+                for (int i = 0; i < width; ++i)
+                {
+                    int iRotated = (i + 1) * height - j - 1;
+                    int iOriginal = j * width + i;
+                    newData[iRotated] = textureData[iOriginal];
+                }
+            }
+
+            return newData;
+        }
+
+        private static NativeArray<Color32> RotateToRight(int height, int width, NativeArray<Color32> textureData, NativeArray<Color32> newData)
+        {
+            for (int j = 0; j < height; ++j)
+            {
+                for (int i = 0; i < width; ++i)
+                {
+                    int iRotated = (i + 1) * height - j - 1;
+                    int iOriginal = textureData.Length - 1 - (j * width + i);
+                    newData[iRotated] = textureData[iOriginal];
+                }
+            }
+
+            return newData;
         }
     }
 }
