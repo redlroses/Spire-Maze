@@ -10,7 +10,7 @@ namespace CodeBase.Logic.Enemy
     {
         [SerializeField]
         [RequireInterface(typeof(Mover))] private MonoCache _mover;
-        [SerializeField] private Transform _spire;
+        [SerializeField] private int _damage;     
         [SerializeField] private float _rayDistance;
         [SerializeField] private float _rayDistanceToTarget;
         [SerializeField] private LayerMask _ground;
@@ -19,8 +19,8 @@ namespace CodeBase.Logic.Enemy
 
         private MoveDirection _moveDirection;
         private float _currentDelayBetweenDetectTarget;
-        private bool _isDie;
         private bool _isRotationToTarget;
+        private bool _isDie;
 
         public Mover Mover => (Mover)_mover;
 
@@ -31,8 +31,11 @@ namespace CodeBase.Logic.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player _))
+            if (other.TryGetComponent(out Player player))
+            {
                 _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
+                player.ReceiveDamage(_damage);
+            }
         }
 
         protected override void FixedRun()
@@ -55,7 +58,7 @@ namespace CodeBase.Logic.Enemy
 
         private MoveDirection GetMoveDirection()
         {
-            Vector3 direction = CalculateRayDirection(_spire.position, transform.localPosition, _moveDirection);
+            Vector3 direction = CalculateRayDirection(Spire.Position, transform.localPosition, _moveDirection);
             Ray ray = new Ray(transform.localPosition, direction + Vector3.down);
 
             if (Physics.Raycast(ray, _rayDistance, _ground))
@@ -82,8 +85,8 @@ namespace CodeBase.Logic.Enemy
 
         private void DetectTarget<T>() where T : MonoCache
         {
-            Vector3 rayDirectionForward = CalculateRayDirection(_spire.position, transform.localPosition, MoveDirection.Right);
-            Vector3 rayDirectionBackward = CalculateRayDirection(_spire.position, transform.localPosition, MoveDirection.Left);
+            Vector3 rayDirectionForward = CalculateRayDirection(Spire.Position, transform.localPosition, MoveDirection.Right);
+            Vector3 rayDirectionBackward = CalculateRayDirection(Spire.Position, transform.localPosition, MoveDirection.Left);
             Ray rayForward = new Ray(transform.localPosition, rayDirectionForward);
             Ray rayBackward = new Ray(transform.localPosition, rayDirectionBackward);
             RaycastHit hit;
