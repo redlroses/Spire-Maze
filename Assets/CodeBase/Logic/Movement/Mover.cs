@@ -35,7 +35,7 @@ namespace CodeBase.Logic.Movement
 
         public void EnableBonusSpeed()
         {
-            if (_isBonusSpeedEnabled == true)
+            if (_isBonusSpeedEnabled)
                 return;
 
             _speed += _bonusSpeed;
@@ -70,7 +70,7 @@ namespace CodeBase.Logic.Movement
         {
             Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
 
-            return Vector3.Cross(directionForAnchor, Vector3.down * (int)direction).normalized;
+            return Vector3.Cross(directionForAnchor, Vector3.down * (int) direction).normalized;
         }
 
         private Vector3 CorrectVelocity(Vector2 currentVelocity, Vector2 currentPosition)

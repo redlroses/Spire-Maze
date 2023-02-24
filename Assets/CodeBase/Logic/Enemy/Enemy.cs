@@ -2,45 +2,51 @@
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
+using CodeBase.Tools.PhysicsDebug;
 
 namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(Mover))]
     public class Enemy : MonoCache, IEnemy
     {
-        [SerializeField]
-        [RequireInterface(typeof(Mover))] private MonoCache _mover;
-        [SerializeField] private int _damage;     
+        [SerializeField] [RequireInterface(typeof(Mover))]
+        private MonoCache _mover;
+
+        [SerializeField] private int _damage;
         [SerializeField] private float _rayDistance;
         [SerializeField] private float _rayDistanceToTarget;
         [SerializeField] private LayerMask _ground;
 
         private const float DelayBetweenDetectTarget = 1f;
 
+        private Transform _selfTransform;
         private MoveDirection _moveDirection;
         private float _currentDelayBetweenDetectTarget;
         private bool _isRotationToTarget;
         private bool _isDie;
 
-        public Mover Mover => (Mover)_mover;
+        private Mover Mover => (Mover) _mover;
 
         private void Awake()
         {
+            _selfTransform = transform;
             _moveDirection = MoveDirection.Left;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player))
+            if (other.TryGetComponent(out Player player) == false)
             {
-                _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
-                player.ReceiveDamage(_damage);
+                return;
             }
+
+            _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
+            player.ReceiveDamage(_damage);
         }
 
         protected override void FixedRun()
         {
-            Move();
+            Mover.Move(GetMoveDirection());
 
             if (CanDetectTarget())
                 DetectTarget<Player>();
@@ -48,30 +54,38 @@ namespace CodeBase.Logic.Enemy
 
         public void Initialize()
         {
-
-        }
-
-        private void Move()
-        {
-            Mover.Move(GetMoveDirection());
         }
 
         private MoveDirection GetMoveDirection()
         {
-            Vector3 direction = CalculateRayDirection(Spire.Position, transform.localPosition, _moveDirection);
-            Ray ray = new Ray(transform.localPosition, direction + Vector3.down);
+            Vector3 localPosition = _selfTransform.localPosition;
+            Vector3 wallDirection = CalculateRayDirection(Spire.Position, localPosition, _moveDirection);
+            Vector3 groundDirection = wallDirection + Vector3.down;
 
-            if (Physics.Raycast(ray, _rayDistance, _ground))
-                return _moveDirection;
+            Drawer.DrawRay(_selfTransform.position, groundDirection, _rayDistance, Color.magenta, Time.deltaTime);
+            Drawer.DrawRay(_selfTransform.position, wallDirection, _rayDistance, Color.green, Time.deltaTime);
 
-            return ChangeDirection();
+            bool isWall = CheckForDirection(wallDirection);
+            bool isNotGround = !CheckForDirection(groundDirection);
+
+            if (isWall || isNotGround)
+            {
+                ChangeDirection();
+            }
+
+            return _moveDirection;
+        }
+
+        private bool CheckForDirection(Vector3 direction)
+        {
+            Ray ray = new Ray(_selfTransform.localPosition, direction);
+            return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
         private Vector3 CalculateRayDirection(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
         {
             Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
-
-            return Vector3.Cross(directionForAnchor, Vector3.down * (int)direction).normalized;
+            return Vector3.Cross(directionForAnchor, Vector3.down * (int) direction).normalized;
         }
 
         private bool CanDetectTarget()
@@ -85,28 +99,28 @@ namespace CodeBase.Logic.Enemy
 
         private void DetectTarget<T>() where T : MonoCache
         {
-            Vector3 rayDirectionForward = CalculateRayDirection(Spire.Position, transform.localPosition, MoveDirection.Right);
-            Vector3 rayDirectionBackward = CalculateRayDirection(Spire.Position, transform.localPosition, MoveDirection.Left);
-            Ray rayForward = new Ray(transform.localPosition, rayDirectionForward);
-            Ray rayBackward = new Ray(transform.localPosition, rayDirectionBackward);
-            RaycastHit hit;
+            Vector3 localPosition = _selfTransform.localPosition;
+            Vector3 rayDirectionForward =
+                CalculateRayDirection(Spire.Position, localPosition, MoveDirection.Right);
+            Vector3 rayDirectionBackward =
+                CalculateRayDirection(Spire.Position, localPosition, MoveDirection.Left);
+            Ray rayForward = new Ray(localPosition, rayDirectionForward);
+            Ray rayBackward = new Ray(localPosition, rayDirectionBackward);
 
-            if (Physics.Raycast(rayForward, out hit, _rayDistanceToTarget)
+            if (Physics.Raycast(rayForward, out var hit, _rayDistanceToTarget)
                 || Physics.Raycast(rayBackward, out hit, _rayDistanceToTarget))
                 if (hit.collider.TryGetComponent(out T _))
                 {
-                    
                     Mover.EnableBonusSpeed();
 
-                    if (Vector3.Dot(transform.forward.normalized, (hit.transform.position - transform.position).normalized) < 0)
-                    {
-                        if (_isRotationToTarget == true)
-                            return;
+                    if (Vector3.Dot(_selfTransform.forward.normalized,
+                        (hit.transform.position - _selfTransform.position).normalized) < 0 == false) return;
+                    if (_isRotationToTarget)
+                        return;
 
-                        ChangeDirection();
-                        
-                        _isRotationToTarget = true;
-                    }
+                    ChangeDirection();
+
+                    _isRotationToTarget = true;
 
                     return;
                 }
@@ -114,6 +128,6 @@ namespace CodeBase.Logic.Enemy
             _isRotationToTarget = false;
         }
 
-        private MoveDirection ChangeDirection() => _moveDirection = _moveDirection == MoveDirection.Right ? MoveDirection.Left : MoveDirection.Right;
+        private void ChangeDirection() => _moveDirection = (MoveDirection) ((int) _moveDirection * -1);
     }
 }
