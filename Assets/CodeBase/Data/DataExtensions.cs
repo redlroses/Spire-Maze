@@ -16,6 +16,24 @@ namespace CodeBase.Data
             return vector;
         }
 
+        public static Vector3 ChangeY(this Vector3 vector, float to)
+        {
+            vector.y = to;
+            return vector;
+        }
+
+        public static Vector3 ChangeX(this Vector3 vector, float to)
+        {
+            vector.x = to;
+            return vector;
+        }
+
+        public static Vector3 ChangeZ(this Vector3 vector, float to)
+        {
+            vector.z = to;
+            return vector;
+        }
+
         public static Vector2 ExcludeAxisY(this Vector3 vector) =>
             new Vector2(vector.x, vector.z);
 

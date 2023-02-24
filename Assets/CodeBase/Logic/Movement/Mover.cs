@@ -8,49 +8,26 @@ namespace CodeBase.Logic.Movement
     public class Mover : MonoCache, IMover
     {
         [SerializeField] private float _speed;
-        [SerializeField] private float _bonusSpeed;
-        [SerializeField] private float _durationBonusSpeed;
+        [SerializeField] private Rigidbody _rigidbody;
 
-        private Rigidbody _rigidbody;
+        protected float Speed => _speed;
+
         private MoveDirection _direction;
-        private float _timerBonusSpeed;
-        private bool _isBonusSpeedEnabled;
 
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody ??= Get<Rigidbody>();
         }
 
         protected override void FixedRun()
         {
             ApplyMove();
-
-            if (_timerBonusSpeed <= 0)
-                DisableBonusSpeed();
-            else
-                _timerBonusSpeed -= Time.fixedDeltaTime;
         }
+
+        protected virtual float CalculateSpeed() =>
+            _speed;
 
         public void Move(MoveDirection direction) => _direction = direction;
-
-        public void EnableBonusSpeed()
-        {
-            if (_isBonusSpeedEnabled)
-                return;
-
-            _speed += _bonusSpeed;
-            _isBonusSpeedEnabled = true;
-            _timerBonusSpeed = _durationBonusSpeed;
-        }
-
-        public void DisableBonusSpeed()
-        {
-            if (_isBonusSpeedEnabled == false)
-                return;
-
-            _speed -= _bonusSpeed;
-            _isBonusSpeedEnabled = false;
-        }
 
         private void ApplyMove()
         {
@@ -59,7 +36,7 @@ namespace CodeBase.Logic.Movement
             if (_direction == MoveDirection.Stop)
                 return;
 
-            Vector3 velocity = CalculateVelocity(Spire.Position, _rigidbody.position, _direction) * _speed;
+            Vector3 velocity = CalculateVelocity(Spire.Position, _rigidbody.position, _direction) * CalculateSpeed();
             _rigidbody.velocity = CorrectVelocity(velocity.ExcludeAxisY(), _rigidbody.position.ExcludeAxisY());
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
@@ -77,7 +54,7 @@ namespace CodeBase.Logic.Movement
         {
             Vector2 uncorrectedNextPosition = currentPosition + currentVelocity * Time.fixedDeltaTime;
             Vector2 pointOnArc = uncorrectedNextPosition.normalized * Spire.DistanceToCenter;
-            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * _speed;
+            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * CalculateSpeed();
 
             return new Vector3(correctedVelocity.x, _rigidbody.velocity.y, correctedVelocity.y);
         }
