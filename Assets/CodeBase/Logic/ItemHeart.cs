@@ -5,15 +5,17 @@ namespace CodeBase.Logic
 {
     public class ItemHeart : MonoCache
     {
-       [SerializeField] private int _health = 10;
+        [SerializeField] private int _health = 10;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player))
+            if (other.TryGetComponent(out Player player) == false)
             {
-                player.Heal(_health);
-                Destroy(gameObject);
+                return;
             }
+
+            player.Heal(_health);
+            Destroy(gameObject);
         }
     }
 }
