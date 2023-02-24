@@ -9,7 +9,7 @@ namespace CodeBase.Logic.Enemy
     [RequireComponent(typeof(Mover))]
     public class Enemy : MonoCache, IEnemy
     {
-        [SerializeField] [RequireInterface(typeof(Mover))]
+        [SerializeField] [RequireInterface(typeof(IAccelerable))]
         private MonoCache _mover;
 
         [SerializeField] private int _damage;
@@ -25,7 +25,7 @@ namespace CodeBase.Logic.Enemy
         private bool _isRotationToTarget;
         private bool _isDie;
 
-        private Mover Mover => (Mover) _mover;
+        private IAccelerable Mover => (IAccelerable) _mover;
 
         private void Awake()
         {
@@ -61,9 +61,6 @@ namespace CodeBase.Logic.Enemy
             Vector3 localPosition = _selfTransform.localPosition;
             Vector3 wallDirection = CalculateRayDirection(Spire.Position, localPosition, _moveDirection);
             Vector3 groundDirection = wallDirection + Vector3.down;
-
-            Drawer.DrawRay(_selfTransform.position, groundDirection, _rayDistance, Color.magenta, Time.deltaTime);
-            Drawer.DrawRay(_selfTransform.position, wallDirection, _rayDistance, Color.green, Time.deltaTime);
 
             bool isWall = CheckForDirection(wallDirection);
             bool isNotGround = !CheckForDirection(groundDirection);
@@ -107,8 +104,9 @@ namespace CodeBase.Logic.Enemy
             Ray rayForward = new Ray(localPosition, rayDirectionForward);
             Ray rayBackward = new Ray(localPosition, rayDirectionBackward);
 
-            if (Physics.Raycast(rayForward, out var hit, _rayDistanceToTarget)
+            if (Physics.Raycast(rayForward, out RaycastHit hit, _rayDistanceToTarget)
                 || Physics.Raycast(rayBackward, out hit, _rayDistanceToTarget))
+
                 if (hit.collider.TryGetComponent(out T _))
                 {
                     Mover.EnableBonusSpeed();
@@ -123,6 +121,10 @@ namespace CodeBase.Logic.Enemy
                     _isRotationToTarget = true;
 
                     return;
+                }
+                else
+                {
+                    Mover.DisableBonusSpeed();
                 }
 
             _isRotationToTarget = false;
