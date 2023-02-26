@@ -5,6 +5,7 @@
         None,
         Red,
         Green,
-        Blue
+        Blue,
+        Rgb
     }
 }

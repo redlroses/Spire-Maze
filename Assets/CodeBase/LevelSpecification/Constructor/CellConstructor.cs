@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 
 namespace CodeBase.LevelSpecification.Constructor
@@ -20,9 +21,9 @@ namespace CodeBase.LevelSpecification.Constructor
             };
         }
 
-        public void Construct<TCell>(Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
         {
-            _constructors[typeof(TCell)].Construct<TCell>(cells);
+            _constructors[typeof(TCell)].Construct<TCell>(gameFactory, cells);
         }
     }
 }

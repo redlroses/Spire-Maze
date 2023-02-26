@@ -1,7 +1,8 @@
-using System;
 using System.Linq;
 using CodeBase.Data.Cell;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services;
 using CodeBase.StaticData;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ namespace CodeBase.LevelSpecification
             Clear();
             BuildLevel(_levelMapData);
             _levelConstructor ??= GetComponent<LevelConstructor>();
-            _levelConstructor.Construct(_level);
+            _levelConstructor.Construct(AllServices.Container.Single<IGameFactory>(), _level);
         }
 
         [ContextMenu("Clear")]

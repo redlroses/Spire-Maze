@@ -5,11 +5,13 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class DoorConstructor : ICellConstructor
     {
-        public void Construct<TCell>(Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
         {
             foreach (var cell in cells)
             {
-                CellFactory.InstantiateCell<Door>(cell.Container);
+                var doorData = (Data.Cell.Door) cell.CellData;
+                var door = CellFactory.InstantiateCell<Door>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
+                door.Construct(gameFactory, doorData.Color);
             }
         }
     }

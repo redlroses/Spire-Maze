@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using CodeBase.Data.Cell;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -8,6 +10,7 @@ namespace CodeBase.Infrastructure.Factory
   {
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
-    void Cleanup();
+    public void Cleanup();
+    public Material CreateColoredMaterial(Colors color);
   }
 }

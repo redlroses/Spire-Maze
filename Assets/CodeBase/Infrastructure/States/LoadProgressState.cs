@@ -6,8 +6,6 @@ namespace CodeBase.Infrastructure.States
 {
   public class LoadProgressState : IState
   {
-    private const string InitialLevelName = "Main";
-
     private readonly GameStateMachine _gameStateMachine;
     private readonly IPersistentProgressService _progressService;
     private readonly ISaveLoadService _saveLoadProgress;
@@ -38,7 +36,7 @@ namespace CodeBase.Infrastructure.States
 
     private PlayerProgress NewProgress()
     {
-      var progress = new PlayerProgress(initialLevel: InitialLevelName)
+      var progress = new PlayerProgress(initialLevel: LevelNames.InitialLevelName)
       {
         HeroState = {MaxHP = 50}, HeroStats = {Damage = 1, DamageRadius = 0.5f}
       };

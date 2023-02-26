@@ -5,7 +5,7 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class PlateConstructor : ICellConstructor
     {
-        public void Construct<TCell>(Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
         {
             foreach (var cell in cells)
             {

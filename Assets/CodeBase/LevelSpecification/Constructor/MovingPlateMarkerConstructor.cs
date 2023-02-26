@@ -17,7 +17,7 @@ namespace CodeBase.LevelSpecification.Constructor
         private Cell[] _markers;
         private Cell[] _movingPlates;
 
-        public void Construct<TCell>(Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
         {
             _markers = cells;
             _movingPlates = cells.Where(cell => ((MovingMarker) cell.CellData).IsLiftHolder).ToArray();
