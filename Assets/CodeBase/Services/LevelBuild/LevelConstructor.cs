@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
-using UnityEngine;
 
-namespace CodeBase.LevelSpecification
+namespace CodeBase.Services.LevelBuild
 {
-    public class LevelConstructor : MonoBehaviour
+    public class LevelConstructor
     {
         private readonly CellConstructor _cellConstructor = new CellConstructor();
 

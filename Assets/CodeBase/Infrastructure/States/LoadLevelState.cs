@@ -1,52 +1,75 @@
 ﻿using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification;
+using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-  public class LoadLevelState : IPayloadedState<string>
-  {
-    private readonly GameStateMachine _stateMachine;
-    private readonly SceneLoader _sceneLoader;
-    private readonly IGameFactory _gameFactory;
-    private readonly IPersistentProgressService _progressService;
-    private readonly IStaticDataService _staticData;
-
-    public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
+    public class LoadLevelState : IPayloadedState<LoadPayload>
     {
-      _stateMachine = gameStateMachine;
-      _sceneLoader = sceneLoader;
-      _gameFactory = gameFactory;
-      _progressService = progressService;
-      _staticData = staticDataService;
-    }
+        private readonly GameStateMachine _stateMachine;
+        private readonly SceneLoader _sceneLoader;
+        private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressService _progressService;
+        private readonly IStaticDataService _staticData;
+        private readonly ILevelBuilder _levelBuilder;
 
-    public void Enter(string sceneName)
-    {
-      _gameFactory.Cleanup();
-      _sceneLoader.Load(sceneName, OnLoaded);
-    }
+        private LoadPayload _loadPayload;
 
-    public void Exit()
-    {
-    }
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
+            IPersistentProgressService progressService, IStaticDataService staticDataService,
+            ILevelBuilder levelBuilder)
+        {
+            _stateMachine = gameStateMachine;
+            _sceneLoader = sceneLoader;
+            _gameFactory = gameFactory;
+            _progressService = progressService;
+            _staticData = staticDataService;
+            _levelBuilder = levelBuilder;
+        }
 
-    private void OnLoaded()
-    {
-      InitGameWorld();
-      InformProgressReaders();
+        public void Enter(LoadPayload payload)
+        {
+            _loadPayload = payload;
+            _gameFactory.Cleanup();
+            _sceneLoader.Load(payload.SceneName, OnLoaded);
+        }
 
-      _stateMachine.Enter<GameLoopState>();
-    }
+        public void Exit()
+        {
+        }
 
-    private void InformProgressReaders()
-    {
-      foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
-        progressReader.LoadProgress(_progressService.Progress);
-    }
+        private void OnLoaded()
+        {
+            InitGameWorld();
+            InformProgressReaders();
 
-    private void InitGameWorld()
-    {
+            _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
+        }
+
+        private void InitGameWorld()
+        {
+            if (_loadPayload.IsBuildable)
+            {
+                Level level = BuildLevel();
+                InitHero(level.HeroInitialPosition);
+            }
+        }
+
+        private Level BuildLevel() =>
+            _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelKey));
+
+        private void InitHero(Vector3 at)
+        {
+            _gameFactory.CreateHero(at);
+        }
     }
-  }
 }

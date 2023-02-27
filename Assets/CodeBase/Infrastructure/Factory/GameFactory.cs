@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CodeBase.Data.Cell;
 using CodeBase.Infrastructure.AssetManagement;
@@ -17,6 +18,8 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly Dictionary<Colors, Material> _coloredMaterials = new Dictionary<Colors, Material>();
+
         private GameObject _heroGameObject;
 
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
@@ -34,8 +37,29 @@ namespace CodeBase.Infrastructure.Factory
             ProgressWriters.Clear();
         }
 
-        public Material CreateColoredMaterial(Colors color) =>
-            _assets.Instantiate<Material>($"{AssetPath.Materials}/{color.ToString()}");
+        public Material CreateColoredMaterial(Colors color)
+        {
+            if (_coloredMaterials.TryGetValue(color, out Material material))
+            {
+                return material;
+            }
+
+            Material loaded = _assets.Instantiate<Material>($"{AssetPath.Materials}/{color.ToString()}");
+
+            if (loaded is null)
+            {
+                throw new NullReferenceException($"There is no material for color {color}");
+            }
+
+            _coloredMaterials.Add(color, loaded);
+            return loaded;
+        }
+
+        public GameObject CreateSpire() =>
+            _assets.Instantiate(path: AssetPath.Spire);
+
+        public GameObject CreateHero(Vector3 at) =>
+            InstantiateRegistered(AssetPath.HeroPath);
 
         private void Register(ISavedProgressReader progressReader)
         {

@@ -1,56 +1,45 @@
 using System.Linq;
 using CodeBase.Data.Cell;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services;
 using CodeBase.StaticData;
 using UnityEngine;
 
-namespace CodeBase.LevelSpecification
+namespace CodeBase.Services.LevelBuild
 {
-    [RequireComponent(typeof(LevelConstructor))]
-    [ExecuteAlways]
-    public class LevelBuilder : MonoBehaviour
+    public class LevelBuilder : ILevelBuilder
     {
-        [Header("LevelData")] [SerializeField] private LevelStaticData _levelMapData;
+        private readonly LevelConstructor _levelConstructor;
+        private readonly IGameFactory _gameFactory;
 
-        [Space] [Header("Settings")]
-        [SerializeField] private Transform _levelContainer;
-        [SerializeField] private float _radius;
-        [SerializeField] private float _arcGrade;
-        [SerializeField] private float _floorHeight;
-
-        private LevelConstructor _levelConstructor;
+        private Transform _levelContainer;
+        private float _radius;
+        private float _archAngle;
+        private float _floorHeight;
         private Level _level;
 
-        private void Awake()
+        public LevelBuilder(IGameFactory gameFactory)
         {
-            Build();
+            _gameFactory = gameFactory;
+            _levelConstructor = new LevelConstructor();
         }
 
-        [ContextMenu("Build")]
-        private void Build()
+        public Level Build(LevelStaticData levelStaticData)
         {
-            Clear();
-            BuildLevel(_levelMapData);
-            _levelConstructor ??= GetComponent<LevelConstructor>();
-            _levelConstructor.Construct(AllServices.Container.Single<IGameFactory>(), _level);
+            _levelContainer = _gameFactory.CreateSpire().transform;
+            SetUpLevelParameters(levelStaticData);
+            BuildLevel(levelStaticData);
+            _levelConstructor.Construct(_gameFactory, _level);
+            return _level;
         }
 
-        [ContextMenu("Clear")]
-        private void Clear()
+        public void Clear()
         {
-            for (int i = 0; i < 100; i++)
-            {
-                foreach (Transform plate in _levelContainer)
-                {
-                    DestroyImmediate(plate.gameObject);
-                }
-            }
+            _levelContainer.gameObject.AddComponent<Destroyer>();
         }
 
         private void BuildLevel(LevelStaticData mapData)
-
         {
             _level = new Level(mapData.Height, _levelContainer);
 
@@ -64,14 +53,21 @@ namespace CodeBase.LevelSpecification
             }
         }
 
+        private void SetUpLevelParameters(LevelStaticData levelStaticData)
+        {
+            _radius = levelStaticData.Radius;
+            _archAngle = levelStaticData.ArchAngle;
+            _floorHeight = levelStaticData.FloorHeight;
+        }
+
         private Floor BuildFloor(CellData[] floorCells, Transform container)
         {
             Floor floor = new Floor(floorCells.Length, container);
 
             for (int i = 0; i < floorCells.Length; i++)
             {
-                Vector3 containerPosition = GetPosition(i * _arcGrade, _radius);
-                Quaternion containerRotation = GetRotation(i * _arcGrade);
+                Vector3 containerPosition = GetPosition(i * _archAngle, _radius);
+                Quaternion containerRotation = GetRotation(i * _archAngle);
                 Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}", container,
                     containerPosition, containerRotation);
                 Cell cell = new Cell(floorCells[i], cellContainer);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace CodeBase.Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string LevelsDataPath = "Static Data/Levels";
+        private const string LevelsDataPath = "Level Maps";
 
         private Dictionary<string, LevelStaticData> _levels;
 
@@ -18,9 +19,9 @@ namespace CodeBase.Services.StaticData
                 .ToDictionary(x => x.LevelKey, x => x);
         }
 
-        public LevelStaticData ForLevel(string sceneKey) =>
-            _levels.TryGetValue(sceneKey, out LevelStaticData staticData)
+        public LevelStaticData ForLevel(string levelKey) =>
+            _levels.TryGetValue(levelKey, out LevelStaticData staticData)
                 ? staticData
-                : null;
+                : throw new NullReferenceException($"There is no level with key: {levelKey}");
     }
 }

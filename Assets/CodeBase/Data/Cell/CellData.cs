@@ -14,6 +14,7 @@ namespace CodeBase.Data.Cell
             {
                 Key key => new Key(cellData.Texture, key.Color),
                 Door door => new Door(cellData.Texture, door.Color),
+                InitialPlate plate => new InitialPlate(cellData.Texture),
                 Plate plate => new Plate(cellData.Texture),
                 Air air => new Air(cellData.Texture),
                 Wall wall => new Wall(cellData.Texture),

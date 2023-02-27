@@ -43,6 +43,9 @@ namespace CodeBase.Editor.LevelEditor
             {
                 [typeof(Air)] = data => _baseTextures[typeof(Air)].Tint(_colors[typeof(Air)]),
                 [typeof(Plate)] = data => _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)]),
+                [typeof(InitialPlate)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(InitialPlate)].Tint(_colors[typeof(InitialPlate)])),
                 [typeof(Wall)] = data => _baseTextures[typeof(Wall)].Tint(_colors[typeof(Wall)]),
                 [typeof(Door)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
@@ -53,7 +56,8 @@ namespace CodeBase.Editor.LevelEditor
                         .CombineTexture(_baseTextures[typeof(Key)]
                             .Tint(GetColor32(((Key) data)?.Color ?? Colors.None))),
                 [typeof(MovingMarker)] = data =>
-                    _baseTextures[typeof(MovingMarker)].Tint(_colors[typeof(MovingMarker)]).RotateTo(((MovingMarker) data)?.Direction ?? PlateMoveDirection.None)
+                    _baseTextures[typeof(MovingMarker)].Tint(_colors[typeof(MovingMarker)])
+                        .RotateTo(((MovingMarker) data)?.Direction ?? PlateMoveDirection.None)
                         .CombineTexture(((MovingMarker) data)?.IsLiftHolder == true
                             ? _baseTextures[typeof(MovingPlate)].Tint(_colors[typeof(MovingPlate)])
                             : _baseTextures[typeof(Air)]),
@@ -63,6 +67,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 [typeof(Air)] = Resources.Load<Texture2D>("Textures/AirIcon"),
                 [typeof(Plate)] = Resources.Load<Texture2D>("Textures/PlateIcon"),
+                [typeof(InitialPlate)] = Resources.Load<Texture2D>("Textures/InitialPlateIcon"),
                 [typeof(Wall)] = Resources.Load<Texture2D>("Textures/WallIcon"),
                 [typeof(Door)] = Resources.Load<Texture2D>("Textures/DoorIcon"),
                 [typeof(Key)] = Resources.Load<Texture2D>("Textures/KeyIcon"),
@@ -74,6 +79,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 [typeof(Air)] = new Color32(0, 0, 0, 0),
                 [typeof(Plate)] = new Color32(57, 181, 94, 255),
+                [typeof(InitialPlate)] = new Color32(192, 105, 55, 255),
                 [typeof(Wall)] = new Color32(57, 181, 94, 255),
                 [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
                 [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
@@ -83,6 +89,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 new Air(GetTextureByType<Air>()),
                 new Plate(GetTextureByType<Plate>()),
+                new InitialPlate(GetTextureByType<InitialPlate>()),
                 new Wall(GetTextureByType<Wall>()),
                 new Key(GetTextureByType<Key>()),
                 new Door(GetTextureByType<Door>()),

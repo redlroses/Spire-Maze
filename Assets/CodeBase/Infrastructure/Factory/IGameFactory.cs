@@ -12,5 +12,7 @@ namespace CodeBase.Infrastructure.Factory
     List<ISavedProgress> ProgressWriters { get; }
     public void Cleanup();
     public Material CreateColoredMaterial(Colors color);
+    public GameObject CreateSpire();
+    public GameObject CreateHero(Vector3 at);
   }
 }

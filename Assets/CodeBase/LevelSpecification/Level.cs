@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using CodeBase.Data.Cell;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
 
@@ -10,13 +12,11 @@ namespace CodeBase.LevelSpecification
         private int _currentIndex = -1;
 
         public int Height => Container.Count;
-
         public int Width => Container[0].Container.Count;
-
         public int Size => Height * Width;
+        public Vector3 HeroInitialPosition => this.First(cell => cell.CellData is InitialPlate).Container.transform.position;
 
         public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
-
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
 
         public Level(int size, Transform selfTransform, List<Floor> container = null) : base(size, selfTransform, container)
