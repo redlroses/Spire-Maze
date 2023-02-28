@@ -30,6 +30,7 @@ namespace CodeBase.Services.LevelBuild
             _levelContainer = _gameFactory.CreateSpire().transform;
             SetUpLevelParameters(levelStaticData);
             BuildLevel(levelStaticData);
+            _level.SelfTransform = _levelContainer;
             _levelConstructor.Construct(_gameFactory, _level);
             return _level;
         }
@@ -47,6 +48,9 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = new Vector3(0, i * _floorHeight, 0);
                 Transform floorContainer = CreateContainer($"Floor {i + 1}", _levelContainer, containerPosition);
+                floorContainer.gameObject.AddComponent<MeshFilter>();
+                floorContainer.gameObject.AddComponent<MeshRenderer>();
+                floorContainer.gameObject.AddComponent<MeshCollider>();
                 CellData[] floorCells = mapData.CellDataMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
                 Floor floor = BuildFloor(floorCells, floorContainer);
                 _level.Add(floor);

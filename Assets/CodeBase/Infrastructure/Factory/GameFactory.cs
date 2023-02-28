@@ -68,7 +68,7 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(path: AssetPath.Spire);
 
         public GameObject CreateHero(Vector3 at) =>
-            InstantiateRegistered(AssetPath.HeroPath);
+            InstantiateRegistered(prefabPath: AssetPath.HeroPath);
 
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
@@ -76,6 +76,9 @@ namespace CodeBase.Infrastructure.Factory
             RegisterProgressWatchers(cell);
             return cell;
         }
+
+        public Material CreateMaterial(string name) =>
+            Resources.Load<Material>(path: $"{AssetPath.Materials}/{name}");
 
         private void Register(ISavedProgressReader progressReader)
         {
