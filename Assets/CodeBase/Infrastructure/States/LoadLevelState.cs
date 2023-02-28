@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
+using CodeBase.Logic;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
@@ -58,19 +59,25 @@ namespace CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
-            if (_loadPayload.IsBuildable)
+            if (_loadPayload.IsBuildable == false)
             {
-                Level level = BuildLevel();
-                InitHero(level.HeroInitialPosition);
+                return;
             }
+
+            Level level = BuildLevel();
+            GameObject hero = InitHero(level.HeroInitialPosition);
+            CameraFollow(hero);
         }
 
         private Level BuildLevel() =>
             _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelKey));
 
-        private void InitHero(Vector3 at)
-        {
+        private GameObject InitHero(Vector3 at) =>
             _gameFactory.CreateHero(at);
+
+        private void CameraFollow(GameObject hero)
+        {
+            if (Camera.main != null) Camera.main.GetComponent<CameraFollower>().Follow(hero.transform);
         }
     }
 }

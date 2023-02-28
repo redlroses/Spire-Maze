@@ -16,5 +16,10 @@ namespace CodeBase.Logic
             _cameraHolder.position = new Vector3(0, _target.position.y, 0);
             transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
         }
+
+        public void Follow(Transform hero)
+        {
+            _target = hero;
+        }
     }
 }

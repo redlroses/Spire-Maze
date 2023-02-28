@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   LevelKey: Level 1
-  Radius: 5.945
+  Radius: 5.94
   ArchAngle: 22.5
   FloorHeight: 2
   Width: 16
@@ -108,7 +108,7 @@ MonoBehaviour:
   - rid: 11825799655325708
   - rid: 11825799655325718
   - rid: 11825799655325710
-  - rid: 11825799655325711
+  - rid: 11825889065304064
   - rid: 11825846246178825
   - rid: 11825799655325713
   - rid: 11825846246178826
@@ -438,10 +438,6 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.Data.Cell, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 11825799655325711
-      type: {class: Plate, ns: CodeBase.Data.Cell, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 11825799655325713
       type: {class: Plate, ns: CodeBase.Data.Cell, asm: Assembly-CSharp}
       data:
@@ -514,5 +510,9 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 11825846246178828
       type: {class: Plate, ns: CodeBase.Data.Cell, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 11825889065304064
+      type: {class: InitialPlate, ns: CodeBase.Data.Cell, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
