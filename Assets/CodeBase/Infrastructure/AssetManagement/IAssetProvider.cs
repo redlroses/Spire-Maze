@@ -1,3 +1,4 @@
+using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services;
 using UnityEngine;
 
@@ -5,8 +6,10 @@ namespace CodeBase.Infrastructure.AssetManagement
 {
   public interface IAssetProvider : IService
   {
+    void LoadCells();
+    void CleanUp();
     GameObject Instantiate(string path, Vector3 at);
     GameObject Instantiate(string path);
-    TObject Instantiate<TObject>(string path) where TObject : Object;
+    GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell;
   }
 }

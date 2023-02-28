@@ -24,12 +24,12 @@ namespace CodeBase.LevelSpecification.Constructor
 
             foreach (Cell cell in _movingPlates)
             {
-                CellFactory.InstantiateCell<MovingPlate>(cell.Container);
+                gameFactory.CreateCell<MovingPlate>(cell.Container);
             }
 
             foreach (Cell cell in _markers)
             {
-                CellFactory.InstantiateCell<MovingPlateMarker>(cell.Container);
+                gameFactory.CreateCell<MovingPlateMarker>(cell.Container);
             }
 
             foreach (Cell movingPlates in _movingPlates)

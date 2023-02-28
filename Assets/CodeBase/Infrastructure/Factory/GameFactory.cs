@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Data.Cell;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.StaticData;
@@ -18,7 +19,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
-        private readonly Dictionary<Colors, Material> _coloredMaterials = new Dictionary<Colors, Material>();
+        private readonly Dictionary<Colors, Material> _coloredMaterials;
 
         private GameObject _heroGameObject;
 
@@ -29,12 +30,20 @@ namespace CodeBase.Infrastructure.Factory
             _staticData = staticData;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+            _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
         }
 
         public void Cleanup()
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+
+            _heroGameObject = null;
+        }
+
+        public void WarmUp()
+        {
+            _assets.LoadCells();
         }
 
         public Material CreateColoredMaterial(Colors color)
@@ -44,7 +53,7 @@ namespace CodeBase.Infrastructure.Factory
                 return material;
             }
 
-            Material loaded = _assets.Instantiate<Material>($"{AssetPath.Materials}/{color.ToString()}");
+            Material loaded = Resources.Load<Material>($"{AssetPath.Materials}/{color.ToString()}");
 
             if (loaded is null)
             {
@@ -60,6 +69,13 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHero(Vector3 at) =>
             InstantiateRegistered(AssetPath.HeroPath);
+
+        public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
+        {
+            GameObject cell = _assets.InstantiateCell<TCell>(container);
+            RegisterProgressWatchers(cell);
+            return cell;
+        }
 
         private void Register(ISavedProgressReader progressReader)
         {
@@ -79,10 +95,10 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath);
-            RegisterProgressWatchers(gameObject);
+            _heroGameObject ??= _assets.Instantiate(path: prefabPath);
+            RegisterProgressWatchers(_heroGameObject);
 
-            return gameObject;
+            return _heroGameObject;
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

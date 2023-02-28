@@ -10,7 +10,7 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (var cell in cells)
             {
                 var doorData = (Data.Cell.Door) cell.CellData;
-                var door = CellFactory.InstantiateCell<Door>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
+                var door = gameFactory.CreateCell<Door>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
                 door.Construct(gameFactory, doorData.Color);
             }
         }

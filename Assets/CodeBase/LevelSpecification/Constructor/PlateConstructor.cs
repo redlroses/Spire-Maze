@@ -9,7 +9,7 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                CellFactory.InstantiateCell<Plate>(cell.Container);
+                gameFactory.CreateCell<Plate>(cell.Container);
             }
         }
     }

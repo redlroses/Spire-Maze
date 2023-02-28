@@ -53,7 +53,9 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle(staticData);
         }
 
-        private void EnterLoadLevel() =>
+        private void EnterLoadLevel()
+        {
             _stateMachine.Enter<LoadProgressState>();
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CodeBase.Data.Cell;
+using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace CodeBase.Infrastructure.Factory
   {
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
-    public void Cleanup();
-    public Material CreateColoredMaterial(Colors color);
-    public GameObject CreateSpire();
-    public GameObject CreateHero(Vector3 at);
+    void Cleanup();
+    void WarmUp();
+    Material CreateColoredMaterial(Colors color);
+    GameObject CreateSpire();
+    GameObject CreateHero(Vector3 at);
+    GameObject CreateCell<TCell>(Transform container) where TCell : Cell;
   }
 }

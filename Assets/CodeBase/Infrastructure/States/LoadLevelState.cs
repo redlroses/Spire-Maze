@@ -34,6 +34,7 @@ namespace CodeBase.Infrastructure.States
         {
             _loadPayload = payload;
             _gameFactory.Cleanup();
+            _gameFactory.WarmUp();
             _sceneLoader.Load(payload.SceneName, OnLoaded);
         }
 
