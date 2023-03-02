@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5272379439785042178}
   - component: {fileID: -460353984038943939}
   - component: {fileID: -775770549204709863}
+  - component: {fileID: 472032752461111891}
   m_Layer: 3
   m_Name: MovingPlate
   m_TagString: Untagged
@@ -129,3 +130,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3796300582984652964, guid: f77e178da6068d141bbef9c767a7fe71, type: 3}
+--- !u!65 &472032752461111891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299658556792600835}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 0.2, z: 1.91}
+  m_Center: {x: 0, y: 0.05, z: -0}

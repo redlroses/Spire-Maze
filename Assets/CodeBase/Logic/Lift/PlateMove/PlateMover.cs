@@ -60,7 +60,7 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         private void CheckIsComplete()
         {
-            if (_delta >= 1)
+            if (_delta >= FinalTranslateValue)
             {
                 enabled = false;
             }
