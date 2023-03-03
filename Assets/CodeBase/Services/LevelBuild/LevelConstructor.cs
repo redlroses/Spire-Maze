@@ -1,16 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Data.Cell;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
 using CodeBase.Tools.Extension;
 using UnityEngine;
+using Door = CodeBase.LevelSpecification.Cells.Door;
+using Key = CodeBase.LevelSpecification.Cells.Key;
+using Plate = CodeBase.LevelSpecification.Cells.Plate;
+using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.Services.LevelBuild
 {
     public class LevelConstructor
     {
+        private const string Colliders = "Colliders";
+        private const string Spire = "Spire";
+
         private readonly CellConstructor _cellConstructor = new CellConstructor();
 
         private IGameFactory _gameFactory;
@@ -18,165 +26,205 @@ namespace CodeBase.Services.LevelBuild
         public void Construct(IGameFactory gameFactory, Level level)
         {
             _gameFactory = gameFactory;
-            _cellConstructor.Construct<Wall>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Wall).ToArray());
             _cellConstructor.Construct<Plate>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Plate).ToArray());
-            // CombineMashes(gameFactory, level); //TODO: Комбинирование мешей целиком и коллайдеров по слитным участкам
-            CombineColliders(level);
+            _cellConstructor.Construct<Wall>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Wall).ToArray());
             _cellConstructor.Construct<Key>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Key).ToArray());
             _cellConstructor.Construct<Door>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Door).ToArray());
-            _cellConstructor.Construct<MovingPlateMarker>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.MovingMarker).ToArray());
+            _cellConstructor.Construct<MovingPlateMarker>(gameFactory, level.Where(cell => cell.CellData is MovingMarker).ToArray());
+            CombineCells(level);
         }
 
-        private void Combine(List<Cell> cells, Transform floorTransform)
+        private void CombineCells(Level level)
         {
-            Debug.Log("Begin Group");
-
-            foreach (var item in cells)
-            {
-                Debug.Log(item.Container.name);
-            }
-
-            Debug.Log("End Group");
-
-            MeshFilter[] meshesFilters = cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
-
-            var cell = cells.First().Container.gameObject;
-
-            CombineInstance[] combine = new CombineInstance[meshesFilters.Length];
-            Debug.Log(meshesFilters.Length);
-
-            for (int i = 0; i < meshesFilters.Length; i++)
-            {
-                combine[i].mesh = meshesFilters[i].sharedMesh;
-                combine[i].transform = meshesFilters[i].transform.localToWorldMatrix;
-                meshesFilters[i].gameObject.SetActive(false);
-            }
-
-            MeshFilter meshFilter = cell.AddComponent<MeshFilter>();
-            MeshCollider meshCollider = cell.AddComponent<MeshCollider>();
-            MeshRenderer meshRenderer = cell.AddComponent<MeshRenderer>();
-            meshFilter.mesh = new Mesh();
-            meshFilter.mesh.CombineMeshes(combine);
-            meshCollider.sharedMesh = meshFilter.mesh;
-            meshCollider.convex = true;
-            meshRenderer.material = _gameFactory.CreateMaterial("Spire");
-            cell.transform.position = Vector3.zero;
-            cell.transform.rotation = Quaternion.identity;
-            cell.layer = cell.transform.GetChild(0).gameObject.layer;
+            GameObject groupsHolder = CombineAllColliders(level);
+            CombineAllMeshes(level.SelfTransform, groupsHolder);
         }
 
-        private void CombineColliders(Level level)
+        private GameObject CombineAllColliders(Level level)
+        {
+            GameObject collidersHolder = new GameObject(Colliders);
+            collidersHolder.transform.parent = level.SelfTransform;
+
+            CombineByType<Data.Cell.Plate>(level, collidersHolder);
+            CombineByType<Data.Cell.Wall>(level, collidersHolder);
+
+            collidersHolder.isStatic = true;
+
+            return collidersHolder;
+        }
+
+        private void CombineByType<TCell>(Level level, GameObject collidersHolder) where TCell : CellData
         {
             for (int i = 0; i < level.Height; i++)
             {
-                int airIndex = FindFirstGap(level.Container[i]);
-                CombineGroups(level.Container[i], airIndex);
+                if (HasFloorCellType<TCell>(level, i) == false)
+                {
+                    continue;
+                }
+
+                int airIndex = FindFirstGap<TCell>(level.Container[i]);
+                CombineColliderGroups<TCell>(level.Container[i], airIndex, collidersHolder.transform);
             }
         }
 
-        private void CombineGroups(Floor floor, int beginIndex)
+        private static bool HasFloorCellType<TCell>(Level level, int floor) where TCell : CellData
+        {
+            for (int j = 0; j < level.Width; j++)
+            {
+                if (level.GetCell(floor, j).CellData is TCell)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void CombineAllMeshes(Transform spire, GameObject groupsHolder)
+        {
+            MeshFilter[] meshesFilters = groupsHolder.GetComponentsInChildren<MeshFilter>();
+            MeshFilter[] meshFilters = meshesFilters.Append(spire.GetComponent<MeshFilter>()).ToArray();
+            CombineInstance[] combine = CombineInstances(meshFilters);
+            ApplyMesh(spire.gameObject, combine, true);
+            spire.gameObject.isStatic = true;
+        }
+
+        private void CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder) where TCell : CellData
         {
             if (beginIndex == -1)
             {
-                Combine(floor.Container.GetRange(0, floor.Container.Count), floor.SelfTransform);
+                CombineColliders(floor.Container.GetRange(0, floor.Container.Count), collidersHolder);
                 return;
             }
 
-            int firstGroupIndex = FindFirstGroupIndex(floor, beginIndex);
+            int firstGroupIndex = FindFirstGroupIndex<TCell>(floor, beginIndex);
             int initialGroupIndex = firstGroupIndex;
 
             do
             {
-                int lastGroupIndex = FindLastGroupIndex(floor, firstGroupIndex);
+                int lastGroupIndex = FindLastGroupIndex<TCell>(floor, firstGroupIndex);
 
                 if (lastGroupIndex < firstGroupIndex)
                 {
                     List<Cell> combined = floor.Container.GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
                     combined.AddRange(floor.Container.GetRange(0, lastGroupIndex));
-                    Combine(combined, floor.SelfTransform);
+                    CombineColliders(combined, collidersHolder);
                 }
                 else
                 {
-                    Combine(floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex), floor.SelfTransform);
+                    CombineColliders(floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex), collidersHolder);
                 }
 
-                firstGroupIndex = FindFirstGroupIndex(floor, lastGroupIndex);
+                firstGroupIndex = FindFirstGroupIndex<TCell>(floor, lastGroupIndex);
             } while (initialGroupIndex != firstGroupIndex);
         }
 
-        private int FindFirstGroupIndex(Floor floor, int beginIndex)
+        private void CombineColliders(List<Cell> cells, Transform parent)
         {
-            int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
+            GameObject cell = cells.First().Container.gameObject;
+            GameObject colliderHolder = new GameObject($"{cell.name} collider");
+            colliderHolder.transform.parent = parent;
+            colliderHolder.isStatic = true;
 
-            while (currentIndex != beginIndex)
+            MeshFilter[] meshesFilters = cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
+
+            foreach (MeshFilter meshFilter in meshesFilters)
             {
-                if (floor.Container[currentIndex].CellData is Data.Cell.Plate)
-                {
-                    break;
-                }
-
-                currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
+                meshFilter.gameObject.SetActive(false);
             }
 
-            // Debug.Log($"first index {currentIndex}");
-            return currentIndex;
+            CombineInstance[] combine = CombineInstances(meshesFilters);
+
+            Mesh mesh = ApplyMesh(colliderHolder, combine, false);
+            CreateMeshCollider(colliderHolder, mesh, cell.transform.GetChild(0).gameObject.layer);
         }
 
-        private int FindLastGroupIndex(Floor floor, int beginIndex)
+        private void CreateMeshCollider(GameObject colliderHolder, Mesh mesh, int layer)
         {
-            int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
-
-            while (currentIndex != beginIndex)
-            {
-                // Debug.Log($"currentIndex in last {currentIndex}");
-
-                if (floor.Container[currentIndex].CellData is Data.Cell.Plate == false)
-                {
-                    break;
-                }
-
-                currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
-            }
-
-            // Debug.Log($"last index {currentIndex}");
-            return (currentIndex).ClampRound(0, floor.Container.Count);
+            MeshCollider meshCollider = colliderHolder.AddComponent<MeshCollider>();
+            meshCollider.sharedMesh = mesh;
+            meshCollider.convex = true;
+            colliderHolder.layer = layer;
         }
 
-        private int FindFirstGap(Floor floor)
+        private CombineInstance[] CombineInstances(MeshFilter[] meshesFilters)
         {
-            for (int i = 0; i < floor.Container.Count; i++)
-            {
-                if (floor.Container[i].CellData is Data.Cell.Plate == false)
-                {
-                    // Debug.Log($"First non Plate {i} {floor.Container[i].CellData.GetType()}");
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        private void CombineMeshes(IGameFactory gameFactory, Level level)
-        {
-            Transform levelSelfTransform = level.SelfTransform;
-            MeshFilter[] meshesFilters = levelSelfTransform.GetComponentsInChildren<MeshFilter>();
             CombineInstance[] combine = new CombineInstance[meshesFilters.Length];
-            Debug.Log(meshesFilters.Length);
 
             for (int i = 0; i < meshesFilters.Length; i++)
             {
                 combine[i].mesh = meshesFilters[i].sharedMesh;
                 combine[i].transform = meshesFilters[i].transform.localToWorldMatrix;
-                meshesFilters[i].gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
 
-            MeshFilter meshFilter = levelSelfTransform.gameObject.GetComponent<MeshFilter>();
-            meshFilter.mesh = new Mesh();
+            return combine;
+        }
+
+        private Mesh ApplyMesh(GameObject holder, CombineInstance[] combine, bool isEnableRenderer)
+        {
+            if (holder.TryGetComponent(out MeshFilter meshFilter) == false)
+            {
+                meshFilter = holder.AddComponent<MeshFilter>();
+            }
+
+            if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
+            {
+                meshRenderer = holder.AddComponent<MeshRenderer>();
+            }
+
+            Mesh mesh = new Mesh();
+            meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combine);
-            MeshCollider meshCollider = levelSelfTransform.gameObject.GetComponent<MeshCollider>();
-            meshCollider.sharedMesh = meshFilter.mesh;
-            MeshRenderer meshRenderer = levelSelfTransform.gameObject.GetComponent<MeshRenderer>();
-            meshRenderer.material = gameFactory.CreateMaterial("Spire");
+            meshRenderer.material = _gameFactory.CreateMaterial(Spire);
+            meshRenderer.enabled = isEnableRenderer;
+            return mesh;
+        }
+
+        private int FindFirstGroupIndex<TCell>(Floor floor, int beginIndex) where TCell : CellData
+        {
+            int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
+
+            while (currentIndex != beginIndex)
+            {
+                if (floor.Container[currentIndex].CellData is TCell)
+                {
+                    break;
+                }
+
+                currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
+            }
+
+            return currentIndex;
+        }
+
+        private int FindLastGroupIndex<TCell>(Floor floor, int beginIndex) where TCell : CellData
+        {
+            int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
+
+            while (currentIndex != beginIndex)
+            {
+                if (floor.Container[currentIndex].CellData is TCell == false)
+                {
+                    break;
+                }
+
+                currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
+            }
+
+            return currentIndex.ClampRound(0, floor.Container.Count);
+        }
+
+        private int FindFirstGap<TCell>(Floor floor) where TCell : CellData
+        {
+            for (int i = 0; i < floor.Container.Count; i++)
+            {
+                if (floor.Container[i].CellData is TCell == false)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }
