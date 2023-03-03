@@ -1,4 +1,5 @@
-﻿using NTC.Global.Cache;
+﻿using System;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift.PlateMove
@@ -19,18 +20,36 @@ namespace CodeBase.Logic.Lift.PlateMove
         private float _delta;
         private float _distance;
 
+        private Vector3 _prevPosition;
+        private Vector3 _prevRotation;
+
+        public event Action<Vector3, Vector3> PositionUpdated;
+
+        public Vector3 DeltaPosition => (_rigidBody.position - _prevPosition) / Time.fixedDeltaTime;
+        public Vector3 DeltaRotation => (_rigidBody.rotation.eulerAngles - _prevRotation) / Time.fixedDeltaTime;
+
         protected Rigidbody RigidBody => _rigidBody;
 
         private void Awake()
         {
             _rigidBody = Get<Rigidbody>();
-            Radius = new Vector2(transform.parent.position.x, transform.parent.position.z).magnitude;
+            Vector3 parentPosition = transform.parent.position;
+            Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
+        }
+
+        protected override void OnEnabled()
+        {
+            _prevRotation = _rigidBody.rotation.eulerAngles;
+            _prevPosition = _rigidBody.position;
         }
 
         protected override void FixedRun()
         {
+            PositionUpdated?.Invoke(DeltaPosition, DeltaRotation);
             Translate();
+            _prevPosition = _rigidBody.position;
+            _prevRotation = _rigidBody.rotation.eulerAngles;
         }
 
         protected abstract T GetTransform(LiftDestinationMarker from);

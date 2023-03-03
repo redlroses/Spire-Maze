@@ -68,7 +68,7 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(path: AssetPath.Spire);
 
         public GameObject CreateHero(Vector3 at) =>
-            InstantiateRegistered(AssetPath.HeroPath);
+            InstantiateRegistered(AssetPath.HeroPath, at);
 
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
