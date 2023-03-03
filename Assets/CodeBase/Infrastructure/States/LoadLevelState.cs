@@ -66,6 +66,7 @@ namespace CodeBase.Infrastructure.States
 
             Level level = BuildLevel();
             GameObject hero = InitHero(level.HeroInitialPosition);
+            Debug.Log(level.HeroInitialPosition);
             CameraFollow(hero);
         }
 

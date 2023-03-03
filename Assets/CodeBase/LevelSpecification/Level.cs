@@ -9,12 +9,14 @@ namespace CodeBase.LevelSpecification
 {
     public sealed class Level : CellContainer<Floor>, IEnumerable<Cell>, IEnumerator<Cell>
     {
+        private readonly Vector3 _heroPositionOffset = new Vector3(0, 1.1f, 0);
+
         private int _currentIndex = -1;
 
         public int Height => Container.Count;
         public int Width => Container[0].Container.Count;
         public int Size => Height * Width;
-        public Vector3 HeroInitialPosition => this.First(cell => cell.CellData is InitialPlate).Container.transform.position;
+        public Vector3 HeroInitialPosition => this.First(cell => cell.CellData is InitialPlate).Container.transform.position + _heroPositionOffset;
 
         public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
