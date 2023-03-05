@@ -12,6 +12,7 @@ namespace CodeBase.LevelSpecification
         private readonly Vector3 _heroPositionOffset = new Vector3(0, 1.1f, 0);
 
         private int _currentIndex = -1;
+        private Vector3 _heroPositionOffset = new Vector3(0, 1.1f, 0);
 
         public int Height => Container.Count;
         public int Width => Container[0].Container.Count;

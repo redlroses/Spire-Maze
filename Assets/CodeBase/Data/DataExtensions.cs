@@ -10,11 +10,11 @@ namespace CodeBase.Data
         public static Vector3 AsUnityVector(this Vector3Data vector3Data) =>
             new Vector3(vector3Data.X, vector3Data.Y, vector3Data.Z);
 
-        public static Vector3 AddAxisY(this Vector3 vector, float y)
-        {
-            vector.y = y;
-            return vector;
-        }
+        public static Vector3 AddY(this Vector2 vector, float y) =>
+            new Vector3(vector.x, y, vector.y);
+
+        public static Vector2 RemoveY(this Vector3 vector) =>
+            new Vector2(vector.x, vector.z);
 
         public static Vector3 ChangeY(this Vector3 vector, float to)
         {
@@ -33,9 +33,6 @@ namespace CodeBase.Data
             vector.z = to;
             return vector;
         }
-
-        public static Vector2 ExcludeAxisY(this Vector3 vector) =>
-            new Vector2(vector.x, vector.z);
 
         public static float SqrMagnitudeTo(this Vector3 from, Vector3 to) =>
             Vector3.SqrMagnitude(to - from);
