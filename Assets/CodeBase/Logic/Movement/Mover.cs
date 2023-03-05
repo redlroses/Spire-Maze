@@ -38,7 +38,7 @@ namespace CodeBase.Logic.Movement
                 return;
 
             Vector3 velocity = CalculateVelocity(Spire.Position, _rigidbody.position, _direction) * CalculateSpeed();
-            _rigidbody.velocity = CorrectVelocity(velocity.ExcludeAxisY(), _rigidbody.position.ExcludeAxisY());
+            _rigidbody.velocity = CorrectVelocity(velocity.RemoveY(), _rigidbody.position.RemoveY());
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
             _rigidbody.MoveRotation(targetRotation);
@@ -47,7 +47,6 @@ namespace CodeBase.Logic.Movement
         private Vector3 CalculateVelocity(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
         {
             Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
-
             return Vector3.Cross(directionForAnchor, Vector3.down * (int) direction).normalized;
         }
 
@@ -57,7 +56,7 @@ namespace CodeBase.Logic.Movement
             Vector2 pointOnArc = uncorrectedNextPosition.normalized * Spire.DistanceToCenter;
             Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * CalculateSpeed();
 
-            return new Vector3(correctedVelocity.x, _rigidbody.velocity.y, correctedVelocity.y);
+            return correctedVelocity.AddY(_rigidbody.velocity.y);
         }
     }
 }

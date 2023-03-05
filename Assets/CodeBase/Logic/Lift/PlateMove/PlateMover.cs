@@ -25,8 +25,8 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         public event Action<Vector3, Vector3> PositionUpdated;
 
-        public Vector3 DeltaPosition => (_rigidBody.position - _prevPosition) / Time.fixedDeltaTime;
-        public Vector3 DeltaRotation => (_rigidBody.rotation.eulerAngles - _prevRotation) / Time.fixedDeltaTime;
+        public Vector3 DeltaPosition => _rigidBody.position - _prevPosition;
+        public Vector3 DeltaRotation => _rigidBody.rotation.eulerAngles - _prevRotation;
 
         protected Rigidbody RigidBody => _rigidBody;
 
@@ -46,8 +46,8 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected override void FixedRun()
         {
-            PositionUpdated?.Invoke(DeltaPosition, DeltaRotation);
             Translate();
+            PositionUpdated?.Invoke(DeltaPosition, DeltaRotation);
             _prevPosition = _rigidBody.position;
             _prevRotation = _rigidBody.rotation.eulerAngles;
         }

@@ -21,14 +21,13 @@ namespace CodeBase.Logic.Portal
 
         protected override void Run()
         {
-            if (_enteredObject == null)
-            {
-                return;
-            }
-
             if (_isTriggered)
             {
                 _timer -= Time.deltaTime;
+            }
+            else
+            {
+                return;
             }
 
             if (_timer <= 0.35f)

@@ -1,6 +1,4 @@
-﻿using CodeBase.Logic.Lift.PlateMove;
-
-namespace CodeBase.Logic
+﻿namespace CodeBase.Logic.Lift.PlateMove
 {
     public interface IPlateMovable
     {
