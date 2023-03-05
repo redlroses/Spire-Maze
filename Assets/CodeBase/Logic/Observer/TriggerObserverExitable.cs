@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Observer
 {
-    public class TriggerObserver<TTarget> : MonoBehaviour, ITriggerObserver<TTarget>
+    public class TriggerObserverExit<TTarget> : TriggerObserver<TTarget>, ITriggerObserverExit<TTarget>
     {
-        public event Action<TTarget> Entered;
+        public event Action<TTarget> Exited;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out TTarget collectible) == false)
             {
                 return;
             }
 
-            Entered?.Invoke(collectible);
+            Exited?.Invoke(collectible);
         }
     }
 }

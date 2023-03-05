@@ -11,10 +11,10 @@ namespace CodeBase.Logic.Lift.PlateMove
         private const int FinalTranslateValue = 1;
 
         [SerializeField] protected float _speed = 3f;
+        [SerializeField] private Rigidbody _rigidBody;
 
         protected float Radius;
 
-        private Rigidbody _rigidBody;
         private T _from;
         private T _to;
         private float _delta;
@@ -24,15 +24,16 @@ namespace CodeBase.Logic.Lift.PlateMove
         private Vector3 _prevRotation;
 
         public event Action<Vector3, Vector3> PositionUpdated;
+        public event Action MoveEnded;
 
-        public Vector3 DeltaPosition => _rigidBody.position - _prevPosition;
-        public Vector3 DeltaRotation => _rigidBody.rotation.eulerAngles - _prevRotation;
+        private Vector3 DeltaPosition => _rigidBody.position - _prevPosition;
+        private Vector3 DeltaRotation => _rigidBody.rotation.eulerAngles - _prevRotation;
 
         protected Rigidbody RigidBody => _rigidBody;
 
         private void Awake()
         {
-            _rigidBody = Get<Rigidbody>();
+            _rigidBody ??= Get<Rigidbody>();
             Vector3 parentPosition = transform.parent.position;
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
@@ -82,6 +83,7 @@ namespace CodeBase.Logic.Lift.PlateMove
             if (_delta >= FinalTranslateValue)
             {
                 enabled = false;
+                MoveEnded?.Invoke();
             }
         }
     }

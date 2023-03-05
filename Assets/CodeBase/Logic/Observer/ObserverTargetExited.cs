@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using NTC.Global.Cache;
+using UnityEngine;
 
 namespace CodeBase.Logic.Observer
 {
-    public abstract class ObserverTarget<TObserver, TTarget> : MonoBehaviour where TObserver : ITriggerObserver<TTarget>
+    public abstract class ObserverTargetExited<TObserver, TTarget> : MonoCache where TObserver : ITriggerObserverExit<TTarget>
     {
         [SerializeField] private TObserver _observer;
 
@@ -11,16 +12,19 @@ namespace CodeBase.Logic.Observer
             _observer ??= GetComponent<TObserver>();
         }
 
-        private void OnEnable()
+        protected override void OnEnabled()
         {
             _observer.Entered += OnTriggerObserverEntered;
+            _observer.Exited += OnTriggerObserverExited;
         }
 
-        private void OnDisable()
+        protected override void OnDisabled()
         {
             _observer.Entered -= OnTriggerObserverEntered;
+            _observer.Exited -= OnTriggerObserverExited;
         }
 
         protected abstract void OnTriggerObserverEntered(TTarget collectible);
+        protected abstract void OnTriggerObserverExited(TTarget collectible);
     }
 }

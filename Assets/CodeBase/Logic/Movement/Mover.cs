@@ -1,5 +1,5 @@
 using UnityEngine;
-using CodeBase.Data;
+using CodeBase.Tools.Extension;
 using NTC.Global.Cache;
 
 namespace CodeBase.Logic.Movement
@@ -37,26 +37,14 @@ namespace CodeBase.Logic.Movement
             if (_direction == MoveDirection.Stop)
                 return;
 
-            Vector3 velocity = CalculateVelocity(Spire.Position, _rigidbody.position, _direction) * CalculateSpeed();
-            _rigidbody.velocity = CorrectVelocity(velocity.RemoveY(), _rigidbody.position.RemoveY());
+            Vector2 direction = new Vector2((int) _direction, 0f);
+            Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, Spire.DistanceToCenter) * CalculateSpeed();
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
             _rigidbody.MoveRotation(targetRotation);
-        }
 
-        private Vector3 CalculateVelocity(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
-        {
-            Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
-            return Vector3.Cross(directionForAnchor, Vector3.down * (int) direction).normalized;
-        }
-
-        private Vector3 CorrectVelocity(Vector2 currentVelocity, Vector2 currentPosition)
-        {
-            Vector2 uncorrectedNextPosition = currentPosition + currentVelocity * Time.fixedDeltaTime;
-            Vector2 pointOnArc = uncorrectedNextPosition.normalized * Spire.DistanceToCenter;
-            Vector2 correctedVelocity = (pointOnArc - currentPosition).normalized * CalculateSpeed();
-
-            return correctedVelocity.AddY(_rigidbody.velocity.y);
+            velocity.ChangeY(_rigidbody.velocity.y);
+            _rigidbody.velocity = velocity.ChangeY(_rigidbody.velocity.y);
         }
     }
 }

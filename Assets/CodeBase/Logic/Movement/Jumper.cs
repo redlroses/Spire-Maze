@@ -1,4 +1,5 @@
 using CodeBase.Data;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
 
@@ -10,7 +11,7 @@ namespace CodeBase.Logic.Movement
     public class Jumper : MonoCache, IJumper
     {
         public const float GroundCheckDistance = -0.15f;
-        public const float RoofCheckDistance = 0.1f;
+        public const float RoofCheckDistance = 0.15f;
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private SphereCaster _sphereCaster;
@@ -68,7 +69,7 @@ namespace CodeBase.Logic.Movement
 
             _jumpProgress = Mathf.Clamp01(_expiredTime / _jumpDuration);
 
-            bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance);
+            bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, 0.3f);
 
             if (isInRoof)
             {

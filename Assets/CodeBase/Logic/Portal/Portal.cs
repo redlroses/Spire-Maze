@@ -1,80 +1,62 @@
+using CodeBase.Logic.Observer;
 using UnityEngine;
-using NTC.Global.Cache;
-using CodeBase.Tools.Constants;
 
 namespace CodeBase.Logic.Portal
 {
-    public class Portal : MonoCache
+    [RequireComponent(typeof(TimerOperator))]
+    public class Portal : ObserverTargetExited<TeleportableObserver, ITeleportable>
     {
+        [SerializeField] private float _waitDelay;
         [SerializeField] private Portal _linkedPortal;
         [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private TimerOperator _timer;
 
-        private Teleporter _enteredObject;
-        private float _timer;
-        private bool _isTriggered;
+        private ITeleportable _teleportable;
         private bool _isRecipient;
+        private Transform _selfTransform;
 
-
-        [SerializeField] private BoxCollider _boxCollider;
-        [SerializeField] private Color _color;
-
-
-        protected override void Run()
+        private void Awake()
         {
-            if (_isTriggered)
-            {
-                _timer -= Time.deltaTime;
-            }
-            else
-            {
-                return;
-            }
-
-            if (_timer <= 0.35f)
-            {
-                _effect.Play();
-            }
-
-            if (_timer <= 0)
-            {
-                _effect.Play();
-                _enteredObject.Teleport(_linkedPortal);
-            }
+            Constructor(_linkedPortal);
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void Constructor(Portal linked)
+        {
+            _linkedPortal = linked;
+            _selfTransform = transform;
+            _timer ??= Get<TimerOperator>();
+            _timer.SetUp(_waitDelay, Teleport);
+        }
+
+        protected override void OnTriggerObserverEntered(ITeleportable teleporter)
         {
             if (_isRecipient)
-                return;
-
-            if (other.TryGetComponent(out Teleporter teleporter) == false)
             {
                 return;
             }
 
-            _timer = ConstantsGeneral.DelayBeforeRelocation;
-            _isTriggered = true;
-            _enteredObject = teleporter;
+            _timer.Restart();
+            _timer.Play();
+            _teleportable = teleporter;
         }
 
-        private void OnTriggerExit(Collider other)
+        protected override void OnTriggerObserverExited(ITeleportable teleporter)
         {
-            if (other.TryGetComponent(out Teleporter _) == false)
-            {
-                return;
-            }
-
-            _isTriggered = false;
-            _enteredObject = null;
+            _timer.Pause();
             _isRecipient = false;
         }
 
-        private void OnDrawGizmos()
+        private void Receive(ITeleportable teleportable)
         {
-            Gizmos.color = _color;
-            Gizmos.DrawCube(transform.position, _boxCollider.size);
+            _effect.Play();
+            _isRecipient = true;
+            teleportable.Teleportation(_selfTransform.position);
         }
 
-        public void SetRecipet() => _isRecipient = true;
+        private void Teleport()
+        {
+            _linkedPortal.Receive(_teleportable);
+            _effect.Play();
+        }
     }
 }

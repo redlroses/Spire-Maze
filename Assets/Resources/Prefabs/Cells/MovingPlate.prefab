@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -460353984038943939}
   - component: {fileID: -775770549204709863}
   - component: {fileID: 472032752461111891}
+  - component: {fileID: -4472175196050936747}
+  - component: {fileID: 4981631733710271874}
   m_Layer: 3
   m_Name: MovingPlate
   m_TagString: Untagged
@@ -99,7 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b53a6efc0a34e72be46c9cc34c1af2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _observer: {fileID: 4981631733710271874}
   _state: 0
+  _waitDelay: 1
+  _timer: {fileID: -4472175196050936747}
 --- !u!54 &-460353984038943939
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,7 +128,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299658556792600835}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ffd059eaff180ec479922c439d0a74bf, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -141,5 +146,29 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.2, z: 1.91}
-  m_Center: {x: 0, y: 0.05, z: -0}
+  m_Size: {x: 1.5, y: 0.16, z: 1.91}
+  m_Center: {x: 0, y: 0.22, z: -0}
+--- !u!114 &-4472175196050936747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299658556792600835}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4981631733710271874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299658556792600835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c3da6ae6764fe18ae432994d36c262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
