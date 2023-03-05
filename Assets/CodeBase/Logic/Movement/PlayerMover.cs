@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic.Lift.PlateMove;
+﻿using CodeBase.Data;
+using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Movement;
 using UnityEngine;
 
@@ -40,8 +41,10 @@ namespace CodeBase.Logic
         {
             Debug.Log($"deltaPosition {deltaPosition}, deltaRotation {deltaRotation}");
 
-            Rigidbody.velocity += deltaPosition;
-            Rigidbody.angularVelocity = Rigidbody.rotation.eulerAngles + deltaRotation;
+            Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
+            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
+                .AddY(uncorrectedPosition.y);
+            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
         }
     }
 }
