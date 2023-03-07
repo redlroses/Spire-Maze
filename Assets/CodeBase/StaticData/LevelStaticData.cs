@@ -1,4 +1,4 @@
-﻿using CodeBase.Data.Cell;
+﻿using CodeBase.EditorCells;
 using UnityEngine;
 
 namespace CodeBase.StaticData
@@ -11,8 +11,8 @@ namespace CodeBase.StaticData
         public float ArchAngle = 22.5f;
         public float FloorHeight = 2f;
         [HideInInspector] public int Width = 16;
-        [HideInInspector] public int Height = 0;
-        [HideInInspector] [SerializeField] [SerializeReference] public CellData[] CellDataMap;
+         public int Height = 0;
+         [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
     }

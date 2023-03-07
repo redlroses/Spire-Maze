@@ -3,7 +3,7 @@ using System;
 namespace CodeBase.Data
 {
   [Serializable]
-  public class State
+  public class HealthState
   {
     public float CurrentHP;
     public float MaxHP;

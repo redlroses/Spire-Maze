@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Data.Cell
+namespace CodeBase.EditorCells
 {
     public class Plate : CellData
     {
@@ -8,7 +8,7 @@ namespace CodeBase.Data.Cell
         {
         }
 
-        public override CellData Copy2() =>
+        public override CellData Copy() =>
             new Plate(Texture);
     }
 }

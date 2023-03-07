@@ -10,7 +10,7 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                var keyData = (Data.Cell.Key) cell.CellData;
+                var keyData = (EditorCells.Key) cell.CellData;
                 KeyCollectible key = gameFactory.CreateCell<Key>(cell.Container).GetComponent<KeyCollectible>();
                 key.Construct(gameFactory, keyData.Color);
             }

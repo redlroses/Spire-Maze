@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Data.Cell
+﻿namespace CodeBase.EditorCells
 {
     public enum Colors
     {

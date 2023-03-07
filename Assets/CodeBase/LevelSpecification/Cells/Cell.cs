@@ -1,4 +1,4 @@
-﻿using CodeBase.Data.Cell;
+﻿using CodeBase.EditorCells;
 using CodeBase.Logic.Lift;
 using CodeBase.Tools.Constants;
 using UnityEngine;
@@ -9,24 +9,29 @@ namespace CodeBase.LevelSpecification.Cells
     {
         public readonly CellData CellData;
         public readonly Transform Container;
+        private readonly int _id;
 
-        public CellPosition Position;
+        private CellPosition _position;
 
-        public Cell(CellData cellData, Transform container)
+        public int Id => _id;
+        public CellPosition Position => _position;
+
+        public Cell(CellData cellData, Transform container, int id)
         {
             CellData = cellData;
             Container = container;
-            Position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
+            _position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
+            _id = id;
         }
 
         public void AddTwoPiToAngle()
         {
-            Position = new CellPosition(Position.Height, Position.Angle + Trigonometry.TwoPiGrade);
+            _position = new CellPosition(_position.Height, _position.Angle + Trigonometry.TwoPiGrade);
         }
 
         public void RemoveTwoPiFromAngle()
         {
-            Position = new CellPosition(Position.Height, Position.Angle - Trigonometry.TwoPiGrade);
+            _position = new CellPosition(_position.Height, _position.Angle - Trigonometry.TwoPiGrade);
         }
     }
 }

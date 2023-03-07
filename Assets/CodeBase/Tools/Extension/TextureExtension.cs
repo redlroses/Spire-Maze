@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;

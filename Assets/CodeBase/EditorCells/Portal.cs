@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Data.Cell
+namespace CodeBase.EditorCells
 {
     public class Portal : Plate
     {
@@ -13,7 +13,7 @@ namespace CodeBase.Data.Cell
             Color = color;
         }
 
-        public override CellData Copy2() =>
+        public override CellData Copy() =>
             new Portal(Texture, Key, Color);
     }
 }

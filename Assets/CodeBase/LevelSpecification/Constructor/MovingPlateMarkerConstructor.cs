@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Lift;

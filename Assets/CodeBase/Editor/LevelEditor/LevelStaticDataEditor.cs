@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
 using UnityEditor;
@@ -191,7 +191,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 if (_isPaletteShow)
                 {
-                    arrayElementAtIndex.managedReferenceValue = _pipetteCell.Copy2();
+                    arrayElementAtIndex.managedReferenceValue = _pipetteCell.Copy();
                 }
                 else
                 {

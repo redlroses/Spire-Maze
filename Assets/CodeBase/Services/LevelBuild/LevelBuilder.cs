@@ -1,5 +1,5 @@
 using System.Linq;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
@@ -48,11 +48,11 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = new Vector3(0, i * _floorHeight, 0);
                 Transform floorContainer = CreateContainer($"Floor {i + 1}", _levelContainer, containerPosition);
-                floorContainer.gameObject.AddComponent<MeshFilter>();
-                floorContainer.gameObject.AddComponent<MeshRenderer>();
-                floorContainer.gameObject.AddComponent<MeshCollider>();
+                // floorContainer.gameObject.AddComponent<MeshFilter>();
+                // floorContainer.gameObject.AddComponent<MeshRenderer>();
+                // floorContainer.gameObject.AddComponent<MeshCollider>();
                 CellData[] floorCells = mapData.CellDataMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
-                Floor floor = BuildFloor(floorCells, floorContainer);
+                Floor floor = BuildFloor(floorCells, floorContainer, i);
                 _level.Add(floor);
             }
         }
@@ -64,7 +64,7 @@ namespace CodeBase.Services.LevelBuild
             _floorHeight = levelStaticData.FloorHeight;
         }
 
-        private Floor BuildFloor(CellData[] floorCells, Transform container)
+        private Floor BuildFloor(CellData[] floorCells, Transform container, int floorIndex)
         {
             Floor floor = new Floor(floorCells.Length, container);
 
@@ -74,7 +74,8 @@ namespace CodeBase.Services.LevelBuild
                 Quaternion containerRotation = GetRotation(i * _archAngle);
                 Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}", container,
                     containerPosition, containerRotation);
-                Cell cell = new Cell(floorCells[i], cellContainer);
+                int cellId = floorIndex * (floorCells.Length + 1) + i;
+                Cell cell = new Cell(floorCells[i], cellContainer, cellId);
                 floor.Add(cell);
             }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
@@ -28,12 +28,12 @@ namespace CodeBase.Services.LevelBuild
         public void Construct(IGameFactory gameFactory, Level level)
         {
             _gameFactory = gameFactory;
-            _cellConstructor.Construct<Plate>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Plate).ToArray());
-            _cellConstructor.Construct<Wall>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Wall).ToArray());
-            _cellConstructor.Construct<Key>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Key).ToArray());
-            _cellConstructor.Construct<Door>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Door).ToArray());
+            _cellConstructor.Construct<Plate>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
+            _cellConstructor.Construct<Wall>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
+            _cellConstructor.Construct<Key>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
+            _cellConstructor.Construct<Door>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
             _cellConstructor.Construct<MovingPlateMarker>(gameFactory, level.Where(cell => cell.CellData is MovingMarker).ToArray());
-            _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Portal).ToArray());
+            _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
             CombineCells(level);
         }
 
@@ -48,8 +48,8 @@ namespace CodeBase.Services.LevelBuild
             GameObject collidersHolder = new GameObject(Colliders);
             collidersHolder.transform.parent = level.SelfTransform;
 
-            CombineByType<Data.Cell.Plate>(level, collidersHolder);
-            CombineByType<Data.Cell.Wall>(level, collidersHolder);
+            CombineByType<EditorCells.Plate>(level, collidersHolder);
+            CombineByType<EditorCells.Wall>(level, collidersHolder);
 
             collidersHolder.isStatic = true;
 

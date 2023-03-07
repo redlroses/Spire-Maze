@@ -6,10 +6,12 @@ namespace CodeBase.Data
   public class WorldData
   {
     public PositionOnLevel PositionOnLevel;
+    public LevelState LevelState;
 
     public WorldData(string initialLevel)
     {
       PositionOnLevel = new PositionOnLevel(initialLevel);
+      LevelState = new LevelState();
     }
   }
 }

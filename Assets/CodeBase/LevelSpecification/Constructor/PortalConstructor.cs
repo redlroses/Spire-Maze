@@ -20,7 +20,7 @@ namespace CodeBase.LevelSpecification.Constructor
             while (portals.Count > 0)
             {
                 Cell currentPortal = portals[0];
-                Data.Cell.Portal currentPortalData = (Data.Cell.Portal) currentPortal.CellData;
+                EditorCells.Portal currentPortalData = (EditorCells.Portal) currentPortal.CellData;
                 Cell linkedPortal = FindLinked(portals, currentPortalData);
                 PortalGate currentPortalGate = currentPortal.Container.GetComponentInChildren<PortalGate>();
                 PortalGate linkedPortalGate = linkedPortal.Container.GetComponentInChildren<PortalGate>();
@@ -41,11 +41,11 @@ namespace CodeBase.LevelSpecification.Constructor
             // }
         }
 
-        private Cell FindLinked(IEnumerable<Cell> portals, Data.Cell.Portal currentPortalData)
+        private Cell FindLinked(IEnumerable<Cell> portals, EditorCells.Portal currentPortalData)
         {
             return portals.First(portal =>
-                ((Data.Cell.Portal) portal.CellData).Key == currentPortalData.Key &&
-                currentPortalData != (Data.Cell.Portal) portal.CellData);
+                ((EditorCells.Portal) portal.CellData).Key == currentPortalData.Key &&
+                currentPortalData != (EditorCells.Portal) portal.CellData);
         }
     }
 }

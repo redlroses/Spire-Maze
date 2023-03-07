@@ -9,9 +9,9 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                var doorData = (Data.Cell.Door) cell.CellData;
+                var doorData = (EditorCells.Door) cell.CellData;
                 var door = gameFactory.CreateCell<Door>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
-                door.Construct(gameFactory, doorData.Color);
+                door.Construct(gameFactory, doorData.Color, cell.Id);
             }
         }
     }

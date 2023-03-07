@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.PersistentProgress;

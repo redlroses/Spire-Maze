@@ -1,6 +1,7 @@
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -38,10 +39,11 @@ namespace CodeBase.Infrastructure.States
     {
       var progress = new PlayerProgress(initialLevel: LevelNames.InitialLevelName)
       {
-        HeroState = {MaxHP = 50}, HeroStats = {Damage = 1, DamageRadius = 0.5f}
+        HeroHealthState = {MaxHP = 50}
       };
 
-      progress.HeroState.ResetHP();
+      Debug.Log("new progress");
+      progress.HeroHealthState.ResetHP();
 
       return progress;
     }

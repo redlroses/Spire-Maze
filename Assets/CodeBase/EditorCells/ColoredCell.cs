@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Data.Cell
+namespace CodeBase.EditorCells
 {
     public class ColoredCell : Plate
     {
@@ -11,7 +11,7 @@ namespace CodeBase.Data.Cell
             Color = colorType;
         }
 
-        public override CellData Copy2() =>
+        public override CellData Copy() =>
             new ColoredCell(Texture, Color);
     }
 }

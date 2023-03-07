@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using UnityEngine;
 
 namespace CodeBase.Logic.Сollectible

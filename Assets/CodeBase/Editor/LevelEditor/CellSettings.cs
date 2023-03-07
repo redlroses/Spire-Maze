@@ -1,4 +1,4 @@
-using CodeBase.Data.Cell;
+using CodeBase.EditorCells;
 using UnityEditor;
 using UnityEngine;
 

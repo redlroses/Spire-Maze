@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Data.Cell
+namespace CodeBase.EditorCells
 {
     public class MovingMarker : CellData
     {
@@ -13,7 +13,7 @@ namespace CodeBase.Data.Cell
             Direction = direction;
         }
 
-        public override CellData Copy2() =>
+        public override CellData Copy() =>
             new MovingMarker(Texture, Direction, IsLiftHolder);
     }
 }
