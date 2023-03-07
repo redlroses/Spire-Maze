@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Data.Cell
+﻿﻿namespace CodeBase.Data.Cell
 {
     public class MovingPlate
     {

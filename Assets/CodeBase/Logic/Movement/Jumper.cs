@@ -2,6 +2,7 @@ using CodeBase.Data;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
+using NTC.Global.System;
 
 namespace CodeBase.Logic.Movement
 {
@@ -53,7 +54,7 @@ namespace CodeBase.Logic.Movement
             }
 
             enabled = true;
-            _gravityScaler.SetGravityScale(0);
+            _gravityScaler.Disable();
         }
 
         private void ApplyJump()
@@ -84,7 +85,7 @@ namespace CodeBase.Logic.Movement
             _expiredTime = 0;
             _isJump = false;
             enabled = false;
-            _gravityScaler.SetDefaultGravityScale();
+            _gravityScaler.Enable();
         }
 
         private void VelocityJump()

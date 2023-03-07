@@ -10,6 +10,7 @@ using UnityEngine;
 using Door = CodeBase.LevelSpecification.Cells.Door;
 using Key = CodeBase.LevelSpecification.Cells.Key;
 using Plate = CodeBase.LevelSpecification.Cells.Plate;
+using Portal = CodeBase.LevelSpecification.Cells.Portal;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.Services.LevelBuild
@@ -18,6 +19,7 @@ namespace CodeBase.Services.LevelBuild
     {
         private const string Colliders = "Colliders";
         private const string Spire = "Spire";
+        private const string Ground = "Ground";
 
         private readonly CellConstructor _cellConstructor = new CellConstructor();
 
@@ -31,6 +33,7 @@ namespace CodeBase.Services.LevelBuild
             _cellConstructor.Construct<Key>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Key).ToArray());
             _cellConstructor.Construct<Door>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Door).ToArray());
             _cellConstructor.Construct<MovingPlateMarker>(gameFactory, level.Where(cell => cell.CellData is MovingMarker).ToArray());
+            _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is Data.Cell.Portal).ToArray());
             CombineCells(level);
         }
 
@@ -144,6 +147,7 @@ namespace CodeBase.Services.LevelBuild
             MeshCollider meshCollider = colliderHolder.AddComponent<MeshCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
+            meshCollider.material = _gameFactory.CreatePhysicMaterial(Ground);
             colliderHolder.layer = layer;
         }
 

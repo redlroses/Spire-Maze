@@ -10,5 +10,8 @@ namespace CodeBase.Data.Cell
         {
             Color = colorType;
         }
+
+        public override CellData Copy2() =>
+            new ColoredCell(Texture, Color);
     }
 }

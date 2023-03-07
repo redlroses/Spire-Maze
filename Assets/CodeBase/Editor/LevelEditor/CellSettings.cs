@@ -34,6 +34,10 @@ namespace CodeBase.Editor.LevelEditor
                     plate.Direction = (PlateMoveDirection) EditorGUILayout.EnumPopup("Direction", plate.Direction);
                     plate.IsLiftHolder = EditorGUILayout.Toggle("Is lift holder", plate.IsLiftHolder);
                     break;
+                case Portal cell:
+                    cell.Key = EditorGUILayout.IntField("Link Id", cell.Key);
+                    cell.Color = EditorGUILayout.ColorField("Color", cell.Color);
+                    break;
             }
         }
 
@@ -46,15 +50,14 @@ namespace CodeBase.Editor.LevelEditor
             switch (_cellData.managedReferenceValue)
             {
                 case ColoredCell cell:
-                {
                     cell.SetTexture(_editor.GetTextureByType(cell));
                     break;
-                }
                 case MovingMarker cell:
-                {
                     cell.SetTexture(_editor.GetTextureByType(cell));
                     break;
-                }
+                case Portal cell:
+                    cell.SetTexture(_editor.GetTextureByType(cell));
+                    break;
             }
         }
     }

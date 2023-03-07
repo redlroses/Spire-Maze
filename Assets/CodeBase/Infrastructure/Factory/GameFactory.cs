@@ -7,6 +7,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.StaticData;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -19,7 +20,10 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
+
         private readonly Dictionary<Colors, Material> _coloredMaterials;
+        private readonly Dictionary<string, Material> _materials;
+        private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
         private GameObject _heroGameObject;
 
@@ -31,6 +35,8 @@ namespace CodeBase.Infrastructure.Factory
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
+            _materials = new Dictionary<string, Material>(4);
+            _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
 
         public void Cleanup()
@@ -46,23 +52,8 @@ namespace CodeBase.Infrastructure.Factory
             _assets.LoadCells();
         }
 
-        public Material CreateColoredMaterial(Colors color)
-        {
-            if (_coloredMaterials.TryGetValue(color, out Material material))
-            {
-                return material;
-            }
-
-            Material loaded = Resources.Load<Material>($"{AssetPath.Materials}/{color.ToString()}");
-
-            if (loaded is null)
-            {
-                throw new NullReferenceException($"There is no material for color {color}");
-            }
-
-            _coloredMaterials.Add(color, loaded);
-            return loaded;
-        }
+        public Material CreateColoredMaterial(Colors color) =>
+            GetCashed(color, AssetPath.Materials, _coloredMaterials);
 
         public GameObject CreateSpire() =>
             _assets.Instantiate(path: AssetPath.Spire);
@@ -78,7 +69,10 @@ namespace CodeBase.Infrastructure.Factory
         }
 
         public Material CreateMaterial(string name) =>
-            Resources.Load<Material>(path: $"{AssetPath.Materials}/{name}");
+            GetCashed(name, AssetPath.Materials, _materials);
+
+        public PhysicMaterial CreatePhysicMaterial(string name) =>
+            GetCashed(name, AssetPath.PhysicMaterials, _physicMaterials);
 
         private void Register(ISavedProgressReader progressReader)
         {
@@ -108,6 +102,24 @@ namespace CodeBase.Infrastructure.Factory
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);
+        }
+
+        private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection) where TValue : Object
+        {
+            if (collection.TryGetValue(key, out TValue value))
+            {
+                return value;
+            }
+
+            TValue loaded = Resources.Load<TValue>($"{path}/{key}");
+
+            if (loaded is null)
+            {
+                throw new NullReferenceException($"There is no object with key {key}");
+            }
+
+            collection.Add(key, loaded);
+            return loaded;
         }
     }
 }

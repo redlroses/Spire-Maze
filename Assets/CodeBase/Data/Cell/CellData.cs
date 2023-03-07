@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CodeBase.Data.Cell
 {
     [Serializable]
-    public class CellData
+    public abstract class CellData
     {
         public Texture2D Texture;
 
@@ -22,6 +22,8 @@ namespace CodeBase.Data.Cell
                 _ => throw new ArgumentException(nameof(cellData)),
             };
         }
+
+        public abstract CellData Copy2();
 
         public void SetTexture(Texture2D texture)
         {

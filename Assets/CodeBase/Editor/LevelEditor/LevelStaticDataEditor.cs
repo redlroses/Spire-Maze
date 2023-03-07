@@ -61,6 +61,10 @@ namespace CodeBase.Editor.LevelEditor
                         .CombineTexture(((MovingMarker) data)?.IsLiftHolder == true
                             ? _baseTextures[typeof(MovingPlate)].Tint(_colors[typeof(MovingPlate)])
                             : _baseTextures[typeof(Air)]),
+                [typeof(Portal)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(Portal)]
+                            .Tint(((Portal) data)?.Color ?? _colors[typeof(Portal)]))
             };
 
             _baseTextures = new Dictionary<Type, Texture2D>
@@ -73,6 +77,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Key)] = Resources.Load<Texture2D>("Textures/KeyIcon"),
                 [typeof(MovingMarker)] = Resources.Load<Texture2D>("Textures/MovingMarkerIcon"),
                 [typeof(MovingPlate)] = Resources.Load<Texture2D>("Textures/MovingPlateIcon"),
+                [typeof(Portal)] = Resources.Load<Texture2D>("Textures/PortalIcon"),
             };
 
             _colors = new Dictionary<Type, Color32>
@@ -83,6 +88,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Wall)] = new Color32(57, 181, 94, 255),
                 [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
                 [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
+                [typeof(Portal)] = new Color32(129, 93, 199, 255),
             };
 
             _palette = new CellData[]
@@ -94,6 +100,7 @@ namespace CodeBase.Editor.LevelEditor
                 new Key(GetTextureByType<Key>()),
                 new Door(GetTextureByType<Door>()),
                 new MovingMarker(GetTextureByType<MovingMarker>()),
+                new Portal(GetTextureByType<Portal>()) {Color = _colors[typeof(Portal)]},
             };
 
             UpdateTextures();
@@ -184,7 +191,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 if (_isPaletteShow)
                 {
-                    arrayElementAtIndex.managedReferenceValue = CellData.Copy(_pipetteCell);
+                    arrayElementAtIndex.managedReferenceValue = _pipetteCell.Copy2();
                 }
                 else
                 {

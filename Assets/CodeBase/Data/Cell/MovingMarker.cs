@@ -12,5 +12,8 @@ namespace CodeBase.Data.Cell
             IsLiftHolder = isLiftHolder;
             Direction = direction;
         }
+
+        public override CellData Copy2() =>
+            new MovingMarker(Texture, Direction, IsLiftHolder);
     }
 }

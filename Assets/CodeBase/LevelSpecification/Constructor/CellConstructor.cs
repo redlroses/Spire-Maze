@@ -18,6 +18,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Key)] = new KeyConstructor(),
                 [typeof(Door)] = new DoorConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),
+                [typeof(Portal)] = new PortalConstructor(),
             };
         }
 

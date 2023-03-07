@@ -7,5 +7,8 @@ namespace CodeBase.Data.Cell
         public Door(Texture2D texture, Colors colorType = Colors.None) : base(texture, colorType)
         {
         }
+
+        public override CellData Copy2() =>
+            new Door(Texture, Color);
     }
 }

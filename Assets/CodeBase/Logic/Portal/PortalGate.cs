@@ -4,10 +4,10 @@ using UnityEngine;
 namespace CodeBase.Logic.Portal
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class Portal : ObserverTargetExited<TeleportableObserver, ITeleportable>
+    public class PortalGate : ObserverTargetExited<TeleportableObserver, ITeleportable>
     {
         [SerializeField] private float _waitDelay;
-        [SerializeField] private Portal _linkedPortal;
+        [SerializeField] private PortalGate _linkedPortalGate;
         [SerializeField] private ParticleSystem _effect;
         [SerializeField] private TimerOperator _timer;
 
@@ -15,14 +15,9 @@ namespace CodeBase.Logic.Portal
         private bool _isRecipient;
         private Transform _selfTransform;
 
-        private void Awake()
+        public void Construct(PortalGate linked)
         {
-            Constructor(_linkedPortal);
-        }
-
-        public void Constructor(Portal linked)
-        {
-            _linkedPortal = linked;
+            _linkedPortalGate = linked;
             _selfTransform = transform;
             _timer ??= Get<TimerOperator>();
             _timer.SetUp(_waitDelay, Teleport);
@@ -46,16 +41,19 @@ namespace CodeBase.Logic.Portal
             _isRecipient = false;
         }
 
-        private void Receive(ITeleportable teleportable)
+        private void Receive(ITeleportable teleportable, float dotRotation)
         {
             _effect.Play();
             _isRecipient = true;
-            teleportable.Teleportation(_selfTransform.position);
+            Vector3 forward = _selfTransform.forward;
+            Vector3 rotation = dotRotation > 0 ? forward : forward * -1;
+            teleportable.Teleportation(_selfTransform.position, rotation);
         }
 
         private void Teleport()
         {
-            _linkedPortal.Receive(_teleportable);
+            float dotRotation = Vector3.Dot(_selfTransform.forward, _teleportable.Forward);
+            _linkedPortalGate.Receive(_teleportable, dotRotation);
             _effect.Play();
         }
     }
