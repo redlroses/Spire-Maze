@@ -35,13 +35,16 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             DoorState cellState = progress.WorldData.LevelState.DoorStates.Find(cell => cell.Id == Id);
 
-            if (cellState == null || cellState.IsOpen == false)
+            if (cellState == null)
             {
                 return;
             }
 
-            _animator.Open(1f);
-            _isOpen = true;
+            if (cellState.IsOpen)
+            {
+                _animator.Open(1f);
+                _isOpen = true;
+            }
         }
 
         public void UpdateProgress(PlayerProgress progress)

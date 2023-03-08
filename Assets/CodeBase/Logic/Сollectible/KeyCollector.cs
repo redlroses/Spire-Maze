@@ -1,22 +1,31 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Data;
 using CodeBase.EditorCells;
-using UnityEngine;
+using CodeBase.Services.PersistentProgress;
 
 namespace CodeBase.Logic.Сollectible
 {
-    public class KeyCollector : ItemCollector<KeyCollectible>
+    public class KeyCollector : ItemCollector<KeyCollectible>, ISavedProgress
     {
         private Dictionary<Colors, int> _keys;
 
-        private void Awake()
+        public void LoadProgress(PlayerProgress progress)
         {
             _keys = new Dictionary<Colors, int>
             {
-                [Colors.Red] = 0,
-                [Colors.Green] = 0,
-                [Colors.Blue] = 0,
-                [Colors.Rgb] = 0,
+                [Colors.Red] = progress.HeroInventory.RedKeys,
+                [Colors.Green] = progress.HeroInventory.GreenKeys,
+                [Colors.Blue] = progress.HeroInventory.BlueKeys,
+                [Colors.Rgb] = progress.HeroInventory.RgbKeys
             };
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.HeroInventory.RedKeys = _keys[Colors.Red];
+            progress.HeroInventory.GreenKeys = _keys[Colors.Green];
+            progress.HeroInventory.BlueKeys = _keys[Colors.Blue];
+            progress.HeroInventory.RgbKeys = _keys[Colors.Rgb];
         }
 
         protected override void Collect(KeyCollectible item)

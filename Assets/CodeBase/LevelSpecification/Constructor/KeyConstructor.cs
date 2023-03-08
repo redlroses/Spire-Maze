@@ -12,7 +12,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var keyData = (EditorCells.Key) cell.CellData;
                 KeyCollectible key = gameFactory.CreateCell<Key>(cell.Container).GetComponent<KeyCollectible>();
-                key.Construct(gameFactory, keyData.Color);
+                key.Construct(gameFactory, keyData.Color, cell.Id);
             }
         }
     }

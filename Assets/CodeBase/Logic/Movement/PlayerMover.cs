@@ -1,10 +1,12 @@
-﻿using CodeBase.Logic.Lift.PlateMove;
+﻿using CodeBase.Data;
+using CodeBase.Logic.Lift.PlateMove;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class PlayerMover : Mover, IPlateMovable
+    public class PlayerMover : Mover, IPlateMovable, ISavedProgress
     {
         public void OnMovingPlatformEnter(IPlateMover plateMover)
         {
@@ -14,6 +16,16 @@ namespace CodeBase.Logic.Movement
         public void OnMovingPlatformExit(IPlateMover plateMover)
         {
             plateMover.PositionUpdated -= OnPlateMoverPositionUpdated;
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            Rigidbody.position = progress.WorldData.PositionOnLevel.Position.AsUnityVector();
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.WorldData.PositionOnLevel.Position = Rigidbody.position.AsVectorData();
         }
 
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)

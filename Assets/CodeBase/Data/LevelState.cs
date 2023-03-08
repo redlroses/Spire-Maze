@@ -9,11 +9,13 @@ namespace CodeBase.Data
     {
         public string LevelKey;
         public List<DoorState> DoorStates;
+        public List<KeyState> KeyStates;
 
         public LevelState(string levelKey)
         {
             LevelKey = levelKey;
             DoorStates = new List<DoorState>();
+            KeyStates = new List<KeyState>();
         }
     }
 }

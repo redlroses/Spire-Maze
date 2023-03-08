@@ -18,11 +18,12 @@ namespace CodeBase.Logic.Movement
         private void Awake()
         {
             _rigidbody ??= Get<Rigidbody>();
+            ApplyMove(MoveDirection.Left);
         }
 
         protected override void FixedRun()
         {
-            ApplyMove();
+            ApplyMove(_direction);
         }
 
         public void Move(MoveDirection direction) => _direction = direction;
@@ -30,14 +31,14 @@ namespace CodeBase.Logic.Movement
         protected virtual float CalculateSpeed() =>
             _speed;
 
-        private void ApplyMove()
+        private void ApplyMove(MoveDirection moveDirection)
         {
             _rigidbody.velocity = new Vector3(0f, _rigidbody.velocity.y, 0f);
 
-            if (_direction == MoveDirection.Stop)
+            if (moveDirection == MoveDirection.Stop)
                 return;
 
-            Vector2 direction = new Vector2((int) _direction, 0f);
+            Vector2 direction = new Vector2((int) moveDirection, 0f);
             Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, Spire.DistanceToCenter) * CalculateSpeed();
 
             Quaternion targetRotation = Quaternion.LookRotation(velocity);
