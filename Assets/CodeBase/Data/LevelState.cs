@@ -7,11 +7,12 @@ namespace CodeBase.Data
     [Serializable]
     public class LevelState
     {
-        public string LevelName;
+        public string LevelKey;
         public List<DoorState> DoorStates;
 
-        public LevelState()
+        public LevelState(string levelKey)
         {
+            LevelKey = levelKey;
             DoorStates = new List<DoorState>();
         }
     }

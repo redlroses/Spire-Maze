@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Infrastructure.States;
 
 namespace CodeBase.Data
 {
@@ -11,7 +12,7 @@ namespace CodeBase.Data
     public WorldData(string initialLevel)
     {
       PositionOnLevel = new PositionOnLevel(initialLevel);
-      LevelState = new LevelState();
+      LevelState = new LevelState(LevelNames.TestLevelName);
     }
   }
 }

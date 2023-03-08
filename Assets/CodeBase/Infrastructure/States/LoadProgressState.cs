@@ -21,7 +21,7 @@ namespace CodeBase.Infrastructure.States
     public void Enter()
     {
       LoadProgressOrInitNew();
-      _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.InitialLevelName, true, LevelNames.TestLevelKey));
+      _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey));
     }
 
     public void Exit()
@@ -37,7 +37,7 @@ namespace CodeBase.Infrastructure.States
 
     private PlayerProgress NewProgress()
     {
-      var progress = new PlayerProgress(initialLevel: LevelNames.InitialLevelName)
+      var progress = new PlayerProgress(initialLevel: LevelNames.TestLevelName)
       {
         HeroHealthState = {MaxHP = 50}
       };

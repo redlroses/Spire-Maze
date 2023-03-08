@@ -35,7 +35,7 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             DoorState cellState = progress.WorldData.LevelState.DoorStates.Find(cell => cell.Id == Id);
 
-            if (cellState?.IsOpen == false)
+            if (cellState == null || cellState.IsOpen == false)
             {
                 return;
             }
@@ -46,7 +46,16 @@ namespace CodeBase.Logic.DoorEnvironment
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.WorldData.LevelState.DoorStates.Add(new DoorState(Id, _isOpen));
+            DoorState cellState = progress.WorldData.LevelState.DoorStates.Find(cell => cell.Id == Id);
+
+            if (cellState == null)
+            {
+                progress.WorldData.LevelState.DoorStates.Add(new DoorState(Id, _isOpen));
+            }
+            else
+            {
+                cellState.IsOpen = _isOpen;
+            }
         }
 
         protected override void OnTriggerObserverEntered(KeyCollector collectible)

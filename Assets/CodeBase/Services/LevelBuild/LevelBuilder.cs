@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
@@ -31,13 +32,26 @@ namespace CodeBase.Services.LevelBuild
             SetUpLevelParameters(levelStaticData);
             BuildLevel(levelStaticData);
             _level.SelfTransform = _levelContainer;
-            _levelConstructor.Construct(_gameFactory, _level);
             return _level;
+        }
+
+        public void Construct()
+        {
+            if (_level == null)
+            {
+                throw new Exception("You must build the level before constructing it");
+            }
+
+            _levelConstructor.Construct(_gameFactory, _level);
         }
 
         public void Clear()
         {
-            _levelContainer.gameObject.AddComponent<Destroyer>();
+            _level = null;
+            _radius = default;
+            _archAngle = default;
+            _floorHeight = default;
+            _levelContainer = null;
         }
 
         private void BuildLevel(LevelStaticData mapData)
@@ -48,9 +62,6 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = new Vector3(0, i * _floorHeight, 0);
                 Transform floorContainer = CreateContainer($"Floor {i + 1}", _levelContainer, containerPosition);
-                // floorContainer.gameObject.AddComponent<MeshFilter>();
-                // floorContainer.gameObject.AddComponent<MeshRenderer>();
-                // floorContainer.gameObject.AddComponent<MeshCollider>();
                 CellData[] floorCells = mapData.CellDataMap.Skip(i * mapData.Width).Take(mapData.Width).ToArray();
                 Floor floor = BuildFloor(floorCells, floorContainer, i);
                 _level.Add(floor);
