@@ -13,6 +13,10 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _currentScale = 1;
         [SerializeField] private float _defaultScale = 1;
 
+        private GroundState _groundState = GroundState.Grounded;
+
+        public GroundState State => _groundState;
+
         private void Awake()
         {
             _sphereCaster ??= Get<SphereCaster>();
@@ -23,7 +27,17 @@ namespace CodeBase.Logic.Movement
 
         protected override void FixedRun()
         {
-            _rigidbody.AddForce(Vector3.down * (Gravity * _currentScale), ForceMode.Acceleration);
+            bool isTouchGround = CheckTouchGround();
+
+            if (isTouchGround)
+            {
+                _groundState = GroundState.Grounded;
+            }
+            else
+            {
+                _rigidbody.AddForce(Vector3.down * (Gravity * _currentScale), ForceMode.Acceleration);
+                _groundState = GroundState.Falling;
+            }
         }
 
         public void Enable()
@@ -34,6 +48,7 @@ namespace CodeBase.Logic.Movement
         public void Disable()
         {
             enabled = false;
+            _groundState = GroundState.Falling;
         }
 
         public void SetGravityScale(float scale)
@@ -46,7 +61,9 @@ namespace CodeBase.Logic.Movement
             _currentScale = _defaultScale;
         }
 
-        private bool IsOnGround() =>
-            _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);
+        private bool CheckTouchGround()
+        {
+            return _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);
+        }
     }
-} 
+}

@@ -42,7 +42,6 @@ namespace CodeBase.Infrastructure.States
         HeroHealthState = {MaxHP = 50}
       };
 
-      Debug.Log("new progress");
       progress.HeroHealthState.ResetHP();
 
       return progress;

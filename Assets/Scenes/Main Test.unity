@@ -752,7 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1750127507}
   _cameraHolder: {fileID: 843557618}
-  _offsetRotetion: {x: 0, y: 0, z: 0}
+  _offsetRotetion: {x: 0, y: -0.44, z: 0}
   _offsetPosition: {x: 0, y: 0, z: -14}
 --- !u!1 &1090456479
 GameObject:
@@ -829,8 +829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1eeac350fc54a1c987d0f4e600d3fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0}
-  _obj: {fileID: 383827581}
 --- !u!114 &1546208052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2457798514992701150, guid: af66c2b27aa5678409f524b2fa39829d, type: 3}
@@ -845,6 +843,11 @@ MonoBehaviour:
 --- !u!4 &1750127507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7393409988495010667, guid: ff23aaff328baa843be2a29a4500c101, type: 3}
+  m_PrefabInstance: {fileID: 7393409986753280248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1787196152 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 7393409988495010664, guid: ff23aaff328baa843be2a29a4500c101, type: 3}
   m_PrefabInstance: {fileID: 7393409986753280248}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1835422441
@@ -1061,6 +1064,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2212661745572598830, guid: ff23aaff328baa843be2a29a4500c101, type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 1787196152}
     - target: {fileID: 7393409988495010667, guid: ff23aaff328baa843be2a29a4500c101, type: 3}
       propertyPath: m_RootOrder
       value: 6

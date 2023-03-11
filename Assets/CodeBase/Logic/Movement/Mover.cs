@@ -8,6 +8,7 @@ namespace CodeBase.Logic.Movement
     public class Mover : MonoCache, IMover
     {
         [SerializeField] private float _speed;
+        [SerializeField] private float _rotateSpeed;
         [SerializeField] private Rigidbody _rigidbody;
 
         protected float Speed => _speed;
@@ -41,10 +42,10 @@ namespace CodeBase.Logic.Movement
             Vector2 direction = new Vector2((int) moveDirection, 0f);
             Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, Spire.DistanceToCenter) * CalculateSpeed();
 
-            Quaternion targetRotation = Quaternion.LookRotation(velocity);
-            _rigidbody.MoveRotation(targetRotation);
+            Quaternion lookRotation = Quaternion.LookRotation(velocity);
+            Quaternion targetRotation = Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
 
-            velocity.ChangeY(_rigidbody.velocity.y);
+            _rigidbody.MoveRotation(targetRotation);
             _rigidbody.velocity = velocity.ChangeY(_rigidbody.velocity.y);
         }
     }

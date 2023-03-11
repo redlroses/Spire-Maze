@@ -9,7 +9,7 @@ namespace CodeBase.Logic
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player) == false)
+            if (other.TryGetComponent(out Player.Hero player) == false)
             {
                 return;
             }

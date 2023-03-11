@@ -1,22 +1,25 @@
-using CodeBase.Data;
+using CodeBase.Logic.Player;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
-using NTC.Global.System;
 
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(SphereCaster))]
     [RequireComponent(typeof(CustomGravityScaler))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(HeroAnimator))]
     public class Jumper : MonoCache, IJumper
     {
-        public const float GroundCheckDistance = -0.15f;
+        public const float GroundCheckDistance = -0.1f;
         public const float RoofCheckDistance = 0.15f;
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private SphereCaster _sphereCaster;
+        [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private AnimationCurve _jumpCurve;
+        [SerializeField] private float _maxDownVelocity;
+        [SerializeField] private float _maxUpVelocity;
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _velocityScale;
         [SerializeField] private float _jumpDuration = 1;
@@ -32,6 +35,7 @@ namespace CodeBase.Logic.Movement
             _gravityScaler ??= Get<CustomGravityScaler>();
             _sphereCaster ??= Get<SphereCaster>();
             _rigidbody ??= Get<Rigidbody>();
+            _heroAnimator ??= Get<HeroAnimator>();
         }
 
         protected override void FixedRun()
@@ -54,6 +58,7 @@ namespace CodeBase.Logic.Movement
             }
 
             enabled = true;
+            _heroAnimator.PlayJump();
             _gravityScaler.Disable();
         }
 
@@ -92,7 +97,8 @@ namespace CodeBase.Logic.Movement
         {
             float expectedHeight = _jumpCurve.Evaluate(_jumpProgress) * _jumpHeight + _startHeight;
             float heightDifference = expectedHeight - _rigidbody.position.y;
-            _rigidbody.velocity = _rigidbody.velocity.ChangeY(heightDifference * _velocityScale);
+            float clampedVerticalVelocity = Mathf.Clamp(heightDifference * _velocityScale, -_maxDownVelocity, _maxUpVelocity);
+            _rigidbody.velocity = _rigidbody.velocity.ChangeY(clampedVerticalVelocity);
         }
     }
 }

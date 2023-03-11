@@ -7,6 +7,7 @@ namespace CodeBase.Logic.Movement
     public class SphereCaster : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private CapsuleCollider _collider;
         [SerializeField] private LayerMask _mask;
 
         private float _colliderRadius;
@@ -15,15 +16,15 @@ namespace CodeBase.Logic.Movement
         private void Awake()
         {
             _rigidbody ??= GetComponent<Rigidbody>();
-            CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
-            _colliderHeight = capsuleCollider.height;
-            _colliderRadius = capsuleCollider.radius;
+            _collider ??= GetComponent<CapsuleCollider>();
+            _colliderHeight = _collider.height;
+            _colliderRadius = _collider.radius;
         }
 
         public bool CastSphere(Vector3 direction, float distance, float radiusReduction = 0.1f)
         {
-            bool isHit = Physics.SphereCast(_rigidbody.position, _colliderRadius - radiusReduction, direction,
-                out _, distance + _colliderHeight * Arithmetic.ToHalf - _colliderRadius, _mask);
+            bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
+                out _, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
             return isHit;
         }
     }

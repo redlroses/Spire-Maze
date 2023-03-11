@@ -35,7 +35,7 @@ namespace CodeBase.Logic.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player) == false)
+            if (other.TryGetComponent(out Player.Hero player) == false)
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace CodeBase.Logic.Enemy
             Mover.Move(GetMoveDirection());
 
             if (CanDetectTarget())
-                DetectTarget<Player>();
+                DetectTarget<Player.Hero>();
         }
 
         public void Initialize()
