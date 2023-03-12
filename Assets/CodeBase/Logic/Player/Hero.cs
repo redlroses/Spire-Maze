@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Player
 {
-    public class Hero : MonoCache
+    public class Hero : MonoCache,  IDamagable
     {
         [SerializeField] private float _durationInvulnerability;
         [SerializeField] private ParticleSystem _invulnerabilityEffect;
@@ -27,7 +27,7 @@ namespace CodeBase.Logic.Player
 
         public void ReceiveDamage(int damage)
         {
-            if (_isInvulnerabilityActive == true)
+            if (_isInvulnerabilityActive == true || _currentHealth <= 0)
                 return;
 
             if (damage < 0)

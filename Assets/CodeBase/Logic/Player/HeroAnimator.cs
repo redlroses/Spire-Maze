@@ -22,7 +22,7 @@ namespace CodeBase.Logic.Player
         private readonly int _landStateHash = Animator.StringToHash("Land");
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
-        [SerializeField] public Animator _animator;
+        [SerializeField] private Animator _animator;
 
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;

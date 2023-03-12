@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
-using CodeBase.Tools.PhysicsDebug;
 
 namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(Mover))]
-    public class Enemy : MonoCache, IEnemy
+    public class Enemy : MonoCache, IEnemy, IDamagable
     {
         [SerializeField] [RequireInterface(typeof(IAccelerable))]
         private MonoCache _mover;
@@ -24,6 +24,8 @@ namespace CodeBase.Logic.Enemy
         private float _currentDelayBetweenDetectTarget;
         private bool _isRotationToTarget;
         private bool _isDie;
+
+        public event Action Die;
 
         private IAccelerable Mover => (IAccelerable) _mover;
 
@@ -128,8 +130,15 @@ namespace CodeBase.Logic.Enemy
                 }
 
             _isRotationToTarget = false;
+
         }
 
         private void ChangeDirection() => _moveDirection = (MoveDirection) ((int) _moveDirection * -1);
+
+        public void ReceiveDamage(int damage)
+        {
+            _isDie = true;
+            Die?.Invoke();
+        }
     }
 }
