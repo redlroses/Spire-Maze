@@ -7,11 +7,13 @@ using CodeBase.Tools;
 namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(Mover))]
+    [RequireComponent(typeof(RayDirection))]
     public class Enemy : MonoCache, IEnemy, IDamagable
     {
         [SerializeField] [RequireInterface(typeof(IAccelerable))]
         private MonoCache _mover;
 
+        [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private int _damage;
         [SerializeField] private float _rayDistance;
         [SerializeField] private float _rayDistanceToTarget;
@@ -31,6 +33,7 @@ namespace CodeBase.Logic.Enemy
 
         private void Awake()
         {
+            _rayDirection ??= Get<RayDirection>();
             _selfTransform = transform;
             _moveDirection = MoveDirection.Left;
         }
@@ -61,7 +64,7 @@ namespace CodeBase.Logic.Enemy
         private MoveDirection GetMoveDirection()
         {
             Vector3 localPosition = _selfTransform.localPosition;
-            Vector3 wallDirection = RayDirection.Calculate(Spire.Position, localPosition, _moveDirection);
+            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, localPosition, _moveDirection);
             Vector3 groundDirection = wallDirection + Vector3.down;
 
             bool isWall = CheckForDirection(wallDirection);
@@ -81,8 +84,6 @@ namespace CodeBase.Logic.Enemy
             return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
-       
-
         private bool CanDetectTarget()
         {
             if (_currentDelayBetweenDetectTarget <= 0)
@@ -96,9 +97,9 @@ namespace CodeBase.Logic.Enemy
         {
             Vector3 localPosition = _selfTransform.localPosition;
             Vector3 rayDirectionForward =
-                RayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Right);
+                _rayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Right);
             Vector3 rayDirectionBackward =
-                RayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Left);
+                _rayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Left);
             Ray rayForward = new Ray(localPosition, rayDirectionForward);
             Ray rayBackward = new Ray(localPosition, rayDirectionBackward);
 
@@ -126,7 +127,6 @@ namespace CodeBase.Logic.Enemy
                 }
 
             _isRotationToTarget = false;
-
         }
 
         private void ChangeDirection() => _moveDirection = (MoveDirection) ((int) _moveDirection * -1);

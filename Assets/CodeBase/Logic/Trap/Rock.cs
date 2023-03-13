@@ -5,11 +5,12 @@ using UnityEngine;
 namespace CodeBase.Logic.Trap
 {
     [RequireComponent(typeof(RockMover))]
-
+    [RequireComponent(typeof(RayDirection))]
     public class Rock : Trap
     {
         [SerializeField] private RockMover _mover;
         [SerializeField] private Rigidbody[] _fragments;
+        [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private float _rayDistance;
         [SerializeField] private LayerMask _ground;
 
@@ -21,6 +22,7 @@ namespace CodeBase.Logic.Trap
         {
             _mover ??= Get<RockMover>();
             _selfTransform = transform;
+            _rayDirection ??= Get<RayDirection>();
         }
 
         protected override void FixedRun()
@@ -40,7 +42,7 @@ namespace CodeBase.Logic.Trap
             if (_isActivated == false)
                 return;
 
-            Vector3 wallDirection = RayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _mover.Direction);
+            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _mover.Direction);
             Vector3 groundDirection = wallDirection + Vector3.down;
 
             bool isWallCollision = CheckCollisionObstacle(wallDirection);
