@@ -61,7 +61,7 @@ namespace CodeBase.Logic.Enemy
         private MoveDirection GetMoveDirection()
         {
             Vector3 localPosition = _selfTransform.localPosition;
-            Vector3 wallDirection = CalculateRayDirection(Spire.Position, localPosition, _moveDirection);
+            Vector3 wallDirection = RayDirection.Calculate(Spire.Position, localPosition, _moveDirection);
             Vector3 groundDirection = wallDirection + Vector3.down;
 
             bool isWall = CheckForDirection(wallDirection);
@@ -81,11 +81,7 @@ namespace CodeBase.Logic.Enemy
             return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
-        private Vector3 CalculateRayDirection(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
-        {
-            Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
-            return Vector3.Cross(directionForAnchor, Vector3.down * (int) direction).normalized;
-        }
+       
 
         private bool CanDetectTarget()
         {
@@ -100,9 +96,9 @@ namespace CodeBase.Logic.Enemy
         {
             Vector3 localPosition = _selfTransform.localPosition;
             Vector3 rayDirectionForward =
-                CalculateRayDirection(Spire.Position, localPosition, MoveDirection.Right);
+                RayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Right);
             Vector3 rayDirectionBackward =
-                CalculateRayDirection(Spire.Position, localPosition, MoveDirection.Left);
+                RayDirection.Calculate(Spire.Position, localPosition, MoveDirection.Left);
             Ray rayForward = new Ray(localPosition, rayDirectionForward);
             Ray rayBackward = new Ray(localPosition, rayDirectionBackward);
 

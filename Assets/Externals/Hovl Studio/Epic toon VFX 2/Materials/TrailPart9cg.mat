@@ -8,9 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TrailPart9cg
-  m_Shader: {fileID: -6465566751694194690, guid: 00191177e5fd5c4468ad546ce87ef329, type: 3}
+  m_Shader: {fileID: 4800000, guid: bd6af5d577c618947b73aa60db554e51, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USEDEPTH_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -90,6 +91,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Blend2: 1
     - _BumpScale: 1
     - _CullMode: 0
     - _Cutoff: 0.5
@@ -114,6 +116,7 @@ Material:
     - _UseCustomData: 1
     - _UseFresnel: 0
     - _Usecenterglow: 0
+    - _Usecustomrandom: 0
     - _Usedepth: 1
     - __dirty: 1
     m_Colors:

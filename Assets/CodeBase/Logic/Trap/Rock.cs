@@ -1,4 +1,5 @@
 using CodeBase.Logic.Movement;
+using CodeBase.Tools;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
@@ -39,7 +40,7 @@ namespace CodeBase.Logic.Trap
             if (_isActivated == false)
                 return;
 
-            Vector3 wallDirection = CalculateRayDirection(Spire.Position, _selfTransform.localPosition, _mover.Direction);
+            Vector3 wallDirection = RayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _mover.Direction);
             Vector3 groundDirection = wallDirection + Vector3.down;
 
             bool isWallCollision = CheckCollisionObstacle(wallDirection);
@@ -60,13 +61,7 @@ namespace CodeBase.Logic.Trap
                 _fragments[i].isKinematic = false;
             }
         }
-
-        private Vector3 CalculateRayDirection(Vector3 anchorPoint, Vector3 currentPoint, MoveDirection direction)
-        {
-            Vector3 directionForAnchor = new Vector3(anchorPoint.x, currentPoint.y, anchorPoint.z) - currentPoint;
-            return Vector3.Cross(directionForAnchor, Vector3.down * (int)direction).normalized;
-        }
-
+            
         private bool CheckCollisionObstacle(Vector3 direction)
         {
             Ray ray = new Ray(_selfTransform.localPosition, direction);
