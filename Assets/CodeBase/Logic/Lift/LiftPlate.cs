@@ -22,14 +22,39 @@ namespace CodeBase.Logic.Lift
             _timer ??= Get<TimerOperator>();
             _currentMarker = initialMarker;
             _destinationMarker = destinationMarker;
+            _currentMarker.Call += OnCall;
+            _destinationMarker.Call += OnCall;
             _plateMover = mover;
             _plateMover.MoveEnded += OnMoveEnded;
             _timer.SetUp(_waitDelay, Move);
         }
 
+        private void OnCall(LiftDestinationMarker caller)
+        {
+            if (_currentMarker != caller)
+            {
+                Move();
+            }
+        }
+
         private void OnDestroy()
         {
             _plateMover.MoveEnded -= OnMoveEnded;
+            _currentMarker.Call -= OnCall;
+            _destinationMarker.Call -= OnCall;
+        }
+
+        [ContextMenu("Move")]
+        public void Move()
+        {
+            if (_state == LiftState.Moving)
+            {
+                return;
+            }
+
+            _plateMover.Move(_currentMarker, _destinationMarker);
+            _state = LiftState.Moving;
+            SwitchMarkers();
         }
 
         protected override void OnTriggerObserverEntered(IPlateMovable plateMovable)
@@ -54,14 +79,6 @@ namespace CodeBase.Logic.Lift
         private void OnMoveEnded()
         {
             _state = LiftState.Idle;
-        }
-
-        [ContextMenu("Move")]
-        public void Move()
-        {
-            _plateMover.Move(_currentMarker, _destinationMarker);
-            _state = LiftState.Moving;
-            SwitchMarkers();
         }
 
         private void SwitchMarkers()
