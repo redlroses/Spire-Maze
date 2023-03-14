@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Observer;
 using UnityEngine;
 

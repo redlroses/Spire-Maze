@@ -1,7 +1,7 @@
 ﻿using CodeBase.Logic.Observer;
 using UnityEngine;
 
-namespace CodeBase.Logic
+namespace CodeBase.Logic.HealthEntity
 {
     [RequireComponent(typeof(DamagableObserver))]
     public sealed class DamageTrigger : ObserverTarget<DamagableObserver, IDamagable>, IDamageTrigger
@@ -22,7 +22,7 @@ namespace CodeBase.Logic
 
         protected override void OnTriggerObserverEntered(IDamagable collectible)
         {
-            collectible.ReceiveDamage(_damage);
+            collectible.Damage(_damage);
         }
 
         public void Enable()

@@ -1,7 +1,7 @@
 ﻿using CodeBase.Logic.Observer;
 using UnityEngine;
 
-namespace CodeBase.Logic
+namespace CodeBase.Logic.HealthEntity
 {
     [RequireComponent(typeof(TimerOperator))]
     [RequireComponent(typeof(DamagableObserver))]
@@ -40,7 +40,7 @@ namespace CodeBase.Logic
 
         private void OnDamage()
         {
-            _damagable.ReceiveDamage(_damage);
+            _damagable.Damage(_damage);
             _timer.Restart();
             _timer.Play();
         }

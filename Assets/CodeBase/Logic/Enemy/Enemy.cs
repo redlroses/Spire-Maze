@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Logic.HealthEntity;
+using UnityEngine;
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
@@ -42,7 +43,7 @@ namespace CodeBase.Logic.Enemy
             }
 
             _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
-            player.ReceiveDamage(_damage);
+            player.Damage(_damage);
         }
 
         protected override void FixedRun()
@@ -53,7 +54,7 @@ namespace CodeBase.Logic.Enemy
                 DetectTarget<Player.Hero>();
         }
 
-        public void ReceiveDamage(int damage)
+        public void Damage(int damage)
         {
             //TODO: health сущность
         }

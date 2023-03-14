@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Logic.HealthEntity;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace CodeBase.Logic.Player
             _waitForSeconds = new WaitForSeconds(_durationInvulnerability);
         }
 
-        public void ReceiveDamage(int damage)
+        public void Damage(int damage)
         {
             if (_isInvulnerabilityActive == true || _currentHealth <= 0)
                 return;

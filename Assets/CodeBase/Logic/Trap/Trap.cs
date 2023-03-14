@@ -1,3 +1,4 @@
+using CodeBase.Logic.HealthEntity;
 using NTC.Global.Cache;
 using UnityEngine;
 

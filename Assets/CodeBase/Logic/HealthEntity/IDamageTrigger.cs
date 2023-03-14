@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Logic
+﻿namespace CodeBase.Logic.HealthEntity
 {
     public interface IDamageTrigger
     {

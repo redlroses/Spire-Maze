@@ -1,3 +1,4 @@
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
