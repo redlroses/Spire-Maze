@@ -29,7 +29,7 @@ namespace CodeBase.Logic.Trap
         {
             _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _curveSpeed * Time.deltaTime);
             float spikeHeight = _movementCurve.Evaluate(_delta) * _curveMultiplier;
-            _spikes.localPosition = _spikes.localPosition.ChangeZ(spikeHeight);
+            _spikes.localPosition = _spikes.localPosition.ChangeY(spikeHeight);
         }
 
         private void CheckIsComplete()

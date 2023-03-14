@@ -67,6 +67,8 @@ namespace CodeBase.Infrastructure.AssetManagement
                 nameof(MovingPlate) => typeof(MovingPlate),
                 nameof(MovingPlateMarker) => typeof(MovingPlateMarker),
                 nameof(Portal) => typeof(Portal),
+                nameof(SpikeTrap) => typeof(SpikeTrap),
+                nameof(FireTrap) => typeof(FireTrap),
                 _ => throw new ArgumentException()
             };
         }

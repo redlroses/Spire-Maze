@@ -19,10 +19,12 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Door)] = new DoorConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),
                 [typeof(Portal)] = new PortalConstructor(),
+                [typeof(SpikeTrap)] = new SpikeTrapConstructor(),
+                [typeof(FireTrap)] = new FireTrapConstructor(),
             };
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
             _constructors[typeof(TCell)].Construct<TCell>(gameFactory, cells);
         }

@@ -8,13 +8,13 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class PortalConstructor : ICellConstructor
     {
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
             List<Cell> portals = new List<Cell>(cells);
 
             foreach (var cell in cells)
             {
-                gameFactory.CreateCell<Portal>(cell.Container).GetComponent<PortalGate>();
+                gameFactory.CreateCell<TCell>(cell.Container).GetComponent<PortalGate>();
             }
 
             while (portals.Count > 0)
@@ -29,16 +29,6 @@ namespace CodeBase.LevelSpecification.Constructor
                 portals.Remove(currentPortal);
                 portals.Remove(linkedPortal);
             }
-
-            // foreach (var cell in cells)
-            // {
-            //     Data.Cell.Portal currentPortalData = (Data.Cell.Portal) cell.CellData;
-            //     Cell linked = FindLinked(cells, currentPortalData);
-            //     PortalGate currentPortalGate = cell.Container.GetComponentInChildren<PortalGate>();
-            //     PortalGate linkedPortalGate = linked.Container.GetComponentInChildren<PortalGate>();
-            //     currentPortalGate.Construct(linkedPortalGate);
-            //     linkedPortalGate.Construct(currentPortalGate);
-            // }
         }
 
         private Cell FindLinked(IEnumerable<Cell> portals, EditorCells.Portal currentPortalData)

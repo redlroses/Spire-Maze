@@ -64,7 +64,13 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Portal)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Portal)]
-                            .Tint(((Portal) data)?.Color ?? _colors[typeof(Portal)]))
+                            .Tint(((Portal) data)?.Color ?? _colors[typeof(Portal)])),
+                [typeof(SpikeTrap)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(SpikeTrap)].Tint(_colors[typeof(SpikeTrap)])),
+                [typeof(FireTrap)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(FireTrap)].Tint(_colors[typeof(FireTrap)])),
             };
 
             _baseTextures = new Dictionary<Type, Texture2D>
@@ -78,6 +84,8 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(MovingMarker)] = Resources.Load<Texture2D>("Textures/MovingMarkerIcon"),
                 [typeof(MovingPlate)] = Resources.Load<Texture2D>("Textures/MovingPlateIcon"),
                 [typeof(Portal)] = Resources.Load<Texture2D>("Textures/PortalIcon"),
+                [typeof(SpikeTrap)] = Resources.Load<Texture2D>("Textures/SpikeTrapIcon"),
+                [typeof(FireTrap)] = Resources.Load<Texture2D>("Textures/FireTrapIcon"),
             };
 
             _colors = new Dictionary<Type, Color32>
@@ -89,6 +97,8 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
                 [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
                 [typeof(Portal)] = new Color32(129, 93, 199, 255),
+                [typeof(SpikeTrap)] = new Color32(76, 128, 144, 255),
+                [typeof(FireTrap)] = new Color32(255, 170, 52, 255),
             };
 
             _palette = new CellData[]
@@ -101,6 +111,8 @@ namespace CodeBase.Editor.LevelEditor
                 new Door(GetTextureByType<Door>()),
                 new MovingMarker(GetTextureByType<MovingMarker>()),
                 new Portal(GetTextureByType<Portal>()) {Color = _colors[typeof(Portal)]},
+                new SpikeTrap(GetTextureByType<SpikeTrap>()),
+                new FireTrap(GetTextureByType<FireTrap>()),
             };
 
             UpdateTextures();

@@ -8,9 +8,11 @@ using CodeBase.LevelSpecification.Constructor;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using Door = CodeBase.LevelSpecification.Cells.Door;
+using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
 using Plate = CodeBase.LevelSpecification.Cells.Plate;
 using Portal = CodeBase.LevelSpecification.Cells.Portal;
+using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.Services.LevelBuild
@@ -34,6 +36,8 @@ namespace CodeBase.Services.LevelBuild
             _cellConstructor.Construct<Door>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
             _cellConstructor.Construct<MovingPlateMarker>(gameFactory, level.Where(cell => cell.CellData is MovingMarker).ToArray());
             _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
+            _cellConstructor.Construct<SpikeTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
+            _cellConstructor.Construct<FireTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
             CombineCells(level);
         }
 

@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeTrap
       objectReference: {fileID: 0}
+    - target: {fileID: 8887755658176466091, guid: cfc7c8ad2676082458375bc2c5ad0093, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8887755659242917772, guid: cfc7c8ad2676082458375bc2c5ad0093, type: 3}
       propertyPath: Activator
       value: 
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997382624760113179, guid: cfc7c8ad2676082458375bc2c5ad0093, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8997382624760113179, guid: cfc7c8ad2676082458375bc2c5ad0093, type: 3}
       propertyPath: m_LocalPosition.z

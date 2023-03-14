@@ -2,15 +2,13 @@
 
 namespace CodeBase.EditorCells
 {
-    public class Plate : CellData
+    public class FireTrap : Plate
     {
-        public Plate(Texture2D texture) : base(texture)
+        public FireTrap(Texture2D texture) : base(texture)
         {
         }
 
         public override CellData Copy() =>
-            new Plate(Texture);
+            new FireTrap(Texture);
     }
-    
-    
 }

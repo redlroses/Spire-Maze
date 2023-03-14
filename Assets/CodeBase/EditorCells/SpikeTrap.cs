@@ -2,15 +2,13 @@
 
 namespace CodeBase.EditorCells
 {
-    public class Plate : CellData
+    public class SpikeTrap : Plate
     {
-        public Plate(Texture2D texture) : base(texture)
+        public SpikeTrap(Texture2D texture) : base(texture)
         {
         }
 
         public override CellData Copy() =>
-            new Plate(Texture);
+            new SpikeTrap(Texture);
     }
-    
-    
 }

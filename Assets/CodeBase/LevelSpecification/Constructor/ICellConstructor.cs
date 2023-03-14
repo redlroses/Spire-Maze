@@ -5,6 +5,6 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public interface ICellConstructor
     {
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells);
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell;
     }
 }
