@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic.Observer
 {
-    public class PlateMovableObserver : TriggerObserverExit<IPlateMovable>
+    public sealed class PlateMovableObserver : TriggerObserverExit<IPlateMovable>
     {
     }
 }

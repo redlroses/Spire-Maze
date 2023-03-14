@@ -1,3 +1,4 @@
+using CodeBase.Tools;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
@@ -5,61 +6,40 @@ namespace CodeBase.Logic.Trap
     [RequireComponent(typeof(TimerOperator))]
     public class FireTrap : Trap
     {
+        [SerializeField] [RequireInterface(typeof(IDamageTrigger))] private MonoBehaviour _damageTrigger;
         [SerializeField] private ParticleSystem _effect;
-        [SerializeField] private float _delayBetweenDamage;
-        [SerializeField] private float _rayDistance;
         [SerializeField] private TimerOperator _timer;
+        [SerializeField] private float _turnOffDelay;
 
-        private Transform _selfTransform;
-        private IDamagable _target;
-        private bool _isActavated;
+        private bool _isActivated;
 
-        private void Awake()
+        private IDamageTrigger DamageTrigger => (IDamageTrigger) _damageTrigger;
+
+        public override void Construct(TrapActivator activator)
         {
-            _selfTransform = transform;
-            _timer ??= Get<TimerOperator>();
-            _timer.SetUp(_delayBetweenDamage, TakeDamage);
+            base.Construct(activator);
+            _timer.SetUp(_turnOffDelay, OnTurnOff);
         }
 
-        protected override void Run()
+        private void OnTurnOff()
         {
-            DetectTarget();
+            DamageTrigger.Disable();
+            _effect.Stop();
+            _isActivated = false;
         }
 
-        protected override void Activate()
+        protected override void Activate(IDamagable damagable)
         {
-            _effect.Play();
-            _isActavated = true;
-        }
-
-        private void DetectTarget()
-        {
-            if (_isActavated == false)
+            if (_isActivated)
             {
                 return;
             }
 
-            Ray ray = new Ray(_selfTransform.position, transform.forward);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, _rayDistance))
-            {
-                if (hit.collider.TryGetComponent(out IDamagable target) == false)
-                {
-                    return;
-                }
-
-                _timer.Play();
-                _target = target;
-            }
-        }
-
-        private void TakeDamage()
-        {
-            if (_target == null)
-                return;
-
-            _target.ReceiveDamage(Damage);
             _timer.Restart();
+            _timer.Play();
+            _effect.Play();
+            DamageTrigger.Enable();
+            _isActivated = true;
         }
     }
 }

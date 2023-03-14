@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
@@ -25,9 +24,6 @@ namespace CodeBase.Logic.Enemy
         private MoveDirection _moveDirection;
         private float _currentDelayBetweenDetectTarget;
         private bool _isRotationToTarget;
-        private bool _isDie;
-
-        public event Action Die;
 
         private IAccelerable Mover => (IAccelerable) _mover;
 
@@ -57,8 +53,9 @@ namespace CodeBase.Logic.Enemy
                 DetectTarget<Player.Hero>();
         }
 
-        public void Initialize()
+        public void ReceiveDamage(int damage)
         {
+            //TODO: health сущность
         }
 
         private MoveDirection GetMoveDirection()
@@ -130,11 +127,5 @@ namespace CodeBase.Logic.Enemy
         }
 
         private void ChangeDirection() => _moveDirection = (MoveDirection) ((int) _moveDirection * -1);
-
-        public void ReceiveDamage(int damage)
-        {
-            _isDie = true;
-            Die?.Invoke();
-        }
     }
 }

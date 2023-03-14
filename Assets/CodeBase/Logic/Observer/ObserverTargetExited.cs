@@ -24,7 +24,7 @@ namespace CodeBase.Logic.Observer
             _observer.Exited -= OnTriggerObserverExited;
         }
 
-        protected abstract void OnTriggerObserverEntered(TTarget collectible);
-        protected abstract void OnTriggerObserverExited(TTarget collectible);
+        protected abstract void OnTriggerObserverEntered(TTarget target);
+        protected abstract void OnTriggerObserverExited(TTarget target);
     }
 }

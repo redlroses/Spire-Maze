@@ -1,29 +1,47 @@
 using System;
-using NTC.Global.Cache;
+using CodeBase.Logic.Observer;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
 {
-    public class TrapActivator : MonoCache
+    [RequireComponent(typeof(TimerOperator))]
+    [RequireComponent(typeof(DamagableObserver))]
+    public class TrapActivator : ObserverTarget<DamagableObserver, IDamagable>
     {
+        [SerializeField] private TimerOperator _timer;
+        [SerializeField] private float _recoveryTime;
+
         private bool _isActivated;
 
-        public event Action IsActived;
+        public event Action<IDamagable> Activated;
 
-        private void OnTriggerEnter(Collider other)
+        private void Awake()
         {
-            if(_isActivated)
+            Construct();
+            Debug.LogWarning("Remove constructor from awake");
+        }
+
+        public void Construct()
+        {
+            _timer.SetUp(_recoveryTime, OnReadyToActivate);
+        }
+
+        private void OnReadyToActivate()
+        {
+            _isActivated = false;
+        }
+
+        protected override void OnTriggerObserverEntered(IDamagable collectible)
+        {
+            if (_isActivated)
             {
                 return;
             }
 
-            if (other.TryGetComponent(out Player.Hero _) == false)
-            {
-                return;
-            }
-
+            _timer.Restart();
+            _timer.Play();
             _isActivated = true;
-            IsActived?.Invoke();
+            Activated?.Invoke(collectible);
         }
     }
 }

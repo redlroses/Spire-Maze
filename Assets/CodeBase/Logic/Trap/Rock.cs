@@ -18,26 +18,27 @@ namespace CodeBase.Logic.Trap
         private bool _isActivated;
         private bool _isNotOnPlate;
 
-        private void Awake()
-        {
-            _mover ??= Get<RockMover>();
-            _selfTransform = transform;
-            _rayDirection ??= Get<RayDirection>();
-        }
-
         protected override void FixedRun()
         {
             TryDestroy();
         }
 
-        protected override void Activate()
+        public override void Construct(TrapActivator activator)
+        {
+            base.Construct(Activator);
+            _mover ??= Get<RockMover>();
+            _selfTransform = transform;
+            _rayDirection ??= Get<RayDirection>();
+        }
+
+        protected override void Activate(IDamagable damagable)
         {
             _mover.SetMoveDirection(Activator.transform.position);
             _mover.enabled = true;
             _isActivated = true;
         }
 
-        protected void TryDestroy()
+        private void TryDestroy()
         {
             if (_isActivated == false)
                 return;
@@ -63,7 +64,7 @@ namespace CodeBase.Logic.Trap
                 _fragments[i].isKinematic = false;
             }
         }
-            
+
         private bool CheckCollisionObstacle(Vector3 direction)
         {
             Ray ray = new Ray(_selfTransform.localPosition, direction);

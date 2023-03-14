@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic.Observer
 {
-    public class TeleportableObserver : TriggerObserverExit<ITeleportable>
+    public sealed class TeleportableObserver : TriggerObserverExit<ITeleportable>
     {
     }
 }

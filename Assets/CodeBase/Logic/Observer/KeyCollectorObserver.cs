@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic.Observer
 {
-    public class KeyCollectorObserver : TriggerObserver<KeyCollector>
+    public sealed class KeyCollectorObserver : TriggerObserver<KeyCollector>
     {
     }
 }

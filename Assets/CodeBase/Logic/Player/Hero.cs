@@ -44,7 +44,7 @@ namespace CodeBase.Logic.Player
             }
             else
             {
-                _invulnerabilityActive = RestartCoroutine(ActiveInvulnerability());
+                // _invulnerabilityActive = RestartCoroutine(ActiveInvulnerability());
             }
         }
 

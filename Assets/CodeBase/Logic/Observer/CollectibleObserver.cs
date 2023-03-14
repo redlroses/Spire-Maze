@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic.Observer
 {
-    public class CollectibleObserver : TriggerObserver<ICollectible>
+    public sealed class CollectibleObserver : TriggerObserver<ICollectible>
     {
     }
 }

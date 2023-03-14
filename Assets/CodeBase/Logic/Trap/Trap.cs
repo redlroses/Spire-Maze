@@ -6,28 +6,24 @@ namespace CodeBase.Logic.Trap
     public abstract class Trap : MonoCache
     {
         [SerializeField] protected TrapActivator Activator;
-        [SerializeField] protected int Damage;
 
-        protected override void OnEnabled()
+        private void Awake()
         {
-            Activator.IsActived += Activate;
+            Construct(Activator);
+            Debug.LogWarning("Remove constructor from awake");
         }
 
-        protected override void OnDisabled()
+        public virtual void Construct(TrapActivator activator)
         {
-            Activator.IsActived -= Activate;
+            Activator = activator;
+            Activator.Activated += Activate;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnDestroy()
         {
-            if (other.TryGetComponent(out IDamagable target) == false)
-            {
-                return;
-            }
-
-            target.ReceiveDamage(Damage);
+            Activator.Activated -= Activate;
         }
 
-        protected abstract void Activate();
+        protected abstract void Activate(IDamagable damagable);
     }
 }
