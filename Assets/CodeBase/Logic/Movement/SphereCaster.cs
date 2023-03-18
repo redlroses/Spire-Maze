@@ -27,5 +27,12 @@ namespace CodeBase.Logic.Movement
                 out _, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
             return isHit;
         }
+
+        public bool CastSphere(Vector3 direction, float distance, out RaycastHit hitInfo, float radiusReduction = 0.1f)
+        {
+            bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
+                out hitInfo, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
+            return isHit;
+        }
     }
 }
