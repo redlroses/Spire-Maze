@@ -40,7 +40,7 @@ namespace CodeBase.Logic.HealthEntity
 
         private void OnDamage()
         {
-            _damagable.Damage(_damage);
+            _damagable.Damage(_damage, DamageType.Periodic);
             _timer.Restart();
             _timer.Play();
         }

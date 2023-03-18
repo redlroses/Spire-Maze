@@ -22,7 +22,7 @@ namespace CodeBase.Logic.HealthEntity
 
         protected override void OnTriggerObserverEntered(IDamagable collectible)
         {
-            collectible.Damage(_damage);
+            collectible.Damage(_damage, DamageType.Single);
         }
 
         public void Enable()

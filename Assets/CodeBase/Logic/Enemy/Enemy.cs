@@ -8,7 +8,7 @@ namespace CodeBase.Logic.Enemy
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(RayDirection))]
-    public class Enemy : MonoCache, IEnemy, IDamagable
+    public class Enemy : MonoCache, IEnemy
     {
         [SerializeField] [RequireInterface(typeof(IAccelerable))]
         private MonoCache _mover;
@@ -35,17 +35,6 @@ namespace CodeBase.Logic.Enemy
             _moveDirection = MoveDirection.Left;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out Player.Hero player) == false)
-            {
-                return;
-            }
-
-            _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
-            player.Damage(_damage);
-        }
-
         protected override void FixedRun()
         {
             Mover.Move(GetMoveDirection());
@@ -54,9 +43,15 @@ namespace CodeBase.Logic.Enemy
                 DetectTarget<Player.Hero>();
         }
 
-        public void Damage(int damage)
+        private void OnTriggerEnter(Collider other)
         {
-            //TODO: health сущность
+            if (other.TryGetComponent(out IDamagable player) == false)
+            {
+                return;
+            }
+
+            _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
+            player.Damage(_damage, DamageType.Single);
         }
 
         private MoveDirection GetMoveDirection()
@@ -91,7 +86,7 @@ namespace CodeBase.Logic.Enemy
             return false;
         }
 
-        private void DetectTarget<T>() where T : MonoCache
+        private void DetectTarget<T>() where T : MonoBehaviour
         {
             Vector3 localPosition = _selfTransform.localPosition;
             Vector3 rayDirectionForward =
