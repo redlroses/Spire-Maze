@@ -1,13 +1,12 @@
 ﻿using System;
+using CodeBase.Data;
+using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 
 namespace CodeBase.Logic.HealthEntity
 {
-    public sealed class PlayerHealth : Health, IHealable, IImmune
+    public sealed class PlayerHealth : Health, IHealable, IImmune, ISavedProgress
     {
-        [SerializeField] private int _currentPoints;
-        [SerializeField] private int _maxPoints;
-
         public event Action<int, DamageType> Damaged;
         public event Action<int> Healed;
 
@@ -22,18 +21,30 @@ namespace CodeBase.Logic.HealthEntity
         {
             Validate(healPoints);
 
-            int newPoints = _currentPoints + healPoints;
+            int newPoints = CurrentPoints + healPoints;
 
-            if (newPoints > _maxPoints)
+            if (newPoints > MaxPoints)
             {
-                newPoints = _maxPoints;
+                newPoints = MaxPoints;
             }
 
-            int deltaPoints = newPoints - _currentPoints;
+            int deltaPoints = newPoints - CurrentPoints;
             Healed?.Invoke(deltaPoints);
-            _currentPoints = newPoints;
+            CurrentPoints = newPoints;
 
-            Debug.Log($"Healed: {deltaPoints}, current health: {_currentPoints}");
+            Debug.Log($"Healed: {deltaPoints}, current health: {CurrentPoints}");
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            CurrentPoints = progress.HeroHealthState.CurrentHP;
+            MaxPoints = progress.HeroHealthState.MaxHP;
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.HeroHealthState.CurrentHP = CurrentPoints;
+            progress.HeroHealthState.MaxHP = MaxPoints;
         }
 
         private void Validate(int points)

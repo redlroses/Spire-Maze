@@ -10,8 +10,8 @@ namespace CodeBase.Logic.HealthEntity
 
         public event Action Died;
 
-        public int Points => _currentPoints;
-        public int MaxPoints => _maxPoints;
+        public int CurrentPoints { get; protected set; }
+        public int MaxPoints { get; protected set; }
         public bool IsAlive => _currentPoints >= 0;
 
         public void Init(int maxPoints, int currentPoints)
