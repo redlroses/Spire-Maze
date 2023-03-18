@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic.HealthEntity
 {
-    public interface IHealth
+    public interface IHealth : IDamagable
     {
         event Action Died;
         int Points { get; }
