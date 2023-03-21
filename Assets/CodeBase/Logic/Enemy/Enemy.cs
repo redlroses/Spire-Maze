@@ -3,7 +3,6 @@ using UnityEngine;
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
-using CodeBase.Tools.PhysicsDebug;
 
 namespace CodeBase.Logic.Enemy
 {
