@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3122911722639388473}
-  - component: {fileID: 84641381320370470}
   - component: {fileID: 3122911722639388475}
   - component: {fileID: 5627462416414770430}
   m_Layer: 5
@@ -39,54 +38,6 @@ RectTransform:
   m_AnchoredPosition: {x: 4.0000153, y: -0.00008392334}
   m_SizeDelta: {x: -77.866196, y: -77.201996}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &84641381320370470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3122911722639388472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformFallback:
-    LocalPosition: {x: -55.999985, y: -60.000084, z: 0}
-    AnchoredPosition: {x: 4.0000153, y: -0.00008392334}
-    SizeDelta: {x: -77.866196, y: -77.201996}
-    AnchorMin: {x: 0, y: 0}
-    AnchorMax: {x: 1, y: 1}
-    Pivot: {x: 0.5, y: 0.5}
-    Scale: {x: 1, y: 1, z: 1}
-    rotation: {x: -0, y: -0, z: -0, w: 1}
-    EulerAngles: {x: -0, y: 0, z: 0}
-    saveRotationAsEuler: 0
-    screenConfigName: 
-  transformConfigs:
-    items:
-    - LocalPosition: {x: -0.000026703, y: -0.00010729, z: 0}
-      AnchoredPosition: {x: -0.000026703, y: -0.00010729}
-      SizeDelta: {x: 46.9998, y: 48.27}
-      AnchorMin: {x: 0.5, y: 0.5}
-      AnchorMax: {x: 0.5, y: 0.5}
-      Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      EulerAngles: {x: 0, y: 0, z: 0}
-      saveRotationAsEuler: 0
-      screenConfigName: Landscape
-    - LocalPosition: {x: -55.999985, y: -60.000084, z: 0}
-      AnchoredPosition: {x: 4.0000153, y: -0.00008392334}
-      SizeDelta: {x: -77.866196, y: -77.201996}
-      AnchorMin: {x: 0, y: 0}
-      AnchorMax: {x: 1, y: 1}
-      Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
-      EulerAngles: {x: -0, y: 0, z: 0}
-      saveRotationAsEuler: 0
-      screenConfigName: Portrate
 --- !u!222 &3122911722639388475
 CanvasRenderer:
   m_ObjectHideFlags: 0
