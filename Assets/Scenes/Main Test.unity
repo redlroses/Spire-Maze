@@ -6851,9 +6851,9 @@ MonoBehaviour:
       target: {fileID: 9006744365387306231}
       states:
       - Name: Normal
-        StateObject: 
+        StateObject: Normal
       - Name: Highlighted
-        StateObject: 
+        StateObject: Highlighted
       - Name: Pressed
         StateObject: Press
       - Name: Selected
@@ -6990,7 +6990,22 @@ MonoBehaviour:
       AnchorMax: {x: 1, y: 1}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 0.9, y: 0.9, z: 0.9}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 1
+      screenConfigName: 
+    transformConfigs:
+      items: []
+  - name: Highlight
+    transformFallback:
+      LocalPosition: {x: 943.23376, y: 497.75647, z: 0}
+      AnchoredPosition: {x: -75, y: -75}
+      SizeDelta: {x: 120, y: 120}
+      AnchorMin: {x: 1, y: 1}
+      AnchorMax: {x: 1, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 1
       screenConfigName: 
@@ -6998,7 +7013,7 @@ MonoBehaviour:
       items: []
   animations:
   - name: Press
-    from: Normal
+    from: 
     to: Pressed
     curve:
       serializedVersion: 2
@@ -7013,17 +7028,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -7043,9 +7049,85 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     animateWithEulerRotation: 0
-    timeScale: 2.5
+    timeScale: 10
+  - name: Normal
+    from: 
+    to: Normal
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 10
+  - name: Highlighted
+    from: 
+    to: Highlight
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 10
   startLocation: Normal
-  startUpAnimation: 
+  startUpAnimation: Normal
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
