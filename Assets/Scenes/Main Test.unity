@@ -413,7 +413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1201, y: 8.22}
+  m_AnchoredPosition: {x: 0.12011719, y: 8.220001}
   m_SizeDelta: {x: 95.0409, y: 94.5599}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478733646
@@ -1410,11 +1410,11 @@ RectTransform:
   m_Father: {fileID: 1775253699}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.4084843, y: 0.0066003203}
-  m_AnchorMax: {x: 0.8624346, y: 1.0000026}
-  m_AnchoredPosition: {x: 298, y: 0}
+  m_AnchorMin: {x: 0, y: 0.9993213}
+  m_AnchorMax: {x: 1.0000141, y: 1.5421684}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0.59}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1055565823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,8 +1597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d6436a87432de4d9a8278f12bf49b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
   source: {fileID: 1055565822}
   settingsFallback:
     HorizontalFit: 2
@@ -1710,9 +1710,9 @@ MonoBehaviour:
   m_Padding:
     m_Left: 5
     m_Right: 5
-    m_Top: 7
+    m_Top: 15
     m_Bottom: 5
-  m_ChildAlignment: 0
+  m_ChildAlignment: 6
   m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -1886,7 +1886,7 @@ MonoBehaviour:
       ChildControlHeight: 0
       Orientation: 0
       screenConfigName: Portrate
-  orientation: 0
+  orientation: 1
 --- !u!114 &1055565826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1947,8 +1947,9 @@ GameObject:
   - component: {fileID: 1056385635}
   - component: {fileID: 1056385634}
   - component: {fileID: 1056385633}
-  - component: {fileID: 1056385632}
   - component: {fileID: 1056385631}
+  - component: {fileID: 1056385637}
+  - component: {fileID: 1056385636}
   m_Layer: 5
   m_Name: Button_Inventory
   m_TagString: Untagged
@@ -1965,7 +1966,7 @@ RectTransform:
   m_GameObject: {fileID: 1056385629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 478733645}
@@ -1975,8 +1976,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 116, y: -320.5}
-  m_SizeDelta: {x: 156, y: 158}
+  m_AnchoredPosition: {x: 118, y: -333}
+  m_SizeDelta: {x: 156, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1056385631
 MonoBehaviour:
@@ -1993,129 +1994,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.15294118}
   m_EffectDistance: {x: 9, y: -11}
   m_UseGraphicAlpha: 1
---- !u!114 &1056385632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056385629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 266537010df2f7d42a0c51583f328c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.15294118}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1056385633}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-  betterTransitions:
-  - mode: 0
-    stateNames:
-    - Normal
-    - Highlighted
-    - Pressed
-    - Selected
-    - Disabled
-    colorTransitions:
-      target: {fileID: 0}
-      colorMultiplier: 0
-      fadeDuration: 0
-      states: []
-    color32Transitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-    spriteSwapTransitions:
-      target: {fileID: 0}
-      states: []
-    animationTransitions:
-      target: {fileID: 0}
-      states: []
-    activenessTransitions:
-      target: {fileID: 0}
-      states: []
-    alphaTransitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-    materialPropertyTransitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-      propertyIndex: 0
-    locationAnimationTransitions:
-      target: {fileID: 0}
-      states: []
-    customTransitions:
-      states: []
-  - mode: 0
-    stateNames:
-    - Normal
-    - Highlighted
-    - Pressed
-    - Selected
-    - Disabled
-    colorTransitions:
-      target: {fileID: 0}
-      colorMultiplier: 0
-      fadeDuration: 0
-      states: []
-    color32Transitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-    spriteSwapTransitions:
-      target: {fileID: 0}
-      states: []
-    animationTransitions:
-      target: {fileID: 0}
-      states: []
-    activenessTransitions:
-      target: {fileID: 0}
-      states: []
-    alphaTransitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-    materialPropertyTransitions:
-      target: {fileID: 0}
-      fadeDuration: 0
-      states: []
-      propertyIndex: 0
-    locationAnimationTransitions:
-      target: {fileID: 0}
-      states: []
-    customTransitions:
-      states: []
 --- !u!114 &1056385633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2138,7 +2016,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9183ace9b96bd426c9d11a11130473e4, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2167,41 +2045,434 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformFallback:
-    LocalPosition: {x: -424, y: 759, z: 0}
-    AnchoredPosition: {x: -424, y: 759}
+    LocalPosition: {x: -427.60004, y: 755, z: 0}
+    AnchoredPosition: {x: -427.60004, y: 755}
     SizeDelta: {x: 156, y: 157}
     AnchorMin: {x: 0.5, y: 0.5}
     AnchorMax: {x: 0.5, y: 0.5}
     Pivot: {x: 0.5, y: 0.5}
-    Scale: {x: 1.00008, y: 1.00008, z: 1.00008}
-    rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
     EulerAngles: {x: -0, y: 0, z: 0}
     saveRotationAsEuler: 0
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -901, y: 232, z: 0}
-      AnchoredPosition: {x: -901, y: 232}
+    - LocalPosition: {x: -900.23376, y: 239.75647, z: 0}
+      AnchoredPosition: {x: 118, y: -333}
       SizeDelta: {x: 156, y: 157}
-      AnchorMin: {x: 0.5, y: 0.5}
-      AnchorMax: {x: 0.5, y: 0.5}
+      AnchorMin: {x: 0, y: 1}
+      AnchorMax: {x: 0, y: 1}
       Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1.00008, y: 1.00008, z: 1.00008}
+      Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -424, y: 759.5, z: 0}
-      AnchoredPosition: {x: 116, y: -320.5}
-      SizeDelta: {x: 156, y: 158}
+    - LocalPosition: {x: -423.2, y: 759.1, z: 0}
+      AnchoredPosition: {x: 116.79999, y: -320.90002}
+      SizeDelta: {x: 156, y: 157}
       AnchorMin: {x: 0, y: 1}
       AnchorMax: {x: 0, y: 1}
       Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1.00008, y: 1.00008, z: 1.00008}
+      Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
+--- !u!114 &1056385636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056385629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da11a160dab1b746b31f9a603951ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 9006744365387306227}
+  toggleTransition: 1
+  graphic: {fileID: 0}
+  m_Group: {fileID: 0}
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_IsOn: 0
+  betterTransitions:
+  - mode: 8
+    stateNames:
+    - Normal
+    - Highlighted
+    - Pressed
+    - Selected
+    - Disabled
+    colorTransitions:
+      target: {fileID: 0}
+      colorMultiplier: 0
+      fadeDuration: 0
+      states: []
+    color32Transitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+    spriteSwapTransitions:
+      target: {fileID: 0}
+      states: []
+    animationTransitions:
+      target: {fileID: 0}
+      states: []
+    activenessTransitions:
+      target: {fileID: 0}
+      states: []
+    alphaTransitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+    materialPropertyTransitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+      propertyIndex: 0
+    locationAnimationTransitions:
+      target: {fileID: 1056385637}
+      states:
+      - Name: Normal
+        StateObject: Normal
+      - Name: Highlighted
+        StateObject: Highlighted
+      - Name: Pressed
+        StateObject: Press
+      - Name: Selected
+        StateObject: 
+      - Name: Disabled
+        StateObject: 
+    customTransitions:
+      states: []
+  - mode: 1
+    stateNames:
+    - Normal
+    - Highlighted
+    - Pressed
+    - Selected
+    - Disabled
+    colorTransitions:
+      target: {fileID: 1056385633}
+      colorMultiplier: 1
+      fadeDuration: 0.1
+      states:
+      - Name: Normal
+        StateObject: {r: 1, g: 1, b: 1, a: 1}
+      - Name: Highlighted
+        StateObject: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+      - Name: Pressed
+        StateObject: {r: 1, g: 1, b: 1, a: 1}
+      - Name: Selected
+        StateObject: {r: 1, g: 1, b: 1, a: 1}
+      - Name: Disabled
+        StateObject: {r: 1, g: 1, b: 1, a: 1}
+    color32Transitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+    spriteSwapTransitions:
+      target: {fileID: 0}
+      states: []
+    animationTransitions:
+      target: {fileID: 0}
+      states: []
+    activenessTransitions:
+      target: {fileID: 0}
+      states: []
+    alphaTransitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+    materialPropertyTransitions:
+      target: {fileID: 0}
+      fadeDuration: 0
+      states: []
+      propertyIndex: 0
+    locationAnimationTransitions:
+      target: {fileID: 0}
+      states: []
+    customTransitions:
+      states: []
+  betterToggleTransitions: []
+--- !u!114 &1056385637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056385629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf511209ead75448bda470f26a3ea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useRelativeLocations: 0
+  locations:
+  - name: Normal
+    transformFallback:
+      LocalPosition: {x: -421.7, y: 759.8, z: 0}
+      AnchoredPosition: {x: -421.7, y: 759.8}
+      SizeDelta: {x: 156, y: 157}
+      AnchorMin: {x: 0, y: 1}
+      AnchorMax: {x: 0, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 1
+      screenConfigName: 
+    transformConfigs:
+      items:
+      - LocalPosition: {x: -900.23376, y: 239.75647, z: 0}
+        AnchoredPosition: {x: 118, y: -333}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1, y: 1, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -423.2, y: 759.1, z: 0}
+        AnchoredPosition: {x: 116.79999, y: -320.90002}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1, y: 1, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Portrate
+  - name: Pressed
+    transformFallback:
+      LocalPosition: {x: -421.7, y: 759.8, z: 0}
+      AnchoredPosition: {x: -421.7, y: 759.8}
+      SizeDelta: {x: 156, y: 157}
+      AnchorMin: {x: 0, y: 1}
+      AnchorMax: {x: 0, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 0.9, y: 0.9, z: 0.9}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: 
+    transformConfigs:
+      items:
+      - LocalPosition: {x: -900.23376, y: 239.75647, z: 0}
+        AnchoredPosition: {x: 118, y: -333}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.9, y: 0.9, z: 0.9}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -423.2, y: 759.1, z: 0}
+        AnchoredPosition: {x: 116.79999, y: -320.90002}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.9, y: 0.9, z: 0.9}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Portrate
+  - name: Highlight
+    transformFallback:
+      LocalPosition: {x: -421.7, y: 759.8, z: 0}
+      AnchoredPosition: {x: -421.7, y: 759.8}
+      SizeDelta: {x: 156, y: 157}
+      AnchorMin: {x: 0, y: 1}
+      AnchorMax: {x: 0, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: 
+    transformConfigs:
+      items:
+      - LocalPosition: {x: -900.23376, y: 239.75647, z: 0}
+        AnchoredPosition: {x: 118, y: -333}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1, y: 1, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -423.2, y: 759.1, z: 0}
+        AnchoredPosition: {x: 116.79999, y: -320.90002}
+        SizeDelta: {x: 156, y: 157}
+        AnchorMin: {x: 0, y: 1}
+        AnchorMax: {x: 0, y: 1}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1, y: 1, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Portrate
+  animations:
+  - name: Press
+    from: 
+    to: Pressed
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 10
+  - name: Normal
+    from: 
+    to: Normal
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 10
+  - name: Highlighted
+    from: 
+    to: Highlight
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 10
+  startLocation: Normal
+  startUpAnimation: Normal
+  actionOnInit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1090456479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,7 +2806,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684355390}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2546,11 +2817,11 @@ RectTransform:
   m_Father: {fileID: 1799160672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000004283169, y: 1.1079133}
-  m_AnchorMax: {x: 1, y: 1.4247007}
+  m_AnchorMin: {x: 0.9952247, y: 0.00000423193}
+  m_AnchorMax: {x: 1.6366874, y: 0.99999577}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1684355392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2611,8 +2882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d6436a87432de4d9a8278f12bf49b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
   source: {fileID: 1684355391}
   settingsFallback:
     HorizontalFit: 0
@@ -2722,19 +2993,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
-  m_ChildAlignment: 1
-  m_Spacing: 17
+    m_Left: 9
+    m_Right: 9
+    m_Top: 9
+    m_Bottom: 9
+  m_ChildAlignment: 5
+  m_Spacing: 8.5
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
-  m_ReverseArrangement: 0
+  m_ReverseArrangement: 1
   paddingSizerFallback:
     screenConfigName: 
     OptimizedSize:
@@ -2819,7 +3090,7 @@ MonoBehaviour:
       ChildControlHeight: 0
       Orientation: 1
       screenConfigName: Portrate
-  orientation: 1
+  orientation: 0
 --- !u!114 &1684355395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3019,7 +3290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1747001012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3118,11 +3389,11 @@ RectTransform:
   m_Father: {fileID: 584240224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -4.9540973, y: -0.12941587}
-  m_AnchorMax: {x: 0.5, y: 1.1294159}
+  m_AnchorMin: {x: -0.1249993, y: -4.248224}
+  m_AnchorMax: {x: 1.1249825, y: 0.5082154}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.50000125, y: 1.0000001}
 --- !u!114 &1775253700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3202,6 +3473,7 @@ GameObject:
   - component: {fileID: 1799160674}
   - component: {fileID: 1799160673}
   - component: {fileID: 1799160675}
+  - component: {fileID: 1799160676}
   m_Layer: 5
   m_Name: Buttons_Mask
   m_TagString: Untagged
@@ -3225,11 +3497,11 @@ RectTransform:
   m_Father: {fileID: 1380603950}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75, y: -72.1001}
-  m_SizeDelta: {x: 114, y: 1017}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.7605517, y: 0.8821239}
+  m_AnchorMax: {x: 0.9300013, y: 0.98862714}
+  m_AnchoredPosition: {x: -78.189, y: 0}
+  m_SizeDelta: {x: 297.272, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799160673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,6 +3585,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1799160676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799160671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &1835422441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5277,8 +5566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 278.5642, y: -122.54004}
-  m_SizeDelta: {x: 424.7809, y: 174.3527}
+  m_AnchoredPosition: {x: 415.12018, y: -122.54001}
+  m_SizeDelta: {x: 654.2867, y: 174.3527}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2289923211505906108
 CanvasRenderer:
@@ -7155,15 +7444,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3122911722706491729, guid: afbff90d0da79da469278706f42f284b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3122911722706491729, guid: afbff90d0da79da469278706f42f284b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3122911722706491729, guid: afbff90d0da79da469278706f42f284b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3122911722706491729, guid: afbff90d0da79da469278706f42f284b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7499,16 +7788,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf511209ead75448bda470f26a3ea37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRelativeLocations: 1
+  useRelativeLocations: 0
   locations:
   - name: Normal
     transformFallback:
-      LocalPosition: {x: 418.23376, y: -567.2435, z: 0}
-      AnchoredPosition: {x: -60, y: -60}
-      SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0, y: 0}
-      AnchorMax: {x: 0, y: 0}
-      Pivot: {x: -0.5, y: -0.5}
+      LocalPosition: {x: 823.23376, y: 377.75647, z: 0}
+      AnchoredPosition: {x: -75, y: -75}
+      SizeDelta: {x: 120, y: 120}
+      AnchorMin: {x: 1, y: 1}
+      AnchorMax: {x: 1, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
@@ -7518,27 +7807,27 @@ MonoBehaviour:
       items: []
   - name: Pressed
     transformFallback:
-      LocalPosition: {x: 418.23376, y: -567.2435, z: 0}
-      AnchoredPosition: {x: -60, y: -60}
-      SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0, y: 0}
-      AnchorMax: {x: 0, y: 0}
-      Pivot: {x: -0.5, y: -0.5}
+      LocalPosition: {x: 345, y: 885, z: 0}
+      AnchoredPosition: {x: -75, y: -75}
+      SizeDelta: {x: 120, y: 120}
+      AnchorMin: {x: 1, y: 1}
+      AnchorMax: {x: 1, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 0.9, y: 0.9, z: 0.9}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      EulerAngles: {x: -0, y: 0, z: 0}
-      saveRotationAsEuler: 1
+      EulerAngles: {x: 0, y: 0, z: 0}
+      saveRotationAsEuler: 0
       screenConfigName: 
     transformConfigs:
       items: []
   - name: Highlight
     transformFallback:
-      LocalPosition: {x: 418.23376, y: -567.2435, z: 0}
-      AnchoredPosition: {x: -60, y: -60}
-      SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0, y: 0}
-      AnchorMax: {x: 0, y: 0}
-      Pivot: {x: -0.5, y: -0.5}
+      LocalPosition: {x: 823.23376, y: 377.75647, z: 0}
+      AnchoredPosition: {x: -75, y: -75}
+      SizeDelta: {x: 120, y: 120}
+      AnchorMin: {x: 1, y: 1}
+      AnchorMax: {x: 1, y: 1}
+      Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optimizedResolutionFallback: {x: 1080, y: 2160}
   optimizedDpiFallback: 96
-  fallbackName: Portrait
+  fallbackName: Default
   staticSizerMethods:
   - assemblyName: Assembly-CSharp
     typeName: 
@@ -50,7 +50,7 @@ MonoBehaviour:
       inverse: 0
       isActive: 1
     checkDeviceType:
-      expectedDeviceInfo: 0
+      expectedDeviceInfo: 4
       isActive: 0
     checkScreenTag:
       screenTag: 
@@ -58,10 +58,11 @@ MonoBehaviour:
     optimizedScreenInfo:
       resolution: {x: 1920, y: 1080}
       dpi: 96
-    fallbacks: []
+    fallbacks:
+    - Portrate
   - name: Portrate
     checkOrientation:
-      expectedOrientation: 1
+      expectedOrientation: 0
       isActive: 1
     checkScreenSize:
       measureType: 1
@@ -83,4 +84,5 @@ MonoBehaviour:
     optimizedScreenInfo:
       resolution: {x: 1080, y: 2160}
       dpi: 96
-    fallbacks: []
+    fallbacks:
+    - Landscape
