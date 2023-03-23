@@ -12,6 +12,8 @@ namespace CodeBase.Infrastructure
       _game = new Game(this);
       _game.StateMachine.Enter<BootstrapState>();
 
+      Debug.Log("GameBootstrapper Awake");
+      
       DontDestroyOnLoad(this);
     }
   }

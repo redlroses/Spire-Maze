@@ -37,7 +37,7 @@ MonoBehaviour:
   - name: Portrate
     checkOrientation:
       expectedOrientation: 0
-      isActive: 1
+      isActive: 0
     checkScreenSize:
       measureType: 1
       unitType: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
       maxSizeInInches: 7.6
       isActive: 0
     checkAspectRatio:
-      minAspect: 0.421875
-      maxAspect: 0.8
+      minAspect: 0.2
+      maxAspect: 0.99
       inverse: 0
       isActive: 1
     checkDeviceType:
@@ -63,7 +63,7 @@ MonoBehaviour:
   - name: Landscape
     checkOrientation:
       expectedOrientation: 1
-      isActive: 1
+      isActive: 0
     checkScreenSize:
       measureType: 1
       unitType: 0
@@ -71,12 +71,12 @@ MonoBehaviour:
       maxSizeInInches: 7.6
       isActive: 0
     checkAspectRatio:
-      minAspect: 1.25
+      minAspect: 1.01
       maxAspect: 2.3703704
       inverse: 0
       isActive: 1
     checkDeviceType:
-      expectedDeviceInfo: 4
+      expectedDeviceInfo: 0
       isActive: 0
     checkScreenTag:
       screenTag: 

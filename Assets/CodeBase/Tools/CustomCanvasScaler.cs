@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.Tools
 {
+    [ExecuteInEditMode]
     [RequireComponent(typeof(CanvasScaler))]
     public class CustomCanvasScaler : MonoBehaviour
     {
@@ -61,8 +62,6 @@ namespace CodeBase.Tools
 
         private void Update()
         {
-            Resolution currentResolution = Screen.currentResolution;
-
             CurrentOrientation = Screen.width / (float) Screen.height > 1f
                 ? ScreenOrientation.LandscapeLeft
                 : ScreenOrientation.Portrait;

@@ -10,6 +10,8 @@ namespace CodeBase.Infrastructure
         {
             if (Application.isEditor == false)
             {
+                Debug.Log("if (Application.isEditor == false)");
+                Instantiate(_bootstrapperPrefab);
                 return;
             }
 
@@ -17,9 +19,11 @@ namespace CodeBase.Infrastructure
 
             if (bootstrapper != null)
             {
+                Debug.Log("if (bootstrapper != null)");
                 return;
             }
 
+            Debug.Log("  Instantiate(_bootstrapperPrefab);");
             Instantiate(_bootstrapperPrefab);
         }
     }
