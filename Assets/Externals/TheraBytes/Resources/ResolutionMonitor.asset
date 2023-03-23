@@ -34,6 +34,32 @@ MonoBehaviour:
   dpiManager:
     overrides: []
   optimizedScreens:
+  - name: Portrate
+    checkOrientation:
+      expectedOrientation: 0
+      isActive: 1
+    checkScreenSize:
+      measureType: 1
+      unitType: 0
+      minSizeInInches: 4.7
+      maxSizeInInches: 7.6
+      isActive: 0
+    checkAspectRatio:
+      minAspect: 0.421875
+      maxAspect: 0.8
+      inverse: 0
+      isActive: 1
+    checkDeviceType:
+      expectedDeviceInfo: 0
+      isActive: 0
+    checkScreenTag:
+      screenTag: 
+      isActive: 0
+    optimizedScreenInfo:
+      resolution: {x: 1080, y: 2160}
+      dpi: 96
+    fallbacks:
+    - Landscape
   - name: Landscape
     checkOrientation:
       expectedOrientation: 1
@@ -60,29 +86,3 @@ MonoBehaviour:
       dpi: 96
     fallbacks:
     - Portrate
-  - name: Portrate
-    checkOrientation:
-      expectedOrientation: 0
-      isActive: 1
-    checkScreenSize:
-      measureType: 1
-      unitType: 0
-      minSizeInInches: 4.7
-      maxSizeInInches: 7.6
-      isActive: 0
-    checkAspectRatio:
-      minAspect: 0.66
-      maxAspect: 1.5
-      inverse: 0
-      isActive: 1
-    checkDeviceType:
-      expectedDeviceInfo: 0
-      isActive: 0
-    checkScreenTag:
-      screenTag: 
-      isActive: 0
-    optimizedScreenInfo:
-      resolution: {x: 1080, y: 2160}
-      dpi: 96
-    fallbacks:
-    - Landscape
