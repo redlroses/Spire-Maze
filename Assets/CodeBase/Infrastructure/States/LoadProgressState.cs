@@ -21,10 +21,12 @@ namespace CodeBase.Infrastructure.States
     public void Enter()
     {
       LoadProgressOrInitNew();
-      _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey));
-    }
+    //  _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey));
+      _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelTwoName, true, LevelNames.FirstLevelKey2));
 
-    public void Exit()
+        }
+
+        public void Exit()
     {
     }
 

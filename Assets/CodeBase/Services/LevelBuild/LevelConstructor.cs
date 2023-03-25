@@ -38,7 +38,7 @@ namespace CodeBase.Services.LevelBuild
             _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
             _cellConstructor.Construct<SpikeTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
             _cellConstructor.Construct<FireTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
-            CombineCells(level);
+        //    CombineCells(level);
         }
 
         private void CombineCells(Level level)
