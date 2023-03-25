@@ -6,6 +6,7 @@ using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
+using CodeBase.Logic;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -14,7 +15,7 @@ namespace CodeBase.Infrastructure.States
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>
             {
@@ -23,7 +24,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IGameFactory>(),
                     services.Single<IPersistentProgressService>(),
                     services.Single<IStaticDataService>(),
-                    services.Single<ILevelBuilder>()),
+                    services.Single<ILevelBuilder>(), curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),

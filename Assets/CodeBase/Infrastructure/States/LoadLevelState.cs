@@ -20,10 +20,11 @@ namespace CodeBase.Infrastructure.States
         private readonly ILevelBuilder _levelBuilder;
 
         private LoadPayload _loadPayload;
+        private LoadingCurtain _curtain;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder)
+            ILevelBuilder levelBuilder, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -31,10 +32,12 @@ namespace CodeBase.Infrastructure.States
             _progressService = progressService;
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
+            _curtain = curtain;
         }
 
         public void Enter(LoadPayload payload)
         {
+            _curtain.Show();
             _loadPayload = payload;
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
@@ -43,6 +46,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
+            _curtain.Hide();
             _levelBuilder.Clear();
         }
 
