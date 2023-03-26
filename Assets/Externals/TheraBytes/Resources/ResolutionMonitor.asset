@@ -37,7 +37,7 @@ MonoBehaviour:
   - name: Portrate
     checkOrientation:
       expectedOrientation: 0
-      isActive: 0
+      isActive: 1
     checkScreenSize:
       measureType: 1
       unitType: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   - name: Landscape
     checkOrientation:
       expectedOrientation: 1
-      isActive: 0
+      isActive: 1
     checkScreenSize:
       measureType: 1
       unitType: 0
