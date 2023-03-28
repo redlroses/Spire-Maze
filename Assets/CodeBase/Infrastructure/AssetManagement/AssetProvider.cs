@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
-using Door = CodeBase.LevelSpecification.Cells.Door;
-using Key = CodeBase.LevelSpecification.Cells.Key;
-using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
+// using Door = CodeBase.LevelSpecification.Cells.Door;
+// using Key = CodeBase.LevelSpecification.Cells.Key;
+// using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
 using Object = UnityEngine.Object;
-using Plate = CodeBase.LevelSpecification.Cells.Plate;
-using Portal = CodeBase.LevelSpecification.Cells.Portal;
-using Wall = CodeBase.LevelSpecification.Cells.Wall;
+// using Plate = CodeBase.LevelSpecification.Cells.Plate;
+// using Portal = CodeBase.LevelSpecification.Cells.Portal;
+// using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -69,6 +69,7 @@ namespace CodeBase.Infrastructure.AssetManagement
                 nameof(Portal) => typeof(Portal),
                 nameof(SpikeTrap) => typeof(SpikeTrap),
                 nameof(FireTrap) => typeof(FireTrap),
+                nameof(Savepoint) => typeof(Savepoint),
                 _ => throw new ArgumentException()
             };
         }

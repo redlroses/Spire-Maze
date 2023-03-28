@@ -30,16 +30,13 @@ namespace CodeBase.Logic
             SavepointState cellState = progress.WorldData.LevelState.SavepointStates
                 .Find(cell => cell.Id == Id);
 
-            if (cellState == null)
+            if (cellState == null || cellState.IsActive == false)
             {
                 return;
             }
 
-            if (cellState.IsActive)
-            {
-                _isActive = cellState.IsActive;
-                SetColliderState(cellState.IsActive);
-            }
+            _isActive = cellState.IsActive;
+            SetColliderState(cellState.IsActive);
         }
 
         public void UpdateProgress(PlayerProgress progress)
@@ -59,6 +56,8 @@ namespace CodeBase.Logic
 
         protected override void OnTriggerObserverEntered(Hero player)
         {
+            _isActive = true;
+            SetColliderState(_isActive);
             AllServices.Container.Single<ISaveLoadService>().SaveProgress();
         }
 

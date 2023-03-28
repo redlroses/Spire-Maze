@@ -9,7 +9,8 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (Cell cell in cells)
             {
-             
+                var savepoint = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.Savepoint>();
+                savepoint.Construct(cell.Id);
             }
         }
     }
