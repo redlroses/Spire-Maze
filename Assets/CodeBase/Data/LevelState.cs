@@ -10,12 +10,14 @@ namespace CodeBase.Data
         public string LevelKey;
         public List<DoorState> DoorStates;
         public List<KeyState> KeyStates;
+        public List<SavepointState> SavepointStates;
 
         public LevelState(string levelKey)
         {
             LevelKey = levelKey;
             DoorStates = new List<DoorState>();
             KeyStates = new List<KeyState>();
+            SavepointStates = new List<SavepointState>();
         }
     }
 }
