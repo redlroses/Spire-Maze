@@ -10,5 +10,7 @@ namespace CodeBase.Infrastructure.AssetManagement
     public const string PhysicMaterials = "Materials/Physics";
     public const string Spire = "Prefabs/Spire";
     public const string Cells = "Prefabs/Cells";
+    public const string HUD = "Prefabs/UI/HUD";
+    public const string ExtraLiveView = "Prefabs/UI/ExtraLiveView";
   }
 }

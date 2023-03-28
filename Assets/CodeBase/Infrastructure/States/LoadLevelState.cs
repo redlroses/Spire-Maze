@@ -12,6 +12,8 @@ namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<LoadPayload>
     {
+        private const string PlayerHealthKey = "Player";
+
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
@@ -106,6 +108,8 @@ namespace CodeBase.Infrastructure.States
 
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelKey);
             _progressService.Progress.WorldData.PositionOnLevel = new PositionOnLevel(_loadPayload.LevelKey, level.HeroInitialPosition.AsVectorData());
+            _progressService.Progress.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerHealthKey).MaxHealth;
+            _progressService.Progress.HeroHealthState.ResetHP();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace CodeBase.StaticData
         public float ArchAngle = 22.5f;
         public float FloorHeight = 2f;
         [HideInInspector] public int Width = 16;
-         public int Height = 0;
-         [SerializeField] [SerializeReference] public CellData[] CellDataMap;
+        public int Height = 0;
+        [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
     }
