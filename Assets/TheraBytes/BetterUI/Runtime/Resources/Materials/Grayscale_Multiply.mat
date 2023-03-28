@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ColorOverlay_Multiply
-  m_Shader: {fileID: 4800000, guid: beef6cdc3ad868a4ea03b510f8d97a9b, type: 3}
+  m_Name: Grayscale_Multiply
+  m_Shader: {fileID: 4800000, guid: 9c938b662d6b04f4c914cc4cabe4b22d, type: 3}
   m_ValidKeywords:
   - FORCE_CLIP
   m_InvalidKeywords: []
@@ -38,6 +38,6 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
+    - _UseUIAlphaClip: 1
     m_Colors: []
   m_BuildTextureStacks: []

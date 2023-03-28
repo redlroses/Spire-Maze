@@ -183,7 +183,7 @@ namespace TheraBytes.BetterUi.Editor
         {
             return !IsFallbackPortrait();
         }
-        
+
         bool IsFallbackPortrait()
         {
             var fallback = ResolutionMonitor.OptimizedResolutionFallback;
