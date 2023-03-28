@@ -1,0 +1,19 @@
+﻿using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification.Cells;
+using Rock = CodeBase.Logic.Trap.Rock;
+
+namespace CodeBase.LevelSpecification.Constructor
+{
+    public class RockConstructor : ICellConstructor
+    {
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        {
+            foreach (Cell cell in cells)
+            {
+                var rockData = (EditorCells.Rock)cell.CellData;
+                Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Rock>();
+                rock.SetMoveDirection(rockData.IsDirectionToRight);
+            }
+        }
+    }
+}

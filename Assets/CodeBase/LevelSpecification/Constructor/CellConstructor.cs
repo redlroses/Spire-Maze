@@ -21,6 +21,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Portal)] = new PortalConstructor(),
                 [typeof(SpikeTrap)] = new SpikeTrapConstructor(),
                 [typeof(FireTrap)] = new FireTrapConstructor(),
+                [typeof(Rock)] = new RockConstructor(),
                 [typeof(Savepoint)] = new SavepointConstructor(),
             };
         }

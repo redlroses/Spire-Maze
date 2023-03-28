@@ -2,7 +2,7 @@
 
 namespace CodeBase.EditorCells
 {
-    public class Savepoint : ColoredCell
+    public class Savepoint : Plate
     {
         public Savepoint(Texture2D texture) : base(texture)
         {

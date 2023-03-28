@@ -13,11 +13,6 @@ namespace CodeBase.Logic.Movement
             _selfTransform = transform;
         }
 
-        public void SetMoveDirection(Vector3 activatorPosition)
-        {
-            Direction = CalculateDirection(activatorPosition);
-            Move(Direction);
-        }
         private MoveDirection CalculateDirection(Vector3 activatorPosition)
         {
             float dotDirection = Vector3.Dot(_selfTransform.forward.normalized, (activatorPosition - _selfTransform.position).normalized);

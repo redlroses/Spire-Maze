@@ -69,6 +69,7 @@ namespace CodeBase.Infrastructure.AssetManagement
                 nameof(Portal) => typeof(Portal),
                 nameof(SpikeTrap) => typeof(SpikeTrap),
                 nameof(FireTrap) => typeof(FireTrap),
+                nameof(Rock) => typeof(Rock),
                 nameof(Savepoint) => typeof(Savepoint),
                 _ => throw new ArgumentException()
             };

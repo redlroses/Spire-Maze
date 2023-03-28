@@ -1,6 +1,7 @@
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
@@ -11,7 +12,7 @@ namespace CodeBase.Logic.Trap
     {
         [SerializeField] private SphereCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private RockMover _mover;
+        [SerializeField] private Mover _mover;
         [SerializeField] private Rigidbody[] _fragments;
         [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private float _rayDistance;
@@ -22,6 +23,7 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _timerDelay;
 
         private Transform _selfTransform;
+        private MoveDirection _direction;
         private bool _isActivated;
         private bool _isNotOnPlate;
         private bool _isDestroyed;
@@ -36,17 +38,35 @@ namespace CodeBase.Logic.Trap
             base.Construct(Activator);
             _rigidbody ??= Get<Rigidbody>();
             _mover ??= Get<RockMover>();
+            _mover.enabled = false;
             _selfTransform = transform;
             _rayDirection ??= Get<RayDirection>();
+            Rotate();
         }
 
+        public void SetMoveDirection(bool isDirectionToRight)
+        {
+            _direction = isDirectionToRight ? MoveDirection.Right : MoveDirection.Left;
+        }
+        
         protected override void Activate(IDamagable damagable)
         {
-            _mover.SetMoveDirection(Activator.transform.position);
+            _mover.Move(_direction);
+            _mover.enabled = true;
             _timer.SetUp(_timerDelay, OnTurnOffFragments);
             _stopEffectCallback.SetCallback(OnDestroyGameObject);
             _mover.enabled = true;
             _isActivated = true;
+        }
+
+        private void Rotate()
+        {
+            Vector2 direction = new Vector2((int)_direction, 0f);
+            Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
+            Debug.LogError($"Direction of rotation does not change");
+            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
+            
+            _rigidbody.MoveRotation(lookRotation);
         }
 
         private void TryDestroy()
@@ -54,7 +74,7 @@ namespace CodeBase.Logic.Trap
             if (_isActivated == false || _isDestroyed == true)
                 return;
 
-            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _mover.Direction);
+            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _direction);
             Vector3 groundDirection = Vector3.down;
 
             bool isWallCollision = CheckCollisionObstacle(wallDirection);
@@ -66,6 +86,12 @@ namespace CodeBase.Logic.Trap
             }
 
             _isNotOnPlate = !isGroundCollision;
+        }
+
+        private bool CheckCollisionObstacle(Vector3 direction)
+        {
+            Ray ray = new Ray(_selfTransform.localPosition, direction);
+            return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
         private void Destroy()
@@ -83,12 +109,6 @@ namespace CodeBase.Logic.Trap
             _timer.Play();
             _destroyEffect.Play();
             _isDestroyed = true;
-        }
-
-        private bool CheckCollisionObstacle(Vector3 direction)
-        {
-            Ray ray = new Ray(_selfTransform.localPosition, direction);
-            return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
         private void OnTurnOffFragments()

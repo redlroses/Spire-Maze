@@ -12,6 +12,7 @@ using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
 using Plate = CodeBase.LevelSpecification.Cells.Plate;
 using Portal = CodeBase.LevelSpecification.Cells.Portal;
+using Rock = CodeBase.LevelSpecification.Cells.Rock;
 using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
 using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
@@ -39,6 +40,7 @@ namespace CodeBase.Services.LevelBuild
             _cellConstructor.Construct<Portal>(gameFactory, level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
             _cellConstructor.Construct<SpikeTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
             _cellConstructor.Construct<FireTrap>(gameFactory, level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
+            _cellConstructor.Construct<Rock>(gameFactory, level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
             _cellConstructor.Construct<Savepoint>(gameFactory,level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
         //    CombineCells(level);
         }

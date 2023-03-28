@@ -22,7 +22,7 @@ namespace CodeBase.Editor.LevelEditor
 
         public override void OnGUI(Rect rect)
         {
-            EditorGUIUtility.labelWidth = 80;
+            EditorGUIUtility.labelWidth = 90;
             GUILayout.Label("Cell Settings", EditorStyles.boldLabel);
 
             switch (_cellData.managedReferenceValue)
@@ -37,6 +37,9 @@ namespace CodeBase.Editor.LevelEditor
                 case Portal cell:
                     cell.Key = EditorGUILayout.IntField("Link Id", cell.Key);
                     cell.Color = EditorGUILayout.ColorField("Color", cell.Color);
+                    break;
+                case Rock rock:
+                    rock.IsDirectionToRight = EditorGUILayout.Toggle("Is move to right", rock.IsDirectionToRight);
                     break;
             }
         }

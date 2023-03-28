@@ -71,6 +71,9 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(FireTrap)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(FireTrap)].Tint(_colors[typeof(FireTrap)])),
+                [typeof(Rock)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(Rock)].Tint(_colors[typeof(Rock)])),
                 [typeof(Savepoint)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Savepoint)].Tint(_colors[typeof(Savepoint)])),
@@ -89,6 +92,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Portal)] = Resources.Load<Texture2D>("Textures/PortalIcon"),
                 [typeof(SpikeTrap)] = Resources.Load<Texture2D>("Textures/SpikeTrapIcon"),
                 [typeof(FireTrap)] = Resources.Load<Texture2D>("Textures/FireTrapIcon"),
+                [typeof(Rock)] = Resources.Load<Texture2D>("Textures/RockIcon"),
                 [typeof(Savepoint)] = Resources.Load<Texture2D>("Textures/SaveIcon"),
             };
 
@@ -103,6 +107,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Portal)] = new Color32(129, 93, 199, 255),
                 [typeof(SpikeTrap)] = new Color32(76, 128, 144, 255),
                 [typeof(FireTrap)] = new Color32(255, 170, 52, 255),
+                [typeof(Rock)] = new Color32(233, 117, 50, 255),
                 [typeof(Savepoint)] = new Color32(0, 180, 255, 255),
             };
 
@@ -118,6 +123,7 @@ namespace CodeBase.Editor.LevelEditor
                 new Portal(GetTextureByType<Portal>()) {Color = _colors[typeof(Portal)]},
                 new SpikeTrap(GetTextureByType<SpikeTrap>()),
                 new FireTrap(GetTextureByType<FireTrap>()),
+                new Rock(GetTextureByType<Rock>()),
                 new Savepoint(GetTextureByType<Savepoint>()),
             };
 
