@@ -2,10 +2,12 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.Logic;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
+using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -74,6 +76,7 @@ namespace CodeBase.Infrastructure.States
             ConstructLevel();
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = InitHero(heroPosition);
+            InitHud(hero);
             CameraFollow(hero);
         }
 
@@ -88,6 +91,13 @@ namespace CodeBase.Infrastructure.States
 
         private GameObject InitHero(Vector3 at) =>
             _gameFactory.CreateHero(at);
+
+        private void InitHud(GameObject hero)
+        {
+            GameObject hud = _gameFactory.CreateHud();
+            hud.GetComponent<Canvas>().worldCamera = Camera.main;
+            hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
+        }
 
         private void CameraFollow(GameObject hero)
         {

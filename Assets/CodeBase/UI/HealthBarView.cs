@@ -1,7 +1,4 @@
-﻿using System;
-using CodeBase.Infrastructure.Factory;
-using CodeBase.Logic.HealthEntity;
-using CodeBase.Services;
+﻿using CodeBase.Logic.HealthEntity;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -15,7 +12,6 @@ namespace CodeBase.UI
 
         public void Construct(IHealthReactive health)
         {
-            //TODO: посмотреть как у синдикатов это реализовано
             _health = health;
             _health.Changed += OnChanged;
         }
@@ -23,7 +19,7 @@ namespace CodeBase.UI
         private void OnChanged()
         {
             float normalizedPoints = _health.CurrentPoints / (float) _health.MaxPoints;
-            _sliderSetter.SetValue(normalizedPoints);
+            _sliderSetter.SetValueNormalized(normalizedPoints);
             _textSetter.SetText($"{_health.CurrentPoints}/{_health.MaxPoints}");
         }
     }

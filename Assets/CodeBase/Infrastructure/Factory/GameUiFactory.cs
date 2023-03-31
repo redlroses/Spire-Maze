@@ -16,6 +16,6 @@ namespace CodeBase.Infrastructure.Factory
             _assetProvider.Instantiate(AssetPath.ExtraLiveView, inside);
 
         public GameObject CreateHud() =>
-            _assetProvider.Instantiate(AssetPath.HUD);
+            _assetProvider.Instantiate(AssetPath.HudPath);
     }
 }

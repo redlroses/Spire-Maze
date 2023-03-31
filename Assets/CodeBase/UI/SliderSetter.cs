@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace CodeBase.UI
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
         }
 
-        public void SetValue(float value)
+        public void SetValueNormalized(float value)
         {
             Validate(value);
             ApplyValue(value);
@@ -77,7 +78,7 @@ namespace CodeBase.UI
         {
             if (value < _slider.minValue || value > _slider.maxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(value));
+                throw new ArgumentOutOfRangeException(nameof(value), value, value.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -85,7 +86,7 @@ namespace CodeBase.UI
         [Button("TestSet", EButtonEnableMode.Playmode)]
         private void TestSet()
         {
-            SetValue(_testValue);
+            SetValueNormalized(_testValue);
         }
 #endif
     }

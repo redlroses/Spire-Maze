@@ -8,8 +8,8 @@ namespace CodeBase.Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string LevelsDataPath = "Level Maps";
-        private const string HealthPath = "Health";
+        private const string LevelsDataPath = "StaticData/Level Maps";
+        private const string HealthPath = "StaticData/Health";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
