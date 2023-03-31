@@ -3,7 +3,7 @@
 namespace CodeBase.Data
 {
     [Serializable]
-    public class HeroInventory
+    public class HeroInventoryOld
     {
         public int RedKeys;
         public int GreenKeys;

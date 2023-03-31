@@ -1,4 +1,5 @@
 using CodeBase.Data;
+using CodeBase.Logic.Inventory;
 using UnityEngine;
 
 namespace CodeBase.Tools.Extension
@@ -16,5 +17,11 @@ namespace CodeBase.Tools.Extension
 
         public static T ToDeserialized<T>(this string json) =>
             JsonUtility.FromJson<T>(json);
+
+        public static InventoryData AsInventoryData(this IInventory inventory) =>
+            new InventoryData(inventory.ReadAll());
+
+        public static IInventory AsHeroInventory(this InventoryData inventoryData) =>
+            new Inventory(inventoryData.InventoryCells);
     }
 }

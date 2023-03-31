@@ -45,7 +45,7 @@ namespace CodeBase.UI
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
         }
 
-        public void SetValueNormalized(float value)
+        public void SetNormalizedValue(float value)
         {
             Validate(value);
             ApplyValue(value);
@@ -86,7 +86,7 @@ namespace CodeBase.UI
         [Button("TestSet", EButtonEnableMode.Playmode)]
         private void TestSet()
         {
-            SetValueNormalized(_testValue);
+            SetNormalizedValue(_testValue);
         }
 #endif
     }

@@ -9,6 +9,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using CodeBase.UI;
 using UnityEngine;
+using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -97,6 +98,7 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
+            hud.GetComponentInChildren<InventoryView>().Construct(hero.GetComponent<HeroInventory>());
         }
 
         private void CameraFollow(GameObject hero)

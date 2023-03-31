@@ -13,19 +13,19 @@ namespace CodeBase.Logic.Сollectible
         {
             _keys = new Dictionary<Colors, int>
             {
-                [Colors.Red] = progress.HeroInventory.RedKeys,
-                [Colors.Green] = progress.HeroInventory.GreenKeys,
-                [Colors.Blue] = progress.HeroInventory.BlueKeys,
-                [Colors.Rgb] = progress.HeroInventory.RgbKeys
+                [Colors.Red] = progress.HeroInventoryOld.RedKeys,
+                [Colors.Green] = progress.HeroInventoryOld.GreenKeys,
+                [Colors.Blue] = progress.HeroInventoryOld.BlueKeys,
+                [Colors.Rgb] = progress.HeroInventoryOld.RgbKeys
             };
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroInventory.RedKeys = _keys[Colors.Red];
-            progress.HeroInventory.GreenKeys = _keys[Colors.Green];
-            progress.HeroInventory.BlueKeys = _keys[Colors.Blue];
-            progress.HeroInventory.RgbKeys = _keys[Colors.Rgb];
+            progress.HeroInventoryOld.RedKeys = _keys[Colors.Red];
+            progress.HeroInventoryOld.GreenKeys = _keys[Colors.Green];
+            progress.HeroInventoryOld.BlueKeys = _keys[Colors.Blue];
+            progress.HeroInventoryOld.RgbKeys = _keys[Colors.Rgb];
         }
 
         protected override void Collect(KeyCollectible item)

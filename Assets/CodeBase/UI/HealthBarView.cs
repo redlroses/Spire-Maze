@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.UI
 {
-    public class HealthBarView : MonoBehaviour
+    public sealed class HealthBarView : MonoBehaviour
     {
         [SerializeField] private SliderSetter _sliderSetter;
         [SerializeField] private TextSetter _textSetter;
@@ -18,8 +18,15 @@ namespace CodeBase.UI
 
         private void OnChanged()
         {
-            float normalizedPoints = _health.CurrentPoints / (float) _health.MaxPoints;
-            _sliderSetter.SetValueNormalized(normalizedPoints);
+            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
+            ApplyTextHealth();
+        }
+
+        private float GetNormalizedBarValue() =>
+            _health.CurrentPoints / (float) _health.MaxPoints;
+
+        private void ApplyTextHealth()
+        {
             _textSetter.SetText($"{_health.CurrentPoints}/{_health.MaxPoints}");
         }
     }
