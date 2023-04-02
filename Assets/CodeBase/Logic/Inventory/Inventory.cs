@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData.Storable;
+using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {
@@ -19,13 +20,13 @@ namespace CodeBase.Logic.Inventory
             _storage = storage;
         }
 
-        public void Add<TItem>(IStorable collectible) where TItem : IStorable
+        public void Add(StorableData item)
         {
-            InventoryCell existingInventoryCell = _storage.First(inventoryCell => inventoryCell.Item is TItem);
+            InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == item.ItemType);
 
             if (existingInventoryCell == null)
             {
-                _storage.Add(new InventoryCell(collectible));
+                _storage.Add(new InventoryCell(item));
             }
             else
             {
@@ -33,14 +34,16 @@ namespace CodeBase.Logic.Inventory
             }
 
             Updated?.Invoke();
+
+            Debug.Log($"Add {item.Name}");
         }
 
         public List<InventoryCell> ReadAll() => new List<InventoryCell>(_storage);
 
 
-        public bool TryUse<TItem>(out TItem item) where TItem : IStorable
+        public bool TryUse(StorableType storableType, out StorableData item)
         {
-            InventoryCell existingInventoryCell = _storage.First(inventoryCell => inventoryCell.Item is TItem);
+            InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == storableType);
             item = default;
 
             if (existingInventoryCell == null)
@@ -48,9 +51,11 @@ namespace CodeBase.Logic.Inventory
                 return false;
             }
 
-            item = (TItem) existingInventoryCell.Item;
+            item = existingInventoryCell.Item;
             RemoveItemFrom(existingInventoryCell);
             Updated?.Invoke();
+
+            Debug.Log($"Use {item.Name}");
 
             return true;
         }

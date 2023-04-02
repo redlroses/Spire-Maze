@@ -7361,12 +7361,13 @@ GameObject:
   - component: {fileID: 7393409988495010677}
   - component: {fileID: 7393409988495010669}
   - component: {fileID: 7393409988495010671}
-  - component: {fileID: 7393409988495010670}
   - component: {fileID: 2212661745572598830}
   - component: {fileID: 9130773236145860932}
   - component: {fileID: 1356605512462546074}
   - component: {fileID: 7131724038521599921}
   - component: {fileID: 989079028364153686}
+  - component: {fileID: 2960491418050870100}
+  - component: {fileID: 5771158303944293934}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -7533,19 +7534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b4be2604d9409f9043a412634a37f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7393409988495010670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7393409988495010675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dee1708d95a445e99a14748c4c3d685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _observer: {fileID: 7393409988495010671}
 --- !u!114 &2212661745572598830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7626,6 +7614,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityScaler: {fileID: 7393409988495010669}
   _animator: {fileID: 7131724038521599921}
+--- !u!114 &2960491418050870100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393409988495010675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7c566fa24047e1b5f77b84c19f9c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5771158303944293934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393409988495010675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c49e343a0684cce95fa32b5c072a57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _observer: {fileID: 7393409988495010671}
+  _heroInventory: {fileID: 2960491418050870100}
 --- !u!1 &7591910132656366578
 GameObject:
   m_ObjectHideFlags: 0

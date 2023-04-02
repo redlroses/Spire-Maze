@@ -20,7 +20,7 @@ namespace CodeBase.UI
 
         private void OnUpdatedInventory()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Inventory updated");
         }
     }
 }

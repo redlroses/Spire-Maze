@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
-using JetBrains.Annotations;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Services.StaticData
 {
@@ -32,7 +30,7 @@ namespace CodeBase.Services.StaticData
         public HealthStaticData HealthForEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
 
-        public IStorable ForStorable(StorableType storableType) =>
+        public StorableData ForStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
 
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>

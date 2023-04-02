@@ -53,8 +53,9 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
-            InitGameWorld();
+            var hero = InitGameWorld();
             InformProgressReaders();
+            InitHud(hero);
 
             _stateMachine.Enter<GameLoopState>();
         }
@@ -65,11 +66,11 @@ namespace CodeBase.Infrastructure.States
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
-        private void InitGameWorld()
+        private GameObject InitGameWorld()
         {
             if (_loadPayload.IsBuildable == false)
             {
-                return;
+                return null;
             }
 
             Level level = BuildLevel();
@@ -77,8 +78,8 @@ namespace CodeBase.Infrastructure.States
             ConstructLevel();
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = InitHero(heroPosition);
-            InitHud(hero);
             CameraFollow(hero);
+            return hero;
         }
 
         private Vector3 GetHeroPosition() =>
