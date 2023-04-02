@@ -23,9 +23,9 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
+        private readonly LoadingCurtain _curtain;
 
         private LoadPayload _loadPayload;
-        private LoadingCurtain _curtain;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
             IPersistentProgressService progressService, IStaticDataService staticDataService,

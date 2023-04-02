@@ -33,17 +33,27 @@ namespace CodeBase.Services.LevelBuild
         public void Construct(IGameFactory gameFactory, IStaticDataService staticData, Level level)
         {
             _gameFactory = gameFactory;
-            _cellConstructor.Construct<Plate>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
-            _cellConstructor.Construct<Wall>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
-            _cellConstructor.Construct<Key>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
-            _cellConstructor.Construct<Door>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
-            _cellConstructor.Construct<MovingPlateMarker>(gameFactory, staticData, level.Where(cell => cell.CellData is MovingMarker).ToArray());
-            _cellConstructor.Construct<Portal>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
-            _cellConstructor.Construct<SpikeTrap>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
-            _cellConstructor.Construct<FireTrap>(gameFactory, staticData, level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
-            _cellConstructor.Construct<Rock>(gameFactory, level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
-            _cellConstructor.Construct<Savepoint>(gameFactory,level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
-        //    CombineCells(level);
+            _cellConstructor.Construct<Plate>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
+            _cellConstructor.Construct<Wall>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
+            _cellConstructor.Construct<Key>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
+            _cellConstructor.Construct<Door>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
+            _cellConstructor.Construct<MovingPlateMarker>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is MovingMarker).ToArray());
+            _cellConstructor.Construct<Portal>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
+            _cellConstructor.Construct<SpikeTrap>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
+            _cellConstructor.Construct<FireTrap>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
+            _cellConstructor.Construct<Rock>(gameFactory, staticData,
+                level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
+            _cellConstructor.Construct<Savepoint>(gameFactory, staticData,
+                level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
+            //    CombineCells(level);
         }
 
         private void CombineCells(Level level)
@@ -101,7 +111,8 @@ namespace CodeBase.Services.LevelBuild
             spire.gameObject.isStatic = true;
         }
 
-        private void CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder) where TCell : CellData
+        private void CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder)
+            where TCell : CellData
         {
             if (beginIndex == -1)
             {
@@ -118,13 +129,15 @@ namespace CodeBase.Services.LevelBuild
 
                 if (lastGroupIndex < firstGroupIndex)
                 {
-                    List<Cell> combined = floor.Container.GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
+                    List<Cell> combined =
+                        floor.Container.GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
                     combined.AddRange(floor.Container.GetRange(0, lastGroupIndex));
                     CombineColliders(combined, collidersHolder);
                 }
                 else
                 {
-                    CombineColliders(floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex), collidersHolder);
+                    CombineColliders(floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex),
+                        collidersHolder);
                 }
 
                 firstGroupIndex = FindFirstGroupIndex<TCell>(floor, lastGroupIndex);
@@ -138,7 +151,8 @@ namespace CodeBase.Services.LevelBuild
             colliderHolder.transform.parent = parent;
             colliderHolder.isStatic = true;
 
-            MeshFilter[] meshesFilters = cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
+            MeshFilter[] meshesFilters =
+                cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
 
             foreach (MeshFilter meshFilter in meshesFilters)
             {

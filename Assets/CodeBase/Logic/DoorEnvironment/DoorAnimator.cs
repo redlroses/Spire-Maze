@@ -4,11 +4,11 @@ namespace CodeBase.Logic.DoorEnvironment
 {
     public class DoorAnimator : MonoBehaviour
     {
-        private static readonly int Direction = UnityEngine.Animator.StringToHash("Direction");
-        private static readonly int OpenTrigger = UnityEngine.Animator.StringToHash("Open");
-        private static readonly int CloseTrigger = UnityEngine.Animator.StringToHash("Close");
+        private static readonly int Direction = Animator.StringToHash("Direction");
+        private static readonly int OpenTrigger = Animator.StringToHash("Open");
+        private static readonly int CloseTrigger = Animator.StringToHash("Close");
 
-        [SerializeField] private UnityEngine.Animator _animator;
+        [SerializeField] private Animator _animator;
 
         public void Open(float direction)
         {
