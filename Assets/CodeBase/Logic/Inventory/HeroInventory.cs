@@ -12,6 +12,8 @@ namespace CodeBase.Logic.Inventory
 
         private void Start()
         {
+            Debug.Log("Press \"X\" for look into inventory");
+
             InputAction input = new InputAction("Press X", InputActionType.Button, "<Keyboard>/x");
             input.started += context =>
             {
