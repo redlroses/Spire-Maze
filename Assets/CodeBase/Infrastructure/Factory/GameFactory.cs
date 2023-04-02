@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.StaticData;
@@ -58,8 +59,11 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateSpire() =>
             _assets.Instantiate(path: AssetPath.Spire);
 
-        public GameObject CreateHero(Vector3 at) =>
-            InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+        public GameObject CreateHero(Vector3 at)
+        {
+            _heroGameObject ??= InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            return _heroGameObject;
+        }
 
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
@@ -73,6 +77,12 @@ namespace CodeBase.Infrastructure.Factory
 
         public PhysicMaterial CreatePhysicMaterial(string name) =>
             GetCashed(name, AssetPath.PhysicMaterials, _physicMaterials);
+
+        public GameObject CreateHud()
+        {
+            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+            return hud;
+        }
 
         private void Register(ISavedProgressReader progressReader)
         {
@@ -92,10 +102,10 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
-            _heroGameObject ??= _assets.Instantiate(path: prefabPath);
-            RegisterProgressWatchers(_heroGameObject);
+            GameObject gameObject = _assets.Instantiate(path: prefabPath);
+            RegisterProgressWatchers(gameObject);
 
-            return _heroGameObject;
+            return gameObject;
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

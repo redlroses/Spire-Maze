@@ -3,6 +3,7 @@ using CodeBase.Data.CellStates;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Logic.Сollectible
@@ -12,17 +13,19 @@ namespace CodeBase.Logic.Сollectible
         [SerializeField] private Colors _color;
         [SerializeField] private MaterialChanger _materialChanger;
 
+        private StorableData _keyStaticData;
         private bool _isTaken;
         private int _id;
 
         public int Id => _id;
         public Colors Color => _color;
+        public StorableData StorableData => _keyStaticData;
 
-
-        public void Construct(IGameFactory gameFactory, Colors color, int id)
+        public void Construct(IGameFactory gameFactory, StorableData staticData, Colors color, int id)
         {
             _materialChanger.Construct(gameFactory);
             _materialChanger.SetMaterial(color);
+            _keyStaticData = staticData;
             _color = color;
             _id = id;
         }

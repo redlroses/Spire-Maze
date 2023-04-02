@@ -9,8 +9,18 @@ namespace CodeBase.Logic.HealthEntity
         [SerializeField] private int _maxPoints;
 
         public event Action Died;
+        public event Action Changed;
 
-        public int CurrentPoints { get; protected set; }
+        public int CurrentPoints
+        {
+            get => _currentPoints;
+            protected set
+            {
+                _currentPoints = value;
+                Changed?.Invoke();
+            }
+        }
+
         public int MaxPoints { get; protected set; }
         public bool IsAlive => _currentPoints >= 0;
 

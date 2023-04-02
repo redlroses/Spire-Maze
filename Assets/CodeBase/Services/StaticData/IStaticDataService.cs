@@ -1,4 +1,5 @@
 ﻿using CodeBase.StaticData;
+using CodeBase.StaticData.Storable;
 
 namespace CodeBase.Services.StaticData
 {
@@ -6,5 +7,7 @@ namespace CodeBase.Services.StaticData
   {
     void Load();
     LevelStaticData ForLevel(string levelKey);
+    HealthStaticData HealthForEntity(string entityKey);
+    StorableData ForStorable(StorableType storableType);
   }
 }

@@ -2,16 +2,21 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.Logic;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
+using CodeBase.UI;
 using UnityEngine;
+using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<LoadPayload>
     {
+        private const string PlayerHealthKey = "Player";
+
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
@@ -52,8 +57,9 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
-            InitGameWorld();
+            var hero = InitGameWorld();
             InformProgressReaders();
+            InitHud(hero);
 
             _stateMachine.Enter<GameLoopState>();
         }
@@ -64,11 +70,11 @@ namespace CodeBase.Infrastructure.States
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
-        private void InitGameWorld()
+        private GameObject InitGameWorld()
         {
             if (_loadPayload.IsBuildable == false)
             {
-                return;
+                return null;
             }
 
             Level level = BuildLevel();
@@ -77,6 +83,7 @@ namespace CodeBase.Infrastructure.States
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = InitHero(heroPosition);
             CameraFollow(hero);
+            return hero;
         }
 
         private Vector3 GetHeroPosition() =>
@@ -90,6 +97,14 @@ namespace CodeBase.Infrastructure.States
 
         private GameObject InitHero(Vector3 at) =>
             _gameFactory.CreateHero(at);
+
+        private void InitHud(GameObject hero)
+        {
+            GameObject hud = _gameFactory.CreateHud();
+            hud.GetComponent<Canvas>().worldCamera = Camera.main;
+            hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
+            hud.GetComponentInChildren<InventoryView>().Construct(hero.GetComponent<HeroInventory>());
+        }
 
         private void CameraFollow(GameObject hero)
         {
@@ -110,6 +125,8 @@ namespace CodeBase.Infrastructure.States
 
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelKey);
             _progressService.Progress.WorldData.PositionOnLevel = new PositionOnLevel(_loadPayload.LevelKey, level.HeroInitialPosition.AsVectorData());
+            _progressService.Progress.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerHealthKey).MaxHealth;
+            _progressService.Progress.HeroHealthState.ResetHP();
         }
     }
 }

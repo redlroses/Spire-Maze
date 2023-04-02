@@ -31,14 +31,12 @@ namespace CodeBase.Logic.HealthEntity
             int deltaPoints = newPoints - CurrentPoints;
             Healed?.Invoke(deltaPoints);
             CurrentPoints = newPoints;
-
-            Debug.Log($"Healed: {deltaPoints}, current health: {CurrentPoints}");
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            CurrentPoints = progress.HeroHealthState.CurrentHP;
             MaxPoints = progress.HeroHealthState.MaxHP;
+            CurrentPoints = progress.HeroHealthState.CurrentHP;
         }
 
         public void UpdateProgress(PlayerProgress progress)

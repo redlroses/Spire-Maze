@@ -2,15 +2,16 @@
 using CodeBase.Data.CellStates;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
-using CodeBase.Logic.Сollectible;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Logic.DoorEnvironment
 {
-    [RequireComponent(typeof(KeyCollectorObserver))]
-    public class Door : ObserverTarget<KeyCollectorObserver, KeyCollector>, ISavedProgress, IIndexable
+    [RequireComponent(typeof(InventoryObserver))]
+    public class Door : ObserverTarget<InventoryObserver, HeroInventory>, ISavedProgress, IIndexable
     {
         [SerializeField] private Colors _doorColor;
         [SerializeField] private DoorAnimator _animator;
@@ -61,17 +62,17 @@ namespace CodeBase.Logic.DoorEnvironment
             }
         }
 
-        protected override void OnTriggerObserverEntered(KeyCollector collectible)
+        protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
         {
-            if (collectible.TryUseKey(_doorColor))
+            if (heroInventory.Inventory.TryUse(StorableType.Key, out StorableData storableData))
             {
-                Open(collectible);
+                Open(heroInventory.transform.position);
             }
         }
 
-        private void Open(KeyCollector keyCollector)
+        private void Open(Vector3 fromPosition)
         {
-            _animator.Open(GetDirection(keyCollector.transform.position));
+            _animator.Open(GetDirection(fromPosition));
             _isOpen = true;
         }
 

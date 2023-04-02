@@ -33,6 +33,12 @@ namespace CodeBase.Infrastructure.AssetManagement
             return Object.Instantiate(prefab, at, Quaternion.identity);
         }
 
+        public GameObject Instantiate(string path, Transform inside)
+        {
+            var prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, inside);
+        }
+
         public GameObject Instantiate(string path)
         {
             var prefab = Resources.Load<GameObject>(path);

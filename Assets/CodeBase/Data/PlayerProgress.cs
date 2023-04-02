@@ -7,13 +7,15 @@ namespace CodeBase.Data
   {
     public HealthState HeroHealthState;
     public WorldData WorldData;
-    public HeroInventory HeroInventory;
+    public HeroInventoryOld HeroInventoryOld;
+    public InventoryData HeroInventoryData;
 
     public PlayerProgress(string initialLevel)
     {
       WorldData = new WorldData(initialLevel);
       HeroHealthState = new HealthState();
-      HeroInventory = new HeroInventory();
+      HeroInventoryOld = new HeroInventoryOld();
+      HeroInventoryData = new InventoryData();
     }
   }
 }

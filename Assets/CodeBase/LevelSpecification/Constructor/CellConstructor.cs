@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services.StaticData;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -26,9 +27,9 @@ namespace CodeBase.LevelSpecification.Constructor
             };
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, IStaticDataService staticData, Cell[] cells) where TCell : Cell
         {
-            _constructors[typeof(TCell)].Construct<TCell>(gameFactory, cells);
+            _constructors[typeof(TCell)].Construct<TCell>(gameFactory, staticData, cells);
         }
     }
 }

@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Lift;
 using CodeBase.Logic.Lift.PlateMove;
+using CodeBase.Services.StaticData;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
 using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
@@ -17,7 +18,7 @@ namespace CodeBase.LevelSpecification.Constructor
         private Cell[] _markers;
         private Cell[] _movingPlates;
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, IStaticDataService staticData, Cell[] cells) where TCell : Cell
         {
             _markers = cells;
             _movingPlates = cells.Where(cell => ((MovingMarker) cell.CellData).IsLiftHolder).ToArray();

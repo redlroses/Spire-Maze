@@ -10,6 +10,7 @@ namespace CodeBase.Infrastructure
         {
             if (Application.isEditor == false)
             {
+                Instantiate(_bootstrapperPrefab);
                 return;
             }
 
