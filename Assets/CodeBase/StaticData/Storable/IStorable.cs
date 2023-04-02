@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Logic.Inventory.Storables
+﻿namespace CodeBase.StaticData.Storable
 {
     public interface IStorable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Logic.Inventory.Storables;
+using CodeBase.StaticData.Storable;
 
 namespace CodeBase.Logic.Inventory
 {

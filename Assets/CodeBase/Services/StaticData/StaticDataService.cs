@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Storable;
+using JetBrains.Annotations;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Services.StaticData
 {
@@ -10,29 +13,36 @@ namespace CodeBase.Services.StaticData
     {
         private const string LevelsDataPath = "StaticData/Level Maps";
         private const string HealthPath = "StaticData/Health";
+        private const string StorablePath = "StaticData/Storable";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
+        private Dictionary<StorableType, StorableData> _storables;
 
         public void Load()
         {
-            _levels = Resources
-                .LoadAll<LevelStaticData>(LevelsDataPath)
-                .ToDictionary(x => x.LevelKey, x => x);
-
-            _healths = Resources
-                .LoadAll<HealthStaticData>(HealthPath)
-                .ToDictionary(x => x.EntityKey, x => x);
+            _levels = LoadFor<LevelStaticData, string>(LevelsDataPath, x => x.LevelKey);
+            _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
+            _storables = LoadFor<StorableData, StorableType>(StorablePath, x => x.ItemType);
         }
 
         public LevelStaticData ForLevel(string levelKey) =>
-            _levels.TryGetValue(levelKey, out LevelStaticData staticData)
-                ? staticData
-                : throw new NullReferenceException($"There is no level with key: {levelKey}");
+            GetDataFor(levelKey, _levels);
 
         public HealthStaticData HealthForEntity(string entityKey) =>
-            _healths.TryGetValue(entityKey, out HealthStaticData staticData)
+            GetDataFor(entityKey, _healths);
+
+        public IStorable ForStorable(StorableType storableType) =>
+            GetDataFor(storableType, _storables);
+
+        private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
+            from.TryGetValue(key, out TData staticData)
                 ? staticData
-                : throw new NullReferenceException($"There is no health data for: {entityKey}");
+                : throw new NullReferenceException($"There is no {nameof(TData)} data with key: {nameof(TKey)}");
+
+        private Dictionary<TKey, TData> LoadFor<TData, TKey>(string path, Func<TData, TKey> keySelector) where TData : ScriptableObject =>
+            Resources
+                .LoadAll<TData>(path)
+                .ToDictionary(keySelector, x => x);
     }
 }
