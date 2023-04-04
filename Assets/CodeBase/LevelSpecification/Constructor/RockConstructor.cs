@@ -12,7 +12,7 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell cell in cells)
             {
                 var rockData = (EditorCells.Rock) cell.CellData;
-                Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Rock>();
+                Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Rock>();
                 rock.SetMoveDirection(rockData.IsDirectionToRight);
             }
         }

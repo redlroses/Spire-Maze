@@ -23,14 +23,17 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _timerDelay;
 
         private Transform _selfTransform;
+        private Quaternion _lookRotation;
         private MoveDirection _direction;
         private bool _isActivated;
         private bool _isNotOnPlate;
         private bool _isDestroyed;
+        private bool _hasTargetRotationReached;
 
         protected override void FixedRun()
         {
             TryDestroy();
+            Rotate();
         }
 
         public override void Construct(TrapActivator activator)
@@ -41,14 +44,13 @@ namespace CodeBase.Logic.Trap
             _mover.enabled = false;
             _selfTransform = transform;
             _rayDirection ??= Get<RayDirection>();
-            Rotate();
         }
 
         public void SetMoveDirection(bool isDirectionToRight)
         {
             _direction = isDirectionToRight ? MoveDirection.Right : MoveDirection.Left;
         }
-        
+
         protected override void Activate(IDamagable damagable)
         {
             _mover.Move(_direction);
@@ -61,12 +63,17 @@ namespace CodeBase.Logic.Trap
 
         private void Rotate()
         {
+            if (_hasTargetRotationReached)
+            {
+                return;
+            }
+
             Vector2 direction = new Vector2((int)_direction, 0f);
             Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
-            Debug.LogError($"Direction of rotation does not change");
-            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
-            
-            _rigidbody.MoveRotation(lookRotation);
+            _lookRotation = Quaternion.LookRotation(moveDirection);
+
+            _rigidbody.MoveRotation(_lookRotation);
+            _hasTargetRotationReached = _rigidbody.rotation == _lookRotation;
         }
 
         private void TryDestroy()
@@ -90,7 +97,7 @@ namespace CodeBase.Logic.Trap
 
         private bool CheckCollisionObstacle(Vector3 direction)
         {
-            Ray ray = new Ray(_selfTransform.localPosition, direction);
+            Ray ray = new Ray(_selfTransform.position, direction);
             return Physics.Raycast(ray, _rayDistance, _ground);
         }
 
@@ -104,7 +111,7 @@ namespace CodeBase.Logic.Trap
             {
                 _fragments[i].isKinematic = false;
             }
-            
+
             _timer.Restart();
             _timer.Play();
             _destroyEffect.Play();
