@@ -6231,7 +6231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8001022738760582169}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0.895, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6324,10 +6324,13 @@ MonoBehaviour:
   - {fileID: 3406632704153811926}
   - {fileID: 3406632704622997761}
   _rayDirection: {fileID: 5760991588161085492}
-  _rayDistance: 0.76
+  _rayDistance: 1.1
   _ground:
     serializedVersion: 2
     m_Bits: 8
+  _wall:
+    serializedVersion: 2
+    m_Bits: 512
   _destroyEffect: {fileID: 2652488659174017466}
   _stopEffectCallback: {fileID: 198151582450111807}
   _timer: {fileID: 9132919717544923177}
@@ -6400,7 +6403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9217244448564275211, guid: e8b9bbde6ecec2e448604597fa670507, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.83
+      value: -0.92
       objectReference: {fileID: 0}
     - target: {fileID: 9217244448564275211, guid: e8b9bbde6ecec2e448604597fa670507, type: 3}
       propertyPath: m_LocalPosition.z

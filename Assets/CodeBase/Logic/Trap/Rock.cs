@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
 using CodeBase.Tools;
@@ -17,6 +18,7 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private float _rayDistance;
         [SerializeField] private LayerMask _ground;
+        [SerializeField] private LayerMask _wall;
         [SerializeField] private ParticleSystem _destroyEffect;
         [SerializeField] private ParticleStopCallback _stopEffectCallback;
         [SerializeField] private TimerOperator _timer;
@@ -81,11 +83,11 @@ namespace CodeBase.Logic.Trap
             if (_isActivated == false || _isDestroyed == true)
                 return;
 
-            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.localPosition, _direction);
-            Vector3 groundDirection = Vector3.down;
+            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.position, _direction);
+            Vector3 groundDirection = wallDirection + Vector3.down;
 
-            bool isWallCollision = CheckCollisionObstacle(wallDirection);
-            bool isGroundCollision = CheckCollisionObstacle(groundDirection);
+            bool isWallCollision = CheckCollisionObstacle(wallDirection, _wall);
+            bool isGroundCollision = CheckCollisionObstacle(groundDirection, _ground);
 
             if (isWallCollision || isGroundCollision && _isNotOnPlate)
             {
@@ -95,10 +97,10 @@ namespace CodeBase.Logic.Trap
             _isNotOnPlate = !isGroundCollision;
         }
 
-        private bool CheckCollisionObstacle(Vector3 direction)
+        private bool CheckCollisionObstacle(Vector3 direction, LayerMask obstacle)
         {
             Ray ray = new Ray(_selfTransform.position, direction);
-            return Physics.Raycast(ray, _rayDistance, _ground);
+            return Physics.Raycast(ray, _rayDistance, obstacle);
         }
 
         private void Destroy()
