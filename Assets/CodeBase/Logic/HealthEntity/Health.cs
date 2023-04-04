@@ -22,7 +22,7 @@ namespace CodeBase.Logic.HealthEntity
         }
 
         public int MaxPoints { get; protected set; }
-        public bool IsAlive => _currentPoints >= 0;
+        public bool IsAlive => _currentPoints > 0;
 
         public void Init(int maxPoints, int currentPoints)
         {
@@ -32,6 +32,11 @@ namespace CodeBase.Logic.HealthEntity
 
         public void Damage(int damagePoints, DamageType damageType)
         {
+            if (IsAlive == false)
+            {
+                return;
+            }
+            
             Validate(damagePoints);
 
             int newPoints = _currentPoints - damagePoints;
@@ -40,6 +45,7 @@ namespace CodeBase.Logic.HealthEntity
             {
                 Died?.Invoke();
                 newPoints = 0;
+                Debug.Log($"Died!");
             }
 
             int deltaPoints = _currentPoints - newPoints;

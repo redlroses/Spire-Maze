@@ -14,6 +14,7 @@ namespace CodeBase.Logic.Player
         private static readonly int Running = Animator.StringToHash("Run");
         private static readonly int Fall = Animator.StringToHash("Fall");
         private static readonly int FallSpeed = Animator.StringToHash("FallSpeed");
+        private static readonly int Died = Animator.StringToHash("Died");
 
         private readonly int _idleStateHash = Animator.StringToHash("Idle");
         private readonly int _runStateHash = Animator.StringToHash("Run");
@@ -69,6 +70,9 @@ namespace CodeBase.Logic.Player
         {
             _animator.SetTrigger(Land);
         }
+
+        public void PlayDied() => 
+            _animator.SetTrigger(Died);
 
         public void EnteredState(int stateHash)
         {
