@@ -36,10 +36,10 @@ namespace CodeBase.Logic.HealthEntity
             {
                 return;
             }
-            
+
             Validate(damagePoints);
 
-            int newPoints = _currentPoints - damagePoints;
+            int newPoints = CurrentPoints - damagePoints;
 
             if (newPoints <= 0)
             {
@@ -48,12 +48,12 @@ namespace CodeBase.Logic.HealthEntity
                 Debug.Log($"Died!");
             }
 
-            int deltaPoints = _currentPoints - newPoints;
-            _currentPoints = newPoints;
+            int deltaPoints = CurrentPoints - newPoints;
+            CurrentPoints = newPoints;
 
             OnDamaged(deltaPoints, damageType);
 
-            Debug.Log($"Damaged: {deltaPoints}, current health: {_currentPoints}");
+            Debug.Log($"Damaged: {deltaPoints}, current health: {CurrentPoints}");
         }
 
         protected virtual void OnDamaged(int deltaPoints, DamageType damageType)

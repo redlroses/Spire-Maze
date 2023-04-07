@@ -1,4 +1,4 @@
-﻿using CodeBase.Logic.HealthEntity;
+﻿using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -8,12 +8,13 @@ namespace CodeBase.UI
         [SerializeField] private SliderSetter _sliderSetter;
         [SerializeField] private TextSetter _textSetter;
 
-        private IHealthReactive _health;
+        private IBar _health;
 
-        public void Construct(IHealthReactive health)
+        public void Construct(IBar health)
         {
             _health = health;
             _health.Changed += OnChanged;
+            OnChanged();
         }
 
         private void OnChanged()

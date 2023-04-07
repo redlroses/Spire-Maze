@@ -2,12 +2,9 @@
 
 namespace CodeBase.Logic.HealthEntity
 {
-    public interface IHealth : IDamagable
+    public interface IHealth : IDamagable, IBar
     {
         event Action Died;
-        event Action Changed;
-        int CurrentPoints { get; }
-        int MaxPoints { get; }
         bool IsAlive { get; }
     }
 }
