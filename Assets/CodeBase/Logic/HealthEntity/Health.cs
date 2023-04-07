@@ -6,7 +6,6 @@ namespace CodeBase.Logic.HealthEntity
     public class Health : MonoBehaviour, IHealth
     {
         [SerializeField] private int _currentPoints;
-        [SerializeField] private int _maxPoints;
 
         public event Action Died;
         public event Action Changed;
@@ -23,12 +22,6 @@ namespace CodeBase.Logic.HealthEntity
 
         public int MaxPoints { get; protected set; }
         public bool IsAlive => _currentPoints > 0;
-
-        public void Init(int maxPoints, int currentPoints)
-        {
-            _maxPoints = maxPoints;
-            _currentPoints = currentPoints;
-        }
 
         public void Damage(int damagePoints, DamageType damageType)
         {

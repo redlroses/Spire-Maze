@@ -8,6 +8,7 @@ namespace CodeBase.Services.StaticData
     void Load();
     LevelStaticData ForLevel(string levelKey);
     HealthStaticData HealthForEntity(string entityKey);
+    StaminaStaticData StaminaForEntity(string entityKey);
     StorableData ForStorable(StorableType storableType);
   }
 }

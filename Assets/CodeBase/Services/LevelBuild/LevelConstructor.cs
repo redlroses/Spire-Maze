@@ -54,7 +54,7 @@ namespace CodeBase.Services.LevelBuild
                 level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
             _cellConstructor.Construct<Savepoint>(gameFactory, staticData,
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
-                CombineCells(level);
+             //   CombineCells(level);
         }
 
         private void CombineCells(Level level)

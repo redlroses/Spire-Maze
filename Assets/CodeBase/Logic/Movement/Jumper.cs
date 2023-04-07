@@ -1,4 +1,5 @@
 using CodeBase.Logic.Player;
+using CodeBase.Logic.StaminaEntity;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
@@ -23,6 +24,8 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _velocityScale;
         [SerializeField] private float _jumpDuration = 1;
+        [SerializeField] private PlayerStamina _stamina;
+        [SerializeField] private int _fatigue;
 
         private Rigidbody _rigidbody;
         private float _startHeight;
@@ -45,7 +48,7 @@ namespace CodeBase.Logic.Movement
 
         public void Jump()
         {
-            if (_isJump)
+            if (_isJump || _stamina.TrySpend(_fatigue) == false)
                 return;
 
             Vector3 position = _rigidbody.position;

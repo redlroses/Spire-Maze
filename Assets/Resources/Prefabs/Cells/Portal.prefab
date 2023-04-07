@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2772289887685615573
 Transform:
@@ -98,9 +98,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2772289887685615573}
     m_Modifications:
+    - target: {fileID: 123380, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 145256, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
       propertyPath: m_Name
       value: MagicBuffBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 145256, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 409988, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
       propertyPath: m_RootOrder
@@ -146,6 +154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1099344919378908, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 198535239526381674, guid: 7b117ab47ae99e74fbb811d488c1eb17, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 1.5
@@ -176,6 +188,14 @@ PrefabInstance:
     - target: {fileID: 158776, guid: c4e46d0b8ddbfe049ac8facbc1652648, type: 3}
       propertyPath: m_Name
       value: MagicFieldGreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 158776, guid: c4e46d0b8ddbfe049ac8facbc1652648, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 171740, guid: c4e46d0b8ddbfe049ac8facbc1652648, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 409792, guid: c4e46d0b8ddbfe049ac8facbc1652648, type: 3}
       propertyPath: m_RootOrder

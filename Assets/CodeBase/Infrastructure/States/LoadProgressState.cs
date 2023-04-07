@@ -45,6 +45,7 @@ namespace CodeBase.Infrastructure.States
             };
 
             progress.HeroHealthState.ResetHP();
+            progress.HeroStaminaState.ResetStamina();
 
             return progress;
         }

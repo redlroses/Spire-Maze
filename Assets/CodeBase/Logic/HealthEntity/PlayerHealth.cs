@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
-using UnityEngine;
 
 namespace CodeBase.Logic.HealthEntity
 {

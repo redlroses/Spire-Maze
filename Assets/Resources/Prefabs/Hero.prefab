@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentPoints: 100
-  _maxPoints: 100
 --- !u!114 &1176746167610235285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,6 +1430,67 @@ Transform:
   m_Father: {fileID: 6598325180944605877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4287986512914410415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7812224892826278206}
+  - component: {fileID: 7420519260703392512}
+  - component: {fileID: 8813367137604465016}
+  m_Layer: 0
+  m_Name: Stamina
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7812224892826278206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287986512914410415}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7393409988495010667}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7420519260703392512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287986512914410415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8813367137604465016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287986512914410415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07eef5582e274ce488bc219ef14c7384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimerDelay: {fileID: 7420519260703392512}
+  _currentPoints: 50
+  _speedReplenish: 100
+  _delayBeforeReplenish: 1.5
 --- !u!1 &4664208756271691803
 GameObject:
   m_ObjectHideFlags: 0
@@ -7394,6 +7454,7 @@ Transform:
   - {fileID: 2964272896709481484}
   - {fileID: 3396022293209050644}
   - {fileID: 7671679976408396966}
+  - {fileID: 7812224892826278206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7509,6 +7570,8 @@ MonoBehaviour:
   _jumpHeight: 2.3
   _velocityScale: 25
   _jumpDuration: 0.55
+  _stamina: {fileID: 8813367137604465016}
+  _fatigue: 75
 --- !u!114 &7393409988495010669
 MonoBehaviour:
   m_ObjectHideFlags: 0

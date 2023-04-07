@@ -11,16 +11,19 @@ namespace CodeBase.Services.StaticData
     {
         private const string LevelsDataPath = "StaticData/Level Maps";
         private const string HealthPath = "StaticData/Health";
+        private const string StaminaPath = "StaticData/Stamina";
         private const string StorablePath = "StaticData/Storable";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
+        private Dictionary<string, StaminaStaticData> _staminas;
         private Dictionary<StorableType, StorableData> _storables;
 
         public void Load()
         {
             _levels = LoadFor<LevelStaticData, string>(LevelsDataPath, x => x.LevelKey);
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
+            _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableData, StorableType>(StorablePath, x => x.ItemType);
         }
 
@@ -29,6 +32,8 @@ namespace CodeBase.Services.StaticData
 
         public HealthStaticData HealthForEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
+        public StaminaStaticData StaminaForEntity(string entityKey) =>
+            GetDataFor(entityKey, _staminas);
 
         public StorableData ForStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
