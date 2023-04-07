@@ -14,7 +14,7 @@ namespace CodeBase.Logic.Movement
     {
         public const float GroundCheckDistance = -0.1f;
         public const float RoofCheckDistance = 0.15f;
-        
+
         private const float RadiusReduction = 0.3f;
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
@@ -50,14 +50,14 @@ namespace CodeBase.Logic.Movement
 
         public void Jump()
         {
-            if (_isJump || _stamina.TrySpend(_fatigue) == false)
+            if (_isJump)
                 return;
 
             Vector3 position = _rigidbody.position;
             _startHeight = position.y;
             bool isInGround = _sphereCaster.CastSphere(Vector3.down, GroundCheckDistance);
 
-            if (isInGround == false)
+            if (isInGround == false || _stamina.TrySpend(_fatigue) == false)
             {
                 return;
             }
@@ -80,7 +80,6 @@ namespace CodeBase.Logic.Movement
 
             _jumpProgress = Mathf.Clamp01(_expiredTime / _jumpDuration);
 
-            
             bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, RadiusReduction);
 
             if (isInRoof)
