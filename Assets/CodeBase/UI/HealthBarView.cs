@@ -1,34 +1,20 @@
-﻿using CodeBase.Logic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.UI
 {
-    public sealed class HealthBarView : MonoBehaviour
+    public sealed class HealthBarView : BarView
     {
-        [SerializeField] private SliderSetter _sliderSetter;
         [SerializeField] private TextSetter _textSetter;
 
-        private IBar _health;
-
-        public void Construct(IBar health)
+        protected override void OnChanged()
         {
-            _health = health;
-            _health.Changed += OnChanged;
-            OnChanged();
-        }
-
-        private void OnChanged()
-        {
-            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
+            base.OnChanged();
             ApplyTextHealth();
         }
 
-        private float GetNormalizedBarValue() =>
-            _health.CurrentPoints / (float) _health.MaxPoints;
-
         private void ApplyTextHealth()
         {
-            _textSetter.SetText($"{_health.CurrentPoints}/{_health.MaxPoints}");
+            _textSetter.SetText($"{Parameter.CurrentPoints}/{Parameter.MaxPoints}");
         }
     }
 }

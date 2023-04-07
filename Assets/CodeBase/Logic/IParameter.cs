@@ -2,7 +2,7 @@
 
 namespace CodeBase.Logic
 {
-    public interface IBar
+    public interface IParameter
     {
         event Action Changed;
         int CurrentPoints { get; }

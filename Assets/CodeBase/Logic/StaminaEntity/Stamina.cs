@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CodeBase.Logic.StaminaEntity
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class Stamina : MonoCache, IBar
+    public class Stamina : MonoCache, IStamina
     {
         private const float LowerSpeedMultiplier = 0.3f;
         private const float MinimumPercent = 0.1f;
@@ -65,7 +65,6 @@ namespace CodeBase.Logic.StaminaEntity
             _isSpent = CurrentPoints <= CurrentPoints * MinimumPercent;
             TimerDelay.Restart();
             TimerDelay.Play();
-            Debug.Log(CurrentPoints);
         }
 
         private void Replenish()
@@ -86,8 +85,6 @@ namespace CodeBase.Logic.StaminaEntity
                 _isSpent = false;
                 _currentSpeedReplenish = _speedReplenish;
             }
-
-            Debug.Log(CurrentPoints);
         }
 
         private void OnStartReplenish()

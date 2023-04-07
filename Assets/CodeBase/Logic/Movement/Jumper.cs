@@ -14,6 +14,8 @@ namespace CodeBase.Logic.Movement
     {
         public const float GroundCheckDistance = -0.1f;
         public const float RoofCheckDistance = 0.15f;
+        
+        private const float RadiusReduction = 0.3f;
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private SphereCaster _sphereCaster;
@@ -78,7 +80,8 @@ namespace CodeBase.Logic.Movement
 
             _jumpProgress = Mathf.Clamp01(_expiredTime / _jumpDuration);
 
-            bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, 0.3f);
+            
+            bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, RadiusReduction);
 
             if (isInRoof)
             {

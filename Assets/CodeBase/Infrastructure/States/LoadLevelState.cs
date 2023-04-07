@@ -3,6 +3,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
@@ -103,6 +104,7 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
+            hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
             hud.GetComponentInChildren<InventoryView>().Construct(hero.GetComponent<HeroInventory>());
         }
 
