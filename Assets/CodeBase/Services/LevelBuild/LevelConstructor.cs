@@ -8,6 +8,7 @@ using CodeBase.LevelSpecification.Constructor;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Door = CodeBase.LevelSpecification.Cells.Door;
 using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
@@ -53,7 +54,7 @@ namespace CodeBase.Services.LevelBuild
                 level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
             _cellConstructor.Construct<Savepoint>(gameFactory, staticData,
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
-            //    CombineCells(level);
+                CombineCells(level);
         }
 
         private void CombineCells(Level level)
@@ -154,6 +155,14 @@ namespace CodeBase.Services.LevelBuild
             MeshFilter[] meshesFilters =
                 cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
 
+            // MeshFilter[] meshesFilters;
+            // List<MeshFilter> meshesFiltersList;
+            // meshesFiltersList = new List<MeshFilter>();
+
+            // meshesFiltersList = cells.Aggregate(meshesFiltersList, (current1, cell1) => cell1.Container.GetComponentsInChildren<MeshFilter>().Aggregate(current1, (current, componentsInChild) => current.Append(componentsInChild).ToList()));
+
+            // meshesFilters = meshesFiltersList.ToArray();
+
             foreach (MeshFilter meshFilter in meshesFilters)
             {
                 meshFilter.gameObject.SetActive(false);
@@ -199,7 +208,7 @@ namespace CodeBase.Services.LevelBuild
                 meshRenderer = holder.AddComponent<MeshRenderer>();
             }
 
-            Mesh mesh = new Mesh();
+            Mesh mesh = new Mesh {indexFormat = IndexFormat.UInt32};
             meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combine);
             meshRenderer.material = _gameFactory.CreateMaterial(Spire);
