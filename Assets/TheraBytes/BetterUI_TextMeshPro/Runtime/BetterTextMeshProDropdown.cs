@@ -8,16 +8,17 @@ using UnityEngine.UI;
 
 namespace TheraBytes.BetterUi
 {
+    [HelpURL("https://documentation.therabytes.de/better-ui/BetterTextMeshPro-Dropdown.html")]
     [AddComponentMenu("Better UI/TextMeshPro/Better TextMeshPro - Dropdown", 30)]
     public class BetterTextMeshProDropdown : TMP_Dropdown, IBetterTransitionUiElement
     {
         public List<Transitions> BetterTransitions { get { return betterTransitions; } }
         public List<Transitions> ShowHideTransitions { get { return showHideTransitions; } }
 
-        [SerializeField]
+        [SerializeField, DefaultTransitionStates]
         List<Transitions> betterTransitions = new List<Transitions>();
 
-        [SerializeField]
+        [SerializeField, TransitionStates("Show", "Hide")]
         List<Transitions> showHideTransitions = new List<Transitions>();
 
         protected override void DoStateTransition(SelectionState state, bool instant)

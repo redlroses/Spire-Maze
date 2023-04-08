@@ -15,6 +15,7 @@ namespace TheraBytes.BetterUi
 #else
     [ExecuteInEditMode]
 #endif
+    [HelpURL("https://documentation.therabytes.de/better-ui/BetterTextMeshPro-InputField.html")]
     [AddComponentMenu("Better UI/TextMeshPro/Better TextMeshPro - Input Field", 30)]
     public class BetterTextMeshProInputField : TMP_InputField, IBetterTransitionUiElement, IResolutionDependency
     {
@@ -27,7 +28,7 @@ namespace TheraBytes.BetterUi
             set { overridePointSize = value; }
         }
 
-        [SerializeField]
+        [SerializeField, DefaultTransitionStates]
         List<Transitions> betterTransitions = new List<Transitions>();
 
         [SerializeField]
@@ -38,7 +39,13 @@ namespace TheraBytes.BetterUi
 
         [SerializeField]
         bool overridePointSize;
-        
+
+        public new float pointSize
+        {
+            get { return base.pointSize; }
+            set { Config.Set(value, (o) => base.pointSize = o, (o) => PointSizeScaler.SetSize(this, o)); }
+        }
+
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);

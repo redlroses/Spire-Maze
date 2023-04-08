@@ -13,6 +13,7 @@ namespace TheraBytes.BetterUi
 #else
     [ExecuteInEditMode]
 #endif
+    [HelpURL("https://documentation.therabytes.de/better-ui/BetterTextMeshProUGUI.html")]
     [AddComponentMenu("Better UI/TextMeshPro/Better TextMeshPro Text", 30)]
     public class BetterTextMeshProUGUI : TextMeshProUGUI, IResolutionDependency
     {
@@ -36,6 +37,27 @@ namespace TheraBytes.BetterUi
         public FloatSizeModifier MaxFontSizer { get { return customMaxFontSizers.GetCurrentItem(maxFontSizerFallback); } }
 
         public bool IgnoreFontSizerOptions { get; set; }
+
+        public new float fontSize
+        {
+            get { return base.fontSize; }
+            set { Config.Set(value, (o) => base.fontSize = o, (o) => FontSizer.SetSize(this, o)); }
+        }
+        public new float fontSizeMin
+        {
+            get { return base.fontSizeMin; }
+            set { Config.Set(value, (o) => base.fontSizeMin = o, (o) => MinFontSizer.SetSize(this, o)); }
+        }
+        public new float fontSizeMax
+        {
+            get { return base.fontSizeMax; }
+            set { Config.Set(value, (o) => base.fontSizeMax = o, (o) => MaxFontSizer.SetSize(this, o)); }
+        }
+        public new Vector4 margin
+        {
+            get { return base.margin; }
+            set { Config.Set(value, (o) => base.margin = o, (o) => MarginSizer.SetSize(this, new Margin(o))); }
+        }
 
         [SerializeField]
         BetterText.FittingMode fitting;
