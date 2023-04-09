@@ -155,11 +155,11 @@ RectTransform:
   m_Father: {fileID: 8142739469072451886}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.56724375, y: 1}
-  m_AnchoredPosition: {x: 135, y: -1}
-  m_SizeDelta: {x: -330, y: -104}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0.64565456, y: 0.5}
+  m_AnchoredPosition: {x: 176.17474, y: -2.7503}
+  m_SizeDelta: {x: -415.6505, y: 87.501}
+  m_Pivot: {x: 0.5, y: 0.50000006}
 --- !u!222 &5460014092718431034
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -215,10 +215,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
+  m_fontSize: 47.85
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -0.61112595, z: 0, w: 0.0000038146973}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -290,10 +290,10 @@ RectTransform:
   m_Father: {fileID: 8142739469072451886}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -347, y: 0.5}
-  m_SizeDelta: {x: 77, y: 81}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 319.5, y: 0.5}
+  m_SizeDelta: {x: 76, y: 81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1498378746451184450
 CanvasRenderer:
@@ -325,7 +325,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 82b0d7526bc104423950347a39c211aa, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -645,6 +645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142739469072451886}
+  - component: {fileID: 3481340139796705107}
   - component: {fileID: 8519033750656137281}
   m_Layer: 5
   m_Name: List_Medal
@@ -677,8 +678,56 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 27.887024, y: 0}
-  m_SizeDelta: {x: 1074.2261, y: 168}
+  m_SizeDelta: {x: 1074.2261, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3481340139796705107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676275123049903451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformFallback:
+    LocalPosition: {x: -932.113, y: -540, z: 0}
+    AnchoredPosition: {x: 27.887024, y: 0}
+    SizeDelta: {x: 1074.2261, y: 0}
+    AnchorMin: {x: 0, y: 0}
+    AnchorMax: {x: 0, y: 0}
+    Pivot: {x: 0.5, y: 0.5}
+    Scale: {x: 1, y: 1, z: 1}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    saveRotationAsEuler: 0
+    screenConfigName: 
+  transformConfigs:
+    items:
+    - LocalPosition: {x: -932.113, y: -540, z: 0}
+      AnchoredPosition: {x: 27.887024, y: 0}
+      SizeDelta: {x: 1074.2261, y: 150}
+      AnchorMin: {x: 0, y: 0}
+      AnchorMax: {x: 0, y: 0}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Landscape
+    - LocalPosition: {x: -512.113, y: -1080, z: 0}
+      AnchoredPosition: {x: 27.887024, y: 0}
+      SizeDelta: {x: 1074.2261, y: 140}
+      AnchorMin: {x: 0, y: 0}
+      AnchorMax: {x: 0, y: 0}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Portrate
 --- !u!222 &8519033750656137281
 CanvasRenderer:
   m_ObjectHideFlags: 0
