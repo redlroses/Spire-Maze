@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7661582505483606606
+--- !u!1001 &4070100755043452203
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_AnchorMin.x
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1130
+      value: 1097.1208
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 168
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,11 +73,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 548.5604
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -485
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -93,22 +93,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1192889434414009522, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_Name
-      value: List_Me
+      value: List_Variant_Me
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.12258083
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.65347445
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.33241296
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757884307285095107, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
---- !u!1 &678626532720570227 stripped
+--- !u!1 &6575951020699840534 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7149921316756550973, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
-  m_PrefabInstance: {fileID: 7661582505483606606}
+  m_PrefabInstance: {fileID: 4070100755043452203}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8595194039178109494
+--- !u!114 &480509441439273705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678626532720570227}
+  m_GameObject: {fileID: 6575951020699840534}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
