@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2035427964553228012}
   - component: {fileID: 4104131437606071905}
   - component: {fileID: 4433133638679981155}
+  - component: {fileID: 5240939576931679707}
   m_Layer: 5
   m_Name: UserPicture
   m_TagString: Untagged
@@ -124,6 +125,19 @@ MonoBehaviour:
       PrimaryColor: {r: 1, g: 1, b: 1, a: 1}
       SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
       screenConfigName: Portrate
+--- !u!114 &5240939576931679707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666506505103532791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0685dfe2a37cd3d4a9ff39f271aa43f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _betterImage: {fileID: 4433133638679981155}
 --- !u!1 &1816070628325362900
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +194,7 @@ GameObject:
   - component: {fileID: 1526933355964673318}
   - component: {fileID: 5460014092718431034}
   - component: {fileID: 5230264486692527199}
+  - component: {fileID: 149144431931795825}
   m_Layer: 5
   m_Name: Text_UserID
   m_TagString: Untagged
@@ -266,8 +281,8 @@ MonoBehaviour:
   m_fontSizeBase: 152.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 128
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -530,6 +545,19 @@ MonoBehaviour:
         SizeModifiers:
         - Mode: 0
           Impact: 1
+--- !u!114 &149144431931795825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403151838795589329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a6ff1a9bbf4e4eb0fbf5c0f0a02162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 5230264486692527199}
 --- !u!1 &4840104629801738784
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +569,7 @@ GameObject:
   - component: {fileID: 8762273988972217970}
   - component: {fileID: 1498378746451184450}
   - component: {fileID: 7181214899305887250}
+  - component: {fileID: 5404299737062143896}
   m_Layer: 5
   m_Name: Image_Flag
   m_TagString: Untagged
@@ -653,6 +682,19 @@ MonoBehaviour:
       PrimaryColor: {r: 1, g: 1, b: 1, a: 1}
       SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
       screenConfigName: Portrate
+--- !u!114 &5404299737062143896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840104629801738784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0685dfe2a37cd3d4a9ff39f271aa43f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _betterImage: {fileID: 7181214899305887250}
 --- !u!1 &4900524728696400961
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,8 +968,9 @@ GameObject:
   - component: {fileID: 9134194133178354147}
   - component: {fileID: 559188535506805771}
   - component: {fileID: 8848443791801712086}
+  - component: {fileID: 1677441688669428115}
   m_Layer: 5
-  m_Name: Text_Level_Value
+  m_Name: Text_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,8 +1055,8 @@ MonoBehaviour:
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 88.88889
+  m_fontSizeMin: 18
+  m_fontSizeMax: 50.000004
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1254,6 +1297,19 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &1677441688669428115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7125766378731200695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a6ff1a9bbf4e4eb0fbf5c0f0a02162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 8848443791801712086}
 --- !u!1 &7676275123049903451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,6 +1322,7 @@ GameObject:
   - component: {fileID: 8519033750656137281}
   - component: {fileID: 8745496723351442778}
   - component: {fileID: 1542930483582159479}
+  - component: {fileID: 6640824731507230226}
   m_Layer: 5
   m_Name: List_Ranking
   m_TagString: Untagged
@@ -1497,3 +1554,20 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6640824731507230226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676275123049903451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5406e31e8d7f6748b218739402826f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rank: {fileID: 0}
+  _name: {fileID: 149144431931795825}
+  _score: {fileID: 1677441688669428115}
+  _avatar: {fileID: 4433133638679981155}
+  _flag: {fileID: 7181214899305887250}

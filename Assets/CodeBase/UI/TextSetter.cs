@@ -11,5 +11,10 @@ namespace CodeBase.UI
         {
             _text.text = text;
         }
+        
+        public void SetText(int text)
+        {
+            _text.text = text.ToString();
+        }
     }
 }
