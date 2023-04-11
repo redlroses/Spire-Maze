@@ -3,6 +3,7 @@ using CodeBase.Logic.Movement;
 using CodeBase.Tools;
 using NTC.Global.Cache;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Services.Input
 {
@@ -10,15 +11,21 @@ namespace CodeBase.Services.Input
     [RequireComponent(typeof(Jumper))]
     public class PlayerInput : MonoCache
     {
-        [SerializeField]
-        [RequireInterface(typeof(IMover))] private MonoCache _mover;
-        [SerializeField]
-        [RequireInterface(typeof(IJumper))] private MonoCache _jumper;
+        [SerializeField] [RequireInterface(typeof(IHorizontalMover))]
+        private MonoCache _mover;
+
+        [SerializeField] [RequireInterface(typeof(IJumper))]
+        private MonoCache _jumper;
+
+        [SerializeField] [RequireInterface(typeof(IDodge))]
+        private MonoCache _dodge;
 
         private InputController _inputController;
+        private MoveDirection _direction;
 
-        private IMover Mover => (IMover) _mover;
-        private IJumper Jumper => (IJumper) _jumper;
+        private IHorizontalMover Mover => (IHorizontalMover)_mover;
+        private IJumper Jumper => (IJumper)_jumper;
+        private IDodge Dodge => (IDodge)_dodge;
 
         private void Awake()
         {
@@ -31,6 +38,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Jump.performed += OnJump;
             _inputController.Player.Movement.performed += OnMove;
             _inputController.Player.Movement.canceled += OnMove;
+            _inputController.Player.Dodge.performed += OnDodged;
         }
 
         protected override void OnDisabled()
@@ -39,17 +47,27 @@ namespace CodeBase.Services.Input
             _inputController.Player.Jump.performed -= OnJump;
             _inputController.Player.Movement.performed -= OnMove;
             _inputController.Player.Movement.canceled -= OnMove;
+            _inputController.Player.Dodge.performed -= OnDodged;
         }
 
         private void OnMove(InputAction.CallbackContext context)
         {
             int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
-            MoveDirection direction = (MoveDirection) moveInput;
 
-            Mover.Move(direction);
+            Mover.HorizontalMove((MoveDirection)moveInput);
+
+            if ((MoveDirection)moveInput != MoveDirection.Stop)
+            {
+                _direction = (MoveDirection)moveInput;
+            }
         }
 
         private void OnJump(InputAction.CallbackContext context) =>
             Jumper.Jump();
+
+        private void OnDodged(InputAction.CallbackContext context)
+        {
+            Dodge.Evade(_direction);
+        }
     }
 }

@@ -23,6 +23,11 @@ namespace CodeBase.Logic.Player
             _playerHealth.Died += OnDied;
         }
 
+        private void OnDisable()
+        {
+            _playerHealth.Died -= OnDied;
+        }
+
         private void OnDied()
         {
             _input.enabled = false;

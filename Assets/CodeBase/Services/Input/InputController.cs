@@ -46,6 +46,15 @@ namespace CodeBase.Services.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""52b68400-ea97-4f0c-895e-5417c4136ced"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -136,6 +145,17 @@ namespace CodeBase.Services.Input
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""709c6a2f-d675-4fb9-8d6c-5b92d22f3f1a"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -307,6 +327,7 @@ namespace CodeBase.Services.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
             // Overview
             m_Overview = asset.FindActionMap("Overview", throwIfNotFound: true);
             m_Overview_ViewTower = m_Overview.FindAction("ViewTower", throwIfNotFound: true);
@@ -371,12 +392,14 @@ namespace CodeBase.Services.Input
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Movement;
+        private readonly InputAction m_Player_Dodge;
         public struct PlayerActions
         {
             private @InputController m_Wrapper;
             public PlayerActions(@InputController wrapper) { m_Wrapper = wrapper; }
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -392,6 +415,9 @@ namespace CodeBase.Services.Input
                     @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                    @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                    @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                    @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -402,6 +428,9 @@ namespace CodeBase.Services.Input
                     @Movement.started += instance.OnMovement;
                     @Movement.performed += instance.OnMovement;
                     @Movement.canceled += instance.OnMovement;
+                    @Dodge.started += instance.OnDodge;
+                    @Dodge.performed += instance.OnDodge;
+                    @Dodge.canceled += instance.OnDodge;
                 }
             }
         }
@@ -470,6 +499,7 @@ namespace CodeBase.Services.Input
         {
             void OnJump(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
+            void OnDodge(InputAction.CallbackContext context);
         }
         public interface IOverviewActions
         {

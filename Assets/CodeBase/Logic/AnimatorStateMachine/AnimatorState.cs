@@ -10,5 +10,6 @@ namespace CodeBase.Logic.AnimatorStateMachine
     Land,
     Hit,
     Died,
+    Dodge,
   }
 }

@@ -246,6 +246,67 @@ Transform:
   m_Father: {fileID: 3143372868674301616}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &998998863233086476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7171077660583060194}
+  - component: {fileID: 6587769830596586222}
+  - component: {fileID: 8291894814252270757}
+  m_Layer: 0
+  m_Name: Dodge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7171077660583060194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998998863233086476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7393409988495010667}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6587769830596586222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998998863233086476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d737d7bdba98cdd46b91fe0a72f206d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _input: {fileID: 7393409988495010676}
+  _animator: {fileID: 989079028364153686}
+  _timer: {fileID: 8291894814252270757}
+  _slidingTime: 0.5
+--- !u!114 &8291894814252270757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998998863233086476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047768616380990612
 GameObject:
   m_ObjectHideFlags: 0
@@ -7428,6 +7489,7 @@ GameObject:
   - component: {fileID: 989079028364153686}
   - component: {fileID: 2960491418050870100}
   - component: {fileID: 5771158303944293934}
+  - component: {fileID: 6953851934803590298}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -7455,6 +7517,7 @@ Transform:
   - {fileID: 3396022293209050644}
   - {fileID: 7671679976408396966}
   - {fileID: 7812224892826278206}
+  - {fileID: 7171077660583060194}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7517,6 +7580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mover: {fileID: 1356605512462546074}
   _jumper: {fileID: 7393409988495010677}
+  _dodge: {fileID: 6587769830596586222}
 --- !u!114 &7393409988495010677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7646,6 +7710,7 @@ MonoBehaviour:
   _rotateSpeed: 12
   _rigidbody: {fileID: 7393409988495010679}
   _heroAnimator: {fileID: 989079028364153686}
+  _dodge: {fileID: 6587769830596586222}
 --- !u!95 &7131724038521599921
 Animator:
   serializedVersion: 4
@@ -7706,6 +7771,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _observer: {fileID: 7393409988495010671}
   _heroInventory: {fileID: 2960491418050870100}
+--- !u!114 &6953851934803590298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393409988495010675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7591910132656366578
 GameObject:
   m_ObjectHideFlags: 0

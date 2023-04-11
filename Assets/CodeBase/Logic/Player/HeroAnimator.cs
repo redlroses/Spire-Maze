@@ -12,15 +12,18 @@ namespace CodeBase.Logic.Player
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Land = Animator.StringToHash("Land");
         private static readonly int Running = Animator.StringToHash("Run");
+        private static readonly int Dodge = Animator.StringToHash("Dodge");
         private static readonly int Fall = Animator.StringToHash("Fall");
         private static readonly int FallSpeed = Animator.StringToHash("FallSpeed");
         private static readonly int Died = Animator.StringToHash("Died");
 
-        private readonly int _idleStateHash = Animator.StringToHash("Idle");
-        private readonly int _runStateHash = Animator.StringToHash("Run");
         private readonly int _jumpStateHash = Animator.StringToHash("Jump");
-        private readonly int _fallStateHash = Animator.StringToHash("Fall");
         private readonly int _landStateHash = Animator.StringToHash("Land");
+        private readonly int _runStateHash = Animator.StringToHash("Run");
+        private readonly int _dodgeStateHash = Animator.StringToHash("Dodge");
+        private readonly int _idleStateHash = Animator.StringToHash("Idle");
+        private readonly int _fallStateHash = Animator.StringToHash("Fall");
+        private readonly int _diedStateHash = Animator.StringToHash("Died");
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private Animator _animator;
@@ -43,35 +46,28 @@ namespace CodeBase.Logic.Player
             }
         }
 
-        public void PlayFall()
-        {
+        public void PlayFall() =>
             _animator.SetTrigger(Fall);
-        }
 
-        public void SetSpeed(float speed)
-        {
+        public void SetSpeed(float speed) =>
             _animator.SetFloat(Speed, speed, 0.01f, Time.deltaTime);
-        }
 
-        public void SetFallSpeed(float speed)
-        {
+        public void SetFallSpeed(float speed) =>
             _animator.SetFloat(FallSpeed, speed, 0.05f, Time.deltaTime);
-        }
 
         public void PlayJump() =>
             _animator.SetTrigger(Jump);
 
-        public void PlayRun(bool isRun)
-        {
+        public void PlayRun(bool isRun) =>
             _animator.SetBool(Running, isRun);
-        }
 
-        public void PlayLand()
-        {
+        public void PlayLand() =>
             _animator.SetTrigger(Land);
-        }
 
-        public void PlayDied() => 
+        public void PlayDodge() =>
+            _animator.SetTrigger(Dodge);
+
+        public void PlayDied() =>
             _animator.SetTrigger(Died);
 
         public void EnteredState(int stateHash)
@@ -108,11 +104,16 @@ namespace CodeBase.Logic.Player
             {
                 state = AnimatorState.Land;
             }
+            else if (stateHash == _dodgeStateHash)
+            {
+                state = AnimatorState.Dodge;
+            }
             else
             {
                 state = AnimatorState.Unknown;
             }
 
+            Debug.Log(state);
             return state;
         }
     }

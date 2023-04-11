@@ -1,4 +1,6 @@
-﻿using CodeBase.Data;
+﻿using System.Collections;
+using CodeBase.Data;
+using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Player;
 using CodeBase.Services.PersistentProgress;
@@ -7,9 +9,23 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class HeroMover : Mover, IPlateMovable, ISavedProgress
+    public class HeroMover : Mover, IHorizontalMover, IPlateMovable, ISavedProgress
     {
         [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private Dodge _dodge;
+
+        private Coroutine _inputDelay;
+        private WaitUntil _waitUntil;
+
+        private void Awake()
+        {
+            _waitUntil = new WaitUntil(() => _heroAnimator.State != AnimatorState.Dodge);
+        }
+
+        protected override void OnEnabled()
+        {
+            _dodge.Slided += OnSlided;
+        }
 
         protected override void Run()
         {
@@ -43,6 +59,37 @@ namespace CodeBase.Logic.Movement
             Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
                 .AddY(uncorrectedPosition.y);
             Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
+        }
+
+        public void HorizontalMove(MoveDirection direction)
+        {
+            if (_inputDelay != null)
+            {
+                StopCoroutine(_inputDelay);
+            }
+
+            if (_heroAnimator.State == AnimatorState.Dodge)
+            {
+                _inputDelay = StartCoroutine(InputDelay(direction));
+                return;
+            }
+
+            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
+            Move(direction);
+        }
+
+        private IEnumerator InputDelay(MoveDirection direction)
+        {
+            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
+            yield return _waitUntil;
+            yield return null;
+            
+            Move(direction);
+        }
+
+        private void OnSlided(MoveDirection direction)
+        {
+            Move(direction);
         }
     }
 }
