@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CodeBase.Data;
+using CodeBase.StaticData;
 
 namespace CodeBase.Leaderboard
 {
-    public class YandexLeaderBoard : ILeaderBoard
+    public class YandexLeaderboard : ILeaderboard
     {
         private const string Anonymous = "Anonymous";
 
@@ -14,31 +16,45 @@ namespace CodeBase.Leaderboard
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
 
-        private List<RanksData> _ranksData;
+        private List<SingleRankData> _ranksData;
+        private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived;
 
-        public YandexLeaderBoard(string name, int topPlayersCount, int competingPlayersCount, bool isIncludeSelf = true)
+        public YandexLeaderboard(LeaderboardStaticData leaderboard)
         {
-            _name = name;
-            _topPlayersCount = topPlayersCount;
-            _competingPlayersCount = competingPlayersCount;
-            _isIncludeSelf = isIncludeSelf;
+            _name = leaderboard.Name;
+            _topPlayersCount = leaderboard.TopPlayersCount;
+            _competingPlayersCount = leaderboard.CompetingPlayersCount;
+            _isIncludeSelf = leaderboard.IsIncludeSelf;
         }
 
-        public async Task<RanksData[]> GetLeaderboardEntries()
+        public async Task<RanksData> GetRanksData()
         {
-            throw new NotImplementedException();
-            // _isLeaderboardDataReceived = false;
+            _isLeaderboardDataReceived = false;
             // TryAuthorize();
-            // Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount, _isIncludeSelf);
-            //
-            // while (_isLeaderboardDataReceived == false)
+            
+            // Leaderboard.GetPlayerEntry(_name, result =>
             // {
-            //     await Task.Yield();
-            // }
-            //
-            // return _ranksData.ToArray();
+            //     _selfRanksData = result;
+            // });
+            
+            // Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount, _isIncludeSelf);
+            
+            while (_isLeaderboardDataReceived == false)
+            {
+                await Task.Yield();
+            }
+
+            return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
+
+        private SingleRankData[] GetCompetingRanks()
+        {
+            return _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray();
+        }
+
+        private SingleRankData[] GetTopRanks() =>
+            _ranksData.GetRange(0, _topPlayersCount).ToArray();
 
         public void SetScore(int score, string avatarName)
         {
@@ -49,14 +65,14 @@ namespace CodeBase.Leaderboard
         //     if (PlayerAccount.IsAuthorized == false)
         //         return;
         //
-        //     UnityEngine.SocialPlatforms.Impl.Leaderboard.GetPlayerEntry(_name, result =>
+        //     Leaderboard.GetPlayerEntry(_name, result =>
         //     {
         //         if (result.score >= score)
         //         {
         //             return;
         //         }
         //
-        //         UnityEngine.SocialPlatforms.Impl.Leaderboard.SetScore(_name, score, null, null, avatarName);
+        //         SetScore(_name, score, null, null, avatarName);
         //     });
         }
 

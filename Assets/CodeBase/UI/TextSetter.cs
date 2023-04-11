@@ -16,5 +16,10 @@ namespace CodeBase.UI
         {
             _text.text = text.ToString();
         }
+
+        public void SetTextColor(Color32 color)
+        {
+            _text.color = color;
+        }
     }
 }

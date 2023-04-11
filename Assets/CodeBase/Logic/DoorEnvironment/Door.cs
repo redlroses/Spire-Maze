@@ -64,7 +64,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
         protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
         {
-            if (heroInventory.Inventory.TryUse(StorableType.Key, out StorableData storableData))
+            if (heroInventory.Inventory.TryUse(StorableType.Key, out StorableStaticData storableData))
             {
                 Open(heroInventory.transform.position);
             }

@@ -15,6 +15,14 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateExtraLiveView(Transform inside) =>
             _assetProvider.Instantiate(AssetPath.ExtraLiveView, inside);
 
+        public GameObject CreateTopRankView(int rank) =>
+            _assetProvider.Instantiate(AssetPath.TopRankView);
+
+        public GameObject CreateRankView()
+        {
+            return _assetProvider.Instantiate(AssetPath.RankView);        
+        }
+
         public GameObject CreateHud() =>
             _assetProvider.Instantiate(AssetPath.HudPath);
     }

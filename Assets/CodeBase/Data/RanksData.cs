@@ -1,22 +1,16 @@
-using UnityEngine;
-
-namespace CodeBase.Data
+﻿namespace CodeBase.Data
 {
-    public class RanksData
+    public struct RanksData
     {
-        public readonly int Rank;
-        public readonly int Score;
-        public readonly Sprite Avatar;
-        public readonly Sprite Flag;
-        public readonly string Name;
+        public readonly SingleRankData[] TopThreeRanks;
+        public readonly SingleRankData[] AroundRanks;
+        public readonly SingleRankData SelfRank;
 
-        public RanksData(int rank, int score, Sprite avatar, string name, Sprite flag)
+        public RanksData(SingleRankData[] topThreeRanks, SingleRankData[] aroundRanks, SingleRankData selfRank)
         {
-            Rank = rank;
-            Score = score;
-            Avatar = avatar;
-            Name = name;
-            Flag = flag;
+            TopThreeRanks = topThreeRanks;
+            AroundRanks = aroundRanks;
+            SelfRank = selfRank;
         }
     }
 }

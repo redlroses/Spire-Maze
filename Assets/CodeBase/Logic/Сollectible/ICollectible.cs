@@ -4,7 +4,7 @@ namespace CodeBase.Logic.Сollectible
 {
     public interface ICollectible
     {
-        public StorableData StorableData { get; }
+        public StorableStaticData StorableStaticData { get; }
         public void Disable();
     }
 }

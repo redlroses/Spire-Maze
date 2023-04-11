@@ -7,5 +7,7 @@ namespace CodeBase.Infrastructure.Factory
     {
         GameObject CreateHud();
         GameObject CreateExtraLiveView(Transform inside);
+        GameObject CreateTopRankView(int rank);
+        GameObject CreateRankView();
     }
 }

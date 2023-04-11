@@ -4,6 +4,7 @@ using CodeBase.Services;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
+using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 
@@ -44,7 +45,9 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IGameUiFactory>(new GameUiFactory(_services.Single<IAssetProvider>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
-            _services.RegisterSingle<ILevelBuilder>(new LevelBuilder(_services.Single<IGameFactory>(), _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<ILevelBuilder>(new LevelBuilder(_services.Single<IGameFactory>(),
+                _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
         }
 
         private void RegisterStaticDataService()

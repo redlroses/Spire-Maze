@@ -1,4 +1,5 @@
 using CodeBase.Data;
+using TheraBytes.BetterUi;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +12,20 @@ namespace CodeBase.UI
         [SerializeField] private TextSetter _score;
         [SerializeField] private Image _avatar;
         [SerializeField] private Image _flag;
-
-        public void Set(RanksData ranksData)
+        [SerializeField] private BetterImage _selfIndication;
+        
+        public void Set(SingleRankData singleRankData)
         {
-            _rank.SetText(ranksData.Rank);
-            _name.SetText(ranksData.Name);
-            _score.SetText(ranksData.Score);
-            _avatar.sprite = ranksData.Avatar;
-            _flag.sprite = ranksData.Flag;
+            _rank.SetText(singleRankData.Rank);
+            _name.SetText(singleRankData.Name);
+            _score.SetText(singleRankData.Score);
+            _avatar.sprite = singleRankData.Avatar;
+            _flag.sprite = singleRankData.Flag;
+        }
+
+        public void EnableSelfIndication()
+        {
+            _selfIndication.enabled = true;
         }
     }
 }

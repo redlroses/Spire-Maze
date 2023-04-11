@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 4511771027392886438}
   - component: {fileID: 9165886565866499803}
   - component: {fileID: 2272650932799784298}
+  - component: {fileID: 1260990669194149185}
   m_Layer: 5
   m_Name: Icon_Medal
   m_TagString: Untagged
@@ -493,6 +494,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.101960786}
   m_EffectDistance: {x: 0, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!114 &1260990669194149185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254078158750795789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0685dfe2a37cd3d4a9ff39f271aa43f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _betterImage: {fileID: 9165886565866499803}
 --- !u!1001 &1388703577737699462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,3 +641,35 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8142739469072451886, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
   m_PrefabInstance: {fileID: 1388703577737699462}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8773628926360557021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7676275123049903451, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+  m_PrefabInstance: {fileID: 1388703577737699462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6333787241581654309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773628926360557021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54fbb86ef8c44a4a2914a5a0ab52d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 1260990669194149185}
+  _text: {fileID: 3725613754018530670}
+  _topRanksSetUpData:
+  - Image: {fileID: 21300000, guid: 0ee67a1a648dc4b2fbc77f39591a6307, type: 3}
+    TextColor:
+      serializedVersion: 2
+      rgba: 0
+  - Image: {fileID: 21300000, guid: 2a992c71d9f0f4636977c9f7a496d2f3, type: 3}
+    TextColor:
+      serializedVersion: 2
+      rgba: 0
+  - Image: {fileID: 21300000, guid: dc616340029fe46f488deb0845bf7a59, type: 3}
+    TextColor:
+      serializedVersion: 2
+      rgba: 0

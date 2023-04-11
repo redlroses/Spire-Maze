@@ -17,14 +17,16 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
         private Dictionary<string, StaminaStaticData> _staminas;
-        private Dictionary<StorableType, StorableData> _storables;
+        private Dictionary<StorableType, StorableStaticData> _storables;
+        private Dictionary<string, LeaderboardStaticData> _leaderboards;
 
         public void Load()
         {
             _levels = LoadFor<LevelStaticData, string>(LevelsDataPath, x => x.LevelKey);
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
-            _storables = LoadFor<StorableData, StorableType>(StorablePath, x => x.ItemType);
+            _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
+            _leaderboards = LoadFor<LeaderboardStaticData, string>(StorablePath, x => x.Name);
         }
 
         public LevelStaticData ForLevel(string levelKey) =>
@@ -35,8 +37,11 @@ namespace CodeBase.Services.StaticData
         public StaminaStaticData StaminaForEntity(string entityKey) =>
             GetDataFor(entityKey, _staminas);
 
-        public StorableData ForStorable(StorableType storableType) =>
+        public StorableStaticData ForStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
+
+        public LeaderboardStaticData ForLeaderboard(string yandexName) =>
+            GetDataFor(yandexName, _leaderboards);
 
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

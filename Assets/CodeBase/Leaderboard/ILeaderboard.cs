@@ -3,9 +3,9 @@ using CodeBase.Data;
 
 namespace CodeBase.Leaderboard
 {
-    public interface ILeaderBoard
+    public interface ILeaderboard
     {
-        Task<RanksData[]> GetLeaderboardEntries();
+        Task<RanksData> GetRanksData();
         void SetScore(int score, string avatarName);
     }
 }

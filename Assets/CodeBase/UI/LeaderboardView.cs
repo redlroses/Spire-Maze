@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
-using CodeBase.Leaderboard;
+using CodeBase.Data;
+using CodeBase.Infrastructure.Factory;
+using CodeBase.Services.Ranked;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -8,68 +9,64 @@ namespace CodeBase.UI
     public class LeaderboardView : MonoBehaviour
     {
         [SerializeField] private LoadingAnimation _loadingAnimation;
-        [SerializeField] private Transform _ranksViewContainer;
-        [SerializeField] private string _leaderboardName;
-        [SerializeField] private int _leaderboardTopPlayersCount;
-        [SerializeField] private int _leaderboardCompetingPlayersCount;
+
+        private IRankedService _rankedService;
+        private IGameUiFactory _gameUiFactory;
 
         private List<RankView> _ranksView;
-        private ILeaderBoard _leaderBoard;
-
         private bool _isLeaderboardDataReceived;
+        private int _currentSelfRank;
 
-        private void Awake()
+        public void Construct(IRankedService rankedService, IGameUiFactory gameUiFactory)
         {
-            FindRanksView();
-        }
-
-        private void Start()
-        {
-#if UNITY_EDITOR
-            _leaderBoard = new EditorLeaderBoard();
-#endif
-#if UNITY_WEBGL && !UNITY_EDITOR
-            _leaderBoard =
-                new YandexLeaderBoard(_leaderboardName, _leaderboardTopPlayersCount, _leaderboardCompetingPlayersCount);
-#endif
+            _rankedService = rankedService;
+            _gameUiFactory = gameUiFactory;
         }
 
         public async void ShowLeaderBoard()
         {
             _loadingAnimation.Play();
-            var ranksData = await _leaderBoard.GetLeaderboardEntries();
+            RanksData ranksData = await _rankedService.GetRanksData();
             _loadingAnimation.Stop();
-            int ranksCount = Math.Min(_ranksViewContainer.childCount, ranksData.Length);
+            _currentSelfRank = ranksData.SelfRank.Rank;
+            SpawnTopRanks(ranksData.TopThreeRanks);
+            SpawnCompetingRanks(ranksData.AroundRanks);
+        }
 
-            for (int i = 0; i < ranksCount; i++)
+        private void SpawnCompetingRanks(SingleRankData[] aroundRanks)
+        {
+            for (int i = 0; i < aroundRanks.Length; i++)
             {
-                _ranksView[i].Set(ranksData[i]);
-                _ranksView[i].gameObject.SetActive(true);
+                GameObject topRankView = _gameUiFactory.CreateRankView();
+                RankView rankView = topRankView.GetComponent<RankView>();
+                rankView.Set(aroundRanks[i]);
+                
+                if (IsMyRank(aroundRanks[i]))
+                {
+                    rankView.EnableSelfIndication();
+                }
             }
         }
 
-        public void HideLeaderBoard()
+        private void SpawnTopRanks(SingleRankData[] topThreeRanks)
         {
-            foreach (var rankView in _ranksView)
+            for (int i = 0; i < topThreeRanks.Length; i++)
             {
-                rankView.gameObject.SetActive(false);
+                GameObject topRankView = _gameUiFactory.CreateTopRankView(i);
+                topRankView.GetComponent<TopRankViewConfigurator>().SetUp(i);
+                RankView rankView = topRankView.GetComponent<RankView>();
+                rankView.Set(topThreeRanks[i]);
+                
+                if (IsMyRank(topThreeRanks[i]))
+                {
+                    rankView.EnableSelfIndication();
+                }
             }
         }
 
-        public void SetScore(int score, string avatarName)
+        private bool IsMyRank(SingleRankData rankData)
         {
-            _leaderBoard.SetScore(score, avatarName);
-        }
-
-        private void FindRanksView()
-        {
-            _ranksView = new List<RankView>(_ranksViewContainer.childCount);
-            _ranksView.AddRange(_ranksViewContainer.GetComponentsInChildren<RankView>());
-
-            foreach (var rank in _ranksView)
-            {
-                rank.gameObject.SetActive(false);
-            }
+            return rankData.Rank == _currentSelfRank;
         }
     }
 }
