@@ -24,7 +24,12 @@ namespace CodeBase.Logic.Movement
 
         protected override void OnEnabled()
         {
-            _dodge.Slided += OnSlided;
+            _dodge.Dodged += OnDodged;
+        }
+
+        protected override void OnDisabled()
+        {
+            _dodge.Dodged -= OnDodged;
         }
 
         protected override void Run()
@@ -87,7 +92,7 @@ namespace CodeBase.Logic.Movement
             Move(direction);
         }
 
-        private void OnSlided(MoveDirection direction)
+        private void OnDodged(MoveDirection direction)
         {
             Move(direction);
         }

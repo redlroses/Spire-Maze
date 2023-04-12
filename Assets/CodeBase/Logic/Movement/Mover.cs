@@ -11,7 +11,7 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private Rigidbody _rigidbody;
 
-        protected MoveDirection Direction;
+        private MoveDirection _direction;
         
         protected float Speed => _speed;
         public Rigidbody Rigidbody => _rigidbody;
@@ -24,10 +24,10 @@ namespace CodeBase.Logic.Movement
 
         protected override void FixedRun()
         {
-            ApplyMove(Direction);
+            ApplyMove(_direction);
         }
 
-        public void Move(MoveDirection direction) => Direction = direction;
+        public void Move(MoveDirection direction) => _direction = direction;
 
         protected virtual float CalculateSpeed() =>
             _speed;

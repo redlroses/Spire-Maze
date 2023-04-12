@@ -7,15 +7,15 @@ namespace CodeBase.Logic.StaminaEntity
     [RequireComponent(typeof(TimerOperator))]
     public class Stamina : MonoCache, IStamina
     {
-        private const float LowerSpeedMultiplier = 0.3f;
+        private const float LowerSpeedMultiplier = 0.5f;
         private const float MinimumPercent = 0.1f;
 
         [SerializeField] protected TimerOperator TimerDelay;
 
-        [SerializeField] private int _currentPoints;
         [SerializeField] private float _speedReplenish;
         [SerializeField] private float _delayBeforeReplenish = 1.5f;
 
+        private int _currentPoints;
         private float _currentSpeedReplenish;
         private bool _isSpent;
         private bool _isReplenish;
@@ -62,7 +62,7 @@ namespace CodeBase.Logic.StaminaEntity
             _isReplenish = false;
             CurrentPoints -= spendStamina;
 
-            _isSpent = CurrentPoints <= CurrentPoints * MinimumPercent;
+            _isSpent = CurrentPoints <= MaxPoints * MinimumPercent;
             TimerDelay.Restart();
             TimerDelay.Play();
         }
@@ -75,8 +75,8 @@ namespace CodeBase.Logic.StaminaEntity
             }
 
             int newPoints = _isSpent
-                ? CurrentPoints + (int)(_currentSpeedReplenish * LowerSpeedMultiplier * Time.deltaTime)
-                : CurrentPoints + (int)(_currentSpeedReplenish * Time.deltaTime);
+                ? CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * LowerSpeedMultiplier * Time.deltaTime)
+                : CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * Time.deltaTime);
             CurrentPoints = newPoints > MaxPoints ? MaxPoints : newPoints;
 
             if (CurrentPoints >= MaxPoints)
