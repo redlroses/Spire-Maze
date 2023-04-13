@@ -10,6 +10,7 @@ using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Door = CodeBase.LevelSpecification.Cells.Door;
+using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
 using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
 using Plate = CodeBase.LevelSpecification.Cells.Plate;
@@ -54,6 +55,8 @@ namespace CodeBase.Services.LevelBuild
                 level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
             _cellConstructor.Construct<Savepoint>(gameFactory, staticData,
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
+            _cellConstructor.Construct<EnemySpawnPoint>(gameFactory,staticData, 
+                level.Where(cell => cell.CellData is EditorCells.EnemySpawnPoint).ToArray());
              //   CombineCells(level);
         }
 

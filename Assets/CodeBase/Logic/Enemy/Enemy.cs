@@ -23,13 +23,17 @@ namespace CodeBase.Logic.Enemy
 
         private const float DelayBetweenDetectTarget = 1f;
 
+        private int _id;
         private Transform _selfTransform;
         private MoveDirection _moveDirection;
         private float _currentDelayBetweenDetectTarget;
-        private IAccelerable Mover => (IAccelerable) _mover;
 
-        private void Awake()
+        public int Id => _id;
+        private IAccelerable Mover => (IAccelerable)_mover;
+
+        public void Construct(int id)
         {
+            _id = id;
             _rayDirection ??= Get<RayDirection>();
             _selfTransform = transform;
             _moveDirection = MoveDirection.Left;
@@ -92,7 +96,7 @@ namespace CodeBase.Logic.Enemy
             Vector3 rayDirectionForward = _rayDirection.Calculate(Spire.Position, localPosition,
                 _moveDirection);
             Vector3 rayDirectionBackward = _rayDirection.Calculate(Spire.Position, localPosition,
-                (MoveDirection) ((int) _moveDirection * -1));
+                (MoveDirection)((int)_moveDirection * -1));
 
             bool isInFront = _sphereCaster.CastSphere(rayDirectionForward, _rayDistanceToTarget, out RaycastHit hit);
 
@@ -120,6 +124,6 @@ namespace CodeBase.Logic.Enemy
             Mover.DisableBonusSpeed();
         }
 
-        private void ChangeDirection() => _moveDirection = (MoveDirection) ((int) _moveDirection * -1);
+        private void ChangeDirection() => _moveDirection = (MoveDirection)((int)_moveDirection * -1);
     }
 }

@@ -41,6 +41,9 @@ namespace CodeBase.Editor.LevelEditor
                 case Rock rock:
                     rock.IsDirectionToRight = EditorGUILayout.Toggle("Is move to right", rock.IsDirectionToRight);
                     break;
+                case EnemySpawnPoint enemy:
+                    enemy.Type = (EnemyType)EditorGUILayout.EnumPopup("Type of enemy", enemy.Type);
+                    break;
             }
         }
 

@@ -2,5 +2,6 @@
 {
     public interface IEnemy
     {
+       void Construct(int id);
     }
 }

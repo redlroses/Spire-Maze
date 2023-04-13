@@ -5,7 +5,7 @@ namespace CodeBase.Infrastructure.AssetManagement
     public const string HeroPath = "Prefabs/Hero";
     public const string Loot = "Loot/Loot";
     public const string HudPath = "Prefabs/UI/Hud";
-    public const string Spawner = "Enemies/SpawnPoint";
+    public const string Enemies = "Prefabs/Enemies";
     public const string Materials = "Materials";
     public const string PhysicMaterials = "Materials/Physics";
     public const string Spire = "Prefabs/Spire";

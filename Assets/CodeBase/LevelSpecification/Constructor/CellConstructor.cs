@@ -24,6 +24,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(FireTrap)] = new FireTrapConstructor(),
                 [typeof(Rock)] = new RockConstructor(),
                 [typeof(Savepoint)] = new SavepointConstructor(),
+                [typeof(EnemySpawnPoint)] = new EnemySpawnPointConstructor(),
             };
         }
 

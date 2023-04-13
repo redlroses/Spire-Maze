@@ -65,6 +65,13 @@ namespace CodeBase.Infrastructure.Factory
             return _heroGameObject;
         }
 
+        public GameObject CreateEnemy(string prefabPath, Vector3 position)
+        {
+            GameObject enemy = InstantiateRegistered(prefabPath, position);
+            RegisterProgressWatchers(enemy);
+            return enemy;
+        }
+
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);

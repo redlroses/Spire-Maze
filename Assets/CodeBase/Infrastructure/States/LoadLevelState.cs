@@ -89,7 +89,7 @@ namespace CodeBase.Infrastructure.States
 
         private Vector3 GetHeroPosition() =>
             _progressService.Progress.WorldData.PositionOnLevel.Position.AsUnityVector();
-
+    
         private Level BuildLevel() =>
             _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelKey));
 

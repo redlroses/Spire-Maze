@@ -50,21 +50,21 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Door)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Door)]
-                            .Tint(GetColor32(((Door) data)?.Color ?? Colors.None))),
+                            .Tint(GetColor32(((Door)data)?.Color ?? Colors.None))),
                 [typeof(Key)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Key)]
-                            .Tint(GetColor32(((Key) data)?.Color ?? Colors.None))),
+                            .Tint(GetColor32(((Key)data)?.Color ?? Colors.None))),
                 [typeof(MovingMarker)] = data =>
                     _baseTextures[typeof(MovingMarker)].Tint(_colors[typeof(MovingMarker)])
-                        .RotateTo(((MovingMarker) data)?.Direction ?? PlateMoveDirection.None)
-                        .CombineTexture(((MovingMarker) data)?.IsLiftHolder == true
+                        .RotateTo(((MovingMarker)data)?.Direction ?? PlateMoveDirection.None)
+                        .CombineTexture(((MovingMarker)data)?.IsLiftHolder == true
                             ? _baseTextures[typeof(MovingPlate)].Tint(_colors[typeof(MovingPlate)])
                             : _baseTextures[typeof(Air)]),
                 [typeof(Portal)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Portal)]
-                            .Tint(((Portal) data)?.Color ?? _colors[typeof(Portal)])),
+                            .Tint(((Portal)data)?.Color ?? _colors[typeof(Portal)])),
                 [typeof(SpikeTrap)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(SpikeTrap)].Tint(_colors[typeof(SpikeTrap)])),
@@ -77,6 +77,9 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Savepoint)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Savepoint)].Tint(_colors[typeof(Savepoint)])),
+                [typeof(EnemySpawnPoint)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(EnemySpawnPoint)].Tint(_colors[typeof(EnemySpawnPoint)])),
             };
 
             _baseTextures = new Dictionary<Type, Texture2D>
@@ -94,6 +97,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(FireTrap)] = Resources.Load<Texture2D>("Textures/FireTrapIcon"),
                 [typeof(Rock)] = Resources.Load<Texture2D>("Textures/RockIcon"),
                 [typeof(Savepoint)] = Resources.Load<Texture2D>("Textures/SaveIcon"),
+                [typeof(EnemySpawnPoint)] = Resources.Load<Texture2D>("Textures/EnemyIcon"),
             };
 
             _colors = new Dictionary<Type, Color32>
@@ -109,6 +113,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(FireTrap)] = new Color32(255, 170, 52, 255),
                 [typeof(Rock)] = new Color32(233, 117, 50, 255),
                 [typeof(Savepoint)] = new Color32(0, 180, 255, 255),
+                [typeof(EnemySpawnPoint)] = new Color32(255, 255, 255, 255),
             };
 
             _palette = new CellData[]
@@ -120,11 +125,12 @@ namespace CodeBase.Editor.LevelEditor
                 new Key(GetTextureByType<Key>()),
                 new Door(GetTextureByType<Door>()),
                 new MovingMarker(GetTextureByType<MovingMarker>()),
-                new Portal(GetTextureByType<Portal>()) {Color = _colors[typeof(Portal)]},
+                new Portal(GetTextureByType<Portal>()) { Color = _colors[typeof(Portal)] },
                 new SpikeTrap(GetTextureByType<SpikeTrap>()),
                 new FireTrap(GetTextureByType<FireTrap>()),
                 new Rock(GetTextureByType<Rock>()),
                 new Savepoint(GetTextureByType<Savepoint>()),
+                new EnemySpawnPoint(GetTextureByType<EnemySpawnPoint>()),
             };
 
             UpdateTextures();
@@ -134,7 +140,7 @@ namespace CodeBase.Editor.LevelEditor
         {
             for (int i = 0; i < _width.intValue * _height.intValue; i++)
             {
-                CellData managedReferenceValue = (CellData) _dataMap.GetArrayElementAtIndex(i).managedReferenceValue;
+                CellData managedReferenceValue = (CellData)_dataMap.GetArrayElementAtIndex(i).managedReferenceValue;
                 managedReferenceValue.SetTexture(GetTextureByType(managedReferenceValue));
             }
         }
@@ -148,7 +154,7 @@ namespace CodeBase.Editor.LevelEditor
             };
 
             base.OnInspectorGUI();
-            LevelStaticData data = (LevelStaticData) target;
+            LevelStaticData data = (LevelStaticData)target;
 
             _isPaletteShow = EditorGUILayout.Toggle("Edit mode on", _isPaletteShow);
 
@@ -198,8 +204,8 @@ namespace CodeBase.Editor.LevelEditor
         private void DrawPaletteButton(CellData cellData)
         {
             if (GUILayout.Button(new GUIContent(cellData.Texture),
-                _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10),
-                GUILayout.MaxHeight(Screen.width / (float) _width.intValue)))
+                    _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10),
+                    GUILayout.MaxHeight(Screen.width / (float)_width.intValue)))
             {
                 _pipetteCell = cellData;
             }
@@ -209,9 +215,9 @@ namespace CodeBase.Editor.LevelEditor
         {
             SerializedProperty arrayElementAtIndex = _dataMap.GetArrayElementAtIndex(index);
 
-            if (GUILayout.Button(new GUIContent(((CellData) arrayElementAtIndex.managedReferenceValue).Texture),
-                _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10),
-                GUILayout.MaxHeight(Screen.width / (_width.intValue + 1f))))
+            if (GUILayout.Button(new GUIContent(((CellData)arrayElementAtIndex.managedReferenceValue).Texture),
+                    _cellStyle, GUILayout.MinWidth(10), GUILayout.MinHeight(10),
+                    GUILayout.MaxHeight(Screen.width / (_width.intValue + 1f))))
             {
                 if (_isPaletteShow)
                 {

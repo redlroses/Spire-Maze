@@ -16,6 +16,7 @@ namespace CodeBase.Infrastructure.Factory
     Material CreateColoredMaterial(Colors color);
     GameObject CreateSpire();
     GameObject CreateHero(Vector3 at);
+    GameObject CreateEnemy(string prefabPath, Vector3 position);
     GameObject CreateCell<TCell>(Transform container) where TCell : Cell;
     Material CreateMaterial(string name);
     PhysicMaterial CreatePhysicMaterial(string name);
