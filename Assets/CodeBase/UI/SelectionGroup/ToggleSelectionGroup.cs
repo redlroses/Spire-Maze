@@ -14,16 +14,7 @@ namespace CodeBase.UI.SelectionGroup
 
         private void OnEnable()
         {
-            UnselectAll();
             Subscribe();
-        }
-
-        private void UnselectAll()
-        {
-            foreach (var toggle in _selectionsToggle)
-            {
-                toggle.Unselect();
-            }
         }
 
         protected void SetDefault(TEnum defaultId)
