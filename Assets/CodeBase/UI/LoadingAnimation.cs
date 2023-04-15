@@ -1,23 +1,26 @@
-using System;
+using TheraBytes.BetterUi;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.UI
 {
     public class LoadingAnimation : MonoBehaviour
     {
-        [SerializeField] private RectTransform _rotor;
-        [SerializeField] private float _duration;
+        private const string RotateAnimation = "Rotate";
+
+        [SerializeField] private Image _rotor;
+        [SerializeField] private LocationAnimations _rotorLocationAnimations;
 
         public void Play()
         {
-            throw new NotImplementedException();
-            _rotor.gameObject.SetActive(true);
+            _rotor.enabled = true;
+            _rotorLocationAnimations.StartAnimation(RotateAnimation);
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
-            _rotor.gameObject.SetActive(false);
+            _rotorLocationAnimations.StopCurrentAnimation();
+            _rotor.enabled = false;
         }
     }
 }
