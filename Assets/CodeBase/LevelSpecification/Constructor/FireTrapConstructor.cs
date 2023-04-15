@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.StaticData;
+using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -10,7 +11,8 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                gameFactory.CreateCell<TCell>(cell.Container);
+                var fireTrap =  gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Logic.Trap.FireTrap>();
+                fireTrap.Construct(cell.Id, fireTrap.TrapActivator);
             }
         }
     }

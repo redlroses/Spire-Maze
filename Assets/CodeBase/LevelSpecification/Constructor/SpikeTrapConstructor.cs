@@ -10,7 +10,8 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                gameFactory.CreateCell<TCell>(cell.Container);
+               var spikeTrap = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Logic.Trap.Spike>();
+               spikeTrap.Construct(cell.Id, spikeTrap.TrapActivator);
             }
         }
     }

@@ -42,11 +42,16 @@ namespace CodeBase.Logic.Movement
             Vector2 direction = new Vector2((int) moveDirection, 0f);
             Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, Spire.DistanceToCenter) * CalculateSpeed();
 
+            Rotate(velocity);
+            _rigidbody.velocity = velocity.ChangeY(_rigidbody.velocity.y);
+        }
+
+        private void Rotate(Vector3 velocity)
+        {
             Quaternion lookRotation = Quaternion.LookRotation(velocity);
             Quaternion targetRotation = Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
 
             _rigidbody.MoveRotation(targetRotation);
-            _rigidbody.velocity = velocity.ChangeY(_rigidbody.velocity.y);
         }
     }
 }

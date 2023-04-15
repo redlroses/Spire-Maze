@@ -8,14 +8,21 @@ namespace CodeBase.Logic.Trap
     {
         [SerializeField] protected TrapActivator Activator;
 
+        protected int Id { get; private set; }
+
+        public TrapActivator TrapActivator => Activator;
+        
+        /*
         private void Awake()
         {
-            Construct(Activator);
+            Construct(id, Activator);
             Debug.LogWarning("Remove constructor from awake");
         }
+        */
 
-        public virtual void Construct(TrapActivator activator)
+        public virtual void Construct(int id, TrapActivator activator)
         {
+            Id = id;
             Activator = activator;
             Activator.Activated += Activate;
         }

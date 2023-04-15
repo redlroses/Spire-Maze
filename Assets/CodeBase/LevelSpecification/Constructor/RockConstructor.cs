@@ -13,6 +13,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var rockData = (EditorCells.Rock) cell.CellData;
                 Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Rock>();
+                rock.Construct(cell.Id, rock.TrapActivator);
                 rock.SetMoveDirection(rockData.IsDirectionToRight);
             }
         }

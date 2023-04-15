@@ -1,6 +1,8 @@
-using System;
+using CodeBase.Data;
+using CodeBase.Data.CellStates;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -9,11 +11,11 @@ namespace CodeBase.Logic.Trap
 {
     [RequireComponent(typeof(RockMover))]
     [RequireComponent(typeof(RayDirection))]
-    public class Rock : Trap
+    public class Rock : Trap, ISavedProgress
     {
         [SerializeField] private SphereCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Mover _mover;
+        [SerializeField] private RockMover _mover;
         [SerializeField] private Rigidbody[] _fragments;
         [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private float _rayDistance;
@@ -25,7 +27,6 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _timerDelay;
 
         private Transform _selfTransform;
-        private Quaternion _lookRotation;
         private MoveDirection _direction;
         private bool _isActivated;
         private bool _isNotOnPlate;
@@ -38,9 +39,9 @@ namespace CodeBase.Logic.Trap
             Rotate();
         }
 
-        public override void Construct(TrapActivator activator)
+        public override void Construct(int id, TrapActivator activator)
         {
-            base.Construct(Activator);
+            base.Construct(id, activator);
             _rigidbody ??= Get<Rigidbody>();
             _mover ??= Get<RockMover>();
             _mover.enabled = false;
@@ -51,6 +52,39 @@ namespace CodeBase.Logic.Trap
         public void SetMoveDirection(bool isDirectionToRight)
         {
             _direction = isDirectionToRight ? MoveDirection.Right : MoveDirection.Left;
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            RockState cellState = progress.WorldData.LevelState.RockStates
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null || cellState.IsDestroyed == false)
+            {
+                return;
+            }
+
+            _isDestroyed = cellState.IsDestroyed;
+
+            if (cellState.IsDestroyed)
+            {
+                OnDestroyGameObject();
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            RockState cellState = progress.WorldData.LevelState.RockStates
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null)
+            {
+                progress.WorldData.LevelState.RockStates.Add((new RockState(Id, _isDestroyed)));
+            }
+            else
+            {
+                cellState.IsDestroyed = _isDestroyed;
+            }
         }
 
         protected override void Activate(IDamagable damagable)
@@ -65,17 +99,17 @@ namespace CodeBase.Logic.Trap
 
         private void Rotate()
         {
-            if (_hasTargetRotationReached)
+            if (_hasTargetRotationReached || _isActivated)
             {
                 return;
             }
 
             Vector2 direction = new Vector2((int)_direction, 0f);
             Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
-            _lookRotation = Quaternion.LookRotation(moveDirection);
+            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
 
-            _rigidbody.MoveRotation(_lookRotation);
-            _hasTargetRotationReached = _rigidbody.rotation == _lookRotation;
+            _rigidbody.MoveRotation(lookRotation);
+            _hasTargetRotationReached = _rigidbody.rotation == lookRotation;
         }
 
         private void TryDestroy()
