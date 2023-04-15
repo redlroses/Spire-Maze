@@ -102,7 +102,7 @@ namespace CodeBase.Logic.Enemy
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.EnemyStates.Add((new EnemyState(Id, _isDied)));
+                progress.WorldData.LevelState.EnemyStates.Add(new EnemyState(Id, _isDied));
             }
             else
             {

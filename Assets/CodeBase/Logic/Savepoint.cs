@@ -46,7 +46,7 @@ namespace CodeBase.Logic
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.SavepointStates.Add((new SavepointState(Id, _isActive)));
+                progress.WorldData.LevelState.SavepointStates.Add(new SavepointState(Id, _isActive));
             }
             else
             {

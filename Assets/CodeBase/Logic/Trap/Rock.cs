@@ -79,7 +79,7 @@ namespace CodeBase.Logic.Trap
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.RockStates.Add((new RockState(Id, _isDestroyed)));
+                progress.WorldData.LevelState.RockStates.Add(new RockState(Id, _isDestroyed));
             }
             else
             {

@@ -13,6 +13,7 @@ namespace CodeBase.Data
         public List<SavepointState> SavepointStates;
         public List<EnemyState> EnemyStates;
         public List<RockState> RockStates;
+        public List<PortalState> PortalStates;
 
         public LevelState(string levelKey)
         {
@@ -22,6 +23,7 @@ namespace CodeBase.Data
             SavepointStates = new List<SavepointState>();
             EnemyStates = new List<EnemyState>();
             RockStates = new List<RockState>();
+            PortalStates = new List<PortalState>();
         }
     }
 }
