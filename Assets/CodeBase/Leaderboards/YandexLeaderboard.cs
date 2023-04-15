@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CodeBase.Data;
+using CodeBase.Leaderboard;
 using CodeBase.StaticData;
 
-namespace CodeBase.Leaderboard
+namespace CodeBase.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {
@@ -37,7 +37,7 @@ namespace CodeBase.Leaderboard
             // {
             //     _selfRanksData = result;
             // });
-            
+            //
             // Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount, _isIncludeSelf);
             
             while (_isLeaderboardDataReceived == false)
@@ -59,21 +59,21 @@ namespace CodeBase.Leaderboard
         public void SetScore(int score, string avatarName)
         {
             throw new NotImplementedException();
-        //     TryAuthorize();
-        //     TryGetPersonalData();
+        // TryAuthorize();
+        // TryGetPersonalData();
         //
-        //     if (PlayerAccount.IsAuthorized == false)
-        //         return;
+        // if (PlayerAccount.IsAuthorized == false)
+        //     return;
         //
-        //     Leaderboard.GetPlayerEntry(_name, result =>
+        // Leaderboard.GetPlayerEntry(_name, result =>
+        // {
+        //     if (result.score >= score)
         //     {
-        //         if (result.score >= score)
-        //         {
-        //             return;
-        //         }
+        //         return;
+        //     }
         //
-        //         SetScore(_name, score, null, null, avatarName);
-        //     });
+        //     SetScore(_name, score, null, null, avatarName);
+        // });
         }
 
         // private void TryAuthorize()

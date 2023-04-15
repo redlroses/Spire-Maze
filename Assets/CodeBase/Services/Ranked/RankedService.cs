@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Leaderboard;
+using CodeBase.Leaderboards;
 using CodeBase.Services.StaticData;
 
 namespace CodeBase.Services.Ranked
