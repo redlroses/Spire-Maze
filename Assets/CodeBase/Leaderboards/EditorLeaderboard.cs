@@ -4,6 +4,7 @@ using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
+using UnityEngine;
 
 namespace CodeBase.Leaderboards
 {
@@ -14,7 +15,7 @@ namespace CodeBase.Leaderboards
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
         
-        private List<SingleRankData> _ranksData;
+        private List<SingleRankData> _ranksData = new List<SingleRankData>();
         private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived = false;
 
@@ -29,11 +30,10 @@ namespace CodeBase.Leaderboards
         public async Task<RanksData> GetRanksData()
         {
             _isLeaderboardDataReceived = false;
-            List<SingleRankData> ranks = new List<SingleRankData>();
             string[] langs = {"ru", "en", "tr"};
             string[] avatars = {"Test1", "Test2"};
 
-            ApplyTestData(langs, avatars, ranks);
+            ApplyTestData(langs, avatars, _ranksData);
 
             while (_isLeaderboardDataReceived == false)
             {
@@ -57,13 +57,13 @@ namespace CodeBase.Leaderboards
 
         private async void ApplyTestData(string[] langs, string[] avatars, List<SingleRankData> ranks)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 var data = new LeaderboardEntryResponse
                 {
                     rank = i,
                     extraData = avatars.GetRandom(),
-                    score = i * 5,
+                    score = (10 - i) * 5,
                     player = new PlayerAccountProfileDataResponse
                     {
                         lang = langs.GetRandom(),
@@ -77,6 +77,7 @@ namespace CodeBase.Leaderboards
             }
 
             _selfRanksData = ranks.GetRandom();
+            Debug.Log(_selfRanksData.Rank + " test my rank");
 
             _isLeaderboardDataReceived = true;
         }

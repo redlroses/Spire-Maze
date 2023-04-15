@@ -9,6 +9,11 @@ namespace CodeBase.UI
 
         private void OnDestroy()
         {
+            if (_inventory == null)
+            {
+                return;
+            }
+
             _inventory.Updated -= OnUpdatedInventory;
         }
 

@@ -380,6 +380,18 @@ PrefabInstance:
       propertyPath: _rank
       value: 
       objectReference: {fileID: 2666965529879190027}
+    - target: {fileID: 6640824731507230226, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: _selfIndication
+      value: 
+      objectReference: {fileID: 7149921316756550973}
+    - target: {fileID: 7181214899305887250, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181214899305887250, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.data[0].screenConfigName
+      value: Portrate
+      objectReference: {fileID: 0}
     - target: {fileID: 7676275123049903451, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_Name
       value: List_Variant
@@ -468,6 +480,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8380982630548297568, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380982630548297568, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.data[0].screenConfigName
+      value: Portrate
+      objectReference: {fileID: 0}
     - target: {fileID: 8848443791801712086, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSize
       value: 39.65
@@ -485,5 +505,10 @@ PrefabInstance:
 --- !u!224 &795649995738132679 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8142739469072451886, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+  m_PrefabInstance: {fileID: 8793952354960341481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7149921316756550973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1816070628325362900, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
   m_PrefabInstance: {fileID: 8793952354960341481}
   m_PrefabAsset: {fileID: 0}

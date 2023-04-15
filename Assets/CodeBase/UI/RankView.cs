@@ -10,9 +10,9 @@ namespace CodeBase.UI
         [SerializeField] private TextSetter _rank;
         [SerializeField] private TextSetter _name;
         [SerializeField] private TextSetter _score;
-        [SerializeField] private Image _avatar;
-        [SerializeField] private Image _flag;
-        [SerializeField] private BetterImage _selfIndication;
+        [SerializeField] private BetterImage _avatar;
+        [SerializeField] private BetterImage _flag;
+        [SerializeField] private GameObject _selfIndication;
         
         public void Set(SingleRankData singleRankData)
         {
@@ -25,7 +25,7 @@ namespace CodeBase.UI
 
         public void EnableSelfIndication()
         {
-            _selfIndication.enabled = true;
+            _selfIndication.SetActive(true);
         }
     }
 }

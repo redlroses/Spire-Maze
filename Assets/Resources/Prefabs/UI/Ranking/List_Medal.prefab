@@ -468,17 +468,7 @@ MonoBehaviour:
     SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
     screenConfigName: 
   customSpriteSettings:
-    items:
-    - Sprite: {fileID: 21300000, guid: 06cea55f7f045402f8ea9eacb9924fa5, type: 3}
-      ColorMode: 0
-      PrimaryColor: {r: 1, g: 1, b: 1, a: 1}
-      SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
-      screenConfigName: Landscape
-    - Sprite: {fileID: 21300000, guid: 06cea55f7f045402f8ea9eacb9924fa5, type: 3}
-      ColorMode: 0
-      PrimaryColor: {r: 1, g: 1, b: 1, a: 1}
-      SecondaryColor: {r: 1, g: 1, b: 1, a: 1}
-      screenConfigName: Portrate
+    items: []
 --- !u!114 &2272650932799784298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,9 +504,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1816070628325362900, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2403151838795589329, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433133638679981155, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433133638679981155, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.data[0].screenConfigName
+      value: Portrate
       objectReference: {fileID: 0}
     - target: {fileID: 5230264486692527199, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSize
@@ -534,6 +536,14 @@ PrefabInstance:
       propertyPath: _rank
       value: 
       objectReference: {fileID: 3725613754018530670}
+    - target: {fileID: 6640824731507230226, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: _selfIndication
+      value: 
+      objectReference: {fileID: 753878045349391442}
+    - target: {fileID: 7181214899305887250, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+      propertyPath: customSpriteSettings.items.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7676275123049903451, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_Name
       value: List_Medal
@@ -636,6 +646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+--- !u!1 &753878045349391442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1816070628325362900, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
+  m_PrefabInstance: {fileID: 1388703577737699462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7081198945892002216 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8142739469072451886, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
@@ -664,12 +679,12 @@ MonoBehaviour:
   - Image: {fileID: 21300000, guid: 0ee67a1a648dc4b2fbc77f39591a6307, type: 3}
     TextColor:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4279900295
   - Image: {fileID: 21300000, guid: 2a992c71d9f0f4636977c9f7a496d2f3, type: 3}
     TextColor:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4284565292
   - Image: {fileID: 21300000, guid: dc616340029fe46f488deb0845bf7a59, type: 3}
     TextColor:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4280957034

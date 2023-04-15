@@ -32,14 +32,12 @@ namespace CodeBase.Tools.Extension
         public static SingleRankData ToSingleRankData(this LeaderboardEntryResponse entry)
         {
             IAssetProvider assetProvider = AllServices.Container.Single<IAssetProvider>();
-            
+
             Sprite avatar = assetProvider
-                .Instantiate($"{AssetPath.AvatarPath}/{entry.extraData}")
-                .GetComponent<Sprite>();
-            
+                .LoadSprite($"{AssetPath.AvatarPath}/{entry.extraData}");
+
             Sprite flag = assetProvider
-                .Instantiate($"{AssetPath.AvatarPath}/{entry.extraData}")
-                .GetComponent<Sprite>();
+                .LoadSprite($"{AssetPath.FlagPath}/{entry.player.lang}");
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);

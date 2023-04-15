@@ -10,6 +10,8 @@ namespace CodeBase.UI
     public class LeaderboardView : MonoBehaviour
     {
         [SerializeField] private LoadingAnimation _loadingAnimation;
+        [SerializeField] private Transform _content;
+        
 
         private IRankedService _rankedService;
         private IGameUiFactory _gameUiFactory;
@@ -35,6 +37,9 @@ namespace CodeBase.UI
         public async void ShowLeaderBoard()
         {
             _loadingAnimation.Play();
+            
+            print(_rankedService);
+            
             RanksData ranksData = await _rankedService.GetRanksData();
             _loadingAnimation.Stop();
             _currentSelfRank = ranksData.SelfRank.Rank;
@@ -46,13 +51,14 @@ namespace CodeBase.UI
         {
             for (int i = 0; i < aroundRanks.Length; i++)
             {
-                GameObject topRankView = _gameUiFactory.CreateRankView();
+                GameObject topRankView = _gameUiFactory.CreateRankView(_content);
                 RankView rankView = topRankView.GetComponent<RankView>();
                 rankView.Set(aroundRanks[i]);
 
                 if (IsMyRank(aroundRanks[i]))
                 {
                     rankView.EnableSelfIndication();
+                    Debug.Log("my rank " + aroundRanks[i].Rank);
                 }
             }
         }
@@ -61,7 +67,7 @@ namespace CodeBase.UI
         {
             for (int i = 0; i < topThreeRanks.Length; i++)
             {
-                GameObject topRankView = _gameUiFactory.CreateTopRankView(i);
+                GameObject topRankView = _gameUiFactory.CreateTopRankView(i, _content);
                 topRankView.GetComponent<TopRankViewConfigurator>().SetUp(i);
                 RankView rankView = topRankView.GetComponent<RankView>();
                 rankView.Set(topThreeRanks[i]);
@@ -69,6 +75,7 @@ namespace CodeBase.UI
                 if (IsMyRank(topThreeRanks[i]))
                 {
                     rankView.EnableSelfIndication();
+                    Debug.Log("my rank " + topThreeRanks[i].Rank);
                 }
             }
         }

@@ -1491,7 +1491,7 @@ MonoBehaviour:
     - applyPosX: 0
       applyPosY: 0
       applySizeX: 0
-      applySizeY: 0
+      applySizeY: 1
       screenConfigName: Portrate
   anchorPosXSizerFallback:
     screenConfigName: 
@@ -1627,7 +1627,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 100
+      OptimizedSize: 140
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0

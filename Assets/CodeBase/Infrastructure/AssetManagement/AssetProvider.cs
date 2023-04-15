@@ -44,6 +44,12 @@ namespace CodeBase.Infrastructure.AssetManagement
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab);
         }
+        
+        public Sprite LoadSprite(string path)
+        {
+            var sprite = Resources.Load<Sprite>(path);
+            return sprite;
+        }
 
         public void CleanUp()
         {

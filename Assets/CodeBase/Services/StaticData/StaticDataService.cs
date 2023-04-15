@@ -13,6 +13,7 @@ namespace CodeBase.Services.StaticData
         private const string HealthPath = "StaticData/Health";
         private const string StaminaPath = "StaticData/Stamina";
         private const string StorablePath = "StaticData/Storable";
+        private const string LeaderboardPath = "StaticData/Leaderboard";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -26,7 +27,7 @@ namespace CodeBase.Services.StaticData
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
-            _leaderboards = LoadFor<LeaderboardStaticData, string>(StorablePath, x => x.Name);
+            _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.Name);
         }
 
         public LevelStaticData ForLevel(string levelKey) =>
