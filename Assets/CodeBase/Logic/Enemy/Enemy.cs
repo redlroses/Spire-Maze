@@ -1,7 +1,10 @@
-﻿using CodeBase.Logic.HealthEntity;
+﻿using CodeBase.Data;
+using CodeBase.Data.CellStates;
+using CodeBase.Logic.HealthEntity;
 using UnityEngine;
 using NTC.Global.Cache;
 using CodeBase.Logic.Movement;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
 
 namespace CodeBase.Logic.Enemy
@@ -9,11 +12,12 @@ namespace CodeBase.Logic.Enemy
     [RequireComponent(typeof(SphereCaster))]
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(RayDirection))]
-    public class Enemy : MonoCache, IEnemy
+    public class Enemy : MonoCache, IEnemy, ISavedProgress
     {
         [SerializeField] [RequireInterface(typeof(IAccelerable))]
         private MonoCache _mover;
 
+        [SerializeField] private EnemyHealth _health;
         [SerializeField] private SphereCaster _sphereCaster;
         [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private int _damage;
@@ -27,6 +31,7 @@ namespace CodeBase.Logic.Enemy
         private Transform _selfTransform;
         private MoveDirection _moveDirection;
         private float _currentDelayBetweenDetectTarget;
+        private bool _isDied;
 
         public int Id => _id;
         private IAccelerable Mover => (IAccelerable)_mover;
@@ -34,9 +39,26 @@ namespace CodeBase.Logic.Enemy
         public void Construct(int id)
         {
             _id = id;
+            _health ??= Get<EnemyHealth>();
             _rayDirection ??= Get<RayDirection>();
             _selfTransform = transform;
             _moveDirection = MoveDirection.Left;
+        }
+
+        protected override void OnEnabled()
+        {
+            _health.Died += OnDied;
+        }
+
+        protected override void OnDisabled()
+        {
+            _health.Died -= OnDied;
+        }
+
+        private void OnDied()
+        {
+            _isDied = true;
+            SetActive(_isDied);
         }
 
         protected override void FixedRun()
@@ -56,6 +78,36 @@ namespace CodeBase.Logic.Enemy
 
             _currentDelayBetweenDetectTarget = DelayBetweenDetectTarget;
             player.Damage(_damage, DamageType.Single);
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            EnemyState cellState = progress.WorldData.LevelState.EnemyStates
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null || cellState.IsDied == false)
+            {
+                return;
+            }
+
+            _isDied = cellState.IsDied;
+            SetActive(cellState.IsDied);
+        }
+
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            EnemyState cellState = progress.WorldData.LevelState.EnemyStates
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null)
+            {
+                progress.WorldData.LevelState.EnemyStates.Add((new EnemyState(Id, _isDied)));
+            }
+            else
+            {
+                cellState.IsDied = _isDied;
+            }
         }
 
         private MoveDirection GetMoveDirection()
@@ -125,5 +177,7 @@ namespace CodeBase.Logic.Enemy
         }
 
         private void ChangeDirection() => _moveDirection = (MoveDirection)((int)_moveDirection * -1);
+
+        private void SetActive(bool isDied) => gameObject.SetActive(!isDied);
     }
 }

@@ -1551,7 +1551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerDelay: {fileID: 7420519260703392512}
-  _currentPoints: 50
   _speedReplenish: 100
   _delayBeforeReplenish: 1.5
 --- !u!1 &4664208756271691803
@@ -7568,6 +7567,7 @@ MonoBehaviour:
   _playerHealth: {fileID: 7440742495519906430}
   _input: {fileID: 7393409988495010676}
   _animator: {fileID: 989079028364153686}
+  _collider: {fileID: 7393409988495010664}
 --- !u!114 &7393409988495010676
 MonoBehaviour:
   m_ObjectHideFlags: 0

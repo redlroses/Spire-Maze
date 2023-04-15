@@ -68,7 +68,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateEnemy(string prefabPath, Vector3 position)
         {
             GameObject enemy = InstantiateRegistered(prefabPath, position);
-            RegisterProgressWatchers(enemy);
             return enemy;
         }
 

@@ -10,12 +10,14 @@ namespace CodeBase.Logic.Player
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private HeroAnimator _animator;
+        [SerializeField] private CapsuleCollider _collider;
 
         private void Awake()
         {
             _playerHealth ??= GetComponentInChildren<PlayerHealth>();
             _input ??= GetComponent<PlayerInput>();
             _animator ??= GetComponent<HeroAnimator>();
+            _collider ??= GetComponent<CapsuleCollider>();
         }
 
         private void OnEnable()
@@ -31,6 +33,7 @@ namespace CodeBase.Logic.Player
         private void OnDied()
         {
             _input.enabled = false;
+            _collider.enabled = false;
             _animator.PlayDied();
         }
     }
