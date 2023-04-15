@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Data;
-using CodeBase.Leaderboard;
 using CodeBase.StaticData;
+using Agava.YandexGames;
+using CodeBase.Tools.Extension;
 
 namespace CodeBase.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {
-        private const string Anonymous = "Anonymous";
-
         private readonly string _name;
         private readonly int _topPlayersCount;
         private readonly int _competingPlayersCount;
@@ -31,15 +29,13 @@ namespace CodeBase.Leaderboards
         public async Task<RanksData> GetRanksData()
         {
             _isLeaderboardDataReceived = false;
-            // TryAuthorize();
-            
-            // Leaderboard.GetPlayerEntry(_name, result =>
-            // {
-            //     _selfRanksData = result;
-            // });
-            //
-            // Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount, _isIncludeSelf);
-            
+            TryAuthorize();
+
+            Leaderboard.GetPlayerEntry(_name, result => { _selfRanksData = result.ToSingleRankData(); });
+
+            Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount,
+                _isIncludeSelf);
+
             while (_isLeaderboardDataReceived == false)
             {
                 await Task.Yield();
@@ -58,67 +54,54 @@ namespace CodeBase.Leaderboards
 
         public void SetScore(int score, string avatarName)
         {
-            throw new NotImplementedException();
-        // TryAuthorize();
-        // TryGetPersonalData();
-        //
-        // if (PlayerAccount.IsAuthorized == false)
-        //     return;
-        //
-        // Leaderboard.GetPlayerEntry(_name, result =>
-        // {
-        //     if (result.score >= score)
-        //     {
-        //         return;
-        //     }
-        //
-        //     SetScore(_name, score, null, null, avatarName);
-        // });
+            TryAuthorize();
+            TryGetPersonalData();
+
+            if (PlayerAccount.IsAuthorized == false)
+                return;
+
+            Leaderboard.GetPlayerEntry(_name, result =>
+            {
+                if (result.score >= score)
+                {
+                    return;
+                }
+
+                Leaderboard.SetScore(_name, score, null, null, avatarName);
+            });
         }
 
-        // private void TryAuthorize()
-        // {
-        //     if (PlayerAccount.IsAuthorized)
-        //     {
-        //         return;
-        //     }
-        //
-        //     PlayerAccount.Authorize();
-        // }
-        //
-        // private void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
-        // {
-        //     TryAuthorize();
-        //     TryGetPersonalData();
-        //
-        //     _ranksData = new List<RanksData>(board.entries.Length);
-        //
-        //     foreach (var entry in board.entries)
-        //     {
-        //         string name = entry.player.publicName;
-        //
-        //         if (string.IsNullOrEmpty(name))
-        //         {
-        //             name = Anonymous;
-        //         }
-        //
-        //         int rank = entry.rank;
-        //         int score = entry.score;
-        //         string lang = entry.player.lang;
-        //         string avatar = entry.extraData;
-        //
-        //         _ranksData.Add(RanksDataConverter.FromYandex(name, rank, score, lang, avatar));
-        //     }
-        //
-        //     _isLeaderboardDataReceived = true;
-        // }
-        //
-        // private void TryGetPersonalData()
-        // {
-        //     if (PlayerAccount.IsAuthorized && PlayerAccount.HasPersonalProfileDataPermission == false)
-        //     {
-        //         PlayerAccount.RequestPersonalProfileDataPermission();
-        //     }
-        // }
+        private void TryAuthorize()
+        {
+            if (PlayerAccount.IsAuthorized)
+            {
+                return;
+            }
+
+            PlayerAccount.Authorize();
+        }
+
+        private void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
+        {
+            TryAuthorize();
+            TryGetPersonalData();
+
+            _ranksData = new List<SingleRankData>(board.entries.Length);
+
+            foreach (LeaderboardEntryResponse entry in board.entries)
+            {
+                _ranksData.Add(entry.ToSingleRankData());
+            }
+
+            _isLeaderboardDataReceived = true;
+        }
+
+        private void TryGetPersonalData()
+        {
+            if (PlayerAccount.IsAuthorized && PlayerAccount.HasPersonalProfileDataPermission == false)
+            {
+                PlayerAccount.RequestPersonalProfileDataPermission();
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Services;
 using CodeBase.Services.Ranked;
 using UnityEngine;
 
@@ -16,6 +17,14 @@ namespace CodeBase.UI
         private List<RankView> _ranksView;
         private bool _isLeaderboardDataReceived;
         private int _currentSelfRank;
+
+        private void Start()
+        {
+            Construct(AllServices.Container.Single<IRankedService>(),
+                AllServices.Container.Single<IGameUiFactory>());
+            
+            ShowLeaderBoard();
+        }
 
         public void Construct(IRankedService rankedService, IGameUiFactory gameUiFactory)
         {
@@ -40,7 +49,7 @@ namespace CodeBase.UI
                 GameObject topRankView = _gameUiFactory.CreateRankView();
                 RankView rankView = topRankView.GetComponent<RankView>();
                 rankView.Set(aroundRanks[i]);
-                
+
                 if (IsMyRank(aroundRanks[i]))
                 {
                     rankView.EnableSelfIndication();
@@ -56,7 +65,7 @@ namespace CodeBase.UI
                 topRankView.GetComponent<TopRankViewConfigurator>().SetUp(i);
                 RankView rankView = topRankView.GetComponent<RankView>();
                 rankView.Set(topThreeRanks[i]);
-                
+
                 if (IsMyRank(topThreeRanks[i]))
                 {
                     rankView.EnableSelfIndication();

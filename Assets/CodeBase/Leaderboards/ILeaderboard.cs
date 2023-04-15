@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using CodeBase.Data;
 
-namespace CodeBase.Leaderboard
+namespace CodeBase.Leaderboards
 {
     public interface ILeaderboard
     {
