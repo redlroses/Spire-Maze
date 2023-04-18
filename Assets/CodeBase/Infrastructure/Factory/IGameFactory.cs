@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.Score;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory
@@ -13,6 +15,7 @@ namespace CodeBase.Infrastructure.Factory
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
     List<IPauseWatcher> PauseWatchers { get; }
+    List<IScoreCounter> ScoreCounters { get; }
     void Cleanup();
     void WarmUp();
     Material CreateColoredMaterial(Colors color);

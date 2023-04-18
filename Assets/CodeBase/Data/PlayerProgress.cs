@@ -10,6 +10,7 @@ namespace CodeBase.Data
     public WorldData WorldData;
     public HeroInventoryOld HeroInventoryOld;
     public InventoryData HeroInventoryData;
+    public ScoreAccumulationData ScoreAccumulationData;
 
     public PlayerProgress(string initialLevel)
     {
@@ -18,6 +19,7 @@ namespace CodeBase.Data
       HeroStaminaState = new StaminaState();
       HeroInventoryOld = new HeroInventoryOld();
       HeroInventoryData = new InventoryData();
+      ScoreAccumulationData = new ScoreAccumulationData();
     }
   }
 }

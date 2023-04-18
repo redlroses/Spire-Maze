@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Data;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
@@ -43,6 +44,11 @@ namespace CodeBase.Services.StaticData
 
         public LeaderboardStaticData ForLeaderboard(string yandexName) =>
             GetDataFor(yandexName, _leaderboards);
+
+        public ScoreAccumulationData ForScore()
+        {
+            throw new NotImplementedException();
+        }
 
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

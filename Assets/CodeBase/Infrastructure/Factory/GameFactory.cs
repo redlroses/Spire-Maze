@@ -7,6 +7,7 @@ using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
+using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -18,6 +19,7 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();        
         public List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
+        public List<IScoreCounter> ScoreCounters { get; } = new List<IScoreCounter>();
 
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;

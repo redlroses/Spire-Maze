@@ -1,4 +1,5 @@
-﻿using CodeBase.StaticData;
+﻿using CodeBase.Data;
+using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 
 namespace CodeBase.Services.StaticData
@@ -11,5 +12,6 @@ namespace CodeBase.Services.StaticData
     StaminaStaticData StaminaForEntity(string entityKey);
     StorableStaticData ForStorable(StorableType storableType);
     LeaderboardStaticData ForLeaderboard(string yandexName);
+    ScoreAccumulationData ForScore();
   }
 }
