@@ -5,11 +5,11 @@ namespace CodeBase.Logic.Inventory
     public sealed class InventoryCell : IReadOnlyInventoryCell
     {
         public int Count { get; private set; }
-        public StorableData Item { get; }
+        public StorableStaticData Item { get; }
 
         public bool IsEmpty => Count <= 0;
 
-        public InventoryCell(StorableData item)
+        public InventoryCell(StorableStaticData item)
         {
             Count = 1;
             Item = item;

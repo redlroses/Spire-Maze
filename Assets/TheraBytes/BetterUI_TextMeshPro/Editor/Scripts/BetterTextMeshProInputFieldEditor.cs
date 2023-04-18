@@ -19,12 +19,11 @@ namespace TheraBytes.BetterUi.Editor
         BetterElementHelper<TMP_InputField, BetterTextMeshProInputField> helper =
             new BetterElementHelper<TMP_InputField, BetterTextMeshProInputField>();
 
-        int phCount = 0;
-
         bool foldout = true;
 
         SerializedProperty pointSizeScalerProp;
         SerializedProperty overrideSizeProp;
+        SerializedProperty additionalPlaceholdersProp;
 
         protected override void OnEnable()
         {
@@ -32,6 +31,7 @@ namespace TheraBytes.BetterUi.Editor
 
             pointSizeScalerProp = serializedObject.FindProperty("pointSizeScaler");
             overrideSizeProp = serializedObject.FindProperty("overridePointSize");
+            additionalPlaceholdersProp = serializedObject.FindProperty("additionalPlaceholders");
         }
 
         public override void OnInspectorGUI()
@@ -49,26 +49,16 @@ namespace TheraBytes.BetterUi.Editor
             {
                 EditorGUI.indentLevel++;
 
-                var obj = target as BetterTextMeshProInputField;
-
                 EditorGUILayout.PropertyField(overrideSizeProp);
                 if(overrideSizeProp.boolValue)
                 {
                     EditorGUILayout.PropertyField(pointSizeScalerProp);
                 }
 
-                helper.DrawGui(serializedObject, obj);
+                helper.DrawGui(serializedObject);
 
-                var prop = serializedObject.FindProperty("additionalPlaceholders");
-                EditorGuiUtils.DrawLayoutList("Additional Placeholders",
-                    obj.AdditionalPlaceholders, prop, ref phCount,
-                    createCallback: null,
-                    drawItemCallback: (item, p) =>
-                    {
-                        EditorGUILayout.PropertyField(p);
-                        serializedObject.ApplyModifiedProperties();
-                    }
-                );
+                ThirdParty.ReorderableListGUI.Title("Additional Placeholders");
+                ThirdParty.ReorderableListGUI.ListField(additionalPlaceholdersProp);
 
                 serializedObject.ApplyModifiedProperties();
 

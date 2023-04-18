@@ -13,19 +13,19 @@ namespace CodeBase.Logic.Сollectible
         [SerializeField] private Colors _color;
         [SerializeField] private MaterialChanger _materialChanger;
 
-        private StorableData _keyStaticData;
+        private StorableStaticData _keyStaticStaticData;
         private bool _isTaken;
         private int _id;
 
         public int Id => _id;
         public Colors Color => _color;
-        public StorableData StorableData => _keyStaticData;
+        public StorableStaticData StorableStaticData => _keyStaticStaticData;
 
-        public void Construct(IGameFactory gameFactory, StorableData staticData, Colors color, int id)
+        public void Construct(IGameFactory gameFactory, StorableStaticData staticStaticData, Colors color, int id)
         {
             _materialChanger.Construct(gameFactory);
             _materialChanger.SetMaterial(color);
-            _keyStaticData = staticData;
+            _keyStaticStaticData = staticStaticData;
             _color = color;
             _id = id;
         }

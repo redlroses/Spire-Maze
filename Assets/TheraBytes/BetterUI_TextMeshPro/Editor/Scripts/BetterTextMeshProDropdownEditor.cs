@@ -15,13 +15,14 @@ namespace TheraBytes.BetterUi.Editor
     [CustomEditor(typeof(BetterTextMeshProDropdown)), CanEditMultipleObjects]
     public class BetterTextMeshProDropDownEditor : TMPro.EditorUtilities.DropdownEditor
     {
-
         bool foldout = true;
 
-        BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown> helper =
+        BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown> transitions =
             new BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown>();
 
-        int showHideTransCount = 0;
+        BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown> showHideTransitions =
+            new BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown>();
+
 
         protected override void OnEnable()
         {
@@ -43,13 +44,8 @@ namespace TheraBytes.BetterUi.Editor
             {
                 EditorGUI.indentLevel++;
 
-                BetterTextMeshProDropdown obj = target as BetterTextMeshProDropdown;
-                helper.DrawGui(serializedObject, obj);
-
-                // Show / Hide Transitions
-                var prop = serializedObject.FindProperty("showHideTransitions");
-                EditorGuiUtils.DrawTransitions("Show / Hide Transitions", obj.ShowHideTransitions, prop,
-                    ref showHideTransCount, Transitions.ShowHideStateNames);
+                transitions.DrawGui(serializedObject);
+                showHideTransitions.DrawGui(serializedObject);
 
                 serializedObject.ApplyModifiedProperties();
 

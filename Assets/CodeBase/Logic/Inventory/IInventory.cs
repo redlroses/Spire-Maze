@@ -8,9 +8,9 @@ namespace CodeBase.Logic.Inventory
     public interface IInventory : IEnumerable
     {
         event Action Updated;
-        bool TryUse(StorableType storableType, out StorableData item);
+        bool TryUse(StorableType storableType, out StorableStaticData item);
         void ClearUp();
-        void Add(StorableData collectible);
+        void Add(StorableStaticData collectible);
         List<InventoryCell> ReadAll();
     }
 }

@@ -20,7 +20,7 @@ namespace CodeBase.Logic.Inventory
             _storage = storage;
         }
 
-        public void Add(StorableData item)
+        public void Add(StorableStaticData item)
         {
             InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == item.ItemType);
 
@@ -41,7 +41,7 @@ namespace CodeBase.Logic.Inventory
         public List<InventoryCell> ReadAll() => new List<InventoryCell>(_storage);
 
 
-        public bool TryUse(StorableType storableType, out StorableData item)
+        public bool TryUse(StorableType storableType, out StorableStaticData item)
         {
             InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == storableType);
             item = default;

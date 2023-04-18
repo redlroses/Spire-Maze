@@ -9,6 +9,7 @@ namespace CodeBase.Services.StaticData
     LevelStaticData ForLevel(string levelKey);
     HealthStaticData HealthForEntity(string entityKey);
     StaminaStaticData StaminaForEntity(string entityKey);
-    StorableData ForStorable(StorableType storableType);
+    StorableStaticData ForStorable(StorableType storableType);
+    LeaderboardStaticData ForLeaderboard(string yandexName);
   }
 }

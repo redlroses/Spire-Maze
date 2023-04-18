@@ -11,5 +11,9 @@ namespace CodeBase.Infrastructure.AssetManagement
     public const string Spire = "Prefabs/Spire";
     public const string Cells = "Prefabs/Cells";
     public const string ExtraLiveView = "Prefabs/UI/ExtraLiveView";
+    public const string TopRankView = "Prefabs/UI/Ranking/List_Medal";
+    public const string RankView = "Prefabs/UI/Ranking/List_Variant";
+    public const string AvatarPath = "Sprite/Avatar";
+    public const string FlagPath = "Sprite/Flag";
   }
 }
