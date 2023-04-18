@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.Services.LevelBuild;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.Ranked;
@@ -48,6 +49,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ILevelBuilder>(new LevelBuilder(_services.Single<IGameFactory>(),
                 _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IGameFactory>()));
         }
 
         private void RegisterStaticDataService()

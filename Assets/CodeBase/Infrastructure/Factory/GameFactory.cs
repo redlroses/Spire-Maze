@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.HealthEntity;
+using CodeBase.Services;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.StaticData;
@@ -15,7 +16,8 @@ namespace CodeBase.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
+        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();        
+        public List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
 
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
@@ -43,7 +45,9 @@ namespace CodeBase.Infrastructure.Factory
         public void Cleanup()
         {
             ProgressReaders.Clear();
-            ProgressWriters.Clear();
+            ProgressWriters.Clear();     
+            
+            PauseWatchers.Clear();
 
             _heroGameObject = null;
         }
@@ -102,6 +106,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
             RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
 
             return gameObject;
         }
@@ -112,6 +117,12 @@ namespace CodeBase.Infrastructure.Factory
             RegisterProgressWatchers(gameObject);
 
             return gameObject;
+        }
+
+        private void RegisterPauseWatchers(GameObject gameObject)
+        {
+            foreach (IPauseWatcher progressReader in gameObject.GetComponentsInChildren<IPauseWatcher>())
+                PauseWatchers.Add(progressReader);
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)
