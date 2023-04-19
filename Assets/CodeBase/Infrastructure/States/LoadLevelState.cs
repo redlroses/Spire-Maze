@@ -9,6 +9,8 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Factory;
 using UnityEngine;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
@@ -25,16 +27,18 @@ namespace CodeBase.Infrastructure.States
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
         private readonly LoadingCurtain _curtain;
+        private readonly IUIFactory _uiFactory;
 
         private LoadPayload _loadPayload;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IUIFactory uiFactory,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
+            _uiFactory = uiFactory;
             _progressService = progressService;
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
@@ -58,12 +62,17 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
+            InitUIRoot();
             var hero = InitGameWorld();
             InformProgressReaders();
             InitHud(hero);
 
             _stateMachine.Enter<GameLoopState>();
         }
+
+        // ReSharper disable once InconsistentNaming
+        private void InitUIRoot() =>
+            _uiFactory.CreateUIRoot();
 
         private void InformProgressReaders()
         {

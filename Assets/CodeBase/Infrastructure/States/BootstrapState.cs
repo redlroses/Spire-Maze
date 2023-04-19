@@ -8,6 +8,8 @@ using CodeBase.Services.Randomizer;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
+using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -39,17 +41,23 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(),
-                _services.Single<IStaticDataService>(),
-                _services.Single<IRandomService>(),
-                _services.Single<IPersistentProgressService>()));
-            _services.RegisterSingle<IGameUiFactory>(new GameUiFactory(_services.Single<IAssetProvider>()));
+            _services.RegisterSingle<IGameFactory>(
+                new GameFactory(
+                    _services.Single<IAssetProvider>(),
+                    _services.Single<IStaticDataService>(),
+                    _services.Single<IRandomService>(),
+                    _services.Single<IPersistentProgressService>()));
+            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(),
+                _services.Single<IStaticDataService>(), _services.Single<IPersistentProgressService>(),
+                _services.Single<IRankedService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
             _services.RegisterSingle<ILevelBuilder>(new LevelBuilder(_services.Single<IGameFactory>(),
                 _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IGameFactory>()));
+            _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
         }
 
         private void RegisterStaticDataService()

@@ -1,5 +1,7 @@
 ﻿using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
+using CodeBase.StaticData.Windows;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Services.StaticData
 {
@@ -11,5 +13,6 @@ namespace CodeBase.Services.StaticData
     StaminaStaticData StaminaForEntity(string entityKey);
     StorableStaticData ForStorable(StorableType storableType);
     LeaderboardStaticData ForLeaderboard(string yandexName);
+    WindowConfig ForWindow(WindowId windowId);
   }
 }

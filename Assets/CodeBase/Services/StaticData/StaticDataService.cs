@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
+using CodeBase.StaticData.Windows;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Services.StaticData
@@ -14,12 +16,14 @@ namespace CodeBase.Services.StaticData
         private const string StaminaPath = "StaticData/Stamina";
         private const string StorablePath = "StaticData/Storable";
         private const string LeaderboardPath = "StaticData/Leaderboard";
+        private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
         private Dictionary<string, StaminaStaticData> _staminas;
         private Dictionary<StorableType, StorableStaticData> _storables;
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
+        private Dictionary<WindowId, WindowConfig> _windows;
 
         public void Load()
         {
@@ -28,6 +32,10 @@ namespace CodeBase.Services.StaticData
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
             _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.Name);
+            _windows = Resources
+                .Load<WindowStaticData>(WindowPath)
+                .Configs
+                .ToDictionary(x => x.WindowId, x => x);
         }
 
         public LevelStaticData ForLevel(string levelKey) =>
@@ -43,6 +51,9 @@ namespace CodeBase.Services.StaticData
 
         public LeaderboardStaticData ForLeaderboard(string yandexName) =>
             GetDataFor(yandexName, _leaderboards);
+
+        public WindowConfig ForWindow(WindowId windowId) =>
+            GetDataFor(windowId, _windows);
 
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)
