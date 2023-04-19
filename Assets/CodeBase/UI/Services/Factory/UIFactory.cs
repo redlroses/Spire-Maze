@@ -1,6 +1,9 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.Localization;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
+using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Elements;
@@ -18,16 +21,23 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
         private readonly IRankedService _rankedService;
+        private readonly ILocalizationService _localizationService;
+        private readonly ISoundService _soundService;
+        private readonly IPauseService _pauseService;
 
         private Transform _uiRoot;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
-            IPersistentProgressService progressService, IRankedService rankedService)
+            IPersistentProgressService progressService, IRankedService rankedService,
+            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
             _rankedService = rankedService;
+            _localizationService = localizationService;
+            _soundService = soundService;
+            _pauseService = pauseService;
         }
 
         public GameObject CreateExtraLiveView(Transform inside) =>
@@ -44,13 +54,13 @@ namespace CodeBase.UI.Services.Factory
         public void CreateSettings()
         {
             var window = CreateWindow<SettingsWindow>(WindowId.Settings);
-            window.Construct(_progressService);
+            window.Construct(_localizationService, _soundService);
         }
 
         public void CreatePause()
         {
             var window = CreateWindow<PauseWindow>(WindowId.Pause);
-            window.Construct(_progressService);
+            window.Construct(_pauseService);
         }
 
         public void CreateResults()

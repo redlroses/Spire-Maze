@@ -2,11 +2,13 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.Services.LevelBuild;
+using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
@@ -48,15 +50,28 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
-            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(),
-                _services.Single<IStaticDataService>(), _services.Single<IPersistentProgressService>(),
-                _services.Single<IRankedService>()));
-            _services.RegisterSingle<ISaveLoadService>(
-                new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
-            _services.RegisterSingle<ILevelBuilder>(new LevelBuilder(_services.Single<IGameFactory>(),
-                _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<ILocalizationService>(new LocalizationService());
+            _services.RegisterSingle<ISoundService>(new SoundService());
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IGameFactory>()));
+            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IUIFactory>(
+                new UIFactory(
+                    _services.Single<IAssetProvider>(),
+                    _services.Single<IStaticDataService>(),
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IRankedService>(),
+                    _services.Single<ILocalizationService>(),
+                    _services.Single<ISoundService>(),
+                    _services.Single<IPauseService>()));
+            _services.RegisterSingle<ISaveLoadService>(
+                new SaveLoadService(
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IGameFactory>()));
+            _services.RegisterSingle<ILevelBuilder>(
+                new LevelBuilder(
+                    _services.Single<IGameFactory>(),
+                    _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
         }
 
