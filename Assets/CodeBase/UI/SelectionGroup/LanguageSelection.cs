@@ -1,17 +1,26 @@
-﻿using UnityEngine;
+﻿using CodeBase.Services.Localization;
+using UnityEngine;
 
 namespace CodeBase.UI.SelectionGroup
 {
-    public class LanguageSelection : ToggleSelectionGroup<Languages>
+    public class LanguageSelection : ToggleSelectionGroup<LanguageId>
     {
+        private ILocalizationService _localization;
+
         private void Awake()
         {
-            SetDefault(Languages.Russian);
+            SetDefault(LanguageId.Russian);
         }
 
-        protected override void OnSelectionChanged(Languages id)
+        public void Construct(ILocalizationService localization)
         {
-            Debug.Log($"Select language: {id}");
+            _localization = localization;
+        }
+        
+        protected override void OnSelectionChanged(LanguageId languageId)
+        {
+            Debug.Log($"Select language: {languageId}");
+            _localization.ChooseLanguage(languageId);
         }
     }
 }

@@ -64,6 +64,6 @@ namespace CodeBase.UI.SelectionGroup
             OnSelectionChanged(_currentSelected.Id);
         }
 
-        protected abstract void OnSelectionChanged(TEnum id);
+        protected abstract void OnSelectionChanged(TEnum languageId);
     }
 }
