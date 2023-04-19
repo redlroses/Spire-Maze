@@ -2,6 +2,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 {
   public static class AssetPath
   {
+    public const string UIRootPath = "Prefabs/UI/UIRoot";
     public const string HeroPath = "Prefabs/Hero";
     public const string Loot = "Loot/Loot";
     public const string HudPath = "Prefabs/UI/Hud";

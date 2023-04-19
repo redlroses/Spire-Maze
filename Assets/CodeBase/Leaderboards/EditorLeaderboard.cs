@@ -30,11 +30,9 @@ namespace CodeBase.Leaderboards
         public async Task<RanksData> GetRanksData()
         {
             _isLeaderboardDataReceived = false;
-            string[] langs = {"ru", "en", "tr"};
-            string[] avatars = {"Test1", "Test2"};
 
-            ApplyTestData(langs, avatars, _ranksData);
-
+            ApplyTestData();
+            
             while (_isLeaderboardDataReceived == false)
             {
                 await Task.Yield();
@@ -55,8 +53,13 @@ namespace CodeBase.Leaderboards
         {
         }
 
-        private async void ApplyTestData(string[] langs, string[] avatars, List<SingleRankData> ranks)
+        private async void ApplyTestData()
         {
+            _ranksData.Clear();
+            
+            string[] langs = {"ru", "en", "tr"};
+            string[] avatars = {"Test1", "Test2"};
+            
             for (int i = 1; i <= 10; i++)
             {
                 var data = new LeaderboardEntryResponse
@@ -71,14 +74,12 @@ namespace CodeBase.Leaderboards
                     },
                 };
                 
-                ranks.Add(data.ToSingleRankData());
+                _ranksData.Add(data.ToSingleRankData());
 
                 await Task.Delay(150);
             }
 
-            _selfRanksData = ranks.GetRandom();
-            Debug.Log(_selfRanksData.Rank + " test my rank");
-
+            _selfRanksData = _ranksData.GetRandom();
             _isLeaderboardDataReceived = true;
         }
     }
