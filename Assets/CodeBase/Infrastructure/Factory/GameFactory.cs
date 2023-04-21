@@ -45,8 +45,7 @@ namespace CodeBase.Infrastructure.Factory
         public void Cleanup()
         {
             ProgressReaders.Clear();
-            ProgressWriters.Clear();     
-            
+            ProgressWriters.Clear();
             PauseWatchers.Clear();
 
             _heroGameObject = null;

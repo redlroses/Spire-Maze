@@ -38,7 +38,7 @@ namespace CodeBase.Services.Pause
             {
                 foreach (var watcher in _gameFactory.PauseWatchers)
                 {
-                    watcher.Unpause();
+                    watcher.Resume();
                 }
             }
         }

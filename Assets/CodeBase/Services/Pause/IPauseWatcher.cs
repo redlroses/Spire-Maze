@@ -3,6 +3,6 @@
     public interface IPauseWatcher
     {
         void Pause();
-        void Unpause();
+        void Resume();
     }
 }
