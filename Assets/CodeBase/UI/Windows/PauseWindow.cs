@@ -6,8 +6,9 @@ namespace CodeBase.UI.Windows
 {
     public class PauseWindow : WindowBase
     {
-        [SerializeField] private Button _pauseButton;
         [SerializeField] private Button _unpauseButton;
+        [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _menuButton;
 
         private IPauseService _pauseService;
 
@@ -25,24 +26,14 @@ namespace CodeBase.UI.Windows
 
         protected override void SubscribeUpdates()
         {
-            _pauseButton.onClick.AddListener(ActivatePause);
-            _unpauseButton.onClick.AddListener(DeactivatePause);
+            _unpauseButton.onClick.AddListener(() => _pauseService.SetPause(false));
+            _menuButton.onClick.AddListener(() => print("To main menu"));
+            _restartButton.onClick.AddListener(() => print("Restart level"));
         }
 
         protected override void CleanUp()
         {
-            _pauseButton.onClick.RemoveListener(ActivatePause);
-            _unpauseButton.onClick.RemoveListener(DeactivatePause);
-        }
-
-        private void ActivatePause()
-        {
-            _pauseService.SetPause(true);
-        }
-
-        private void DeactivatePause()
-        {
-            _pauseService.SetPause(false);
+            _unpauseButton.onClick.RemoveAllListeners();
         }
     }
 }
