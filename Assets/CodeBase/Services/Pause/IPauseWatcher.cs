@@ -2,6 +2,6 @@
 {
     public interface IPauseWatcher
     {
-        void Register(IPauseReactive pauseReactive);
+        void RegisterPauseWatcher(IPauseReactive pauseReactive);
     }
 }
