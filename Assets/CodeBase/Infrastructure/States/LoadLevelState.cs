@@ -139,6 +139,11 @@ namespace CodeBase.Infrastructure.States
                 return;
             }
 
+            ResetProgress(level);
+        }
+
+        private void ResetProgress(Level level)
+        {
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelKey);
             _progressService.Progress.WorldData.PositionOnLevel =
                 new PositionOnLevel(_loadPayload.LevelKey, level.HeroInitialPosition.AsVectorData());
