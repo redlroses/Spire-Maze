@@ -64,7 +64,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IRankedService>(),
                     _services.Single<ILocalizationService>(),
                     _services.Single<ISoundService>(),
-                    _services.Single<IPauseService>()));
+                    _services.Single<IPauseService>(), 
+                    _stateMachine));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

@@ -1,6 +1,6 @@
 ﻿namespace CodeBase.Infrastructure
 {
-    public struct LoadPayload
+    public readonly struct LoadPayload
     {
         public readonly string SceneName;
         public readonly string LevelKey;

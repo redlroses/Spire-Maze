@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.States;
 using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -24,12 +25,14 @@ namespace CodeBase.UI.Services.Factory
         private readonly ILocalizationService _localizationService;
         private readonly ISoundService _soundService;
         private readonly IPauseService _pauseService;
+        private readonly GameStateMachine _stateMachine;
 
         private Transform _uiRoot;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
             IPersistentProgressService progressService, IRankedService rankedService,
-            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService)
+            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService,
+            GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;
@@ -38,6 +41,7 @@ namespace CodeBase.UI.Services.Factory
             _localizationService = localizationService;
             _soundService = soundService;
             _pauseService = pauseService;
+            _stateMachine = stateMachine;
         }
 
         public GameObject CreateExtraLiveView(Transform inside) =>
@@ -60,7 +64,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreatePause()
         {
             var window = CreateWindow<PauseWindow>(WindowId.Pause);
-            window.Construct(_pauseService);
+            window.Construct(_pauseService, _stateMachine);
         }
 
         public void CreateResults()

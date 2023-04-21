@@ -1,4 +1,6 @@
-﻿using CodeBase.Services.Pause;
+﻿using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.States;
+using CodeBase.Services.Pause;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +13,11 @@ namespace CodeBase.UI.Windows
         [SerializeField] private Button _menuButton;
 
         private IPauseService _pauseService;
+        private GameStateMachine _stateMachine;
 
-        public void Construct(IPauseService pauseService)
+        public void Construct(IPauseService pauseService, GameStateMachine stateMachine)
         {
+            _stateMachine = stateMachine;
             _pauseService = pauseService;
             _pauseService.Resume += OnResume;
         }
@@ -27,8 +31,10 @@ namespace CodeBase.UI.Windows
         protected override void SubscribeUpdates()
         {
             _unpauseButton.onClick.AddListener(() => _pauseService.SetPause(false));
-            _menuButton.onClick.AddListener(() => print("To main menu"));
-            _restartButton.onClick.AddListener(() => print("Restart level"));
+            _menuButton.onClick.AddListener(() =>
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey)));
+            _restartButton.onClick.AddListener(() =>
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey)));
         }
 
         protected override void CleanUp()
