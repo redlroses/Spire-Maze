@@ -43,17 +43,18 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _services.RegisterSingle<IPauseService>(new PauseService());
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IStaticDataService>(),
                     _services.Single<IRandomService>(),
-                    _services.Single<IPersistentProgressService>()));
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IPauseService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
-            _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IGameFactory>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(

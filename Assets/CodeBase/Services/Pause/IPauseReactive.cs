@@ -1,7 +1,11 @@
-﻿namespace CodeBase.Services.Pause
+﻿using System;
+
+namespace CodeBase.Services.Pause
 {
-    public interface IPauseReader
+    public interface IPauseReactive
     {
-        
+        bool IsPause { get; }
+        event Action Pause;
+        event Action Resume;
     }
 }

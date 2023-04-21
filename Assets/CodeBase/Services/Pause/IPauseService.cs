@@ -1,8 +1,7 @@
 ﻿namespace CodeBase.Services.Pause
 {
-    public interface IPauseService : IService
+    public interface IPauseService : IPauseReactive, IService
     {
-        bool IsPause { get; }
         void SetPause(bool isPause);
     }
 }

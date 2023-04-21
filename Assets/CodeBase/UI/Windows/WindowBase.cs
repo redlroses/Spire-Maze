@@ -25,13 +25,13 @@ namespace CodeBase.UI.Windows
     }
 
     private void OnDestroy() => 
-      Cleanup();
+      CleanUp();
 
     protected virtual void OnAwake() => 
       CloseButton.onClick.AddListener(()=> Destroy(gameObject));
 
     protected virtual void Initialize(){}
     protected virtual void SubscribeUpdates(){}
-    protected virtual void Cleanup(){}
+    protected virtual void CleanUp(){}
   }
 }

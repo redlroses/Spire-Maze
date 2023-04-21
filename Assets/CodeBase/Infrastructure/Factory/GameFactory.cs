@@ -16,13 +16,13 @@ namespace CodeBase.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();        
-        public List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
+        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IPauseService _pauseService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
@@ -31,12 +31,13 @@ namespace CodeBase.Infrastructure.Factory
         private GameObject _heroGameObject;
 
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService)
+            IPersistentProgressService persistentProgressService, IPauseService pauseService)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+            _pauseService = pauseService;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -46,7 +47,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
-            PauseWatchers.Clear();
 
             _heroGameObject = null;
         }
@@ -120,8 +120,8 @@ namespace CodeBase.Infrastructure.Factory
 
         private void RegisterPauseWatchers(GameObject gameObject)
         {
-            foreach (IPauseWatcher progressReader in gameObject.GetComponentsInChildren<IPauseWatcher>())
-                PauseWatchers.Add(progressReader);
+            foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
+                pauseWatcher.Register(_pauseService);
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

@@ -1,15 +1,11 @@
-﻿using CodeBase.Infrastructure.Factory;
+﻿using System;
 
 namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
-        private readonly IGameFactory _gameFactory;
-
-        public PauseService(IGameFactory gameFactory)
-        {
-            _gameFactory = gameFactory;
-        }
+        public event Action Pause;
+        public event Action Resume;
 
         public bool IsPause { get; private set; }
 
@@ -22,24 +18,13 @@ namespace CodeBase.Services.Pause
 
             IsPause = isPause;
 
-            UpdatePauseWatchers();
-        }
-
-        private void UpdatePauseWatchers()
-        {
             if (IsPause)
             {
-                foreach (var watcher in _gameFactory.PauseWatchers)
-                {
-                    watcher.Pause();
-                }
+                Pause?.Invoke();
             }
             else
             {
-                foreach (var watcher in _gameFactory.PauseWatchers)
-                {
-                    watcher.Resume();
-                }
+                Resume?.Invoke();
             }
         }
     }

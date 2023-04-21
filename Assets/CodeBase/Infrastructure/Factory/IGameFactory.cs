@@ -12,7 +12,6 @@ namespace CodeBase.Infrastructure.Factory
   {
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
-    List<IPauseWatcher> PauseWatchers { get; }
     void Cleanup();
     void WarmUp();
     Material CreateColoredMaterial(Colors color);
