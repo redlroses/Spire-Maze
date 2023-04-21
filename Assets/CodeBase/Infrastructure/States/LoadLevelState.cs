@@ -31,7 +31,8 @@ namespace CodeBase.Infrastructure.States
 
         private LoadPayload _loadPayload;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IUIFactory uiFactory,
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
+            IUIFactory uiFactory,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, LoadingCurtain curtain)
         {
@@ -63,7 +64,8 @@ namespace CodeBase.Infrastructure.States
         private void OnLoaded()
         {
             InitUIRoot();
-            var hero = InitGameWorld();
+            var hero = InitHero();
+            InitGameWorld();
             InformProgressReaders();
             InitHud(hero);
 
@@ -80,33 +82,34 @@ namespace CodeBase.Infrastructure.States
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
-        private GameObject InitGameWorld()
+        private void InitGameWorld()
         {
             if (_loadPayload.IsBuildable == false)
             {
-                return null;
+                return;
             }
 
             Level level = BuildLevel();
             ValidateLevelProgress(level);
             ConstructLevel();
-            Vector3 heroPosition = GetHeroPosition();
-            GameObject hero = InitHero(heroPosition);
-            CameraFollow(hero);
-            return hero;
         }
 
         private Vector3 GetHeroPosition() =>
             _progressService.Progress.WorldData.PositionOnLevel.Position.AsUnityVector();
-    
+
         private Level BuildLevel() =>
             _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelKey));
 
         private void ConstructLevel() =>
             _levelBuilder.Construct();
 
-        private GameObject InitHero(Vector3 at) =>
-            _gameFactory.CreateHero(at);
+        private GameObject InitHero()
+        {
+            Vector3 heroPosition = GetHeroPosition();
+            GameObject hero = _gameFactory.CreateHero(heroPosition);
+            CameraFollow(hero);
+            return hero;
+        }
 
         private void InitHud(GameObject hero)
         {
@@ -119,7 +122,8 @@ namespace CodeBase.Infrastructure.States
 
         private void CameraFollow(GameObject hero)
         {
-            if (Camera.main != null) Camera.main.GetComponent<CameraFollower>().Follow(hero.transform);
+            if (Camera.main != null)
+                Camera.main.GetComponent<CameraFollower>().Follow(hero.transform);
         }
 
         private void ValidateLevelProgress(Level level)
@@ -129,13 +133,15 @@ namespace CodeBase.Infrastructure.States
                 return;
             }
 
-            if (_progressService.Progress.WorldData.LevelState.LevelKey == _loadPayload.LevelKey)
+            if (_progressService.Progress.WorldData.LevelState.LevelKey == _loadPayload.LevelKey &&
+                _loadPayload.IsClearLoad == false)
             {
                 return;
             }
 
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelKey);
-            _progressService.Progress.WorldData.PositionOnLevel = new PositionOnLevel(_loadPayload.LevelKey, level.HeroInitialPosition.AsVectorData());
+            _progressService.Progress.WorldData.PositionOnLevel =
+                new PositionOnLevel(_loadPayload.LevelKey, level.HeroInitialPosition.AsVectorData());
             _progressService.Progress.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerKey).MaxHealth;
             _progressService.Progress.HeroHealthState.ResetHP();
             _progressService.Progress.HeroStaminaState.MaxValue = _staticData.StaminaForEntity(PlayerKey).MaxStamina;

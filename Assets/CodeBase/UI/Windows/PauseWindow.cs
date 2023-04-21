@@ -32,9 +32,11 @@ namespace CodeBase.UI.Windows
         {
             _unpauseButton.onClick.AddListener(() => _pauseService.SetPause(false));
             _menuButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey)));
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true,
+                    LevelNames.FirstLevelKey)));
             _restartButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true, LevelNames.FirstLevelKey)));
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true,
+                    LevelNames.FirstLevelKey, true)));
         }
 
         protected override void CleanUp()
