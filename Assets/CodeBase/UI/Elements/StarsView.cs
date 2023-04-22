@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.UI.Windows
+namespace CodeBase.UI.Elements
 {
     public class StarsView : MonoBehaviour
     {

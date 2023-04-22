@@ -15,6 +15,6 @@ namespace CodeBase.Services.StaticData
     StorableStaticData ForStorable(StorableType storableType);
     LeaderboardStaticData ForLeaderboard(string yandexName);
     WindowConfig ForWindow(WindowId windowId);
-    ScoreAccumulationData ForScore();
+    ScoreConfig ScoreForLevel(string levelKey);
   }
 }

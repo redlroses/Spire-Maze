@@ -2,11 +2,13 @@
 
 namespace CodeBase.StaticData
 {
-    [CreateAssetMenu(fileName = "LevelData", menuName = "Static Data/Level")]
-    public class PointsPerLevelProgress : ScriptableObject
+    [CreateAssetMenu(fileName = "ScoreConfig", menuName = "Static Data/Score configs")]
+    public class ScoreConfig : ScriptableObject
     {
+        public string LevelKey;
         public int BasePointsOnStart;
         public int PerSecondReduction;
         public int PerArtifact;
+        public AnimationCurve RaitingCurve;
     }
 }

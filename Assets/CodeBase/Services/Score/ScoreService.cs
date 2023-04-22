@@ -20,7 +20,7 @@ namespace CodeBase.Services.Score
         {
             //_progressService.Progress.ScoreAccumulationData;
             //_staticData.ForScore;
-            //TODO: Подсчёт очков по модификаторам из статик даты, добавить метод ForScore
+            //TODO: Подсчёт очков по модификаторам из статик даты
             //CurrentScore = 
             //TODO: Кеширование текущих очков на всякий случай чтобы не пересчитывать каждый раз
             return CurrentScore;

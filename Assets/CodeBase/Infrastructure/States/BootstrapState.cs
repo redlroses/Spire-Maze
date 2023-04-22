@@ -8,6 +8,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.UI.Services.Factory;
@@ -64,7 +65,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IRankedService>(),
                     _services.Single<ILocalizationService>(),
                     _services.Single<ISoundService>(),
-                    _services.Single<IPauseService>(), 
+                    _services.Single<IPauseService>(),
+                    _services.Single<IScoreService>(),
                     _stateMachine));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
