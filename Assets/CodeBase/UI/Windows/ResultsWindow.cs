@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.UI.Windows
 {
     public class ResultsWindow : WindowBase
     {
-        [SerializeField] private TestWindowWrapper _testWindowWrapper;
+        [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
 
         protected override void Initialize()
         {
-            _testWindowWrapper.Play();
+            _windowAnimationPlayer.Play();
         }
     }
 }
