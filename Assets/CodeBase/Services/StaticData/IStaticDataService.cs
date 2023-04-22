@@ -1,4 +1,5 @@
-﻿using CodeBase.StaticData;
+﻿using CodeBase.Data;
+using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
@@ -14,5 +15,6 @@ namespace CodeBase.Services.StaticData
     StorableStaticData ForStorable(StorableType storableType);
     LeaderboardStaticData ForLeaderboard(string yandexName);
     WindowConfig ForWindow(WindowId windowId);
+    ScoreAccumulationData ForScore();
   }
 }

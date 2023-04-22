@@ -55,6 +55,11 @@ namespace CodeBase.Services.StaticData
         public WindowConfig ForWindow(WindowId windowId) =>
             GetDataFor(windowId, _windows);
 
+        public ScoreAccumulationData ForScore()
+        {
+            throw new NotImplementedException();
+        }
+
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)
                 ? staticData

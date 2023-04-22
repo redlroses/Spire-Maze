@@ -7,6 +7,7 @@ using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
+using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using UnityEngine;
 using Object = UnityEngine.Object;
