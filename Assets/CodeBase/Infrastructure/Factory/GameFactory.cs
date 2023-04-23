@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
-using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
+using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -24,6 +24,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IPauseService _pauseService;
+        private readonly IWindowService _windowService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
@@ -32,13 +33,14 @@ namespace CodeBase.Infrastructure.Factory
         private GameObject _heroGameObject;
 
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService)
+            IPersistentProgressService persistentProgressService, IPauseService pauseService, IWindowService windowService)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
             _pauseService = pauseService;
+            _windowService = windowService;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -91,6 +93,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+            hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService, _windowService);
             return hud;
         }
 
@@ -131,7 +134,8 @@ namespace CodeBase.Infrastructure.Factory
                 Register(progressReader);
         }
 
-        private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection) where TValue : Object
+        private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection)
+            where TValue : Object
         {
             if (collection.TryGetValue(key, out TValue value))
             {
