@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 5444690589777981685}
   - component: {fileID: 5444690589777981683}
   - component: {fileID: 5444690589777981684}
-  - component: {fileID: 2498219208413065250}
+  - component: {fileID: 1200259939827944471}
   m_Layer: 5
   m_Name: Text_Value
   m_TagString: Untagged
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2498219208413065250
+--- !u!114 &1200259939827944471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,10 +237,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 5444690589777981686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a6ff1a9bbf4e4eb0fbf5c0f0a02162, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a75c7c10a7c4848867913044cca10d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 5444690589777981684}
+  _curveAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0037651062
+      value: 0
+      inSlope: 3.056665
+      outSlope: 3.056665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0360401
+    - serializedVersion: 3
+      time: 0.9962158
+      value: 0.9976425
+      inSlope: -0.0137324855
+      outSlope: -0.0137324855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17297347
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 2
+  _testNumber: 8346
 --- !u!1 &5444690589787184589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1142,7 @@ GameObject:
   - component: {fileID: 5444690590304023849}
   - component: {fileID: 5444690590304023847}
   - component: {fileID: 5444690590304023840}
+  - component: {fileID: 340574579}
   m_Layer: 5
   m_Name: Coin
   m_TagString: Untagged
@@ -1252,6 +1279,45 @@ MonoBehaviour:
     screenConfigName: 
   customSpriteSettings:
     items: []
+--- !u!114 &340574579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444690590304023850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a75c7c10a7c4848867913044cca10d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 5444690590406894339}
+  _curveAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0037651062
+      value: 0
+      inSlope: 3.056665
+      outSlope: 3.056665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0360401
+    - serializedVersion: 3
+      time: 0.9962158
+      value: 0.9976425
+      inSlope: -0.0137324855
+      outSlope: -0.0137324855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17297347
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 2
+  _testNumber: 533
 --- !u!1 &5444690590406894341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3118,6 +3184,7 @@ GameObject:
   - component: {fileID: 5444690590695128079}
   - component: {fileID: 5444690590695128077}
   - component: {fileID: 5444690590695128081}
+  - component: {fileID: 264227925}
   m_Layer: 5
   m_Name: Horner
   m_TagString: Untagged
@@ -3254,6 +3321,45 @@ MonoBehaviour:
     screenConfigName: 
   customSpriteSettings:
     items: []
+--- !u!114 &264227925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444690590695128080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a75c7c10a7c4848867913044cca10d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 5444690590447803802}
+  _curveAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0037651062
+      value: 0
+      inSlope: 3.056665
+      outSlope: 3.056665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0360401
+    - serializedVersion: 3
+      time: 0.9962158
+      value: 0.9976425
+      inSlope: -0.0137324855
+      outSlope: -0.0137324855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17297347
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 2
+  _testNumber: 8
 --- !u!1 &5444690590862150685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5475,6 +5581,7 @@ GameObject:
   - component: {fileID: 5444690591657119884}
   - component: {fileID: 5444690591657119886}
   - component: {fileID: 8780862126405594946}
+  - component: {fileID: 7320264303191176710}
   m_Layer: 5
   m_Name: Complete_Window
   m_TagString: Untagged
@@ -5570,9 +5677,26 @@ MonoBehaviour:
   _menuButton: {fileID: 5444690590612338100}
   _restartButton: {fileID: 5444690591139660980}
   _nextLevelButton: {fileID: 5444690590686908236}
-  _windowAnimationPlayer: {fileID: 0}
-  _scoreText: {fileID: 2498219208413065250}
+  _windowAnimationPlayer: {fileID: 7320264303191176710}
+  _scoreText: {fileID: 1200259939827944471}
   _starsView: {fileID: 6244547600601090814}
+--- !u!114 &7320264303191176710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444690591657119885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 444764e465c84ebea261b64669d8ef99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _locationAnimations:
+  - {fileID: 6475712330598358902}
+  - {fileID: 2398804558052463612}
+  - {fileID: 2148780328136324313}
+  _particles: []
 --- !u!1 &5444690591805691643
 GameObject:
   m_ObjectHideFlags: 0

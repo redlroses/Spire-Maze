@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Data;
+using UnityEngine;
 
 namespace CodeBase.StaticData
 {
@@ -9,6 +10,8 @@ namespace CodeBase.StaticData
         public int BasePointsOnStart;
         public int PerSecondReduction;
         public int PerArtifact;
-        public AnimationCurve RaitingCurve;
+        
+        [Space] [Header("Stars Per Score")]
+        public int[] StarsRatingData;
     }
 }

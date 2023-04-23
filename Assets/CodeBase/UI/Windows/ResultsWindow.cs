@@ -18,27 +18,28 @@ namespace CodeBase.UI.Windows
         [SerializeField] private Button _nextLevelButton;
 
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
-        [SerializeField] private TextSetter _scoreText;
+        [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private StarsView _starsView;
 
-        private IScoreService _scoreCounter;
+        private IScoreService _scoreService;
         private IPersistentProgressService _progressService;
         private IStaticDataService _staticDataService;
         private GameStateMachine _stateMachine;
 
-        public void Construct(IPersistentProgressService progressService, IScoreService scoreCounter,
+        public void Construct(IPersistentProgressService progressService, IScoreService scoreService,
             IStaticDataService staticDataService, GameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
             _staticDataService = staticDataService;
             _progressService = progressService;
-            _scoreCounter = scoreCounter;
+            _scoreService = scoreService;
         }
 
         protected override void Initialize()
         {
             _windowAnimationPlayer.Play();
-            _scoreText.SetText(_scoreCounter.CalculateScore());
+            _scoreText.SetTextAnimated(_scoreService.CalculateScore());
+            print(_progressService.Progress.WorldData.LevelState.LevelKey);
             ScoreConfig scoreConfig = GetScoreConfig();
             _starsView.EnableStars(StarsCountFromConfig(scoreConfig));
         }
@@ -59,7 +60,17 @@ namespace CodeBase.UI.Windows
         private ScoreConfig GetScoreConfig() =>
             _staticDataService.ScoreForLevel(_progressService.Progress.WorldData.LevelState.LevelKey);
 
-        private int StarsCountFromConfig(ScoreConfig scoreConfig) =>
-            Convert.ToInt32(scoreConfig.RaitingCurve.Evaluate(_scoreCounter.CurrentScore));
+        private int StarsCountFromConfig(ScoreConfig scoreConfig)
+        {
+            for (int i = scoreConfig.StarsRatingData.Length - 1; i >= 0; i--)
+            {
+                if (_scoreService.CurrentScore > scoreConfig.StarsRatingData[i])
+                {
+                    return i + 1;
+                }
+            }
+
+            return 0;
+        }
     }
 }

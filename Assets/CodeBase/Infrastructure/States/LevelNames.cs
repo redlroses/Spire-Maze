@@ -5,6 +5,7 @@
         public const string TestLevelName = "Main Test";
         public const string TestLevelTwoName = "Test1";
         public const string Initial = "Initial";
+        public const string LobbyKey = "Lobby";
         public const string FirstLevelKey = "Level 1";
         public const string FirstLevelKey2 = "Level 2";
     }

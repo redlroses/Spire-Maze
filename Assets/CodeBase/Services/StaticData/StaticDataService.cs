@@ -17,7 +17,7 @@ namespace CodeBase.Services.StaticData
         private const string StorablePath = "StaticData/Storable";
         private const string LeaderboardPath = "StaticData/Leaderboard";
         private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
-        private const string ScoreConfigPath = "StaticData/WindowConfig/ScoreConfigs";
+        private const string ScoreConfigPath = "StaticData/ScoreConfig/ScoreConfigs";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -34,7 +34,7 @@ namespace CodeBase.Services.StaticData
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
             _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.Name);
-            _scoreConfigs = LoadFor<ScoreConfig, string>(LeaderboardPath, x => x.LevelKey);
+            _scoreConfigs = LoadFor<ScoreConfig, string>(ScoreConfigPath, x => x.LevelKey);
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
                 .Configs

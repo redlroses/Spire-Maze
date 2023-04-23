@@ -64,8 +64,8 @@ namespace CodeBase.Infrastructure.States
         private void OnLoaded()
         {
             InitUIRoot();
-            var hero = InitHero();
             InitGameWorld();
+            var hero = InitHero();
             InformProgressReaders();
             InitHud(hero);
 

@@ -14,7 +14,7 @@ namespace CodeBase.Services.Score
             _staticData = staticData;
         }
 
-        public int CurrentScore { get; private set; }
+        public int CurrentScore { get; private set; } = default;
 
         public int CalculateScore()
         {

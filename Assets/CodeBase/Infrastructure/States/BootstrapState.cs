@@ -52,10 +52,10 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IPauseService>()));
-            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
-            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IScoreService>(new ScoreService(_services.Single<IPersistentProgressService>(),
+                _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(

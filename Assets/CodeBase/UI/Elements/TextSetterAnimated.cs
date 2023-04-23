@@ -17,6 +17,11 @@ namespace CodeBase.UI.Elements
         private float _elapsedTime;
         private int _targetNumber;
 
+        private void Awake()
+        {
+            enabled = false;
+        }
+
         protected override void Run()
         {
             _elapsedTime += Time.deltaTime;
