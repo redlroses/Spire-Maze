@@ -92,6 +92,7 @@ namespace CodeBase.UI.Services.Factory
         {
             GameObject root = _assets.Instantiate(AssetPath.UIRootPath);
             _uiRoot = root.transform;
+            root.GetComponent<Canvas>().worldCamera = Camera.main;
         }
 
         private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase

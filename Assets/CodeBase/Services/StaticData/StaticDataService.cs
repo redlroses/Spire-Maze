@@ -17,7 +17,7 @@ namespace CodeBase.Services.StaticData
         private const string StorablePath = "StaticData/Storable";
         private const string LeaderboardPath = "StaticData/Leaderboard";
         private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
-        private const string ScoreConfigPath = "StaticData/ScoreConfig/ScoreConfigs";
+        private const string ScoreConfigPath = "StaticData/ScoreConfig";
 
         private Dictionary<string, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
