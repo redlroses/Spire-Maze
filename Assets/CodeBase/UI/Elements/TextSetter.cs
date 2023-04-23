@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using NTC.Global.Cache;
+using TMPro;
 using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class TextSetter : MonoBehaviour
+    public class TextSetter : MonoCache
     {
         [SerializeField] private TextMeshProUGUI _text;
 
