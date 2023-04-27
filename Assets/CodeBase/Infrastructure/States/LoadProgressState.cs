@@ -33,7 +33,7 @@ namespace CodeBase.Infrastructure.States
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.LevelName,
                 _progressService.Progress.WorldData.LevelName == LevelNames.BuildableLevel,
-                _progressService.Progress.WorldData.LevelState.LevelKey, _isNewProgress));
+                _progressService.Progress.WorldData.LevelState.LevelKey));
         }
 
         public void Exit()

@@ -6,16 +6,18 @@ namespace CodeBase.UI.Elements
     {
         private const string RotateAnimation = "Rotate";
 
-        [SerializeField] private GameObject _rotor;
+        [SerializeField] private Animation _rotor;
         
         public void Play()
         {
-            _rotor.SetActive(true);
+            _rotor.gameObject.SetActive(true);
+            _rotor.Play();
         }
 
         public void Stop()
         {
-            _rotor.SetActive(false);
+            _rotor.Stop();
+            _rotor.gameObject.SetActive(false);
         }
     }
 }

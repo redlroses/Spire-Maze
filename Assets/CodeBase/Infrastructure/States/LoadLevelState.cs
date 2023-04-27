@@ -63,6 +63,7 @@ namespace CodeBase.Infrastructure.States
         {
             InitUIRoot();
             InitGameWorld();
+            ValidateLevelProgress();
             var hero = InitHero();
             CameraFollow(hero);
             InformProgressReaders();
@@ -89,7 +90,6 @@ namespace CodeBase.Infrastructure.States
             }
 
             BuildLevel();
-            ValidateLevelProgress();
             ConstructLevel();
         }
 

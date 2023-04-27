@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CodeBase.EditorCells;
+using CodeBase.LevelSpecification;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace CodeBase.StaticData
                     continue;
                 }
 
-                int height = i / Width * Height;
+                float height = i / (float) Width * FloorHeight;
                 float angle = i % Width * ArchAngle;
                 return GetPosition(angle, Radius).ChangeY(height);
             }

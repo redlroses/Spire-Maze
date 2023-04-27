@@ -13,7 +13,7 @@ namespace CodeBase.Data
         public WorldData(string initialLevel)
         {
             PositionOnLevel = new PositionOnLevel(initialLevel);
-            LevelState = new LevelState(LevelNames.FirstLevelKey);
+            LevelState = new LevelState(initialLevel);
             LevelName = initialLevel;
         }
     }
