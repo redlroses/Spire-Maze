@@ -3,14 +3,14 @@
     public readonly struct LoadPayload
     {
         public readonly string SceneName;
-        public readonly string LevelKey;
+        public readonly int LevelId;
         public readonly bool IsClearLoad;
         public readonly bool IsBuildable;
 
-        public LoadPayload(string sceneName, bool isBuildable, string levelKey = null, bool isClearLoad = false)
+        public LoadPayload(string sceneName, bool isBuildable, int levelId = -1, bool isClearLoad = false)
         {
             SceneName = sceneName;
-            LevelKey = levelKey;
+            LevelId = levelId;
             IsClearLoad = isClearLoad;
             IsBuildable = isBuildable;
         }

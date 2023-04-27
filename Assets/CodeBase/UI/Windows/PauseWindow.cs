@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.Pause;
+using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,11 @@ namespace CodeBase.UI.Windows
 
         private IPauseService _pauseService;
         private GameStateMachine _stateMachine;
+        private IPersistentProgressService _progressService;
 
-        public void Construct(IPauseService pauseService, GameStateMachine stateMachine)
+        public void Construct(IPersistentProgressService progressService, IPauseService pauseService, GameStateMachine stateMachine)
         {
+            _progressService = progressService;
             _stateMachine = stateMachine;
             _pauseService = pauseService;
             _pauseService.Resume += OnResume;
@@ -33,10 +36,10 @@ namespace CodeBase.UI.Windows
             _unpauseButton.onClick.AddListener(() => _pauseService.SetPause(false));
             _menuButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.Lobby, false,
-                    LevelNames.Lobby)));
+                    LevelNames.LobbyId)));
             _restartButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    LevelNames.FirstLevelKey, true)));
+                    _progressService.Progress.WorldData.LevelState.LevelId + 1, true)));
         }
 
         protected override void CleanUp()

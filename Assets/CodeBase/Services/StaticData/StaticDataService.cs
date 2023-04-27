@@ -19,30 +19,30 @@ namespace CodeBase.Services.StaticData
         private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
         private const string ScoreConfigPath = "StaticData/ScoreConfig";
 
-        private Dictionary<string, LevelStaticData> _levels;
+        private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
         private Dictionary<string, StaminaStaticData> _staminas;
         private Dictionary<StorableType, StorableStaticData> _storables;
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
         private Dictionary<WindowId, WindowConfig> _windows;
-        private Dictionary<string, ScoreConfig> _scoreConfigs;
+        private Dictionary<int, ScoreConfig> _scoreConfigs;
 
         public void Load()
         {
-            _levels = LoadFor<LevelStaticData, string>(LevelsDataPath, x => x.LevelKey);
+            _levels = LoadFor<LevelStaticData, int>(LevelsDataPath, x => x.LevelId);
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
             _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.Name);
-            _scoreConfigs = LoadFor<ScoreConfig, string>(ScoreConfigPath, x => x.LevelKey);
+            _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
                 .Configs
                 .ToDictionary(x => x.WindowId, x => x);
         }
 
-        public LevelStaticData ForLevel(string levelKey) =>
-            GetDataFor(levelKey, _levels);
+        public LevelStaticData ForLevel(int levelId) =>
+            GetDataFor(levelId, _levels);
 
         public HealthStaticData HealthForEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
@@ -58,8 +58,8 @@ namespace CodeBase.Services.StaticData
         public WindowConfig ForWindow(WindowId windowId) =>
             GetDataFor(windowId, _windows);
 
-        public ScoreConfig ScoreForLevel(string levelKey) =>
-            GetDataFor(levelKey, _scoreConfigs);
+        public ScoreConfig ScoreForLevel(int levelId) =>
+            GetDataFor(levelId, _scoreConfigs);
 
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

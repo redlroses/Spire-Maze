@@ -67,7 +67,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreatePause()
         {
             var window = CreateWindow<PauseWindow>(WindowId.Pause);
-            window.Construct(_pauseService, _stateMachine);
+            window.Construct(_progressService, _pauseService, _stateMachine);
         }
 
         public void CreateResults()
@@ -79,7 +79,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateLose()
         {
             var window = CreateWindow<LoseWindow>(WindowId.Lose);
-            window.Construct(_progressService);
+            window.Construct(_progressService, _scoreService, _stateMachine);
         }
 
         public void CreateLeaderboard()

@@ -9,12 +9,12 @@ namespace CodeBase.Services.StaticData
   public interface IStaticDataService : IService
   {
     void Load();
-    LevelStaticData ForLevel(string levelKey);
+    LevelStaticData ForLevel(int levelId);
     HealthStaticData HealthForEntity(string entityKey);
     StaminaStaticData StaminaForEntity(string entityKey);
     StorableStaticData ForStorable(StorableType storableType);
     LeaderboardStaticData ForLeaderboard(string yandexName);
     WindowConfig ForWindow(WindowId windowId);
-    ScoreConfig ScoreForLevel(string levelKey);
+    ScoreConfig ScoreForLevel(int levelId);
   }
 }

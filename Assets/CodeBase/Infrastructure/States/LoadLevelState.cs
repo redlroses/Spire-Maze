@@ -10,6 +10,7 @@ using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
@@ -99,7 +100,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         private void BuildLevel() =>
-            _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelKey));
+            _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>
             _levelBuilder.Construct();
@@ -128,7 +129,7 @@ namespace CodeBase.Infrastructure.States
 
         private void ValidateLevelProgress()
         {
-            if (_progressService.Progress.WorldData.LevelState.LevelKey == _loadPayload.LevelKey &&
+            if (_progressService.Progress.WorldData.LevelState.LevelId == _loadPayload.LevelId &&
                 _loadPayload.IsClearLoad == false)
             {
                 return;
@@ -139,10 +140,9 @@ namespace CodeBase.Infrastructure.States
 
         private void ResetProgress()
         {
-            _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelKey);
+            _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelId);
             _progressService.Progress.WorldData.PositionOnLevel =
-                new PositionOnLevel(_loadPayload.LevelKey,
-                    _staticData.ForLevel(_loadPayload.LevelKey).HeroInitialPosition.AsVectorData());
+                new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData());
             _progressService.Progress.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerKey).MaxHealth;
             _progressService.Progress.HeroHealthState.ResetHP();
             _progressService.Progress.HeroStaminaState.MaxValue = _staticData.StaminaForEntity(PlayerKey).MaxStamina;

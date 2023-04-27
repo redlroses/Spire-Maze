@@ -47,17 +47,17 @@ namespace CodeBase.UI.Windows
         {
             _menuButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.Lobby, false,
-                    LevelNames.Lobby)));
+                    LevelNames.LobbyId)));
             _restartButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    LevelNames.FirstLevelKey, true)));
+                    _progressService.Progress.WorldData.LevelState.LevelId, true)));
             _nextLevelButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    LevelNames.FirstLevelKey)));
+                    _progressService.Progress.WorldData.LevelState.LevelId + 1)));
         }
 
         private ScoreConfig GetScoreConfig() =>
-            _staticDataService.ScoreForLevel(_progressService.Progress.WorldData.LevelState.LevelKey);
+            _staticDataService.ScoreForLevel(_progressService.Progress.WorldData.LevelState.LevelId);
 
         private int StarsCountFromConfig(ScoreConfig scoreConfig)
         {

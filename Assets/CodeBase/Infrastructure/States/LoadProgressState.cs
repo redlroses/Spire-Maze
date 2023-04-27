@@ -3,20 +3,17 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
     public class LoadProgressState : IState
     {
         private const string PlayerKey = "Player";
-        
+
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
         private readonly IStaticDataService _staticDataService;
-
-        private bool _isNewProgress;
 
         public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
             ISaveLoadService saveLoadProgress, IStaticDataService staticDataService)
@@ -31,9 +28,9 @@ namespace CodeBase.Infrastructure.States
         {
             LoadProgressOrInitNew();
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
-                _progressService.Progress.WorldData.LevelName,
-                _progressService.Progress.WorldData.LevelName == LevelNames.BuildableLevel,
-                _progressService.Progress.WorldData.LevelState.LevelKey));
+                _progressService.Progress.WorldData.SceneName,
+                _progressService.Progress.WorldData.SceneName == LevelNames.BuildableLevel,
+                _progressService.Progress.WorldData.LevelState.LevelId));
         }
 
         public void Exit()
@@ -53,8 +50,8 @@ namespace CodeBase.Infrastructure.States
             {
                 WorldData =
                 {
-                    PositionOnLevel = new PositionOnLevel(LevelNames.Lobby,
-                        _staticDataService.ForLevel(LevelNames.Lobby).HeroInitialPosition.AsVectorData())
+                    PositionOnLevel = new PositionOnLevel(_staticDataService.ForLevel(LevelNames.LobbyId)
+                        .HeroInitialPosition.AsVectorData())
                 },
                 HeroHealthState = {MaxHP = _staticDataService.HealthForEntity(PlayerKey).MaxHealth},
                 HeroStaminaState = {MaxValue = _staticDataService.StaminaForEntity(PlayerKey).MaxStamina}
@@ -62,7 +59,6 @@ namespace CodeBase.Infrastructure.States
 
             progress.HeroHealthState.ResetHP();
             progress.HeroStaminaState.ResetStamina();
-            _isNewProgress = true;
             return progress;
         }
     }

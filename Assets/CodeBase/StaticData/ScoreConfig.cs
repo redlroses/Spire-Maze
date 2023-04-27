@@ -7,6 +7,7 @@ namespace CodeBase.StaticData
     public class ScoreConfig : ScriptableObject
     {
         public string LevelKey;
+        public int LevelId;
         public int BasePointsOnStart;
         public int PerSecondReduction;
         public int PerArtifact;

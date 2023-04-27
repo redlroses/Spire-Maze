@@ -10,7 +10,8 @@ namespace CodeBase.StaticData
     [CreateAssetMenu(fileName = "LevelData", menuName = "Static Data/Level")]
     public class LevelStaticData : ScriptableObject
     {
-        public string LevelKey;
+        public string LevelName;
+        public int LevelId;
         public float Radius = 5.945f;
         public float ArchAngle = 22.5f;
         public float FloorHeight = 2f;

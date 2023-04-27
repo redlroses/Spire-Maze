@@ -7,7 +7,7 @@ namespace CodeBase.Data
     [Serializable]
     public class LevelState
     {
-        public string LevelKey;
+        public int LevelId;
         public List<DoorState> DoorStates;
         public List<KeyState> KeyStates;
         public List<SavepointState> SavepointStates;
@@ -15,9 +15,9 @@ namespace CodeBase.Data
         public List<RockState> RockStates;
         public List<PortalState> PortalStates;
 
-        public LevelState(string levelKey)
+        public LevelState(int levelId)
         {
-            LevelKey = levelKey;
+            LevelId = levelId;
             DoorStates = new List<DoorState>();
             KeyStates = new List<KeyState>();
             SavepointStates = new List<SavepointState>();

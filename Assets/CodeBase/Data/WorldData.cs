@@ -8,13 +8,13 @@ namespace CodeBase.Data
     {
         public PositionOnLevel PositionOnLevel;
         public LevelState LevelState;
-        public string LevelName;
+        public string SceneName;
 
-        public WorldData(string initialLevel)
+        public WorldData(string initialScene)
         {
-            PositionOnLevel = new PositionOnLevel(initialLevel);
-            LevelState = new LevelState(initialLevel);
-            LevelName = initialLevel;
+            PositionOnLevel = new PositionOnLevel();
+            LevelState = new LevelState(LevelNames.LobbyId);
+            SceneName = initialScene;
         }
     }
 }
