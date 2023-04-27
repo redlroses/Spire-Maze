@@ -39,7 +39,6 @@ namespace CodeBase.UI.Windows
         {
             _windowAnimationPlayer.Play();
             _scoreText.SetTextAnimated(_scoreService.CalculateScore());
-            print(_progressService.Progress.WorldData.LevelState.LevelKey);
             ScoreConfig scoreConfig = GetScoreConfig();
             _starsView.EnableStars(StarsCountFromConfig(scoreConfig));
         }
@@ -47,13 +46,13 @@ namespace CodeBase.UI.Windows
         protected override void SubscribeUpdates()
         {
             _menuButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true,
-                    LevelNames.FirstLevelKey)));
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.Lobby, false,
+                    LevelNames.Lobby)));
             _restartButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true,
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
                     LevelNames.FirstLevelKey, true)));
             _nextLevelButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.TestLevelName, true,
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
                     LevelNames.FirstLevelKey)));
         }
 

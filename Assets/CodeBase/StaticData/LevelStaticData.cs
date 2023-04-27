@@ -1,4 +1,7 @@
-﻿using CodeBase.EditorCells;
+﻿using System;
+using System.Linq;
+using CodeBase.EditorCells;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.StaticData
@@ -15,5 +18,30 @@ namespace CodeBase.StaticData
         [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
+        public Vector3 HeroInitialPosition => GetHeroInitialPosition();
+
+        private Vector3 GetHeroInitialPosition()
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (CellDataMap[i] is InitialPlate == false)
+                {
+                    continue;
+                }
+
+                int height = i / Width * Height;
+                float angle = i % Width * ArchAngle;
+                return GetPosition(angle, Radius).ChangeY(height);
+            }
+
+            throw new NullReferenceException();
+        }
+
+        private Vector3 GetPosition(float byArcGrade, float radius)
+        {
+            float posX = Mathf.Cos(byArcGrade * Mathf.Deg2Rad) * radius;
+            float posZ = Mathf.Sin(byArcGrade * Mathf.Deg2Rad) * radius;
+            return new Vector3(posX, 0, posZ);
+        }
     }
 }

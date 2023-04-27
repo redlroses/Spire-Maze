@@ -29,7 +29,8 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ILevelBuilder>(), curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>()),
+                    services.Single<ISaveLoadService>(),
+                    services.Single<IStaticDataService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }
