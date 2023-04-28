@@ -11,24 +11,17 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class HeroMover : Mover, IHorizontalMover, IPlateMovable, ISavedProgress, IPauseWatcher
+    public class HeroMover : Mover, IHorizontalMover, IPlateMovable, ISavedProgress
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
 
         private Coroutine _inputDelay;
         private WaitUntil _waitUntil;
-        private IPauseReactive _pauseReactive;
 
         private void Awake()
         {
             _waitUntil = new WaitUntil(() => _heroAnimator.State != AnimatorState.Dodge);
-        }
-
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void OnEnabled()
@@ -65,23 +58,6 @@ namespace CodeBase.Logic.Movement
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.WorldData.PositionOnLevel.Position = Rigidbody.position.AsVectorData();
-        }
-
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
-        private void OnResume()
-        {
-            enabled = true;
-        }
-
-        private void OnPause()
-        {
-            enabled = false;
         }
 
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)

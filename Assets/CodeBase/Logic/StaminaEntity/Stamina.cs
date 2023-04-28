@@ -1,11 +1,12 @@
 using System;
+using CodeBase.Services.Pause;
 using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.StaminaEntity
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class Stamina : MonoCache, IStamina
+    public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
         private const float LowerSpeedMultiplier = 0.5f;
         private const float MinimumPercent = 0.1f;
@@ -19,6 +20,7 @@ namespace CodeBase.Logic.StaminaEntity
         private float _currentSpeedReplenish;
         private bool _isSpent;
         private bool _isReplenish;
+        private IPauseReactive _pauseReactive;
 
         public event Action Changed;
 
@@ -41,11 +43,24 @@ namespace CodeBase.Logic.StaminaEntity
             TimerDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
         }
 
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
+        }
+
         protected override void Run()
         {
             Replenish();
         }
 
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+        
         public bool TrySpend(int spendStamina)
         {
             if (spendStamina <= 0 || CurrentPoints - spendStamina < 0)
@@ -90,6 +105,16 @@ namespace CodeBase.Logic.StaminaEntity
         private void OnStartReplenish()
         {
             _isReplenish = true;
+        }
+        
+        private void OnResume()
+        {
+            enabled = true;
+        }
+
+        private void OnPause()
+        {
+            enabled = false;
         }
     }
 }

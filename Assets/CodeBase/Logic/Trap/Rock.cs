@@ -13,7 +13,7 @@ namespace CodeBase.Logic.Trap
     [RequireComponent(typeof(RayDirection))]
     public class Rock : Trap, ISavedProgress
     {
-        [SerializeField] private SphereCollider _collisionCollider;
+        [SerializeField] private CapsuleCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private RockMover _mover;
         [SerializeField] private Rigidbody[] _fragments;

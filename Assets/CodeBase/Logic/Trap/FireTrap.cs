@@ -1,11 +1,12 @@
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Services.Pause;
 using CodeBase.Tools;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class FireTrap : Trap
+    public class FireTrap : Trap, IPauseWatcher
     {
         [SerializeField] 
         [RequireInterface(typeof(IDamageTrigger))] private MonoBehaviour _damageTrigger;
@@ -14,13 +15,39 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _turnOffDelay;
 
         private bool _isActivated;
+        private IPauseReactive _pauseReactive;
 
-        private IDamageTrigger DamageTrigger => (IDamageTrigger) _damageTrigger;
+        private IDamageTrigger DamageTrigger => (IDamageTrigger)_damageTrigger;
+
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
+        }
 
         public override void Construct(int id, TrapActivator activator)
         {
             base.Construct(id, activator);
             _timer.SetUp(_turnOffDelay, OnTurnOff);
+        }
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+
+        private void OnResume()
+        {
+            if (_isActivated)
+                _effect.Play();
+        }
+
+        private void OnPause()
+        {
+            if (_isActivated)
+                _effect.Pause();
         }
 
         private void OnTurnOff()

@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Services.Pause;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace CodeBase.Logic.Lift.PlateMove
 {
     [RequireComponent(typeof(LiftPlate))]
     [RequireComponent(typeof(Rigidbody))]
-    public abstract class PlateMover<T> : MonoCache, IPlateMover
+    public abstract class PlateMover<T> : MonoCache, IPlateMover, IPauseWatcher
     {
         private const int FinalTranslateValue = 1;
 
@@ -22,6 +23,8 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         private Vector3 _prevPosition;
         private Vector3 _prevRotation;
+        private IPauseReactive _pauseReactive;
+        private bool _isEnabled;
 
         public event Action<Vector3, Vector3> PositionUpdated;
         public event Action MoveEnded;
@@ -37,6 +40,12 @@ namespace CodeBase.Logic.Lift.PlateMove
             Vector3 parentPosition = transform.parent.position;
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
+        }
+        
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void OnEnabled()
@@ -64,6 +73,25 @@ namespace CodeBase.Logic.Lift.PlateMove
             _to = GetTransform(to);
             _distance = GetDistance(from, to);
             _delta = 0;
+        }
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+
+        private void OnResume()
+        {
+            enabled = _isEnabled;
+        }
+        
+        private void OnPause()
+        {
+            Debug.Log($"Pause On");
+            _isEnabled = enabled;
+            enabled = false;
         }
 
         private void Translate()

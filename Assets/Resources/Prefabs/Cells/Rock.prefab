@@ -6210,12 +6210,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8090674333564611682}
   - component: {fileID: 2976654156250728952}
-  - component: {fileID: 6115234392435426223}
-  - component: {fileID: 5349451554897456572}
+  - component: {fileID: 8340080614926882585}
   - component: {fileID: 3337484362527455217}
   - component: {fileID: 3763534346131496845}
   - component: {fileID: 5760991588161085492}
   - component: {fileID: 9132919717544923177}
+  - component: {fileID: 3655441129170313658}
+  - component: {fileID: 7887131475049223329}
   m_Layer: 7
   m_Name: RockObject
   m_TagString: Untagged
@@ -6263,13 +6264,13 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &6115234392435426223
-SphereCollider:
+--- !u!136 &8340080614926882585
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6278,21 +6279,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.75
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &5349451554897456572
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001022738760582169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.75
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3337484362527455217
 MonoBehaviour:
@@ -6307,7 +6296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Activator: {fileID: 7879863177841329368}
-  _collisionCollider: {fileID: 6115234392435426223}
+  _collisionCollider: {fileID: 8340080614926882585}
   _rigidbody: {fileID: 2976654156250728952}
   _mover: {fileID: 3763534346131496845}
   _fragments:
@@ -6374,6 +6363,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3655441129170313658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001022738760582169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bec1436999f4deaa653fcc18bfabd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 2976654156250728952}
+  _collider: {fileID: 8340080614926882585}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &7887131475049223329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001022738760582169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9db619c96e64b25a49fc2f0738de58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 2976654156250728952}
+  _sphereCaster: {fileID: 3655441129170313658}
+  _currentScale: 1
+  _defaultScale: 1
 --- !u!1001 &1346821695321976022
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
@@ -10,7 +11,7 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(CustomGravityScaler))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(HeroAnimator))]
-    public class Jumper : MonoCache, IJumper
+    public class Jumper : MonoCache, IJumper,IPauseWatcher
     {
         public const float GroundCheckDistance = -0.1f;
         public const float RoofCheckDistance = 0.15f;
@@ -30,10 +31,13 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private int _fatigue;
 
         private Rigidbody _rigidbody;
+        private Vector3 _currentVelocity;
         private float _startHeight;
         private float _expiredTime;
         private float _jumpProgress;
         private bool _isJump;
+        private IPauseReactive _pauseReactive;
+        private bool _isEnabled;
 
         private void Awake()
         {
@@ -43,6 +47,12 @@ namespace CodeBase.Logic.Movement
             _heroAnimator ??= Get<HeroAnimator>();
         }
 
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
+        }
+        
         protected override void FixedRun()
         {
             ApplyJump();
@@ -65,6 +75,27 @@ namespace CodeBase.Logic.Movement
             enabled = true;
             _heroAnimator.PlayJump();
             _gravityScaler.Disable();
+        }
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+
+        private void OnResume()
+        {
+            _rigidbody.velocity = _currentVelocity;
+            enabled = _isEnabled;
+        }
+
+        private void OnPause()
+        {
+            _currentVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = Vector3.zero;
+            _isEnabled = enabled;
+            enabled = false;
         }
 
         private void ApplyJump()

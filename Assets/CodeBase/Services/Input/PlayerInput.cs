@@ -1,5 +1,6 @@
 using UnityEngine;
 using CodeBase.Logic.Movement;
+using CodeBase.Services.Pause;
 using CodeBase.Tools;
 using NTC.Global.Cache;
 using UnityEngine.InputSystem;
@@ -9,7 +10,7 @@ namespace CodeBase.Services.Input
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Jumper))]
-    public class PlayerInput : MonoCache
+    public class PlayerInput : MonoCache, IPauseWatcher
     {
         [SerializeField] [RequireInterface(typeof(IHorizontalMover))]
         private MonoCache _mover;
@@ -22,6 +23,7 @@ namespace CodeBase.Services.Input
 
         private InputController _inputController;
         private MoveDirection _direction;
+        private IPauseReactive _pauseReactive;
 
         private IHorizontalMover Mover => (IHorizontalMover)_mover;
         private IJumper Jumper => (IJumper)_jumper;
@@ -30,6 +32,12 @@ namespace CodeBase.Services.Input
         private void Awake()
         {
             _inputController = new InputController();
+        }
+
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void OnEnabled()
@@ -48,6 +56,23 @@ namespace CodeBase.Services.Input
             _inputController.Player.Movement.performed -= OnMove;
             _inputController.Player.Movement.canceled -= OnMove;
             _inputController.Player.Dodge.performed -= OnDodged;
+        }
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+
+        private void OnResume()
+        {
+            enabled = true;
+        }
+
+        private void OnPause()
+        {
+            enabled = false;
         }
 
         private void OnMove(InputAction.CallbackContext context)

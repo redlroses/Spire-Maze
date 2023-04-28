@@ -81,6 +81,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);
+            RegisterPauseWatchers(cell);
             return cell;
         }
 

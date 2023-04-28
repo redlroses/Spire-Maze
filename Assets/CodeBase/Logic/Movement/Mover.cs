@@ -1,3 +1,4 @@
+using CodeBase.Services.Pause;
 using UnityEngine;
 using CodeBase.Tools.Extension;
 using NTC.Global.Cache;
@@ -5,14 +6,16 @@ using NTC.Global.Cache;
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Mover : MonoCache, IMover
+    public class Mover : MonoCache, IMover, IPauseWatcher
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private Rigidbody _rigidbody;
 
         private MoveDirection _direction;
-        
+        private Vector3 _currentVelocity;
+        private IPauseReactive _pauseReactive;
+
         protected float Speed => _speed;
         public Rigidbody Rigidbody => _rigidbody;
 
@@ -22,9 +25,22 @@ namespace CodeBase.Logic.Movement
             ApplyMove(MoveDirection.Left);
         }
 
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
+        }
+
         protected override void FixedRun()
         {
             ApplyMove(_direction);
+        }
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
         }
 
         public void Move(MoveDirection direction) => _direction = direction;
@@ -52,6 +68,19 @@ namespace CodeBase.Logic.Movement
             Quaternion targetRotation = Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
 
             _rigidbody.MoveRotation(targetRotation);
+        }
+
+        private void OnResume()
+        {
+            Rigidbody.velocity = _currentVelocity;
+            enabled = true;
+        }
+
+        private void OnPause()
+        {
+            _currentVelocity = Rigidbody.velocity;
+            Rigidbody.velocity = Vector3.zero;
+            enabled = false;
         }
     }
 }

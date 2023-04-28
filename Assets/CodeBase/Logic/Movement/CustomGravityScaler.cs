@@ -1,10 +1,11 @@
-﻿using NTC.Global.Cache;
+﻿using CodeBase.Services.Pause;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(SphereCaster))]
-    public class CustomGravityScaler : MonoCache
+    public class CustomGravityScaler : MonoCache, IPauseWatcher
     {
         private const float Gravity = 9.81f;
 
@@ -14,6 +15,7 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _defaultScale = 1;
 
         private GroundState _groundState = GroundState.Grounded;
+        private IPauseReactive _pauseReactive;
 
         public GroundState State => _groundState;
 
@@ -23,6 +25,12 @@ namespace CodeBase.Logic.Movement
             _rigidbody ??= Get<Rigidbody>();
             _rigidbody.useGravity = false;
             _currentScale = _defaultScale;
+        }
+        
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void FixedRun()
@@ -59,6 +67,23 @@ namespace CodeBase.Logic.Movement
         public void SetDefaultGravityScale()
         {
             _currentScale = _defaultScale;
+        }
+        
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+        }
+
+        private void OnResume()
+        {
+            enabled = true;
+        }
+
+        private void OnPause()
+        {
+            enabled = false;
         }
 
         private bool CheckTouchGround()
