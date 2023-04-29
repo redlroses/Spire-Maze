@@ -1,12 +1,13 @@
 ﻿using System;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
+using CodeBase.Services.Pause;
 using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.Player
 {
-    public class HeroAnimator : MonoCache, IAnimationStateReader
+    public class HeroAnimator : MonoCache, IAnimationStateReader, IPauseWatcher
     {
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Jump = Animator.StringToHash("Jump");
@@ -27,12 +28,20 @@ namespace CodeBase.Logic.Player
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private Animator _animator;
+        
+        private IPauseReactive _pauseReactive;
 
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
 
         public AnimatorState State { get; private set; }
 
+        private void OnDestroy()
+        {
+            _pauseReactive.Pause -= OnPause;
+            _pauseReactive.Resume -= OnResume;
+        }
+        
         protected override void FixedRun()
         {
             if ((State == AnimatorState.Fall || State == AnimatorState.Jump) && _gravityScaler.State == GroundState.Grounded)
@@ -44,6 +53,13 @@ namespace CodeBase.Logic.Player
             {
                 PlayFall();
             }
+        }
+        
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
         }
 
         public void PlayFall() =>
@@ -116,5 +132,9 @@ namespace CodeBase.Logic.Player
             Debug.Log(state);
             return state;
         }
+        
+        private void OnResume() => _animator.enabled = true;
+
+        private void OnPause() => _animator.enabled = false;
     }
 }
