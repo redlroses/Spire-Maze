@@ -126,7 +126,10 @@ namespace CodeBase.Infrastructure.Factory
         private void RegisterPauseWatchers(GameObject gameObject)
         {
             foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
+            {
+                Debug.Log(gameObject.name + " " + pauseWatcher.GetHashCode());
                 pauseWatcher.RegisterPauseWatcher(_pauseService);
+            }
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

@@ -1,5 +1,6 @@
 ﻿using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Observer;
+using CodeBase.Services.Pause;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift

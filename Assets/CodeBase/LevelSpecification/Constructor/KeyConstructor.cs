@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Сollectible;
+using CodeBase.Services.Pause;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Storable;
 using Key = CodeBase.EditorCells.Key;

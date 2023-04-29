@@ -25,9 +25,9 @@ namespace CodeBase.Services.Input
         private MoveDirection _direction;
         private IPauseReactive _pauseReactive;
 
-        private IHorizontalMover Mover => (IHorizontalMover)_mover;
-        private IJumper Jumper => (IJumper)_jumper;
-        private IDodge Dodge => (IDodge)_dodge;
+        private IHorizontalMover Mover => (IHorizontalMover) _mover;
+        private IJumper Jumper => (IJumper) _jumper;
+        private IDodge Dodge => (IDodge) _dodge;
 
         private void Awake()
         {
@@ -79,11 +79,11 @@ namespace CodeBase.Services.Input
         {
             int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
 
-            Mover.HorizontalMove((MoveDirection)moveInput);
+            Mover.HorizontalMove((MoveDirection) moveInput);
 
-            if ((MoveDirection)moveInput != MoveDirection.Stop)
+            if ((MoveDirection) moveInput != MoveDirection.Stop)
             {
-                _direction = (MoveDirection)moveInput;
+                _direction = (MoveDirection) moveInput;
             }
         }
 

@@ -1,9 +1,10 @@
-﻿using CodeBase.Tools.Constants;
+﻿using CodeBase.Services.Pause;
+using CodeBase.Tools.Constants;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift.PlateMove
 {
-    public sealed class PlateHorizontalMover : PlateMover<float>
+    public sealed class PlateHorizontalMover : PlateMover<float>, IPauseWatcher
     {
         protected override void SetNewPosition(float from, float to, float delta)
         {

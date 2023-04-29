@@ -41,7 +41,7 @@ namespace CodeBase.Logic.Lift.PlateMove
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
         }
-        
+
         private void OnDestroy()
         {
             _pauseReactive.Pause -= OnPause;
@@ -63,8 +63,18 @@ namespace CodeBase.Logic.Lift.PlateMove
         }
 
         protected abstract T GetTransform(LiftDestinationMarker from);
+
         protected abstract void SetNewPosition(T from, T to, float delta);
+
         protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
+
+        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
+        {
+            _pauseReactive = pauseReactive;
+            _pauseReactive.Pause += OnPause;
+            _pauseReactive.Resume += OnResume;
+            Debug.Log("Registred");
+        }
 
         public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
         {
@@ -73,25 +83,6 @@ namespace CodeBase.Logic.Lift.PlateMove
             _to = GetTransform(to);
             _distance = GetDistance(from, to);
             _delta = 0;
-        }
-
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
-        private void OnResume()
-        {
-            enabled = _isEnabled;
-        }
-        
-        private void OnPause()
-        {
-            Debug.Log($"Pause On");
-            _isEnabled = enabled;
-            enabled = false;
         }
 
         private void Translate()
@@ -113,6 +104,18 @@ namespace CodeBase.Logic.Lift.PlateMove
                 enabled = false;
                 MoveEnded?.Invoke();
             }
+        }
+
+        private void OnResume()
+        {
+            enabled = _isEnabled;
+        }
+
+        private void OnPause()
+        {
+            Debug.Log($"Pause On");
+            _isEnabled = enabled;
+            enabled = false;
         }
     }
 }

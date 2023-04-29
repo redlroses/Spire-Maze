@@ -2028,6 +2028,8 @@ GameObject:
   - component: {fileID: 470538716943559524}
   - component: {fileID: 2526695143226658917}
   - component: {fileID: 6811979314399910335}
+  - component: {fileID: 5048105065659090017}
+  - component: {fileID: -6143057598305293160}
   m_Layer: 3
   m_Name: MovingPlate
   m_TagString: Untagged
@@ -2123,6 +2125,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.16, z: 1.91}
   m_Center: {x: 0, y: 0.2, z: -0}
+--- !u!114 &5048105065659090017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6334336615449263104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8426935375764be2a37a9e4fb11b8914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3
+  _rigidBody: {fileID: 2526695143226658917}
+--- !u!114 &-6143057598305293160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6334336615449263104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87910f2469064c59a02ef4d8bffe3fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3
+  _rigidBody: {fileID: 2526695143226658917}
 --- !u!1 &6381455510113715300
 GameObject:
   m_ObjectHideFlags: 0

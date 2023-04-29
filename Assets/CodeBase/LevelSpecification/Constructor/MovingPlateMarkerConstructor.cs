@@ -10,6 +10,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
 using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -49,13 +50,22 @@ namespace CodeBase.LevelSpecification.Constructor
             initialMarker.Construct(movingPlate.Position);
             destinationMarker.Construct(pairMarker.Position);
 
-
             PlateMoveDirection plateMoveDirection = ((MovingMarker) movingPlate.CellData).Direction;
-            IPlateMover mover = plateMoveDirection == PlateMoveDirection.Left || plateMoveDirection == PlateMoveDirection.Right
-                ? (IPlateMover) liftPlate.gameObject.AddComponent<PlateHorizontalMover>()
-                : liftPlate.gameObject.AddComponent<PlateVerticalMover>();
+            IPlateMover mover = ChooseMoverComponent(liftPlate, plateMoveDirection);
 
             liftPlate.Construct(initialMarker, destinationMarker, mover);
+        }
+
+        private IPlateMover ChooseMoverComponent(LiftPlate liftPlate, PlateMoveDirection direction)
+        {
+            if (direction == PlateMoveDirection.Left || direction == PlateMoveDirection.Right)
+            {
+                Object.Destroy(liftPlate.gameObject.GetComponent<PlateVerticalMover>());
+                return liftPlate.gameObject.GetComponent<PlateHorizontalMover>();
+            }
+
+            Object.Destroy(liftPlate.gameObject.GetComponent<PlateHorizontalMover>());
+            return liftPlate.gameObject.GetComponent<PlateVerticalMover>();
         }
 
         private Cell FindPair(Cell movingPlateCell)
