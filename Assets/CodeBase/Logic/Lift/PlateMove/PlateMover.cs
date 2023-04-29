@@ -113,7 +113,6 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         private void OnPause()
         {
-            Debug.Log($"Pause On");
             _isEnabled = enabled;
             enabled = false;
         }

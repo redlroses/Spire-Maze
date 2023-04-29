@@ -55,6 +55,15 @@ namespace CodeBase.Services.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa130c85-128c-4d61-8bb4-cdb2c13c5065"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,17 @@ namespace CodeBase.Services.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49772fc4-6005-49ae-bf21-ef2f05a58bfe"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -328,6 +348,7 @@ namespace CodeBase.Services.Input
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
             // Overview
             m_Overview = asset.FindActionMap("Overview", throwIfNotFound: true);
             m_Overview_ViewTower = m_Overview.FindAction("ViewTower", throwIfNotFound: true);
@@ -393,6 +414,7 @@ namespace CodeBase.Services.Input
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Dodge;
+        private readonly InputAction m_Player_Pause;
         public struct PlayerActions
         {
             private @InputController m_Wrapper;
@@ -400,6 +422,7 @@ namespace CodeBase.Services.Input
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -418,6 +441,9 @@ namespace CodeBase.Services.Input
                     @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                     @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                     @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                    @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                    @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                    @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -431,6 +457,9 @@ namespace CodeBase.Services.Input
                     @Dodge.started += instance.OnDodge;
                     @Dodge.performed += instance.OnDodge;
                     @Dodge.canceled += instance.OnDodge;
+                    @Pause.started += instance.OnPause;
+                    @Pause.performed += instance.OnPause;
+                    @Pause.canceled += instance.OnPause;
                 }
             }
         }
@@ -500,6 +529,7 @@ namespace CodeBase.Services.Input
             void OnJump(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
             void OnDodge(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
         public interface IOverviewActions
         {

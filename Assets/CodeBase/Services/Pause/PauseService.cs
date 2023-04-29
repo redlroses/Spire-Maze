@@ -1,9 +1,11 @@
 ﻿using System;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
+        private readonly IWindowService _windowService;
         public event Action Pause;
         public event Action Resume;
 

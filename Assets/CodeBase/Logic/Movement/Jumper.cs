@@ -1,5 +1,6 @@
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(CustomGravityScaler))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(HeroAnimator))]
-    public class Jumper : MonoCache, IJumper,IPauseWatcher
+    public class Jumper : MonoCache, IPauseWatcher
     {
         public const float GroundCheckDistance = -0.1f;
         public const float RoofCheckDistance = 0.15f;
@@ -22,12 +23,12 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private SphereCaster _sphereCaster;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private AnimationCurve _jumpCurve;
+        [SerializeField] private PlayerStamina _stamina;
         [SerializeField] private float _maxDownVelocity;
         [SerializeField] private float _maxUpVelocity;
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _velocityScale;
         [SerializeField] private float _jumpDuration = 1;
-        [SerializeField] private PlayerStamina _stamina;
         [SerializeField] private int _fatigue;
 
         private Rigidbody _rigidbody;
@@ -38,6 +39,7 @@ namespace CodeBase.Logic.Movement
         private bool _isJump;
         private IPauseReactive _pauseReactive;
         private bool _isEnabled;
+        private IPlayerInputService _inputService;
 
         private void Awake()
         {
@@ -51,15 +53,25 @@ namespace CodeBase.Logic.Movement
         {
             _pauseReactive.Pause -= OnPause;
             _pauseReactive.Resume -= OnResume;
+            _inputService.Jump -= Jump;
         }
-        
+
         protected override void FixedRun()
         {
             ApplyJump();
         }
 
-        public void Jump()
+        public void Construct(IPlayerInputService inputService)
         {
+            _inputService = inputService;
+            _inputService.Jump += Jump;
+        }
+
+        private void Jump()
+        {
+            if (_pauseReactive.IsPause)
+                return;
+
             if (_isJump)
                 return;
 
@@ -133,7 +145,8 @@ namespace CodeBase.Logic.Movement
         {
             float expectedHeight = _jumpCurve.Evaluate(_jumpProgress) * _jumpHeight + _startHeight;
             float heightDifference = expectedHeight - _rigidbody.position.y;
-            float clampedVerticalVelocity = Mathf.Clamp(heightDifference * _velocityScale, -_maxDownVelocity, _maxUpVelocity);
+            float clampedVerticalVelocity =
+                Mathf.Clamp(heightDifference * _velocityScale, -_maxDownVelocity, _maxUpVelocity);
             _rigidbody.velocity = _rigidbody.velocity.ChangeY(clampedVerticalVelocity);
         }
     }

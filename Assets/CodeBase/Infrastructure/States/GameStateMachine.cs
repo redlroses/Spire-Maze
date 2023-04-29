@@ -7,11 +7,12 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Logic;
+using CodeBase.Services.Input;
 using CodeBase.UI.Services.Factory;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class GameStateMachine
+    public sealed class GameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
@@ -32,7 +33,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>()),
+                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>()),
             };
         }
 

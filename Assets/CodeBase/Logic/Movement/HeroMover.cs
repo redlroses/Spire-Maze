@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using CodeBase.Data;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Player;
-using CodeBase.Services.Pause;
+using CodeBase.Services.Input;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class HeroMover : Mover, IHorizontalMover, IPlateMovable, ISavedProgress
+    public class HeroMover : Mover, IPlateMovable, ISavedProgress
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
 
         private Coroutine _inputDelay;
         private WaitUntil _waitUntil;
+        private IPlayerInputService _inputService;
 
         private void Awake()
         {
@@ -34,10 +34,21 @@ namespace CodeBase.Logic.Movement
             _dodge.Dodged -= OnDodged;
         }
 
+        private void OnDestroy()
+        {
+            _inputService.HorizontalMove -= HorizontalMove;
+        }
+
         protected override void Run()
         {
             _heroAnimator.SetSpeed(Rigidbody.velocity.RemoveY().magnitude);
             _heroAnimator.SetFallSpeed(Mathf.Abs(Rigidbody.velocity.y));
+        }
+
+        public void Construct(IPlayerInputService inputService)
+        {
+            _inputService = inputService;
+            _inputService.HorizontalMove += HorizontalMove;
         }
 
         public void OnMovingPlatformEnter(IPlateMover plateMover)
@@ -60,15 +71,7 @@ namespace CodeBase.Logic.Movement
             progress.WorldData.PositionOnLevel.Position = Rigidbody.position.AsVectorData();
         }
 
-        private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
-        {
-            Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
-            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
-                .AddY(uncorrectedPosition.y);
-            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
-        }
-
-        public void HorizontalMove(MoveDirection direction)
+        private void HorizontalMove(MoveDirection direction)
         {
             if (_inputDelay != null)
             {
@@ -85,12 +88,20 @@ namespace CodeBase.Logic.Movement
             Move(direction);
         }
 
+        private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
+        {
+            Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
+            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
+                .AddY(uncorrectedPosition.y);
+            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
+        }
+
         private IEnumerator InputDelay(MoveDirection direction)
         {
             _heroAnimator.PlayRun(direction != MoveDirection.Stop);
             yield return _waitUntil;
             yield return null;
-            
+
             Move(direction);
         }
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic.Movement;
+using CodeBase.Logic.Player;
+using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
@@ -25,16 +28,16 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IPauseService _pauseService;
         private readonly IWindowService _windowService;
+        private readonly IPlayerInputService _inputService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
-        private GameObject _heroGameObject;
-
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService, IWindowService windowService)
+            IPersistentProgressService persistentProgressService, IPauseService pauseService, IWindowService windowService, IPlayerInputService inputService)
         {
+            _inputService = inputService;
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
@@ -50,8 +53,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
-
-            _heroGameObject = null;
         }
 
         public void WarmUp()
@@ -67,8 +68,12 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHero(Vector3 at)
         {
-            _heroGameObject ??= InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
-            return _heroGameObject;
+            var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            hero.GetComponent<HeroMover>().Construct(_inputService);
+            hero.GetComponent<Jumper>().Construct(_inputService);
+            hero.GetComponentInChildren<Dodge>().Construct(_inputService);
+            hero.GetComponent<Hero>().Construct(_inputService);
+            return hero;
         }
 
         public GameObject CreateEnemy(string prefabPath, Vector3 position)
@@ -127,7 +132,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
             {
-                Debug.Log(gameObject.name + " " + pauseWatcher.GetHashCode());
                 pauseWatcher.RegisterPauseWatcher(_pauseService);
             }
         }

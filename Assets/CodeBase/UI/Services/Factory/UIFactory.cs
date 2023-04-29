@@ -53,10 +53,8 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateTopRankView(int rank, Transform inside) =>
             _assets.Instantiate(AssetPath.TopRankView, inside);
 
-        public GameObject CreateRankView(Transform inside)
-        {
-            return _assets.Instantiate(AssetPath.RankView, inside);
-        }
+        public GameObject CreateRankView(Transform inside) =>
+            _assets.Instantiate(AssetPath.RankView, inside);
 
         public void CreateSettings()
         {

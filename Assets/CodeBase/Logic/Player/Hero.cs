@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Logic.HealthEntity;
+﻿using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.Input;
 using UnityEngine;
 
@@ -8,14 +7,14 @@ namespace CodeBase.Logic.Player
     public class Hero : MonoBehaviour
     {
         [SerializeField] private PlayerHealth _playerHealth;
-        [SerializeField] private PlayerInput _input;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private CapsuleCollider _collider;
+
+        private IPlayerInputService _inputService;
 
         private void Awake()
         {
             _playerHealth ??= GetComponentInChildren<PlayerHealth>();
-            _input ??= GetComponent<PlayerInput>();
             _animator ??= GetComponent<HeroAnimator>();
             _collider ??= GetComponent<CapsuleCollider>();
         }
@@ -30,9 +29,14 @@ namespace CodeBase.Logic.Player
             _playerHealth.Died -= OnDied;
         }
 
+        public void Construct(IPlayerInputService inputService)
+        {
+            _inputService = inputService;
+        }
+
         private void OnDied()
         {
-            _input.enabled = false;
+            _inputService.ClearUp();
             _collider.enabled = false;
             _animator.PlayDied();
         }

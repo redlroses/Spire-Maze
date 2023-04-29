@@ -13,7 +13,6 @@ namespace CodeBase.Logic.Movement
         private readonly LayerMask _player = 10;
         private readonly LayerMask _trapActivator = 11;
 
-        [SerializeField] private PlayerInput _input;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private float _slidingTime;
@@ -21,12 +20,24 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private int _fatigue;
 
         private bool _isDodged;
+        private IPlayerInputService _inputService;
 
         public event Action<MoveDirection> Dodged;
 
         private void Start()
         {
             _timer.SetUp(_slidingTime, OnTurnOff);
+        }
+
+        private void OnDestroy()
+        {
+            _inputService.Dodge -= Evade;
+        }
+
+        public void Construct(IPlayerInputService inputService)
+        {
+            _inputService = inputService;
+            _inputService.Dodge += Evade;
         }
 
         public void Evade(MoveDirection direction)
@@ -37,7 +48,7 @@ namespace CodeBase.Logic.Movement
             }
 
             _isDodged = true;
-            Physics.IgnoreLayerCollision(_player, _trapActivator, true);
+            Physics.IgnoreLayerCollision(_player, _trapActivator, true); //TODO: лучше отключать хитбокс на время переката
             Dodged?.Invoke(direction);
             _animator.PlayDodge();
             _timer.Restart();

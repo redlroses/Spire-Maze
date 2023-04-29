@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
+using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
@@ -13,6 +14,7 @@ using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using TMPro;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -44,12 +46,12 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IPauseService>(new PauseService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
             _services.RegisterSingle<IScoreService>(new ScoreService(_services.Single<IPersistentProgressService>(),
                 _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IPauseService>(new PauseService());
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
@@ -62,14 +64,17 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IScoreService>(),
                     _stateMachine));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+            _services.RegisterSingle<IPlayerInputService>(new PlayerInputService(_services.Single<IPauseService>(),
+                _services.Single<IWindowService>()));
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IStaticDataService>(),
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
-                    _services.Single<IPauseService>(), 
-                    _services.Single<IWindowService>()));
+                    _services.Single<IPauseService>(),
+                    _services.Single<IWindowService>(),
+                    _services.Single<IPlayerInputService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

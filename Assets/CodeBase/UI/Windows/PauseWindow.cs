@@ -17,6 +17,11 @@ namespace CodeBase.UI.Windows
         private GameStateMachine _stateMachine;
         private IPersistentProgressService _progressService;
 
+        private void OnDestroy()
+        {
+            _pauseService.Resume -= OnResume;
+        }
+
         public void Construct(IPersistentProgressService progressService, IPauseService pauseService, GameStateMachine stateMachine)
         {
             _progressService = progressService;
@@ -27,7 +32,6 @@ namespace CodeBase.UI.Windows
 
         private void OnResume()
         {
-            _pauseService.Resume -= OnResume;
             Destroy(gameObject);
         }
 

@@ -3,6 +3,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
@@ -94,10 +95,8 @@ namespace CodeBase.Infrastructure.States
             ConstructLevel();
         }
 
-        private Vector3 GetHeroPosition()
-        {
-            return _progressService.Progress.WorldData.PositionOnLevel.Position.AsUnityVector();
-        }
+        private Vector3 GetHeroPosition() =>
+            _progressService.Progress.WorldData.PositionOnLevel.Position.AsUnityVector();
 
         private void BuildLevel() =>
             _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelId));

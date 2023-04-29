@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.UI.Services.Factory
 {
-  public interface IUIFactory: IService
+  public interface IUIFactory : IService
   {
     void CreateLeaderboard();
     void CreateUIRoot();

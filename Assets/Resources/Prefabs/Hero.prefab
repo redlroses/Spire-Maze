@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d737d7bdba98cdd46b91fe0a72f206d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _input: {fileID: 7393409988495010676}
   _animator: {fileID: 989079028364153686}
   _timer: {fileID: 8291894814252270757}
   _slidingTime: 0.5
@@ -7479,7 +7478,6 @@ GameObject:
   - component: {fileID: 7393409988495010664}
   - component: {fileID: 7393409988495010679}
   - component: {fileID: 7393409988495010668}
-  - component: {fileID: 7393409988495010676}
   - component: {fileID: 7393409988495010677}
   - component: {fileID: 7393409988495010669}
   - component: {fileID: 7393409988495010671}
@@ -7565,24 +7563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 7440742495519906430}
-  _input: {fileID: 7393409988495010676}
   _animator: {fileID: 989079028364153686}
   _collider: {fileID: 7393409988495010664}
---- !u!114 &7393409988495010676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7393409988495010675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd2646d1d8624884585a22d69327b348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mover: {fileID: 1356605512462546074}
-  _jumper: {fileID: 7393409988495010677}
-  _dodge: {fileID: 6587769830596586222}
 --- !u!114 &7393409988495010677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7631,12 +7613,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _stamina: {fileID: 8813367137604465016}
   _maxDownVelocity: 5
   _maxUpVelocity: 15
   _jumpHeight: 2.3
   _velocityScale: 25
   _jumpDuration: 0.55
-  _stamina: {fileID: 8813367137604465016}
   _fatigue: 120
 --- !u!114 &7393409988495010669
 MonoBehaviour:
