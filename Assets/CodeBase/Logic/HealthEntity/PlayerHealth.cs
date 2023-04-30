@@ -34,14 +34,14 @@ namespace CodeBase.Logic.HealthEntity
 
         public void LoadProgress(PlayerProgress progress)
         {
-            MaxPoints = progress.HeroHealthState.MaxHP;
-            CurrentPoints = progress.HeroHealthState.CurrentHP;
+            MaxPoints = progress.WorldData.HeroHealthState.MaxHP;
+            CurrentPoints = progress.WorldData.HeroHealthState.CurrentHP;
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroHealthState.CurrentHP = CurrentPoints;
-            progress.HeroHealthState.MaxHP = MaxPoints;
+            progress.WorldData.HeroHealthState.CurrentHP = CurrentPoints;
+            progress.WorldData.HeroHealthState.MaxHP = MaxPoints;
         }
 
         private void Validate(int points)

@@ -31,6 +31,7 @@ namespace CodeBase.Logic.Inventory
             else
             {
                 existingInventoryCell.IncreaseCount();
+                Debug.Log($"Count item {existingInventoryCell.Count}");
             }
 
             Updated?.Invoke();

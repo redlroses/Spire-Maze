@@ -48,8 +48,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
-            _services.RegisterSingle<IScoreService>(new ScoreService(_services.Single<IPersistentProgressService>(),
-                _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IScoreService>(new ScoreService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(new PauseService());
             _services.RegisterSingle<IUIFactory>(

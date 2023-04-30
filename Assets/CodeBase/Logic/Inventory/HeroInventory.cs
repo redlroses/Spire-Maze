@@ -17,7 +17,6 @@ namespace CodeBase.Logic.Inventory
             InputAction input = new InputAction("Press X", InputActionType.Button, "<Keyboard>/x");
             input.started += context =>
             {
-                Debug.Log("Items:");
                 foreach (IReadOnlyInventoryCell cell in Inventory)
                 {
                     Debug.Log($"Item:  {cell.Item.Name}, type: {cell.Item.ItemType}");
@@ -29,12 +28,12 @@ namespace CodeBase.Logic.Inventory
 
         public void LoadProgress(PlayerProgress progress)
         {
-            Inventory = progress.HeroInventoryData.AsHeroInventory();
+            Inventory = progress.WorldData.HeroInventoryData.AsHeroInventory();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroInventoryData = Inventory.AsInventoryData();
+            progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
         }
     }
 }

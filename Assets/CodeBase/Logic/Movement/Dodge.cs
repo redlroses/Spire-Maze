@@ -16,6 +16,7 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private float _slidingTime;
+        [SerializeField] private GameObject _hitBox;
         [SerializeField] private PlayerStamina _stamina;
         [SerializeField] private int _fatigue;
 
@@ -48,7 +49,7 @@ namespace CodeBase.Logic.Movement
             }
 
             _isDodged = true;
-            Physics.IgnoreLayerCollision(_player, _trapActivator, true); //TODO: лучше отключать хитбокс на время переката
+            _hitBox.SetActive(false);
             Dodged?.Invoke(direction);
             _animator.PlayDodge();
             _timer.Restart();
@@ -58,7 +59,7 @@ namespace CodeBase.Logic.Movement
         private void OnTurnOff()
         {
             _isDodged = false;
-            Physics.IgnoreLayerCollision(_player, _trapActivator, false);
+            _hitBox.SetActive(true);
         }
     }
 }

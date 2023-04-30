@@ -7,16 +7,16 @@ namespace CodeBase.Logic.StaminaEntity
     {
         public void LoadProgress(PlayerProgress progress)
         {
-            MaxPoints = progress.HeroStaminaState.MaxValue;
-            CurrentPoints = progress.HeroStaminaState.CurrentValue;
+            MaxPoints = progress.WorldData.HeroStaminaState.MaxValue;
+            CurrentPoints = progress.WorldData.HeroStaminaState.CurrentValue;
             TimerDelay.Restart();
             TimerDelay.Play();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroStaminaState.CurrentValue = CurrentPoints;
-            progress.HeroStaminaState.MaxValue = MaxPoints;
+            progress.WorldData.HeroStaminaState.CurrentValue = CurrentPoints;
+            progress.WorldData.HeroStaminaState.MaxValue = MaxPoints;
         }
     }
 }

@@ -142,10 +142,10 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelId);
             _progressService.Progress.WorldData.PositionOnLevel =
                 new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData());
-            _progressService.Progress.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerKey).MaxHealth;
-            _progressService.Progress.HeroHealthState.ResetHP();
-            _progressService.Progress.HeroStaminaState.MaxValue = _staticData.StaminaForEntity(PlayerKey).MaxStamina;
-            _progressService.Progress.HeroStaminaState.ResetStamina();
+            _progressService.Progress.WorldData.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerKey).MaxHealth;
+            _progressService.Progress.WorldData.HeroHealthState.ResetHP();
+            _progressService.Progress.WorldData.HeroStaminaState.MaxValue = _staticData.StaminaForEntity(PlayerKey).MaxStamina;
+            _progressService.Progress.WorldData.HeroStaminaState.ResetStamina();
         }
     }
 }

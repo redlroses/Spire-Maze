@@ -46,6 +46,7 @@ namespace CodeBase.Services.StaticData
 
         public HealthStaticData HealthForEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
+        
         public StaminaStaticData StaminaForEntity(string entityKey) =>
             GetDataFor(entityKey, _staminas);
 
