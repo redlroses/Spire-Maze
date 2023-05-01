@@ -24,5 +24,6 @@ namespace CodeBase.Infrastructure.Factory
     Material CreateMaterial(string name);
     PhysicMaterial CreatePhysicMaterial(string name);
     GameObject CreateHud();
+    GameObject CreateLobby();
   }
 }

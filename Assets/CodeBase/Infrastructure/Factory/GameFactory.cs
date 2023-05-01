@@ -76,11 +76,8 @@ namespace CodeBase.Infrastructure.Factory
             return hero;
         }
 
-        public GameObject CreateEnemy(string prefabPath, Vector3 position)
-        {
-            GameObject enemy = InstantiateRegistered(prefabPath, position);
-            return enemy;
-        }
+        public GameObject CreateEnemy(string prefabPath, Vector3 position) =>
+            InstantiateRegistered(prefabPath, position);
 
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
@@ -89,6 +86,9 @@ namespace CodeBase.Infrastructure.Factory
             RegisterPauseWatchers(cell);
             return cell;
         }
+
+        public GameObject CreateLobby() =>
+            InstantiateRegistered(AssetPath.Lobby);
 
         public Material CreateMaterial(string name) =>
             GetCashed(name, AssetPath.Materials, _materials);
@@ -124,6 +124,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);
             RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
 
             return gameObject;
         }
@@ -139,7 +140,9 @@ namespace CodeBase.Infrastructure.Factory
         private void RegisterProgressWatchers(GameObject gameObject)
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+            {
                 Register(progressReader);
+            }
         }
 
         private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection)

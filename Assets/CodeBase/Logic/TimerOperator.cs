@@ -20,6 +20,11 @@ namespace CodeBase.Logic
 
         private void OnDestroy()
         {
+            if (_pauseReactive is null)
+            {
+                return;
+            }
+
             _pauseReactive.Pause -= OnPause;
             _pauseReactive.Resume -= OnResume;
         }

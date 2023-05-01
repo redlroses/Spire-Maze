@@ -7,7 +7,6 @@
         public const string Initial = "Initial";
         public const string Lobby = "Lobby";
         public const int LobbyId = 0;
-        public const string FirstLevelKey = "Level 1";
-        public const string FirstLevelKey2 = "Level 2";
+        public const string LearningLevel = "Learning";
     }
 }

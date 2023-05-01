@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
@@ -86,13 +87,35 @@ namespace CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
-            if (_loadPayload.IsBuildable == false)
+            if (_loadPayload.IsBuildable)
             {
+                BuildLevel();
+                ConstructLevel();
                 return;
             }
 
-            BuildLevel();
-            ConstructLevel();
+            if (string.Equals(_loadPayload.SceneName, LevelNames.Lobby))
+            {
+                InitLobby();
+                return;
+            }
+            
+            if (string.Equals(_loadPayload.SceneName, LevelNames.LearningLevel))
+            {
+                InitLearningLevel();
+            }
+        }
+
+        private void InitLearningLevel()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InitLobby()
+        {
+            GameObject lobby = _gameFactory.CreateLobby();
+            foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
+                levelTransfer.Construct(_stateMachine);   
         }
 
         private Vector3 GetHeroPosition() =>
@@ -142,9 +165,11 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelId);
             _progressService.Progress.WorldData.PositionOnLevel =
                 new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData());
-            _progressService.Progress.WorldData.HeroHealthState.MaxHP = _staticData.HealthForEntity(PlayerKey).MaxHealth;
+            _progressService.Progress.WorldData.HeroHealthState.MaxHP =
+                _staticData.HealthForEntity(PlayerKey).MaxHealth;
             _progressService.Progress.WorldData.HeroHealthState.ResetHP();
-            _progressService.Progress.WorldData.HeroStaminaState.MaxValue = _staticData.StaminaForEntity(PlayerKey).MaxStamina;
+            _progressService.Progress.WorldData.HeroStaminaState.MaxValue =
+                _staticData.StaminaForEntity(PlayerKey).MaxStamina;
             _progressService.Progress.WorldData.HeroStaminaState.ResetStamina();
         }
     }

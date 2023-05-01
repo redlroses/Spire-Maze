@@ -73,7 +73,6 @@ namespace CodeBase.Logic.Lift.PlateMove
             _pauseReactive = pauseReactive;
             _pauseReactive.Pause += OnPause;
             _pauseReactive.Resume += OnResume;
-            Debug.Log("Registred");
         }
 
         public void Move(LiftDestinationMarker from, LiftDestinationMarker to)

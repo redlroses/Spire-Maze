@@ -84,12 +84,13 @@ namespace CodeBase.Logic.Portal
             teleportable.Teleportation(_selfTransform.position, rotation);
         }
 
-        private void SetActivate() => _isActivated = _linkedPortalGate._isActivated;
+        private void Activate() =>
+            _isActivated = true;
 
         private void Teleport()
         {
             float dotRotation = Vector3.Dot(_selfTransform.forward, _teleportable.Forward);
-            _linkedPortalGate.SetActivate();
+            _linkedPortalGate.Activate();
             _linkedPortalGate.Receive(_teleportable, dotRotation);
             _effect.Play();
         }
