@@ -57,13 +57,13 @@ namespace CodeBase.Services.LevelBuild
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
             _cellConstructor.Construct<EnemySpawnPoint>(gameFactory, staticData,
                 level.Where(cell => cell.CellData is EditorCells.EnemySpawnPoint).ToArray());
-            //   CombineCells(level);
+               CombineCells(level);
         }
 
         private void CombineCells(Level level)
         {
             GameObject groupsHolder = CombineAllColliders(level);
-            CombineAllMeshes(level.SelfTransform, groupsHolder);
+            // CombineAllMeshes(level.SelfTransform, groupsHolder);
         }
 
         private GameObject CombineAllColliders(Level level)
@@ -155,8 +155,14 @@ namespace CodeBase.Services.LevelBuild
             colliderHolder.transform.parent = parent;
             colliderHolder.isStatic = true;
 
+            // MeshFilter[] meshesFilters =
+            //     cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
+
+            MeshCollider[] meshColliders =
+                cells.Select(container => container.Container.GetComponentInChildren<MeshCollider>()).ToArray();
+
             MeshFilter[] meshesFilters =
-                cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
+                meshColliders.Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
 
             // MeshFilter[] meshesFilters;
             // List<MeshFilter> meshesFiltersList;
@@ -166,9 +172,9 @@ namespace CodeBase.Services.LevelBuild
 
             // meshesFilters = meshesFiltersList.ToArray();
 
-            foreach (MeshFilter meshFilter in meshesFilters)
+            foreach (MeshCollider meshCollider in meshColliders)
             {
-                meshFilter.gameObject.SetActive(false);
+                meshCollider.enabled = false;
             }
 
             CombineInstance[] combine = CombineInstances(meshesFilters);
