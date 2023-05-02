@@ -27,6 +27,7 @@ namespace CodeBase.Services.LevelBuild
         private const string Colliders = "Colliders";
         private const string Spire = "Spire";
         private const string Ground = "Ground";
+        private const int MaxCellsInCollider = 8;
 
         private readonly CellConstructor _cellConstructor = new CellConstructor();
 
@@ -150,6 +151,13 @@ namespace CodeBase.Services.LevelBuild
 
         private void CombineColliders(List<Cell> cells, Transform parent)
         {
+            if (cells.Count > MaxCellsInCollider)
+            {
+                CombineColliders(cells.GetRange(0, cells.Count / 2), parent);
+                CombineColliders(cells.GetRange(cells.Count / 2, Mathf.FloorToInt(cells.Count / 2f)), parent);
+                return;
+            }
+            
             GameObject cell = cells.First().Container.gameObject;
             GameObject colliderHolder = new GameObject($"{cell.name} collider");
             colliderHolder.transform.parent = parent;
