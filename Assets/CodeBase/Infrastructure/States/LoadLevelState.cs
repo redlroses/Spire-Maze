@@ -68,6 +68,7 @@ namespace CodeBase.Infrastructure.States
             InitGameWorld();
             ValidateLevelProgress();
             var hero = InitHero();
+            InitScoreService();
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
@@ -76,6 +77,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         // ReSharper disable once InconsistentNaming
+
         private void InitUIRoot() =>
             _uiFactory.CreateUIRoot();
 
@@ -132,6 +134,11 @@ namespace CodeBase.Infrastructure.States
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
             return hero;
+        }
+
+        private void InitScoreService()
+        {
+            _gameFactory.InitScoreService();
         }
 
         private void InitHud(GameObject hero)

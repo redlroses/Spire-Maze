@@ -72,6 +72,7 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IPauseService>(),
+                    _services.Single<IScoreService>(),
                     _services.Single<IWindowService>(),
                     _services.Single<IPlayerInputService>()));
             _services.RegisterSingle<ISaveLoadService>(

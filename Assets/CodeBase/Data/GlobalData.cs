@@ -6,6 +6,11 @@ namespace CodeBase.Data
     [Serializable]
     public class GlobalData
     {
-        public List<Level> Level;
+        public List<LevelData> Levels = new List<LevelData>();
+
+        public GlobalData()
+        {
+            
+        }
     }
 }

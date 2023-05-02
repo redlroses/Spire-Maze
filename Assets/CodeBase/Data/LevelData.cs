@@ -3,7 +3,7 @@
 namespace CodeBase.Data
 {
     [Serializable]
-    public class Level
+    public class LevelData
     {
         public int Id;
         public int Score;

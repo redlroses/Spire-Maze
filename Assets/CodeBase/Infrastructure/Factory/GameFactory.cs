@@ -9,6 +9,7 @@ using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
+using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
@@ -27,6 +28,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IPauseService _pauseService;
+        private readonly IScoreService _scoreService;
         private readonly IWindowService _windowService;
         private readonly IPlayerInputService _inputService;
 
@@ -35,13 +37,14 @@ namespace CodeBase.Infrastructure.Factory
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService, IWindowService windowService, IPlayerInputService inputService)
+            IPersistentProgressService persistentProgressService, IPauseService pauseService, IScoreService scoreService, IWindowService windowService, IPlayerInputService inputService)
         {
             _inputService = inputService;
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
+            _scoreService = scoreService;
             _pauseService = pauseService;
             _windowService = windowService;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
@@ -66,6 +69,11 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateSpire() =>
             _assets.Instantiate(path: AssetPath.Spire);
 
+        public void InitScoreService()
+        {
+            RegisterScoreService(_scoreService);
+        }
+        
         public GameObject CreateHero(Vector3 at)
         {
             var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
@@ -127,6 +135,11 @@ namespace CodeBase.Infrastructure.Factory
             RegisterPauseWatchers(gameObject);
 
             return gameObject;
+        }
+
+        private void RegisterScoreService(IScoreService scoreService)
+        {
+            Register((ISavedProgress)scoreService);
         }
 
         private void RegisterPauseWatchers(GameObject gameObject)

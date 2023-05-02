@@ -13,8 +13,7 @@ namespace CodeBase.Data
     public PlayerProgress(string initialLevel)
     {
       WorldData = new WorldData(initialLevel);
-
-      GlobalData GlobalData = new GlobalData();
+      GlobalData = new GlobalData();
     }
   }
 }
