@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
-using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Services.Score
@@ -25,10 +23,11 @@ namespace CodeBase.Services.Score
 
         public int CalculateScore()
         {
-            // _progressService.Progress.ScoreAccumulationData;
+            ScoreAccumulationData scoreAccumulationData = _progress.WorldData.ScoreAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
+            
             //TODO: Подсчёт очков по модификаторам из статик даты
-            CurrentScore = _progress.WorldData.ScoreAccumulationData.Artifacts * scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * scoreConfig.PerSecondReduction);
+            CurrentScore = scoreAccumulationData.Artifacts * scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * scoreConfig.PerSecondReduction);
 
             //Сохранять флаг что уровень пройден GlobalData.Levels.IsCompleted;
            // _currentLevelData.IsCompleted = true;
@@ -45,7 +44,6 @@ namespace CodeBase.Services.Score
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            //Сохранять текущий счет GlobalData.Levels.Score;
             _currentLevelData.Score = CurrentScore;
         }
     }

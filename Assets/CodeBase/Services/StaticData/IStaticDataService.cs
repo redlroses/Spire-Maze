@@ -16,5 +16,6 @@ namespace CodeBase.Services.StaticData
     LeaderboardStaticData ForLeaderboard(string yandexName);
     WindowConfig ForWindow(WindowId windowId);
     ScoreConfig ScoreForLevel(int levelId);
+    int GetCountScoreConfigs();
   }
 }

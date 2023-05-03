@@ -35,10 +35,10 @@ namespace CodeBase.Logic.Inventory
 
         public void UpdateProgress(PlayerProgress progress)
         {
+            progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
             progress.WorldData.ScoreAccumulationData.Artifacts = progress.WorldData.HeroInventoryData.InventoryCells
                 .Where(inventoryCell => inventoryCell.Item.ItemType != StorableType.Key)
                 .Sum(inventoryCell => inventoryCell.Count);
-            progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
         }
     }
 }

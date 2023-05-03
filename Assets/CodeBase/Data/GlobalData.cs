@@ -6,13 +6,13 @@ namespace CodeBase.Data
     [Serializable]
     public class GlobalData
     {
-        public List<LevelData> Levels = new List<LevelData>(MaxLevel);
+        public List<LevelData> Levels;
 
-        private const int MaxLevel = 15; 
-        
-        public GlobalData()
+        public GlobalData(int countLevels)
         {
-            for (int i = 0; i < Levels.Capacity-1; i++)
+            Levels = new List<LevelData>(countLevels);
+
+            for (int i = 0; i < Levels.Capacity; i++)
             {
                 Levels.Add(new LevelData()
                 {

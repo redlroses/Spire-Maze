@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Logic.Inventory;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
@@ -10,15 +11,21 @@ namespace CodeBase.Logic.Player
         [SerializeField] private HeroInventory _heroInventory;
         [SerializeField] private StorableStaticData _scoreItem;
 
+        private InputAction _input;
+
         private void OnEnable()
         {
-            InputAction input = new InputAction("Press B", InputActionType.Button, "<Keyboard>/B");
-            input.started += context =>
-            {
-                _heroInventory.Inventory.Add(_scoreItem);
-            };
+            _input = new InputAction("Press B", InputActionType.Button, "<Keyboard>/B");
+            _input.started += AddItem;
+            _input.Enable();
+        }
 
-            input.Enable();
+        private void AddItem(InputAction.CallbackContext context) => _heroInventory.Inventory.Add(_scoreItem);
+
+        private void OnDisable()
+        {
+            _input.started -= AddItem;
+            _input.Disable();
         }
     }
 }
