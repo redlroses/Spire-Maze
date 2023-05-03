@@ -45,9 +45,6 @@ namespace CodeBase.Services.Score
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            _progress.WorldData.ScoreAccumulationData.Artifacts = _progress.WorldData.HeroInventoryData.InventoryCells
-                .Where(inventoryCell => inventoryCell.Item.ItemType != StorableType.Key)
-                .Sum(inventoryCell => inventoryCell.Count);
             //Сохранять текущий счет GlobalData.Levels.Score;
             _currentLevelData.Score = CurrentScore;
         }

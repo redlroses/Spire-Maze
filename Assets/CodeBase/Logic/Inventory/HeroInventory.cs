@@ -1,5 +1,7 @@
-﻿using CodeBase.Data;
+﻿using System.Linq;
+using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,6 +35,9 @@ namespace CodeBase.Logic.Inventory
 
         public void UpdateProgress(PlayerProgress progress)
         {
+            progress.WorldData.ScoreAccumulationData.Artifacts = progress.WorldData.HeroInventoryData.InventoryCells
+                .Where(inventoryCell => inventoryCell.Item.ItemType != StorableType.Key)
+                .Sum(inventoryCell => inventoryCell.Count);
             progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
         }
     }
