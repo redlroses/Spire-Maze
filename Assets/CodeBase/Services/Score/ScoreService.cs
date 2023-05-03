@@ -1,7 +1,9 @@
-﻿using CodeBase.Data;
+﻿using System.Linq;
+using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Services.Score
@@ -29,7 +31,7 @@ namespace CodeBase.Services.Score
             CurrentScore = _progress.WorldData.ScoreAccumulationData.Artifacts * scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * scoreConfig.PerSecondReduction);
 
             //Сохранять флаг что уровень пройден GlobalData.Levels.IsCompleted;
-            _currentLevelData.IsCompleted = true;
+           // _currentLevelData.IsCompleted = true;
             return CurrentScore;
         }
 
@@ -43,6 +45,9 @@ namespace CodeBase.Services.Score
 
         public void UpdateProgress(PlayerProgress progress)
         {
+            _progress.WorldData.ScoreAccumulationData.Artifacts = _progress.WorldData.HeroInventoryData.InventoryCells
+                .Where(inventoryCell => inventoryCell.Item.ItemType != StorableType.Key)
+                .Sum(inventoryCell => inventoryCell.Count);
             //Сохранять текущий счет GlobalData.Levels.Score;
             _currentLevelData.Score = CurrentScore;
         }

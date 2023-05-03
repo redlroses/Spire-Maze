@@ -1,5 +1,4 @@
-﻿using CodeBase.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.StaticData
 {
