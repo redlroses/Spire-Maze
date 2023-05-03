@@ -1,11 +1,14 @@
-﻿using CodeBase.StaticData.Storable;
+﻿using System;
+using CodeBase.StaticData.Storable;
+using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {
+    [Serializable]
     public sealed class InventoryCell : IReadOnlyInventoryCell
     {
-        public int Count { get; private set; }
-        public StorableStaticData Item { get; }
+        [field: SerializeField] public int Count { get; private set; }
+        [field: SerializeField] public StorableStaticData Item { get; private set; }
 
         public bool IsEmpty => Count <= 0;
 
