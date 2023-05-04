@@ -1,5 +1,4 @@
-﻿using CodeBase.Data;
-using CodeBase.StaticData;
+﻿using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
@@ -16,6 +15,5 @@ namespace CodeBase.Services.StaticData
     LeaderboardStaticData ForLeaderboard(string yandexName);
     WindowConfig ForWindow(WindowId windowId);
     ScoreConfig ScoreForLevel(int levelId);
-    int GetCountScoreConfigs();
   }
 }

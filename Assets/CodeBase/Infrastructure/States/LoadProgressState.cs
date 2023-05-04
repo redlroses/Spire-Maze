@@ -46,8 +46,7 @@ namespace CodeBase.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var countLevels = _staticDataService.GetCountScoreConfigs();
-            var progress = new PlayerProgress(initialLevel: LevelNames.Lobby, countLevels)
+            var progress = new PlayerProgress(initialLevel: LevelNames.Lobby)
             {
                 WorldData =
                 {

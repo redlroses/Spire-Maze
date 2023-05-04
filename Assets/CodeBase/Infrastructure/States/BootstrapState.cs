@@ -48,7 +48,10 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
-            _services.RegisterSingle<IScoreService>(new ScoreService(_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IScoreService>(
+                new ScoreService(
+                    _services.Single<IStaticDataService>(),
+                    _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(new PauseService());
             _services.RegisterSingle<IUIFactory>(
@@ -78,7 +81,8 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
-                    _services.Single<IGameFactory>()));
+                    _services.Single<IGameFactory>(), 
+                    _services.Single<IScoreService>()));
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),

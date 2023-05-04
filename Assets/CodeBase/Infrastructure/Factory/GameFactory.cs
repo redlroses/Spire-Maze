@@ -69,11 +69,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateSpire() =>
             _assets.Instantiate(path: AssetPath.Spire);
 
-        public void InitScoreService()
-        {
-            RegisterScoreService(_scoreService);
-        }
-        
         public GameObject CreateHero(Vector3 at)
         {
             var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
@@ -135,11 +130,6 @@ namespace CodeBase.Infrastructure.Factory
             RegisterPauseWatchers(gameObject);
 
             return gameObject;
-        }
-
-        private void RegisterScoreService(IScoreService scoreService)
-        {
-            Register((ISavedProgress)scoreService);
         }
 
         private void RegisterPauseWatchers(GameObject gameObject)

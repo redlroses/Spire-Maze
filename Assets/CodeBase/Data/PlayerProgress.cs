@@ -5,15 +5,13 @@ namespace CodeBase.Data
   [Serializable]
   public class PlayerProgress
   {
-
     public WorldData WorldData;
-
     public GlobalData GlobalData;
 
-    public PlayerProgress(string initialLevel, int countLevels)
+    public PlayerProgress(string initialLevel)
     {
       WorldData = new WorldData(initialLevel);
-      GlobalData = new GlobalData(countLevels);
+      GlobalData = new GlobalData();
     }
   }
 }

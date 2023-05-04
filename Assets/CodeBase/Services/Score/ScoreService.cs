@@ -1,50 +1,80 @@
 ﻿using CodeBase.Data;
+using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
-using UnityEngine;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.Score
 {
-    public class ScoreService : IScoreService, ISavedProgress
+    public class ScoreService : IScoreService
     {
         private readonly IStaticDataService _staticData;
+        private readonly IPersistentProgressService _progressService;
 
-        private PlayerProgress _progress;
         private LevelData _currentLevelData;
         private int _currentLevelId;
 
-        public ScoreService(IStaticDataService staticData)
+        private PlayerProgress Progress => _progressService.Progress;
+
+        public ScoreService(IStaticDataService staticData, IPersistentProgressService progressService)
         {
+            _progressService = progressService;
             _staticData = staticData;
         }
-
+ 
         public int CurrentScore { get; private set; } = default;
 
         public int CalculateScore()
         {
-            ScoreAccumulationData scoreAccumulationData = _progress.WorldData.ScoreAccumulationData;
+            ScoreAccumulationData scoreAccumulationData = Progress.WorldData.ScoreAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
-            
-            //TODO: Подсчёт очков по модификаторам из статик даты
-            CurrentScore = scoreAccumulationData.Artifacts * scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * scoreConfig.PerSecondReduction);
 
-            //Сохранять флаг что уровень пройден GlobalData.Levels.IsCompleted;
-           // _currentLevelData.IsCompleted = true;
+            //TODO: Подсчёт очков по модификаторам из статик даты
+            CurrentScore =
+                scoreAccumulationData.Artifacts *
+                scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * soreConfig.PerSecondReduction);
+            
             return CurrentScore;
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadProgress()
         {
-            _progress = progress;
-            _currentLevelId = _progress.WorldData.LevelState.LevelId;
-            _currentLevelData = _progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
-            Debug.Log($"Level ID: {_currentLevelId}, LevelData: {_currentLevelData}");
+            if (IsScorableLevel() == false)
+            {
+                return;
+            }
+
+            _currentLevelId = Progress.WorldData.LevelState.LevelId;
+            _currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
+            
+            if (_currentLevelData != null)
+            {
+                CurrentScore = _currentLevelData.Score;
+            }
+
+            Debug.Log(_currentLevelData == null
+                ? $"Level ID: {_currentLevelId}, LevelData: {_currentLevelData}"
+                : $"Level ID: {_currentLevelId}, LevelData: id - {_currentLevelData.Id}, score - {_currentLevelData.Score}");
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateProgress()
         {
-            _currentLevelData.Score = CurrentScore;
+            if (_currentLevelData == null)
+            {
+                Progress.GlobalData.Levels.Add(new LevelData(_currentLevelId, CurrentScore));
+            }
+            else
+            {
+                if (_currentLevelData.Score < CurrentScore)
+                {
+                    _currentLevelData.Score = CurrentScore;
+                }
+            }
         }
+
+        private bool IsScorableLevel() =>
+            SceneManager.GetActiveScene().name == LevelNames.BuildableLevel;
     }
 }

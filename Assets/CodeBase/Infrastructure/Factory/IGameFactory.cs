@@ -18,7 +18,6 @@ namespace CodeBase.Infrastructure.Factory
     void WarmUp();
     Material CreateColoredMaterial(Colors color);
     GameObject CreateSpire();
-    void InitScoreService();
     GameObject CreateHero(Vector3 at);
     GameObject CreateEnemy(string prefabPath, Vector3 position);
     GameObject CreateCell<TCell>(Transform container) where TCell : Cell;

@@ -62,8 +62,6 @@ namespace CodeBase.Services.StaticData
         public ScoreConfig ScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);
 
-        public int GetCountScoreConfigs() => _scoreConfigs.Count;
-        
         private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)
                 ? staticData

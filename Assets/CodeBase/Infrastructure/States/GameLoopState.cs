@@ -22,6 +22,7 @@ namespace CodeBase.Infrastructure.States
 
     public void Exit()
     {
+      _saveLoadService.SaveProgress();
       _inputService.ClearUp();
     }
 

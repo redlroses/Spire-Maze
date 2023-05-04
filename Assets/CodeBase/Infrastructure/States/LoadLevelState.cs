@@ -7,6 +7,7 @@ using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
@@ -27,6 +28,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
+        private readonly IScoreService _scoreService;
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
 
@@ -35,7 +37,7 @@ namespace CodeBase.Infrastructure.States
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
             IUIFactory uiFactory,
             IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, LoadingCurtain curtain)
+            ILevelBuilder levelBuilder, IScoreService scoreService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -44,6 +46,7 @@ namespace CodeBase.Infrastructure.States
             _progressService = progressService;
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
+            _scoreService = scoreService;
             _curtain = curtain;
         }
 
@@ -68,7 +71,6 @@ namespace CodeBase.Infrastructure.States
             InitGameWorld();
             ValidateLevelProgress();
             var hero = InitHero();
-            InitScoreService();
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
@@ -77,7 +79,6 @@ namespace CodeBase.Infrastructure.States
         }
 
         // ReSharper disable once InconsistentNaming
-
         private void InitUIRoot() =>
             _uiFactory.CreateUIRoot();
 
@@ -85,6 +86,8 @@ namespace CodeBase.Infrastructure.States
         {
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
+            
+            _scoreService.LoadProgress();
         }
 
         private void InitGameWorld()
@@ -134,11 +137,6 @@ namespace CodeBase.Infrastructure.States
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
             return hero;
-        }
-
-        private void InitScoreService()
-        {
-            _gameFactory.InitScoreService();
         }
 
         private void InitHud(GameObject hero)

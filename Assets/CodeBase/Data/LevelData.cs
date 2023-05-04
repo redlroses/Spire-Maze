@@ -7,6 +7,11 @@ namespace CodeBase.Data
     {
         public int Id;
         public int Score;
-        public bool IsCompleted;
+
+        public LevelData(int id, int score)
+        {
+            Id = id;
+            Score = score;
+        }
     }
 }

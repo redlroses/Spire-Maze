@@ -8,7 +8,9 @@ using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Logic;
 using CodeBase.Services.Input;
+using CodeBase.Services.Score;
 using CodeBase.UI.Services.Factory;
+using UnityEngine.SocialPlatforms;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -27,7 +29,9 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IUIFactory>(),
                     services.Single<IPersistentProgressService>(),
                     services.Single<IStaticDataService>(),
-                    services.Single<ILevelBuilder>(), curtain),
+                    services.Single<ILevelBuilder>(),
+                    services.Single<IScoreService>(),
+                    curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(),

@@ -8,17 +8,9 @@ namespace CodeBase.Data
     {
         public List<LevelData> Levels;
 
-        public GlobalData(int countLevels)
+        public GlobalData()
         {
-            Levels = new List<LevelData>(countLevels);
-
-            for (int i = 0; i < Levels.Capacity; i++)
-            {
-                Levels.Add(new LevelData()
-                {
-                    Id = i
-                });
-            }
+            Levels = new List<LevelData>();
         }
     }
 }

@@ -4,5 +4,7 @@
     {
         int CurrentScore { get; }
         int CalculateScore();
+        void LoadProgress();
+        void UpdateProgress();
     }
 }
