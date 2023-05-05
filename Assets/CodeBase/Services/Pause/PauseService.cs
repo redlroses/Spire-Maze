@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Services.Pause
@@ -6,6 +7,12 @@ namespace CodeBase.Services.Pause
     public class PauseService : IPauseService
     {
         private readonly IWindowService _windowService;
+
+        public PauseService(IWatchService watchService)
+        {
+            watchService.RegisterPauseWatcher(this);
+        }
+
         public event Action Pause;
         public event Action Resume;
 

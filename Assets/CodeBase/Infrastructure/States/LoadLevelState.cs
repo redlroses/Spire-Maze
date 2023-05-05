@@ -9,6 +9,7 @@ using CodeBase.Services.LevelBuild;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
+using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
@@ -29,15 +30,15 @@ namespace CodeBase.Infrastructure.States
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
         private readonly IScoreService _scoreService;
+        private readonly IWatchService _watchService;
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
 
         private LoadPayload _loadPayload;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
-            IUIFactory uiFactory,
-            IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IScoreService scoreService, LoadingCurtain curtain)
+            IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
+            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -47,6 +48,7 @@ namespace CodeBase.Infrastructure.States
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
             _scoreService = scoreService;
+            _watchService = watchService;
             _curtain = curtain;
         }
 
@@ -87,6 +89,7 @@ namespace CodeBase.Infrastructure.States
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
             
+            _watchService.LoadProgress();
             _scoreService.LoadProgress();
         }
 

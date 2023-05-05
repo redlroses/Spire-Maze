@@ -12,6 +12,7 @@ using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
+using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using TMPro;
@@ -23,12 +24,14 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
+        private readonly ICoroutineRunner _coroutineRunner;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _services = services;
+            _coroutineRunner = coroutineRunner;
 
             RegisterServices();
         }
@@ -48,12 +51,16 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
+            _services.RegisterSingle<IWatchService>(
+                new WatchService(
+                    _coroutineRunner,
+                    _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IScoreService>(
                 new ScoreService(
                     _services.Single<IStaticDataService>(),
                     _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
-            _services.RegisterSingle<IPauseService>(new PauseService());
+            _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IWatchService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
@@ -82,7 +89,8 @@ namespace CodeBase.Infrastructure.States
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IGameFactory>(), 
-                    _services.Single<IScoreService>()));
+                    _services.Single<IScoreService>(),
+                    _services.Single<IWatchService>()));
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),

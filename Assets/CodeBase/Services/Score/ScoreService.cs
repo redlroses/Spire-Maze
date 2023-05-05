@@ -31,12 +31,11 @@ namespace CodeBase.Services.Score
             ScoreAccumulationData scoreAccumulationData = Progress.WorldData.ScoreAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
 
-            //TODO: Подсчёт очков по модификаторам из статик даты
             CurrentScore =
-                scoreAccumulationData.Artifacts *
-                scoreConfig.PerArtifact; //+ (scoreConfig.BasePointsOnStart - N * soreConfig.PerSecondReduction);
+                (int)(scoreAccumulationData.Artifacts *
+                    scoreConfig.PerArtifact + (scoreConfig.BasePointsOnStart - scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction));
             
-            return CurrentScore;
+            return CurrentScore = CurrentScore > 0 ? CurrentScore : 0;
         }
 
         public void LoadProgress()

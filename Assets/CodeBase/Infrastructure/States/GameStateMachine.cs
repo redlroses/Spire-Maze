@@ -9,8 +9,8 @@ using CodeBase.Services.StaticData;
 using CodeBase.Logic;
 using CodeBase.Services.Input;
 using CodeBase.Services.Score;
+using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
-using UnityEngine.SocialPlatforms;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -19,11 +19,11 @@ namespace CodeBase.Infrastructure.States
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services, LoadingCurtain curtain)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     services.Single<IGameFactory>(),
                     services.Single<IUIFactory>(),
@@ -31,13 +31,14 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IStaticDataService>(),
                     services.Single<ILevelBuilder>(),
                     services.Single<IScoreService>(),
+                    services.Single<IWatchService>(),
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>()),
+                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(), services.Single<IWatchService>()),
             };
         }
 
