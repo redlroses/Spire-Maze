@@ -19,6 +19,7 @@ namespace CodeBase.UI.Windows
 
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
         [SerializeField] private TextSetterAnimated _scoreText;
+        [SerializeField] private TextSetterAnimated _itemText;
         [SerializeField] private StarsView _starsView;
 
         private IScoreService _scoreService;
@@ -39,6 +40,7 @@ namespace CodeBase.UI.Windows
         {
             _windowAnimationPlayer.Play();
             _scoreText.SetTextAnimated(_scoreService.CalculateScore());
+            _itemText.SetTextAnimated(_progressService.Progress.WorldData.ScoreAccumulationData.Artifacts);
             ScoreConfig scoreConfig = GetScoreConfig();
             _starsView.EnableStars(StarsCountFromConfig(scoreConfig));
         }

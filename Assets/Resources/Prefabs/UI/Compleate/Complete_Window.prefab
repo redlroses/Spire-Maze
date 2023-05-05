@@ -1644,6 +1644,7 @@ GameObject:
   - component: {fileID: 5444690590447803803}
   - component: {fileID: 5444690590447803801}
   - component: {fileID: 5444690590447803802}
+  - component: {fileID: 397981187607071034}
   m_Layer: 5
   m_Name: Text_Value
   m_TagString: Untagged
@@ -1768,6 +1769,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &397981187607071034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444690590447803804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a75c7c10a7c4848867913044cca10d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 5444690590447803802}
+  _curveAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0037651062
+      value: 0
+      inSlope: 3.056665
+      outSlope: 3.056665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0360401
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.0137324855
+      outSlope: -0.0137324855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17297347
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 2
+  _testNumber: 8346
 --- !u!1 &5444690590498031068
 GameObject:
   m_ObjectHideFlags: 0
@@ -5679,6 +5719,7 @@ MonoBehaviour:
   _nextLevelButton: {fileID: 5444690590686908236}
   _windowAnimationPlayer: {fileID: 7320264303191176710}
   _scoreText: {fileID: 1200259939827944471}
+  _itemText: {fileID: 397981187607071034}
   _starsView: {fileID: 6244547600601090814}
 --- !u!114 &7320264303191176710
 MonoBehaviour:
