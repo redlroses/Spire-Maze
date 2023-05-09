@@ -7,5 +7,11 @@ namespace CodeBase.Data
     {
         public float PlayTime;
         public int Artifacts;
+
+        public void Reset()
+        {
+            PlayTime = 0;
+            Artifacts = 0;
+        }
     }
 }

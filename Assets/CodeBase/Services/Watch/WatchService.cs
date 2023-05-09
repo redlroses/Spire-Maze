@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Services.Watch
 {
-    public class WatchService : IWatchService, IPauseWatcher
+    public class WatchService : IWatchService
     {
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IPersistentProgressService _progressService;
@@ -27,7 +27,8 @@ namespace CodeBase.Services.Watch
 
         public void Start()
         {
-            _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
+            Debug.Log(_routine);
+            _routine = _coroutineRunner.StartCoroutine(RunTimer());
         }
 
         public void Cleanup()
@@ -39,7 +40,6 @@ namespace CodeBase.Services.Watch
         {
             _coroutineRunner.StopCoroutine(_routine);
             _routine = null;
-            _elapsedTime = 0;
         }
 
         public void LoadProgress()

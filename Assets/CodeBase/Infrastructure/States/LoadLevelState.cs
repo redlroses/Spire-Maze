@@ -4,7 +4,6 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.StaminaEntity;
-using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -15,7 +14,6 @@ using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
@@ -188,6 +186,7 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData.HeroStaminaState.MaxValue =
                 _staticData.StaminaForEntity(PlayerKey).MaxStamina;
             _progressService.Progress.WorldData.HeroStaminaState.ResetStamina();
+            _progressService.Progress.WorldData.ScoreAccumulationData.Reset();
         }
     }
 }
