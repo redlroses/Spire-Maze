@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Logic.Inventory;
 using CodeBase.StaticData.Storable;
 using UnityEngine;

@@ -15,7 +15,6 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
-using TMPro;
 
 namespace CodeBase.Infrastructure.States
 {

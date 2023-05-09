@@ -28,20 +28,12 @@ namespace CodeBase.Logic.Player
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private Animator _animator;
-        
-        private IPauseReactive _pauseReactive;
 
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
 
         public AnimatorState State { get; private set; }
 
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
-        }
-        
         protected override void FixedRun()
         {
             if ((State == AnimatorState.Fall || State == AnimatorState.Jump) && _gravityScaler.State == GroundState.Grounded)
@@ -53,13 +45,6 @@ namespace CodeBase.Logic.Player
             {
                 PlayFall();
             }
-        }
-        
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
         }
 
         public void PlayFall() =>
@@ -92,10 +77,15 @@ namespace CodeBase.Logic.Player
             StateEntered?.Invoke(State);
         }
 
-        public void ExitedState(int stateHash)
-        {
+        public void ExitedState(int stateHash) =>
             StateExited?.Invoke(StateFor(stateHash));
-        }
+
+        public void Resume() =>
+            _animator.enabled = true;
+
+        public void Pause() =>
+            _animator.enabled = false;
+
 
         private AnimatorState StateFor(int stateHash)
         {
@@ -124,6 +114,10 @@ namespace CodeBase.Logic.Player
             {
                 state = AnimatorState.Dodge;
             }
+            else if (stateHash == _diedStateHash)
+            {
+                state = AnimatorState.Died;
+            }
             else
             {
                 state = AnimatorState.Unknown;
@@ -132,9 +126,5 @@ namespace CodeBase.Logic.Player
             Debug.Log(state);
             return state;
         }
-        
-        private void OnResume() => _animator.enabled = true;
-
-        private void OnPause() => _animator.enabled = false;
     }
 }

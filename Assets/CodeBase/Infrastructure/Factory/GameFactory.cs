@@ -136,7 +136,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
             {
-                pauseWatcher.RegisterPauseWatcher(_pauseService);
+                // pauseWatcher.RegisterPauseWatcher(_pauseService);
             }
         }
 

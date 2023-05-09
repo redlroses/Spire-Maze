@@ -1550,7 +1550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07eef5582e274ce488bc219ef14c7384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerDelay: {fileID: 7420519260703392512}
+  _timerDelay: {fileID: 0}
   _speedReplenish: 100
   _delayBeforeReplenish: 1.5
 --- !u!1 &4664208756271691803
@@ -7580,6 +7580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ffd534729e33841a6d5a6e401ab185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 7393409988495010679}
   _gravityScaler: {fileID: 7393409988495010669}
   _sphereCaster: {fileID: 2212661745572598830}
   _heroAnimator: {fileID: 989079028364153686}
@@ -7793,7 +7794,7 @@ SphereCollider:
   m_GameObject: {fileID: 7393409988495010675}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0.18, z: 0}

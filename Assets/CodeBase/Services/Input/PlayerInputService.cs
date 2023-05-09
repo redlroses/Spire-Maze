@@ -9,24 +9,11 @@ namespace CodeBase.Services.Input
 {
     public class PlayerInputService : IPlayerInputService
     {
-        // [SerializeField] [RequireInterface(typeof(IHorizontalMover))]
-        // private MonoCache _mover;
-        //
-        // [SerializeField] [RequireInterface(typeof(IJumper))]
-        // private MonoCache _jumper;
-        //
-        // [SerializeField] [RequireInterface(typeof(IDodge))]
-        // private MonoCache _dodge;
-
         private readonly InputController _inputController;
         private readonly IPauseService _pauseService;
+        private readonly IWindowService _windowService;
 
         private MoveDirection _direction;
-        private IWindowService _windowService;
-
-        // private IHorizontalMover Mover => (IHorizontalMover) _mover;
-        // private IJumper Jumper => (IJumper) _jumper;
-        // private IDodge Dodge => (IDodge) _dodge;
 
         public event Action<MoveDirection> HorizontalMove;
         public event Action Jump;
@@ -50,7 +37,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Pause.started += OnPause;
         }
 
-        public void ClearUp()
+        public void Cleanup()
         {
             _inputController.Player.Disable();
             _inputController.Player.Jump.performed -= OnJump;
@@ -65,7 +52,6 @@ namespace CodeBase.Services.Input
             int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
 
             HorizontalMove?.Invoke((MoveDirection) moveInput);
-            // Mover.HorizontalMove((MoveDirection) moveInput);
 
             if ((MoveDirection) moveInput != MoveDirection.Stop)
             {

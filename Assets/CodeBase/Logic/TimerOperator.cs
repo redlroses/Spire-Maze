@@ -10,23 +10,11 @@ namespace CodeBase.Logic
     {
         private Timer _timer;
         private Action _callBack;
-        private IPauseReactive _pauseReactive;
         private bool _isEnabled;
 
         private void Awake()
         {
             enabled = false;
-        }
-
-        private void OnDestroy()
-        {
-            if (_pauseReactive is null)
-            {
-                return;
-            }
-
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void Run()
@@ -35,40 +23,34 @@ namespace CodeBase.Logic
             _timer.Tick(Time.deltaTime);
         }
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
         public void SetUp(float duration, Action action)
         {
             _timer = new Timer(duration, OnTimeIsOn);
             _callBack = action;
         }
 
+        public void Resume()
+        {
+            enabled = _isEnabled;
+        }
+
+        public void Pause()
+        {
+            _isEnabled = enabled;
+            enabled = false;
+        }
+
         public void Play() => enabled = true;
 
-        public void Pause() => enabled = false;
-
-        public void Restart() => _timer.Reset();
+        public void Restart()
+        {
+            _timer.Reset();
+        }
 
         private void OnTimeIsOn()
         {
             enabled = false;
             _callBack?.Invoke();
-        }
-
-        private void OnResume()
-        {
-            enabled = _isEnabled;
-        }
-
-        private void OnPause()
-        {
-            _isEnabled = enabled;
-            enabled = false;
         }
     }
 }

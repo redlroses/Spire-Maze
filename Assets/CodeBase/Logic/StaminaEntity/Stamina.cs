@@ -11,8 +11,7 @@ namespace CodeBase.Logic.StaminaEntity
         private const float LowerSpeedMultiplier = 0.5f;
         private const float MinimumPercent = 0.1f;
 
-        [SerializeField] protected TimerOperator TimerDelay;
-
+        [SerializeField] protected TimerOperator _timerDelay;
         [SerializeField] private float _speedReplenish;
         [SerializeField] private float _delayBeforeReplenish = 1.5f;
 
@@ -20,7 +19,6 @@ namespace CodeBase.Logic.StaminaEntity
         private float _currentSpeedReplenish;
         private bool _isSpent;
         private bool _isReplenish;
-        private IPauseReactive _pauseReactive;
 
         public event Action Changed;
 
@@ -38,15 +36,9 @@ namespace CodeBase.Logic.StaminaEntity
 
         private void Awake()
         {
-            TimerDelay ??= Get<TimerOperator>();
+            _timerDelay ??= Get<TimerOperator>();
             _currentSpeedReplenish = _speedReplenish;
-            TimerDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
-        }
-
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
+            _timerDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
         }
 
         protected override void Run()
@@ -54,13 +46,6 @@ namespace CodeBase.Logic.StaminaEntity
             Replenish();
         }
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-        
         public bool TrySpend(int spendStamina)
         {
             if (spendStamina <= 0 || CurrentPoints - spendStamina < 0)
@@ -78,8 +63,8 @@ namespace CodeBase.Logic.StaminaEntity
             CurrentPoints -= spendStamina;
 
             _isSpent = CurrentPoints <= MaxPoints * MinimumPercent;
-            TimerDelay.Restart();
-            TimerDelay.Play();
+            _timerDelay.Restart();
+            _timerDelay.Play();
         }
 
         private void Replenish()
@@ -106,15 +91,11 @@ namespace CodeBase.Logic.StaminaEntity
         {
             _isReplenish = true;
         }
-        
-        private void OnResume()
-        {
-            enabled = true;
-        }
 
-        private void OnPause()
-        {
+        public void Resume() =>
+            enabled = true;
+
+        public void Pause() =>
             enabled = false;
-        }
     }
 }

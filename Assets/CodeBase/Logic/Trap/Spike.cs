@@ -15,31 +15,28 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _curveSpeed = 1f;
 
         private float _delta;
-        private IPauseReactive _pauseReactive;
         private bool _isEnabled;
 
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
-        }
-        
         protected override void Run()
         {
             Move();
             CheckIsComplete();
         }
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-        
         protected override void Activate(IDamagable damagable)
         {
             enabled = true;
+        }
+
+        public void Resume()
+        {
+            enabled = _isEnabled;
+        }
+
+        public void Pause()
+        {
+            _isEnabled = enabled;
+            enabled = false;
         }
 
         private void Move()
@@ -56,17 +53,6 @@ namespace CodeBase.Logic.Trap
                 enabled = false;
                 _delta = 0;
             }
-        }
-        
-        private void OnResume()
-        {
-            enabled = _isEnabled;
-        }
-
-        private void OnPause()
-        {
-            _isEnabled = enabled;
-            enabled = false;
         }
     }
 }

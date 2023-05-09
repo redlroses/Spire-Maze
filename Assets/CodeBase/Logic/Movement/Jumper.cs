@@ -19,6 +19,7 @@ namespace CodeBase.Logic.Movement
 
         private const float RadiusReduction = 0.3f;
 
+        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private SphereCaster _sphereCaster;
         [SerializeField] private HeroAnimator _heroAnimator;
@@ -31,28 +32,25 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _jumpDuration = 1;
         [SerializeField] private int _fatigue;
 
-        private Rigidbody _rigidbody;
         private Vector3 _currentVelocity;
         private float _startHeight;
         private float _expiredTime;
         private float _jumpProgress;
         private bool _isJump;
-        private IPauseReactive _pauseReactive;
         private bool _isEnabled;
+        private bool _isPause;
         private IPlayerInputService _inputService;
 
         private void Awake()
         {
             _gravityScaler ??= Get<CustomGravityScaler>();
             _sphereCaster ??= Get<SphereCaster>();
-            _rigidbody ??= Get<Rigidbody>();
+            _rigidbody ??= GetComponent<Rigidbody>();
             _heroAnimator ??= Get<HeroAnimator>();
         }
 
         private void OnDestroy()
         {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
             _inputService.Jump -= Jump;
         }
 
@@ -67,9 +65,23 @@ namespace CodeBase.Logic.Movement
             _inputService.Jump += Jump;
         }
 
+        public void Resume()
+        {
+            _rigidbody.velocity = _currentVelocity;
+            enabled = _isEnabled;
+        }
+
+        public void Pause()
+        {
+            _currentVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = Vector3.zero;
+            _isEnabled = enabled;
+            enabled = false;
+        }
+
         private void Jump()
         {
-            if (_pauseReactive.IsPause)
+            if (_isPause)
                 return;
 
             if (_isJump)
@@ -87,27 +99,6 @@ namespace CodeBase.Logic.Movement
             enabled = true;
             _heroAnimator.PlayJump();
             _gravityScaler.Disable();
-        }
-
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
-        private void OnResume()
-        {
-            _rigidbody.velocity = _currentVelocity;
-            enabled = _isEnabled;
-        }
-
-        private void OnPause()
-        {
-            _currentVelocity = _rigidbody.velocity;
-            _rigidbody.velocity = Vector3.zero;
-            _isEnabled = enabled;
-            enabled = false;
         }
 
         private void ApplyJump()

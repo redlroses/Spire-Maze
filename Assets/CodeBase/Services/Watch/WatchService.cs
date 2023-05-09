@@ -7,13 +7,12 @@ using UnityEngine;
 
 namespace CodeBase.Services.Watch
 {
-    public class WatchService : IWatchService
+    public class WatchService : IWatchService, IPauseWatcher
     {
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IPersistentProgressService _progressService;
         private readonly WaitForSeconds _waitForSeconds = new WaitForSeconds(1f);
 
-        private IPauseReactive _pauseReactive;
         private Coroutine _routine;
         private float _elapsedTime;
         private bool _isPause;
@@ -31,11 +30,9 @@ namespace CodeBase.Services.Watch
             _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
         }
 
-        public void ClearUp()
+        public void Cleanup()
         {
             ResetWatch();
-            _pauseReactive.Resume -= OnResume;
-            _pauseReactive.Pause -= OnPause;
         }
 
         private void ResetWatch()
@@ -55,13 +52,6 @@ namespace CodeBase.Services.Watch
             _progressService.Progress.WorldData.ScoreAccumulationData.PlayTime = _elapsedTime;
         }
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Resume += OnResume;
-            _pauseReactive.Pause += OnPause;
-        }
-
         private IEnumerator RunTimer()
         {
             while (true)
@@ -79,12 +69,12 @@ namespace CodeBase.Services.Watch
             }
         }
 
-        private void OnResume()
+        public void Resume()
         {
             _isPause = false;
         }
 
-        private void OnPause()
+        public void Pause()
         {
             _isPause = true;
         }

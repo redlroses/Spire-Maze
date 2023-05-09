@@ -19,14 +19,14 @@ namespace CodeBase.Logic
             _stateMachine = stateMachine;
             _timer.SetUp(_waitDuration, LoadNewLevel);
         }
-        
-        protected override void OnTriggerObserverEntered(ITeleportable inventory)
+
+        protected override void OnTriggerObserverEntered(ITeleportable _)
         {
             _timer.Restart();
             _timer.Play();
         }
 
-        protected override void OnTriggerObserverExited(ITeleportable target)
+        protected override void OnTriggerObserverExited(ITeleportable _)
         {
             _timer.Pause();
         }

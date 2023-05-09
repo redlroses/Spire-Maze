@@ -7,7 +7,7 @@ namespace CodeBase.Infrastructure.AssetManagement
   public interface IAssetProvider : IService
   {
     void LoadCells();
-    void CleanUp();
+    void Cleanup();
     GameObject Instantiate(string path, Vector3 at);
     GameObject Instantiate(string path, Transform inside);
     GameObject Instantiate(string path);

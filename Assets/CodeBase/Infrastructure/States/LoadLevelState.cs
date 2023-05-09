@@ -6,6 +6,7 @@ using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
@@ -33,12 +34,13 @@ namespace CodeBase.Infrastructure.States
         private readonly IWatchService _watchService;
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
+        private readonly IPauseService _pauseService;
 
         private LoadPayload _loadPayload;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, LoadingCurtain curtain)
+            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -49,6 +51,7 @@ namespace CodeBase.Infrastructure.States
             _levelBuilder = levelBuilder;
             _scoreService = scoreService;
             _watchService = watchService;
+            _pauseService = pauseService;
             _curtain = curtain;
         }
 
@@ -56,6 +59,7 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Show();
             _loadPayload = payload;
+            _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
             _sceneLoader.Load(payload.SceneName, OnLoaded);
@@ -88,7 +92,7 @@ namespace CodeBase.Infrastructure.States
         {
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
-            
+
             _watchService.LoadProgress();
             _scoreService.LoadProgress();
         }
@@ -107,10 +111,11 @@ namespace CodeBase.Infrastructure.States
                 InitLobby();
                 return;
             }
-            
+
             if (string.Equals(_loadPayload.SceneName, LevelNames.LearningLevel))
             {
                 InitLearningLevel();
+                return;
             }
         }
 
@@ -122,8 +127,12 @@ namespace CodeBase.Infrastructure.States
         private void InitLobby()
         {
             GameObject lobby = _gameFactory.CreateLobby();
+
             foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
-                levelTransfer.Construct(_stateMachine);   
+                levelTransfer.Construct(_stateMachine);
+
+            foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
+                _pauseService.Register(pauseWatchers);
         }
 
         private Vector3 GetHeroPosition() =>

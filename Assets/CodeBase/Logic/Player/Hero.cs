@@ -36,7 +36,7 @@ namespace CodeBase.Logic.Player
 
         private void OnDied()
         {
-            _inputService.ClearUp();
+            _inputService.Cleanup();
             _collider.enabled = false;
             _animator.PlayDied();
         }

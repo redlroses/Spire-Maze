@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows
 {
-    public class PauseWindow : WindowBase
+    public class PauseWindow : WindowBase, IPauseWatcher
     {
         [SerializeField] private Button _unpauseButton;
         [SerializeField] private Button _restartButton;
@@ -17,21 +17,20 @@ namespace CodeBase.UI.Windows
         private GameStateMachine _stateMachine;
         private IPersistentProgressService _progressService;
 
-        private void OnDestroy()
-        {
-            _pauseService.Resume -= OnResume;
-        }
-
         public void Construct(IPersistentProgressService progressService, IPauseService pauseService, GameStateMachine stateMachine)
         {
+            _pauseService = pauseService;
             _progressService = progressService;
             _stateMachine = stateMachine;
-            _pauseService = pauseService;
-            _pauseService.Resume += OnResume;
         }
 
-        private void OnResume()
+        public void Pause()
         {
+        }
+
+        public void Resume()
+        {
+            _pauseService.UnregisterAll(this);
             Destroy(gameObject);
         }
 
@@ -46,7 +45,7 @@ namespace CodeBase.UI.Windows
                     _progressService.Progress.WorldData.LevelState.LevelId, true)));
         }
 
-        protected override void CleanUp()
+        protected override void Cleanup()
         {
             _unpauseButton.onClick.RemoveAllListeners();
         }

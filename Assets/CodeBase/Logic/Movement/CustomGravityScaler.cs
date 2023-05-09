@@ -14,10 +14,7 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _currentScale = 1;
         [SerializeField] private float _defaultScale = 1;
 
-        private GroundState _groundState = GroundState.Grounded;
-        private IPauseReactive _pauseReactive;
-
-        public GroundState State => _groundState;
+        public GroundState State { get; private set; } = GroundState.Grounded;
 
         private void Awake()
         {
@@ -26,12 +23,6 @@ namespace CodeBase.Logic.Movement
             _rigidbody.useGravity = false;
             _currentScale = _defaultScale;
         }
-        
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
-        }
 
         protected override void FixedRun()
         {
@@ -39,12 +30,12 @@ namespace CodeBase.Logic.Movement
 
             if (isTouchGround)
             {
-                _groundState = GroundState.Grounded;
+                State = GroundState.Grounded;
             }
             else
             {
                 _rigidbody.AddForce(Vector3.down * (Gravity * _currentScale), ForceMode.Acceleration);
-                _groundState = GroundState.Falling;
+                State = GroundState.Falling;
             }
         }
 
@@ -56,7 +47,17 @@ namespace CodeBase.Logic.Movement
         public void Disable()
         {
             enabled = false;
-            _groundState = GroundState.Falling;
+            State = GroundState.Falling;
+        }
+
+        public void Resume()
+        {
+            enabled = true;
+        }
+
+        public void Pause()
+        {
+            enabled = false;
         }
 
         public void SetGravityScale(float scale)
@@ -68,27 +69,8 @@ namespace CodeBase.Logic.Movement
         {
             _currentScale = _defaultScale;
         }
-        
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
 
-        private void OnResume()
-        {
-            enabled = true;
-        }
-
-        private void OnPause()
-        {
-            enabled = false;
-        }
-
-        private bool CheckTouchGround()
-        {
-            return _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);
-        }
+        private bool CheckTouchGround() =>
+            _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);
     }
 }

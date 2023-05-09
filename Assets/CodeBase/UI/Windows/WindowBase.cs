@@ -25,7 +25,7 @@ namespace CodeBase.UI.Windows
         }
 
         private void OnDestroy() =>
-            CleanUp();
+            Cleanup();
 
         protected virtual void OnAwake() =>
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
@@ -38,7 +38,7 @@ namespace CodeBase.UI.Windows
         {
         }
 
-        protected virtual void CleanUp()
+        protected virtual void Cleanup()
         {
         }
     }

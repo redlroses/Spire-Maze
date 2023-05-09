@@ -23,7 +23,6 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         private Vector3 _prevPosition;
         private Vector3 _prevRotation;
-        private IPauseReactive _pauseReactive;
         private bool _isEnabled;
 
         public event Action<Vector3, Vector3> PositionUpdated;
@@ -40,12 +39,6 @@ namespace CodeBase.Logic.Lift.PlateMove
             Vector3 parentPosition = transform.parent.position;
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
-        }
-
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
         }
 
         protected override void OnEnabled()
@@ -68,13 +61,6 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
         public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
         {
             enabled = true;
@@ -82,6 +68,17 @@ namespace CodeBase.Logic.Lift.PlateMove
             _to = GetTransform(to);
             _distance = GetDistance(from, to);
             _delta = 0;
+        }
+
+        public void Resume()
+        {
+            enabled = _isEnabled;
+        }
+
+        public void Pause()
+        {
+            _isEnabled = enabled;
+            enabled = false;
         }
 
         private void Translate()
@@ -103,17 +100,6 @@ namespace CodeBase.Logic.Lift.PlateMove
                 enabled = false;
                 MoveEnded?.Invoke();
             }
-        }
-
-        private void OnResume()
-        {
-            enabled = _isEnabled;
-        }
-
-        private void OnPause()
-        {
-            _isEnabled = enabled;
-            enabled = false;
         }
     }
 }

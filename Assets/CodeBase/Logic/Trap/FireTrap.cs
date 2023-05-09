@@ -15,15 +15,8 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _turnOffDelay;
 
         private bool _isActivated;
-        private IPauseReactive _pauseReactive;
 
         private IDamageTrigger DamageTrigger => (IDamageTrigger)_damageTrigger;
-
-        private void OnDestroy()
-        {
-            _pauseReactive.Pause -= OnPause;
-            _pauseReactive.Resume -= OnResume;
-        }
 
         public override void Construct(int id, TrapActivator activator)
         {
@@ -31,20 +24,13 @@ namespace CodeBase.Logic.Trap
             _timer.SetUp(_turnOffDelay, OnTurnOff);
         }
 
-        public void RegisterPauseWatcher(IPauseReactive pauseReactive)
-        {
-            _pauseReactive = pauseReactive;
-            _pauseReactive.Pause += OnPause;
-            _pauseReactive.Resume += OnResume;
-        }
-
-        private void OnResume()
+        public void Resume()
         {
             if (_isActivated)
                 _effect.Play();
         }
 
-        private void OnPause()
+        public void Pause()
         {
             if (_isActivated)
                 _effect.Pause();

@@ -11,14 +11,6 @@ namespace CodeBase.Logic.Trap
         protected int Id { get; private set; }
 
         public TrapActivator TrapActivator => Activator;
-        
-        /*
-        private void Awake()
-        {
-            Construct(id, Activator);
-            Debug.LogWarning("Remove constructor from awake");
-        }
-        */
 
         public virtual void Construct(int id, TrapActivator activator)
         {

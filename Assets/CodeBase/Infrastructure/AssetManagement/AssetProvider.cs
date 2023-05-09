@@ -45,7 +45,7 @@ namespace CodeBase.Infrastructure.AssetManagement
             return sprite;
         }
 
-        public void CleanUp()
+        public void Cleanup()
         {
             _cellsPrefabs = null;
         }

@@ -71,7 +71,7 @@ namespace CodeBase.Logic.Inventory
             }
         }
 
-        public void ClearUp() => _storage.Clear();
+        public void Cleanup() => _storage.Clear();
 
         public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
 

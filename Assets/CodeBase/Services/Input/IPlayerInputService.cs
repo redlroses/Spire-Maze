@@ -9,6 +9,6 @@ namespace CodeBase.Services.Input
         event Action Jump;
         event Action<MoveDirection> Dodge;
         void Subscribe();
-        void ClearUp();
+        void Cleanup();
     }
 }

@@ -66,6 +66,7 @@ namespace CodeBase.UI.Services.Factory
         {
             var window = CreateWindow<PauseWindow>(WindowId.Pause);
             window.Construct(_progressService, _pauseService, _stateMachine);
+            _pauseService.Register(window);
         }
 
         public void CreateResults()

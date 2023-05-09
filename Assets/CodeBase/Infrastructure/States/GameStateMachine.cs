@@ -8,6 +8,7 @@ using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Logic;
 using CodeBase.Services.Input;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Score;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
@@ -32,6 +33,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ILevelBuilder>(),
                     services.Single<IScoreService>(),
                     services.Single<IWatchService>(),
+                    services.Single<IPauseService>(),
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),

@@ -9,7 +9,7 @@ namespace CodeBase.Logic.Inventory
     {
         event Action Updated;
         bool TryUse(StorableType storableType, out StorableStaticData item);
-        void ClearUp();
+        void Cleanup();
         void Add(StorableStaticData collectible);
         List<InventoryCell> ReadAll();
     }
