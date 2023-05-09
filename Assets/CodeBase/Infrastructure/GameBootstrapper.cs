@@ -6,13 +6,13 @@ namespace CodeBase.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
-       [SerializeField] private LoadingCurtain _curtain;
+        [SerializeField] private LoadingCurtain _curtain;
 
         private Game _game;
 
         private void Awake()
         {
-            var curtain = Instantiate(_curtain);
+            LoadingCurtain curtain = Instantiate(_curtain);
             _game = new Game(this, curtain);
             _game.StateMachine.Enter<BootstrapState>();
 

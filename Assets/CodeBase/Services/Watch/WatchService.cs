@@ -9,31 +9,40 @@ namespace CodeBase.Services.Watch
 {
     public class WatchService : IWatchService
     {
-        private readonly ICoroutineRunner _coroutine;
+        private readonly ICoroutineRunner _coroutineRunner;
         private readonly IPersistentProgressService _progressService;
         private readonly WaitForSeconds _waitForSeconds = new WaitForSeconds(1f);
 
-        private float _elapsedTime;
         private IPauseReactive _pauseReactive;
+        private Coroutine _routine;
+        private float _elapsedTime;
         private bool _isPause;
 
         public event Action<float> TimeChanged;
 
-        public WatchService(ICoroutineRunner coroutineRunner, IPersistentProgressService progressService)
+        public WatchService(ICoroutineRunner coroutineRunnerRunner, IPersistentProgressService progressService)
         {
-            _coroutine = coroutineRunner;
+            _coroutineRunner = coroutineRunnerRunner;
             _progressService = progressService;
         }
 
         public void Start()
         {
-            _coroutine.StartCoroutine(RunTimer());
+            _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
         }
 
-        public void Cleanup()
+        public void ClearUp()
         {
+            ResetWatch();
             _pauseReactive.Resume -= OnResume;
             _pauseReactive.Pause -= OnPause;
+        }
+
+        private void ResetWatch()
+        {
+            _coroutineRunner.StopCoroutine(_routine);
+            _routine = null;
+            _elapsedTime = 0;
         }
 
         public void LoadProgress()

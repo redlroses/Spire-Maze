@@ -23,7 +23,7 @@ namespace CodeBase.Services.Score
             _progressService = progressService;
             _staticData = staticData;
         }
- 
+
         public int CurrentScore { get; private set; } = default;
 
         public int CalculateScore()
@@ -32,9 +32,10 @@ namespace CodeBase.Services.Score
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
 
             CurrentScore =
-                (int)(scoreAccumulationData.Artifacts *
-                    scoreConfig.PerArtifact + (scoreConfig.BasePointsOnStart - scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction));
-            
+                (int) (scoreAccumulationData.Artifacts *
+                    scoreConfig.PerArtifact + (scoreConfig.BasePointsOnStart -
+                                               scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction));
+
             return CurrentScore = CurrentScore > 0 ? CurrentScore : 0;
         }
 
@@ -47,7 +48,7 @@ namespace CodeBase.Services.Score
 
             _currentLevelId = Progress.WorldData.LevelState.LevelId;
             _currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
-            
+
             if (_currentLevelData != null)
             {
                 CurrentScore = _currentLevelData.Score;

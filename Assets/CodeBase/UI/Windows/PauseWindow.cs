@@ -43,7 +43,7 @@ namespace CodeBase.UI.Windows
                     LevelNames.LobbyId)));
             _restartButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    _progressService.Progress.WorldData.LevelState.LevelId + 1, true)));
+                    _progressService.Progress.WorldData.LevelState.LevelId, true)));
         }
 
         protected override void CleanUp()
