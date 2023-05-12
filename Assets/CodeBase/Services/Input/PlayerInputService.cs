@@ -19,6 +19,9 @@ namespace CodeBase.Services.Input
         public event Action Jump;
         public event Action<MoveDirection> Dodge;
 
+        public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
+        public MoveDirection HorizontalDirection => _direction;
+
         public PlayerInputService(IPauseService pauseService, IWindowService windowService)
         {
             _windowService = windowService;
@@ -33,7 +36,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Jump.performed += OnJump;
             _inputController.Player.Movement.performed += OnMove;
             _inputController.Player.Movement.canceled += OnMove;
-            _inputController.Player.Dodge.performed += OnDodged;
+            _inputController.Player.Dodge.started += OnDodged;
             _inputController.Player.Pause.started += OnPause;
         }
 
@@ -43,7 +46,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Jump.performed -= OnJump;
             _inputController.Player.Movement.performed -= OnMove;
             _inputController.Player.Movement.canceled -= OnMove;
-            _inputController.Player.Dodge.performed -= OnDodged;
+            _inputController.Player.Dodge.started -= OnDodged;
             _inputController.Player.Pause.started -= OnPause;
         }
 

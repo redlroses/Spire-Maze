@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d737d7bdba98cdd46b91fe0a72f206d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 989079028364153686}
   _timer: {fileID: 8291894814252270757}
   _slidingTime: 0.5
   _hitBox: {fileID: 803051217541185496}
@@ -7568,6 +7567,9 @@ MonoBehaviour:
   _playerHealth: {fileID: 7440742495519906430}
   _animator: {fileID: 989079028364153686}
   _collider: {fileID: 7393409988495010664}
+  _mover: {fileID: 1356605512462546074}
+  _dodge: {fileID: 6587769830596586222}
+  _jumper: {fileID: 7393409988495010677}
 --- !u!114 &7393409988495010677
 MonoBehaviour:
   m_ObjectHideFlags: 0

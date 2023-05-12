@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Infrastructure.States;
+﻿using CodeBase.Infrastructure.States;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
@@ -14,23 +13,35 @@ namespace CodeBase.Logic.StateMachine.States
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
         private readonly IPlayerInputService _playerInputService;
+        private readonly Dodge _dodge;
         private readonly InputController _inputController;
 
-        private MoveDirection _direction;
+        private MoveDirection _lastDirection;
 
         public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService)
+            IPlayerInputService playerInputService, Dodge dodge)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
             _playerInputService = playerInputService;
-            _inputController = new InputController();
+            _dodge = dodge;
         }
 
         public void Enter(MoveDirection direction)
         {
             _heroAnimator.PlayDodge();
+            _dodge.Evade(direction);
+            _lastDirection = direction;
+            _playerInputService.HorizontalMove += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
+        }
+
+        private void OnHorizontalMove(MoveDirection direction)
+        {
+            if (direction != MoveDirection.Stop)
+            {
+                _lastDirection = direction;
+            }
         }
 
         private void OnStateExited(AnimatorState state)
@@ -38,10 +49,9 @@ namespace CodeBase.Logic.StateMachine.States
             if (state != AnimatorState.Dodge)
                 return;
 
-            if (_inputController.Player.Movement.phase == InputActionPhase.Performed)
+            if (_playerInputService.MovementPhase == InputActionPhase.Performed)
             {
-                Debug.Log(_inputController.Player.Movement.phase == InputActionPhase.Performed);
-                _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_direction);
+                _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
             }
             else
             {
@@ -52,6 +62,7 @@ namespace CodeBase.Logic.StateMachine.States
         public void Exit()
         {
             _heroAnimator.StateExited -= OnStateExited;
+            _playerInputService.HorizontalMove -= OnHorizontalMove;
         }
     }
 }

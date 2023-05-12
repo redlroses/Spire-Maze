@@ -11,20 +11,26 @@ namespace CodeBase.Logic.StateMachine.States
         private readonly HeroAnimator _heroAnimator;
         private readonly IPlayerInputService _playerInputService;
         private readonly HeroMover _mover;
+        private readonly Jumper _jumper;
+        private readonly Dodge _dodge;
+
+        private MoveDirection _lastDirection;
 
         public PlayerMoveState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService, HeroMover mover)
+            IPlayerInputService playerInputService, HeroMover mover, Jumper jumper, Dodge dodge)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
             _playerInputService = playerInputService;
             _mover = mover;
+            _jumper = jumper;
+            _dodge = dodge;
         }
 
         public void Enter(MoveDirection direction)
         {
-            _heroAnimator.PlayRun(true);
             _mover.Move(direction);
+            _lastDirection = direction;
             _playerInputService.HorizontalMove += OnHorizontalMove;
             _playerInputService.Jump += OnJump;
             _playerInputService.Dodge += OnDodge;
@@ -32,23 +38,36 @@ namespace CodeBase.Logic.StateMachine.States
 
         private void OnDodge(MoveDirection direction)
         {
-            _entityStateMachine.Enter<DodgeState, MoveDirection>(direction);
+            if (_dodge.CanDodge)
+            {
+                _entityStateMachine.Enter<DodgeState, MoveDirection>(direction);
+            }
         }
 
         private void OnJump()
         {
-            _entityStateMachine.Enter<JumpState>();
+            if (_jumper.CanJump)
+            {
+                _entityStateMachine.Enter<JumpState, MoveDirection>(_lastDirection);
+            }
         }
 
         private void OnHorizontalMove(MoveDirection direction)
         {
             _mover.Move(direction);
+
+            if (direction != MoveDirection.Stop)
+                return;
+
+            _lastDirection = direction;
+            _entityStateMachine.Enter<PlayerIdleState>();
         }
 
         public void Exit()
         {
-            _heroAnimator.PlayRun(false);
             _playerInputService.HorizontalMove -= OnHorizontalMove;
+            _playerInputService.Jump -= OnJump;
+            _playerInputService.Dodge -= OnDodge;
         }
     }
 }

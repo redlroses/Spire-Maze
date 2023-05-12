@@ -1,6 +1,5 @@
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
-using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -39,7 +38,8 @@ namespace CodeBase.Logic.Movement
         private bool _isJump;
         private bool _isEnabled;
         private bool _isPause;
-        private IPlayerInputService _inputService;
+
+        public bool CanJump => IsCanJump();
 
         private void Awake()
         {
@@ -49,20 +49,9 @@ namespace CodeBase.Logic.Movement
             _heroAnimator ??= Get<HeroAnimator>();
         }
 
-        private void OnDestroy()
-        {
-            _inputService.Jump -= Jump;
-        }
-
         protected override void FixedRun()
         {
             ApplyJump();
-        }
-
-        public void Construct(IPlayerInputService inputService)
-        {
-            _inputService = inputService;
-            _inputService.Jump += Jump;
         }
 
         public void Resume()
@@ -79,26 +68,26 @@ namespace CodeBase.Logic.Movement
             enabled = false;
         }
 
-        private void Jump()
+        public void Jump()
         {
-            if (_isPause)
-                return;
-
-            if (_isJump)
-                return;
-
             Vector3 position = _rigidbody.position;
             _startHeight = position.y;
-            bool isInGround = _sphereCaster.CastSphere(Vector3.down, GroundCheckDistance);
-
-            if (isInGround == false || _stamina.TrySpend(_fatigue) == false)
-            {
-                return;
-            }
-
             enabled = true;
             _heroAnimator.PlayJump();
             _gravityScaler.Disable();
+        }
+
+        private bool IsCanJump()
+        {
+            if (_isPause)
+                return false;
+
+            if (_isJump)
+                return false;
+
+            bool isInGround = _sphereCaster.CastSphere(Vector3.down, GroundCheckDistance);
+
+            return isInGround && _stamina.TrySpend(_fatigue);
         }
 
         private void ApplyJump()

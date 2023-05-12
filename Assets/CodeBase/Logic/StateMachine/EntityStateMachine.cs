@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure.States;
+using UnityEngine;
 
 namespace CodeBase.Logic.StateMachine
 {
@@ -34,6 +35,7 @@ namespace CodeBase.Logic.StateMachine
             TState state = GetState<TState>();
             _activeState = state;
 
+            Debug.Log($"Current state: {state}");
             return state;
         }
 

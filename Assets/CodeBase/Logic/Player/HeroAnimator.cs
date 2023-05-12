@@ -126,7 +126,7 @@ namespace CodeBase.Logic.Player
                 state = AnimatorState.Unknown;
             }
 
-            Debug.Log(state);
+            // Debug.Log(state);
             return state;
         }
     }

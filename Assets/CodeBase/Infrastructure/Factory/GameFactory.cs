@@ -75,9 +75,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(Vector3 at)
         {
             var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
-            hero.GetComponent<HeroMover>().Construct(_inputService);
-            hero.GetComponent<Jumper>().Construct(_inputService);
-            hero.GetComponentInChildren<Dodge>().Construct(_inputService);
             hero.GetComponent<Hero>().Construct(_inputService);
             return hero;
         }

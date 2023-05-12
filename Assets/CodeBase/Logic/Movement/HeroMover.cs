@@ -16,14 +16,6 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private Dodge _dodge;
 
         private Coroutine _inputDelay;
-        private WaitUntil _waitUntil;
-        private IPlayerInputService _inputService;
-
-        private void Awake()
-        {
-            _waitUntil = new WaitUntil(() =>
-                _heroAnimator.State != AnimatorState.Dodge);
-        }
 
         protected override void OnEnabled()
         {
@@ -35,21 +27,10 @@ namespace CodeBase.Logic.Movement
             _dodge.Dodged -= OnDodged;
         }
 
-        private void OnDestroy()
-        {
-            _inputService.HorizontalMove -= HorizontalMove;
-        }
-
         protected override void Run()
         {
             _heroAnimator.SetSpeed(Rigidbody.velocity.RemoveY().magnitude);
             _heroAnimator.SetFallSpeed(Mathf.Abs(Rigidbody.velocity.y));
-        }
-
-        public void Construct(IPlayerInputService inputService)
-        {
-            _inputService = inputService;
-            _inputService.HorizontalMove += HorizontalMove;
         }
 
         public void OnMovingPlatformEnter(IPlateMover plateMover)
@@ -72,39 +53,12 @@ namespace CodeBase.Logic.Movement
             progress.WorldData.PositionOnLevel.Position = Rigidbody.position.AsVectorData();
         }
 
-        private void HorizontalMove(MoveDirection direction)
-        {
-            if (_inputDelay != null)
-            {
-                StopCoroutine(_inputDelay);
-            }
-
-            Debug.Log("begin move");
-            if (_heroAnimator.State == AnimatorState.Dodge)
-            {
-                _inputDelay = StartCoroutine(InputDelay(direction));
-                return;
-            }
-
-            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
-            Move(direction);
-        }
-
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {
             Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
             Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
                 .AddY(uncorrectedPosition.y);
             Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
-        }
-
-        private IEnumerator InputDelay(MoveDirection direction)
-        {
-            yield return _waitUntil;
-            yield return null;
-
-            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
-            Move(direction);
         }
 
         private void OnDodged(MoveDirection direction)
