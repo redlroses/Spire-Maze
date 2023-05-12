@@ -1,4 +1,5 @@
 ﻿using CodeBase.Data;
+using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;

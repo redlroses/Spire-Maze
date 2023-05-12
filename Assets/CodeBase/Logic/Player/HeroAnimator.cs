@@ -9,6 +9,7 @@ namespace CodeBase.Logic.Player
 {
     public class HeroAnimator : MonoCache, IAnimationStateReader, IPauseWatcher
     {
+        private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Land = Animator.StringToHash("Land");
@@ -47,6 +48,8 @@ namespace CodeBase.Logic.Player
             }
         }
 
+        public void PlayIdle() =>
+            _animator.SetTrigger(Idle);
         public void PlayFall() =>
             _animator.SetTrigger(Fall);
 
