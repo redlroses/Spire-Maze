@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Input;
@@ -43,7 +44,7 @@ namespace CodeBase.Logic.Movement
 
         public void Evade(MoveDirection direction)
         {
-            if (_isDodged || _stamina.TrySpend(_fatigue) == false)
+            if (_isDodged || _animator.State != AnimatorState.Run || _stamina.TrySpend(_fatigue) == false)
             {
                 return;
             }

@@ -29,7 +29,8 @@ namespace CodeBase.Logic.Movement
             ApplyMove(_direction);
         }
 
-        public void Move(MoveDirection direction) => _direction = direction;
+        public void Move(MoveDirection direction) =>
+            _direction = direction;
 
         public void Resume()
         {

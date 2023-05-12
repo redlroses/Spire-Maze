@@ -21,7 +21,8 @@ namespace CodeBase.Logic.Movement
 
         private void Awake()
         {
-            _waitUntil = new WaitUntil(() => _heroAnimator.State != AnimatorState.Dodge);
+            _waitUntil = new WaitUntil(() =>
+                _heroAnimator.State != AnimatorState.Dodge);
         }
 
         protected override void OnEnabled()
@@ -78,6 +79,7 @@ namespace CodeBase.Logic.Movement
                 StopCoroutine(_inputDelay);
             }
 
+            Debug.Log("begin move");
             if (_heroAnimator.State == AnimatorState.Dodge)
             {
                 _inputDelay = StartCoroutine(InputDelay(direction));
@@ -98,10 +100,10 @@ namespace CodeBase.Logic.Movement
 
         private IEnumerator InputDelay(MoveDirection direction)
         {
-            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
             yield return _waitUntil;
             yield return null;
 
+            _heroAnimator.PlayRun(direction != MoveDirection.Stop);
             Move(direction);
         }
 

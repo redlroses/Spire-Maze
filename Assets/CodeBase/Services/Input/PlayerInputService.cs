@@ -13,7 +13,7 @@ namespace CodeBase.Services.Input
         private readonly IPauseService _pauseService;
         private readonly IWindowService _windowService;
 
-        private MoveDirection _direction;
+        private MoveDirection _direction = MoveDirection.Left;
 
         public event Action<MoveDirection> HorizontalMove;
         public event Action Jump;

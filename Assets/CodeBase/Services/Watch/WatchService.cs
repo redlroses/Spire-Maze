@@ -68,7 +68,6 @@ namespace CodeBase.Services.Watch
 
                 _elapsedTime++;
                 TimeChanged?.Invoke(_elapsedTime);
-                Debug.Log($"Current elapsedTime {_elapsedTime}");
             }
         }
 
