@@ -16,6 +16,7 @@ namespace CodeBase.Services.Watch
         private Coroutine _routine;
         private float _elapsedTime;
         private bool _isPause;
+        private bool _isRun;
 
         public event Action<float> TimeChanged;
 
@@ -27,8 +28,9 @@ namespace CodeBase.Services.Watch
 
         public void Start()
         {
-            Debug.Log(_routine);
-            _routine = _coroutineRunner.StartCoroutine(RunTimer());
+            Resume();
+            _isRun = true;
+            _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
         }
 
         public void Cleanup()
@@ -38,6 +40,7 @@ namespace CodeBase.Services.Watch
 
         private void ResetWatch()
         {
+            _isRun = false;
             _coroutineRunner.StopCoroutine(_routine);
             _routine = null;
         }
@@ -54,7 +57,7 @@ namespace CodeBase.Services.Watch
 
         private IEnumerator RunTimer()
         {
-            while (true)
+            while (_isRun)
             {
                 yield return _waitForSeconds;
 

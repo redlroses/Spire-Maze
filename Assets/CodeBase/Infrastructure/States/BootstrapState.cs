@@ -83,11 +83,12 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IPauseService>(),
                     _services.Single<IScoreService>(),
                     _services.Single<IWindowService>(),
-                    _services.Single<IPlayerInputService>()));
+                    _services.Single<IPlayerInputService>(),
+                    _services.Single<IWatchService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
-                    _services.Single<IGameFactory>(), 
+                    _services.Single<IGameFactory>(),
                     _services.Single<IScoreService>(),
                     _services.Single<IWatchService>()));
             _services.RegisterSingle<ILevelBuilder>(

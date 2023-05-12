@@ -11,6 +11,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
+using CodeBase.Services.Watch;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
@@ -31,13 +32,14 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IScoreService _scoreService;
         private readonly IWindowService _windowService;
         private readonly IPlayerInputService _inputService;
+        private readonly IWatchService _watchService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
         public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService, IScoreService scoreService, IWindowService windowService, IPlayerInputService inputService)
+            IPersistentProgressService persistentProgressService, IPauseService pauseService, IScoreService scoreService, IWindowService windowService, IPlayerInputService inputService, IWatchService watchService)
         {
             _inputService = inputService;
             _assets = assets;
@@ -47,6 +49,7 @@ namespace CodeBase.Infrastructure.Factory
             _scoreService = scoreService;
             _pauseService = pauseService;
             _windowService = windowService;
+            _watchService = watchService;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -103,6 +106,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
             hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService, _windowService);
+            hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             return hud;
         }
 
