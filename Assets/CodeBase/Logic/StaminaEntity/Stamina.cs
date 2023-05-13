@@ -8,12 +8,11 @@ namespace CodeBase.Logic.StaminaEntity
     [RequireComponent(typeof(TimerOperator))]
     public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
-        private const float LowerSpeedMultiplier = 0.5f;
-        private const float MinimumPercent = 0.1f;
-
         [SerializeField] protected TimerOperator _timerDelay;
-        [SerializeField] private float _speedReplenish;
-        [SerializeField] private float _delayBeforeReplenish = 1.5f;
+        
+        protected float LowerSpeedMultiplier;
+        protected float SpeedReplenish;
+        protected float DelayBeforeReplenish;
 
         private int _currentPoints;
         private float _currentSpeedReplenish;
@@ -34,13 +33,6 @@ namespace CodeBase.Logic.StaminaEntity
 
         public int MaxPoints { get; protected set; }
 
-        private void Awake()
-        {
-            _timerDelay ??= Get<TimerOperator>();
-            _currentSpeedReplenish = _speedReplenish;
-            _timerDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
-        }
-
         protected override void Run()
         {
             Replenish();
@@ -48,7 +40,7 @@ namespace CodeBase.Logic.StaminaEntity
 
         public bool TrySpend(int spendStamina)
         {
-            if (spendStamina <= 0 || CurrentPoints - spendStamina < 0)
+            if (spendStamina <= 0 || CurrentPoints == 0)
             {
                 return false;
             }
@@ -57,12 +49,25 @@ namespace CodeBase.Logic.StaminaEntity
             return true;
         }
 
+        protected void Initialize()
+        {
+            _timerDelay ??= Get<TimerOperator>();
+            _currentSpeedReplenish = SpeedReplenish;
+            _timerDelay.SetUp(DelayBeforeReplenish, OnStartReplenish);
+        }
+
         private void Spend(int spendStamina)
         {
             _isReplenish = false;
-            CurrentPoints -= spendStamina;
+            
+            int newPoints = CurrentPoints - spendStamina;
+            CurrentPoints = newPoints < 0 ? 0 : newPoints;
 
-            _isSpent = CurrentPoints <= MaxPoints * MinimumPercent;
+            if (_isSpent == false)
+            {
+                _isSpent = CurrentPoints == 0;
+            }
+
             _timerDelay.Restart();
             _timerDelay.Play();
         }
@@ -83,7 +88,7 @@ namespace CodeBase.Logic.StaminaEntity
             {
                 _isReplenish = false;
                 _isSpent = false;
-                _currentSpeedReplenish = _speedReplenish;
+                _currentSpeedReplenish = SpeedReplenish;
             }
         }
 
