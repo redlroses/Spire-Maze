@@ -26,17 +26,9 @@ namespace CodeBase.Logic.Movement
 
         protected override void FixedRun()
         {
-            bool isTouchGround = CheckTouchGround();
-
-            if (isTouchGround)
-            {
-                State = GroundState.Grounded;
-            }
-            else
-            {
-                _rigidbody.AddForce(Vector3.down * (Gravity * _currentScale), ForceMode.Acceleration);
-                State = GroundState.Falling;
-            }
+            bool isTouchGround = IsTouchGround();
+            State = isTouchGround ? GroundState.Grounded : GroundState.Falling;
+            _rigidbody.AddForce(Vector3.down * (Gravity * _currentScale), ForceMode.Acceleration);
         }
 
         public void Enable()
@@ -70,7 +62,7 @@ namespace CodeBase.Logic.Movement
             _currentScale = _defaultScale;
         }
 
-        private bool CheckTouchGround() =>
+        private bool IsTouchGround() =>
             _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);
     }
 }

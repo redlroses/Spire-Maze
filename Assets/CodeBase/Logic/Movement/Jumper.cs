@@ -13,7 +13,7 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(HeroAnimator))]
     public class Jumper : MonoCache, IPauseWatcher
     {
-        public const float GroundCheckDistance = -0.1f;
+        public const float GroundCheckDistance = -0.17f;
         public const float RoofCheckDistance = 0.15f;
 
         private const float RadiusReduction = 0.3f;
