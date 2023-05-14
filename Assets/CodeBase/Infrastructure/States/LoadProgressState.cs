@@ -46,20 +46,14 @@ namespace CodeBase.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress(initialLevel: LevelNames.Lobby)
+            PlayerProgress progress = new PlayerProgress(initialLevel: LevelNames.Lobby)
             {
                 WorldData =
                 {
                     PositionOnLevel = new PositionOnLevel(_staticDataService.ForLevel(LevelNames.LobbyId)
                         .HeroInitialPosition.AsVectorData()),
-                    HeroHealthState = { MaxHP = _staticDataService.HealthForEntity(PlayerKey).MaxHealth },
-                    HeroStaminaState =
-                    {
-                        LowerSpeedMultiplier = _staticDataService.StaminaForEntity(PlayerKey).LowerSpeedMultiplier,
-                        MaxValue = _staticDataService.StaminaForEntity(PlayerKey).MaxStamina,
-                        SpeedReplenish = _staticDataService.StaminaForEntity(PlayerKey).SpeedReplenish,
-                        DelayBeforeReplenish = _staticDataService.StaminaForEntity(PlayerKey).DelayBeforeReplenish
-                    }
+                    HeroHealthState = {MaxHP = _staticDataService.HealthForEntity(PlayerKey).MaxHealth},
+                    HeroStaminaState = {MaxValue = _staticDataService.StaminaForEntity(PlayerKey).MaxStamina}
                 }
             };
 

@@ -9,13 +9,10 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(TimerOperator))]
     public class Dodge : MonoCache, IDodge
     {
-        private readonly LayerMask _player = 10;
-        private readonly LayerMask _trapActivator = 11;
-
         [SerializeField] private TimerOperator _timer;
-        [SerializeField] private float _slidingTime;
         [SerializeField] private GameObject _hitBox;
         [SerializeField] private PlayerStamina _stamina;
+        [SerializeField] private float _invulnerabilityTime = 0.7f;
         [SerializeField] private int _fatigue;
 
         private bool _isDodged;
@@ -26,11 +23,10 @@ namespace CodeBase.Logic.Movement
         public bool CanDodge => (_isDodged == false) & _stamina.TrySpend(_fatigue);
 
         private void Start() =>
-            _timer.SetUp(_slidingTime, OnTurnOff);
+            _timer.SetUp(_invulnerabilityTime, OnTurnOff);
 
         public void Evade(MoveDirection direction)
         {
-            _isDodged = true;
             _hitBox.SetActive(false);
             Dodged?.Invoke(direction);
             _timer.Restart();
@@ -39,7 +35,6 @@ namespace CodeBase.Logic.Movement
 
         private void OnTurnOff()
         {
-            _isDodged = false;
             _hitBox.SetActive(true);
         }
     }

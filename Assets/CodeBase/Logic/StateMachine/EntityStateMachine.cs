@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure.States;
-using UnityEngine;
 
 namespace CodeBase.Logic.StateMachine
 {
@@ -28,6 +27,12 @@ namespace CodeBase.Logic.StateMachine
             state.Enter(payload);
         }
 
+        public void Cleanup()
+        {
+            _activeState?.Exit();
+            _activeState = null;
+        }
+
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
@@ -35,7 +40,7 @@ namespace CodeBase.Logic.StateMachine
             TState state = GetState<TState>();
             _activeState = state;
 
-            Debug.Log($"Current state: {state}");
+            // Debug.Log($"Current state: {state}");
             return state;
         }
 

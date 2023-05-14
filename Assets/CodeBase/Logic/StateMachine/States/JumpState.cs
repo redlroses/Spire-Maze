@@ -36,6 +36,12 @@ namespace CodeBase.Logic.StateMachine.States
             _playerInputService.HorizontalMove += OnHorizontalMove;
         }
 
+        public void Exit()
+        {
+            _heroAnimator.StateExited -= OnStateExited;
+            _playerInputService.HorizontalMove -= OnHorizontalMove;
+        }
+
         private void OnStateExited(AnimatorState state)
         {
             if (state != AnimatorState.Jump)
@@ -59,12 +65,6 @@ namespace CodeBase.Logic.StateMachine.States
             {
                 _lastDirection = direction;
             }
-        }
-
-        public void Exit()
-        {
-            _heroAnimator.StateExited -= OnStateExited;
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
         }
     }
 }

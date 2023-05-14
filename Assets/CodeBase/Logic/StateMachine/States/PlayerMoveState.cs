@@ -36,6 +36,13 @@ namespace CodeBase.Logic.StateMachine.States
             _playerInputService.Dodge += OnDodge;
         }
 
+        public void Exit()
+        {
+            _playerInputService.HorizontalMove -= OnHorizontalMove;
+            _playerInputService.Jump -= OnJump;
+            _playerInputService.Dodge -= OnDodge;
+        }
+
         private void OnDodge(MoveDirection direction)
         {
             if (_dodge.CanDodge)
@@ -61,13 +68,6 @@ namespace CodeBase.Logic.StateMachine.States
 
             _lastDirection = direction;
             _entityStateMachine.Enter<PlayerIdleState>();
-        }
-
-        public void Exit()
-        {
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
-            _playerInputService.Jump -= OnJump;
-            _playerInputService.Dodge -= OnDodge;
         }
     }
 }

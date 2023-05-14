@@ -38,6 +38,9 @@ namespace CodeBase.UI.Elements
 
         private void Cleanup()
         {
+            if (_watchService is null)
+                return;
+
             _watchService.TimeChanged -= SetTime;
         }
 

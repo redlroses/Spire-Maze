@@ -7,14 +7,8 @@ namespace CodeBase.Logic.StaminaEntity
     {
         public void LoadProgress(PlayerProgress progress)
         {
-            LowerSpeedMultiplier = progress.WorldData.HeroStaminaState.LowerSpeedMultiplier;
             MaxPoints = progress.WorldData.HeroStaminaState.MaxValue;
             CurrentPoints = progress.WorldData.HeroStaminaState.CurrentValue;
-            SpeedReplenish = progress.WorldData.HeroStaminaState.SpeedReplenish;
-            DelayBeforeReplenish = progress.WorldData.HeroStaminaState.DelayBeforeReplenish;
-            Initialize();
-            _timerDelay.Restart();
-            _timerDelay.Play();
         }
 
         public void UpdateProgress(PlayerProgress progress)

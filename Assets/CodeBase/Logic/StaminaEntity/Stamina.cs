@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Services.Pause;
+using CodeBase.StaticData;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -8,15 +9,13 @@ namespace CodeBase.Logic.StaminaEntity
     [RequireComponent(typeof(TimerOperator))]
     public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
-        [SerializeField] protected TimerOperator _timerDelay;
+        [SerializeField] protected TimerOperator _normalDelay;
 
-        protected float LowerSpeedMultiplier;
-        protected float SpeedReplenish;
-        protected float DelayBeforeReplenish;
-
-        private int _currentPoints;
+        private float _lowerSpeedMultiplier;
+        private float _speedReplenish;
+        private float _delayBeforeReplenish;
         private float _currentSpeedReplenish;
-        private bool _isSpent;
+        private int _currentPoints;
         private bool _isReplenish;
 
         public event Action Changed;
@@ -33,68 +32,62 @@ namespace CodeBase.Logic.StaminaEntity
 
         public int MaxPoints { get; protected set; }
 
-        protected override void Run()
-        {
+        protected override void Run() =>
             Replenish();
+
+        public void Construct(StaminaStaticData staminaStaticData)
+        {
+            _lowerSpeedMultiplier = staminaStaticData.LowerSpeedMultiplier;
+            _speedReplenish = staminaStaticData.SpeedReplenish;
+            _delayBeforeReplenish = staminaStaticData.DelayBeforeReplenish;
+            Initialize();
         }
 
         public bool TrySpend(int spendStamina)
         {
             if (spendStamina <= 0 || CurrentPoints <= 0)
-            {
                 return false;
-            }
 
             Spend(spendStamina);
             return true;
         }
 
-        protected void Initialize()
+        private void Initialize()
         {
-            _timerDelay ??= Get<TimerOperator>();
-            _currentSpeedReplenish = SpeedReplenish;
-            _timerDelay.SetUp(DelayBeforeReplenish, OnStartReplenish);
+            _normalDelay ??= Get<TimerOperator>();
+            _currentSpeedReplenish = _speedReplenish;
+            _normalDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
         }
 
         private void Spend(int spendStamina)
         {
             _isReplenish = false;
+            CurrentPoints -= spendStamina;
 
-            int newPoints = CurrentPoints - spendStamina;
-            CurrentPoints = newPoints < 0 ? 0 : newPoints;
+            if (CurrentPoints < 0)
+                _currentSpeedReplenish = _speedReplenish * _lowerSpeedMultiplier;
 
-            if (_isSpent == false)
-            {
-                _isSpent = CurrentPoints == 0;
-                _currentSpeedReplenish = SpeedReplenish * LowerSpeedMultiplier;
-            }
-
-            _timerDelay.Restart();
-            _timerDelay.Play();
+            _normalDelay.Restart();
+            _normalDelay.Play();
         }
 
         private void Replenish()
         {
             if (_isReplenish == false)
-            {
                 return;
-            }
 
             int newPoints = CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * Time.deltaTime);
             CurrentPoints = newPoints > MaxPoints ? MaxPoints : newPoints;
 
-            if (CurrentPoints >= MaxPoints)
-            {
-                _isReplenish = false;
-                _isSpent = false;
-                _currentSpeedReplenish = SpeedReplenish;
-            }
+            if (CurrentPoints < MaxPoints)
+                return;
+
+            _isReplenish = false;
+            _currentSpeedReplenish = _speedReplenish;
         }
 
-        private void OnStartReplenish()
-        {
+        private void OnStartReplenish() =>
             _isReplenish = true;
-        }
 
         public void Resume() =>
             enabled = true;

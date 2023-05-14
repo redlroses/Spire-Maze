@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
+using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -25,28 +25,23 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private readonly IAssetProvider _assets;
-        private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IPauseService _pauseService;
-        private readonly IScoreService _scoreService;
         private readonly IWindowService _windowService;
-        private readonly IPlayerInputService _inputService;
         private readonly IWatchService _watchService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService, IScoreService scoreService, IWindowService windowService, IPlayerInputService inputService, IWatchService watchService)
+        public GameFactory(IAssetProvider assets, IRandomService randomService,
+            IPersistentProgressService persistentProgressService, IPauseService pauseService,
+            IWindowService windowService, IWatchService watchService)
         {
-            _inputService = inputService;
             _assets = assets;
-            _staticData = staticData;
             _randomService = randomService;
             _persistentProgressService = persistentProgressService;
-            _scoreService = scoreService;
             _pauseService = pauseService;
             _windowService = windowService;
             _watchService = watchService;
@@ -75,7 +70,6 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(Vector3 at)
         {
             var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
-            hero.GetComponent<Hero>().Construct(_inputService);
             return hero;
         }
 
@@ -86,7 +80,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);
-            RegisterPauseWatchers(cell);
             return cell;
         }
 
@@ -119,7 +112,6 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
             RegisterProgressWatchers(gameObject);
-            RegisterPauseWatchers(gameObject);
 
             return gameObject;
         }
@@ -128,17 +120,8 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);
             RegisterProgressWatchers(gameObject);
-            RegisterPauseWatchers(gameObject);
 
             return gameObject;
-        }
-
-        private void RegisterPauseWatchers(GameObject gameObject)
-        {
-            foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
-            {
-                // pauseWatcher.RegisterPauseWatcher(_pauseService);
-            }
         }
 
         private void RegisterProgressWatchers(GameObject gameObject)

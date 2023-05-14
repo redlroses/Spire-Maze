@@ -1,5 +1,3 @@
-using System;
-using System.Globalization;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -47,13 +45,13 @@ namespace CodeBase.UI.Elements
 
         public void SetNormalizedValue(float value)
         {
-            Validate(value);
+            value = Validate(value);
             ApplyValue(value);
         }
 
         public void SetValueImmediately(float value)
         {
-            Validate(value);
+            value = Validate(value);
             _slider.SetValueWithoutNotify(value);
         }
 
@@ -74,13 +72,8 @@ namespace CodeBase.UI.Elements
             enabled = true;
         }
 
-        private void Validate(float value)
-        {
-            if (value < _slider.minValue || value > _slider.maxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), value, value.ToString(CultureInfo.InvariantCulture));
-            }
-        }
+        private float Validate(float value) =>
+            Mathf.Clamp01(value);
 
 #if UNITY_EDITOR
         [Button("TestSet", EButtonEnableMode.Playmode)]

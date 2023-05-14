@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic.HealthEntity;
+﻿using System;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.StateMachine;
 using CodeBase.Logic.StateMachine.States;
@@ -34,6 +35,11 @@ namespace CodeBase.Logic.Player
         private void OnDisable()
         {
             _playerHealth.Died -= OnDied;
+        }
+
+        private void OnDestroy()
+        {
+            _stateMachine.Cleanup();
         }
 
         public void Construct(IPlayerInputService inputService)

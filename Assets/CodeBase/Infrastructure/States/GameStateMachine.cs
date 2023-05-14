@@ -27,6 +27,7 @@ namespace CodeBase.Infrastructure.States
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     services.Single<IGameFactory>(),
+                    services.Single<IPlayerInputService>(),
                     services.Single<IUIFactory>(),
                     services.Single<IPersistentProgressService>(),
                     services.Single<IStaticDataService>(),

@@ -3,7 +3,9 @@ using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -25,6 +27,7 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
+        private readonly IPlayerInputService _playerInputService;
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
@@ -36,13 +39,14 @@ namespace CodeBase.Infrastructure.States
 
         private LoadPayload _loadPayload;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
+            _playerInputService = playerInputService;
             _uiFactory = uiFactory;
             _progressService = progressService;
             _staticData = staticDataService;
@@ -113,7 +117,6 @@ namespace CodeBase.Infrastructure.States
             if (string.Equals(_loadPayload.SceneName, LevelNames.LearningLevel))
             {
                 InitLearningLevel();
-                return;
             }
         }
 
@@ -146,6 +149,8 @@ namespace CodeBase.Infrastructure.States
         {
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
+            hero.GetComponent<Hero>().Construct(_playerInputService);
+            hero.GetComponentInChildren<Stamina>().Construct(_staticData.StaminaForEntity(PlayerKey));
             return hero;
         }
 

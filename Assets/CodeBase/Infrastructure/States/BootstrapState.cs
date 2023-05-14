@@ -77,13 +77,10 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
-                    _services.Single<IStaticDataService>(),
                     _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IPauseService>(),
-                    _services.Single<IScoreService>(),
                     _services.Single<IWindowService>(),
-                    _services.Single<IPlayerInputService>(),
                     _services.Single<IWatchService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(

@@ -36,6 +36,12 @@ namespace CodeBase.Logic.StateMachine.States
             _heroAnimator.StateExited += OnStateExited;
         }
 
+        public void Exit()
+        {
+            _heroAnimator.StateExited -= OnStateExited;
+            _playerInputService.HorizontalMove -= OnHorizontalMove;
+        }
+
         private void OnHorizontalMove(MoveDirection direction)
         {
             if (direction != MoveDirection.Stop)
@@ -57,12 +63,6 @@ namespace CodeBase.Logic.StateMachine.States
             {
                 _entityStateMachine.Enter<PlayerIdleState>();
             }
-        }
-
-        public void Exit()
-        {
-            _heroAnimator.StateExited -= OnStateExited;
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
         }
     }
 }
