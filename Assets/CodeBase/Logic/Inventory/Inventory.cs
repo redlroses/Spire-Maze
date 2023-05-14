@@ -9,6 +9,8 @@ namespace CodeBase.Logic.Inventory
 {
     public class Inventory : IReadOnlyCollection<IReadOnlyInventoryCell>, IInventory
     {
+        public const int MaxCountItems = 16;
+
         private readonly List<InventoryCell> _storage;
 
         public event Action Updated;
@@ -36,7 +38,7 @@ namespace CodeBase.Logic.Inventory
 
             Updated?.Invoke();
 
-            Debug.Log($"Add {item.Name}");
+            Debug.Log($"SetUp {item.Name}");
         }
 
         public List<InventoryCell> ReadAll() => new List<InventoryCell>(_storage);

@@ -125,7 +125,7 @@ namespace CodeBase.UI.Elements
             SetActiveLivesCount(_testCurrentActiveLivesCount);
         }
 
-        [Button("Add Max Lives")]
+        [Button("SetUp Max Lives")]
         private void AddMaxLives()
         {
             SetMaxLivesCount(CurrentMaxLivesCount + 1);
@@ -137,7 +137,7 @@ namespace CodeBase.UI.Elements
             SetMaxLivesCount(CurrentMaxLivesCount - 1);
         }
 
-        [Button("Add Active Lives")]
+        [Button("SetUp Active Lives")]
         private void AddActiveLives()
         {
             SetActiveLivesCount(_currentActiveLivesCount + 1);

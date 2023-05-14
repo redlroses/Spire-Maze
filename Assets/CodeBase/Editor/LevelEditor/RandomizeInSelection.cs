@@ -30,7 +30,7 @@ public class EditorWindowWithPopup : EditorWindow
     private GUIStyle _cellStyle;
     private Texture2D _temp;
 
-    // Add menu item
+    // SetUp menu item
 
     [MenuItem("Example/Popup Example")]
     static void Init()
