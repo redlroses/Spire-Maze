@@ -5,7 +5,7 @@ using CodeBase.StaticData.Storable;
 
 namespace CodeBase.Logic.Inventory
 {
-    public interface IInventory : IEnumerable
+    public interface IInventory : IEnumerable<IReadOnlyInventoryCell>
     {
         event Action Updated;
         bool TryUse(StorableType storableType, out StorableStaticData item);
