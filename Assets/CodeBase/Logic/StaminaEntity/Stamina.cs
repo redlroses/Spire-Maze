@@ -9,7 +9,7 @@ namespace CodeBase.Logic.StaminaEntity
     public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
         [SerializeField] protected TimerOperator _timerDelay;
-        
+
         protected float LowerSpeedMultiplier;
         protected float SpeedReplenish;
         protected float DelayBeforeReplenish;
@@ -40,7 +40,7 @@ namespace CodeBase.Logic.StaminaEntity
 
         public bool TrySpend(int spendStamina)
         {
-            if (spendStamina <= 0 || CurrentPoints == 0)
+            if (spendStamina <= 0 || CurrentPoints <= 0)
             {
                 return false;
             }
@@ -59,13 +59,14 @@ namespace CodeBase.Logic.StaminaEntity
         private void Spend(int spendStamina)
         {
             _isReplenish = false;
-            
+
             int newPoints = CurrentPoints - spendStamina;
             CurrentPoints = newPoints < 0 ? 0 : newPoints;
 
             if (_isSpent == false)
             {
                 _isSpent = CurrentPoints == 0;
+                _currentSpeedReplenish = SpeedReplenish * LowerSpeedMultiplier;
             }
 
             _timerDelay.Restart();
@@ -79,9 +80,7 @@ namespace CodeBase.Logic.StaminaEntity
                 return;
             }
 
-            int newPoints = _isSpent
-                ? CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * LowerSpeedMultiplier * Time.deltaTime)
-                : CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * Time.deltaTime);
+            int newPoints = CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * Time.deltaTime);
             CurrentPoints = newPoints > MaxPoints ? MaxPoints : newPoints;
 
             if (CurrentPoints >= MaxPoints)
