@@ -12,7 +12,7 @@ namespace CodeBase.Logic
         {
             _windowService = windowService;
         }
-        
+
         protected override void OnTriggerObserverEntered(ITeleportable target)
         {
             _windowService.Open(WindowId.Results);

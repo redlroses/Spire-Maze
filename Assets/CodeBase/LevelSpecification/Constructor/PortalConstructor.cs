@@ -3,7 +3,6 @@ using System.Linq;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Portal;
-using CodeBase.Services.Pause;
 using CodeBase.Services.StaticData;
 
 namespace CodeBase.LevelSpecification.Constructor

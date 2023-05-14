@@ -10,7 +10,7 @@ namespace CodeBase.EditorCells
         {
             Type = type;
         }
-        
+
         public override CellData Copy() =>
             new EnemySpawnPoint(Texture, Type);
     }

@@ -5,12 +5,15 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Door = CodeBase.LevelSpecification.Cells.Door;
 using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
+using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
 using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
 using Plate = CodeBase.LevelSpecification.Cells.Plate;
@@ -29,36 +32,46 @@ namespace CodeBase.Services.LevelBuild
         private const string Ground = "Ground";
         private const int MaxCellsInCollider = 8;
 
-        private readonly CellConstructor _cellConstructor = new CellConstructor();
+        private readonly IGameFactory _gameFactory;
+        private readonly IStaticDataService _staticData;
+        private readonly CellConstructor _cellConstructor;
 
-        private IGameFactory _gameFactory;
-
-        public void Construct(IGameFactory gameFactory, IStaticDataService staticData, Level level)
+        public LevelConstructor(IGameFactory gameFactory,
+            IStaticDataService staticData,
+            IWindowService windowService, ISaveLoadService saveLoadService)
         {
+            _cellConstructor = new CellConstructor(windowService, saveLoadService);
             _gameFactory = gameFactory;
-            _cellConstructor.Construct<Plate>(gameFactory, staticData,
+            _staticData = staticData;
+        }
+
+        public void Construct(Level level)
+        {
+            _cellConstructor.Construct<Plate>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
-            _cellConstructor.Construct<Wall>(gameFactory, staticData,
+            _cellConstructor.Construct<Wall>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
-            _cellConstructor.Construct<Key>(gameFactory, staticData,
+            _cellConstructor.Construct<Key>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
-            _cellConstructor.Construct<Door>(gameFactory, staticData,
+            _cellConstructor.Construct<Door>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
-            _cellConstructor.Construct<MovingPlateMarker>(gameFactory, staticData,
+            _cellConstructor.Construct<MovingPlateMarker>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is MovingMarker).ToArray());
-            _cellConstructor.Construct<Portal>(gameFactory, staticData,
+            _cellConstructor.Construct<Portal>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
-            _cellConstructor.Construct<SpikeTrap>(gameFactory, staticData,
+            _cellConstructor.Construct<FinishPortal>(_gameFactory, _staticData,
+                level.Where(cell => cell.CellData is EditorCells.FinishPortal).ToArray());
+            _cellConstructor.Construct<SpikeTrap>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
-            _cellConstructor.Construct<FireTrap>(gameFactory, staticData,
+            _cellConstructor.Construct<FireTrap>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
-            _cellConstructor.Construct<Rock>(gameFactory, staticData,
+            _cellConstructor.Construct<Rock>(_gameFactory, _staticData,
                 level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
-            _cellConstructor.Construct<Savepoint>(gameFactory, staticData,
+            _cellConstructor.Construct<Savepoint>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
-            _cellConstructor.Construct<EnemySpawnPoint>(gameFactory, staticData,
+            _cellConstructor.Construct<EnemySpawnPoint>(_gameFactory, _staticData,
                 level.Where(cell => cell.CellData is EditorCells.EnemySpawnPoint).ToArray());
-               CombineCells(level);
+            CombineCells(level);
         }
 
         private void CombineCells(Level level)

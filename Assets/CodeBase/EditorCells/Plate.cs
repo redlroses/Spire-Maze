@@ -11,6 +11,4 @@ namespace CodeBase.EditorCells
         public override CellData Copy() =>
             new Plate(Texture);
     }
-    
-    
 }

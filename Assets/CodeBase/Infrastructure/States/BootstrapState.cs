@@ -91,7 +91,9 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),
-                    _services.Single<IStaticDataService>()));
+                    _services.Single<IStaticDataService>(),
+                    _services.Single<IWindowService>(),
+                    _services.Single<ISaveLoadService>()));
         }
 
         private void RegisterStaticDataService()

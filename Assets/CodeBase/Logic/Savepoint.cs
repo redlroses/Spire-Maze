@@ -18,10 +18,13 @@ namespace CodeBase.Logic
         private int _id;
         private bool _isActive;
 
+        private ISaveLoadService _saveLoadService;
+
         public int Id => _id;
 
-        public void Construct(int id)
+        public void Construct(int id, ISaveLoadService saveLoadService)
         {
+            _saveLoadService = saveLoadService;
             _id = id;
         }
 
@@ -58,9 +61,10 @@ namespace CodeBase.Logic
         {
             _isActive = true;
             SetColliderState(_isActive);
-            AllServices.Container.Single<ISaveLoadService>().SaveProgress();
+            _saveLoadService.SaveProgress();
         }
 
-        private void SetColliderState(bool cellIsActive) => _collider.enabled = cellIsActive == false;
+        private void SetColliderState(bool cellIsActive) =>
+            _collider.enabled = cellIsActive == false;
     }
 }

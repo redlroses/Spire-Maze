@@ -9,6 +9,6 @@ namespace CodeBase.EditorCells
         }
 
         public override CellData Copy() =>
-            new Portal(Texture);
+            new FinishPortal(Texture);
     }
 }

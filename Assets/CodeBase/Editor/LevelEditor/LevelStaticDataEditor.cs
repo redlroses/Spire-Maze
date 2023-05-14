@@ -67,7 +67,7 @@ namespace CodeBase.Editor.LevelEditor
                             .Tint(((Portal) data)?.Color ?? _colors[typeof(Portal)])),
                 [typeof(FinishPortal)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
-                        .CombineTexture(_baseTextures[typeof(Plate)].Tint(_colors[typeof(FinishPortal)])),
+                        .CombineTexture(_baseTextures[typeof(FinishPortal)].Tint(_colors[typeof(FinishPortal)])),
                 [typeof(SpikeTrap)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(SpikeTrap)].Tint(_colors[typeof(SpikeTrap)])),
@@ -113,7 +113,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
                 [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
                 [typeof(Portal)] = new Color32(129, 93, 199, 255),
-                [typeof(FinishPortal)] = new Color32(0, 0, 0, 255),
+                [typeof(FinishPortal)] = new Color32(255, 255, 255, 255),
                 [typeof(SpikeTrap)] = new Color32(76, 128, 144, 255),
                 [typeof(FireTrap)] = new Color32(255, 170, 52, 255),
                 [typeof(Rock)] = new Color32(233, 117, 50, 255),
@@ -131,7 +131,7 @@ namespace CodeBase.Editor.LevelEditor
                 new Door(GetTextureByType<Door>()),
                 new MovingMarker(GetTextureByType<MovingMarker>()),
                 new Portal(GetTextureByType<Portal>()) {Color = _colors[typeof(Portal)]},
-                new FinishPortal(GetTextureByType<Portal>()),
+                new FinishPortal(GetTextureByType<FinishPortal>()),
                 new SpikeTrap(GetTextureByType<SpikeTrap>()),
                 new FireTrap(GetTextureByType<FireTrap>()),
                 new Rock(GetTextureByType<Rock>()),
