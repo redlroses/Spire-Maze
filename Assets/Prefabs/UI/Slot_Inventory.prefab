@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 723083464945246222}
   - component: {fileID: 723083464945246220}
   - component: {fileID: 723083464945246221}
+  - component: {fileID: 7151445997130251219}
   m_Layer: 5
   m_Name: Slot_Inventory
   m_TagString: Untagged
@@ -78,6 +79,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7151445997130251219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723083464945246223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c14d64868048dda4fda5aa019df4bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconItem: {fileID: 723083465243268479}
+  _count: {fileID: 723083466356448780}
 --- !u!1 &723083465243268466
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,12 +278,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.8
+  m_fontSize: 81
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20.25
-  m_fontSizeMax: 500
+  m_fontSizeMax: 81
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -299,7 +314,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -2.1474836e+9, y: -2.1474836e+9, z: -2.1474836e+9, w: -2.1474836e+9}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -323,6 +338,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -350,6 +367,8 @@ MonoBehaviour:
     OptimizedSize: 18
     MinSize: 10
     MaxSize: 500
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -362,6 +381,8 @@ MonoBehaviour:
     OptimizedSize: 18
     MinSize: 10
     MaxSize: 500
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -374,6 +395,8 @@ MonoBehaviour:
     OptimizedSize: 72
     MinSize: 500
     MaxSize: 500
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
