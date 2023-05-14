@@ -182,16 +182,15 @@ namespace CodeBase.Infrastructure.States
 
         private void ResetProgress()
         {
-            _progressService.Progress.WorldData.LevelState = new LevelState(_loadPayload.LevelId);
-            _progressService.Progress.WorldData.PositionOnLevel =
-                new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData());
-            _progressService.Progress.WorldData.HeroHealthState.MaxHP =
-                _staticData.HealthForEntity(PlayerKey).MaxHealth;
-            _progressService.Progress.WorldData.HeroHealthState.ResetHP();
-            _progressService.Progress.WorldData.HeroStaminaState.MaxValue =
-                _staticData.StaminaForEntity(PlayerKey).MaxStamina;
-            _progressService.Progress.WorldData.HeroStaminaState.ResetStamina();
-            _progressService.Progress.WorldData.ScoreAccumulationData.Reset();
+            _progressService.Progress.WorldData = new WorldData(null)
+            {
+                LevelState = new LevelState(_loadPayload.LevelId),
+                PositionOnLevel = new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData()),
+                HeroHealthState = new HealthState(_staticData.HealthForEntity(PlayerKey).MaxHealth),
+                HeroStaminaState = new StaminaState(_staticData.StaminaForEntity(PlayerKey).MaxStamina),
+                HeroInventoryData = new InventoryData(),
+                ScoreAccumulationData = new ScoreAccumulationData()
+            };
         }
     }
 }

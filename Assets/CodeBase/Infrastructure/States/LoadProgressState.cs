@@ -52,13 +52,11 @@ namespace CodeBase.Infrastructure.States
                 {
                     PositionOnLevel = new PositionOnLevel(_staticDataService.ForLevel(LevelNames.LobbyId)
                         .HeroInitialPosition.AsVectorData()),
-                    HeroHealthState = {MaxHP = _staticDataService.HealthForEntity(PlayerKey).MaxHealth},
-                    HeroStaminaState = {MaxValue = _staticDataService.StaminaForEntity(PlayerKey).MaxStamina}
+                    HeroHealthState = new HealthState(_staticDataService.HealthForEntity(PlayerKey).MaxHealth),
+                    HeroStaminaState = new StaminaState(_staticDataService.StaminaForEntity(PlayerKey).MaxStamina)
                 }
             };
 
-            progress.WorldData.HeroHealthState.ResetHP();
-            progress.WorldData.HeroStaminaState.ResetStamina();
             return progress;
         }
     }

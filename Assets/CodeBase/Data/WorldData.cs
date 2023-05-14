@@ -1,6 +1,5 @@
 using System;
 using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.States;
 
 namespace CodeBase.Data
 {
