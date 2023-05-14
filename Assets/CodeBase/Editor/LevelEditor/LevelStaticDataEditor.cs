@@ -13,7 +13,7 @@ namespace CodeBase.Editor.LevelEditor
     {
         private const string Minus = "-";
         private const string Plus = "+";
-        private const string AddFloor = "Add floor";
+        private const string AddFloor = "SetUp floor";
 
         private Rect _buttonRect;
 
