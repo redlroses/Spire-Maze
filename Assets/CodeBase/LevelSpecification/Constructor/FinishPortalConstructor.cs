@@ -1,7 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services.StaticData;
-using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using FinishPortal = CodeBase.Logic.FinishPortal;
 
@@ -9,18 +8,18 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class FinishPortalConstructor : ICellConstructor
     {
-        private readonly IWindowService _windowService;
+        private readonly GameStateMachine _stateMachine;
 
-        public FinishPortalConstructor(IWindowService windowService)
+        public FinishPortalConstructor(GameStateMachine stateMachine)
         {
-            _windowService = windowService;
+            _stateMachine = stateMachine;
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, IStaticDataService staticData, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
             foreach (var cell in cells)
             {
-                gameFactory.CreateCell<TCell>(cell.Container).GetComponent<FinishPortal>().Construct(_windowService);
+                gameFactory.CreateCell<TCell>(cell.Container).GetComponent<FinishPortal>().Construct(_stateMachine);
                 Debug.Log("finish");
             }
         }

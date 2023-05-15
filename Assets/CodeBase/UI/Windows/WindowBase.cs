@@ -12,8 +12,10 @@ namespace CodeBase.UI.Windows
         protected IPersistentProgressService ProgressService;
         protected PlayerProgress Progress => ProgressService.Progress;
 
-        public void Construct(IPersistentProgressService progressService) =>
+        public void Construct(IPersistentProgressService progressService)
+        {
             ProgressService = progressService;
+        }
 
         private void Awake() =>
             OnAwake();

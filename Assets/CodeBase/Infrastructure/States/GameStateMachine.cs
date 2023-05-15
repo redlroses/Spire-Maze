@@ -12,6 +12,7 @@ using CodeBase.Services.Pause;
 using CodeBase.Services.Score;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -20,7 +21,8 @@ namespace CodeBase.Infrastructure.States
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner,
+            LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>
             {
@@ -41,7 +43,10 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(), services.Single<IWatchService>()),
+                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(),
+                    services.Single<IWatchService>()),
+                [typeof(FinishState)] = new FinishState(services.Single<ISaveLoadService>(),
+                    services.Single<IWindowService>(), services.Single<IScoreService>())
             };
         }
 

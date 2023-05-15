@@ -13,31 +13,45 @@ namespace CodeBase.UI.Windows
         [SerializeField] private Button _menuButton;
         [SerializeField] private Button _restartButton;
         [SerializeField] private TextSetterAnimated _scoreText;
-        
+
         private GameStateMachine _stateMachine;
         private IScoreService _scoreService;
         private IPersistentProgressService _progressService;
 
-        public void Construct(IPersistentProgressService progressService, IScoreService scoreService, GameStateMachine stateMachine)
+        private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+
+        public void Construct(IPersistentProgressService progressService, IScoreService scoreService,
+            GameStateMachine stateMachine)
         {
             _progressService = progressService;
             _stateMachine = stateMachine;
             _scoreService = scoreService;
         }
-        
-        protected override void Initialize()
-        {
+
+        protected override void Initialize() =>
+            SetScore();
+
+        private void SetScore() =>
             _scoreText.SetTextAnimated(_scoreService.CalculateScore());
-        }
-        
+
         protected override void SubscribeUpdates()
         {
-            _menuButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.Lobby, false,
-                    LevelNames.LobbyId)));
-            _restartButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    _progressService.Progress.WorldData.LevelState.LevelId + 1, true)));
+            _menuButton.onClick.AddListener(OnMenuClick);
+            _restartButton.onClick.AddListener(OnRestartClick);
         }
+
+        private void OnRestartClick() =>
+            _stateMachine.Enter<LoadLevelState, LoadPayload>(RestartPayload());
+
+        private void OnMenuClick() =>
+            _stateMachine.Enter<LoadLevelState, LoadPayload>(MenuPayload());
+
+        private LoadPayload RestartPayload() =>
+            new LoadPayload(LevelNames.BuildableLevel, true,
+                LevelId + 1, true);
+
+        private static LoadPayload MenuPayload() =>
+            new LoadPayload(LevelNames.Lobby, false,
+                LevelNames.LobbyId);
     }
 }

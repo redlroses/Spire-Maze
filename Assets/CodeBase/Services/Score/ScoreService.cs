@@ -1,11 +1,10 @@
 ﻿using CodeBase.Data;
 using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.Score
 {
@@ -16,6 +15,8 @@ namespace CodeBase.Services.Score
 
         private LevelData _currentLevelData;
         private int _currentLevelId;
+        private int _stars;
+        private int _currentScore;
 
         private PlayerProgress Progress => _progressService.Progress;
 
@@ -25,19 +26,15 @@ namespace CodeBase.Services.Score
             _staticData = staticData;
         }
 
-        public int CurrentScore { get; private set; } = default;
-
         public int CalculateScore()
         {
             ScoreAccumulationData scoreAccumulationData = Progress.WorldData.ScoreAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
 
-            CurrentScore =
-                (int) (scoreAccumulationData.Artifacts *
-                    scoreConfig.PerArtifact + (scoreConfig.BasePointsOnStart -
-                                               scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction));
+            _currentScore = SumScore(scoreAccumulationData, scoreConfig);
+            _stars = StarsCountFromConfig(scoreConfig);
 
-            return CurrentScore = CurrentScore > 0 ? CurrentScore : 0;
+            return _currentScore = _currentScore > 0 ? _currentScore : 0;
         }
 
         public void LoadProgress()
@@ -50,32 +47,59 @@ namespace CodeBase.Services.Score
             _currentLevelId = Progress.WorldData.LevelState.LevelId;
             _currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
 
-            if (_currentLevelData != null)
-            {
-                CurrentScore = _currentLevelData.Score;
-            }
-
             Debug.Log(_currentLevelData == null
                 ? $"Level ID: {_currentLevelId}, LevelData: {_currentLevelData}"
-                : $"Level ID: {_currentLevelId}, LevelData: id - {_currentLevelData.Id}, score - {_currentLevelData.Score}");
+                : $"Level ID: {_currentLevelId}, LevelData: id - {_currentLevelData.Id}, best score - {_currentLevelData.Score}");
         }
 
         public void UpdateProgress()
         {
             if (_currentLevelData == null)
             {
-                Progress.GlobalData.Levels.Add(new LevelData(_currentLevelId, CurrentScore));
+                Progress.GlobalData.Levels.Add(new LevelData(_currentLevelId, _currentScore, _stars));
             }
             else
             {
-                if (_currentLevelData.Score < CurrentScore)
+                if (_currentLevelData.Score < _currentScore)
                 {
-                    _currentLevelData.Score = CurrentScore;
+                    _currentLevelData.Score = _currentScore;
+                    _currentLevelData.Stars = _stars;
                 }
             }
+
+            Progress.WorldData.ScoreAccumulationData.LevelScore = _currentScore;
+            Progress.WorldData.ScoreAccumulationData.LevelStars = _stars;
         }
+
+        private static int SumScore(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
+            (int) (ScorePerArtifacts(scoreAccumulationData, scoreConfig) +
+                   ScorePerTime(scoreConfig, scoreAccumulationData));
+
+        private static float ScorePerTime(ScoreConfig scoreConfig, ScoreAccumulationData scoreAccumulationData)
+        {
+            int scorePerTime = scoreConfig.BasePointsOnStart -
+                               (int) scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction;
+            return scorePerTime < 0 ? 0 : scorePerTime;
+        }
+
+        private static int ScorePerArtifacts(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
+            scoreAccumulationData.Artifacts *
+            scoreConfig.PerArtifact;
 
         private bool IsScorableLevel() =>
             SceneManager.GetActiveScene().name == LevelNames.BuildableLevel;
+
+        private int StarsCountFromConfig(ScoreConfig scoreConfig)
+        {
+            for (int i = scoreConfig.StarsRatingData.Length - 1; i >= 0; i--)
+            {
+                if (_currentScore > scoreConfig.StarsRatingData[i])
+                {
+                    return i + 1;
+                }
+            }
+
+            return 0;
+        }
     }
 }

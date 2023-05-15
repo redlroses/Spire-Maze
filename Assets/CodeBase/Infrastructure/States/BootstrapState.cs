@@ -92,7 +92,7 @@ namespace CodeBase.Infrastructure.States
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),
                     _services.Single<IStaticDataService>(),
-                    _services.Single<IWindowService>(),
+                    _stateMachine,
                     _services.Single<ISaveLoadService>()));
         }
 

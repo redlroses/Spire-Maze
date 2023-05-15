@@ -2,13 +2,13 @@
 using System.Linq;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
-using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Door = CodeBase.LevelSpecification.Cells.Door;
@@ -33,56 +33,54 @@ namespace CodeBase.Services.LevelBuild
         private const int MaxCellsInCollider = 8;
 
         private readonly IGameFactory _gameFactory;
-        private readonly IStaticDataService _staticData;
         private readonly CellConstructor _cellConstructor;
 
         public LevelConstructor(IGameFactory gameFactory,
             IStaticDataService staticData,
-            IWindowService windowService, ISaveLoadService saveLoadService)
+            GameStateMachine stateMachine, ISaveLoadService saveLoadService)
         {
-            _cellConstructor = new CellConstructor(windowService, saveLoadService);
+            _cellConstructor = new CellConstructor(stateMachine, saveLoadService, staticData);
             _gameFactory = gameFactory;
-            _staticData = staticData;
         }
 
         public void Construct(Level level)
         {
-            _cellConstructor.Construct<Plate>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Plate>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
-            _cellConstructor.Construct<Wall>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Wall>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
-            _cellConstructor.Construct<Key>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Key>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
-            _cellConstructor.Construct<Door>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Door>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Door).ToArray());
-            _cellConstructor.Construct<MovingPlateMarker>(_gameFactory, _staticData,
+            _cellConstructor.Construct<MovingPlateMarker>(_gameFactory,
                 level.Where(cell => cell.CellData is MovingMarker).ToArray());
-            _cellConstructor.Construct<Portal>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Portal>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Portal).ToArray());
-            _cellConstructor.Construct<FinishPortal>(_gameFactory, _staticData,
+            _cellConstructor.Construct<FinishPortal>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.FinishPortal).ToArray());
-            _cellConstructor.Construct<SpikeTrap>(_gameFactory, _staticData,
+            _cellConstructor.Construct<SpikeTrap>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.SpikeTrap).ToArray());
-            _cellConstructor.Construct<FireTrap>(_gameFactory, _staticData,
+            _cellConstructor.Construct<FireTrap>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.FireTrap).ToArray());
-            _cellConstructor.Construct<Rock>(_gameFactory, _staticData,
-                level.Where((cell => cell.CellData is EditorCells.Rock)).ToArray());
-            _cellConstructor.Construct<Savepoint>(_gameFactory, _staticData,
+            _cellConstructor.Construct<Rock>(_gameFactory,
+                level.Where(cell => cell.CellData is EditorCells.Rock).ToArray());
+            _cellConstructor.Construct<Savepoint>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
-            _cellConstructor.Construct<EnemySpawnPoint>(_gameFactory, _staticData,
+            _cellConstructor.Construct<EnemySpawnPoint>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.EnemySpawnPoint).ToArray());
             CombineCells(level);
         }
 
         private void CombineCells(Level level)
         {
-            GameObject groupsHolder = CombineAllColliders(level);
+            var groupsHolder = CombineAllColliders(level);
             // CombineAllMeshes(level.SelfTransform, groupsHolder);
         }
 
         private GameObject CombineAllColliders(Level level)
         {
-            GameObject collidersHolder = new GameObject(Colliders);
+            var collidersHolder = new GameObject(Colliders);
             collidersHolder.transform.parent = level.SelfTransform;
 
             CombineByType<EditorCells.Plate>(level, collidersHolder);
@@ -95,7 +93,7 @@ namespace CodeBase.Services.LevelBuild
 
         private void CombineByType<TCell>(Level level, GameObject collidersHolder) where TCell : CellData
         {
-            for (int i = 0; i < level.Height; i++)
+            for (var i = 0; i < level.Height; i++)
             {
                 if (HasFloorCellType<TCell>(level, i) == false)
                 {
@@ -109,7 +107,7 @@ namespace CodeBase.Services.LevelBuild
 
         private static bool HasFloorCellType<TCell>(Level level, int floor) where TCell : CellData
         {
-            for (int j = 0; j < level.Width; j++)
+            for (var j = 0; j < level.Width; j++)
             {
                 if (level.GetCell(floor, j).CellData is TCell)
                 {
@@ -122,9 +120,9 @@ namespace CodeBase.Services.LevelBuild
 
         private void CombineAllMeshes(Transform spire, GameObject groupsHolder)
         {
-            MeshFilter[] meshesFilters = groupsHolder.GetComponentsInChildren<MeshFilter>();
-            MeshFilter[] meshFilters = meshesFilters.Append(spire.GetComponent<MeshFilter>()).ToArray();
-            CombineInstance[] combine = CombineInstances(meshFilters);
+            var meshesFilters = groupsHolder.GetComponentsInChildren<MeshFilter>();
+            var meshFilters = meshesFilters.Append(spire.GetComponent<MeshFilter>()).ToArray();
+            var combine = CombineInstances(meshFilters);
             ApplyMesh(spire.gameObject, combine, true);
             spire.gameObject.isStatic = true;
         }
@@ -147,7 +145,7 @@ namespace CodeBase.Services.LevelBuild
 
                 if (lastGroupIndex < firstGroupIndex)
                 {
-                    List<Cell> combined =
+                    var combined =
                         floor.Container.GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
                     combined.AddRange(floor.Container.GetRange(0, lastGroupIndex));
                     CombineColliders(combined, collidersHolder);
@@ -170,19 +168,19 @@ namespace CodeBase.Services.LevelBuild
                 CombineColliders(cells.GetRange(cells.Count / 2, Mathf.FloorToInt(cells.Count / 2f)), parent);
                 return;
             }
-            
-            GameObject cell = cells.First().Container.gameObject;
-            GameObject colliderHolder = new GameObject($"{cell.name} collider");
+
+            var cell = cells.First().Container.gameObject;
+            var colliderHolder = new GameObject($"{cell.name} collider");
             colliderHolder.transform.parent = parent;
             colliderHolder.isStatic = true;
 
             // MeshFilter[] meshesFilters =
             //     cells.Select(container => container.Container.GetComponentInChildren<MeshFilter>()).ToArray();
 
-            MeshCollider[] meshColliders =
+            var meshColliders =
                 cells.Select(container => container.Container.GetComponentInChildren<MeshCollider>()).ToArray();
 
-            MeshFilter[] meshesFilters =
+            var meshesFilters =
                 meshColliders.Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
 
             // MeshFilter[] meshesFilters;
@@ -193,20 +191,20 @@ namespace CodeBase.Services.LevelBuild
 
             // meshesFilters = meshesFiltersList.ToArray();
 
-            foreach (MeshCollider meshCollider in meshColliders)
+            foreach (var meshCollider in meshColliders)
             {
                 meshCollider.enabled = false;
             }
 
-            CombineInstance[] combine = CombineInstances(meshesFilters);
+            var combine = CombineInstances(meshesFilters);
 
-            Mesh mesh = ApplyMesh(colliderHolder, combine, false);
+            var mesh = ApplyMesh(colliderHolder, combine, false);
             CreateMeshCollider(colliderHolder, mesh, cell.transform.GetChild(0).gameObject.layer);
         }
 
         private void CreateMeshCollider(GameObject colliderHolder, Mesh mesh, int layer)
         {
-            MeshCollider meshCollider = colliderHolder.AddComponent<MeshCollider>();
+            var meshCollider = colliderHolder.AddComponent<MeshCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
             meshCollider.material = _gameFactory.CreatePhysicMaterial(Ground);
@@ -215,9 +213,9 @@ namespace CodeBase.Services.LevelBuild
 
         private CombineInstance[] CombineInstances(MeshFilter[] meshesFilters)
         {
-            CombineInstance[] combine = new CombineInstance[meshesFilters.Length];
+            var combine = new CombineInstance[meshesFilters.Length];
 
-            for (int i = 0; i < meshesFilters.Length; i++)
+            for (var i = 0; i < meshesFilters.Length; i++)
             {
                 combine[i].mesh = meshesFilters[i].sharedMesh;
                 combine[i].transform = meshesFilters[i].transform.localToWorldMatrix;
@@ -238,7 +236,7 @@ namespace CodeBase.Services.LevelBuild
                 meshRenderer = holder.AddComponent<MeshRenderer>();
             }
 
-            Mesh mesh = new Mesh {indexFormat = IndexFormat.UInt32};
+            var mesh = new Mesh {indexFormat = IndexFormat.UInt32};
             meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combine);
             meshRenderer.material = _gameFactory.CreateMaterial(Spire);
@@ -282,7 +280,7 @@ namespace CodeBase.Services.LevelBuild
 
         private int FindFirstGap<TCell>(Floor floor) where TCell : CellData
         {
-            for (int i = 0; i < floor.Container.Count; i++)
+            for (var i = 0; i < floor.Container.Count; i++)
             {
                 if (floor.Container[i].CellData is TCell == false)
                 {

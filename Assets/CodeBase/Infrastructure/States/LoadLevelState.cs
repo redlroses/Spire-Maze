@@ -191,6 +191,8 @@ namespace CodeBase.Infrastructure.States
                 HeroInventoryData = new InventoryData(),
                 ScoreAccumulationData = new ScoreAccumulationData()
             };
+
+            Debug.Log("Progress was reset");
         }
     }
 }

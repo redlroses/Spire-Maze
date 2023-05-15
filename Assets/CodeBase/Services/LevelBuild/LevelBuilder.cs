@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
-using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Services.LevelBuild
@@ -23,10 +23,10 @@ namespace CodeBase.Services.LevelBuild
         private float _floorHeight;
         private Level _level;
 
-        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, IWindowService windowsService, ISaveLoadService saveLoadService)
+        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, GameStateMachine stateMachine, ISaveLoadService saveLoadService)
         {
             _gameFactory = gameFactory;
-            _levelConstructor = new LevelConstructor(gameFactory, staticData, windowsService, saveLoadService);
+            _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService);
         }
 
         public Level Build(LevelStaticData levelStaticData)

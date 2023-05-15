@@ -1,21 +1,21 @@
-﻿using CodeBase.Logic.Observer;
+﻿using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Observer;
 using CodeBase.Logic.Portal;
-using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Logic
 {
     public class FinishPortal : ObserverTarget<TeleportableObserver, ITeleportable>
     {
-        private IWindowService _windowService;
+        private GameStateMachine _stateMachine;
 
-        public void Construct(IWindowService windowService)
+        public void Construct(GameStateMachine stateMachine)
         {
-            _windowService = windowService;
+            _stateMachine = stateMachine;
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable target)
         {
-            _windowService.Open(WindowId.Results);
+            _stateMachine.Enter<FinishState>();
         }
     }
 }

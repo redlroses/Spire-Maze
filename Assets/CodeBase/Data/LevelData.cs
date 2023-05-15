@@ -7,11 +7,13 @@ namespace CodeBase.Data
     {
         public int Id;
         public int Score;
+        public int Stars;
 
-        public LevelData(int id, int score)
+        public LevelData(int id, int score, int stars)
         {
             Id = id;
             Score = score;
+            Stars = stars;
         }
     }
 }

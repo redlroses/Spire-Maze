@@ -2,13 +2,12 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Enemy;
-using CodeBase.Services.StaticData;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
     public class EnemySpawnPointConstructor : ICellConstructor
     {
-        public void Construct<TCell>(IGameFactory gameFactory, IStaticDataService staticData, Cell[] cells)
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
             where TCell : Cell
         {
             foreach (var cell in cells)

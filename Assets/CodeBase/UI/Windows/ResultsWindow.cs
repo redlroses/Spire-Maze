@@ -1,10 +1,7 @@
-﻿using System;
+﻿using CodeBase.Data;
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
-using CodeBase.Services.Score;
-using CodeBase.Services.StaticData;
-using CodeBase.StaticData;
 using CodeBase.UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,56 +19,50 @@ namespace CodeBase.UI.Windows
         [SerializeField] private TextSetterAnimated _itemText;
         [SerializeField] private StarsView _starsView;
 
-        private IScoreService _scoreService;
         private IPersistentProgressService _progressService;
-        private IStaticDataService _staticDataService;
         private GameStateMachine _stateMachine;
 
-        public void Construct(IPersistentProgressService progressService, IScoreService scoreService,
-            IStaticDataService staticDataService, GameStateMachine stateMachine)
+        private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+        private WorldData WorldData => _progressService.Progress.WorldData;
+
+        public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
-            _staticDataService = staticDataService;
             _progressService = progressService;
-            _scoreService = scoreService;
         }
 
         protected override void Initialize()
         {
             _windowAnimationPlayer.Play();
-            _scoreText.SetTextAnimated(_scoreService.CalculateScore());
-            _itemText.SetTextAnimated(_progressService.Progress.WorldData.ScoreAccumulationData.Artifacts);
-            ScoreConfig scoreConfig = GetScoreConfig();
-            _starsView.EnableStars(StarsCountFromConfig(scoreConfig));
+            var worldData = WorldData;
+            SetScorePoints(worldData);
+            SetItemsCount(worldData);
+            SetStars(worldData);
         }
 
         protected override void SubscribeUpdates()
         {
             _menuButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.Lobby, false,
-                    LevelNames.LobbyId)));
+                _stateMachine.Enter<LoadLevelState, LoadPayload>(MenuPayload()));
             _restartButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    _progressService.Progress.WorldData.LevelState.LevelId, true)));
+                    LevelId, true)));
             _nextLevelButton.onClick.AddListener(() =>
                 _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    _progressService.Progress.WorldData.LevelState.LevelId + 1)));
+                    LevelId + 1)));
         }
 
-        private ScoreConfig GetScoreConfig() =>
-            _staticDataService.ScoreForLevel(_progressService.Progress.WorldData.LevelState.LevelId);
+        private static LoadPayload MenuPayload() =>
+            new LoadPayload(LevelNames.Lobby, false,
+                LevelNames.LobbyId);
 
-        private int StarsCountFromConfig(ScoreConfig scoreConfig)
-        {
-            for (int i = scoreConfig.StarsRatingData.Length - 1; i >= 0; i--)
-            {
-                if (_scoreService.CurrentScore > scoreConfig.StarsRatingData[i])
-                {
-                    return i + 1;
-                }
-            }
+        private void SetStars(WorldData worldData) =>
+            _starsView.EnableStars(worldData.ScoreAccumulationData.LevelStars);
 
-            return 0;
-        }
+        private void SetItemsCount(WorldData worldData) =>
+            _itemText.SetTextAnimated(worldData.ScoreAccumulationData.Artifacts);
+
+        private void SetScorePoints(WorldData worldData) =>
+            _scoreText.SetTextAnimated(worldData.ScoreAccumulationData.LevelScore);
     }
 }

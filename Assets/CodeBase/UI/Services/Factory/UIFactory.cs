@@ -72,7 +72,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateResults()
         {
             var window = CreateWindow<ResultsWindow>(WindowId.Results);
-            window.Construct(_progressService, _scoreService, _staticData, _stateMachine);
+            window.Construct(_progressService, _stateMachine);
         }
 
         public void CreateLose()
