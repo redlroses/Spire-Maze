@@ -81,7 +81,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IPauseService>(),
                     _services.Single<IWindowService>(),
-                    _services.Single<IWatchService>()));
+                    _services.Single<IWatchService>(),
+                    _services.Single<IUIFactory>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

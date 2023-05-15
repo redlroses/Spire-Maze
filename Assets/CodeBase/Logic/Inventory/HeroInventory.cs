@@ -21,7 +21,7 @@ namespace CodeBase.Logic.Inventory
             {
                 foreach (IReadOnlyInventoryCell cell in Inventory)
                 {
-                    Debug.Log($"Item:  {cell.Item.Name}, type: {cell.Item.ItemType}");
+                    Debug.Log($"Item:  {cell.Item.Name}, type: {cell.Item.ItemType}, count: {cell.Count}");
                 }
             };
 

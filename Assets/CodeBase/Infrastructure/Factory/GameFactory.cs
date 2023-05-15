@@ -13,6 +13,7 @@ using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -30,6 +31,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IPauseService _pauseService;
         private readonly IWindowService _windowService;
         private readonly IWatchService _watchService;
+        private readonly IUIFactory _uiFactory;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
@@ -37,7 +39,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService)
+            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory)
         {
             _assets = assets;
             _randomService = randomService;
@@ -45,6 +47,7 @@ namespace CodeBase.Infrastructure.Factory
             _pauseService = pauseService;
             _windowService = windowService;
             _watchService = watchService;
+            _uiFactory = uiFactory;
             _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -97,6 +100,7 @@ namespace CodeBase.Infrastructure.Factory
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
             hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService, _windowService);
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
+            hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
             return hud;
         }
 

@@ -9,30 +9,16 @@ namespace CodeBase.Logic.HealthEntity
         [SerializeField] private int _damage;
         [SerializeField] private Collider _collider;
 
-        private void Awake()
-        {
-            Construct();
-            Debug.LogWarning("Remove constructor from awake");
-        }
+        private void Awake() =>
+            _collider ??= GetComponent<Collider>();
 
-        public void Construct()
-        {
-            _collider.isTrigger = true;
-        }
-
-        protected override void OnTriggerObserverEntered(IDamagable collectible)
-        {
+        protected override void OnTriggerObserverEntered(IDamagable collectible) =>
             collectible.Damage(_damage, DamageType.Single);
-        }
 
-        public void Enable()
-        {
+        public void Enable() =>
             _collider.enabled = true;
-        }
 
-        public void Disable()
-        {
+        public void Disable() =>
             _collider.enabled = false;
-        }
     }
 }

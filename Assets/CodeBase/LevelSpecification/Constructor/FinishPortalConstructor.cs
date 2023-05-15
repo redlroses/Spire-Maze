@@ -1,7 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;
-using UnityEngine;
 using FinishPortal = CodeBase.Logic.FinishPortal;
 
 namespace CodeBase.LevelSpecification.Constructor
@@ -20,7 +19,6 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (var cell in cells)
             {
                 gameFactory.CreateCell<TCell>(cell.Container).GetComponent<FinishPortal>().Construct(_stateMachine);
-                Debug.Log("finish");
             }
         }
     }

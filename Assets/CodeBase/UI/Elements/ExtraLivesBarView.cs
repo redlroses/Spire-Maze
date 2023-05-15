@@ -22,12 +22,6 @@ namespace CodeBase.UI.Elements
 
         private int CurrentMaxLivesCount => _extraLives.Count;
 
-        private void Awake()
-        {
-            Construct(AllServices.Container.Single<IUIFactory>());
-            Debug.LogWarning("Remove constructor from awake");;
-        }
-
         public void Construct(IUIFactory gameUiFactory)
         {
             _gameUiFactory = gameUiFactory;

@@ -19,7 +19,6 @@ namespace CodeBase.Infrastructure
 
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
-            Debug.Log(nextScene);
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)

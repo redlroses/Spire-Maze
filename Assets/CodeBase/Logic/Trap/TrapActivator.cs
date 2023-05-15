@@ -18,12 +18,7 @@ namespace CodeBase.Logic.Trap
 
         private void Awake()
         {
-            Construct();
-            Debug.LogWarning("Remove constructor from awake");
-        }
-
-        public void Construct()
-        {
+            _timer ??= GetComponent<TimerOperator>();
             _timer.SetUp(_recoveryTime, OnReadyToActivate);
         }
 

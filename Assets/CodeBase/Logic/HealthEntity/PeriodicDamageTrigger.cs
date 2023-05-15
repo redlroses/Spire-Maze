@@ -16,33 +16,19 @@ namespace CodeBase.Logic.HealthEntity
 
         private void Awake()
         {
-            Construct();
-            Debug.LogWarning("Remove constructor from awake");
-        }
-
-        public void Construct()
-        {
+            _timer ??= Get<TimerOperator>();
+            _collider ??= Get<Collider>();
             _timer.SetUp(_tickPeriod, OnDamage);
-            _collider.isTrigger = true;
         }
 
-        public void Enable()
-        {
+        public void Enable() =>
             _collider.enabled = true;
-        }
 
         public void Disable()
         {
             _collider.enabled = false;
             _damagable = null;
             _timer.Pause();
-        }
-
-        private void OnDamage()
-        {
-            _damagable.Damage(_damage, DamageType.Periodic);
-            _timer.Restart();
-            _timer.Play();
         }
 
         protected override void OnTriggerObserverEntered(IDamagable damagable)
@@ -56,6 +42,13 @@ namespace CodeBase.Logic.HealthEntity
         {
             _timer.Pause();
             _damagable = null;
+        }
+
+        private void OnDamage()
+        {
+            _damagable.Damage(_damage, DamageType.Periodic);
+            _timer.Restart();
+            _timer.Play();
         }
     }
 }

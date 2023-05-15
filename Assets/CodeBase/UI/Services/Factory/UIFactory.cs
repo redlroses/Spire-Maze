@@ -8,7 +8,6 @@ using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Windows;
-using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;

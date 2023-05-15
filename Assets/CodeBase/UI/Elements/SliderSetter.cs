@@ -33,15 +33,11 @@ namespace CodeBase.UI.Elements
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
         }
 
-        private void Update()
-        {
+        protected override void Run() =>
             _slider.SetValueWithoutNotify(_curveAnimation.Update(Time.deltaTime));
-        }
 
-        private void OnValidate()
-        {
+        private void OnValidate() =>
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
-        }
 
         public void SetNormalizedValue(float value)
         {
