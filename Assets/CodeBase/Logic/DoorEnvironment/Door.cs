@@ -1,7 +1,5 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.EditorCells;
-using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
 using CodeBase.Services.PersistentProgress;
@@ -15,7 +13,6 @@ namespace CodeBase.Logic.DoorEnvironment
     public class Door : ObserverTarget<InventoryObserver, HeroInventory>, ISavedProgress, IIndexable
     {
         [SerializeField] private DoorAnimator _animator;
-        [SerializeField] private MaterialChanger _materialChanger;
 
         private StorableType _targetKeyColor;
         private Transform _selfTransform;
@@ -23,10 +20,8 @@ namespace CodeBase.Logic.DoorEnvironment
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
-        public void Construct(IGameFactory gameFactory, Colors doorColor, int id)
+        public void Construct(Colors doorColor, int id)
         {
-            _materialChanger.Construct(gameFactory);
-            _materialChanger.SetMaterial(doorColor);
             _targetKeyColor = doorColor.ToStorableType();
             _selfTransform = transform;
             Id = id;

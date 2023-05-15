@@ -1,8 +1,6 @@
-﻿using System;
-using CodeBase.EditorCells;
-using CodeBase.Infrastructure.Factory;
+﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.StaticData.Storable;
+using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -14,7 +12,8 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var doorData = (EditorCells.Door) cell.CellData;
                 var door = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
-                door.Construct(gameFactory, doorData.Color, cell.Id);
+                door.GetComponent<Renderer>().material = gameFactory.CreateColoredMaterial(doorData.Color);
+                door.Construct(doorData.Color, cell.Id);
             }
         }
     }

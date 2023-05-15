@@ -361,7 +361,6 @@ GameObject:
   - component: {fileID: 4452247892764991898}
   - component: {fileID: 388773665841792239}
   - component: {fileID: 6160575215373614289}
-  - component: {fileID: -5602937177627393203}
   - component: {fileID: -430217238498158525}
   m_Layer: 0
   m_Name: Door
@@ -412,10 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _observer: {fileID: -138895013418163495}
-  _doorColor: 1
   _animator: {fileID: 388773665841792239}
-  _materialChanger: {fileID: -5602937177627393203}
-  _isOpen: 0
 --- !u!114 &388773665841792239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,19 +445,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5602937177627393203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6959705161729757788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13be29d965f848faaf97fd4f6409482e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _renderer: {fileID: 1478706688435558806}
 --- !u!65 &-430217238498158525
 BoxCollider:
   m_ObjectHideFlags: 0
