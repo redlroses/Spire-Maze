@@ -1,6 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services.Pause;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -10,9 +9,10 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (var cell in cells)
             {
-                var spikeTrap = gameFactory.CreateCell<TCell>(cell.Container)
-                    .GetComponentInChildren<Logic.Trap.Spike>();
-                spikeTrap.Construct(cell.Id, spikeTrap.TrapActivator);
+                var spikeTrap =
+                    gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Logic.Trap.Spike>();
+
+                spikeTrap.Construct(spikeTrap.TrapActivator);
             }
         }
     }

@@ -1,40 +1,64 @@
-﻿using CodeBase.Data;
-using CodeBase.Logic.Сollectible;
+﻿using System;
+using CodeBase.Data;
+using CodeBase.Logic.Inventory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
 
-namespace CodeBase.Logic.Inventory
+namespace CodeBase.Logic.Сollectible
 {
     public class CompassCollectible : MonoBehaviour, ICollectible, IIndexable, ISavedProgress, IUsable
     {
         private StorableStaticData _compassStaticData;
-        private bool _isTaken;
-        private int _id;
 
-        public int Id => _id;
+        public int Id { get; private set; }
+        public bool IsActivated { get; private set; }
+
         public StorableStaticData StorableStaticData => _compassStaticData;
-        
+
         public void Construct(StorableStaticData staticStaticData, int id)
         {
             _compassStaticData = staticStaticData;
-            _id = id;
+            Id = id;
         }
-        
+
         public void Disable()
         {
-            _isTaken = true;
+            IsActivated = true;
             gameObject.SetActive(false);
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            throw new System.NotImplementedException();
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null || cellState.IsActivated == false)
+            {
+                return;
+            }
+
+            IsActivated = cellState.IsActivated;
+
+            if (cellState.IsActivated)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            throw new System.NotImplementedException();
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
+                .Find(cell => cell.Id == Id);
+
+            if (cellState == null)
+            {
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
+            }
+            else
+            {
+                cellState.IsActivated = IsActivated;
+            }
         }
 
         public void Use()

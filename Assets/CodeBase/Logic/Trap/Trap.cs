@@ -8,13 +8,10 @@ namespace CodeBase.Logic.Trap
     {
         [SerializeField] protected TrapActivator Activator;
 
-        protected int Id { get; private set; }
-
         public TrapActivator TrapActivator => Activator;
 
-        public virtual void Construct(int id, TrapActivator activator)
+        public void Construct(TrapActivator activator)
         {
-            Id = id;
             Activator = activator;
             Activator.Activated += Activate;
         }

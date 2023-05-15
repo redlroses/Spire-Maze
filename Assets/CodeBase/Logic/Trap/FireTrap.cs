@@ -8,7 +8,7 @@ namespace CodeBase.Logic.Trap
     [RequireComponent(typeof(TimerOperator))]
     public class FireTrap : Trap, IPauseWatcher
     {
-        [SerializeField] 
+        [SerializeField]
         [RequireInterface(typeof(IDamageTrigger))] private MonoBehaviour _damageTrigger;
         [SerializeField] private ParticleSystem _effect;
         [SerializeField] private TimerOperator _timer;
@@ -18,11 +18,8 @@ namespace CodeBase.Logic.Trap
 
         private IDamageTrigger DamageTrigger => (IDamageTrigger)_damageTrigger;
 
-        public override void Construct(int id, TrapActivator activator)
-        {
-            base.Construct(id, activator);
+        private void Awake() =>
             _timer.SetUp(_turnOffDelay, OnTurnOff);
-        }
 
         public void Resume()
         {
@@ -46,9 +43,7 @@ namespace CodeBase.Logic.Trap
         protected override void Activate(IDamagable damagable)
         {
             if (_isActivated)
-            {
                 return;
-            }
 
             _timer.Restart();
             _timer.Play();

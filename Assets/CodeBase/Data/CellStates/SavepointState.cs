@@ -6,7 +6,7 @@ namespace CodeBase.Data.CellStates
     public class SavepointState : CellState
     {
         public bool IsActive;
-        
+
         public SavepointState(int id, bool isActive) : base(id)
         {
             IsActive = isActive;

@@ -7,22 +7,23 @@ using UnityEngine;
 namespace CodeBase.Logic.Portal
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class PortalGate : ObserverTargetExited<TeleportableObserver, ITeleportable>, ISavedProgress
+    public class PortalGate : ObserverTargetExited<TeleportableObserver, ITeleportable>, ISavedProgress, IIndexable
     {
         [SerializeField] private float _waitDelay;
         [SerializeField] private PortalGate _linkedPortalGate;
         [SerializeField] private ParticleSystem _effect;
         [SerializeField] private TimerOperator _timer;
 
-        private int _id;
         private ITeleportable _teleportable;
         private bool _isRecipient;
         private Transform _selfTransform;
-        private bool _isActivated;
+
+        public int Id { get; private set; }
+        public bool IsActivated { get; private set; }
 
         public void Construct(int id, PortalGate linked)
         {
-            _id = id;
+            Id = id;
             _linkedPortalGate = linked;
             _selfTransform = transform;
             _timer ??= Get<TimerOperator>();
@@ -31,7 +32,7 @@ namespace CodeBase.Logic.Portal
 
         protected override void OnTriggerObserverEntered(ITeleportable teleporter)
         {
-            if (_isRecipient || _isActivated == false)
+            if (_isRecipient || IsActivated == false)
             {
                 return;
             }
@@ -49,29 +50,29 @@ namespace CodeBase.Logic.Portal
 
         public void LoadProgress(PlayerProgress progress)
         {
-            PortalState cellState = progress.WorldData.LevelState.PortalStates
-                .Find(cell => cell.Id == _id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
+                .Find(cell => cell.Id == Id);
 
             if (cellState == null || cellState.IsActivated == false)
             {
                 return;
             }
 
-            _isActivated = cellState.IsActivated;
+            IsActivated = cellState.IsActivated;
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            PortalState cellState = progress.WorldData.LevelState.PortalStates
-                .Find(cell => cell.Id == _id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
+                .Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.PortalStates.Add(new PortalState(_id, _isActivated));
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             }
             else
             {
-                cellState.IsActivated = _isActivated;
+                cellState.IsActivated = IsActivated;
             }
         }
 
@@ -85,7 +86,7 @@ namespace CodeBase.Logic.Portal
         }
 
         private void Activate() =>
-            _isActivated = true;
+            IsActivated = true;
 
         private void Teleport()
         {

@@ -14,10 +14,11 @@ namespace CodeBase.Logic.Сollectible
         [SerializeField] private MaterialChanger _materialChanger;
 
         private StorableStaticData _keyStaticStaticData;
-        private bool _isTaken;
-        private int _id;
 
-        public int Id => _id;
+        public int Id { get; private set; }
+
+        public bool IsActivated { get; private set; }
+
         public Colors Color => _color;
         public StorableStaticData StorableStaticData => _keyStaticStaticData;
 
@@ -27,25 +28,25 @@ namespace CodeBase.Logic.Сollectible
             _materialChanger.SetMaterial(color);
             _keyStaticStaticData = staticStaticData;
             _color = color;
-            _id = id;
+            Id = id;
         }
 
         public void Disable()
         {
-            _isTaken = true;
+            IsActivated = true;
             gameObject.SetActive(false);
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            KeyState cellState = progress.WorldData.LevelState.KeyStates.Find(cell => cell.Id == Id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
                 return;
             }
 
-            if (cellState.IsTaken)
+            if (cellState.IsActivated)
             {
                 Disable();
             }
@@ -53,15 +54,15 @@ namespace CodeBase.Logic.Сollectible
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            KeyState cellState = progress.WorldData.LevelState.KeyStates.Find(cell => cell.Id == Id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.KeyStates.Add(new KeyState(Id, _isTaken));
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             }
             else
             {
-                cellState.IsTaken = _isTaken;
+                cellState.IsActivated = IsActivated;
             }
         }
     }

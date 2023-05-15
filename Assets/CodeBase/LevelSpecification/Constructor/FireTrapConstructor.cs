@@ -14,7 +14,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var fireTrap = gameFactory.CreateCell<TCell>(cell.Container)
                     .GetComponentInChildren<Logic.Trap.FireTrap>();
-                fireTrap.Construct(cell.Id, fireTrap.TrapActivator);
+                fireTrap.Construct( fireTrap.TrapActivator);
             }
         }
     }

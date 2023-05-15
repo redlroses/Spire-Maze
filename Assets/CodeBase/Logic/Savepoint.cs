@@ -1,8 +1,6 @@
 ﻿using CodeBase.Data;
-using CodeBase.Data.CellStates;
 using CodeBase.Logic.Observer;
 using CodeBase.Logic.Player;
-using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using UnityEngine;
@@ -11,56 +9,53 @@ namespace CodeBase.Logic
 {
     [RequireComponent(typeof(SavepointObserver))]
     [RequireComponent(typeof(BoxCollider))]
-    public class Savepoint : ObserverTarget<SavepointObserver, Hero>, ISavedProgress
+    public class Savepoint : ObserverTarget<SavepointObserver, Hero>, ISavedProgress, IIndexable
     {
         [SerializeField] private BoxCollider _collider;
 
-        private int _id;
-        private bool _isActive;
-
         private ISaveLoadService _saveLoadService;
 
-        public int Id => _id;
+        public int Id { get; private set; }
+        public bool IsActivated { get; private set; }
 
         public void Construct(int id, ISaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
-            _id = id;
+            Id = id;
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            SavepointState cellState = progress.WorldData.LevelState.SavepointStates
-                .Find(cell => cell.Id == Id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
-            if (cellState == null || cellState.IsActive == false)
+            if (cellState == null || cellState.IsActivated == false)
             {
                 return;
             }
 
-            _isActive = cellState.IsActive;
-            SetColliderState(cellState.IsActive);
+            IsActivated = cellState.IsActivated;
+            SetColliderState(IsActivated);
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            SavepointState cellState = progress.WorldData.LevelState.SavepointStates
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.SavepointStates.Add(new SavepointState(Id, _isActive));
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             }
             else
             {
-                cellState.IsActive = _isActive;
+                cellState.IsActivated = IsActivated;
             }
         }
 
         protected override void OnTriggerObserverEntered(Hero player)
         {
-            _isActive = true;
-            SetColliderState(_isActive);
+            IsActivated = true;
+            SetColliderState(IsActivated);
             _saveLoadService.SaveProgress();
         }
 

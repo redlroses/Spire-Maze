@@ -1,5 +1,4 @@
 using CodeBase.Data;
-using CodeBase.Data.CellStates;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.PersistentProgress;
@@ -11,7 +10,7 @@ namespace CodeBase.Logic.Trap
 {
     [RequireComponent(typeof(RockMover))]
     [RequireComponent(typeof(RayDirection))]
-    public class Rock : Trap, ISavedProgress
+    public class Rock : Trap, ISavedProgress, IIndexable
     {
         [SerializeField] private CapsuleCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
@@ -28,10 +27,11 @@ namespace CodeBase.Logic.Trap
 
         private Transform _selfTransform;
         private MoveDirection _direction;
-        private bool _isActivated;
         private bool _isNotOnPlate;
-        private bool _isDestroyed;
         private bool _hasTargetRotationReached;
+
+        public int Id { get; private set; }
+        public bool IsActivated { get; private set; }
 
         protected override void FixedRun()
         {
@@ -39,9 +39,10 @@ namespace CodeBase.Logic.Trap
             Rotate();
         }
 
-        public override void Construct(int id, TrapActivator activator)
+        public void Construct(int id, TrapActivator activator)
         {
-            base.Construct(id, activator);
+            base.Construct(activator);
+            Id = id;
             _rigidbody ??= Get<Rigidbody>();
             _mover ??= Get<RockMover>();
             _mover.enabled = false;
@@ -56,17 +57,17 @@ namespace CodeBase.Logic.Trap
 
         public void LoadProgress(PlayerProgress progress)
         {
-            RockState cellState = progress.WorldData.LevelState.RockStates
+            var cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
-            if (cellState == null || cellState.IsDestroyed == false)
+            if (cellState == null || cellState.IsActivated == false)
             {
                 return;
             }
 
-            _isDestroyed = cellState.IsDestroyed;
+            IsActivated = cellState.IsActivated;
 
-            if (cellState.IsDestroyed)
+            if (cellState.IsActivated)
             {
                 OnDestroyGameObject();
             }
@@ -74,16 +75,16 @@ namespace CodeBase.Logic.Trap
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            RockState cellState = progress.WorldData.LevelState.RockStates
+            var cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.RockStates.Add(new RockState(Id, _isDestroyed));
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             }
             else
             {
-                cellState.IsDestroyed = _isDestroyed;
+                cellState.IsActivated = IsActivated;
             }
         }
 
@@ -94,19 +95,19 @@ namespace CodeBase.Logic.Trap
             _timer.SetUp(_timerDelay, OnTurnOffFragments);
             _stopEffectCallback.SetCallback(OnDestroyGameObject);
             _mover.enabled = true;
-            _isActivated = true;
+            IsActivated = true;
         }
 
         private void Rotate()
         {
-            if (_hasTargetRotationReached || _isActivated)
+            if (_hasTargetRotationReached || IsActivated)
             {
                 return;
             }
 
-            Vector2 direction = new Vector2((int)_direction, 0f);
-            Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
-            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
+            var direction = new Vector2((int) _direction, 0f);
+            var moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
+            var lookRotation = Quaternion.LookRotation(moveDirection);
 
             _rigidbody.MoveRotation(lookRotation);
             _hasTargetRotationReached = _rigidbody.rotation == lookRotation;
@@ -114,11 +115,11 @@ namespace CodeBase.Logic.Trap
 
         private void TryDestroy()
         {
-            if (_isActivated == false || _isDestroyed == true)
+            if (IsActivated == false || IsActivated)
                 return;
 
-            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.position, _direction);
-            Vector3 groundDirection = wallDirection + Vector3.down;
+            var wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.position, _direction);
+            var groundDirection = wallDirection + Vector3.down;
 
             bool isWallCollision = CheckCollisionObstacle(wallDirection, _wall);
             bool isGroundCollision = CheckCollisionObstacle(groundDirection, _ground);
@@ -133,7 +134,7 @@ namespace CodeBase.Logic.Trap
 
         private bool CheckCollisionObstacle(Vector3 direction, LayerMask obstacle)
         {
-            Ray ray = new Ray(_selfTransform.position, direction);
+            var ray = new Ray(_selfTransform.position, direction);
             return Physics.Raycast(ray, _rayDistance, obstacle);
         }
 
@@ -143,7 +144,7 @@ namespace CodeBase.Logic.Trap
             _mover.enabled = false;
             _collisionCollider.enabled = false;
 
-            for (int i = 0; i < _fragments.Length; i++)
+            for (var i = 0; i < _fragments.Length; i++)
             {
                 _fragments[i].isKinematic = false;
             }
@@ -151,12 +152,12 @@ namespace CodeBase.Logic.Trap
             _timer.Restart();
             _timer.Play();
             _destroyEffect.Play();
-            _isDestroyed = true;
+            IsActivated = true;
         }
 
         private void OnTurnOffFragments()
         {
-            for (int i = 0; i < _fragments.Length; i++)
+            for (var i = 0; i < _fragments.Length; i++)
             {
                 _fragments[i].gameObject.SetActive(false);
             }

@@ -1,5 +1,4 @@
 ﻿using CodeBase.Data;
-using CodeBase.Data.CellStates;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
@@ -16,12 +15,11 @@ namespace CodeBase.Logic.DoorEnvironment
         [SerializeField] private Colors _doorColor;
         [SerializeField] private DoorAnimator _animator;
         [SerializeField] private MaterialChanger _materialChanger;
-        [SerializeField] private bool _isOpen;
 
         private Transform _selfTransform;
-        private int _id;
 
-        public int Id => _id;
+        public int Id { get; private set; }
+        public bool IsActivated { get; private set; }
 
         public void Construct(IGameFactory gameFactory, Colors doorDataColor, int id)
         {
@@ -29,36 +27,36 @@ namespace CodeBase.Logic.DoorEnvironment
             _materialChanger.SetMaterial(doorDataColor);
             _doorColor = doorDataColor;
             _selfTransform = transform;
-            _id = id;
+            Id = id;
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            DoorState cellState = progress.WorldData.LevelState.DoorStates.Find(cell => cell.Id == Id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
                 return;
             }
 
-            if (cellState.IsOpen)
+            if (cellState.IsActivated)
             {
                 _animator.Open(1f);
-                _isOpen = true;
+                IsActivated = true;
             }
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            DoorState cellState = progress.WorldData.LevelState.DoorStates.Find(cell => cell.Id == Id);
+            IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null)
             {
-                progress.WorldData.LevelState.DoorStates.Add(new DoorState(Id, _isOpen));
+                progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             }
             else
             {
-                cellState.IsOpen = _isOpen;
+                cellState.IsActivated = IsActivated;
             }
         }
 
@@ -73,7 +71,7 @@ namespace CodeBase.Logic.DoorEnvironment
         private void Open(Vector3 fromPosition)
         {
             _animator.Open(GetDirection(fromPosition));
-            _isOpen = true;
+            IsActivated = true;
         }
 
         private float GetDirection(Vector3 collectorPosition)

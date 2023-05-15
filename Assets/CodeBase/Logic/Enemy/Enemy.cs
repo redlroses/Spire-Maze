@@ -34,7 +34,7 @@ namespace CodeBase.Logic.Enemy
         private bool _isDied;
 
         public int Id => _id;
-        private IAccelerable Mover => (IAccelerable)_mover;
+        private IAccelerable Mover => (IAccelerable) _mover;
 
         public void Construct(int id)
         {
