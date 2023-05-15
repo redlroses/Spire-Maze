@@ -9,8 +9,6 @@ namespace CodeBase.Logic.Inventory
 {
     public class Inventory : IReadOnlyCollection<IReadOnlyInventoryCell>, IInventory
     {
-        public const int MaxCountItems = 16;
-
         private readonly List<InventoryCell> _storage;
 
         public event Action Updated;

@@ -3,6 +3,7 @@
     public enum StorableType
     {
         Key,
+        Compass,
         TestItem,
         SomeElse
     }
