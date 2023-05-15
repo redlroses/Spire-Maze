@@ -1,13 +1,13 @@
 ﻿using System;
 using CodeBase.Data;
-using CodeBase.Logic.Inventory;
+using CodeBase.Logic.Item;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Logic.Сollectible
 {
-    public class CompassCollectible : MonoBehaviour, ICollectible, IIndexable, ISavedProgress, IUsable
+    public class CompassCollectible : MonoBehaviour, IIndexable, ISavedProgress, IUsable
     {
         private StorableStaticData _compassStaticData;
 

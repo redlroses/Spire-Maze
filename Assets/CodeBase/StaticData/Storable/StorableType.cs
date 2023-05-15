@@ -5,6 +5,10 @@
         Key,
         Compass,
         TestItem,
-        SomeElse
+        SomeElse,
+        GreenKey,
+        RedKey,
+        BlueKey,
+        RgbKey
     }
 }

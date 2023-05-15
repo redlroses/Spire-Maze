@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
@@ -12,20 +13,20 @@ namespace CodeBase.Logic.DoorEnvironment
     [RequireComponent(typeof(InventoryObserver))]
     public class Door : ObserverTarget<InventoryObserver, HeroInventory>, ISavedProgress, IIndexable
     {
-        [SerializeField] private Colors _doorColor;
         [SerializeField] private DoorAnimator _animator;
         [SerializeField] private MaterialChanger _materialChanger;
 
+        private StorableType _targetKeyColor;
         private Transform _selfTransform;
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
-        public void Construct(IGameFactory gameFactory, Colors doorDataColor, int id)
+        public void Construct(IGameFactory gameFactory, Colors doorColor, int id)
         {
             _materialChanger.Construct(gameFactory);
-            _materialChanger.SetMaterial(doorDataColor);
-            _doorColor = doorDataColor;
+            _materialChanger.SetMaterial(doorColor);
+            _targetKeyColor = CompareColorTypes(doorColor);
             _selfTransform = transform;
             Id = id;
         }
@@ -62,7 +63,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
         protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
         {
-            if (heroInventory.Inventory.TryUse(StorableType.Key, out StorableStaticData storableData))
+            if (heroInventory.Inventory.TryUse(_targetKeyColor, out StorableStaticData storableData))
             {
                 Open(heroInventory.transform.position);
             }
@@ -78,6 +79,18 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             Vector3 directionToCollector = collectorPosition - _selfTransform.position;
             return Vector3.Dot(directionToCollector, _selfTransform.forward);
+        }
+
+        StorableType CompareColorTypes(Colors doorColor)
+        {
+            return doorColor switch
+            {
+                Colors.Red => StorableType.RedKey,
+                Colors.Green => StorableType.GreenKey,
+                Colors.Blue => StorableType.BlueKey,
+                Colors.Rgb => StorableType.RgbKey,
+                _ => throw new ArgumentOutOfRangeException(nameof(doorColor), doorColor, null)
+            };
         }
     }
 }

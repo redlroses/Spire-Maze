@@ -1,6 +1,8 @@
-﻿namespace CodeBase.Logic.Inventory
+﻿using CodeBase.Logic.Сollectible;
+
+namespace CodeBase.Logic.Item
 {
-    public interface IUsable : IItem
+    public interface IUsable : ICollectible
     {
         public void Use();
     }

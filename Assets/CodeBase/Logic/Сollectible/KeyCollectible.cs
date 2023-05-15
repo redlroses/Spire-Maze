@@ -1,5 +1,4 @@
 ﻿using CodeBase.Data;
-using CodeBase.Data.CellStates;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
@@ -10,7 +9,6 @@ namespace CodeBase.Logic.Сollectible
 {
     public class KeyCollectible : MonoBehaviour, ICollectible, IIndexable, ISavedProgress
     {
-        [SerializeField] private Colors _color;
         [SerializeField] private MaterialChanger _materialChanger;
 
         private StorableStaticData _keyStaticStaticData;
@@ -19,7 +17,6 @@ namespace CodeBase.Logic.Сollectible
 
         public bool IsActivated { get; private set; }
 
-        public Colors Color => _color;
         public StorableStaticData StorableStaticData => _keyStaticStaticData;
 
         public void Construct(IGameFactory gameFactory, StorableStaticData staticStaticData, Colors color, int id)
@@ -27,7 +24,6 @@ namespace CodeBase.Logic.Сollectible
             _materialChanger.Construct(gameFactory);
             _materialChanger.SetMaterial(color);
             _keyStaticStaticData = staticStaticData;
-            _color = color;
             Id = id;
         }
 
