@@ -1,18 +1,17 @@
 ﻿using CodeBase.Data;
-using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows
 {
     public class ResultsWindow : WindowBase
     {
-        [SerializeField] private Button _menuButton;
-        [SerializeField] private Button _restartButton;
-        [SerializeField] private Button _nextLevelButton;
+        [SerializeField] private MenuButton _menuButton;
+        [SerializeField] private RestartButton _restartButton;
+        [SerializeField] private NextLevelButton _nextLevelButton;
 
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
         [SerializeField] private TextSetterAnimated _scoreText;
@@ -20,15 +19,18 @@ namespace CodeBase.UI.Windows
         [SerializeField] private StarsView _starsView;
 
         private IPersistentProgressService _progressService;
-        private GameStateMachine _stateMachine;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
         private WorldData WorldData => _progressService.Progress.WorldData;
 
         public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine)
         {
-            _stateMachine = stateMachine;
             _progressService = progressService;
+            _restartButton.Construct(stateMachine);
+            _nextLevelButton.Construct(stateMachine);
+            _menuButton.Construct(stateMachine);
+            _restartButton.Construct(stateMachine, LevelId);
+            _nextLevelButton.Construct(stateMachine, LevelId);
         }
 
         protected override void Initialize()
@@ -42,19 +44,17 @@ namespace CodeBase.UI.Windows
 
         protected override void SubscribeUpdates()
         {
-            _menuButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(MenuPayload()));
-            _restartButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    LevelId, true)));
-            _nextLevelButton.onClick.AddListener(() =>
-                _stateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(LevelNames.BuildableLevel, true,
-                    LevelId + 1)));
+            _menuButton.Subscribe();
+            _restartButton.Subscribe();
+            _nextLevelButton.Subscribe();
         }
 
-        private static LoadPayload MenuPayload() =>
-            new LoadPayload(LevelNames.Lobby, false,
-                LevelNames.LobbyId);
+        protected override void Cleanup()
+        {
+            _menuButton.Cleanup();
+            _restartButton.Cleanup();
+            _nextLevelButton.Cleanup();
+        }
 
         private void SetStars(WorldData worldData) =>
             _starsView.EnableStars(worldData.ScoreAccumulationData.LevelStars);

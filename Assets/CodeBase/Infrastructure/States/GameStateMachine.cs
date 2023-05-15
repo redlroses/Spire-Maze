@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Logic;
 using CodeBase.Services;
+using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
-using CodeBase.Services.StaticData;
-using CodeBase.Logic;
-using CodeBase.Services.Input;
-using CodeBase.Services.Pause;
 using CodeBase.Services.Score;
+using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
@@ -58,7 +58,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            TState state = ChangeState<TState>();
+            var state = ChangeState<TState>();
             state.Enter(payload);
         }
 
@@ -66,7 +66,7 @@ namespace CodeBase.Infrastructure.States
         {
             _activeState?.Exit();
 
-            TState state = GetState<TState>();
+            var state = GetState<TState>();
             _activeState = state;
 
             return state;

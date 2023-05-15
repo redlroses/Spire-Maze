@@ -1,20 +1,18 @@
-﻿using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.States;
+﻿using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Score;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows
 {
     public class LoseWindow : WindowBase
     {
-        [SerializeField] private Button _menuButton;
-        [SerializeField] private Button _restartButton;
+        [SerializeField] private MenuButton _menuButton;
+        [SerializeField] private RestartButton _restartButton;
         [SerializeField] private TextSetterAnimated _scoreText;
 
-        private GameStateMachine _stateMachine;
         private IScoreService _scoreService;
         private IPersistentProgressService _progressService;
 
@@ -24,34 +22,27 @@ namespace CodeBase.UI.Windows
             GameStateMachine stateMachine)
         {
             _progressService = progressService;
-            _stateMachine = stateMachine;
             _scoreService = scoreService;
+            _menuButton.Construct(stateMachine);
+            _restartButton.Construct(stateMachine, LevelId);
         }
 
         protected override void Initialize() =>
             SetScore();
 
-        private void SetScore() =>
-            _scoreText.SetTextAnimated(_scoreService.CalculateScore());
-
         protected override void SubscribeUpdates()
         {
-            _menuButton.onClick.AddListener(OnMenuClick);
-            _restartButton.onClick.AddListener(OnRestartClick);
+            _menuButton.Subscribe();
+            _restartButton.Subscribe();
         }
 
-        private void OnRestartClick() =>
-            _stateMachine.Enter<LoadLevelState, LoadPayload>(RestartPayload());
+        protected override void Cleanup()
+        {
+            _menuButton.Cleanup();
+            _restartButton.Cleanup();
+        }
 
-        private void OnMenuClick() =>
-            _stateMachine.Enter<LoadLevelState, LoadPayload>(MenuPayload());
-
-        private LoadPayload RestartPayload() =>
-            new LoadPayload(LevelNames.BuildableLevel, true,
-                LevelId + 1, true);
-
-        private static LoadPayload MenuPayload() =>
-            new LoadPayload(LevelNames.Lobby, false,
-                LevelNames.LobbyId);
+        private void SetScore() =>
+            _scoreText.SetTextAnimated(_scoreService.CalculateScore());
     }
 }

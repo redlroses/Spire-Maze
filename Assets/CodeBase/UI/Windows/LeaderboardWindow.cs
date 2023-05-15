@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Services.Ranked;
+using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
-using CodeBase.UI.Windows;
 using UnityEngine;
 
-namespace CodeBase.UI.Elements
+namespace CodeBase.UI.Windows
 {
     public class LeaderboardWindow : WindowBase
     {
         [SerializeField] private LoadingAnimation _loadingAnimation;
         [SerializeField] private Transform _content;
-        
 
         private IRankedService _rankedService;
         private IUIFactory _gameUiFactory;
@@ -26,10 +25,8 @@ namespace CodeBase.UI.Elements
             _gameUiFactory = gameUiFactory;
         }
 
-        protected override void Initialize()
-        {
+        protected override void Initialize() =>
             ShowLeaderBoard();
-        }
 
         private async void ShowLeaderBoard()
         {
@@ -73,9 +70,7 @@ namespace CodeBase.UI.Elements
             }
         }
 
-        private bool IsMyRank(SingleRankData rankData)
-        {
-            return rankData.Rank == _currentSelfRank;
-        }
+        private bool IsMyRank(SingleRankData rankData) =>
+            rankData.Rank == _currentSelfRank;
     }
 }
