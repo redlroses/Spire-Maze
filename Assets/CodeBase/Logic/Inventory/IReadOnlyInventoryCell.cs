@@ -1,10 +1,10 @@
-﻿using CodeBase.StaticData.Storable;
+﻿using CodeBase.Logic.Item;
 
 namespace CodeBase.Logic.Inventory
 {
     public interface IReadOnlyInventoryCell
     {
         int Count { get; }
-        StorableStaticData Item { get; }
+        IItem Item { get; }
     }
 }

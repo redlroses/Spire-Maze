@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Logic.Item;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
 
@@ -20,11 +21,11 @@ namespace CodeBase.Logic.Inventory
             _storage = storage;
         }
 
-        public void Add(StorableStaticData item)
+        public void Add(IItem item)
         {
-            InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == item.ItemType);
+            // InventoryCell existingInventoryCell = GetExistingInventoryCell(item.ItemType);
 
-            if (existingInventoryCell == null)
+            if (TryGetExistingInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
             {
                 _storage.Add(new InventoryCell(item));
             }
@@ -34,31 +35,61 @@ namespace CodeBase.Logic.Inventory
                 Debug.Log($"Count item {existingInventoryCell.Count}");
             }
 
-            Updated?.Invoke();
+            // if (existingInventoryCell == null)
+            // {
+            //     _storage.Add(new InventoryCell(item));
+            // }
+            // else
+            // {
+            //     existingInventoryCell.IncreaseCount();
+            //     Debug.Log($"Count item {existingInventoryCell.Count}");
+            // }
 
+            Updated?.Invoke();
             Debug.Log($"SetUp {item.Name}");
         }
 
         public List<InventoryCell> ReadAll() => new List<InventoryCell>(_storage);
 
 
-        public bool TryUse(StorableType storableType, out StorableStaticData item)
+        public bool TryUse(StorableType storableType)
         {
-            InventoryCell existingInventoryCell = _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == storableType);
-            item = default;
-
-            if (existingInventoryCell == null)
-            {
+            if (TryGetExistingInventoryCell(storableType, out InventoryCell existingInventoryCell) == false)
                 return false;
-            }
 
-            item = existingInventoryCell.Item;
-            RemoveItemFrom(existingInventoryCell);
-            Updated?.Invoke();
+            if (!(existingInventoryCell.Item is IUsable usable))
+                return false;
 
-            Debug.Log($"Use {item.Name}");
-
+            UseItem(usable, existingInventoryCell);
             return true;
+        }
+
+        public bool TrySpend(StorableType storableType)
+        {
+            if (TryGetExistingInventoryCell(storableType, out InventoryCell existingInventoryCell) == false)
+                return false;
+
+            RemoveItemFrom(existingInventoryCell);
+            return true;
+        }
+
+        private bool TryGetExistingInventoryCell(StorableType storableType, out InventoryCell existingInventoryCell)
+        {
+            existingInventoryCell = GetExistingInventoryCell(storableType);
+            return GetExistingInventoryCell(storableType) != null;
+        }
+
+        private InventoryCell GetExistingInventoryCell(StorableType storableType)
+        {
+            InventoryCell existingInventoryCell =
+                _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == storableType);
+            return existingInventoryCell;
+        }
+
+        private void UseItem(IUsable usable, InventoryCell existingInventoryCell)
+        {
+            usable.Use();
+            RemoveItemFrom(existingInventoryCell);
         }
 
         private void RemoveItemFrom(InventoryCell existingInventoryCell)
@@ -69,9 +100,12 @@ namespace CodeBase.Logic.Inventory
             {
                 _storage.Remove(existingInventoryCell);
             }
+
+            Updated?.Invoke();
         }
 
-        public void Cleanup() => _storage.Clear();
+        public void Cleanup() =>
+            _storage.Clear();
 
         public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
 

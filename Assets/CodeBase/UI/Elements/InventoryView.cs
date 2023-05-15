@@ -46,7 +46,6 @@ namespace CodeBase.UI.Elements
             newCellView.SetUp(cell);
             newCellView.ItemUsed += OnItemUsed;
             _cellViews.Add(newCellView);
-            Debug.Log("create");
             return newCellView;
         }
 
@@ -59,7 +58,7 @@ namespace CodeBase.UI.Elements
 
         private void OnItemUsed(StorableType itemType)
         {
-            _inventory.TryUse(itemType, out StorableStaticData data);
+            _inventory.TryUse(itemType);
         }
 
         private void OnUpdatedInventory()

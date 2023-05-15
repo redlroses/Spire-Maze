@@ -12,7 +12,7 @@ namespace CodeBase.Logic.Сollectible
 
         protected override void OnTriggerObserverEntered(ICollectible collectible)
         {
-            _heroInventory.Inventory.Add(collectible.StorableStaticData);
+            _heroInventory.Inventory.Add(collectible.Item);
             collectible.Disable();
         }
     }

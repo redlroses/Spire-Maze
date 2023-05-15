@@ -1,8 +1,6 @@
-﻿using CodeBase.Logic.Сollectible;
-
-namespace CodeBase.Logic.Item
+﻿namespace CodeBase.Logic.Item
 {
-    public interface IUsable : ICollectible
+    public interface IUsable : IItem
     {
         public void Use();
     }

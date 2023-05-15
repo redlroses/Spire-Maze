@@ -6,6 +6,7 @@ using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.Logic.DoorEnvironment
@@ -26,7 +27,7 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             _materialChanger.Construct(gameFactory);
             _materialChanger.SetMaterial(doorColor);
-            _targetKeyColor = CompareColorTypes(doorColor);
+            _targetKeyColor = doorColor.ToStorableType();
             _selfTransform = transform;
             Id = id;
         }
@@ -63,7 +64,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
         protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
         {
-            if (heroInventory.Inventory.TryUse(_targetKeyColor, out StorableStaticData storableData))
+            if (heroInventory.Inventory.TrySpend(_targetKeyColor))
             {
                 Open(heroInventory.transform.position);
             }
@@ -79,18 +80,6 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             Vector3 directionToCollector = collectorPosition - _selfTransform.position;
             return Vector3.Dot(directionToCollector, _selfTransform.forward);
-        }
-
-        StorableType CompareColorTypes(Colors doorColor)
-        {
-            return doorColor switch
-            {
-                Colors.Red => StorableType.RedKey,
-                Colors.Green => StorableType.GreenKey,
-                Colors.Blue => StorableType.BlueKey,
-                Colors.Rgb => StorableType.RgbKey,
-                _ => throw new ArgumentOutOfRangeException(nameof(doorColor), doorColor, null)
-            };
         }
     }
 }

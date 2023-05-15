@@ -1,9 +1,10 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic.Item;
 using CodeBase.Logic.Сollectible;
-using CodeBase.Services.Pause;
 using CodeBase.Services.StaticData;
-using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
+using UnityEngine;
 using Key = CodeBase.EditorCells.Key;
 
 namespace CodeBase.LevelSpecification.Constructor
@@ -22,8 +23,9 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (var cell in cells)
             {
                 var keyData = (Key) cell.CellData;
-                KeyCollectible key = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<KeyCollectible>();
-                key.Construct(gameFactory, _staticDataService.ForStorable(StorableType.Key), keyData.Color, cell.Id);
+                Collectible key = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Collectible>();
+                key.GetComponent<Renderer>().material = gameFactory.CreateColoredMaterial(keyData.Color);
+                key.Construct(cell.Id, new Item(_staticDataService.ForStorable(keyData.Color.ToStorableType())));
             }
         }
     }

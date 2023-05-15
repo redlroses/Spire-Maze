@@ -1,10 +1,10 @@
-﻿using CodeBase.StaticData.Storable;
+﻿using CodeBase.Logic.Item;
 
 namespace CodeBase.Logic.Сollectible
 {
     public interface ICollectible
     {
-        public StorableStaticData StorableStaticData { get; }
+        public IItem Item { get; }
         public void Disable();
     }
 }

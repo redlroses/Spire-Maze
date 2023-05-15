@@ -7,14 +7,12 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Сollectible
 {
-    public class CompassCollectible : MonoBehaviour, IIndexable, ISavedProgress, IUsable
+    public class CompassCollectible : MonoBehaviour, IIndexable, ISavedProgress
     {
         private StorableStaticData _compassStaticData;
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
-
-        public StorableStaticData StorableStaticData => _compassStaticData;
 
         public void Construct(StorableStaticData staticStaticData, int id)
         {

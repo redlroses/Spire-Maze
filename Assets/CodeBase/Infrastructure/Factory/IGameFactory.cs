@@ -4,6 +4,7 @@ using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.StaticData.Storable;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Factory

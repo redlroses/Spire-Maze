@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services.Pause;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
-using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.LevelSpecification.Constructor
 {

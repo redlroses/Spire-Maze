@@ -12,6 +12,7 @@ using CodeBase.Services.Randomizer;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
+using CodeBase.StaticData.Storable;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
@@ -48,7 +49,7 @@ namespace CodeBase.Infrastructure.Factory
             _windowService = windowService;
             _watchService = watchService;
             _uiFactory = uiFactory;
-            _coloredMaterials = new Dictionary<Colors, Material>((int) Colors.Rgb);
+            _coloredMaterials = new Dictionary<Colors, Material>(4);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
