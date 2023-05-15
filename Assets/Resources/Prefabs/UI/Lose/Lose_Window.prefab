@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 935994771310353988}
   - component: {fileID: 935994771310353996}
   - component: {fileID: 935994771310353990}
+  - component: {fileID: 1530103457976802959}
   m_Layer: 5
   m_Name: Button_Home
   m_TagString: Untagged
@@ -234,7 +235,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935994771310353998}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -292,7 +293,7 @@ MonoBehaviour:
       AnchorMax: {x: 0.4789682, y: 1}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
@@ -758,6 +759,19 @@ MonoBehaviour:
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1530103457976802959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935994771310353998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb365ff262b9449ca4fe922a3ddb52ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 935994771310353988}
 --- !u!1 &935994771365817641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,8 +1730,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 5841368578030431005}
-  _menuButton: {fileID: 935994771310353988}
-  _restartButton: {fileID: 935994772617598709}
+  _menuButton: {fileID: 1530103457976802959}
+  _restartButton: {fileID: 8146132826192756607}
   _scoreText: {fileID: 982289319}
 --- !u!1 &935994772339204902
 GameObject:
@@ -1896,6 +1910,7 @@ GameObject:
   - component: {fileID: 935994772617598709}
   - component: {fileID: 935994772617598601}
   - component: {fileID: 935994772617598711}
+  - component: {fileID: 8146132826192756607}
   m_Layer: 5
   m_Name: Button_Restart
   m_TagString: Untagged
@@ -1910,7 +1925,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935994772617598603}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1968,7 +1983,7 @@ MonoBehaviour:
       AnchorMax: {x: 1.0112499, y: 1}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
@@ -2434,6 +2449,19 @@ MonoBehaviour:
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8146132826192756607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935994772617598603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb18f01499f54a1db09e6922b517cdd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 935994772617598709}
 --- !u!1 &935994772666909243
 GameObject:
   m_ObjectHideFlags: 0
