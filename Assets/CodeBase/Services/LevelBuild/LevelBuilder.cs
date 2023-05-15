@@ -4,8 +4,10 @@ using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Services.LevelBuild
@@ -14,7 +16,6 @@ namespace CodeBase.Services.LevelBuild
     {
         private readonly LevelConstructor _levelConstructor;
         private readonly IGameFactory _gameFactory;
-        private readonly IStaticDataService _staticData;
 
         private Transform _levelContainer;
         private float _radius;
@@ -22,11 +23,10 @@ namespace CodeBase.Services.LevelBuild
         private float _floorHeight;
         private Level _level;
 
-        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData)
+        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, IWindowService windowsService, ISaveLoadService saveLoadService)
         {
-            _staticData = staticData;
             _gameFactory = gameFactory;
-            _levelConstructor = new LevelConstructor();
+            _levelConstructor = new LevelConstructor(gameFactory, staticData, windowsService, saveLoadService);
         }
 
         public Level Build(LevelStaticData levelStaticData)
@@ -45,7 +45,7 @@ namespace CodeBase.Services.LevelBuild
                 throw new Exception("You must build the level before constructing it");
             }
 
-            _levelConstructor.Construct(_gameFactory, _staticData, _level);
+            _levelConstructor.Construct(_level);
         }
 
         public void Clear()

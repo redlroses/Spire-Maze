@@ -8,6 +8,16 @@ namespace CodeBase.Data
     public int CurrentHP;
     public int MaxHP;
 
+    public HealthState(int maxHp)
+    {
+      MaxHP = maxHp;
+      CurrentHP = maxHp;
+    }
+
+    public HealthState()
+    {
+    }
+
     public void ResetHP()
     {
       CurrentHP = MaxHP;

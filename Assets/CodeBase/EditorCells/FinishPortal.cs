@@ -2,13 +2,13 @@
 
 namespace CodeBase.EditorCells
 {
-    public class Plate : CellData
+    public class FinishPortal : Plate
     {
-        public Plate(Texture2D texture) : base(texture)
+        public FinishPortal(Texture2D texture) : base(texture)
         {
         }
 
         public override CellData Copy() =>
-            new Plate(Texture);
+            new FinishPortal(Texture);
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.Pause;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
+using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -11,7 +13,7 @@ namespace CodeBase.LevelSpecification.Constructor
     {
         private readonly Dictionary<Type, ICellConstructor> _constructors;
 
-        public CellConstructor()
+        public CellConstructor(IWindowService windowsService, ISaveLoadService saveLoadService)
         {
             _constructors = new Dictionary<Type, ICellConstructor>
             {
@@ -21,10 +23,11 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Door)] = new DoorConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),
                 [typeof(Portal)] = new PortalConstructor(),
+                [typeof(FinishPortal)] = new FinishPortalConstructor(windowsService),
                 [typeof(SpikeTrap)] = new SpikeTrapConstructor(),
                 [typeof(FireTrap)] = new FireTrapConstructor(),
                 [typeof(Rock)] = new RockConstructor(),
-                [typeof(Savepoint)] = new SavepointConstructor(),
+                [typeof(Savepoint)] = new SavepointConstructor(saveLoadService),
                 [typeof(EnemySpawnPoint)] = new EnemySpawnPointConstructor(),
             };
         }

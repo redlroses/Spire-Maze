@@ -8,7 +8,17 @@ namespace CodeBase.Data
         public int CurrentValue;
         public int MaxValue;
 
-        public void ResetStamina()
+        public StaminaState(int maxStamina)
+        {
+            MaxValue = maxStamina;
+            CurrentValue = maxStamina;
+        }
+
+        public StaminaState()
+        {
+        }
+
+        public void Reset()
         {
             CurrentValue = MaxValue;
         }

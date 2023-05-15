@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
+using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
 using Object = UnityEngine.Object;
+using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -78,6 +80,7 @@ namespace CodeBase.Infrastructure.AssetManagement
                 nameof(Rock) => typeof(Rock),
                 nameof(Savepoint) => typeof(Savepoint),
                 nameof(EnemySpawnPoint) => typeof(EnemySpawnPoint),
+                nameof(FinishPortal) => typeof(FinishPortal),
                 _ => throw new ArgumentException()
             };
         }
