@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using CodeBase.Data;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;

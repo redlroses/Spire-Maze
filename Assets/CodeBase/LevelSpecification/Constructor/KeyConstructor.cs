@@ -1,6 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Item;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
@@ -25,7 +24,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 var keyData = (Key) cell.CellData;
                 Collectible key = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Collectible>();
                 key.GetComponent<Renderer>().material = gameFactory.CreateColoredMaterial(keyData.Color);
-                key.Construct(cell.Id, new Item(_staticDataService.ForStorable(keyData.Color.ToStorableType())));
+                key.Construct(cell.Id, gameFactory.CreateItem(_staticDataService.ForStorable(keyData.Color.ToStorableType())));
             }
         }
     }

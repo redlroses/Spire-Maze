@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
@@ -13,7 +13,6 @@ using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
-using Compass = CodeBase.Logic.Item.Compass;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
@@ -92,7 +91,10 @@ namespace CodeBase.Infrastructure.Factory
         {
             return data.ItemType switch
             {
-                StorableType.Compass => new Compass(data),
+                StorableType.Compass => new CompassItem(data),
+                StorableType.BlueKey => new KeyItem(data),
+                StorableType.RedKey => new KeyItem(data),
+                StorableType.GreenKey => new KeyItem(data),
                 StorableType.None => throw new Exception("Storable type is not specified"),
                 _ => new Item(data)
             };

@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Logic.Item
+﻿namespace CodeBase.Logic.Items
 {
     public interface IUsable : IItem
     {

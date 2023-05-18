@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Storable;

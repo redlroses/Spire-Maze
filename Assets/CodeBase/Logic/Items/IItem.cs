@@ -1,13 +1,14 @@
 ﻿using CodeBase.StaticData.Storable;
 using UnityEngine;
 
-namespace CodeBase.Logic.Item
+namespace CodeBase.Logic.Items
 {
     public interface IItem
     {
-        string Description { get; }
         string Name { get; }
+        string Description { get; }
         Sprite Sprite { get; }
         StorableType ItemType { get; }
+        bool IsInteractive { get; }
     }
 }

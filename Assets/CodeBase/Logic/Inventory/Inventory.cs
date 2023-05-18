@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace CodeBase.Logic.Inventory
 
         public void Add(IItem item)
         {
-            if (TryGetExistingInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
+            if (TryGetInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
             {
                 _storage.Add(new InventoryCell(item));
             }
@@ -45,29 +45,24 @@ namespace CodeBase.Logic.Inventory
 
         public bool TryUse(StorableType storableType)
         {
-            if (TryGetExistingInventoryCell(storableType, out InventoryCell existingInventoryCell) == false)
+            if (TryGetInventoryCell(storableType, out InventoryCell inventoryCell) == false)
                 return false;
 
-            if (!(existingInventoryCell.Item is IUsable usable))
+            if (!(inventoryCell.Item is IUsable usable))
                 return false;
 
-            UseItem(usable, existingInventoryCell);
+            usable.Use();
+
+            if (inventoryCell.Item is IExpendable)
+                Expend(inventoryCell);
+
             return true;
         }
 
-        public bool TrySpend(StorableType storableType)
+        private bool TryGetInventoryCell(StorableType byType, out InventoryCell inventoryCell)
         {
-            if (TryGetExistingInventoryCell(storableType, out InventoryCell existingInventoryCell) == false)
-                return false;
-
-            RemoveItemFrom(existingInventoryCell);
-            return true;
-        }
-
-        private bool TryGetExistingInventoryCell(StorableType storableType, out InventoryCell existingInventoryCell)
-        {
-            existingInventoryCell = GetExistingInventoryCell(storableType);
-            return GetExistingInventoryCell(storableType) != null;
+            inventoryCell = GetExistingInventoryCell(byType);
+            return GetExistingInventoryCell(byType) != null;
         }
 
         private InventoryCell GetExistingInventoryCell(StorableType storableType)
@@ -77,13 +72,7 @@ namespace CodeBase.Logic.Inventory
             return existingInventoryCell;
         }
 
-        private void UseItem(IUsable usable, InventoryCell existingInventoryCell)
-        {
-            usable.Use();
-            RemoveItemFrom(existingInventoryCell);
-        }
-
-        private void RemoveItemFrom(InventoryCell existingInventoryCell)
+        private void Expend(InventoryCell existingInventoryCell)
         {
             existingInventoryCell.DecreaseCount();
 

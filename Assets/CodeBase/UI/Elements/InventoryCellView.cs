@@ -17,13 +17,12 @@ namespace CodeBase.UI.Elements
 
         private void Start()
         {
-            _button.onClick.AddListener(() => ItemUsed?.Invoke(_itemType));
+            _button.onClick.AddListener(() =>
+                ItemUsed?.Invoke(_itemType));
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _button.onClick.RemoveAllListeners();
-        }
 
         public void SetUp(IReadOnlyInventoryCell cell)
         {

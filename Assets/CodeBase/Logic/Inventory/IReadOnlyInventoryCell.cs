@@ -1,4 +1,4 @@
-﻿using CodeBase.Logic.Item;
+﻿using CodeBase.Logic.Items;
 
 namespace CodeBase.Logic.Inventory
 {

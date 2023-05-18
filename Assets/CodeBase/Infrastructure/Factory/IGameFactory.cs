@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;

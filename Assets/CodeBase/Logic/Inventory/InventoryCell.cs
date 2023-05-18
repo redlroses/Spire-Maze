@@ -1,5 +1,5 @@
 ﻿using System;
-using CodeBase.Logic.Item;
+using CodeBase.Logic.Items;
 using CodeBase.Logic.Сollectible;
 using CodeBase.StaticData.Storable;
 using UnityEngine;

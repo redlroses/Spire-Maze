@@ -59,7 +59,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
         protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
         {
-            if (heroInventory.Inventory.TrySpend(_targetKeyColor))
+            if (heroInventory.Inventory.TryUse(_targetKeyColor))
             {
                 Open(heroInventory.transform.position);
             }
