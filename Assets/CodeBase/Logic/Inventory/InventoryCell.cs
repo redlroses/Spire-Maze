@@ -1,16 +1,12 @@
-﻿using System;
-using CodeBase.Logic.Items;
-using CodeBase.Logic.Сollectible;
-using CodeBase.StaticData.Storable;
+﻿using CodeBase.Logic.Items;
 using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {
-    [Serializable]
     public sealed class InventoryCell : IReadOnlyInventoryCell
     {
         [field: SerializeField] public int Count { get; private set; }
-        [field: SerializeField] public IItem Item { get; private set; }
+        [field: SerializeField] public IItem Item { get; }
 
         public bool IsEmpty => Count <= 0;
 
@@ -20,14 +16,10 @@ namespace CodeBase.Logic.Inventory
             Item = item;
         }
 
-        public void IncreaseCount()
-        {
+        public void IncreaseCount() =>
             Count++;
-        }
 
-        public void DecreaseCount()
-        {
+        public void DecreaseCount() =>
             Count--;
-        }
     }
 }

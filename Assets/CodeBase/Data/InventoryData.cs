@@ -7,14 +7,14 @@ namespace CodeBase.Data
     [Serializable]
     public class InventoryData
     {
-        public List<InventoryCell> InventoryCells;
+        public List<IReadOnlyInventoryCell> InventoryCells;
 
         public InventoryData()
         {
-            InventoryCells = new List<InventoryCell>();
+            InventoryCells = new List<IReadOnlyInventoryCell>();
         }
 
-        public InventoryData(List<InventoryCell> inventoryCells)
+        public InventoryData(List<IReadOnlyInventoryCell> inventoryCells)
         {
             InventoryCells = inventoryCells;
         }

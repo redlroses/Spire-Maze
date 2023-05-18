@@ -12,6 +12,5 @@ namespace CodeBase.Logic.Inventory
         bool TryUse(StorableType storableType);
         void Cleanup();
         void Add(IItem collectible);
-        List<InventoryCell> ReadAll();
     }
 }

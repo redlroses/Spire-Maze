@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.EditorCells;
@@ -27,7 +28,7 @@ namespace CodeBase.Tools.Extension
             JsonUtility.FromJson<T>(json);
 
         public static InventoryData AsInventoryData(this IInventory inventory) =>
-            new InventoryData(inventory.ReadAll());
+            new InventoryData(inventory.ToList());
 
         public static IInventory AsHeroInventory(this InventoryData inventoryData) =>
             new Inventory(inventoryData.InventoryCells);

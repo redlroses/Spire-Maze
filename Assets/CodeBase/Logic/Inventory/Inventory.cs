@@ -8,38 +8,35 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {
-    public class Inventory : IReadOnlyCollection<IReadOnlyInventoryCell>, IInventory
+    public sealed class Inventory : IReadOnlyCollection<IReadOnlyInventoryCell>, IInventory
     {
         private readonly List<InventoryCell> _storage;
 
-        public event Action Updated;
+        public event Action Updated = () => { };
 
         public int Count => _storage.Count;
 
-        public Inventory(List<InventoryCell> storage)
+        public Inventory(List<IReadOnlyInventoryCell> storage)
         {
-            _storage = storage;
+            _storage = storage.ConvertAll(cell => (InventoryCell) cell);
         }
 
         public void Cleanup() =>
             _storage.Clear();
 
-        public List<InventoryCell> ReadAll() =>
-            new List<InventoryCell>(_storage);
-
         public void Add(IItem item)
         {
-            if (TryGetInventoryCell(item.ItemType, out InventoryCell inventoryCell) == false)
-            {
-                _storage.Add(new InventoryCell(item));
-            }
-            else
+            if (TryGetInventoryCell(item.ItemType, out InventoryCell inventoryCell))
             {
                 inventoryCell.IncreaseCount();
                 Debug.Log($"Count item {inventoryCell.Count}");
             }
+            else
+            {
+                _storage.Add(new InventoryCell(item));
+            }
 
-            Updated?.Invoke();
+            Updated.Invoke();
             Debug.Log($"SetUp {item.Name}");
         }
 
@@ -62,7 +59,7 @@ namespace CodeBase.Logic.Inventory
         private bool TryGetInventoryCell(StorableType byType, out InventoryCell inventoryCell)
         {
             inventoryCell = GetExistingInventoryCell(byType);
-            return GetExistingInventoryCell(byType) != null;
+            return inventoryCell != null;
         }
 
         private InventoryCell GetExistingInventoryCell(StorableType storableType)
@@ -77,11 +74,9 @@ namespace CodeBase.Logic.Inventory
             existingInventoryCell.DecreaseCount();
 
             if (existingInventoryCell.IsEmpty)
-            {
                 _storage.Remove(existingInventoryCell);
-            }
 
-            Updated?.Invoke();
+            Updated.Invoke();
         }
 
         public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
