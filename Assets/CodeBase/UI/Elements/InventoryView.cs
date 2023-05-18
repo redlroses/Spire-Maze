@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using CodeBase.Logic.Inventory;
 using CodeBase.StaticData.Storable;
+using CodeBase.UI.Services.Factory;
 using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
     public class InventoryView : MonoBehaviour
     {
-        [SerializeField] private InventoryCellView _prefabCellView;
-
-        private IInventory _inventory;
         private List<InventoryCellView> _cellViews;
+        private IInventory _inventory;
+        private IUIFactory _uiFactory;
+        private Transform _selfTransform;
 
         private void OnDestroy()
         {
@@ -22,8 +23,10 @@ namespace CodeBase.UI.Elements
             _inventory.Updated -= OnUpdatedInventory;
         }
 
-        public void Construct(HeroInventory heroInventory)
+        public void Construct(IUIFactory uiFactory, HeroInventory heroInventory)
         {
+            _selfTransform = transform;
+            _uiFactory = uiFactory;
             _inventory = heroInventory.Inventory;
             _inventory.Updated += OnUpdatedInventory;
             InitializeCell();
@@ -42,12 +45,15 @@ namespace CodeBase.UI.Elements
 
         private InventoryCellView CreateCellView(IReadOnlyInventoryCell cell)
         {
-            var newCellView = Instantiate(_prefabCellView, transform);
+            InventoryCellView newCellView = CreateNewCellView();
             newCellView.SetUp(cell);
             newCellView.ItemUsed += OnItemUsed;
             _cellViews.Add(newCellView);
             return newCellView;
         }
+
+        private InventoryCellView CreateNewCellView() =>
+            _uiFactory.CreateCellView(_selfTransform).GetComponent<InventoryCellView>();
 
         private void RemoveCellView(int index)
         {

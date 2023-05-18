@@ -8,19 +8,13 @@ namespace CodeBase.UI.Elements
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-        public void SetText(string text)
-        {
+        public void SetText(string text) =>
             _text.text = text;
-        }
-        
-        public void SetText(int text)
-        {
-            _text.text = text.ToString();
-        }
 
-        public void SetTextColor(Color32 color)
-        {
+        public void SetText(int text) =>
+            _text.text = text.ToString();
+
+        public void SetTextColor(Color32 color) =>
             _text.color = color;
-        }
     }
 }

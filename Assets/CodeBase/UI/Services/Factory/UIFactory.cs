@@ -55,6 +55,9 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateRankView(Transform inside) =>
             _assets.Instantiate(AssetPath.RankView, inside);
 
+        public GameObject CreateCellView(Transform inside) =>
+            _assets.Instantiate(AssetPath.CellView, inside);
+
         public void CreateSettings()
         {
             var window = CreateWindow<SettingsWindow>(WindowId.Settings);

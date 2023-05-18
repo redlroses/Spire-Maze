@@ -160,7 +160,7 @@ namespace CodeBase.Infrastructure.States
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
-            hud.GetComponentInChildren<InventoryView>().Construct(hero.GetComponent<HeroInventory>());
+            hud.GetComponentInChildren<InventoryView>().Construct(_uiFactory, hero.GetComponent<HeroInventory>());
         }
 
         private void CameraFollow(GameObject hero)
