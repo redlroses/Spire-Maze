@@ -16,10 +16,10 @@ namespace CodeBase.Logic.Inventory
             Item = item;
         }
 
-        public void IncreaseCount() =>
+        public void Increase() =>
             Count++;
 
-        public void DecreaseCount() =>
+        public void Decrease() =>
             Count--;
     }
 }

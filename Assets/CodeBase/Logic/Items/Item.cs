@@ -10,6 +10,7 @@ namespace CodeBase.Logic.Items
         public Sprite Sprite { get; }
         public StorableType ItemType { get; }
         public bool IsInteractive { get; }
+        public bool IsExpendable { get; }
 
         public Item(StorableStaticData staticData)
         {
@@ -18,6 +19,7 @@ namespace CodeBase.Logic.Items
             Name = staticData.Name;
             Description = staticData.Description;
             IsInteractive = staticData.IsInteractive;
+            IsExpendable = staticData.IsExpendable;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Logic.Inventory;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Factory;
@@ -16,9 +17,7 @@ namespace CodeBase.UI.Elements
         private void OnDestroy()
         {
             if (_inventory == null)
-            {
                 return;
-            }
 
             _inventory.Updated -= OnUpdatedInventory;
         }
@@ -38,58 +37,51 @@ namespace CodeBase.UI.Elements
 
             foreach (IReadOnlyInventoryCell cell in _inventory)
             {
-                var cellView = CreateCellView(cell);
-                cellView.SetUp(cell);
+                BuildCellView(cell);
             }
         }
 
-        private InventoryCellView CreateCellView(IReadOnlyInventoryCell cell)
+        private void BuildCellView(IReadOnlyInventoryCell cell)
         {
             InventoryCellView newCellView = CreateNewCellView();
             newCellView.SetUp(cell);
             newCellView.ItemUsed += OnItemUsed;
             _cellViews.Add(newCellView);
-            return newCellView;
         }
 
         private InventoryCellView CreateNewCellView() =>
             _uiFactory.CreateCellView(_selfTransform).GetComponent<InventoryCellView>();
 
-        private void RemoveCellView(int index)
+        private void RemoveCellView(InventoryCellView cellView)
         {
-            _cellViews[index].ItemUsed -= OnItemUsed;
-            _cellViews[index].Remove();
-            _cellViews.RemoveAt(index);
+            cellView.ItemUsed -= OnItemUsed;
+            cellView.Remove();
+            _cellViews.Remove(cellView);
         }
 
-        private void OnItemUsed(StorableType itemType)
-        {
+        private void OnItemUsed(StorableType itemType) =>
             _inventory.TryUse(itemType);
-        }
 
-        private void OnUpdatedInventory()
+        private void OnUpdatedInventory(IReadOnlyInventoryCell readOnlyInventoryCell)
         {
-            int cellViewsCount = _cellViews.Count;
-            using IEnumerator<IReadOnlyInventoryCell> enumerator = _inventory.GetEnumerator();
+            InventoryCellView targetCellView = FirstOrDefaultCell(readOnlyInventoryCell);
 
-            for (int i = 0; i < _inventory.Count; i++)
+            if (targetCellView is null)
             {
-                enumerator.MoveNext();
-                IReadOnlyInventoryCell cell = enumerator.Current;
-
-                if (i < cellViewsCount)
-                {
-                    _cellViews[i].SetUp(cell);
-                    continue;
-                }
-
-                CreateCellView(cell);
+                BuildCellView(readOnlyInventoryCell);
+                return;
             }
 
-            for (int i = _inventory.Count; i < cellViewsCount; i++)
+            if (readOnlyInventoryCell.Count <= 0)
             {
-                RemoveCellView(i);
+                RemoveCellView(targetCellView);
+                return;
             }
+
+            targetCellView.Update();
         }
+
+        private InventoryCellView FirstOrDefaultCell(IReadOnlyInventoryCell readOnlyInventoryCell) =>
+            _cellViews.FirstOrDefault(cell => cell.ItemType == readOnlyInventoryCell.Item.ItemType);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace CodeBase.StaticData.Storable
 {
@@ -9,7 +10,8 @@ namespace CodeBase.StaticData.Storable
         public Sprite Sprite;
         public string Name;
         public string Description;
-        public bool IsExpendable;
         public bool IsInteractive;
+        public bool IsExpendable;
+        [HideIf("IsExpendable")] [Range(0, 30f)] public float ReloadTime;
     }
 }

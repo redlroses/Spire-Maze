@@ -12,7 +12,7 @@ namespace CodeBase.Logic.Inventory
     {
         private readonly List<InventoryCell> _storage;
 
-        public event Action Updated = () => { };
+        public event Action<IReadOnlyInventoryCell> Updated = (c) => { };
 
         public int Count => _storage.Count;
 
@@ -28,15 +28,16 @@ namespace CodeBase.Logic.Inventory
         {
             if (TryGetInventoryCell(item.ItemType, out InventoryCell inventoryCell))
             {
-                inventoryCell.IncreaseCount();
+                inventoryCell.Increase();
                 Debug.Log($"Count item {inventoryCell.Count}");
             }
             else
             {
-                _storage.Add(new InventoryCell(item));
+                inventoryCell = new InventoryCell(item);
+                _storage.Add(inventoryCell);
             }
 
-            Updated.Invoke();
+            Updated.Invoke(inventoryCell);
             Debug.Log($"SetUp {item.Name}");
         }
 
@@ -71,12 +72,12 @@ namespace CodeBase.Logic.Inventory
 
         private void Expend(InventoryCell existingInventoryCell)
         {
-            existingInventoryCell.DecreaseCount();
+            existingInventoryCell.Decrease();
 
             if (existingInventoryCell.IsEmpty)
                 _storage.Remove(existingInventoryCell);
 
-            Updated.Invoke();
+            Updated.Invoke(existingInventoryCell);
         }
 
         public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
