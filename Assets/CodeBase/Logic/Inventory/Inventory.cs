@@ -29,14 +29,14 @@ namespace CodeBase.Logic.Inventory
 
         public void Add(IItem item)
         {
-            if (TryGetInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
+            if (TryGetInventoryCell(item.ItemType, out InventoryCell inventoryCell) == false)
             {
                 _storage.Add(new InventoryCell(item));
             }
             else
             {
-                existingInventoryCell.IncreaseCount();
-                Debug.Log($"Count item {existingInventoryCell.Count}");
+                inventoryCell.IncreaseCount();
+                Debug.Log($"Count item {inventoryCell.Count}");
             }
 
             Updated?.Invoke();
