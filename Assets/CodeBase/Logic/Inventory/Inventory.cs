@@ -23,8 +23,6 @@ namespace CodeBase.Logic.Inventory
 
         public void Add(IItem item)
         {
-            // InventoryCell existingInventoryCell = GetExistingInventoryCell(item.ItemType);
-
             if (TryGetExistingInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
             {
                 _storage.Add(new InventoryCell(item));
@@ -34,16 +32,6 @@ namespace CodeBase.Logic.Inventory
                 existingInventoryCell.IncreaseCount();
                 Debug.Log($"Count item {existingInventoryCell.Count}");
             }
-
-            // if (existingInventoryCell == null)
-            // {
-            //     _storage.Add(new InventoryCell(item));
-            // }
-            // else
-            // {
-            //     existingInventoryCell.IncreaseCount();
-            //     Debug.Log($"Count item {existingInventoryCell.Count}");
-            // }
 
             Updated?.Invoke();
             Debug.Log($"SetUp {item.Name}");

@@ -12,7 +12,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var doorData = (EditorCells.Door) cell.CellData;
                 var door = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
-                door.GetComponent<Renderer>().material = gameFactory.CreateColoredMaterial(doorData.Color);
+                door.GetComponentInChildren<Renderer>().material = gameFactory.CreateColoredMaterial(doorData.Color);
                 door.Construct(doorData.Color, cell.Id);
             }
         }
