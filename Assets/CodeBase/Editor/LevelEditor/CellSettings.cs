@@ -1,4 +1,5 @@
 using CodeBase.EditorCells;
+using CodeBase.StaticData.Storable;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,7 +43,10 @@ namespace CodeBase.Editor.LevelEditor
                     rock.IsDirectionToRight = EditorGUILayout.Toggle("Is move to right", rock.IsDirectionToRight);
                     break;
                 case EnemySpawnPoint enemy:
-                    enemy.Type = (EnemyType)EditorGUILayout.EnumPopup("Type of enemy", enemy.Type);
+                    enemy.Type = (EnemyType) EditorGUILayout.EnumPopup("Type of enemy", enemy.Type);
+                    break;
+                case ItemSpawnPoint item:
+                    item.Type = (StorableType) EditorGUILayout.EnumPopup("Type of storable item", item.Type);
                     break;
             }
         }

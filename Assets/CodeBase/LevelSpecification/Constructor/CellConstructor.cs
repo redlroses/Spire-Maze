@@ -1,10 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
+using Door = CodeBase.LevelSpecification.Cells.Door;
+using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
+using ItemSpawnPoint = CodeBase.LevelSpecification.Cells.ItemSpawnPoint;
+using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
+using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
+using Key = CodeBase.LevelSpecification.Cells.Key;
+using Plate = CodeBase.LevelSpecification.Cells.Plate;
+using Portal = CodeBase.LevelSpecification.Cells.Portal;
+using Rock = CodeBase.LevelSpecification.Cells.Rock;
+using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
+using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
+using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -28,6 +41,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 [typeof(Rock)] = new RockConstructor(),
                 [typeof(Savepoint)] = new SavepointConstructor(saveLoadService),
                 [typeof(EnemySpawnPoint)] = new EnemySpawnPointConstructor(),
+                [typeof(ItemSpawnPoint)] = new ItemSpawnPointConstructor(staticDataService),
             };
         }
 

@@ -1,7 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services.Pause;
-using UnityEngine;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -14,7 +12,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var fireTrap = gameFactory.CreateCell<TCell>(cell.Container)
                     .GetComponentInChildren<Logic.Trap.FireTrap>();
-                fireTrap.Construct( fireTrap.TrapActivator);
+                fireTrap.Construct(fireTrap.TrapActivator);
             }
         }
     }

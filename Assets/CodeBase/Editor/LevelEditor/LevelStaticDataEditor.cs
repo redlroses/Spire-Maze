@@ -83,6 +83,9 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(EnemySpawnPoint)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(EnemySpawnPoint)].Tint(_colors[typeof(EnemySpawnPoint)])),
+                [typeof(ItemSpawnPoint)] = data =>
+                    _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
+                        .CombineTexture(_baseTextures[typeof(ItemSpawnPoint)].Tint(_colors[typeof(ItemSpawnPoint)]))
             };
 
             _baseTextures = new Dictionary<Type, Texture2D>
@@ -102,6 +105,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Rock)] = Resources.Load<Texture2D>("Textures/RockIcon"),
                 [typeof(Savepoint)] = Resources.Load<Texture2D>("Textures/SaveIcon"),
                 [typeof(EnemySpawnPoint)] = Resources.Load<Texture2D>("Textures/EnemyIcon"),
+                [typeof(ItemSpawnPoint)] = Resources.Load<Texture2D>("Textures/ItemIcon"),
             };
 
             _colors = new Dictionary<Type, Color32>
@@ -119,6 +123,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Rock)] = new Color32(233, 117, 50, 255),
                 [typeof(Savepoint)] = new Color32(0, 180, 255, 255),
                 [typeof(EnemySpawnPoint)] = new Color32(255, 255, 255, 255),
+                [typeof(ItemSpawnPoint)] = new Color32(132, 255, 210, 255),
             };
 
             _palette = new CellData[]
@@ -137,6 +142,7 @@ namespace CodeBase.Editor.LevelEditor
                 new Rock(GetTextureByType<Rock>()),
                 new Savepoint(GetTextureByType<Savepoint>()),
                 new EnemySpawnPoint(GetTextureByType<EnemySpawnPoint>()),
+                new ItemSpawnPoint(GetTextureByType<ItemSpawnPoint>()),
             };
 
             UpdateTextures();

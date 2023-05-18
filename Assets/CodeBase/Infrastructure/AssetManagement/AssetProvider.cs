@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
+using Door = CodeBase.LevelSpecification.Cells.Door;
+using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
 using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
+using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
+using ItemSpawnPoint = CodeBase.LevelSpecification.Cells.ItemSpawnPoint;
+using Key = CodeBase.LevelSpecification.Cells.Key;
+using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
 using Object = UnityEngine.Object;
+using Plate = CodeBase.LevelSpecification.Cells.Plate;
+using Portal = CodeBase.LevelSpecification.Cells.Portal;
+using Rock = CodeBase.LevelSpecification.Cells.Rock;
 using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
+using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
+using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -80,6 +91,7 @@ namespace CodeBase.Infrastructure.AssetManagement
                 nameof(Rock) => typeof(Rock),
                 nameof(Savepoint) => typeof(Savepoint),
                 nameof(EnemySpawnPoint) => typeof(EnemySpawnPoint),
+                nameof(ItemSpawnPoint) => typeof(ItemSpawnPoint),
                 nameof(FinishPortal) => typeof(FinishPortal),
                 _ => throw new ArgumentException()
             };

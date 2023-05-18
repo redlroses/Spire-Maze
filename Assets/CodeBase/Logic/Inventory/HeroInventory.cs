@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CodeBase.Data;
+using CodeBase.Logic.Item;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
@@ -37,7 +38,7 @@ namespace CodeBase.Logic.Inventory
         {
             progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
             progress.WorldData.ScoreAccumulationData.Artifacts = progress.WorldData.HeroInventoryData.InventoryCells
-                .Where(inventoryCell => inventoryCell.Item.ItemType != StorableType.Key)
+                .Where(inventoryCell => inventoryCell.Item is IUsable == false)
                 .Sum(inventoryCell => inventoryCell.Count);
         }
     }

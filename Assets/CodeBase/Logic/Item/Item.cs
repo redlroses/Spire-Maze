@@ -5,10 +5,10 @@ namespace CodeBase.Logic.Item
 {
     public class Item : IItem
     {
-        private StorableType _itemType;
-        private Sprite _sprite;
-        private string _name;
-        private string _description;
+        private readonly StorableType _itemType;
+        private readonly Sprite _sprite;
+        private readonly string _name;
+        private readonly string _description;
 
         public string Description => _description;
         public string Name => _name;

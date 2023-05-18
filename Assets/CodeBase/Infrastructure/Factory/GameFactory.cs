@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.Player;
-using CodeBase.Logic.StaminaEntity;
-using CodeBase.Services.Input;
+using CodeBase.Logic.Item;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
-using CodeBase.Services.Score;
-using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using Compass = CodeBase.Logic.Item.Compass;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
@@ -37,6 +34,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
+        private IGameFactory _gameFactoryImplementation;
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
@@ -89,6 +87,16 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
+
+        public IItem CreateItem(StorableStaticData data)
+        {
+            return data.ItemType switch
+            {
+                StorableType.Compass => new Compass(data),
+                StorableType.None => throw new Exception("Storable type is not specified"),
+                _ => new Item(data)
+            };
+        }
 
         public Material CreateMaterial(string name) =>
             GetCashed(name, AssetPath.Materials, _materials);

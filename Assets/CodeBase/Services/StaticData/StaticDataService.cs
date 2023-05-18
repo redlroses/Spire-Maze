@@ -62,10 +62,10 @@ namespace CodeBase.Services.StaticData
         public ScoreConfig ScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);
 
-        private TData GetDataFor<TData, TKey>(TKey key, Dictionary<TKey, TData> from) =>
+        private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)
                 ? staticData
-                : throw new NullReferenceException($"There is no {nameof(TData)} data with key: {nameof(TKey)}");
+                : throw new NullReferenceException($"There is no {from.First().Value.GetType().Name} data with key: {key}");
 
         private Dictionary<TKey, TData> LoadFor<TData, TKey>(string path, Func<TData, TKey> keySelector) where TData : ScriptableObject =>
             Resources

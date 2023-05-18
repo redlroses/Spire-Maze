@@ -1,11 +1,9 @@
 ﻿namespace CodeBase.StaticData.Storable
 {
-    public enum StorableType
+    public enum StorableType : byte
     {
-        Key,
+        None,
         Compass,
-        TestItem,
-        SomeElse,
         GreenKey,
         RedKey,
         BlueKey,

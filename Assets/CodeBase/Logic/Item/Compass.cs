@@ -11,7 +11,7 @@ namespace CodeBase.Logic.Item
 
         public void Use()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Compass Used");
         }
     }
 }

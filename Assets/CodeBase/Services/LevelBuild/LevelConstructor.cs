@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Door = CodeBase.LevelSpecification.Cells.Door;
 using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
+using ItemSpawnPoint = CodeBase.LevelSpecification.Cells.ItemSpawnPoint;
 using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
 using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
 using Key = CodeBase.LevelSpecification.Cells.Key;
@@ -69,6 +70,8 @@ namespace CodeBase.Services.LevelBuild
                 level.Where(cell => cell.CellData is EditorCells.Savepoint).ToArray());
             _cellConstructor.Construct<EnemySpawnPoint>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.EnemySpawnPoint).ToArray());
+            _cellConstructor.Construct<ItemSpawnPoint>(_gameFactory,
+                level.Where(cell => cell.CellData is EditorCells.ItemSpawnPoint).ToArray());
             CombineCells(level);
         }
 

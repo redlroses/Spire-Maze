@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic.Item;
 using CodeBase.Services;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -24,5 +25,6 @@ namespace CodeBase.Infrastructure.Factory
         PhysicMaterial CreatePhysicMaterial(string name);
         GameObject CreateHud();
         GameObject CreateLobby();
+        IItem CreateItem(StorableStaticData itemType);
     }
 }

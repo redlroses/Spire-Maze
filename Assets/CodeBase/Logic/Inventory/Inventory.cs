@@ -21,6 +21,12 @@ namespace CodeBase.Logic.Inventory
             _storage = storage;
         }
 
+        public void Cleanup() =>
+            _storage.Clear();
+
+        public List<InventoryCell> ReadAll() =>
+            new List<InventoryCell>(_storage);
+
         public void Add(IItem item)
         {
             if (TryGetExistingInventoryCell(item.ItemType, out InventoryCell existingInventoryCell) == false)
@@ -36,9 +42,6 @@ namespace CodeBase.Logic.Inventory
             Updated?.Invoke();
             Debug.Log($"SetUp {item.Name}");
         }
-
-        public List<InventoryCell> ReadAll() => new List<InventoryCell>(_storage);
-
 
         public bool TryUse(StorableType storableType)
         {
@@ -91,9 +94,6 @@ namespace CodeBase.Logic.Inventory
 
             Updated?.Invoke();
         }
-
-        public void Cleanup() =>
-            _storage.Clear();
 
         public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
 
