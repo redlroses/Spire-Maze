@@ -15,11 +15,11 @@ namespace CodeBase.UI.Elements
         [SerializeField] private TextSetter _textSetter;
 
         private StorableType _itemType;
-        public event Action<StorableType> ItemUsed;
+        public event Action<StorableType> ItemUsed = c => { };
 
         private void Start() =>
             _button.onClick.AddListener(() =>
-                ItemUsed?.Invoke(_itemType));
+                ItemUsed.Invoke(_itemType));
 
         private void OnDestroy() =>
             _button.onClick.RemoveAllListeners();
