@@ -27,9 +27,7 @@ namespace CodeBase.UI.Windows
             _menuButton.Construct(stateMachine);
         }
 
-        public void Pause()
-        {
-        }
+        public void Pause() { }
 
         public void Resume()
         {
@@ -44,9 +42,7 @@ namespace CodeBase.UI.Windows
             _restartButton.Subscribe();
         }
 
-        protected override void Cleanup()
-        {
+        protected override void Cleanup() =>
             _unpauseButton.Cleanup();
-        }
     }
 }

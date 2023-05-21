@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Elements.Buttons
@@ -7,20 +7,17 @@ namespace CodeBase.UI.Elements.Buttons
     [RequireComponent(typeof(Button))]
     public abstract class ButtonObserver : MonoBehaviour
     {
-        [SerializeField] private Button _button;
+        [FormerlySerializedAs("_button")] [SerializeField] protected Button Button;
 
         private void Awake() =>
-            _button ??= GetComponent<Button>();
+            Button ??= GetComponent<Button>();
 
         public void Subscribe() =>
-            _button.onClick.AddListener(Call);
-
-        public void Subscribe(UnityAction call) =>
-            _button.onClick.AddListener(call);
+            Button.onClick.AddListener(Call);
 
         public void Cleanup() =>
-            _button.onClick.RemoveAllListeners();
+            Button.onClick.RemoveAllListeners();
 
-        protected abstract void Call();
+        protected virtual void Call() { }
     }
 }

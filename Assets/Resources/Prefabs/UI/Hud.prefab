@@ -5302,6 +5302,7 @@ GameObject:
   - component: {fileID: 6491093475600786305}
   - component: {fileID: 8895864879602946086}
   - component: {fileID: 2063156595221375772}
+  - component: {fileID: 6464818504932961465}
   m_Layer: 5
   m_Name: Button_Rating_Bg3
   m_TagString: Untagged
@@ -5368,14 +5369,14 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 0, y: -294.26205, z: 0}
+    - LocalPosition: {x: 0, y: -294.2621, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0, y: -0.025547504}
       AnchorMax: {x: 1, y: 0.3144769}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 0.85, y: 0.85, z: 0.85}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
@@ -5772,6 +5773,19 @@ MonoBehaviour:
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6464818504932961465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491093475600786310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b57d588fc2a4341beca7e3abeb9ff23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 8895864879602946086}
 --- !u!1 &6491093475622903352
 GameObject:
   m_ObjectHideFlags: 0
@@ -9242,7 +9256,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 7.5, y: -355}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 320, y: 460}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8895864880177107287
 MonoBehaviour:
@@ -9962,7 +9976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e82499ef3d3fdd44ac75ac6a02b32c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabCellView: {fileID: 7151445997130251219, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!1 &9216954483624774583
 GameObject:
   m_ObjectHideFlags: 0

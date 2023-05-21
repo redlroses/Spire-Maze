@@ -10,6 +10,7 @@ using CodeBase.Services.Randomizer;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
@@ -108,6 +109,7 @@ namespace CodeBase.Infrastructure.Factory
             hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService, _windowService);
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
+            hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
             return hud;
         }
 

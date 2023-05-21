@@ -1,15 +1,10 @@
-﻿using System;
+﻿using UnityEngine.Events;
 
 namespace CodeBase.UI.Elements.Buttons
 {
-    internal class SimpleButton : ButtonObserver
+    public class SimpleButton : ButtonObserver
     {
-        private Action _action;
-
-        protected override void Call() =>
-            _action?.Invoke();
-
-        public void SetAction(Action action) =>
-            _action = action;
+        public void Subscribe(UnityAction call) =>
+            Button.onClick.AddListener(call);
     }
 }
