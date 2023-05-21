@@ -1,17 +1,20 @@
-﻿using NTC.Global.Cache;
+﻿using CodeBase.Services.Pause;
+using NTC.Global.Cache;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Elements
 {
-    public class VisualTimer : MonoCache
+    public class VisualTimer : MonoCache, IPauseWatcher
     {
         [SerializeField] private Image _clock;
 
         private float _reloadTime;
         private float _amountTime;
 
-        private void Update()
+        private bool _cashedEnableState;
+
+        protected override void Run()
         {
             _amountTime -= Time.deltaTime;
 
@@ -35,5 +38,14 @@ namespace CodeBase.UI.Elements
             _amountTime = _reloadTime;
             enabled = true;
         }
+
+        public void Pause()
+        {
+            _cashedEnableState = enabled;
+            enabled = false;
+        }
+
+        public void Resume() =>
+            enabled = _cashedEnableState;
     }
 }

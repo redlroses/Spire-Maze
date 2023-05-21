@@ -9,23 +9,23 @@ namespace CodeBase.Services.Pause
         private readonly IWatchService _watchService;
         private readonly IWindowService _windowService;
 
-        public List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
-        public List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
+        private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
+        private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
 
-        public PauseService(IWatchService watchService)
-        {
+        public PauseService(IWatchService watchService) =>
             _watchService = watchService;
-        }
 
         public bool IsPause { get; private set; }
 
         public void Register(IPauseWatcher pauseWatcher) =>
             PauseWatchers.Add(pauseWatcher);
 
-        public void UnregisterAll(IPauseWatcher pauseWatcher)
+        public void Unregister(IPauseWatcher pauseWatcher)
         {
-            if (UnregisteredPauseWatchers.Contains(pauseWatcher) == false)
-                UnregisteredPauseWatchers.Add(pauseWatcher);
+            if (UnregisteredPauseWatchers.Contains(pauseWatcher))
+                return;
+
+            UnregisteredPauseWatchers.Add(pauseWatcher);
         }
 
         public void Cleanup()
@@ -42,6 +42,7 @@ namespace CodeBase.Services.Pause
             }
 
             IsPause = isPause;
+            ValidateWatchers();
 
             if (isPause)
             {
@@ -57,31 +58,35 @@ namespace CodeBase.Services.Pause
         {
             _watchService.Resume();
 
-            foreach (var pauseWatcher in PauseWatchers)
+            for (int index = 0; index < PauseWatchers.Count; index++)
+            {
+                IPauseWatcher pauseWatcher = PauseWatchers[index];
                 pauseWatcher.Resume();
-
-            UnregisterAll();
+            }
         }
 
         private void SendPause()
         {
             _watchService.Pause();
 
-            foreach (var pauseWatcher in PauseWatchers)
+            for (int index = 0; index < PauseWatchers.Count; index++)
+            {
+                IPauseWatcher pauseWatcher = PauseWatchers[index];
                 pauseWatcher.Pause();
-
-            UnregisterAll();
+            }
         }
 
-        private void UnregisterAll()
+        private void ValidateWatchers()
         {
-            foreach (var unregisteredPauseWatcher in UnregisteredPauseWatchers)
-            {
-                if (PauseWatchers.Contains(unregisteredPauseWatcher))
-                {
-                    PauseWatchers.Remove(unregisteredPauseWatcher);
-                }
-            }
+            // foreach (IPauseWatcher unregisteredPauseWatcher in UnregisteredPauseWatchers)
+            // {
+            //     if (PauseWatchers.Contains(unregisteredPauseWatcher))
+            //     {
+            //         PauseWatchers.Remove(unregisteredPauseWatcher);
+            //     }
+            // }
+
+            PauseWatchers.RemoveAll(watcher => watcher.Equals(null));
         }
     }
 }

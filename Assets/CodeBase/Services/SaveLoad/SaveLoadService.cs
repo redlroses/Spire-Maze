@@ -32,7 +32,7 @@ namespace CodeBase.Services.SaveLoad
 
             _watchService.UpdateProgress();
             _scoreService.UpdateProgress();
-            
+
             Debug.Log("save");
             PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         }

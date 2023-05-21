@@ -1,6 +1,5 @@
 ﻿using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Observer;
-using CodeBase.Services.Pause;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift
@@ -77,10 +76,8 @@ namespace CodeBase.Logic.Lift
             _timer.Pause();
         }
 
-        private void OnMoveEnded()
-        {
+        private void OnMoveEnded() =>
             _state = LiftState.Idle;
-        }
 
         private void SwitchMarkers()
         {

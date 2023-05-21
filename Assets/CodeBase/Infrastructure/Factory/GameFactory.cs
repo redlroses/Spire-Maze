@@ -33,7 +33,6 @@ namespace CodeBase.Infrastructure.Factory
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
-        private IGameFactory _gameFactoryImplementation;
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
@@ -57,10 +56,8 @@ namespace CodeBase.Infrastructure.Factory
             ProgressWriters.Clear();
         }
 
-        public void WarmUp()
-        {
+        public void WarmUp() =>
             _assets.LoadCells();
-        }
 
         public Material CreateColoredMaterial(Colors color) =>
             GetCashed(color, AssetPath.Materials, _coloredMaterials);
@@ -70,7 +67,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHero(Vector3 at)
         {
-            var hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            GameObject hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
             return hero;
         }
 
@@ -81,15 +78,15 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);
+            RegisterPauseWatchers(cell);
             return cell;
         }
 
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
 
-        public IItem CreateItem(StorableStaticData data)
-        {
-            return data.ItemType switch
+        public IItem CreateItem(StorableStaticData data) =>
+            data.ItemType switch
             {
                 StorableType.Compass => new CompassItem(data),
                 StorableType.BlueKey => new KeyItem(data),
@@ -98,7 +95,6 @@ namespace CodeBase.Infrastructure.Factory
                 StorableType.None => throw new Exception("Storable type is not specified"),
                 _ => new Item(data)
             };
-        }
 
         public Material CreateMaterial(string name) =>
             GetCashed(name, AssetPath.Materials, _materials);
@@ -127,6 +123,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
             RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
 
             return gameObject;
         }
@@ -135,6 +132,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject gameObject = _assets.Instantiate(path: prefabPath);
             RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
 
             return gameObject;
         }
@@ -142,25 +140,25 @@ namespace CodeBase.Infrastructure.Factory
         private void RegisterProgressWatchers(GameObject gameObject)
         {
             foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
-            {
                 Register(progressReader);
-            }
+        }
+
+        private void RegisterPauseWatchers(GameObject gameObject)
+        {
+            foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
+                _pauseService.Register(pauseWatcher);
         }
 
         private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection)
             where TValue : Object
         {
             if (collection.TryGetValue(key, out TValue value))
-            {
                 return value;
-            }
 
-            TValue loaded = Resources.Load<TValue>($"{path}/{key}");
+            var loaded = Resources.Load<TValue>($"{path}/{key}");
 
             if (loaded is null)
-            {
                 throw new NullReferenceException($"There is no object with key {key}");
-            }
 
             collection.Add(key, loaded);
             return loaded;

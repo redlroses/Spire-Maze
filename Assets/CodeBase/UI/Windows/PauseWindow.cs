@@ -33,7 +33,7 @@ namespace CodeBase.UI.Windows
 
         public void Resume()
         {
-            _pauseService.UnregisterAll(this);
+            _pauseService.Unregister(this);
             Destroy(gameObject);
         }
 

@@ -56,7 +56,7 @@ namespace CodeBase.UI.Services.Factory
             _assets.Instantiate(AssetPath.RankView, inside);
 
         public GameObject CreateCellView(Transform inside) =>
-            _assets.Instantiate(AssetPath.CellView, inside);
+            InstantiateRegistered(AssetPath.CellView, inside);
 
         public void CreateSettings()
         {
@@ -101,6 +101,19 @@ namespace CodeBase.UI.Services.Factory
             WindowConfig config = _staticData.ForWindow(windowId);
             TWindow window = Object.Instantiate(config.Template, _uiRoot) as TWindow;
             return window;
+        }
+
+        private GameObject InstantiateRegistered(string path, Transform inside)
+        {
+            GameObject element = _assets.Instantiate(path, inside);
+            Register(element);
+            return element;
+        }
+
+        private void Register(GameObject element)
+        {
+            foreach (IPauseWatcher pauseWatcher in element.GetComponentsInChildren<IPauseWatcher>())
+                _pauseService.Register(pauseWatcher);
         }
     }
 }

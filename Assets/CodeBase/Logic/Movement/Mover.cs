@@ -24,10 +24,8 @@ namespace CodeBase.Logic.Movement
             ApplyMove(MoveDirection.Left);
         }
 
-        protected override void FixedRun()
-        {
+        protected override void FixedRun() =>
             ApplyMove(_direction);
-        }
 
         public void Move(MoveDirection direction) =>
             _direction = direction;

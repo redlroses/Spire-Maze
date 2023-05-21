@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class PauseToggle : MonoBehaviour
+    public class PauseToggle : MonoBehaviour, IPauseWatcher
     {
         [SerializeField] private BetterToggle _pauseToggle;
 
@@ -19,24 +19,27 @@ namespace CodeBase.UI.Elements
             Subscribe();
         }
 
-        private void Subscribe()
-        {
+        private void Subscribe() =>
             _pauseToggle.onValueChanged.AddListener(OnPauseToggle);
-        }
 
         private void OnPauseToggle(bool isPause)
         {
+            if (_pauseService.IsPause == isPause)
+                return;
+
             _pauseService.SetPause(isPause);
 
             if (isPause)
-            {
                 _windowService.Open(WindowId.Pause);
-            }
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _pauseToggle.onValueChanged.RemoveAllListeners();
-        }
+
+        public void Pause() =>
+            _pauseToggle.isOn = true;
+
+        public void Resume() =>
+            _pauseToggle.isOn = false;
     }
 }

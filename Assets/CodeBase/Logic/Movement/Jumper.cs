@@ -49,15 +49,14 @@ namespace CodeBase.Logic.Movement
             _heroAnimator ??= Get<HeroAnimator>();
         }
 
-        protected override void FixedRun()
-        {
+        protected override void FixedRun() =>
             ApplyJump();
-        }
 
         public void Resume()
         {
             _rigidbody.velocity = _currentVelocity;
             enabled = _isEnabled;
+            _isPause = false;
         }
 
         public void Pause()
@@ -66,6 +65,7 @@ namespace CodeBase.Logic.Movement
             _rigidbody.velocity = Vector3.zero;
             _isEnabled = enabled;
             enabled = false;
+            _isPause = true;
         }
 
         public void Jump()

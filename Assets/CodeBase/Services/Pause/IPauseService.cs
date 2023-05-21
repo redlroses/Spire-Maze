@@ -5,7 +5,7 @@
         bool IsPause { get; }
         void SetPause(bool isPause);
         void Register(IPauseWatcher pauseWatcher);
-        void UnregisterAll(IPauseWatcher pauseWatcher);
+        void Unregister(IPauseWatcher pauseWatcher);
         void Cleanup();
     }
 }

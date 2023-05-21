@@ -120,10 +120,8 @@ namespace CodeBase.Infrastructure.States
             }
         }
 
-        private void InitLearningLevel()
-        {
+        private void InitLearningLevel() =>
             throw new NotImplementedException();
-        }
 
         private void InitLobby()
         {

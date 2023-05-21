@@ -70,10 +70,8 @@ namespace CodeBase.Logic.Lift.PlateMove
             _delta = 0;
         }
 
-        public void Resume()
-        {
+        public void Resume() =>
             enabled = _isEnabled;
-        }
 
         public void Pause()
         {
@@ -88,10 +86,8 @@ namespace CodeBase.Logic.Lift.PlateMove
             CheckIsComplete();
         }
 
-        private void UpdateDelta()
-        {
+        private void UpdateDelta() =>
             _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.fixedDeltaTime / _distance);
-        }
 
         private void CheckIsComplete()
         {

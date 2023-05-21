@@ -53,13 +53,10 @@ namespace CodeBase.Services.Input
         private void OnMove(InputAction.CallbackContext context)
         {
             int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
-
             HorizontalMove?.Invoke((MoveDirection) moveInput);
 
             if ((MoveDirection) moveInput != MoveDirection.Stop)
-            {
                 _direction = (MoveDirection) moveInput;
-            }
         }
 
         private void OnJump(InputAction.CallbackContext context) =>
@@ -73,9 +70,7 @@ namespace CodeBase.Services.Input
             _pauseService.SetPause(!_pauseService.IsPause);
 
             if (_pauseService.IsPause)
-            {
                 _windowService.Open(WindowId.Pause);
-            }
         }
     }
 }
