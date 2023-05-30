@@ -16,6 +16,7 @@ namespace CodeBase.Logic.Player
         [SerializeField] private HeroMover _mover;
         [SerializeField] private Dodge _dodge;
         [SerializeField] private Jumper _jumper;
+        [SerializeField] private CustomGravityScaler _customGravityScaler;
 
         private IPlayerInputService _inputService;
         private PlayerStateMachine _stateMachine;
@@ -25,6 +26,7 @@ namespace CodeBase.Logic.Player
             _playerHealth ??= GetComponentInChildren<PlayerHealth>();
             _animator ??= GetComponent<HeroAnimator>();
             _collider ??= GetComponent<CapsuleCollider>();
+            _customGravityScaler ??= GetComponent<CustomGravityScaler>();
         }
 
         private void OnEnable()
@@ -52,6 +54,7 @@ namespace CodeBase.Logic.Player
         private void OnDied()
         {
             _inputService.Cleanup();
+            _customGravityScaler.enabled = false;
             _collider.enabled = false;
             _animator.PlayDied();
         }

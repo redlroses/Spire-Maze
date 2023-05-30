@@ -75,10 +75,10 @@ MonoBehaviour:
   - rid: 6669808201180381188
   - rid: 3569852048532307995
   - rid: 6669808201180381190
-  - rid: 8919696071726989315
+  - rid: 8960763171829710849
   - rid: 8919695827045711907
   - rid: 8919695827045711897
-  - rid: 8919696031508332544
+  - rid: 8960763177959424001
   - rid: 6669808201180381263
   - rid: 6669808201180381196
   - rid: 3569852117800714240
@@ -123,7 +123,7 @@ MonoBehaviour:
   - rid: 3569851764508196865
   - rid: 6669808201180381237
   - rid: 6669808201180381238
-  - rid: 8919696071726989313
+  - rid: 8960763177959424000
   - rid: 6669808218659356675
   - rid: 6669808201180381252
   - rid: 6669808201180381242
@@ -585,29 +585,29 @@ MonoBehaviour:
       type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 8919696031508332544
-      type: {class: EnemySpawnPoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-        Type: 2
     - rid: 8919696071726989312
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 8919696071726989313
-      type: {class: EnemySpawnPoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-        Type: 1
     - rid: 8919696071726989314
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 8919696071726989315
-      type: {class: SpikeTrap, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
     - rid: 8919696071726989316
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
+    - rid: 8960763171829710849
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 8960763177959424000
+      type: {class: EnemySpawnPoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        Type: 2
+    - rid: 8960763177959424001
+      type: {class: EnemySpawnPoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        Type: 1

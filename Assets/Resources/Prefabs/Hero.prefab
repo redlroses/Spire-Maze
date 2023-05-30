@@ -7568,6 +7568,7 @@ MonoBehaviour:
   _mover: {fileID: 1356605512462546074}
   _dodge: {fileID: 6587769830596586222}
   _jumper: {fileID: 7393409988495010677}
+  _customGravityScaler: {fileID: 7393409988495010669}
 --- !u!114 &7393409988495010677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7783,8 +7784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5360018d283509f469b090264d282847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroInventory: {fileID: 2960491418050870100}
-  _scoreItem: {fileID: 11400000, guid: c3157844f07733942a4ac246ea1a53c1, type: 2}
 --- !u!135 &7902642204812287731
 SphereCollider:
   m_ObjectHideFlags: 0
