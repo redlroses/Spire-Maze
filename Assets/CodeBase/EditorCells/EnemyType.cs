@@ -3,7 +3,7 @@
     public enum EnemyType : byte
     {
         Generic,
-        Melee,
+        Knight,
         Archer
     }
 }
