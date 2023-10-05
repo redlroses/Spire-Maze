@@ -18,6 +18,7 @@ namespace CodeBase.UI
         {
             _hero = hero;
             _finishPosition = finishPosition;
+            Destroy(gameObject, lifetime);
         }
 
         protected override void LateRun()
