@@ -18,6 +18,7 @@ using Rock = CodeBase.LevelSpecification.Cells.Rock;
 using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
 using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
+using Wall2 = CodeBase.LevelSpecification.Cells.Wall2;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -31,6 +32,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 [typeof(Plate)] = new PlateConstructor(),
                 [typeof(Wall)] = new WallConstructor(),
+                [typeof(Wall2)] = new WallConstructor(),
                 [typeof(Key)] = new KeyConstructor(staticDataService),
                 [typeof(Door)] = new DoorConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),

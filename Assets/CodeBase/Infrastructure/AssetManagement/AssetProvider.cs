@@ -17,6 +17,7 @@ using Rock = CodeBase.LevelSpecification.Cells.Rock;
 using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
 using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
+using Wall2 = CodeBase.LevelSpecification.Cells.Wall2;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -81,6 +82,7 @@ namespace CodeBase.Infrastructure.AssetManagement
             {
                 nameof(Plate) => typeof(Plate),
                 nameof(Wall) => typeof(Wall),
+                nameof(Wall2) => typeof(Wall2),
                 nameof(Door) => typeof(Door),
                 nameof(Key) => typeof(Key),
                 nameof(MovingPlate) => typeof(MovingPlate),
