@@ -135,7 +135,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         private Vector3 GetHeroPosition() =>
-            _progressService.Progress.WorldData.PositionOnLevel.Position.AsUnityVector();
+            _progressService.Progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
 
         private void BuildLevel() =>
             _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelId));
@@ -183,7 +183,7 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData = new WorldData(null)
             {
                 LevelState = new LevelState(_loadPayload.LevelId),
-                PositionOnLevel = new PositionOnLevel(_staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData()),
+                LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
                 HeroHealthState = new HealthState(_staticData.HealthForEntity(PlayerKey).MaxHealth),
                 HeroStaminaState = new StaminaState(_staticData.StaminaForEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
@@ -192,5 +192,11 @@ namespace CodeBase.Infrastructure.States
 
             Debug.Log("Progress was reset");
         }
+
+        private Vector3Data GetInitialPosition() =>
+            _staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData();
+
+        private Vector3Data GetFinishPosition() =>
+            _staticData.ForLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
     }
 }

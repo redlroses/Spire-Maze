@@ -8,6 +8,7 @@ using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Windows;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;
@@ -57,6 +58,14 @@ namespace CodeBase.UI.Services.Factory
 
         public GameObject CreateCellView(Transform inside) =>
             InstantiateRegistered(AssetPath.CellView, inside);
+
+        public GameObject CreateCompassArrowPanel(Transform hero, float lifetime)
+        {
+            GameObject panel = _assets.Instantiate(AssetPath.CompassArrowPanel, _uiRoot);
+            var compassPanel = panel.GetComponent<CompassArrowPanel>();
+            compassPanel.Construct(_progressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector(), hero, lifetime);
+            return panel;
+        }
 
         public void CreateSettings()
         {

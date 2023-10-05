@@ -33,10 +33,10 @@ namespace CodeBase.Logic.Movement
             plateMover.PositionUpdated -= OnPlateMoverPositionUpdated;
 
         public void LoadProgress(PlayerProgress progress) =>
-            Rigidbody.position = progress.WorldData.PositionOnLevel.Position.AsUnityVector();
+            Rigidbody.position = progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
 
         public void UpdateProgress(PlayerProgress progress) =>
-            progress.WorldData.PositionOnLevel.Position = Rigidbody.position.AsVectorData();
+            progress.WorldData.LevelPositions.InitialPosition = Rigidbody.position.AsVectorData();
 
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {

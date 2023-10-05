@@ -94,7 +94,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IGameFactory>(),
                     _services.Single<IStaticDataService>(),
                     _stateMachine,
-                    _services.Single<ISaveLoadService>()));
+                    _services.Single<ISaveLoadService>(),
+                    _services.Single<IPersistentProgressService>()));
         }
 
         private void RegisterStaticDataService()

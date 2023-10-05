@@ -1,12 +1,14 @@
 using System;
 using CodeBase.Infrastructure;
+using CodeBase.Tools.Extension;
+using UnityEngine;
 
 namespace CodeBase.Data
 {
     [Serializable]
     public class WorldData
     {
-        public PositionOnLevel PositionOnLevel;
+        public LevelPositions LevelPositions;
         public LevelState LevelState;
         public HealthState HeroHealthState;
         public StaminaState HeroStaminaState;
@@ -16,7 +18,7 @@ namespace CodeBase.Data
 
         public WorldData(string initialScene)
         {
-            PositionOnLevel = new PositionOnLevel();
+            LevelPositions = new LevelPositions();
             LevelState = new LevelState(LevelNames.LobbyId);
             HeroHealthState = new HealthState();
             HeroStaminaState = new StaminaState();

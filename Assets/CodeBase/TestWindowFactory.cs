@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Services;
 using CodeBase.UI.Services.Windows;
 using NaughtyAttributes;

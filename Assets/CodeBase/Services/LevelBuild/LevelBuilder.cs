@@ -1,14 +1,18 @@
 using System;
 using System.Linq;
+using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.Tools.Extension;
 using UnityEngine;
+using FinishPortal = CodeBase.EditorCells.FinishPortal;
 
 namespace CodeBase.Services.LevelBuild
 {
@@ -16,6 +20,7 @@ namespace CodeBase.Services.LevelBuild
     {
         private readonly LevelConstructor _levelConstructor;
         private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         private Transform _levelContainer;
         private float _radius;
@@ -23,9 +28,11 @@ namespace CodeBase.Services.LevelBuild
         private float _floorHeight;
         private Level _level;
 
-        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, GameStateMachine stateMachine, ISaveLoadService saveLoadService)
+        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, GameStateMachine stateMachine,
+            ISaveLoadService saveLoadService, IPersistentProgressService persistentProgressService)
         {
             _gameFactory = gameFactory;
+            _persistentProgressService = persistentProgressService;
             _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService);
         }
 
@@ -35,6 +42,10 @@ namespace CodeBase.Services.LevelBuild
             SetUpLevelParameters(levelStaticData);
             BuildLevel(levelStaticData);
             _level.SelfTransform = _levelContainer;
+            _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
+
+            Debug.Log($"Update finish position: {_persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector()}");
+
             return _level;
         }
 
@@ -121,5 +132,8 @@ namespace CodeBase.Services.LevelBuild
             float posZ = Mathf.Sin(byArcGrade * Mathf.Deg2Rad) * radius;
             return new Vector3(posX, 0, posZ);
         }
+
+        private Vector3Data GetFinishPosition() =>
+            _level.First(cell => cell.CellData is FinishPortal).Container.position.AsVectorData();
     }
 }

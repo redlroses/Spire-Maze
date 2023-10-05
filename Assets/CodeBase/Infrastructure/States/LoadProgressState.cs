@@ -50,8 +50,11 @@ namespace CodeBase.Infrastructure.States
             {
                 WorldData =
                 {
-                    PositionOnLevel = new PositionOnLevel(_staticDataService.ForLevel(LevelNames.LobbyId)
-                        .HeroInitialPosition.AsVectorData()),
+                    LevelPositions = new LevelPositions(
+                        _staticDataService.ForLevel(LevelNames.LobbyId)
+                            .HeroInitialPosition.AsVectorData(),
+                        _staticDataService.ForLevel(LevelNames.LobbyId)
+                            .FinishPosition.AsVectorData()),
                     HeroHealthState = new HealthState(_staticDataService.HealthForEntity(PlayerKey).MaxHealth),
                     HeroStaminaState = new StaminaState(_staticDataService.StaminaForEntity(PlayerKey).MaxStamina)
                 }

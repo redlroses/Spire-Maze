@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using CodeBase.EditorCells;
-using CodeBase.LevelSpecification;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
@@ -20,13 +18,16 @@ namespace CodeBase.StaticData
         [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
-        public Vector3 HeroInitialPosition => GetHeroInitialPosition();
+        public Vector3 HeroInitialPosition => GetPositionByCellType<InitialPlate>();
+        public Vector3 FinishPosition => GetPositionByCellType<FinishPortal>();
 
-        private Vector3 GetHeroInitialPosition()
+        private Vector3 GetPositionByCellType<T>()
         {
+            Debug.Log(typeof(T));
+
             for (int i = 0; i < Size; i++)
             {
-                if (CellDataMap[i] is InitialPlate == false)
+                if (CellDataMap[i] is T == false)
                 {
                     continue;
                 }
@@ -36,7 +37,7 @@ namespace CodeBase.StaticData
                 return GetPosition(angle, Radius).ChangeY(height);
             }
 
-            throw new NullReferenceException();
+            return Vector3.zero;
         }
 
         private Vector3 GetPosition(float byArcGrade, float radius)

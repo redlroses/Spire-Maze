@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic;
 using CodeBase.Logic.Items;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -18,7 +19,7 @@ using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
 {
-    public class GameFactory : IGameFactory
+    public class GameFactory : IGameFactory, IHeroLocator
     {
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
@@ -34,6 +35,10 @@ namespace CodeBase.Infrastructure.Factory
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
+
+        private Transform _heroTransform;
+
+        public Transform Location => _heroTransform;
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
@@ -69,6 +74,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHero(Vector3 at)
         {
             GameObject hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            _heroTransform = hero.transform;
             return hero;
         }
 
@@ -89,7 +95,7 @@ namespace CodeBase.Infrastructure.Factory
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
             {
-                StorableType.Compass => new CompassItem(data),
+                StorableType.Compass => new CompassItem(data, _uiFactory, this),
                 StorableType.BlueKey => new KeyItem(data),
                 StorableType.RedKey => new KeyItem(data),
                 StorableType.GreenKey => new KeyItem(data),

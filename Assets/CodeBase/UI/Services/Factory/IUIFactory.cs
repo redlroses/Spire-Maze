@@ -1,8 +1,5 @@
 ﻿using CodeBase.Services;
-using CodeBase.UI.Elements;
 using UnityEngine;
-
-// ReSharper disable InconsistentNaming
 
 namespace CodeBase.UI.Services.Factory
 {
@@ -14,6 +11,7 @@ namespace CodeBase.UI.Services.Factory
     GameObject CreateTopRankView(int rank, Transform inside);
     GameObject CreateRankView(Transform inside);
     GameObject CreateCellView(Transform selfTransform);
+    GameObject CreateCompassArrowPanel(Transform hero, float lifetime);
     void CreateSettings();
     void CreatePause();
     void CreateResults();
