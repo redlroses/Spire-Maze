@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Logic.Movement;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Services.Input
@@ -13,5 +14,10 @@ namespace CodeBase.Services.Input
         MoveDirection HorizontalDirection { get; }
         void Subscribe();
         void Cleanup();
+        void EnableMovementMap();
+        void EnableOverviewMap();
+        void DisableMovementMap();
+        void DisableOverviewMap();
+        event Action<Vector2> OverviewMove;
     }
 }

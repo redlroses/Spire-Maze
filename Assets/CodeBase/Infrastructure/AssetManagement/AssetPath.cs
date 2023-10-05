@@ -9,9 +9,11 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string RankView = "Prefabs/UI/Ranking/List_Variant";
         public const string CellView = "Prefabs/UI/InventorySlot";
         public const string CompassArrowPanel = "Prefabs/UI/CompassArrowPanel";
+        public const string OverviewInterface = "Prefabs/UI/OverviewInterface";
 
         public const string HeroPath = "Prefabs/Hero";
         public const string Enemies = "Prefabs/Enemies";
+        public const string VirtualMover = "Prefabs/VirtualMover";
         public const string Spire = "Prefabs/Spire";
         public const string Cells = "Prefabs/Cells";
         public const string Lobby = "Prefabs/SpireLobby";

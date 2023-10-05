@@ -7,6 +7,7 @@
         GreenKey,
         RedKey,
         BlueKey,
-        RgbKey
+        RgbKey,
+        Binocular
     }
 }

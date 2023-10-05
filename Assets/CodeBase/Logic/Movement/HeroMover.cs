@@ -12,8 +12,6 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
 
-        private Coroutine _inputDelay;
-
         protected override void OnEnabled() =>
             _dodge.Dodged += OnDodged;
 

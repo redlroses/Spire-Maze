@@ -26,5 +26,6 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateHud();
         GameObject CreateLobby();
         IItem CreateItem(StorableStaticData itemType);
+        GameObject CreateVirtualMover();
     }
 }

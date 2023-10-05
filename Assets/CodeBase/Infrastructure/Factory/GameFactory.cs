@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
 using CodeBase.Logic.Items;
+using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
@@ -31,6 +32,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IWindowService _windowService;
         private readonly IWatchService _watchService;
         private readonly IUIFactory _uiFactory;
+        private readonly IPlayerInputService _inputService;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
@@ -42,7 +44,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory)
+            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService)
         {
             _assets = assets;
             _randomService = randomService;
@@ -51,6 +53,7 @@ namespace CodeBase.Infrastructure.Factory
             _windowService = windowService;
             _watchService = watchService;
             _uiFactory = uiFactory;
+            _inputService = inputService;
             _coloredMaterials = new Dictionary<Colors, Material>(4);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -96,12 +99,16 @@ namespace CodeBase.Infrastructure.Factory
             data.ItemType switch
             {
                 StorableType.Compass => new CompassItem(data, _uiFactory, this),
+                StorableType.Binocular => new BinocularsItem(data, _uiFactory, _inputService, this),
                 StorableType.BlueKey => new KeyItem(data),
                 StorableType.RedKey => new KeyItem(data),
                 StorableType.GreenKey => new KeyItem(data),
                 StorableType.None => throw new Exception("Storable type is not specified"),
                 _ => new Item(data)
             };
+
+        public GameObject CreateVirtualMover() =>
+            _assets.Instantiate(AssetPath.VirtualMover, _heroTransform.position);
 
         public Material CreateMaterial(string name) =>
             GetCashed(name, AssetPath.Materials, _materials);

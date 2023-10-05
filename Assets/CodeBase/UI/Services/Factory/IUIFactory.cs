@@ -12,6 +12,7 @@ namespace CodeBase.UI.Services.Factory
     GameObject CreateRankView(Transform inside);
     GameObject CreateCellView(Transform selfTransform);
     GameObject CreateCompassArrowPanel(Transform hero, float lifetime);
+    GameObject CreateOverviewInterface();
     void CreateSettings();
     void CreatePause();
     void CreateResults();

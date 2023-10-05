@@ -92,6 +92,9 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_progressService, _scoreService, _stateMachine);
         }
 
+        public GameObject CreateOverviewInterface() =>
+            _assets.Instantiate(AssetPath.OverviewInterface, _uiRoot);
+
         public void CreateLeaderboard()
         {
             var window = CreateWindow<LeaderboardWindow>(WindowId.Leaderboard);

@@ -36,6 +36,7 @@ namespace CodeBase.Infrastructure.States
       _progressService.Progress.WorldData.SceneName = CurrentScene();
       _saveLoadService.SaveProgress();
       _inputService.Subscribe();
+      _inputService.EnableMovementMap();
       _watchService.Start();
     }
 
