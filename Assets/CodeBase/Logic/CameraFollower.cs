@@ -23,7 +23,7 @@ namespace CodeBase.Logic
             enabled = true;
         }
 
-        protected override void LateRun() =>
+        protected override void FixedRun() =>
             _moveAction.Invoke();
 
         public void Follow(Transform target)
@@ -50,7 +50,7 @@ namespace CodeBase.Logic
             position = Vector3.Lerp(
                 position,
                 newPosition,
-                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(position, targetPosition), 1f - _power));
+                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(position, newPosition), 1f - _power));
             _cameraHolder.position = position;
         }
     }
