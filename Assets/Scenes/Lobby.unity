@@ -1586,10 +1586,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29b215f109538348892a5bc5fb258cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _cameraHolder: {fileID: 843557618}
   _offsetRotetion: {x: 0, y: -0.44, z: 0}
   _offsetPosition: {x: 0, y: 0, z: -14}
+  _smoothing: 15
+  _power: 1
 --- !u!1 &1045952567
 GameObject:
   m_ObjectHideFlags: 0

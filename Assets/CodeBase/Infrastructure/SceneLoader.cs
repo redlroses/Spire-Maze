@@ -9,6 +9,8 @@ namespace CodeBase.Infrastructure
     {
         private readonly ICoroutineRunner _coroutineRunner;
 
+        private bool _isInitialized;
+
         public SceneLoader(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
@@ -19,6 +21,15 @@ namespace CodeBase.Infrastructure
 
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
+            if (nextScene.Equals(LevelNames.Initial))
+            {
+                if (SceneManager.GetActiveScene().name.Equals(LevelNames.Initial))
+                {
+                    onLoaded?.Invoke();
+                    yield break;
+                }
+            }
+
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)

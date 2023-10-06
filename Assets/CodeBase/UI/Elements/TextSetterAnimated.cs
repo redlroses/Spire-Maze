@@ -45,10 +45,12 @@ namespace CodeBase.UI.Elements
         private int GetAnimatedNumberByTime(float time) =>
             (int) Math.Round(_curveAnimation.Evaluate(time / _duration) * _targetNumber);
 
+#if UNITY_EDITOR
         [Conditional("UNITY_EDITOR")] [Button("Set Test Text")]
         private void SetTextNumber()
         {
             SetTextAnimated(_testNumber);
         }
+#endif
     }
 }
