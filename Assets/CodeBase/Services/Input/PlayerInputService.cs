@@ -39,6 +39,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Dodge.started += OnDodged;
             _inputController.Player.Pause.started += OnPause;
             _inputController.Overview.ViewTower.performed += OnOverviewMove;
+            _inputController.Overview.ViewTower.canceled += OnOverviewMove;
         }
 
         public void Cleanup()
@@ -49,6 +50,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Dodge.started -= OnDodged;
             _inputController.Player.Pause.started -= OnPause;
             _inputController.Overview.ViewTower.performed -= OnOverviewMove;
+            _inputController.Overview.ViewTower.canceled -= OnOverviewMove;
 
             DisableOverviewMap();
             DisableMovementMap();
@@ -60,10 +62,10 @@ namespace CodeBase.Services.Input
             _inputController.Player.Enable();
 
         public void EnableOverviewMap() =>
-            _inputController.Player.Enable();
+            _inputController.Overview.Enable();
 
         public void DisableMovementMap() =>
-            _inputController.Overview.Disable();
+            _inputController.Player.Disable();
 
         public void DisableOverviewMap() =>
             _inputController.Overview.Disable();

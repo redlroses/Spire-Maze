@@ -10,6 +10,7 @@ namespace CodeBase.Services.Input
         event Action<MoveDirection> HorizontalMove;
         event Action Jump;
         event Action<MoveDirection> Dodge;
+        event Action<Vector2> OverviewMove;
         InputActionPhase MovementPhase { get; }
         MoveDirection HorizontalDirection { get; }
         void Subscribe();
@@ -18,6 +19,5 @@ namespace CodeBase.Services.Input
         void EnableOverviewMap();
         void DisableMovementMap();
         void DisableOverviewMap();
-        event Action<Vector2> OverviewMove;
     }
 }

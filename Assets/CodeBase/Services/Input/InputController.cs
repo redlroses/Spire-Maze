@@ -197,7 +197,7 @@ namespace CodeBase.Services.Input
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""f1c0ee26-02bd-48b9-8eae-2338e5d325e5"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -206,7 +206,7 @@ namespace CodeBase.Services.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""Up"",
                     ""id"": ""60a07ab8-5bdf-4ff7-b800-1aefc2ee30b5"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
@@ -217,7 +217,7 @@ namespace CodeBase.Services.Input
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""Down"",
                     ""id"": ""5015498c-113f-4127-b495-ac68a11ac2a6"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -228,7 +228,7 @@ namespace CodeBase.Services.Input
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
+                    ""name"": ""Left"",
                     ""id"": ""c9c199f0-a4a4-4118-b050-6248c2ce035c"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -239,8 +239,8 @@ namespace CodeBase.Services.Input
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""90a217b1-1887-491d-8cc0-f3c0959a94e9"",
+                    ""name"": ""Right"",
+                    ""id"": ""6326b22c-e888-459e-bb1f-cd1522fa9594"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -252,7 +252,7 @@ namespace CodeBase.Services.Input
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""8654f22d-d751-4d9b-b177-b9edd4c0655c"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -12,14 +12,19 @@ namespace CodeBase.Logic
 
         protected override void LateRun()
         {
-            _cameraHolder.rotation = Quaternion.LookRotation(new Vector3(-_target.position.x + _offsetRotetion.x, _offsetRotetion.y, -_target.position.z + _offsetRotetion.z));
-            _cameraHolder.position = new Vector3(0, _target.position.y, 0);
-            transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
+            FollowToTarget();
         }
 
         public void Follow(Transform hero)
         {
             _target = hero;
+        }
+
+        private void FollowToTarget()
+        {
+            _cameraHolder.rotation = Quaternion.LookRotation(new Vector3(-_target.position.x + _offsetRotetion.x, _offsetRotetion.y, -_target.position.z + _offsetRotetion.z));
+            _cameraHolder.position = new Vector3(0, _target.position.y, 0);
+            transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
         }
     }
 }

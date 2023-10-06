@@ -13,6 +13,7 @@ namespace CodeBase.Logic.Items
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerInputService _inputService;
         private readonly IGameFactory _gameFactory;
+        private VirtualMover _virtualMover;
         public float ReloadTime { get; }
 
         public BinocularsItem(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService, IGameFactory gameFactory) : base(staticData)
@@ -27,19 +28,22 @@ namespace CodeBase.Logic.Items
         {
             _inputService.DisableMovementMap();
             _inputService.EnableOverviewMap();
-            VirtualMover virtualMover = _gameFactory.CreateVirtualMover().GetComponent<VirtualMover>();
-            _inputService.OverviewMove += virtualMover.Move;
+            _virtualMover = _gameFactory.CreateVirtualMover().GetComponent<VirtualMover>();
+            _inputService.OverviewMove += OnOverviewMove;
             GameObject overviewInterface = _uiFactory.CreateOverviewInterface();
             Button closeButton = overviewInterface.GetComponent<Button>();
 
             closeButton.onClick.AddListener(() =>
             {
-                _inputService.OverviewMove -= virtualMover.Move;
+                _inputService.OverviewMove -= OnOverviewMove;
                 Object.Destroy(overviewInterface);
-                Object.Destroy(virtualMover.gameObject);
+                Object.Destroy(_virtualMover.gameObject);
                 _inputService.DisableOverviewMap();
                 _inputService.EnableMovementMap();
             });
         }
+
+        private void OnOverviewMove(Vector2 direction) =>
+            _virtualMover.Move(direction);
     }
 }
