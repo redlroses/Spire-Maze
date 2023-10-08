@@ -3,12 +3,15 @@ using System.Linq;
 using CodeBase.Logic.Inventory;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Factory;
+using TheraBytes.BetterUi;
 using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
     public class InventoryView : MonoBehaviour
     {
+        [SerializeField] private BetterToggle _inventoryShowToggle;
+
         private List<InventoryCellView> _cellViews;
         private IInventory _inventory;
         private IUIFactory _uiFactory;
@@ -59,8 +62,11 @@ namespace CodeBase.UI.Elements
             _cellViews.Remove(cellView);
         }
 
-        private void OnItemUsed(StorableType itemType) =>
-            _inventory.TryUse(itemType);
+        private void OnItemUsed(StorableType itemType)
+        {
+            if (_inventory.TryUse(itemType))
+                _inventoryShowToggle.isOn = false;
+        }
 
         private void OnUpdatedInventory(IReadOnlyInventoryCell readOnlyInventoryCell)
         {

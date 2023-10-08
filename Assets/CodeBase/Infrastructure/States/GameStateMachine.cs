@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Services;
+using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
@@ -37,6 +38,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IScoreService>(),
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
+                    services.Single<ICameraOperatorService>(),
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),

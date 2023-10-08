@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
+using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Localization;
@@ -15,6 +16,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -36,7 +38,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         public void Enter() =>
-            _sceneLoader.Load(LevelNames.Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(LevelNames.Initial, EnterLoadLevel);
 
         public void Exit()
         {
@@ -48,6 +50,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
             _services.RegisterSingle<IWatchService>(
@@ -83,7 +86,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IWindowService>(),
                     _services.Single<IWatchService>(),
                     _services.Single<IUIFactory>(),
-                    _services.Single<IPlayerInputService>()));
+                    _services.Single<IPlayerInputService>(),
+                    _services.Single<ICameraOperatorService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

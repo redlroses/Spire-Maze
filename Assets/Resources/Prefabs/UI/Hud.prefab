@@ -4649,7 +4649,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6491093475444629286}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -6363,14 +6363,14 @@ MonoBehaviour:
     m_Right: 5
     m_Top: 5
     m_Bottom: 5
-  m_ChildAlignment: 1
-  m_Spacing: 20
+  m_ChildAlignment: 0
+  m_Spacing: 17
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 0
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
   paddingSizerFallback:
     screenConfigName: 
@@ -7263,7 +7263,7 @@ MonoBehaviour:
     m_Right: 5
     m_Top: 7
     m_Bottom: 5
-  m_ChildAlignment: 5
+  m_ChildAlignment: 0
   m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -8674,8 +8674,8 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 3.8769228
-  m_fontSizeMax: 181.38461
+  m_fontSizeMin: 3.4461536
+  m_fontSizeMax: 161.23077
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8706,7 +8706,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 12, y: 10, z: 12, w: 10}
+  m_margin: {x: 12, y: 10, z: 16, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9321,17 +9321,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 30
-    m_Right: 30
-    m_Top: 30
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
     m_Bottom: 30
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 120}
-  m_Spacing: {x: 20, y: 20}
+  m_CellSize: {x: 141, y: 140}
+  m_Spacing: {x: 18, y: 22}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 1
   paddingSizerFallback:
     screenConfigName: 
     OptimizedSize:
@@ -9978,6 +9978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e82499ef3d3fdd44ac75ac6a02b32c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inventoryShowToggle: {fileID: 6493223085243656782}
 --- !u!1 &9216954483624774583
 GameObject:
   m_ObjectHideFlags: 0

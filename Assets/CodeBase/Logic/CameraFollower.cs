@@ -16,7 +16,7 @@ namespace CodeBase.Logic
 
         private Transform _followTarget;
         private Vector3 _toPosition;
-        private Action _moveAction;
+        private Action _moveAction = () => { };
 
         private void Awake()
         {

@@ -5,6 +5,7 @@ using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
@@ -36,12 +37,13 @@ namespace CodeBase.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
+        private readonly ICameraOperatorService _cameraOperatorService;
 
         private LoadPayload _loadPayload;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService, LoadingCurtain curtain)
+            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService, ICameraOperatorService cameraOperatorService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -54,6 +56,7 @@ namespace CodeBase.Infrastructure.States
             _scoreService = scoreService;
             _watchService = watchService;
             _pauseService = pauseService;
+            _cameraOperatorService = cameraOperatorService;
             _curtain = curtain;
         }
 
@@ -164,7 +167,12 @@ namespace CodeBase.Infrastructure.States
         private void CameraFollow(GameObject hero)
         {
             if (Camera.main != null)
-                Camera.main.GetComponent<CameraFollower>().Follow(hero.transform);
+            {
+                CameraFollower cameraFollower = Camera.main.GetComponent<CameraFollower>();
+                _cameraOperatorService.RegisterCamera(cameraFollower);
+                _cameraOperatorService.SetAsDefault(hero.transform);
+                _cameraOperatorService.FocusOnDefault();
+            }
         }
 
         private void ValidateLevelProgress()

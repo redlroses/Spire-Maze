@@ -5,6 +5,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
 using CodeBase.Logic.Items;
+using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -33,6 +34,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IWatchService _watchService;
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerInputService _inputService;
+        private readonly ICameraOperatorService _cameraOperator;
 
         private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
@@ -44,7 +46,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService)
+            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService, ICameraOperatorService cameraOperator)
         {
             _assets = assets;
             _randomService = randomService;
@@ -54,6 +56,7 @@ namespace CodeBase.Infrastructure.Factory
             _watchService = watchService;
             _uiFactory = uiFactory;
             _inputService = inputService;
+            _cameraOperator = cameraOperator;
             _coloredMaterials = new Dictionary<Colors, Material>(4);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
@@ -99,7 +102,7 @@ namespace CodeBase.Infrastructure.Factory
             data.ItemType switch
             {
                 StorableType.Compass => new CompassItem(data, _uiFactory, this),
-                StorableType.Binocular => new BinocularsItem(data, _uiFactory, _inputService, this),
+                StorableType.Binocular => new BinocularItem(data, _uiFactory, _inputService, this, _cameraOperator),
                 StorableType.BlueKey => new KeyItem(data),
                 StorableType.RedKey => new KeyItem(data),
                 StorableType.GreenKey => new KeyItem(data),
