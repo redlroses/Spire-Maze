@@ -11,25 +11,25 @@
                     "id": "6864adca-530a-402b-9ff2-fda098f4843b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(pressPoint=0.5)",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "9dadb56b-b149-4a07-8a9b-b021a5912f12",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Dodge",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "52b68400-ea97-4f0c-895e-5417c4136ced",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(pressPoint=0.75)",
                     "initialStateCheck": false
                 },
                 {
@@ -81,7 +81,7 @@
                     "id": "467edf1c-24e9-4b76-84d7-15830ee2aca8",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
-                    "processors": "AxisDeadzone(min=0.75)",
+                    "processors": "",
                     "groups": "Joystick",
                     "action": "Jump",
                     "isComposite": false,
@@ -212,8 +212,8 @@
                     "name": "",
                     "id": "92236290-e277-48bd-a446-f51ddd8cda0b",
                     "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "AxisDeadzone(min=0.75)",
+                    "interactions": "Press",
+                    "processors": "",
                     "groups": "Joystick",
                     "action": "Dodge",
                     "isComposite": false,
