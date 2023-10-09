@@ -43,8 +43,7 @@ namespace CodeBase.Services.LevelBuild
             BuildLevel(levelStaticData);
             _level.SelfTransform = _levelContainer;
             _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
-            _persistentProgressService.Progress.WorldData.LevelState.Size =
-                new Vector3Data(0, _floorHeight * _level.Height, 0);
+            _persistentProgressService.TemporalProgress.LevelHeightRange = new Vector2(0, _floorHeight * _level.Height);
 
             return _level;
         }

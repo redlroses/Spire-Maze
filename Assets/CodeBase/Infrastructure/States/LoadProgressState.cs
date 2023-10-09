@@ -42,6 +42,8 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress =
                 _saveLoadProgress.LoadProgress()
                 ?? NewProgress();
+
+            _progressService.TemporalProgress = new TemporalProgress();
         }
 
         private PlayerProgress NewProgress()

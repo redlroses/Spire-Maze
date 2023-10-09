@@ -39,7 +39,7 @@ namespace CodeBase.Logic.Items
             _inputService.DisableMovementMap();
             _inputService.EnableOverviewMap();
             _virtualMover = _gameFactory.CreateVirtualMover().GetComponent<VirtualMover>();
-            _virtualMover.Construct(_persistentProgressService.Progress.WorldData.LevelState.Size.AsUnityVector());
+            _virtualMover.Construct(_persistentProgressService.TemporalProgress.LevelHeightRange);
             _cameraOperator.Focus(_virtualMover.transform);
             _inputService.OverviewMove += OnOverviewMove;
             GameObject overviewInterface = _uiFactory.CreateOverviewInterface();

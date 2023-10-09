@@ -11,8 +11,11 @@ namespace CodeBase.Logic.Movement
         private Vector2 _direction;
         private Vector2 _heightRange;
 
-        public void Construct(Vector2 heightRange) =>
+        public void Construct(Vector2 heightRange)
+        {
+            Debug.Log(heightRange);
             _heightRange = heightRange;
+        }
 
         public void Move(Vector2 direction)
         {
