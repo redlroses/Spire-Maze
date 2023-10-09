@@ -102,7 +102,7 @@ namespace CodeBase.Infrastructure.Factory
             data.ItemType switch
             {
                 StorableType.Compass => new CompassItem(data, _uiFactory, this),
-                StorableType.Binocular => new BinocularItem(data, _uiFactory, _inputService, this, _cameraOperator),
+                StorableType.Binocular => new BinocularItem(data, _uiFactory, _inputService, this, _cameraOperator, _persistentProgressService),
                 StorableType.BlueKey => new KeyItem(data),
                 StorableType.RedKey => new KeyItem(data),
                 StorableType.GreenKey => new KeyItem(data),

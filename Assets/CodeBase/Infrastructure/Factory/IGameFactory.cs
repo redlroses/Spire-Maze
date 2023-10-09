@@ -3,7 +3,6 @@ using CodeBase.EditorCells;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Items;
 using CodeBase.Services;
-using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using UnityEngine;

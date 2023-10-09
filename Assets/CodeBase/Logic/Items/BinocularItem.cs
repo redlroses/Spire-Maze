@@ -2,7 +2,9 @@
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,16 +17,20 @@ namespace CodeBase.Logic.Items
         private readonly IPlayerInputService _inputService;
         private readonly IGameFactory _gameFactory;
         private readonly ICameraOperatorService _cameraOperator;
+        private readonly IPersistentProgressService _persistentProgressService;
 
         private VirtualMover _virtualMover;
         public float ReloadTime { get; }
 
-        public BinocularItem(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService, IGameFactory gameFactory, ICameraOperatorService cameraOperator) : base(staticData)
+        public BinocularItem(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService,
+            IGameFactory gameFactory, ICameraOperatorService cameraOperator,
+            IPersistentProgressService persistentProgressService) : base(staticData)
         {
             _uiFactory = uiFactory;
             _inputService = inputService;
             _gameFactory = gameFactory;
             _cameraOperator = cameraOperator;
+            _persistentProgressService = persistentProgressService;
             ReloadTime = staticData.ReloadTime;
         }
 
@@ -33,6 +39,7 @@ namespace CodeBase.Logic.Items
             _inputService.DisableMovementMap();
             _inputService.EnableOverviewMap();
             _virtualMover = _gameFactory.CreateVirtualMover().GetComponent<VirtualMover>();
+            _virtualMover.Construct(_persistentProgressService.Progress.WorldData.LevelState.Size.AsUnityVector());
             _cameraOperator.Focus(_virtualMover.transform);
             _inputService.OverviewMove += OnOverviewMove;
             GameObject overviewInterface = _uiFactory.CreateOverviewInterface();
