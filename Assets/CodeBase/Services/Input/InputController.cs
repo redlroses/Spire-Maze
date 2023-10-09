@@ -185,9 +185,9 @@ namespace CodeBase.Services.Input
             ""actions"": [
                 {
                     ""name"": ""ViewTower"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b3ed7ee0-da61-419a-8855-ae015115672e"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
