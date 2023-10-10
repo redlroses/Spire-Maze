@@ -55,7 +55,7 @@ namespace CodeBase.Logic.StateMachine.States
             if (state != AnimatorState.Dodge)
                 return;
 
-            if (_playerInputService.MovementPhase == InputActionPhase.Performed)
+            if (_playerInputService.MovementPhase != InputActionPhase.Waiting)
             {
                 _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
             }

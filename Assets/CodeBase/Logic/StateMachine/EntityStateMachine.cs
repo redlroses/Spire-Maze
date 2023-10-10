@@ -40,7 +40,6 @@ namespace CodeBase.Logic.StateMachine
             TState state = GetState<TState>();
             _activeState = state;
 
-            // Debug.Log($"Current state: {state}");
             return state;
         }
 

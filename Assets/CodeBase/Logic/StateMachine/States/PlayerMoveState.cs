@@ -2,6 +2,7 @@
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
+using UnityEngine;
 
 namespace CodeBase.Logic.StateMachine.States
 {
@@ -62,11 +63,11 @@ namespace CodeBase.Logic.StateMachine.States
         private void OnHorizontalMove(MoveDirection direction)
         {
             _mover.Move(direction);
+            _lastDirection = direction;
 
             if (direction != MoveDirection.Stop)
                 return;
 
-            _lastDirection = direction;
             _entityStateMachine.Enter<PlayerIdleState>();
         }
     }

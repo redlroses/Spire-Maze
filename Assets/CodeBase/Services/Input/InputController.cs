@@ -35,25 +35,25 @@ namespace CodeBase.Services.Input
                     ""id"": ""6864adca-530a-402b-9ff2-fda098f4843b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.5)"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Movement"",
-                    ""type"": ""Button"",
-                    ""id"": ""9dadb56b-b149-4a07-8a9b-b021a5912f12"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""9dadb56b-b149-4a07-8a9b-b021a5912f12"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Dodge"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""52b68400-ea97-4f0c-895e-5417c4136ced"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.75)"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -160,7 +160,7 @@ namespace CodeBase.Services.Input
                     ""id"": ""ee6fce78-1e91-470a-b138-f8f13dfa5c7e"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.25)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,

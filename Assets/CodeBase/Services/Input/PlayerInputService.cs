@@ -73,10 +73,13 @@ namespace CodeBase.Services.Input
         private void OnMove(InputAction.CallbackContext context)
         {
             int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
-            HorizontalMove.Invoke((MoveDirection) moveInput);
 
             if ((MoveDirection) moveInput != MoveDirection.Stop)
                 _direction = (MoveDirection) moveInput;
+
+            Debug.Log($"{context.phase} {(MoveDirection) moveInput}");
+
+            HorizontalMove.Invoke((MoveDirection) moveInput);
         }
 
         private void OnJump(InputAction.CallbackContext context) =>

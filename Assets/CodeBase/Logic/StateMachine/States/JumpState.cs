@@ -3,6 +3,7 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Logic.StateMachine.States
@@ -47,7 +48,7 @@ namespace CodeBase.Logic.StateMachine.States
             if (state != AnimatorState.Jump)
                 return;
 
-            if (_playerInputService.MovementPhase == InputActionPhase.Performed)
+            if (_playerInputService.MovementPhase != InputActionPhase.Waiting)
             {
                 _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
             }
