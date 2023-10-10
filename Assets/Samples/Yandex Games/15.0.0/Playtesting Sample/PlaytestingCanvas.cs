@@ -1,4 +1,4 @@
-
+#pragma warning disable
 
 using System.Collections;
 using Agava.YandexGames;
@@ -20,12 +20,10 @@ namespace Agava.YandexGames.Samples
         [SerializeField]
         private InputField _cloudSaveDataInputField;
 
-        [SerializeField]
-        private InputField _productIdInputField;
-
         private void Awake()
         {
             YandexGamesSdk.CallbackLogging = true;
+            PlayerAccount.AuthorizedInBackground += OnAuthorizedInBackground;
         }
 
         private IEnumerator Start()
@@ -36,6 +34,9 @@ namespace Agava.YandexGames.Samples
 
             // Always wait for it if invoking something immediately in the first scene.
             yield return YandexGamesSdk.Initialize();
+
+            if (PlayerAccount.IsAuthorized == false)
+                PlayerAccount.StartAuthorizationPolling(1500);
 
             while (true)
             {
@@ -48,6 +49,11 @@ namespace Agava.YandexGames.Samples
 
                 yield return new WaitForSecondsRealtime(0.25f);
             }
+        }
+
+        private void OnDestroy()
+        {
+            PlayerAccount.AuthorizedInBackground -= OnAuthorizedInBackground;
         }
 
         public void OnShowInterstitialButtonClick()
@@ -132,14 +138,39 @@ namespace Agava.YandexGames.Samples
             PlayerAccount.GetCloudSaveData((data) => _cloudSaveDataInputField.text = data);
         }
 
-        public void OnGetDeviceTypeButtonClick()
-        {
-            Debug.Log($"DeviceType = {Device.Type}");
-        }
-
         public void OnGetEnvironmentButtonClick()
         {
             Debug.Log($"Environment = {JsonUtility.ToJson(YandexGamesSdk.Environment)}");
+        }
+
+        public void OnCallGameReadyButtonClick()
+        {
+            YandexGamesSdk.GameReady();
+        }
+
+        public void OnSuggestShortcutButtonClick()
+        {
+            Shortcut.Suggest();
+        }
+
+        public void OnRequestReviewButtonClick()
+        {
+            ReviewPopup.Open();
+        }
+
+        public void OnCanSuggestShortcutButtonClick()
+        {
+            Shortcut.CanSuggest(result => { });
+        }
+
+        public void OnCanRequestReviewButtonClick()
+        {
+            ReviewPopup.CanOpen((result, reason) => { });
+        }
+
+        private void OnAuthorizedInBackground()
+        {
+            Debug.Log($"{nameof(OnAuthorizedInBackground)} {PlayerAccount.IsAuthorized}");
         }
     }
 }
