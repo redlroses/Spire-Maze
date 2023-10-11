@@ -13,7 +13,6 @@ namespace CodeBase.Services.Score
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
 
-        private LevelData _currentLevelData;
         private int _currentLevelId;
         private int _stars;
         private int _currentScore;
@@ -44,45 +43,50 @@ namespace CodeBase.Services.Score
                 return;
             }
 
-            _currentLevelId = Progress.WorldData.LevelState.LevelId;
-            _currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
+            Cleanup();
 
-            Debug.Log(_currentLevelData == null
-                ? $"Level ID: {_currentLevelId}, LevelData: {_currentLevelData}"
-                : $"Level ID: {_currentLevelId}, LevelData: id - {_currentLevelData.Id}, best score - {_currentLevelData.Score}");
+            _currentLevelId = Progress.WorldData.LevelState.LevelId;
+
+#if DEBUG
+            LevelData currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
+
+            Debug.Log(currentLevelData == null
+                ? $"Level ID: {_currentLevelId}, LevelData: {currentLevelData}"
+                : $"Level ID: {_currentLevelId}, LevelData: id - {currentLevelData.Id}, best score - {currentLevelData.Score}, stars - {currentLevelData.Stars}");
+#endif
         }
 
         public void UpdateProgress()
         {
-            if (_currentLevelData == null)
+            if (IsScorableLevel() == false)
             {
-                Progress.GlobalData.Levels.Add(new LevelData(_currentLevelId, _currentScore, _stars));
+                return;
             }
-            else
-            {
-                if (_currentLevelData.Score < _currentScore)
-                {
-                    _currentLevelData.Score = _currentScore;
-                    _currentLevelData.Stars = _stars;
-                }
-            }
+
+            Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
 
             Progress.WorldData.ScoreAccumulationData.LevelScore = _currentScore;
             Progress.WorldData.ScoreAccumulationData.LevelStars = _stars;
         }
 
-        private static int SumScore(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
+        private void Cleanup()
+        {
+            _currentScore = 0;
+            _stars = 0;
+        }
+
+        private int SumScore(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
             (int) (ScorePerArtifacts(scoreAccumulationData, scoreConfig) +
                    ScorePerTime(scoreConfig, scoreAccumulationData));
 
-        private static float ScorePerTime(ScoreConfig scoreConfig, ScoreAccumulationData scoreAccumulationData)
+        private float ScorePerTime(ScoreConfig scoreConfig, ScoreAccumulationData scoreAccumulationData)
         {
             int scorePerTime = scoreConfig.BasePointsOnStart -
                                (int) scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction;
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 
-        private static int ScorePerArtifacts(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
+        private int ScorePerArtifacts(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
             scoreAccumulationData.Artifacts *
             scoreConfig.PerArtifact;
 

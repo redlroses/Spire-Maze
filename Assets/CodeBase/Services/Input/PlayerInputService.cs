@@ -77,8 +77,6 @@ namespace CodeBase.Services.Input
             if ((MoveDirection) moveInput != MoveDirection.Stop)
                 _direction = (MoveDirection) moveInput;
 
-            Debug.Log($"{context.phase} {(MoveDirection) moveInput}");
-
             HorizontalMove.Invoke((MoveDirection) moveInput);
         }
 

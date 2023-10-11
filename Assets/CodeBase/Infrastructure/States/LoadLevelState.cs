@@ -14,6 +14,7 @@ using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
+using CodeBase.UI;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
@@ -43,7 +44,8 @@ namespace CodeBase.Infrastructure.States
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService, ICameraOperatorService cameraOperatorService, LoadingCurtain curtain)
+            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
+            ICameraOperatorService cameraOperatorService, LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -81,7 +83,7 @@ namespace CodeBase.Infrastructure.States
             InitUIRoot();
             InitGameWorld();
             ValidateLevelProgress();
-            var hero = InitHero();
+            GameObject hero = InitHero();
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
@@ -129,9 +131,12 @@ namespace CodeBase.Infrastructure.States
         private void InitLobby()
         {
             GameObject lobby = _gameFactory.CreateLobby();
+            EnterLevelPanel enterLevelPanel = _uiFactory.CreateEnterLevelPanel().GetComponent<EnterLevelPanel>();
 
             foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
-                levelTransfer.Construct(_stateMachine);
+            {
+                levelTransfer.Construct(_stateMachine, enterLevelPanel, _progressService);
+            }
 
             foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
                 _pauseService.Register(pauseWatchers);

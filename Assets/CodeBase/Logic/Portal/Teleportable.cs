@@ -16,8 +16,10 @@ namespace CodeBase.Logic.Portal
 
         public void Teleportation(Vector3 position, Vector3 rotation)
         {
+            _rigidbody.Sleep();
             _rigidbody.position = position;
             _rigidbody.rotation = Quaternion.LookRotation(rotation);
+            _rigidbody.WakeUp();
         }
     }
 }

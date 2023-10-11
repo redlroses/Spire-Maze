@@ -4,19 +4,20 @@ namespace CodeBase.UI.Elements
 {
     public class StarsView : MonoBehaviour
     {
-        [SerializeField] private int _maxStars;
         [SerializeField] private GameObject[] _stars;
 
         public void EnableStars(int starsCount)
         {
-            if (starsCount > _maxStars)
+            int maxStars = _stars.Length;
+
+            if (starsCount > maxStars)
             {
-                starsCount = _maxStars;
+                starsCount = maxStars;
             }
 
-            for (int i = 0; i < starsCount; i++)
+            for (int i = 0; i < maxStars; i++)
             {
-                _stars[i].SetActive(true);
+                _stars[i].SetActive(i < starsCount);
             }
         }
     }

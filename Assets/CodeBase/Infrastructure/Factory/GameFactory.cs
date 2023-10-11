@@ -79,7 +79,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHero(Vector3 at)
         {
-            GameObject hero = InstantiateRegistered(prefabPath: AssetPath.HeroPath, at);
+            GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at);
             _heroTransform = hero.transform;
             return hero;
         }

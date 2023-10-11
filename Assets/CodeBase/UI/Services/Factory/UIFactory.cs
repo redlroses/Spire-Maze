@@ -67,6 +67,9 @@ namespace CodeBase.UI.Services.Factory
             return panel;
         }
 
+        public GameObject CreateEnterLevelPanel() =>
+            _assets.Instantiate(AssetPath.EnterLevelPanel, _uiRoot);
+
         public void CreateSettings()
         {
             var window = CreateWindow<SettingsWindow>(WindowId.Settings);

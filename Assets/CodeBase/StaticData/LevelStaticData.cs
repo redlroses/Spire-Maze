@@ -23,8 +23,6 @@ namespace CodeBase.StaticData
 
         private Vector3 GetPositionByCellType<T>()
         {
-            Debug.Log(typeof(T));
-
             for (int i = 0; i < Size; i++)
             {
                 if (CellDataMap[i] is T == false)
