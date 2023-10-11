@@ -3,7 +3,6 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Logic.StateMachine.States
