@@ -80,6 +80,7 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
+            _pauseService.SetPause(false);
             InitUIRoot();
             InitGameWorld();
             ValidateLevelProgress();

@@ -12,8 +12,10 @@ namespace CodeBase.Services.Pause
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
 
-        public PauseService(IWatchService watchService) =>
+        public PauseService(IWatchService watchService)
+        {
             _watchService = watchService;
+        }
 
         public bool IsPause { get; private set; }
 
@@ -78,14 +80,6 @@ namespace CodeBase.Services.Pause
 
         private void ValidateWatchers()
         {
-            // foreach (IPauseWatcher unregisteredPauseWatcher in UnregisteredPauseWatchers)
-            // {
-            //     if (PauseWatchers.Contains(unregisteredPauseWatcher))
-            //     {
-            //         PauseWatchers.Remove(unregisteredPauseWatcher);
-            //     }
-            // }
-
             PauseWatchers.RemoveAll(watcher => watcher.Equals(null));
         }
     }
