@@ -31,15 +31,13 @@ namespace CodeBase.Logic
 
         protected override void OnTriggerObserverEntered(ITeleportable _)
         {
-            _enterLevelPanel.Show(GetStarsOnLevel());
+            LevelData levelData = GetLevelData();
+            _enterLevelPanel.Show(levelData is null ? 0 : levelData.Id, _toLevelId);
             _enterLevelPanel.EnterClick += LoadNewLevel;
         }
 
-        private int GetStarsOnLevel()
-        {
-            LevelData levelData = _progressService.Progress.GlobalData.Levels.Find(data => data.Id == _toLevelId);
-            return levelData is null ? 0 : levelData.Stars;
-        }
+        private LevelData GetLevelData() =>
+            _progressService.Progress.GlobalData.Levels.Find(data => data.Id == _toLevelId);
 
         protected override void OnTriggerObserverExited(ITeleportable _)
         {

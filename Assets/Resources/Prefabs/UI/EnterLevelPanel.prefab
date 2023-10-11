@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 9221837092584606226}
   - component: {fileID: 2524446073037674942}
   - component: {fileID: 2850762082490276485}
+  - component: {fileID: 8384103181752898300}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -466,7 +467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1
+  m_text: Level {0}
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
   m_sharedMaterial: {fileID: 6447333859754382329, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
@@ -652,6 +653,19 @@ MonoBehaviour:
         SizeModifiers:
         - Mode: 0
           Impact: 1
+--- !u!114 &8384103181752898300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540443703901002877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a6ff1a9bbf4e4eb0fbf5c0f0a02162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 2850762082490276485}
 --- !u!1 &4716260023358130245
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bed0cf2bb745b4b662891dd656a755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStars: 3
   _stars:
   - {fileID: 6273717500485761744}
   - {fileID: 4823993722470206744}
@@ -1458,6 +1471,7 @@ MonoBehaviour:
   _enterButton: {fileID: 7885532037297444048}
   _showHide:
     _underlyingValue: {fileID: 4259215544104766483}
+  _labelSetter: {fileID: 8384103181752898300}
   _starsView: {fileID: 6718189547450336115}
 --- !u!114 &4259215544104766483
 MonoBehaviour:

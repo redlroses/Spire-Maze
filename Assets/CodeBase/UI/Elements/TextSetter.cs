@@ -1,4 +1,5 @@
-﻿using NTC.Global.Cache;
+﻿using System;
+using NTC.Global.Cache;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,11 @@ namespace CodeBase.UI.Elements
     {
         [SerializeField] private TextMeshProUGUI _text;
 
+        private string _formatText;
+
+        private void Awake() =>
+            _formatText = _text.text;
+
         public void SetText(string text) =>
             _text.text = text;
 
@@ -16,5 +22,8 @@ namespace CodeBase.UI.Elements
 
         public void SetTextColor(Color32 color) =>
             _text.color = color;
+
+        public string ReadText() =>
+            _formatText;
     }
 }
