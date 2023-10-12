@@ -32,7 +32,7 @@ namespace CodeBase.Logic
         protected override void OnTriggerObserverEntered(ITeleportable _)
         {
             LevelData levelData = GetLevelData();
-            _enterLevelPanel.Show(levelData is null ? 0 : levelData.Id, _toLevelId);
+            _enterLevelPanel.Show(levelData is null ? 0 : levelData.Stars, _toLevelId);
             _enterLevelPanel.EnterClick += LoadNewLevel;
         }
 

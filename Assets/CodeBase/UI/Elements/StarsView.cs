@@ -19,6 +19,9 @@ namespace CodeBase.UI.Elements
             {
                 _stars[i].SetActive(i < starsCount);
             }
+
+            Debug.Log(starsCount);
+            
         }
     }
 }
