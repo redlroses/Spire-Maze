@@ -10,12 +10,15 @@ namespace CodeBase.Services.Score
 {
     public class ScoreService : IScoreService
     {
+        private const float ScoreToCoins = 0.35f;
+
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
 
         private int _currentLevelId;
         private int _stars;
         private int _currentScore;
+        private int _coins;
 
         private PlayerProgress Progress => _progressService.Progress;
 
@@ -25,15 +28,14 @@ namespace CodeBase.Services.Score
             _staticData = staticData;
         }
 
-        public int CalculateScore()
+        public void Calculate()
         {
-            ScoreAccumulationData scoreAccumulationData = Progress.WorldData.ScoreAccumulationData;
+            LevelAccumulationData levelAccumulationData = Progress.WorldData._levelAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
 
-            _currentScore = SumScore(scoreAccumulationData, scoreConfig);
+            _currentScore = SumScore(levelAccumulationData, scoreConfig);
             _stars = StarsCountFromConfig(scoreConfig);
-
-            return _currentScore = _currentScore > 0 ? _currentScore : 0;
+            _coins = Mathf.RoundToInt(_currentScore * ScoreToCoins);
         }
 
         public void LoadProgress()
@@ -65,8 +67,9 @@ namespace CodeBase.Services.Score
 
             Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
 
-            Progress.WorldData.ScoreAccumulationData.LevelScore = _currentScore;
-            Progress.WorldData.ScoreAccumulationData.LevelStars = _stars;
+            Progress.WorldData._levelAccumulationData.Score = _currentScore;
+            Progress.WorldData._levelAccumulationData.Stars = _stars;
+            Progress.WorldData._levelAccumulationData.Coins = _coins;
         }
 
         private void Cleanup()
@@ -75,19 +78,19 @@ namespace CodeBase.Services.Score
             _stars = 0;
         }
 
-        private int SumScore(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
-            (int) (ScorePerArtifacts(scoreAccumulationData, scoreConfig) +
-                   ScorePerTime(scoreConfig, scoreAccumulationData));
+        private int SumScore(LevelAccumulationData levelAccumulationData, ScoreConfig scoreConfig) =>
+            (int) (ScorePerArtifacts(levelAccumulationData, scoreConfig) +
+                   ScorePerTime(scoreConfig, levelAccumulationData));
 
-        private float ScorePerTime(ScoreConfig scoreConfig, ScoreAccumulationData scoreAccumulationData)
+        private float ScorePerTime(ScoreConfig scoreConfig, LevelAccumulationData levelAccumulationData)
         {
             int scorePerTime = scoreConfig.BasePointsOnStart -
-                               (int) scoreAccumulationData.PlayTime * scoreConfig.PerSecondReduction;
+                               (int) levelAccumulationData.PlayTime * scoreConfig.PerSecondReduction;
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 
-        private int ScorePerArtifacts(ScoreAccumulationData scoreAccumulationData, ScoreConfig scoreConfig) =>
-            scoreAccumulationData.Artifacts *
+        private int ScorePerArtifacts(LevelAccumulationData levelAccumulationData, ScoreConfig scoreConfig) =>
+            levelAccumulationData.Artifacts *
             scoreConfig.PerArtifact;
 
         private bool IsScorableLevel() =>

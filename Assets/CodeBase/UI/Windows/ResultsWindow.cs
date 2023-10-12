@@ -16,6 +16,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _itemText;
+        [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private StarsView _starsView;
 
         private IPersistentProgressService _progressService;
@@ -36,10 +37,11 @@ namespace CodeBase.UI.Windows
         protected override void Initialize()
         {
             _windowAnimationPlayer.Play();
-            var worldData = WorldData;
+            WorldData worldData = WorldData;
             SetScorePoints(worldData);
             SetItemsCount(worldData);
             SetStars(worldData);
+            SetCoins(worldData);
         }
 
         protected override void SubscribeUpdates()
@@ -57,12 +59,15 @@ namespace CodeBase.UI.Windows
         }
 
         private void SetStars(WorldData worldData) =>
-            _starsView.EnableStars(worldData.ScoreAccumulationData.LevelStars);
+            _starsView.EnableStars(worldData._levelAccumulationData.Stars);
 
         private void SetItemsCount(WorldData worldData) =>
-            _itemText.SetTextAnimated(worldData.ScoreAccumulationData.Artifacts);
+            _itemText.SetTextAnimated(worldData._levelAccumulationData.Artifacts);
 
         private void SetScorePoints(WorldData worldData) =>
-            _scoreText.SetTextAnimated(worldData.ScoreAccumulationData.LevelScore);
+            _scoreText.SetTextAnimated(worldData._levelAccumulationData.Score);
+
+        private void SetCoins(WorldData worldData) =>
+            _coinsText.SetTextAnimated(worldData._levelAccumulationData.Coins);
     }
 }

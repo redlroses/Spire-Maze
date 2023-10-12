@@ -92,7 +92,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateLose()
         {
             var window = CreateWindow<LoseWindow>(WindowId.Lose);
-            window.Construct(_progressService, _scoreService, _stateMachine);
+            window.Construct(_progressService, _stateMachine);
         }
 
         public GameObject CreateOverviewInterface() =>

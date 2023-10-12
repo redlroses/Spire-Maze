@@ -1,6 +1,6 @@
-﻿using CodeBase.Infrastructure.States;
+﻿using CodeBase.Data;
+using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
-using CodeBase.Services.Score;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
@@ -12,23 +12,26 @@ namespace CodeBase.UI.Windows
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private TextSetterAnimated _scoreText;
+        [SerializeField] private TextSetterAnimated _coinsText;
 
-        private IScoreService _scoreService;
         private IPersistentProgressService _progressService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+        private WorldData WorldData => _progressService.Progress.WorldData;
 
-        public void Construct(IPersistentProgressService progressService, IScoreService scoreService,
+        public void Construct(IPersistentProgressService progressService,
             GameStateMachine stateMachine)
         {
             _progressService = progressService;
-            _scoreService = scoreService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
         }
 
-        protected override void Initialize() =>
+        protected override void Initialize()
+        {
             SetScore();
+            SetCoins();
+        }
 
         protected override void SubscribeUpdates()
         {
@@ -43,6 +46,9 @@ namespace CodeBase.UI.Windows
         }
 
         private void SetScore() =>
-            _scoreText.SetTextAnimated(_scoreService.CalculateScore());
+            _scoreText.SetTextAnimated(WorldData._levelAccumulationData.Score);
+
+        private void SetCoins() =>
+            _coinsText.SetTextAnimated(WorldData._levelAccumulationData.Coins);
     }
 }

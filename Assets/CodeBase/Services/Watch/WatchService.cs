@@ -47,12 +47,12 @@ namespace CodeBase.Services.Watch
 
         public void LoadProgress()
         {
-            _elapsedTime = _progressService.Progress.WorldData.ScoreAccumulationData.PlayTime;
+            _elapsedTime = _progressService.Progress.WorldData._levelAccumulationData.PlayTime;
         }
 
         public void UpdateProgress()
         {
-            _progressService.Progress.WorldData.ScoreAccumulationData.PlayTime = _elapsedTime;
+            _progressService.Progress.WorldData._levelAccumulationData.PlayTime = _elapsedTime;
         }
 
         private IEnumerator RunTimer()

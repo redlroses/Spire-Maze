@@ -13,7 +13,7 @@ namespace CodeBase.Data
         public HealthState HeroHealthState;
         public StaminaState HeroStaminaState;
         public InventoryData HeroInventoryData;
-        public ScoreAccumulationData ScoreAccumulationData;
+        public LevelAccumulationData _levelAccumulationData;
         public string SceneName;
 
         public WorldData(string initialScene)
@@ -23,7 +23,7 @@ namespace CodeBase.Data
             HeroHealthState = new HealthState();
             HeroStaminaState = new StaminaState();
             HeroInventoryData = new InventoryData();
-            ScoreAccumulationData = new ScoreAccumulationData();
+            _levelAccumulationData = new LevelAccumulationData();
             SceneName = initialScene;
         }
     }

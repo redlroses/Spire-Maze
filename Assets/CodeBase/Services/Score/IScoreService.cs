@@ -2,7 +2,7 @@
 {
     public interface IScoreService : IService
     {
-        int CalculateScore();
+        void Calculate();
         void LoadProgress();
         void UpdateProgress();
     }

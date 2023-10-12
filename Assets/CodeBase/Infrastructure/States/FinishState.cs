@@ -20,13 +20,11 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
-            _scoreService.CalculateScore();
-            _saveLoadService.SaveProgress();
             _windowService.Open(WindowId.Results);
+            _scoreService.Calculate();
+            _saveLoadService.SaveProgress();
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
     }
 }
