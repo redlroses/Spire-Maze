@@ -31,7 +31,14 @@ namespace CodeBase.Logic.Inventory
 
         public void LoadProgress(PlayerProgress progress)
         {
+            Debug.Log("LoadProgress");
+            
             Inventory = progress.WorldData.HeroInventoryData.AsHeroInventory();
+            
+            foreach (var cell in progress.WorldData.HeroInventoryData.InventoryCells)
+            {
+                Debug.Log(cell.Item.Name);
+            }
         }
 
         public void UpdateProgress(PlayerProgress progress)
@@ -40,6 +47,12 @@ namespace CodeBase.Logic.Inventory
             progress.WorldData.LevelAccumulationData.Artifacts = progress.WorldData.HeroInventoryData.InventoryCells
                 .Where(inventoryCell => inventoryCell.Item is IUsable == false)
                 .Sum(inventoryCell => inventoryCell.Count);
+            
+            Debug.Log("Load progress inventory");
+            foreach (var cell in progress.WorldData.HeroInventoryData.InventoryCells)
+            {
+                Debug.Log(cell.Item.Name);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.States
         {
             _scoreService.Calculate(isLose);
             _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
-            _saveLoadService.SaveProgress();
+            _scoreService.UpdateProgress();
         }
 
         public void Exit() { }

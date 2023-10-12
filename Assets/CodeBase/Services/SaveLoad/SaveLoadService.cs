@@ -31,7 +31,6 @@ namespace CodeBase.Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             _watchService.UpdateProgress();
-            _scoreService.UpdateProgress();
 
             Debug.Log("save");
             PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
