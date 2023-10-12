@@ -1,6 +1,8 @@
-﻿using CodeBase.Data;
+﻿using AYellowpaper;
+using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
@@ -13,6 +15,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _coinsText;
+        [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
 
         private IPersistentProgressService _progressService;
 
@@ -31,6 +34,7 @@ namespace CodeBase.UI.Windows
         {
             SetScore();
             SetCoins();
+            _showHide.Value.Show();
         }
 
         protected override void SubscribeUpdates()
@@ -46,9 +50,9 @@ namespace CodeBase.UI.Windows
         }
 
         private void SetScore() =>
-            _scoreText.SetTextAnimated(WorldData._levelAccumulationData.Score);
+            _scoreText.SetTextAnimated(WorldData.LevelAccumulationData.Score);
 
         private void SetCoins() =>
-            _coinsText.SetTextAnimated(WorldData._levelAccumulationData.Coins);
+            _coinsText.SetTextAnimated(WorldData.LevelAccumulationData.Coins);
     }
 }

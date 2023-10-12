@@ -17,6 +17,7 @@ using CodeBase.Tools.Extension;
 using CodeBase.UI;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
@@ -41,12 +42,14 @@ namespace CodeBase.Infrastructure.States
         private readonly ICameraOperatorService _cameraOperatorService;
 
         private LoadPayload _loadPayload;
+        private IWindowService _windowService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
-            ICameraOperatorService cameraOperatorService, LoadingCurtain curtain)
+            ICameraOperatorService cameraOperatorService, IWindowService windowService, LoadingCurtain curtain)
         {
+            _windowService = windowService;
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -62,14 +65,14 @@ namespace CodeBase.Infrastructure.States
             _curtain = curtain;
         }
 
-        public void Enter(LoadPayload payload)
+        public void Enter(LoadPayload isLose)
         {
             _curtain.Show();
-            _loadPayload = payload;
+            _loadPayload = isLose;
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
-            _sceneLoader.Load(payload.SceneName, OnLoaded);
+            _sceneLoader.Load(isLose.SceneName, OnLoaded);
         }
 
         public void Exit()
@@ -157,6 +160,7 @@ namespace CodeBase.Infrastructure.States
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
             hero.GetComponent<Hero>().Construct(_playerInputService);
+            hero.GetComponent<HeroAliveObserver>().Construct(_windowService, _stateMachine);
             hero.GetComponentInChildren<Stamina>().Construct(_staticData.StaminaForEntity(PlayerKey));
             return hero;
         }
@@ -201,7 +205,7 @@ namespace CodeBase.Infrastructure.States
                 HeroHealthState = new HealthState(_staticData.HealthForEntity(PlayerKey).MaxHealth),
                 HeroStaminaState = new StaminaState(_staticData.StaminaForEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
-                _levelAccumulationData = new LevelAccumulationData()
+                LevelAccumulationData = new LevelAccumulationData()
             };
 
             Debug.Log("Progress was reset");

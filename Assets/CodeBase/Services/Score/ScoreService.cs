@@ -11,6 +11,7 @@ namespace CodeBase.Services.Score
     public class ScoreService : IScoreService
     {
         private const float ScoreToCoins = 0.35f;
+        private const float LoseScoreFactor = 0.13f;
 
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
@@ -28,13 +29,22 @@ namespace CodeBase.Services.Score
             _staticData = staticData;
         }
 
-        public void Calculate()
+        public void Calculate(bool isLose)
         {
-            LevelAccumulationData levelAccumulationData = Progress.WorldData._levelAccumulationData;
+            LevelAccumulationData levelAccumulationData = Progress.WorldData.LevelAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
 
-            _currentScore = SumScore(levelAccumulationData, scoreConfig);
-            _stars = StarsCountFromConfig(scoreConfig);
+            if (isLose)
+            {
+                _currentScore = Mathf.RoundToInt(SumScore(levelAccumulationData, scoreConfig) * LoseScoreFactor);
+                _stars = 0;
+            }
+            else
+            {
+                _currentScore = SumScore(levelAccumulationData, scoreConfig);
+                _stars = StarsCountFromConfig(scoreConfig);
+            }
+
             _coins = Mathf.RoundToInt(_currentScore * ScoreToCoins);
         }
 
@@ -67,9 +77,9 @@ namespace CodeBase.Services.Score
 
             Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
 
-            Progress.WorldData._levelAccumulationData.Score = _currentScore;
-            Progress.WorldData._levelAccumulationData.Stars = _stars;
-            Progress.WorldData._levelAccumulationData.Coins = _coins;
+            Progress.WorldData.LevelAccumulationData.Score = _currentScore;
+            Progress.WorldData.LevelAccumulationData.Stars = _stars;
+            Progress.WorldData.LevelAccumulationData.Coins = _coins;
         }
 
         private void Cleanup()

@@ -9,12 +9,12 @@ namespace CodeBase.UI.Windows
     {
         [SerializeField] private Button _closeButton;
 
-        protected IPersistentProgressService ProgressService;
-        protected PlayerProgress Progress => ProgressService.Progress;
+        private IPersistentProgressService _progressService;
+        protected PlayerProgress Progress => _progressService.Progress;
 
         public void Construct(IPersistentProgressService progressService)
         {
-            ProgressService = progressService;
+            _progressService = progressService;
         }
 
         private void Awake() =>
@@ -32,16 +32,10 @@ namespace CodeBase.UI.Windows
         protected virtual void OnAwake() =>
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
 
-        protected virtual void Initialize()
-        {
-        }
+        protected virtual void Initialize() { }
 
-        protected virtual void SubscribeUpdates()
-        {
-        }
+        protected virtual void SubscribeUpdates() { }
 
-        protected virtual void Cleanup()
-        {
-        }
+        protected virtual void Cleanup() { }
     }
 }

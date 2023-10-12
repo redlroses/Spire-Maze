@@ -4,7 +4,7 @@ using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class FinishState : IState
+    public class FinishState : IPayloadedState<bool>
     {
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
@@ -18,10 +18,10 @@ namespace CodeBase.Infrastructure.States
             _scoreService = scoreService;
         }
 
-        public void Enter()
+        public void Enter(bool isLose)
         {
-            _windowService.Open(WindowId.Results);
-            _scoreService.Calculate();
+            _scoreService.Calculate(isLose);
+            _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
             _saveLoadService.SaveProgress();
         }
 

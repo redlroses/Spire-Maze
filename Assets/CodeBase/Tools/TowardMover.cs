@@ -6,16 +6,16 @@ namespace CodeBase.Tools
     public class TowardMover<TValue>
     {
         private const float FinalValue = 1;
-        
+
         private readonly Func<TValue, TValue, float, TValue> _lerpFunc;
         private readonly AnimationCurve _curve;
-        
+
         private readonly TValue _from;
         private readonly TValue _to;
-        
+
         private TValue _begin;
         private TValue _end;
-        
+
         private float _delta;
         private bool _isForward = true;
 
@@ -27,7 +27,7 @@ namespace CodeBase.Tools
             _from = from;
             _lerpFunc = lerp;
             _curve = curve;
-            
+
             Reset();
         }
 
@@ -36,9 +36,9 @@ namespace CodeBase.Tools
             _delta = Mathf.MoveTowards(_delta, FinalValue, deltaTime);
             lerpValue = _lerpFunc.Invoke(_begin, _end, _curve.Evaluate(_delta));
 
-            bool _isComplete = IsComplete;
-            
-            if (_isComplete)
+            bool isComplete = IsComplete;
+
+            if (isComplete)
                 lerpValue = _end;
 
             return !IsComplete;

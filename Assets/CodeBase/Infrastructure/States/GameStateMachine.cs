@@ -39,6 +39,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
                     services.Single<ICameraOperatorService>(),
+                    services.Single<IWindowService>(),
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),

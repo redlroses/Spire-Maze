@@ -1,6 +1,8 @@
-﻿using CodeBase.Data;
+﻿using AYellowpaper;
+using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
@@ -18,6 +20,8 @@ namespace CodeBase.UI.Windows
         [SerializeField] private TextSetterAnimated _itemText;
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private StarsView _starsView;
+        [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
+
 
         private IPersistentProgressService _progressService;
 
@@ -42,6 +46,7 @@ namespace CodeBase.UI.Windows
             SetItemsCount(worldData);
             SetStars(worldData);
             SetCoins(worldData);
+            _showHide.Value.Show();
         }
 
         protected override void SubscribeUpdates()
@@ -59,15 +64,15 @@ namespace CodeBase.UI.Windows
         }
 
         private void SetStars(WorldData worldData) =>
-            _starsView.EnableStars(worldData._levelAccumulationData.Stars);
+            _starsView.EnableStars(worldData.LevelAccumulationData.Stars);
 
         private void SetItemsCount(WorldData worldData) =>
-            _itemText.SetTextAnimated(worldData._levelAccumulationData.Artifacts);
+            _itemText.SetTextAnimated(worldData.LevelAccumulationData.Artifacts);
 
         private void SetScorePoints(WorldData worldData) =>
-            _scoreText.SetTextAnimated(worldData._levelAccumulationData.Score);
+            _scoreText.SetTextAnimated(worldData.LevelAccumulationData.Score);
 
         private void SetCoins(WorldData worldData) =>
-            _coinsText.SetTextAnimated(worldData._levelAccumulationData.Coins);
+            _coinsText.SetTextAnimated(worldData.LevelAccumulationData.Coins);
     }
 }

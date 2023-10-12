@@ -15,7 +15,7 @@ namespace CodeBase.Logic
 
         protected override void OnTriggerObserverEntered(ITeleportable target)
         {
-            _stateMachine.Enter<FinishState>();
+            _stateMachine.Enter<FinishState, bool>(false);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Logic.HealthEntity;
+﻿using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.StateMachine;
 using CodeBase.Logic.StateMachine.States;
@@ -53,7 +52,7 @@ namespace CodeBase.Logic.Player
 
         private void OnDied()
         {
-            _inputService.Cleanup();
+            _inputService.DisableMovementMap();
             _customGravityScaler.enabled = false;
             _collider.enabled = false;
             _animator.PlayDied();

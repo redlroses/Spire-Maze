@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0c34f6d224672bea7d1b26c57df58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPoints: 100
 --- !u!114 &1176746167610235285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7263,6 +7262,7 @@ GameObject:
   - component: {fileID: 5771158303944293934}
   - component: {fileID: 6953851934803590298}
   - component: {fileID: 7902642204812287731}
+  - component: {fileID: 8388498137945045302}
   m_Layer: 11
   m_Name: Hero
   m_TagString: Untagged
@@ -7585,6 +7585,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!114 &8388498137945045302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393409988495010675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d0f44b4b434cf98c4a74178ec81022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loseWindowShowDelay: 2
+  _heroHealth:
+    _underlyingValue: {fileID: 7440742495519906430}
 --- !u!1 &7591910132656366578
 GameObject:
   m_ObjectHideFlags: 0

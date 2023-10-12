@@ -5,10 +5,10 @@ namespace CodeBase.Logic.HealthEntity
 {
     public class Health : MonoBehaviour, IHealth
     {
-        [SerializeField] private int _currentPoints;
+        private int _currentPoints;
 
-        public event Action Died;
-        public event Action Changed;
+        public event Action Died = () => { };
+        public event Action Changed = () => { };
 
         public int CurrentPoints
         {
@@ -16,7 +16,7 @@ namespace CodeBase.Logic.HealthEntity
             protected set
             {
                 _currentPoints = value;
-                Changed?.Invoke();
+                Changed.Invoke();
             }
         }
 
@@ -36,7 +36,7 @@ namespace CodeBase.Logic.HealthEntity
 
             if (newPoints <= 0)
             {
-                Died?.Invoke();
+                Died.Invoke();
                 newPoints = 0;
                 Debug.Log($"Died!");
             }
@@ -49,9 +49,7 @@ namespace CodeBase.Logic.HealthEntity
             Debug.Log($"Damaged: {deltaPoints}, current health: {CurrentPoints}");
         }
 
-        protected virtual void OnDamaged(int deltaPoints, DamageType damageType)
-        {
-        }
+        protected virtual void OnDamaged(int deltaPoints, DamageType damageType) { }
 
         private void Validate(int points)
         {
