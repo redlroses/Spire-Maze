@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8577342732806529859}
   - component: {fileID: 1787129129608857355}
   - component: {fileID: 4292387237672066937}
+  - component: {fileID: 2649867587648727060}
+  - component: {fileID: 3544507626203767886}
   m_Layer: 5
   m_Name: OverviewInterface
   m_TagString: Untagged
@@ -32,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 3510143115633986614}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.000023148132, y: 0}
   m_AnchorMax: {x: 1.0000232, y: 1}
@@ -114,6 +115,46 @@ MonoBehaviour:
     screenConfigName: 
   customSpriteSettings:
     items: []
+--- !u!223 &2649867587648727060
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687665959724635598}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
+--- !u!114 &3544507626203767886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687665959724635598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3896388433120569395
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +190,6 @@ RectTransform:
   m_Children:
   - {fileID: 2591767379793423666}
   m_Father: {fileID: 8577342732806529859}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.44149807, y: 0.105781734}
   m_AnchorMax: {x: 0.5584954, y: 0.16756648}
@@ -332,7 +372,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3510143115633986614}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31538472, y: 0.32370168}
   m_AnchorMax: {x: 0.7096157, y: 0.6964077}

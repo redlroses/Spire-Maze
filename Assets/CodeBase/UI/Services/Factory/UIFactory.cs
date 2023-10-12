@@ -61,8 +61,10 @@ namespace CodeBase.UI.Services.Factory
 
         public GameObject CreateCompassArrowPanel(Transform hero, float lifetime)
         {
-            GameObject panel = _assets.Instantiate(AssetPath.CompassArrowPanel, _uiRoot);
-            var compassPanel = panel.GetComponent<CompassArrowPanel>();
+            GameObject panel = _assets.Instantiate(AssetPath.CompassArrowPanel);
+            CompassArrowPanel compassPanel = panel.GetComponent<CompassArrowPanel>();
+            Canvas canvas = panel.GetComponent<Canvas>();
+            canvas.worldCamera = Camera.main;
             compassPanel.Construct(_progressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector(), hero, lifetime);
             return panel;
         }
