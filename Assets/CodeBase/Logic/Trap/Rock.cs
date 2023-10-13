@@ -4,6 +4,7 @@ using CodeBase.Logic.Movement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
 using CodeBase.Tools.Extension;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.Logic.Trap
@@ -15,6 +16,7 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private CapsuleCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private RockMover _mover;
+        [SerializeField] private SimpleBallRotator _rotator;
         [SerializeField] private Rigidbody[] _fragments;
         [SerializeField] private RayDirection _rayDirection;
         [SerializeField] private float _rayDistance;
@@ -53,11 +55,13 @@ namespace CodeBase.Logic.Trap
         public void SetMoveDirection(bool isDirectionToRight)
         {
             _direction = isDirectionToRight ? MoveDirection.Right : MoveDirection.Left;
+            Rotate();
+            _rotator.SetDirection(_direction);
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
-            var cellState = progress.WorldData.LevelState.Indexables
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null || cellState.IsActivated == false)
@@ -75,7 +79,7 @@ namespace CodeBase.Logic.Trap
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            var cellState = progress.WorldData.LevelState.Indexables
+            IndexableState cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null)
@@ -91,35 +95,29 @@ namespace CodeBase.Logic.Trap
         protected override void Activate(IDamagable damagable)
         {
             _mover.Move(_direction);
-            _mover.enabled = true;
+            _mover.Enable();
+            _rotator.Enable();
             _timer.SetUp(_timerDelay, OnTurnOffFragments);
             _stopEffectCallback.SetCallback(OnDestroyGameObject);
-            _mover.enabled = true;
             IsActivated = true;
         }
 
         private void Rotate()
         {
-            if (_hasTargetRotationReached || IsActivated)
-            {
-                return;
-            }
+            Vector2 direction = new Vector2((int) _direction, 0f);
+            Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
+            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
 
-            var direction = new Vector2((int) _direction, 0f);
-            var moveDirection = direction.ToWorldDirection(transform.parent.position, Spire.DistanceToCenter);
-            var lookRotation = Quaternion.LookRotation(moveDirection);
-
-            _rigidbody.MoveRotation(lookRotation);
-            _hasTargetRotationReached = _rigidbody.rotation == lookRotation;
+            _selfTransform.parent.rotation = lookRotation;
         }
 
         private void TryDestroy()
         {
-            if (IsActivated == false || IsActivated)
+            if (IsActivated == false)
                 return;
 
-            var wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.position, _direction);
-            var groundDirection = wallDirection + Vector3.down;
+            Vector3 wallDirection = _rayDirection.Calculate(Spire.Position, _selfTransform.position, _direction);
+            Vector3 groundDirection = wallDirection + Vector3.down;
 
             bool isWallCollision = CheckCollisionObstacle(wallDirection, _wall);
             bool isGroundCollision = CheckCollisionObstacle(groundDirection, _ground);
@@ -134,15 +132,16 @@ namespace CodeBase.Logic.Trap
 
         private bool CheckCollisionObstacle(Vector3 direction, LayerMask obstacle)
         {
-            var ray = new Ray(_selfTransform.position, direction);
+            Ray ray = new Ray(_selfTransform.position, direction);
             return Physics.Raycast(ray, _rayDistance, obstacle);
         }
 
         private void Destroy()
         {
             _rigidbody.isKinematic = true;
-            _mover.enabled = false;
+            _mover.Disable();
             _collisionCollider.enabled = false;
+            _rotator.Disable();
 
             for (var i = 0; i < _fragments.Length; i++)
             {
@@ -159,10 +158,10 @@ namespace CodeBase.Logic.Trap
         {
             for (var i = 0; i < _fragments.Length; i++)
             {
-                _fragments[i].gameObject.SetActive(false);
+                _fragments[i].gameObject.Disable();
             }
         }
 
-        private void OnDestroyGameObject() => Destroy(gameObject);
+        private void OnDestroyGameObject() => Object.Destroy(gameObject);
     }
 }

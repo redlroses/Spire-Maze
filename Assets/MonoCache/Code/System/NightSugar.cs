@@ -19,7 +19,14 @@ namespace NTC.Global.System
 
         public static void Enable(this Component component)
         {
-            Enable(component.gameObject);
+            if (component is MonoBehaviour monoBehaviour)
+            {
+                monoBehaviour.enabled = true;
+            }
+            else
+            {
+                Enable(component.gameObject);
+            }
         }
 
         public static void Enable(this GameObject gameObject)
@@ -29,7 +36,14 @@ namespace NTC.Global.System
         
         public static void Disable(this Component component)
         {
-            Disable(component.gameObject);
+            if (component is MonoBehaviour monoBehaviour)
+            {
+                monoBehaviour.enabled = false;
+            }
+            else
+            {
+                Disable(component.gameObject);
+            }
         }
         
         public static void Disable(this GameObject gameObject)
