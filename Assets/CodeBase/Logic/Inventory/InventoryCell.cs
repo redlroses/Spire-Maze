@@ -16,6 +16,12 @@ namespace CodeBase.Logic.Inventory
             Item = item;
         }
 
+        public InventoryCell(IItem item, int count)
+        {
+            Count = count;
+            Item = item;
+        }
+
         public void Increase() =>
             Count++;
 

@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Logic.Inventory;
+using UnityEngine;
 
 namespace CodeBase.Data
 {
     [Serializable]
     public class InventoryData
     {
-        public List<IReadOnlyInventoryCell> InventoryCells;
+        public List<ItemData> ItemDatas = new List<ItemData>();
 
         public InventoryData()
         {
-            InventoryCells = new List<IReadOnlyInventoryCell>();
+            //InventoryCells = new List<IReadOnlyInventoryCell>();
         }
 
-        public InventoryData(List<IReadOnlyInventoryCell> inventoryCells)
+        public InventoryData(List<ItemData> itemDatas)
         {
-            InventoryCells = inventoryCells;
+            ItemDatas = itemDatas;
+            Debug.Log("Inventory from list");
         }
     }
 }

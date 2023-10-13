@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
 using CodeBase.Services;
+using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
 
@@ -27,11 +30,32 @@ namespace CodeBase.Tools.Extension
         public static T ToDeserialized<T>(this string json) =>
             JsonUtility.FromJson<T>(json);
 
-        public static InventoryData AsInventoryData(this IInventory inventory) =>
-            new InventoryData(inventory.ToList());
+        public static InventoryData AsInventoryData(this IInventory inventory)
+        {
+            List<ItemData> itemDatas = new List<ItemData>(inventory.Count);
 
-        public static IInventory AsHeroInventory(this InventoryData inventoryData) =>
-            new Inventory(inventoryData.InventoryCells);
+            foreach (IReadOnlyInventoryCell cell in inventory)
+            {
+                itemDatas.Add(new ItemData(cell.Count, (int) cell.Item.ItemType));
+            }
+
+            return new InventoryData(itemDatas);
+        }
+
+        public static IInventory AsHeroInventory(this InventoryData inventoryData)
+        {
+            IGameFactory gameFactory = AllServices.Container.Single<IGameFactory>();
+            IStaticDataService staticData = AllServices.Container.Single<IStaticDataService>();
+            List<InventoryCell> itemDatas = new List<InventoryCell>(inventoryData.ItemDatas.Count);
+
+            foreach (ItemData itemData in inventoryData.ItemDatas)
+            {
+                var item = gameFactory.CreateItem(staticData.ForStorable((StorableType) itemData.StorableType));
+                itemDatas.Add(new InventoryCell(item, itemData.Count));
+            }
+
+            return new Inventory(itemDatas);
+        }
 
         public static StorableType ToStorableType(this Colors colors)
         {

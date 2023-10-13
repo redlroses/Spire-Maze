@@ -2,7 +2,6 @@
 using CodeBase.Data;
 using CodeBase.Logic.Items;
 using CodeBase.Services.PersistentProgress;
-using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,10 +31,9 @@ namespace CodeBase.Logic.Inventory
         public void LoadProgress(PlayerProgress progress)
         {
             Debug.Log("LoadProgress");
-            
             Inventory = progress.WorldData.HeroInventoryData.AsHeroInventory();
-            
-            foreach (var cell in progress.WorldData.HeroInventoryData.InventoryCells)
+
+            foreach (IReadOnlyInventoryCell cell in Inventory)
             {
                 Debug.Log(cell.Item.Name);
             }
@@ -43,15 +41,18 @@ namespace CodeBase.Logic.Inventory
 
         public void UpdateProgress(PlayerProgress progress)
         {
+            if (Inventory is null)
+                return;
+
             progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
-            progress.WorldData.LevelAccumulationData.Artifacts = progress.WorldData.HeroInventoryData.InventoryCells
+            progress.WorldData.LevelAccumulationData.Artifacts = Inventory
                 .Where(inventoryCell => inventoryCell.Item is IUsable == false)
                 .Sum(inventoryCell => inventoryCell.Count);
-            
+
             Debug.Log("Load progress inventory");
-            foreach (var cell in progress.WorldData.HeroInventoryData.InventoryCells)
+            foreach (var cell in progress.WorldData.HeroInventoryData.ItemDatas)
             {
-                Debug.Log(cell.Item.Name);
+                Debug.Log(cell.StorableType);
             }
         }
     }

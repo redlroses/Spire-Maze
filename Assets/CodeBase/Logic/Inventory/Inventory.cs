@@ -12,13 +12,13 @@ namespace CodeBase.Logic.Inventory
     {
         private readonly List<InventoryCell> _storage;
 
-        public event Action<IReadOnlyInventoryCell> Updated = (c) => { };
+        public event Action<IReadOnlyInventoryCell> Updated = _ => { };
 
         public int Count => _storage.Count;
 
-        public Inventory(List<IReadOnlyInventoryCell> storage)
+        public Inventory(List<InventoryCell> storage)
         {
-            _storage = storage.ConvertAll(cell => (InventoryCell) cell);
+            _storage = storage;
         }
 
         public void Cleanup() =>
