@@ -28,11 +28,11 @@ namespace CodeBase.Logic.StateMachine.States
             _mover = mover;
         }
 
-        public void Enter(MoveDirection isLose)
+        public void Enter(MoveDirection payload)
         {
             _jumper.Jump();
-            _mover.Move(isLose);
-            _lastDirection = isLose;
+            _mover.Move(payload);
+            _lastDirection = payload;
             _heroAnimator.StateExited += OnStateExited;
             _playerInputService.HorizontalMove += OnHorizontalMove;
         }

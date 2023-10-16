@@ -38,7 +38,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         public void Enter() =>
-            _sceneLoader.Load(LevelNames.Initial, EnterLoadLevel);
+            _sceneLoader.Load(LevelNames.Initial, EnterLoadProgress);
 
         public void Exit()
         {
@@ -110,7 +110,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle(staticData);
         }
 
-        private void EnterLoadLevel()
+        private void EnterLoadProgress()
         {
             _stateMachine.Enter<LoadProgressState>();
         }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,7 +50,7 @@ namespace TheraBytes.BetterUi
         }
 
 #if !(UNITY_EDITOR)
-        void Update()
+        void FixedUpdate()
         {
             ResolutionMonitor.Update();
         }

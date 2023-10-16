@@ -26,11 +26,11 @@ namespace CodeBase.Logic.StateMachine.States
             _dodge = dodge;
         }
 
-        public void Enter(MoveDirection isLose)
+        public void Enter(MoveDirection payload)
         {
             _heroAnimator.PlayDodge();
-            _dodge.Evade(isLose);
-            _lastDirection = isLose;
+            _dodge.Evade(payload);
+            _lastDirection = payload;
             _playerInputService.HorizontalMove += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
         }

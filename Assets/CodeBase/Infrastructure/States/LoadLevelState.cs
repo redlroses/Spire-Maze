@@ -1,4 +1,5 @@
 ﻿using System;
+using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
@@ -40,9 +41,9 @@ namespace CodeBase.Infrastructure.States
         private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
         private readonly ICameraOperatorService _cameraOperatorService;
+        private readonly IWindowService _windowService;
 
         private LoadPayload _loadPayload;
-        private IWindowService _windowService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
@@ -65,14 +66,14 @@ namespace CodeBase.Infrastructure.States
             _curtain = curtain;
         }
 
-        public void Enter(LoadPayload isLose)
+        public void Enter(LoadPayload payload)
         {
             _curtain.Show();
-            _loadPayload = isLose;
+            _loadPayload = payload;
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
-            _sceneLoader.Load(isLose.SceneName, OnLoaded);
+            _sceneLoader.Load(payload.SceneName, OnLoaded);
         }
 
         public void Exit()

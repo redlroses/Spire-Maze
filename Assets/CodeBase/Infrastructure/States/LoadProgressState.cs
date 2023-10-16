@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
@@ -35,6 +36,9 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            YandexGamesSdk.GameReady();
+#endif
         }
 
         private void LoadProgressOrInitNew()

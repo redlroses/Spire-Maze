@@ -18,10 +18,10 @@ namespace CodeBase.Infrastructure.States
             _scoreService = scoreService;
         }
 
-        public void Enter(bool isLose)
+        public void Enter(bool payload)
         {
-            _scoreService.Calculate(isLose);
-            _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
+            _scoreService.Calculate(payload);
+            _windowService.Open(payload ? WindowId.Lose : WindowId.Results);
             _scoreService.UpdateProgress();
         }
 
