@@ -19,25 +19,24 @@ namespace CodeBase.Logic
         private EnterLevelPanel _enterLevelPanel;
         private IStaticDataService _staticData;
         private IPersistentProgressService _progressService;
+        private LevelData _levelData;
 
         public void Construct(GameStateMachine stateMachine, EnterLevelPanel enterLevelPanel,
             IPersistentProgressService progressService)
         {
-            Debug.Log(progressService);
+            enabled = false;
             _progressService = progressService;
             _enterLevelPanel = enterLevelPanel;
             _stateMachine = stateMachine;
+            _levelData = GetLevelData();
+            CheckForActivation();
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable _)
         {
-            LevelData levelData = GetLevelData();
-            _enterLevelPanel.Show(levelData is null ? 0 : levelData.Stars, _toLevelId);
+            _enterLevelPanel.Show(_levelData is null ? 0 : _levelData.Stars, _toLevelId);
             _enterLevelPanel.EnterClick += LoadNewLevel;
         }
-
-        private LevelData GetLevelData() =>
-            _progressService.Progress.GlobalData.Levels.Find(data => data.Id == _toLevelId);
 
         protected override void OnTriggerObserverExited(ITeleportable _)
         {
@@ -45,10 +44,35 @@ namespace CodeBase.Logic
             _enterLevelPanel.EnterClick -= LoadNewLevel;
         }
 
+        private LevelData GetLevelData() =>
+            _progressService.Progress.GlobalData.Levels.Find(data => data.Id == _toLevelId);
+
         private void LoadNewLevel()
         {
             LoadPayload payload = new LoadPayload(LevelNames.BuildableLevel, true, _toLevelId, true);
             _stateMachine.Enter<LoadLevelState, LoadPayload>(payload);
+        }
+
+        private void CheckForActivation()
+        {
+            int lastLevel = 0;
+
+            if (_progressService.Progress.GlobalData.Levels.Count > 0)
+            {
+                lastLevel = _progressService.Progress.GlobalData.Levels.Max(level => level.Id);
+            }
+
+            if (_toLevelId <= lastLevel + 1)
+            {
+                Activate();
+            }
+        }
+
+        private void Activate()
+        {
+            // Включить портал
+
+            enabled = true;
         }
     }
 }

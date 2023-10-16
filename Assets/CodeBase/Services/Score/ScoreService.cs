@@ -46,6 +46,11 @@ namespace CodeBase.Services.Score
             }
 
             _coins = Mathf.RoundToInt(_currentScore * ScoreToCoins);
+
+            if (isLose == false)
+            {
+                Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
+            }
         }
 
         public void LoadProgress()
@@ -74,8 +79,6 @@ namespace CodeBase.Services.Score
             {
                 return;
             }
-
-            Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
 
             Progress.WorldData.LevelAccumulationData.Score = _currentScore;
             Progress.WorldData.LevelAccumulationData.Stars = _stars;
