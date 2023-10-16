@@ -115,10 +115,10 @@ RectTransform:
   - {fileID: 987451686670629884}
   m_Father: {fileID: 6173821700125119479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75, y: -75}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchorMin: {x: 0.9995039, y: 1}
+  m_AnchorMax: {x: 0.9995039, y: 1}
+  m_AnchoredPosition: {x: -49.612, y: -50}
+  m_SizeDelta: {x: 100.000015, y: 100}
   m_Pivot: {x: 0.49999988, y: 0.49999994}
 --- !u!114 &7377439959878551460
 MonoBehaviour:
@@ -157,8 +157,8 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -74.99997, y: -75, z: 0}
-      AnchoredPosition: {x: -75, y: -75}
+    - LocalPosition: {x: -59.99998, y: -60.00001, z: 0}
+      AnchoredPosition: {x: -60.00001, y: -60.00001}
       SizeDelta: {x: 120, y: 120}
       AnchorMin: {x: 1, y: 1}
       AnchorMax: {x: 1, y: 1}
@@ -892,6 +892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3855659636888555288}
+  - component: {fileID: 7869737429465912111}
   - component: {fileID: 7508923679854465208}
   - component: {fileID: 2479632108000481817}
   - component: {fileID: 1925386820198368678}
@@ -914,13 +915,61 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2386841334173192373}
+  m_Father: {fileID: 7301867589223964733}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.119579956, y: 0.16134053}
-  m_AnchorMax: {x: 0.86003, y: 0.83866024}
+  m_AnchorMin: {x: -0.16849233, y: -0.053820968}
+  m_AnchorMax: {x: 1.1684923, y: 1.0538198}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7869737429465912111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396565432493426452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformFallback:
+    LocalPosition: {x: 0, y: -27, z: 0}
+    AnchoredPosition: {x: 0, y: 0}
+    SizeDelta: {x: 211.70667, y: 107.20167}
+    AnchorMin: {x: 0.5, y: 0}
+    AnchorMax: {x: 0.5, y: 0}
+    Pivot: {x: 0.5, y: 0.5}
+    Scale: {x: 1, y: 1, z: 1}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    saveRotationAsEuler: 0
+    screenConfigName: 
+  transformConfigs:
+    items:
+    - LocalPosition: {x: 0, y: -0.000030517578, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
+      SizeDelta: {x: 0, y: 0}
+      AnchorMin: {x: -0.16849233, y: -0.053820968}
+      AnchorMax: {x: 1.1684923, y: 1.0538198}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Landscape
+    - LocalPosition: {x: 0.000015258789, y: 0, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
+      SizeDelta: {x: 0, y: 0}
+      AnchorMin: {x: -0.14270522, y: -0.21907973}
+      AnchorMax: {x: 1.1427054, y: 1.2190797}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Portrate
 --- !u!222 &7508923679854465208
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1020,7 +1069,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: {x: 1, y: 1}
+      OptimizedSize: {x: 2, y: 2}
       MinSize: {x: 0, y: 0}
       MaxSize: {x: 3, y: 3}
       UseMinSize: 0
@@ -1050,7 +1099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396565432493426452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d6436a87432de4d9a8278f12bf49b6, type: 3}
   m_Name: 
@@ -1144,7 +1193,39 @@ MonoBehaviour:
       - Mode: 0
         Impact: 1
   paddingSizers:
-    items: []
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: {x: 20, y: 17}
+      MinSize: {x: -5000, y: -5000}
+      MaxSize: {x: 5000, y: 5000}
+      UseMinSize: 0
+      UseMaxSize: 0
+      ModX:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModY:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+    - screenConfigName: Portrate
+      OptimizedSize: {x: 0, y: 0}
+      MinSize: {x: -5000, y: -5000}
+      MaxSize: {x: 5000, y: 5000}
+      UseMinSize: 0
+      UseMaxSize: 0
+      ModX:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModY:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
   treatAsLayoutElement: 1
 --- !u!1 &1642492569028340541
 GameObject:
@@ -1307,7 +1388,7 @@ RectTransform:
   m_GameObject: {fileID: 2463561327022760918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956058370117927100}
@@ -1318,10 +1399,10 @@ RectTransform:
   - {fileID: 1235192528669803850}
   m_Father: {fileID: 3830114769209669595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: -0.0016207742, y: 0.777316}
+  m_AnchorMax: {x: 0.9999999, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 499.7417, y: 154.1594}
+  m_SizeDelta: {x: 109.64, y: -5.42}
   m_Pivot: {x: 0, y: 1.0000004}
 --- !u!114 &410942060869314788
 MonoBehaviour:
@@ -1417,8 +1498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: 0}
-  m_SizeDelta: {x: 291.3, y: 973}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
+  m_SizeDelta: {x: 665.5, y: 295.9}
   m_Pivot: {x: 0.99999994, y: 1}
 --- !u!114 &6493223085685555245
 MonoBehaviour:
@@ -1457,13 +1538,13 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 514.99976, y: 1055, z: 0}
+    - LocalPosition: {x: 514.99976, y: 1145, z: 0}
       AnchoredPosition: {x: -0.00024414062, y: 0}
       SizeDelta: {x: 291.3, y: 973}
       AnchorMin: {x: 1, y: 1}
       AnchorMax: {x: 1, y: 1}
       Pivot: {x: 0.99999994, y: 1}
-      Scale: {x: 1, y: 1, z: 1}
+      Scale: {x: 1.0833334, y: 1.0833334, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
@@ -2362,10 +2443,10 @@ RectTransform:
   - {fileID: 6493223085243656820}
   m_Father: {fileID: 2734692787213761605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600.2, y: 973}
+  m_AnchorMin: {x: 0.0005347589, y: 1}
+  m_AnchorMax: {x: 0.0005347589, y: 1.0000052}
+  m_AnchoredPosition: {x: -0.008300781, y: -0.001953125}
+  m_SizeDelta: {x: 620.3, y: 726}
   m_Pivot: {x: 0.00000008999844, y: 1}
 --- !u!114 &8997679322480251992
 MonoBehaviour:
@@ -2732,17 +2813,17 @@ RectTransform:
   m_GameObject: {fileID: 6491093473874675163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093473965408506}
   - {fileID: 6491093475449246687}
   m_Father: {fileID: 6493223085243492308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000059715106, y: -0.0031780005}
-  m_AnchorMax: {x: 0.46466616, y: 1.003178}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -45}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2453632813373878536
 MonoBehaviour:
@@ -3307,17 +3388,17 @@ RectTransform:
   m_GameObject: {fileID: 6491093473980172349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093474069794076}
   - {fileID: 6491093475622903353}
   m_Father: {fileID: 6493223085243492308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.53533363, y: -0.0031780005}
-  m_AnchorMax: {x: 0.99999976, y: 1.0116526}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.0000021457672, y: 45.00099}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5000003, y: 0.49999994}
 --- !u!114 &7094584098360325184
 MonoBehaviour:
@@ -4148,19 +4229,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6491093475235474146}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093475297898435}
   - {fileID: 6491093474667805926}
   m_Father: {fileID: 6493223084009617685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.330292}
-  m_AnchorMax: {x: 1, y: 0.6700122}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.4999999}
 --- !u!114 &3072586701690951661
 MonoBehaviour:
@@ -4814,7 +4895,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6491093475444629286}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -5483,17 +5564,17 @@ RectTransform:
   m_GameObject: {fileID: 6491093475600786310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093475662161575}
   - {fileID: 6491093474025174402}
   m_Father: {fileID: 6493223084009617685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: -0.025547504}
-  m_AnchorMax: {x: 1, y: 0.3144769}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063156595221375773
 MonoBehaviour:
@@ -6208,11 +6289,11 @@ RectTransform:
   - {fileID: 6493223085243492308}
   m_Father: {fileID: 6493223085178981450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -4.954096, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: -0.0000018726031, y: -4.248322}
+  m_AnchorMax: {x: 1.000001, y: 0.50814956}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.50000125, y: 1.0000001}
 --- !u!114 &6493223083920816367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6385,11 +6466,11 @@ RectTransform:
   - {fileID: 6493223084009617685}
   m_Father: {fileID: 6173821700125119479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -60, y: -64}
-  m_SizeDelta: {x: 120, y: 1018}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0.662001}
+  m_AnchorMax: {x: 0.9258437, y: 0.9992224}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 1.0000001, y: 0.5000159}
 --- !u!114 &6493223083956650824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6497,11 +6578,11 @@ RectTransform:
   - {fileID: 6491093475235474145}
   m_Father: {fileID: 6493223083956650826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0000015292911, y: 1.0008439}
-  m_AnchorMax: {x: 0.9999978, y: 1.338713}
+  m_AnchorMin: {x: 1.0022838, y: 0.09915447}
+  m_AnchorMax: {x: 1.4360769, y: 0.9008455}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &6493223084009617768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6515,19 +6596,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
-    m_Right: 2
-    m_Top: 2
-    m_Bottom: 2
-  m_ChildAlignment: 1
-  m_Spacing: 8.37963
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
+  m_ChildAlignment: 5
+  m_Spacing: 8
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ChildScaleHeight: 1
+  m_ReverseArrangement: 1
   paddingSizerFallback:
     screenConfigName: 
     OptimizedSize:
@@ -6714,7 +6795,7 @@ MonoBehaviour:
       ChildControlHeight: 0
       Orientation: 1
       screenConfigName: Portrate
-  orientation: 1
+  orientation: 0
 --- !u!114 &6493223084009617771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6727,8 +6808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d6436a87432de4d9a8278f12bf49b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
   source: {fileID: 6493223084009617685}
   settingsFallback:
     HorizontalFit: 0
@@ -7104,8 +7185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 720, y: 1544}
-  m_SizeDelta: {x: 1440, y: 3088}
+  m_AnchoredPosition: {x: 540, y: 1080}
+  m_SizeDelta: {x: 1080, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508873457668492488
 MonoBehaviour:
@@ -7144,9 +7225,9 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 720, y: 1544, z: 0}
-      AnchoredPosition: {x: 720, y: 1544}
-      SizeDelta: {x: 1440, y: 3088}
+    - LocalPosition: {x: 540, y: 1080, z: 0}
+      AnchoredPosition: {x: 540, y: 1080}
+      SizeDelta: {x: 1080, y: 2160}
       AnchorMin: {x: 0, y: 0}
       AnchorMax: {x: 0, y: 0}
       Pivot: {x: 0.5, y: 0.5}
@@ -7243,19 +7324,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493223085178981493}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 0.79999995, y: 0.79999995, z: 0.79999995}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6493223083920816361}
   - {fileID: 6491093475444629285}
   m_Father: {fileID: 6493223084009617685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.0000030585823, y: 0.6836983}
-  m_AnchorMax: {x: 0.99999696, y: 1.0237226}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -40, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278123345538922245
 MonoBehaviour:
@@ -7349,11 +7430,11 @@ RectTransform:
   - {fileID: 6491093473980172350}
   m_Father: {fileID: 6493223083920816361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1.0030041, y: 0.0064795017}
-  m_AnchorMax: {x: 1.415538, y: 1}
+  m_AnchorMin: {x: 0.048111673, y: 1.0012094}
+  m_AnchorMax: {x: 0.9518752, y: 1.4150373}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.49999982, y: 1.000003}
 --- !u!114 &6493223085243492392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7415,12 +7496,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
-    m_Right: 2
-    m_Top: 3
-    m_Bottom: 2
-  m_ChildAlignment: 5
-  m_Spacing: 6.2847223
+    m_Left: 5
+    m_Right: 5
+    m_Top: 15
+    m_Bottom: 5
+  m_ChildAlignment: 1
+  m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -7614,7 +7695,7 @@ MonoBehaviour:
       ChildControlHeight: 0
       Orientation: 0
       screenConfigName: Portrate
-  orientation: 0
+  orientation: 1
 --- !u!114 &6493223085243492394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7627,8 +7708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d6436a87432de4d9a8278f12bf49b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
   source: {fileID: 6493223085243492308}
   settingsFallback:
     HorizontalFit: 2
@@ -7935,19 +8016,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493223085243656823}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6493223085744825703}
   - {fileID: 6493223083938569886}
   m_Father: {fileID: 3830114769209669595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85.5, y: -418}
-  m_SizeDelta: {x: 156, y: 156}
+  m_AnchorMin: {x: 0.023611091, y: 0.6434699}
+  m_AnchorMax: {x: 0.18482326, y: 0.78124535}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6493223085243656777
 MonoBehaviour:
@@ -8816,7 +8897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7301867589223964733}
   - component: {fileID: 1190034139855997456}
-  - component: {fileID: 9216310459949885854}
+  - component: {fileID: 2689073219081839564}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -8835,13 +8916,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3855659636888555288}
   m_Father: {fileID: 2386841334173192373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.00000071525574}
-  m_AnchorMax: {x: 0.9999996, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: -0.003505061, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0.3619995, y: -0.000022888184}
+  m_SizeDelta: {x: 0, y: 52.8157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1190034139855997456
 CanvasRenderer:
@@ -8851,7 +8933,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6938809685853157064}
   m_CullTransparentMesh: 1
---- !u!114 &9216310459949885854
+--- !u!114 &2689073219081839564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8860,7 +8942,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6938809685853157064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0220f4040307f2a45a27ef20a895b030, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -8898,12 +8980,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.75926
+  m_fontSize: 41.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1.6243588
-  m_fontSizeMax: 16.75926
+  m_fontSizeMin: 5.542564
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8940,134 +9022,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  fitting: 1
-  marginSizerFallback:
-    screenConfigName: 
-    OptimizedSize:
-      left: 0
-      right: 0
-      top: 0
-      bottom: 0
-    MinSize:
-      left: 0
-      right: 0
-      top: 0
-      bottom: 0
-    MaxSize:
-      left: 1000
-      right: 1000
-      top: 1000
-      bottom: 1000
-    UseMinSize: 0
-    UseMaxSize: 0
-    ModLeft:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 1
-        Impact: 1
-    ModRight:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 1
-        Impact: 1
-    ModTop:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 1
-        Impact: 1
-    ModBottom:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 1
-        Impact: 1
-  customMarginSizers:
-    items: []
-  fontSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 42.010258
-    MinSize: 10
-    MaxSize: 500
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customFontSizers:
-    items:
-    - screenConfigName: Landscape
-      OptimizedSize: 40
-      MinSize: 10
-      MaxSize: 500
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 1
-          Impact: 1
-    - screenConfigName: Portrate
-      OptimizedSize: 40
-      MinSize: 10
-      MaxSize: 500
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-  minFontSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 3.4461536
-    MinSize: 10
-    MaxSize: 500
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customMinFontSizers:
-    items: []
-  maxFontSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 70
-    MinSize: 500
-    MaxSize: 500
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customMaxFontSizers:
-    items:
-    - screenConfigName: Landscape
-      OptimizedSize: 35.8
-      MinSize: 500
-      MaxSize: 500
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-    - screenConfigName: Portrate
-      OptimizedSize: 70
-      MinSize: 500
-      MaxSize: 500
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
 --- !u!1 &7123256463798307624
 GameObject:
   m_ObjectHideFlags: 0
@@ -9077,8 +9031,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2386841334173192373}
-  - component: {fileID: 4680771350879530200}
+  - component: {fileID: 672348618932407853}
   - component: {fileID: 5877295409648381231}
+  - component: {fileID: 1326893460553680635}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -9095,19 +9050,18 @@ RectTransform:
   m_GameObject: {fileID: 7123256463798307624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4296297, y: 1.4296297, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3855659636888555288}
   - {fileID: 7301867589223964733}
   m_Father: {fileID: 2734692787213761605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000010252, y: 0}
-  m_SizeDelta: {x: 200, y: 115.6914}
+  m_AnchoredPosition: {x: -0.0000076294, y: 0}
+  m_SizeDelta: {x: 103.2761, y: 52.8602}
   m_Pivot: {x: 0.5, y: 1.0000007}
---- !u!114 &4680771350879530200
+--- !u!114 &672348618932407853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9116,171 +9070,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 7123256463798307624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69088569f3bf0b94aa20420a933f665e, type: 3}
+  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsFallback:
-    applyPosX: 0
-    applyPosY: 0
-    applySizeX: 0
-    applySizeY: 0
+  transformFallback:
+    LocalPosition: {x: -0.0000076294, y: 427.50003, z: 0}
+    AnchoredPosition: {x: -0.0000076294, y: 0.000030517578}
+    SizeDelta: {x: 103.2761, y: 86.009}
+    AnchorMin: {x: 0.5, y: 1}
+    AnchorMax: {x: 0.5, y: 1}
+    Pivot: {x: 0.5, y: 1.0000007}
+    Scale: {x: 1.4296297, y: 1.4296297, z: 1}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    saveRotationAsEuler: 0
     screenConfigName: 
-  customSettings:
+  transformConfigs:
     items:
-    - applyPosX: 0
-      applyPosY: 0
-      applySizeX: 0
-      applySizeY: 0
+    - LocalPosition: {x: -0.0000076294, y: 515, z: 0}
+      AnchoredPosition: {x: -0.0000076294, y: 0}
+      SizeDelta: {x: 103.2761, y: 52.8602}
+      AnchorMin: {x: 0.5, y: 1}
+      AnchorMax: {x: 0.5, y: 1}
+      Pivot: {x: 0.5, y: 1.0000007}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - applyPosX: 0
-      applyPosY: 1
-      applySizeX: 0
-      applySizeY: 0
+    - LocalPosition: {x: -0.000012159, y: 427.50024, z: 0}
+      AnchoredPosition: {x: -0.000012159, y: 0.00024414062}
+      SizeDelta: {x: 128.6478, y: 180.1542}
+      AnchorMin: {x: 0.5, y: 1}
+      AnchorMax: {x: 0.5, y: 1}
+      Pivot: {x: 0.5, y: 1.0000007}
+      Scale: {x: 0.4189815, y: 0.4189815, z: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
       screenConfigName: Portrate
-  anchorPosXSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 100
-    MinSize: 0
-    MaxSize: 1000
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customAnchorPosXSizers:
-    items:
-    - screenConfigName: Portrate
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-    - screenConfigName: Landscape
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-  anchorPosYSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 100
-    MinSize: 0
-    MaxSize: 1000
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customAnchorPosYSizers:
-    items:
-    - screenConfigName: Landscape
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-    - screenConfigName: Portrate
-      OptimizedSize: -134.4
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-  sizeDeltaXSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 100
-    MinSize: 0
-    MaxSize: 1000
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customSizeDeltaXSizers:
-    items:
-    - screenConfigName: Portrate
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-    - screenConfigName: Landscape
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-  sizeDeltaYSizerFallback:
-    screenConfigName: 
-    OptimizedSize: 100
-    MinSize: 0
-    MaxSize: 1000
-    UseMinSize: 0
-    UseMaxSize: 0
-    Mod:
-      ExponentialScale: 1
-      SizeModifiers:
-      - Mode: 0
-        Impact: 1
-  customSizeDeltaYSizers:
-    items:
-    - screenConfigName: Portrate
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
-    - screenConfigName: Landscape
-      OptimizedSize: 100
-      MinSize: 0
-      MaxSize: 1000
-      UseMinSize: 0
-      UseMaxSize: 0
-      Mod:
-        ExponentialScale: 1
-        SizeModifiers:
-        - Mode: 0
-          Impact: 1
 --- !u!114 &5877295409648381231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9293,8 +9121,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369ea9e2bd1e48d3961294276c505824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 9216310459949885854}
+  _text: {fileID: 2689073219081839564}
   _format: mm\:ss
+--- !u!114 &1326893460553680635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123256463798307624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb084b623b6a7eb47931bf032b234ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSizerFallback:
+    screenConfigName: 
+    OptimizedSize: {x: 1, y: 1, z: 1}
+    MinSize: {x: 0, y: 0, z: 0}
+    MaxSize: {x: 4, y: 4, z: 4}
+    UseMinSize: 0
+    UseMaxSize: 0
+    ModX:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+    ModY:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+    ModZ:
+      ExponentialScale: 1
+      SizeModifiers: []
+  customScaleSizers:
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: {x: 1, y: 1, z: 1}
+      MinSize: {x: 0, y: 0, z: 0}
+      MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
+      ModX:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModY:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModZ:
+        ExponentialScale: 1
+        SizeModifiers: []
+    - screenConfigName: Portrate
+      OptimizedSize: {x: 1, y: 1, z: 1}
+      MinSize: {x: 0, y: 0, z: 0}
+      MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
+      ModX:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModY:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+      ModZ:
+        ExponentialScale: 1
+        SizeModifiers: []
 --- !u!1 &7355460847276585602
 GameObject:
   m_ObjectHideFlags: 0
@@ -9478,10 +9378,10 @@ RectTransform:
   - {fileID: 2386841334173192373}
   m_Father: {fileID: 6493223084918380548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.013020823, y: 0.023146927}
+  m_AnchorMax: {x: 0.9869792, y: 0.9768506}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -50, y: -50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7484990238720598158
 MonoBehaviour:
@@ -9889,9 +9789,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3830114769209669595}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 7.5, y: -355}
+  m_AnchorMin: {x: 0.2064258, y: 0.32643098}
+  m_AnchorMax: {x: 0.94800234, y: 0.7671942}
+  m_AnchoredPosition: {x: -100.1, y: -17.1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8895864880177107287
@@ -9961,11 +9861,11 @@ MonoBehaviour:
     m_Bottom: 30
   m_ChildAlignment: 0
   m_StartCorner: 0
-  m_StartAxis: 0
+  m_StartAxis: 1
   m_CellSize: {x: 120, y: 120}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 3
   paddingSizerFallback:
     screenConfigName: 
     OptimizedSize:
