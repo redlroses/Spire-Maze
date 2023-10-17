@@ -45,7 +45,7 @@ MonoBehaviour:
       maxSizeInInches: 7.6
       isActive: 0
     checkAspectRatio:
-      minAspect: 0.8
+      minAspect: 1
       maxAspect: 5
       inverse: 0
       isActive: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
       isActive: 0
     checkAspectRatio:
       minAspect: 0.2
-      maxAspect: 0.7999
+      maxAspect: 0.9999
       inverse: 0
       isActive: 1
     checkDeviceType:
