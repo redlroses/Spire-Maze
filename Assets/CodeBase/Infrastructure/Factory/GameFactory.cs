@@ -128,6 +128,7 @@ namespace CodeBase.Infrastructure.Factory
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
             hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
+            hud.GetComponentInChildren<SettingsButton>().Construct(_windowService);
             return hud;
         }
 

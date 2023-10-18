@@ -16,24 +16,79 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: Music
+      TermType: 0
+      Description: Slider
+      Languages:
+      - Music
+      - "M\xFCzik"
+      - "\u041C\u0443\u0437\u044B\u043A\u0430"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Settings
+      TermType: 0
+      Description: Settings window
+      Languages:
+      - Settings
+      - Ayarlar
+      - "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Sound
+      TermType: 0
+      Description: Slider
+      Languages:
+      - Sound
+      - Ses
+      - "\u0417\u0432\u0443\u043A"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: English_Button
+      TermType: 0
+      Description: Language setup
+      Languages:
+      - English
+      - "\u0130ngilizce"
+      - "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Turkish
+      TermType: 0
+      Description: 
+      Languages:
+      - 
+      - 
+      - 
+      Flags: 000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
-    mLanguages: []
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Turkish
+      Code: tr
+      Flags: 0
+    - Name: Russian
+      Code: ru
+      Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
-    Google_WebServiceURL: 
-    Google_SpreadsheetKey: 
-    Google_SpreadsheetName: 
+    Google_WebServiceURL: https://script.google.com/macros/s/AKfycbw1db4_wBecJcloUOLaAOks_hSqzVaLhDMpUDA4vRw5LHhjqpdEKRo4_M4dDgBiNzDA/exec
+    Google_SpreadsheetKey: 1ri0ni3PftW21_luR1S7mY1FWMpubnShOzefOawAUO8c
+    Google_SpreadsheetName: I2Loc Spyre Maze Localization
     Google_LastUpdatedVersion: 
-    Google_Password: change_this
+    Google_Password: SpyreMaze
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2
-    GoogleUpdateSynchronization: 1
+    GoogleUpdateSynchronization: 2
     GoogleUpdateDelay: 0
     Assets: []
     Spreadsheet_LocalFileName: 
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1
+    Spreadsheet_SortRows: 1
