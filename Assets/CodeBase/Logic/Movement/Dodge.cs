@@ -16,8 +16,7 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private int _fatigue;
 
         private bool _isDodged;
-        private IPlayerInputService _inputService;
-
+        
         public event Action<MoveDirection> Dodged;
 
         public bool CanDodge => (_isDodged == false) & _stamina.TrySpend(_fatigue);

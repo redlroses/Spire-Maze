@@ -110,8 +110,6 @@ namespace CodeBase.Infrastructure.Factory
                 _ => new Item(data)
             };
 
-        
-        
         public GameObject CreateVirtualMover() =>
             _assets.Instantiate(AssetPath.VirtualMover, _heroTransform.position);
 

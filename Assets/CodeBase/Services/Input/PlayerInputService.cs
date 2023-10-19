@@ -19,6 +19,7 @@ namespace CodeBase.Services.Input
         public event Action<Vector2> OverviewMove = _ => { };
         public event Action Jump = () => { };
         public event Action<MoveDirection> Dodge = _ => { };
+        public event Action Action = () => { };
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
         public MoveDirection HorizontalDirection => _direction;
@@ -38,6 +39,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Movement.canceled += OnMove;
             _inputController.Player.Dodge.started += OnDodged;
             _inputController.Player.Pause.started += OnPause;
+            _inputController.Player.Action.started += OnAction;
             _inputController.Overview.ViewTower.performed += OnOverviewMove;
             _inputController.Overview.ViewTower.canceled += OnOverviewMove;
         }
@@ -49,6 +51,7 @@ namespace CodeBase.Services.Input
             _inputController.Player.Movement.canceled -= OnMove;
             _inputController.Player.Dodge.started -= OnDodged;
             _inputController.Player.Pause.started -= OnPause;
+            _inputController.Player.Action.started -= OnAction;
             _inputController.Overview.ViewTower.performed -= OnOverviewMove;
             _inputController.Overview.ViewTower.canceled -= OnOverviewMove;
 
@@ -96,5 +99,8 @@ namespace CodeBase.Services.Input
             if (_pauseService.IsPause)
                 _windowService.Open(WindowId.Pause);
         }
+
+        private void OnAction(InputAction.CallbackContext context) => 
+            Action.Invoke();
     }
 }

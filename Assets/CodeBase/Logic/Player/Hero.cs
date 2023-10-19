@@ -20,6 +20,8 @@ namespace CodeBase.Logic.Player
         private IPlayerInputService _inputService;
         private PlayerStateMachine _stateMachine;
 
+        public IPlayerInputService InputService => _inputService;
+
         private void Awake()
         {
             _playerHealth ??= GetComponentInChildren<PlayerHealth>();

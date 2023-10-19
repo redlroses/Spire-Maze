@@ -64,6 +64,15 @@ namespace CodeBase.Services.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""65ef9c61-7d53-4902-b062-27ea80858e65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -229,6 +238,17 @@ namespace CodeBase.Services.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b6ed37c-391e-4a98-bfd3-e59f7e6b3103"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -404,6 +424,7 @@ namespace CodeBase.Services.Input
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
             // Overview
             m_Overview = asset.FindActionMap("Overview", throwIfNotFound: true);
             m_Overview_ViewTower = m_Overview.FindAction("ViewTower", throwIfNotFound: true);
@@ -472,6 +493,7 @@ namespace CodeBase.Services.Input
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Dodge;
         private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_Action;
         public struct PlayerActions
         {
             private @InputController m_Wrapper;
@@ -480,6 +502,7 @@ namespace CodeBase.Services.Input
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
             public InputAction @Pause => m_Wrapper.m_Player_Pause;
+            public InputAction @Action => m_Wrapper.m_Player_Action;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -501,6 +524,9 @@ namespace CodeBase.Services.Input
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -517,6 +543,9 @@ namespace CodeBase.Services.Input
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Action.started -= instance.OnAction;
+                @Action.performed -= instance.OnAction;
+                @Action.canceled -= instance.OnAction;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -613,6 +642,7 @@ namespace CodeBase.Services.Input
             void OnMovement(InputAction.CallbackContext context);
             void OnDodge(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
+            void OnAction(InputAction.CallbackContext context);
         }
         public interface IOverviewActions
         {
