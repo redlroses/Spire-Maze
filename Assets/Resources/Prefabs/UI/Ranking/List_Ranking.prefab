@@ -349,8 +349,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jackson(Me)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fa08fff1716a04db18700207b6c202e5, type: 2}
-  m_sharedMaterial: {fileID: 7908499825950019370, guid: fa08fff1716a04db18700207b6c202e5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -374,12 +374,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 50
   m_fontSizeBase: 152.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12.569445
-  m_fontSizeMax: 33.51852
+  m_fontSizeMin: 25
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -549,7 +549,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 152.2
+      OptimizedSize: 50
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 80
+      OptimizedSize: 50
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 30
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1119,8 +1119,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 4,983
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1144,12 +1144,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.6
+  m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 8.37963
-  m_fontSizeMax: 37.2428
+  m_fontSizeMin: 25
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 88.88889
+      OptimizedSize: 50
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 88.88889
+      OptimizedSize: 50
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1366,7 +1366,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 20
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0

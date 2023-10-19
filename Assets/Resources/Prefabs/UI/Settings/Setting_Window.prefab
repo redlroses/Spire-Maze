@@ -690,7 +690,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e07bd2b5a314b449692fca2e0ef80194, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -830,7 +830,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e07bd2b5a314b449692fca2e0ef80194, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1662,7 +1662,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e07bd2b5a314b449692fca2e0ef80194, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3748,12 +3748,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.8
+  m_fontSize: 19.85
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 20.6
-  m_fontSizeMax: 70
+  m_fontSizeMin: 8.37963
+  m_fontSizeMax: 29.328705
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3923,7 +3923,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 96.50001
+      OptimizedSize: 70
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3959,7 +3959,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 30
+      OptimizedSize: 20
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3970,7 +3970,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 20.6
+      OptimizedSize: 20
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -4043,6 +4043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4063189393181414467}
   - component: {fileID: 1637807350113603245}
+  - component: {fileID: 4419157274453564169}
   - component: {fileID: 4063189393181414525}
   - component: {fileID: 4063189393181414526}
   - component: {fileID: 2851163712921773227}
@@ -4102,18 +4103,18 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: 0.35998535, y: 0.010757446, z: 0}
+    - LocalPosition: {x: 0.35992432, y: 0.0107421875, z: 0}
       AnchoredPosition: {x: 0, y: 0}
-      SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.19156246, y: 0.29580212}
-      AnchorMax: {x: 0.8088125, y: 0.7042178}
+      SizeDelta: {x: 1185.1205, y: 441.089}
+      AnchorMin: {x: 0.50018746, y: 0.50000995}
+      AnchorMax: {x: 0.50018746, y: 0.50000995}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: -0, y: -0, z: -0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 3.4100037, y: 0.49487305, z: 0}
+    - LocalPosition: {x: 6.645813, y: 0.49487305, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.09302844, y: 0.28991586}
@@ -4124,6 +4125,131 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
+--- !u!114 &4419157274453564169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063189393181414466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69088569f3bf0b94aa20420a933f665e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsFallback:
+    applyPosX: 0
+    applyPosY: 0
+    applySizeX: 0
+    applySizeY: 0
+    screenConfigName: 
+  customSettings:
+    items:
+    - applyPosX: 0
+      applyPosY: 0
+      applySizeX: 1
+      applySizeY: 1
+      screenConfigName: Landscape
+  anchorPosXSizerFallback:
+    screenConfigName: 
+    OptimizedSize: 100
+    MinSize: 0
+    MaxSize: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
+    Mod:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+  customAnchorPosXSizers:
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: 100
+      MinSize: 0
+      MaxSize: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
+      Mod:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+  anchorPosYSizerFallback:
+    screenConfigName: 
+    OptimizedSize: 100
+    MinSize: 0
+    MaxSize: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
+    Mod:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+  customAnchorPosYSizers:
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: 100
+      MinSize: 0
+      MaxSize: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
+      Mod:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
+  sizeDeltaXSizerFallback:
+    screenConfigName: 
+    OptimizedSize: 100
+    MinSize: 0
+    MaxSize: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
+    Mod:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+  customSizeDeltaXSizers:
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: 1185
+      MinSize: 0
+      MaxSize: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
+      Mod:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 1
+          Impact: 0.5
+  sizeDeltaYSizerFallback:
+    screenConfigName: 
+    OptimizedSize: 100
+    MinSize: 0
+    MaxSize: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
+    Mod:
+      ExponentialScale: 1
+      SizeModifiers:
+      - Mode: 0
+        Impact: 1
+  customSizeDeltaYSizers:
+    items:
+    - screenConfigName: Landscape
+      OptimizedSize: 445
+      MinSize: 0
+      MaxSize: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
+      Mod:
+        ExponentialScale: 1
+        SizeModifiers:
+        - Mode: 0
+          Impact: 1
 --- !u!222 &4063189393181414525
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5207,12 +5333,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 12.569445
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 30
+  m_fontSizeMin: 13.407408
+  m_fontSizeMax: 12.569445
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -5243,7 +5369,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -5, z: 0, w: -5}
+  m_margin: {x: 0, y: -3, z: 0, w: -3}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5584,7 +5710,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5766761286862947007}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5753,12 +5879,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 23.043982
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 55
+  m_fontSizeMin: 13.407408
+  m_fontSizeMax: 23.043982
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6064,12 +6190,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 23.043982
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 55
+  m_fontSizeMin: 13.407408
+  m_fontSizeMax: 23.043982
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6376,12 +6502,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 12.569445
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 30
+  m_fontSizeMin: 13.407408
+  m_fontSizeMax: 12.569445
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6412,7 +6538,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -5, z: 0, w: -5}
+  m_margin: {x: 0, y: -3, z: 0, w: -3}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6726,12 +6852,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 23.043982
   m_fontSizeBase: 72.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
-  m_fontSizeMax: 55
+  m_fontSizeMin: 13.407408
+  m_fontSizeMax: 23.043982
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

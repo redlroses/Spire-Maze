@@ -132,7 +132,10 @@ namespace CodeBase.Services.LevelBuild
             return new Vector3(posX, 0, posZ);
         }
 
-        private Vector3Data GetFinishPosition() =>
-            _level.First(cell => cell.CellData is FinishPortal).Container.position.AsVectorData();
+        private Vector3Data GetFinishPosition()
+        {
+            Cell cell = _level.FirstOrDefault(cell => cell.CellData is FinishPortal);
+            return cell is null ? new Vector3Data() : cell.Container.position.AsVectorData();
+        }
     }
 }

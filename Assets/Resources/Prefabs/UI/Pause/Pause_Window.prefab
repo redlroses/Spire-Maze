@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 8333168727858935455}
   - component: {fileID: 8333168727858935449}
   - component: {fileID: 8333168727858935427}
+  - component: {fileID: 3683667857578487126}
   m_Layer: 5
   m_Name: Text_Continue
   m_TagString: Untagged
@@ -289,8 +290,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168727994594923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.14257689, y: 0.20820576}
-  m_AnchorMax: {x: 0.8574231, y: 0.44580525}
+  m_AnchorMin: {x: 0.061227877, y: 0.20820588}
+  m_AnchorMax: {x: 0.9362306, y: 0.44580537}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -324,8 +325,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CONTINUE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -349,12 +350,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.25
+  m_fontSize: 38
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 13.407408
-  m_fontSizeMax: 31.209467
+  m_fontSizeMin: 25
+  m_fontSizeMax: 38
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -385,7 +386,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -5, z: 0, w: -5}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -397,8 +398,8 @@ MonoBehaviour:
     OptimizedSize:
       left: 0
       right: 0
-      top: -11
-      bottom: -10
+      top: 0
+      bottom: 0
     MinSize:
       left: 0
       right: 0
@@ -448,7 +449,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 74.48889
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -459,7 +460,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 74.48889
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -484,7 +485,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -495,7 +496,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -519,6 +520,45 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &3683667857578487126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168727858935452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: CONTINUE
+  mTermSecondary: 
+  PrimaryTermModifier: 1
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8333168727994594920
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,8 +598,8 @@ RectTransform:
   - {fileID: 8333168727858935455}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.011627553, y: 0.030345738}
-  m_AnchorMax: {x: 0.2906983, y: 1.0181465}
+  m_AnchorMin: {x: -0.01550342, y: 0.036394715}
+  m_AnchorMax: {x: 0.28682244, y: 1.0241954}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -589,22 +629,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -306.66632, y: 3.8761902, z: 0}
+    - LocalPosition: {x: -307.6491, y: 6.0590134, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.0077516856, y: 0.02429676}
-      AnchorMax: {x: 0.29457414, y: 1.0120976}
+      AnchorMin: {x: -0.01550342, y: 0.036394715}
+      AnchorMax: {x: 0.28682244, y: 1.0241954}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -289.77753, y: 4.7183, z: 0}
+    - LocalPosition: {x: -296.00912, y: 7.072548, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.011627553, y: 0.030345738}
-      AnchorMax: {x: 0.2906983, y: 1.0181465}
+      AnchorMin: {x: -0.019379286, y: 0.042443693}
+      AnchorMax: {x: 0.2829466, y: 1.0302444}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1119,8 +1159,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0000010486573, y: 0.43813205}
-  m_AnchorMax: {x: 0.3635872, y: 0.5544319}
+  m_AnchorMin: {x: 0.000115570736, y: 0.411511}
+  m_AnchorMax: {x: 0.42113245, y: 0.57763237}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1219,7 +1259,7 @@ MonoBehaviour:
   materialProperty1: 0
   materialProperty2: 0
   materialProperty3: 0
-  keepBorderAspectRatio: 0
+  keepBorderAspectRatio: 1
   spriteBorderScaleFallback:
     screenConfigName: 
     OptimizedSize: {x: 1, y: 1}
@@ -1381,6 +1421,7 @@ GameObject:
   - component: {fileID: 8333168728494775312}
   - component: {fileID: 8333168728494775314}
   - component: {fileID: 8333168728494775319}
+  - component: {fileID: 5463691988251366754}
   m_Layer: 5
   m_Name: Text_Restart
   m_TagString: Untagged
@@ -1402,8 +1443,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729389988971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.18436536, y: 0.20820576}
-  m_AnchorMax: {x: 0.8156348, y: 0.4539702}
+  m_AnchorMin: {x: 0.07943344, y: 0.20820576}
+  m_AnchorMax: {x: 0.9205675, y: 0.45397007}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1437,8 +1478,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: RESTART
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1462,12 +1503,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.15
+  m_fontSize: 38
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 13.385061
-  m_fontSizeMax: 31.358437
+  m_fontSizeMin: 25
+  m_fontSizeMax: 38
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1498,7 +1539,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -6, z: 0, w: -6}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1510,8 +1551,8 @@ MonoBehaviour:
     OptimizedSize:
       left: 0
       right: 0
-      top: -14
-      bottom: -14
+      top: 0
+      bottom: 0
     MinSize:
       left: 0
       right: 0
@@ -1561,7 +1602,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 74.844444
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1572,7 +1613,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 74.844444
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1597,7 +1638,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 31.946665
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1608,7 +1649,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 31.946665
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -1632,6 +1673,45 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &5463691988251366754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168728494775313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: RESTART
+  mTermSecondary: 
+  PrimaryTermModifier: 1
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8333168728619040859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,8 +1747,8 @@ RectTransform:
   - {fileID: 8333168729350557411}
   m_Father: {fileID: 8333168729059685209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.37964088}
-  m_AnchorMax: {x: 1, y: 0.62037903}
+  m_AnchorMin: {x: 0, y: 0.25925118}
+  m_AnchorMax: {x: 1, y: 0.7407489}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1791,8 +1871,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
-  m_AnchorMin: {x: 0.6366773, y: 0.4396193}
-  m_AnchorMax: {x: 1.0000043, y: 0.55591905}
+  m_AnchorMin: {x: 0.5774323, y: 0.411511}
+  m_AnchorMax: {x: 0.99997663, y: 0.57763237}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1891,7 +1971,7 @@ MonoBehaviour:
   materialProperty1: 0
   materialProperty2: 0
   materialProperty3: 0
-  keepBorderAspectRatio: 0
+  keepBorderAspectRatio: 1
   spriteBorderScaleFallback:
     screenConfigName: 
     OptimizedSize: {x: 1, y: 1}
@@ -1990,7 +2070,7 @@ RectTransform:
   - {fileID: 8333168729114264082}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6821709, y: 0.02439624}
+  m_AnchorMin: {x: 0.6821709, y: 0.0243963}
   m_AnchorMax: {x: 0.9844966, y: 1.0118964}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -2032,11 +2112,11 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 133.07794, y: 1.762886, z: 0}
+    - LocalPosition: {x: 135.42972, y: 2.407608, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.6821709, y: 0.02439624}
-      AnchorMax: {x: 0.9844966, y: 1.0118961}
+      AnchorMin: {x: 0.6782951, y: 0.030445218}
+      AnchorMax: {x: 0.98062074, y: 1.0179453}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2625,6 +2705,7 @@ GameObject:
   - component: {fileID: 8333168729114264082}
   - component: {fileID: 8333168729114264092}
   - component: {fileID: 8333168729114264067}
+  - component: {fileID: 1015974505504826004}
   m_Layer: 5
   m_Name: Text_Quit
   m_TagString: Untagged
@@ -2681,8 +2762,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MENU
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: aa2f3c655b3634b2b852b64fd197fd58, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2706,12 +2787,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.6
+  m_fontSize: 38
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 13.407408
-  m_fontSizeMax: 31.544651
+  m_fontSizeMin: 25
+  m_fontSizeMax: 38
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2742,7 +2823,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -3, z: 0, w: -4}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2754,8 +2835,8 @@ MonoBehaviour:
     OptimizedSize:
       left: 0
       right: 0
-      top: -7
-      bottom: -8
+      top: 0
+      bottom: 0
     MinSize:
       left: 0
       right: 0
@@ -2805,7 +2886,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 75.28889
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -2816,7 +2897,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 75.28889
+      OptimizedSize: 38
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -2841,7 +2922,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -2852,7 +2933,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 32
+      OptimizedSize: 25
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -2876,6 +2957,45 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &1015974505504826004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168729114264083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: MENU
+  mTermSecondary: 
+  PrimaryTermModifier: 1
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8333168729262152849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,8 +3005,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8333168729262152848}
+  - component: {fileID: 8963587849633740338}
   - component: {fileID: 8333168729262152850}
   - component: {fileID: 8333168729262152855}
+  - component: {fileID: 3590827418500151812}
   m_Layer: 5
   m_Name: Text_Pause
   m_TagString: Untagged
@@ -2908,11 +3030,59 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.43592796, y: -0.0053539276}
-  m_AnchorMax: {x: 0.56369203, y: 0.99182034}
+  m_AnchorMin: {x: 0.43122262, y: -0.005354166}
+  m_AnchorMax: {x: 0.5687907, y: 0.9918209}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8963587849633740338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168729262152849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformFallback:
+    LocalPosition: {x: -0.20507812, y: -0.97717285, z: 0}
+    AnchoredPosition: {x: 0, y: 0}
+    SizeDelta: {x: 0, y: 0}
+    AnchorMin: {x: 0.38163054, y: -0.005354166}
+    AnchorMax: {x: 0.61798966, y: 0.9918208}
+    Pivot: {x: 0.5, y: 0.5}
+    Scale: {x: 1, y: 1, z: 1}
+    rotation: {x: 0, y: 0, z: 0, w: 1}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    saveRotationAsEuler: 0
+    screenConfigName: 
+  transformConfigs:
+    items:
+    - LocalPosition: {x: 0.012756348, y: -0.97717285, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
+      SizeDelta: {x: 0, y: 0}
+      AnchorMin: {x: 0.43122262, y: -0.005354166}
+      AnchorMax: {x: 0.5687907, y: 0.9918209}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Landscape
+    - LocalPosition: {x: -0.12382507, y: -0.4094181, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
+      SizeDelta: {x: 0, y: 0}
+      AnchorMin: {x: 0.38163054, y: -0.005354166}
+      AnchorMax: {x: 0.61798966, y: 0.9918208}
+      Pivot: {x: 0.5, y: 0.5}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: -0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: Portrate
 --- !u!222 &8333168729262152850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2943,8 +3113,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PAUSE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2968,12 +3138,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.45
+  m_fontSize: 46
   m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 11.132339
-  m_fontSizeMax: 40.22222
+  m_fontSizeMin: 20
+  m_fontSizeMax: 46
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3067,7 +3237,7 @@ MonoBehaviour:
   customFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 96
+      OptimizedSize: 46
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3078,7 +3248,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 96
+      OptimizedSize: 46
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3103,7 +3273,7 @@ MonoBehaviour:
   customMinFontSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 32
+      OptimizedSize: 20
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3114,7 +3284,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 26.57
+      OptimizedSize: 15
       MinSize: 10
       MaxSize: 500
       UseMinSize: 0
@@ -3138,6 +3308,45 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &3590827418500151812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168729262152849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Pause
+  mTermSecondary: 
+  PrimaryTermModifier: 1
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &8333168729350557408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,8 +3652,8 @@ RectTransform:
   - {fileID: 8333168728494775312}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.33333376, y: 0.030445158}
-  m_AnchorMax: {x: 0.6356595, y: 1.0179452}
+  m_AnchorMin: {x: 0.32945788, y: 0.036494136}
+  m_AnchorMax: {x: 0.63178366, y: 1.0239942}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3474,22 +3683,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -9.999649, y: 3.8653488, z: 0}
+    - LocalPosition: {x: -16.363815, y: 6.0488358, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.33720964, y: 0.024396295}
-      AnchorMax: {x: 0.63953537, y: 1.0118963}
+      AnchorMin: {x: 0.32945788, y: 0.036494136}
+      AnchorMax: {x: 0.63178366, y: 1.0239942}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -12.46315, y: 4.7083817, z: 0}
+    - LocalPosition: {x: -9.559441, y: 3.6114273, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.33333376, y: 0.030445158}
-      AnchorMax: {x: 0.6356595, y: 1.0179452}
+      AnchorMin: {x: 0.325582, y: 0.042543054}
+      AnchorMax: {x: 0.6279078, y: 1.0300431}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4005,8 +4214,8 @@ RectTransform:
   - {fileID: 8333168729262152848}
   m_Father: {fileID: 8333168728619040858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000038839147, y: 0.65802085}
-  m_AnchorMax: {x: 0.99999994, y: 0.93573433}
+  m_AnchorMin: {x: 0, y: 0.6580762}
+  m_AnchorMax: {x: 0.99999994, y: 0.9357783}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
