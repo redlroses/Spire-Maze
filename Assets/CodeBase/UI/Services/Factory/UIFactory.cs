@@ -27,14 +27,12 @@ namespace CodeBase.UI.Services.Factory
         private readonly ISoundService _soundService;
         private readonly IPauseService _pauseService;
         private readonly GameStateMachine _stateMachine;
-        private readonly IScoreService _scoreService;
 
         private Transform _uiRoot;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
             IPersistentProgressService progressService, IRankedService rankedService,
-            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService,
-            IScoreService scoreService, GameStateMachine stateMachine)
+            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;
@@ -43,7 +41,6 @@ namespace CodeBase.UI.Services.Factory
             _localizationService = localizationService;
             _soundService = soundService;
             _pauseService = pauseService;
-            _scoreService = scoreService;
             _stateMachine = stateMachine;
         }
 

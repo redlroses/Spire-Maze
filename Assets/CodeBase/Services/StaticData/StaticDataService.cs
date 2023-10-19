@@ -33,7 +33,7 @@ namespace CodeBase.Services.StaticData
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
             _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
-            _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.Name);
+            _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.name);
             _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
@@ -53,8 +53,8 @@ namespace CodeBase.Services.StaticData
         public StorableStaticData ForStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
 
-        public LeaderboardStaticData ForLeaderboard(string yandexName) =>
-            GetDataFor(yandexName, _leaderboards);
+        public LeaderboardStaticData ForLeaderboard(string name) =>
+            GetDataFor(name, _leaderboards);
 
         public WindowConfig ForWindow(WindowId windowId) =>
             GetDataFor(windowId, _windows);

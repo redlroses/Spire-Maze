@@ -29,7 +29,7 @@ namespace CodeBase.Services.Score
             _staticData = staticData;
         }
 
-        public void Calculate(bool isLose)
+        public int Calculate(bool isLose)
         {
             LevelAccumulationData levelAccumulationData = Progress.WorldData.LevelAccumulationData;
             ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
@@ -51,6 +51,8 @@ namespace CodeBase.Services.Score
             {
                 Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
             }
+
+            return _currentScore;
         }
 
         public void LoadProgress()

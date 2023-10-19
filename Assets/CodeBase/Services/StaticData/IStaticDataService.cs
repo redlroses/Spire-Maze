@@ -12,7 +12,7 @@ namespace CodeBase.Services.StaticData
     HealthStaticData HealthForEntity(string entityKey);
     StaminaStaticData StaminaForEntity(string entityKey);
     StorableStaticData ForStorable(StorableType storableType);
-    LeaderboardStaticData ForLeaderboard(string yandexName);
+    LeaderboardStaticData ForLeaderboard(string name);
     WindowConfig ForWindow(WindowId windowId);
     ScoreConfig ScoreForLevel(int levelId);
   }

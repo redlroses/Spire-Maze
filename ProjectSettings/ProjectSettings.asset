@@ -134,7 +134,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 708e8912394e5ec4097bde463995e8c3, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -748,11 +749,12 @@ PlayerSettings:
     Stadia: TextMeshPro
     Standalone: TextMeshPro
     VisionOS: TextMeshPro
-    WebGL: TextMeshPro
+    WebGL: TextMeshPro;YANDEX_GAMES
     XboxOne: TextMeshPro
     iPhone: TextMeshPro
     tvOS: TextMeshPro
-  additionalCompilerArguments: {}
+  additionalCompilerArguments:
+    WebGL: []
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

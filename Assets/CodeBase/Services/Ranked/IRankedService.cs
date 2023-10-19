@@ -6,6 +6,6 @@ namespace CodeBase.Services.Ranked
     public interface IRankedService : IService
     {
         Task<RanksData> GetRanksData();
-        void SetScore(in int score, string avatarName);
+        void SetScore(int score, string avatarName = "Test1");
     }
 }
