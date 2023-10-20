@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Leaderboards;
 using CodeBase.Services.StaticData;
+using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.Ranked
 {
@@ -19,29 +19,38 @@ namespace CodeBase.Services.Ranked
         public RankedService(IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
+            SetupLeaderboard();
+        }
+
+        private void SetupLeaderboard()
+        {
+#if YANDEX_GAMES && UNITY_WEBGL && !UNITY_EDITOR
             UseYandexLeaderboard();
+#endif
+#if UNITY_EDITOR
             UseEditorLeaderboard();
+#endif
         }
 
-        public Task<RanksData> GetRanksData()
-        {
-             return _leaderboard.GetRanksData();
-        }
+        public Task<RanksData> GetRanksData() =>
+            _leaderboard.GetRanksData();
 
-        public void SetScore(in int score, string avatarName)
+        public void SetScore(int score, string avatarName = "Test1")
         {
-            throw new NotImplementedException();
+            _leaderboard.SetScore(score, avatarName);
         }
 
         [Conditional("UNITY_EDITOR")]
         private void UseEditorLeaderboard()
         {
+            Debug.Log(nameof(UseEditorLeaderboard));
             _leaderboard = new EditorLeaderboard(_staticDataService.ForLeaderboard(EditorName));
         }
 
         [Conditional("YANDEX_GAMES")]
         private void UseYandexLeaderboard()
         {
+            Debug.Log(nameof(UseYandexLeaderboard));
             _leaderboard = new YandexLeaderboard(_staticDataService.ForLeaderboard(YandexName));
         }
     }

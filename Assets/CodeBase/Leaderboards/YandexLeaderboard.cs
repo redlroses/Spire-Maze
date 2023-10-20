@@ -4,6 +4,7 @@ using CodeBase.Data;
 using CodeBase.StaticData;
 using Agava.YandexGames;
 using CodeBase.Tools.Extension;
+using UnityEngine;
 
 namespace CodeBase.Leaderboards
 {
@@ -13,6 +14,9 @@ namespace CodeBase.Leaderboards
         private readonly int _topPlayersCount;
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
+
+        private int _unsavedScore;
+        private string _unsavedAvatarName;
 
         private List<SingleRankData> _ranksData;
         private SingleRankData _selfRanksData;
@@ -28,11 +32,21 @@ namespace CodeBase.Leaderboards
 
         public async Task<RanksData> GetRanksData()
         {
+            bool isAuthorized = await TryAuthorize();
+
+            if (isAuthorized)
+            {
+                await TryRequestPersonalData();
+            }
+
+            if (_unsavedScore != 0)
+            {
+                await SetScore(_unsavedScore, _unsavedAvatarName);
+                _unsavedScore = 0;
+            }
+
             _isLeaderboardDataReceived = false;
-            TryAuthorize();
-
-            Leaderboard.GetPlayerEntry(_name, result => { _selfRanksData = result.ToSingleRankData(); });
-
+            Leaderboard.GetPlayerEntry(_name, result => _selfRanksData = result.ToSingleRankData());
             Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount,
                 _isIncludeSelf);
 
@@ -44,21 +58,18 @@ namespace CodeBase.Leaderboards
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
 
-        private SingleRankData[] GetCompetingRanks()
+        public async Task SetScore(int score, string avatarName)
         {
-            return _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray();
-        }
-
-        private SingleRankData[] GetTopRanks() =>
-            _ranksData.GetRange(0, _topPlayersCount).ToArray();
-
-        public void SetScore(int score, string avatarName)
-        {
-            TryAuthorize();
-            TryGetPersonalData();
+            bool isComplete = false;
 
             if (PlayerAccount.IsAuthorized == false)
+            {
+                _unsavedScore = score;
+                _unsavedAvatarName = avatarName;
                 return;
+            }
+
+            // await TryRequestPersonalData();
 
             Leaderboard.GetPlayerEntry(_name, result =>
             {
@@ -67,25 +78,64 @@ namespace CodeBase.Leaderboards
                     return;
                 }
 
-                Leaderboard.SetScore(_name, score, null, null, avatarName);
-            });
+                Leaderboard.SetScore(_name, score, () => isComplete = true, _ => isComplete = true, avatarName);
+            }, _ => isComplete = true);
+
+            while (isComplete == false)
+            {
+                await Task.Yield();
+            }
         }
 
-        private void TryAuthorize()
+        public async Task<bool> TryAuthorize()
         {
+            bool isSuccess = false;
+            bool isError = false;
+
             if (PlayerAccount.IsAuthorized)
+                return true;
+
+            PlayerAccount.Authorize(() => isSuccess = true, _ => isError = true);
+
+            while (isSuccess == false && isError == false)
             {
-                return;
+                await Task.Yield();
             }
 
-            PlayerAccount.Authorize();
+            Debug.Log($"{nameof(TryAuthorize)}: isSuccess: {isSuccess}, isError: {isError}");
+            return isSuccess;
         }
+
+        public async Task<bool> TryRequestPersonalData()
+        {
+            bool isSuccess = false;
+            bool isError = false;
+
+            if (PlayerAccount.IsAuthorized == false)
+                return false;
+
+            if (PlayerAccount.HasPersonalProfileDataPermission)
+                return true;
+
+            PlayerAccount.RequestPersonalProfileDataPermission(() => isSuccess = true, _ => isError = true);
+
+            while (isSuccess == false && isError == false)
+            {
+                await Task.Yield();
+            }
+
+            Debug.Log($"{nameof(TryRequestPersonalData)}: isSuccess: {isSuccess}, isError: {isError}");
+            return isSuccess;
+        }
+
+        private SingleRankData[] GetCompetingRanks() =>
+            _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray();
+
+        private SingleRankData[] GetTopRanks() =>
+            _ranksData.GetRange(0, _topPlayersCount).ToArray();
 
         private void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
         {
-            TryAuthorize();
-            TryGetPersonalData();
-
             _ranksData = new List<SingleRankData>(board.entries.Length);
 
             foreach (LeaderboardEntryResponse entry in board.entries)
@@ -94,14 +144,6 @@ namespace CodeBase.Leaderboards
             }
 
             _isLeaderboardDataReceived = true;
-        }
-
-        private void TryGetPersonalData()
-        {
-            if (PlayerAccount.IsAuthorized && PlayerAccount.HasPersonalProfileDataPermission == false)
-            {
-                PlayerAccount.RequestPersonalProfileDataPermission();
-            }
         }
     }
 }

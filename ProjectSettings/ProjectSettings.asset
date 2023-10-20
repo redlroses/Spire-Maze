@@ -748,11 +748,12 @@ PlayerSettings:
     Stadia: TextMeshPro
     Standalone: TextMeshPro
     VisionOS: TextMeshPro
-    WebGL: TextMeshPro
+    WebGL: TextMeshPro;YANDEX_GAMES
     XboxOne: TextMeshPro
     iPhone: TextMeshPro
     tvOS: TextMeshPro
-  additionalCompilerArguments: {}
+  additionalCompilerArguments:
+    WebGL: []
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

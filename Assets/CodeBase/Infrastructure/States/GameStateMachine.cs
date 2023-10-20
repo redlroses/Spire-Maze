@@ -8,6 +8,7 @@ using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
@@ -48,8 +49,11 @@ namespace CodeBase.Infrastructure.States
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(),
                     services.Single<IWatchService>()),
-                [typeof(FinishState)] = new FinishState(services.Single<ISaveLoadService>(),
-                    services.Single<IWindowService>(), services.Single<IScoreService>())
+                [typeof(FinishState)] = new FinishState(
+                    services.Single<IWindowService>(),
+                    services.Single<IScoreService>(),
+                    services.Single<IRankedService>(),
+                    services.Single<IPersistentProgressService>())
             };
         }
 

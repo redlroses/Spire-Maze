@@ -6,6 +6,6 @@ namespace CodeBase.Leaderboards
     public interface ILeaderboard
     {
         Task<RanksData> GetRanksData();
-        void SetScore(int score, string avatarName);
+        Task SetScore(int score, string avatarName);
     }
 }

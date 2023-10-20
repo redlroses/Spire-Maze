@@ -4,7 +4,6 @@ using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 
 namespace CodeBase.Leaderboards
 {
@@ -14,7 +13,7 @@ namespace CodeBase.Leaderboards
         private readonly string _name;
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
-        
+
         private List<SingleRankData> _ranksData = new List<SingleRankData>();
         private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived = false;
@@ -32,7 +31,7 @@ namespace CodeBase.Leaderboards
             _isLeaderboardDataReceived = false;
 
             ApplyTestData();
-            
+
             while (_isLeaderboardDataReceived == false)
             {
                 await Task.Yield();
@@ -48,18 +47,17 @@ namespace CodeBase.Leaderboards
 
         private SingleRankData[] GetTopRanks() =>
             _ranksData.GetRange(0, _topPlayersCount).ToArray();
-        
-        public void SetScore(int score, string avatarName)
-        {
-        }
+
+        public Task SetScore(int score, string avatarName) =>
+            Task.CompletedTask;
 
         private async void ApplyTestData()
         {
             _ranksData.Clear();
-            
+
             string[] langs = {"ru", "en", "tr"};
             string[] avatars = {"Test1", "Test2"};
-            
+
             for (int i = 1; i <= 10; i++)
             {
                 var data = new LeaderboardEntryResponse
@@ -73,7 +71,7 @@ namespace CodeBase.Leaderboards
                         publicName = $"Name {i}"
                     },
                 };
-                
+
                 _ranksData.Add(data.ToSingleRankData());
 
                 await Task.Delay(150);

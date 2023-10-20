@@ -72,7 +72,6 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<ILocalizationService>(),
                     _services.Single<ISoundService>(),
                     _services.Single<IPauseService>(),
-                    _services.Single<IScoreService>(),
                     _stateMachine));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
             _services.RegisterSingle<IPlayerInputService>(new PlayerInputService(_services.Single<IPauseService>(),

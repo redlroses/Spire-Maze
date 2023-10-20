@@ -22,7 +22,6 @@ namespace CodeBase.UI.Windows
         [SerializeField] private StarsView _starsView;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
 
-
         private IPersistentProgressService _progressService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
