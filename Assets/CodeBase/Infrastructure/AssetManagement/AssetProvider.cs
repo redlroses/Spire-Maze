@@ -55,7 +55,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public Sprite LoadSprite(string path)
         {
-            var sprite = Resources.Load<Sprite>(path);
+            Sprite sprite = Resources.Load<Sprite>(path);
             return sprite;
         }
 

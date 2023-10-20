@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Services.Ranked;
@@ -18,6 +19,7 @@ namespace CodeBase.UI.Windows
         private List<RankView> _ranksView;
         private bool _isLeaderboardDataReceived;
         private int _currentSelfRank;
+        private bool _hasMyRankAtTop;
 
         public void Construct(IRankedService rankedService, IUIFactory gameUiFactory)
         {
@@ -36,20 +38,18 @@ namespace CodeBase.UI.Windows
             _currentSelfRank = ranksData.SelfRank.Rank;
             SpawnTopRanks(ranksData.TopThreeRanks);
             SpawnCompetingRanks(ranksData.AroundRanks);
+
+            if (_hasMyRankAtTop == false)
+            {
+                SpawnRank(CreateCompetingRankView, ranksData.SelfRank);
+            }
         }
 
         private void SpawnCompetingRanks(SingleRankData[] aroundRanks)
         {
             for (int i = 0; i < aroundRanks.Length; i++)
             {
-                GameObject topRankView = _gameUiFactory.CreateRankView(_content);
-                RankView rankView = topRankView.GetComponent<RankView>();
-                rankView.Set(aroundRanks[i]);
-
-                if (IsMyRank(aroundRanks[i]))
-                {
-                    rankView.EnableSelfIndication();
-                }
+                SpawnRank(CreateCompetingRankView, aroundRanks[i]);
             }
         }
 
@@ -57,16 +57,33 @@ namespace CodeBase.UI.Windows
         {
             for (int i = 0; i < topThreeRanks.Length; i++)
             {
-                GameObject topRankView = _gameUiFactory.CreateTopRankView(i, _content);
-                topRankView.GetComponent<TopRankViewConfigurator>().SetUp(i);
-                RankView rankView = topRankView.GetComponent<RankView>();
-                rankView.Set(topThreeRanks[i]);
+                SpawnRank(() => CreateTopRankView(i), topThreeRanks[i]);
+            }
+        }
 
-                if (IsMyRank(topThreeRanks[i]))
-                {
-                    rankView.EnableSelfIndication();
-                    Debug.Log("my rank " + topThreeRanks[i].Rank);
-                }
+        private GameObject CreateCompetingRankView()
+        {
+            GameObject rankViewObject = _gameUiFactory.CreateRankView(_content);
+            return rankViewObject;
+        }
+
+        private GameObject CreateTopRankView(int i)
+        {
+            GameObject rankViewObject = _gameUiFactory.CreateTopRankView(i, _content);
+            rankViewObject.GetComponent<TopRankViewConfigurator>().SetUp(i);
+            return rankViewObject;
+        }
+
+        private void SpawnRank(Func<GameObject> createRankView, SingleRankData rankData)
+        {
+            GameObject rankViewObject = createRankView.Invoke();
+            RankView rankView = rankViewObject.GetComponent<RankView>();
+            rankView.Set(rankData);
+
+            if (IsMyRank(rankData))
+            {
+                rankView.EnableSelfIndication();
+                _hasMyRankAtTop = true;
             }
         }
 

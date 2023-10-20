@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Data;
@@ -129,10 +130,14 @@ namespace CodeBase.Leaderboards
         }
 
         private SingleRankData[] GetCompetingRanks() =>
-            _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray();
+            _ranksData.Count > _topPlayersCount
+                ? _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray()
+                : Array.Empty<SingleRankData>();
 
         private SingleRankData[] GetTopRanks() =>
-            _ranksData.GetRange(0, _topPlayersCount).ToArray();
+            _ranksData.Count == 0
+                ? Array.Empty<SingleRankData>()
+                : _ranksData.GetRange(0, Math.Min(_topPlayersCount, _ranksData.Count)).ToArray();
 
         private void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
         {

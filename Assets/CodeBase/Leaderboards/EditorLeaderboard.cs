@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Agava.YandexGames;
@@ -40,13 +41,15 @@ namespace CodeBase.Leaderboards
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
 
-        private SingleRankData[] GetCompetingRanks()
-        {
-            return _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray();
-        }
+        private SingleRankData[] GetCompetingRanks() =>
+            _ranksData.Count > _topPlayersCount
+                ? _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray()
+                : Array.Empty<SingleRankData>();
 
         private SingleRankData[] GetTopRanks() =>
-            _ranksData.GetRange(0, _topPlayersCount).ToArray();
+            _ranksData.Count == 0
+                ? Array.Empty<SingleRankData>()
+                : _ranksData.GetRange(0, Math.Min(_topPlayersCount, _ranksData.Count)).ToArray();
 
         public Task SetScore(int score, string avatarName) =>
             Task.CompletedTask;
@@ -58,7 +61,7 @@ namespace CodeBase.Leaderboards
             string[] langs = {"ru", "en", "tr"};
             string[] avatars = {"Test1", "Test2"};
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 1; i++)
             {
                 var data = new LeaderboardEntryResponse
                 {
