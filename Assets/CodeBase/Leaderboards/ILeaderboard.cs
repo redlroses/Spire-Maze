@@ -7,5 +7,8 @@ namespace CodeBase.Leaderboards
     {
         Task<RanksData> GetRanksData();
         Task SetScore(int score, string avatarName);
+        bool IsAuthorized { get; }
+        Task<bool> TryAuthorize();
+        Task<bool> TryRequestPersonalData();
     }
 }

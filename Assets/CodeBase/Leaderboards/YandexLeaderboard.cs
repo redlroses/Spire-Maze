@@ -22,6 +22,7 @@ namespace CodeBase.Leaderboards
         private List<SingleRankData> _ranksData;
         private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived;
+        private bool _isAuthorized;
 
         public YandexLeaderboard(LeaderboardStaticData leaderboard)
         {
@@ -29,17 +30,14 @@ namespace CodeBase.Leaderboards
             _topPlayersCount = leaderboard.TopPlayersCount;
             _competingPlayersCount = leaderboard.CompetingPlayersCount;
             _isIncludeSelf = leaderboard.IsIncludeSelf;
+            CheckAuthorization();
+            PlayerAccount.AuthorizedInBackground += CheckAuthorization;
         }
+
+        public bool IsAuthorized => _isAuthorized;
 
         public async Task<RanksData> GetRanksData()
         {
-            bool isAuthorized = await TryAuthorize();
-
-            if (isAuthorized)
-            {
-                await TryRequestPersonalData();
-            }
-
             if (_unsavedScore != 0)
             {
                 await SetScore(_unsavedScore, _unsavedAvatarName);
@@ -63,14 +61,12 @@ namespace CodeBase.Leaderboards
         {
             bool isComplete = false;
 
-            if (PlayerAccount.IsAuthorized == false)
+            if (IsAuthorized == false)
             {
                 _unsavedScore = score;
                 _unsavedAvatarName = avatarName;
                 return;
             }
-
-            // await TryRequestPersonalData();
 
             Leaderboard.GetPlayerEntry(_name, result =>
             {
@@ -93,8 +89,10 @@ namespace CodeBase.Leaderboards
             bool isSuccess = false;
             bool isError = false;
 
-            if (PlayerAccount.IsAuthorized)
+            if (_isAuthorized)
+            {
                 return true;
+            }
 
             PlayerAccount.Authorize(() => isSuccess = true, _ => isError = true);
 
@@ -103,6 +101,7 @@ namespace CodeBase.Leaderboards
                 await Task.Yield();
             }
 
+            _isAuthorized = PlayerAccount.IsAuthorized;
             Debug.Log($"{nameof(TryAuthorize)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
         }
@@ -127,6 +126,12 @@ namespace CodeBase.Leaderboards
 
             Debug.Log($"{nameof(TryRequestPersonalData)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
+        }
+
+        public void CheckAuthorization()
+        {
+            Debug.Log($"CheckAuthorization invoke: {PlayerAccount.IsAuthorized}");
+            _isAuthorized = PlayerAccount.IsAuthorized;
         }
 
         private SingleRankData[] GetCompetingRanks() =>

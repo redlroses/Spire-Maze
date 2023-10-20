@@ -16,13 +16,14 @@ namespace CodeBase.Services.Ranked
 
         private ILeaderboard _leaderboard;
 
+        public bool IsAuthorized => _leaderboard.IsAuthorized;
+
         public RankedService(IStaticDataService staticDataService)
         {
             _staticDataService = staticDataService;
-            SetupLeaderboard();
         }
 
-        private void SetupLeaderboard()
+        public void InitLeaderboard()
         {
 #if YANDEX_GAMES && UNITY_WEBGL && !UNITY_EDITOR
             UseYandexLeaderboard();
@@ -32,6 +33,12 @@ namespace CodeBase.Services.Ranked
 #endif
         }
 
+        public async Task<bool> Authorize() =>
+            await _leaderboard.TryAuthorize();
+
+        public async Task<bool> RequestPersonalData() =>
+            await _leaderboard.TryRequestPersonalData();
+
         public Task<RanksData> GetRanksData() =>
             _leaderboard.GetRanksData();
 
@@ -39,6 +46,7 @@ namespace CodeBase.Services.Ranked
         {
             _leaderboard.SetScore(score, avatarName);
         }
+
 
         [Conditional("UNITY_EDITOR")]
         private void UseEditorLeaderboard()

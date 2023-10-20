@@ -46,6 +46,8 @@ namespace CodeBase.Tools
 
         protected virtual void OnHide() { }
 
+        protected virtual void OnInitialize() { }
+
         public void Show(Action onShowCallback = null)
         {
             if (onShowCallback is null)

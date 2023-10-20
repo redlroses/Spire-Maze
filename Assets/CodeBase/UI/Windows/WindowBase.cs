@@ -37,5 +37,8 @@ namespace CodeBase.UI.Windows
         protected virtual void SubscribeUpdates() { }
 
         protected virtual void Cleanup() { }
+
+        protected void Close() =>
+            _closeButton.onClick.Invoke();
     }
 }

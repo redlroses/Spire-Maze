@@ -30,7 +30,7 @@ namespace CodeBase.SDK
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            
+
 #if !UNITY_WEBGL || UNITY_EDITOR
             onReadyCallback?.Invoke();
             yield break;

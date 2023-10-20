@@ -39,7 +39,6 @@ namespace CodeBase.UI.Windows
 
         protected override void Initialize()
         {
-            _windowAnimationPlayer.Play();
             WorldData worldData = WorldData;
             SetScorePoints(worldData);
             SetItemsCount(worldData);
@@ -53,6 +52,7 @@ namespace CodeBase.UI.Windows
             _menuButton.Subscribe();
             _restartButton.Subscribe();
             _nextLevelButton.Subscribe();
+            _windowAnimationPlayer.Play();
         }
 
         protected override void Cleanup()

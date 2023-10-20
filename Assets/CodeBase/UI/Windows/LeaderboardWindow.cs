@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Agava.YandexGames;
 using CodeBase.Data;
+using CodeBase.DelayRoutines;
 using CodeBase.Services.Ranked;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
+using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows
 {
@@ -12,6 +17,8 @@ namespace CodeBase.UI.Windows
     {
         [SerializeField] private LoadingAnimation _loadingAnimation;
         [SerializeField] private Transform _content;
+        [SerializeField] private GameObject _loginPanel;
+        [SerializeField] private Button _authorizeButton;
 
         private IRankedService _rankedService;
         private IUIFactory _gameUiFactory;
@@ -20,6 +27,8 @@ namespace CodeBase.UI.Windows
         private bool _isLeaderboardDataReceived;
         private int _currentSelfRank;
         private bool _hasMyRankAtTop;
+
+        private RoutineSequence _authorizationAwait;
 
         public void Construct(IRankedService rankedService, IUIFactory gameUiFactory)
         {
@@ -32,6 +41,20 @@ namespace CodeBase.UI.Windows
 
         private async void ShowLeaderBoard()
         {
+            if (_rankedService.IsAuthorized == false)
+            {
+                _loginPanel.Enable();
+                _authorizeButton.onClick.AddListener(OnClickAuthorized);
+
+                while (_rankedService.IsAuthorized == false)
+                {
+                    await Task.Yield();
+                }
+
+                await _rankedService.RequestPersonalData();
+            }
+
+            _loginPanel.Disable();
             _loadingAnimation.Play();
             RanksData ranksData = await _rankedService.GetRanksData();
             _loadingAnimation.Stop();
@@ -43,6 +66,12 @@ namespace CodeBase.UI.Windows
             {
                 SpawnRank(CreateCompetingRankView, ranksData.SelfRank);
             }
+        }
+
+        private void OnClickAuthorized()
+        {
+            _authorizeButton.onClick.RemoveAllListeners();
+            _rankedService.Authorize();
         }
 
         private void SpawnCompetingRanks(SingleRankData[] aroundRanks)

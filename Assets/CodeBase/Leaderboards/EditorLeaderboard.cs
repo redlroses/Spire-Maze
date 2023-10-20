@@ -18,6 +18,19 @@ namespace CodeBase.Leaderboards
         private List<SingleRankData> _ranksData = new List<SingleRankData>();
         private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived = false;
+        private bool _isAuthorized;
+
+        public bool IsAuthorized => _isAuthorized;
+        public Task<bool> TryAuthorize()
+        {
+            _isAuthorized = true;
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> TryRequestPersonalData()
+        {
+            return Task.FromResult(true);
+        }
 
         public EditorLeaderboard(LeaderboardStaticData leaderboard)
         {
@@ -61,7 +74,7 @@ namespace CodeBase.Leaderboards
             string[] langs = {"ru", "en", "tr"};
             string[] avatars = {"Test1", "Test2"};
 
-            for (int i = 1; i <= 1; i++)
+            for (int i = 1; i <= 6; i++)
             {
                 var data = new LeaderboardEntryResponse
                 {
