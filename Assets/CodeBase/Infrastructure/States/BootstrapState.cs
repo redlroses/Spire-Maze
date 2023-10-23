@@ -45,13 +45,16 @@ namespace CodeBase.Infrastructure.States
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             YandexGamesSdk.GameReady();
+            _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
+#endif
+#if UNITY_EDITOR
+            _services.Single<ILocalizationService>().ChooseLanguage(LanguageId.Russian);
 #endif
             _services.Single<IRankedService>().InitLeaderboard();
-            _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
         }
 
         private void RegisterServices()
-        {
+        { 
             RegisterStaticDataService();
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());
