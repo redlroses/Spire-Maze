@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using Agava.YandexGames;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.Services.Cameras;
@@ -14,9 +15,9 @@ using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -42,6 +43,11 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            YandexGamesSdk.GameReady();
+#endif
+            _services.Single<IRankedService>().InitLeaderboard();
+            _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
         }
 
         private void RegisterServices()

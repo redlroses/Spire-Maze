@@ -7,16 +7,12 @@ namespace CodeBase.UI.SelectionGroup
     {
         private ILocalizationService _localization;
 
-        private void Awake()
-        {
-            SetDefault(LanguageId.Russian);
-        }
-
         public void Construct(ILocalizationService localization)
         {
             _localization = localization;
+            SetDefault(localization.Current);
         }
-        
+
         protected override void OnSelectionChanged(LanguageId languageId)
         {
             Debug.Log($"Select language: {languageId}");

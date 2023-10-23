@@ -8,6 +8,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
 using CodeBase.Services;
+using CodeBase.Services.Localization;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Storable;
 using UnityEngine;
@@ -93,6 +94,17 @@ namespace CodeBase.Tools.Extension
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);
+        }
+
+        public static LanguageId AsLangId(this string langString)
+        {
+            return langString switch
+            {
+                "ru" => LanguageId.Russian,
+                "en" => LanguageId.English,
+                "tr" => LanguageId.Turkish,
+                _ => LanguageId.English
+            };
         }
     }
 }
