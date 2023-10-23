@@ -12,16 +12,19 @@ namespace CodeBase.Logic.ChestItem
     public class Chest : MonoCache, IIndexable, ISavedProgress
     {
         private readonly Vector3 _offsetLocalPosition = new Vector3(-0.45f, 0.2f, 0);
-        
+
         [SerializeField] private ChestAnimator _animator;
-        
+
         private Collectible _collectibleItem;
-        
+
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
         public void Initialize(Collectible item)
         {
+            //TODO: Можно избавиться от прослойки Collectible и сразу передавать предмет в сундук.
+            //TODO: Сам сундук будет реализовать ICollectible, логка будет короче и проще.
+
             _collectibleItem = item;
             Id = _collectibleItem.Id;
             transform.localPosition += _offsetLocalPosition;
@@ -68,10 +71,10 @@ namespace CodeBase.Logic.ChestItem
                 return;
 
             hero.InputService.Action += OnAction;
-            
-            if (IsActivated == true)
+
+            if (IsActivated)
                 return;
-            
+
             Debug.Log("Нажмите Е чтоб открыть сундук");
         }
 
@@ -85,9 +88,9 @@ namespace CodeBase.Logic.ChestItem
 
         private void OnAction()
         {
-            if (IsActivated == true)
+            if (IsActivated)
                 return;
-            
+
             _collectibleItem.GetComponent<SphereCollider>().enabled = true;
             Open();
         }

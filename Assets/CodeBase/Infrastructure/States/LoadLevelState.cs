@@ -6,6 +6,8 @@ using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Services;
+using CodeBase.Services.ADS;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
@@ -80,6 +82,7 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Hide();
             _levelBuilder.Clear();
+            AllServices.Container.Single<IADService>().ShowInterstitialAd();
         }
 
         private void OnLoaded()

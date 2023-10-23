@@ -1,9 +1,12 @@
 ﻿using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
+using CodeBase.Services;
+using CodeBase.Services.ADS;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
 
@@ -13,6 +16,7 @@ namespace CodeBase.UI.Windows
     {
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
+        [SerializeField] private SimpleButton _showAdButton;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
@@ -35,6 +39,8 @@ namespace CodeBase.UI.Windows
             SetScore();
             SetCoins();
             _showHide.Value.Show();
+
+            _showAdButton.Clicked += () => AllServices.Container.Single<IADService>().ShowRewardAd(() => Debug.Log("Reward Purchase"));
         }
 
         protected override void SubscribeUpdates()

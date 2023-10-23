@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -8,6 +9,12 @@ namespace CodeBase.UI.Elements.Buttons
     public abstract class ButtonObserver : MonoBehaviour
     {
         [FormerlySerializedAs("_button")] [SerializeField] protected Button Button;
+
+        public event UnityAction Clicked
+        {
+            add => Button.onClick.AddListener(value);
+            remove => Button.onClick.RemoveListener(value);
+        }
 
         private void Awake() =>
             Button ??= GetComponent<Button>();

@@ -17,8 +17,15 @@ namespace CodeBase.UI.Windows
             _progressService = progressService;
         }
 
-        private void Awake() =>
+        private void Awake()
+        {
+            if (_closeButton != null)
+            {
+                _closeButton.onClick.AddListener(() => Destroy(gameObject));
+            }
+
             OnAwake();
+        }
 
         private void Start()
         {
@@ -29,8 +36,7 @@ namespace CodeBase.UI.Windows
         private void OnDestroy() =>
             Cleanup();
 
-        protected virtual void OnAwake() =>
-            _closeButton.onClick.AddListener(() => Destroy(gameObject));
+        protected virtual void OnAwake() { }
 
         protected virtual void Initialize() { }
 
@@ -38,7 +44,12 @@ namespace CodeBase.UI.Windows
 
         protected virtual void Cleanup() { }
 
-        protected void Close() =>
-            _closeButton.onClick.Invoke();
+        protected void Close()
+        {
+            if (_closeButton != null)
+            {
+                _closeButton.onClick.Invoke();
+            }
+        }
     }
 }
