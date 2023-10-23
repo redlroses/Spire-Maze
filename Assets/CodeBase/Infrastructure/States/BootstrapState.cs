@@ -1,7 +1,7 @@
-﻿using Agava.YandexGames;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
+using CodeBase.Services.ADS;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
@@ -15,7 +15,6 @@ using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 
@@ -62,6 +61,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<ISoundService>(new SoundService());
+            _services.RegisterSingle<IADService>(new ADService(_services.Single<ISoundService>()));
             _services.RegisterSingle<IWatchService>(
                 new WatchService(
                     _coroutineRunner,
