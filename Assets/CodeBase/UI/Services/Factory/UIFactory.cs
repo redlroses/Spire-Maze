@@ -1,10 +1,10 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using System;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
-using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Windows;
@@ -12,6 +12,7 @@ using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 // ReSharper disable InconsistentNaming
 
@@ -43,6 +44,14 @@ namespace CodeBase.UI.Services.Factory
             _pauseService = pauseService;
             _stateMachine = stateMachine;
         }
+
+#if UNITY_EDITOR
+        public GameObject CreateEditorRewardADPanel() =>
+            _assets.Instantiate(AssetPath.EditorRewardADPanel, _uiRoot);
+
+        public GameObject CreateEditorInterstitialADPanel() =>
+            _assets.Instantiate(AssetPath.EditorInterstitialADPanel, _uiRoot);
+#endif
 
         public GameObject CreateExtraLiveView(Transform inside) =>
             _assets.Instantiate(AssetPath.ExtraLiveView, inside);

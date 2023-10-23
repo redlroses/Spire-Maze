@@ -12,6 +12,11 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string OverviewInterface = "Prefabs/UI/OverviewInterface";
         public const string EnterLevelPanel = "Prefabs/UI/EnterLevelPanel";
 
+#if UNITY_EDITOR
+        public const string EditorRewardADPanel = "Prefabs/UI/DebugPanels/EditorRewardADPanel";
+        public const string EditorInterstitialADPanel = "Prefabs/UI/DebugPanels/EditorInterstitialADPanel";
+#endif
+
         public const string HeroPath = "Prefabs/Hero";
         public const string Enemies = "Prefabs/Enemies";
         public const string VirtualMover = "Prefabs/VirtualMover";
