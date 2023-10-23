@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.StaticData;
 using Agava.YandexGames;
+using CodeBase.Services.StaticData;
+using CodeBase.Tools;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 
@@ -11,10 +13,14 @@ namespace CodeBase.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {
+        private const string Anonymous = "Anonimus";
+
         private readonly string _name;
         private readonly int _topPlayersCount;
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
+        private readonly IStaticDataService _staticData;
+        private readonly ImageLoader _imageLoader;
 
         private int _unsavedScore;
         private string _unsavedAvatarName;
@@ -24,8 +30,10 @@ namespace CodeBase.Leaderboards
         private bool _isLeaderboardDataReceived;
         private bool _isAuthorized;
 
-        public YandexLeaderboard(LeaderboardStaticData leaderboard)
+        public YandexLeaderboard(LeaderboardStaticData leaderboard, IStaticDataService staticData)
         {
+            _staticData = staticData;
+            _imageLoader = new ImageLoader();
             _name = leaderboard.Name;
             _topPlayersCount = leaderboard.TopPlayersCount;
             _competingPlayersCount = leaderboard.CompetingPlayersCount;
@@ -111,7 +119,7 @@ namespace CodeBase.Leaderboards
             bool isSuccess = false;
             bool isError = false;
 
-            if (PlayerAccount.IsAuthorized == false)
+            if (_isAuthorized == false)
                 return false;
 
             if (PlayerAccount.HasPersonalProfileDataPermission)
@@ -128,7 +136,7 @@ namespace CodeBase.Leaderboards
             return isSuccess;
         }
 
-        public void CheckAuthorization()
+        private void CheckAuthorization()
         {
             Debug.Log($"CheckAuthorization invoke: {PlayerAccount.IsAuthorized}");
             _isAuthorized = PlayerAccount.IsAuthorized;
@@ -144,16 +152,51 @@ namespace CodeBase.Leaderboards
                 ? Array.Empty<SingleRankData>()
                 : _ranksData.GetRange(0, Math.Min(_topPlayersCount, _ranksData.Count)).ToArray();
 
-        private void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
+        private async void OnGetLeaderBoardEntries(LeaderboardGetEntriesResponse board)
         {
             _ranksData = new List<SingleRankData>(board.entries.Length);
 
             foreach (LeaderboardEntryResponse entry in board.entries)
             {
-                _ranksData.Add(entry.ToSingleRankData());
+                _ranksData.Add(await AsSingleRankData(entry));
             }
 
             _isLeaderboardDataReceived = true;
+        }
+
+        private async Task<SingleRankData> AsSingleRankData(LeaderboardEntryResponse entry)
+        {
+            Sprite avatar = await LoadProfileImage(entry);
+
+            Sprite flag = _staticData.SpriteByLang(entry.player.lang);
+
+            return new SingleRankData(entry.rank, entry.score, avatar,
+                entry.player.publicName ?? Anonymous, flag);
+        }
+
+        private async Task<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)
+        {
+            Sprite avatar = null;
+            bool isLoading = true;
+
+            _imageLoader.LoadImage(entry.player.profilePicture,
+                sprite =>
+                {
+                    avatar = sprite;
+                    isLoading = false;
+                },
+                () =>
+                {
+                    avatar = _staticData.GetDefaultAvatar();
+                    isLoading = false;
+                });
+
+            while (isLoading)
+            {
+                await Task.Yield();
+            }
+
+            return avatar;
         }
     }
 }

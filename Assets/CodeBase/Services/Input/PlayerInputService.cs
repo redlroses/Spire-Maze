@@ -100,7 +100,7 @@ namespace CodeBase.Services.Input
                 _windowService.Open(WindowId.Pause);
         }
 
-        private void OnAction(InputAction.CallbackContext context) => 
+        private void OnAction(InputAction.CallbackContext context) =>
             Action.Invoke();
     }
 }

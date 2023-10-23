@@ -18,6 +18,8 @@ namespace CodeBase.Services.StaticData
         private const string LeaderboardPath = "StaticData/Leaderboard";
         private const string WindowPath = "StaticData/WindowConfig/WindowConfigs";
         private const string ScoreConfigPath = "StaticData/ScoreConfig";
+        private const string FlagsConfigPath = "StaticData/FlagsConfig";
+        private const string DefaultAvatarPath = "StaticData/DefaultAvatar";
 
         private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -26,6 +28,8 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<int, ScoreConfig> _scoreConfigs;
+
+        private FlagsConfig _flagsConfig;
 
         public void Load()
         {
@@ -39,6 +43,8 @@ namespace CodeBase.Services.StaticData
                 .Load<WindowStaticData>(WindowPath)
                 .Configs
                 .ToDictionary(x => x.WindowId, x => x);
+
+            _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
         }
 
         public LevelStaticData ForLevel(int levelId) =>
@@ -61,6 +67,14 @@ namespace CodeBase.Services.StaticData
 
         public ScoreConfig ScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);
+
+        public Sprite SpriteByLang(string lang) =>
+            _flagsConfig.Flags.TryGetValue(lang, out Sprite flag)
+                ? flag
+                : _flagsConfig.DefaultFlag;
+
+        public Sprite GetDefaultAvatar() =>
+            Resources.Load<Sprite>(DefaultAvatarPath);
 
         private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

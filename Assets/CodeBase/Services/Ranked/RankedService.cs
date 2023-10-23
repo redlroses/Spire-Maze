@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Leaderboards;
 using CodeBase.Services.StaticData;
 using Debug = UnityEngine.Debug;
@@ -12,15 +13,16 @@ namespace CodeBase.Services.Ranked
         private const string YandexName = "Yandex";
         private const string EditorName = "Editor";
 
-        private readonly IStaticDataService _staticDataService;
+        private readonly IStaticDataService _staticData;
+        private readonly IAssetProvider _assetProvider;
 
         private ILeaderboard _leaderboard;
 
         public bool IsAuthorized => _leaderboard.IsAuthorized;
 
-        public RankedService(IStaticDataService staticDataService)
+        public RankedService(IStaticDataService staticData)
         {
-            _staticDataService = staticDataService;
+            _staticData = staticData;
         }
 
         public void InitLeaderboard()
@@ -52,14 +54,14 @@ namespace CodeBase.Services.Ranked
         private void UseEditorLeaderboard()
         {
             Debug.Log(nameof(UseEditorLeaderboard));
-            _leaderboard = new EditorLeaderboard(_staticDataService.ForLeaderboard(EditorName));
+            _leaderboard = new EditorLeaderboard(_staticData.ForLeaderboard(EditorName));
         }
 
         [Conditional("YANDEX_GAMES")]
         private void UseYandexLeaderboard()
         {
             Debug.Log(nameof(UseYandexLeaderboard));
-            _leaderboard = new YandexLeaderboard(_staticDataService.ForLeaderboard(YandexName));
+            _leaderboard = new YandexLeaderboard(_staticData.ForLeaderboard(YandexName), _staticData);
         }
     }
 }

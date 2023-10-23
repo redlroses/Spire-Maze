@@ -1,13 +1,13 @@
 using System;
 using CodeBase.Logic.StaminaEntity;
-using CodeBase.Services.Input;
+using CodeBase.Services.Pause;
 using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class Dodge : MonoCache, IDodge
+    public class Dodge : MonoCache, IDodge, IPauseWatcher
     {
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private GameObject _hitBox;
@@ -16,10 +16,13 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private int _fatigue;
 
         private bool _isDodged;
-        
+
         public event Action<MoveDirection> Dodged;
 
-        public bool CanDodge => (_isDodged == false) & _stamina.TrySpend(_fatigue);
+        public bool CanDodge => enabled && _isDodged == false && _stamina.TrySpend(_fatigue);
+
+        private void Awake() =>
+            enabled = true;
 
         private void Start() =>
             _timer.SetUp(_invulnerabilityTime, OnTurnOff);
@@ -32,9 +35,13 @@ namespace CodeBase.Logic.Movement
             _timer.Play();
         }
 
-        private void OnTurnOff()
-        {
+        private void OnTurnOff() =>
             _hitBox.SetActive(true);
-        }
+
+        public void Pause() =>
+            enabled = false;
+
+        public void Resume() =>
+            enabled = true;
     }
 }

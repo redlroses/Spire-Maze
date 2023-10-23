@@ -1,6 +1,7 @@
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
@@ -15,10 +16,12 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
         private readonly IStaticDataService _staticDataService;
+        private IRankedService _rankedService;
 
         public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
-            ISaveLoadService saveLoadProgress, IStaticDataService staticDataService)
+            ISaveLoadService saveLoadProgress, IStaticDataService staticDataService, IRankedService rankedService)
         {
+            _rankedService = rankedService;
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadProgress = saveLoadProgress;
@@ -39,6 +42,7 @@ namespace CodeBase.Infrastructure.States
 #if UNITY_WEBGL && !UNITY_EDITOR
             YandexGamesSdk.GameReady();
 #endif
+            _rankedService.InitLeaderboard();
         }
 
         private void LoadProgressOrInitNew()

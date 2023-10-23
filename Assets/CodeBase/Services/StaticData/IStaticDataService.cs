@@ -2,6 +2,7 @@
 using CodeBase.StaticData.Storable;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
+using UnityEngine;
 
 namespace CodeBase.Services.StaticData
 {
@@ -15,5 +16,7 @@ namespace CodeBase.Services.StaticData
     LeaderboardStaticData ForLeaderboard(string name);
     WindowConfig ForWindow(WindowId windowId);
     ScoreConfig ScoreForLevel(int levelId);
+    Sprite SpriteByLang(string lang);
+    Sprite GetDefaultAvatar();
   }
 }

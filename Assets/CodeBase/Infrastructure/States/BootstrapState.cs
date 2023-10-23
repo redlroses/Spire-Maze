@@ -61,8 +61,11 @@ namespace CodeBase.Infrastructure.States
                 new ScoreService(
                     _services.Single<IStaticDataService>(),
                     _services.Single<IPersistentProgressService>()));
-            _services.RegisterSingle<IRankedService>(new RankedService(_services.Single<IStaticDataService>()));
-            _services.RegisterSingle<IPauseService>(new PauseService(_services.Single<IWatchService>()));
+            _services.RegisterSingle<IRankedService>(
+                new RankedService(
+                    _services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IPauseService>(
+                new PauseService(_services.Single<IWatchService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
