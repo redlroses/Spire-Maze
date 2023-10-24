@@ -45,13 +45,11 @@ namespace CodeBase.UI.Services.Factory
             _stateMachine = stateMachine;
         }
 
-#if UNITY_EDITOR
         public GameObject CreateEditorRewardADPanel() =>
             _assets.Instantiate(AssetPath.EditorRewardADPanel, _uiRoot);
 
         public GameObject CreateEditorInterstitialADPanel() =>
             _assets.Instantiate(AssetPath.EditorInterstitialADPanel, _uiRoot);
-#endif
 
         public GameObject CreateExtraLiveView(Transform inside) =>
             _assets.Instantiate(AssetPath.ExtraLiveView, inside);

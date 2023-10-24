@@ -18,9 +18,7 @@ namespace CodeBase.UI.Services.Factory
         void CreatePause();
         void CreateResults();
         void CreateLose();
-#if UNITY_EDITOR
         GameObject CreateEditorRewardADPanel();
         GameObject CreateEditorInterstitialADPanel();
-#endif
     }
 }
