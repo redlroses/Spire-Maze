@@ -50,6 +50,10 @@ namespace CodeBase.UI.Windows
             {
                 _closeButton.onClick.Invoke();
             }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

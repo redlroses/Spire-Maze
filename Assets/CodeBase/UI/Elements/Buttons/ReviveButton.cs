@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.DelayRoutines;
+using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Player;
 using CodeBase.Services.ADS;
 using TheraBytes.BetterUi;
@@ -25,7 +26,8 @@ namespace CodeBase.UI.Elements.Buttons
         private RoutineSequence _heartAnimation;
         private LocationAnimations.LocationAnimationEvent _onFinishAnimation;
 
-        public void Construct(IADService adService, HeroReviver reviver, Action onRevived = null)
+        public void Construct(IADService adService, HeroReviver reviver,
+            Action onRevived = null)
         {
             _onRevived = onRevived ?? (() => { });
             _adService = adService;

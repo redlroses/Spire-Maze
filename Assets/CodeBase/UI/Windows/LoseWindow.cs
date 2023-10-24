@@ -32,7 +32,11 @@ namespace CodeBase.UI.Windows
             _progressService = progressService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
-            _reviveButton.Construct(adService, reviver, Close);
+            _reviveButton.Construct(adService, reviver, () =>
+            {
+                Close();
+                stateMachine.Enter<GameLoopState>();
+            });
         }
 
         protected override void Initialize()
