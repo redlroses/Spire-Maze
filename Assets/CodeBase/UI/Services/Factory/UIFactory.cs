@@ -1,6 +1,6 @@
-﻿using System;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
+using CodeBase.Services.ADS;
 using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
@@ -14,8 +14,6 @@ using CodeBase.UI.Windows;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-// ReSharper disable InconsistentNaming
-
 namespace CodeBase.UI.Services.Factory
 {
     public class UIFactory : IUIFactory
@@ -27,13 +25,14 @@ namespace CodeBase.UI.Services.Factory
         private readonly ILocalizationService _localizationService;
         private readonly ISoundService _soundService;
         private readonly IPauseService _pauseService;
+        private readonly IADService _adService;
         private readonly GameStateMachine _stateMachine;
 
         private Transform _uiRoot;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
             IPersistentProgressService progressService, IRankedService rankedService,
-            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, GameStateMachine stateMachine)
+            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, IADService adService, GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;
@@ -42,6 +41,7 @@ namespace CodeBase.UI.Services.Factory
             _localizationService = localizationService;
             _soundService = soundService;
             _pauseService = pauseService;
+            _adService = adService;
             _stateMachine = stateMachine;
         }
 
@@ -98,7 +98,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateLose()
         {
             var window = CreateWindow<LoseWindow>(WindowId.Lose);
-            window.Construct(_progressService, _stateMachine);
+            window.Construct(_progressService, _adService, _stateMachine);
         }
 
         public GameObject CreateOverviewInterface() =>

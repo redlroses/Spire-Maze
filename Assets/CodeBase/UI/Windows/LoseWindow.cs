@@ -1,7 +1,6 @@
 ﻿using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
-using CodeBase.Services;
 using CodeBase.Services.ADS;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
@@ -16,19 +15,21 @@ namespace CodeBase.UI.Windows
     {
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
-        [SerializeField] private SimpleButton _showAdButton;
+        [SerializeField] private SimpleButton _reviveButton;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
 
         private IPersistentProgressService _progressService;
+        private IADService _adService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
         private WorldData WorldData => _progressService.Progress.WorldData;
 
-        public void Construct(IPersistentProgressService progressService,
+        public void Construct(IPersistentProgressService progressService, IADService adService,
             GameStateMachine stateMachine)
         {
+            _adService = adService;
             _progressService = progressService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
@@ -40,7 +41,12 @@ namespace CodeBase.UI.Windows
             SetCoins();
             _showHide.Value.Show();
 
-            _showAdButton.Clicked += () => AllServices.Container.Single<IADService>().ShowRewardAd(() => Debug.Log("Reward Purchase"));
+            _reviveButton.Clicked += OnRevive;
+        }
+
+        private void OnRevive()
+        {
+            _adService.ShowRewardAd(() => Debug.Log("Hero revived"));
         }
 
         protected override void SubscribeUpdates()
@@ -53,6 +59,7 @@ namespace CodeBase.UI.Windows
         {
             _menuButton.Cleanup();
             _restartButton.Cleanup();
+            _reviveButton.Cleanup();
         }
 
         private void SetScore() =>

@@ -12,7 +12,7 @@ namespace CodeBase.DelayRoutines
 
         private readonly Action<GlobalUpdate, Awaiter> _addUpdater;
         private readonly Action<GlobalUpdate, Awaiter> _removeUpdater;
-        
+
         private int _currentRoutineIndex = -1;
         private bool _isAutoKill;
 
@@ -21,7 +21,7 @@ namespace CodeBase.DelayRoutines
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
         public bool IsActive => ActiveRoutine is not null;
-        
+
         public RoutineSequence(RoutineUpdateMod updateMod = RoutineUpdateMod.Run)
         {
             _globalUpdate = GlobalUpdate.Instance;

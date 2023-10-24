@@ -44,15 +44,17 @@ namespace CodeBase.Infrastructure.States
         private readonly IPauseService _pauseService;
         private readonly ICameraOperatorService _cameraOperatorService;
         private readonly IWindowService _windowService;
+        private readonly IADService _adService;
 
         private LoadPayload _loadPayload;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
-            ICameraOperatorService cameraOperatorService, IWindowService windowService, LoadingCurtain curtain)
+            ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
         {
             _windowService = windowService;
+            _adService = adService;
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -82,7 +84,7 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Hide();
             _levelBuilder.Clear();
-            AllServices.Container.Single<IADService>().ShowInterstitialAd();
+            _adService.ShowInterstitialAd();
         }
 
         private void OnLoaded()

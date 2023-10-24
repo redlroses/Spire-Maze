@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using CodeBase.DelayRoutines;
 using CodeBase.SDK.ADS;
 using CodeBase.Services.Sound;
 using Debug = UnityEngine.Debug;
@@ -8,6 +9,9 @@ namespace CodeBase.Services.ADS
 {
     public class ADService : IADService
     {
+        private const int InterstitialAdCooldownSeconds = 60;
+
+        private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;
 
         private IADProvider _adProvider;
@@ -15,6 +19,9 @@ namespace CodeBase.Services.ADS
         public ADService(ISoundService soundService)
         {
             _soundService = soundService;
+            _interstitialAdCooldown =
+                new RoutineSequence(RoutineUpdateMod.FixedRun)
+                    .WaitForSeconds(InterstitialAdCooldownSeconds);
             InitAdProvider();
         }
 
@@ -32,6 +39,10 @@ namespace CodeBase.Services.ADS
 
         public void ShowInterstitialAd(Action onSuccessCallback = null)
         {
+            if (_interstitialAdCooldown.IsActive)
+                return;
+
+            _interstitialAdCooldown.Play();
             _soundService.Mute();
 
             InterstitialAd(() =>
