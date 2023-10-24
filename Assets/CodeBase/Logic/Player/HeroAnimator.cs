@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Pause;
@@ -18,14 +19,19 @@ namespace CodeBase.Logic.Player
         private static readonly int Fall = Animator.StringToHash("Fall");
         private static readonly int FallSpeed = Animator.StringToHash("FallSpeed");
         private static readonly int Died = Animator.StringToHash("Died");
+        private static readonly int Revive = Animator.StringToHash("Revive");
 
-        private readonly int _jumpStateHash = Animator.StringToHash("Jump");
-        private readonly int _landStateHash = Animator.StringToHash("Land");
-        private readonly int _runStateHash = Animator.StringToHash("Run");
-        private readonly int _dodgeStateHash = Animator.StringToHash("Dodge");
-        private readonly int _idleStateHash = Animator.StringToHash("Idle");
-        private readonly int _fallStateHash = Animator.StringToHash("Fall");
-        private readonly int _diedStateHash = Animator.StringToHash("Died");
+        private readonly Dictionary<int, AnimatorState> _states = new Dictionary<int, AnimatorState>
+        {
+            [Animator.StringToHash("Jump")] = AnimatorState.Jump,
+            [Animator.StringToHash("Land")] = AnimatorState.Land,
+            [Animator.StringToHash("Run")] = AnimatorState.Run,
+            [Animator.StringToHash("Dodge")] = AnimatorState.Dodge,
+            [Animator.StringToHash("Idle")] = AnimatorState.Idle,
+            [Animator.StringToHash("Fall")] = AnimatorState.Fall,
+            [Animator.StringToHash("Died")] = AnimatorState.Died,
+            [Animator.StringToHash("Revive")] = AnimatorState.Revive,
+        };
 
         [SerializeField] private CustomGravityScaler _gravityScaler;
         [SerializeField] private Animator _animator;
@@ -74,6 +80,9 @@ namespace CodeBase.Logic.Player
         public void PlayDied() =>
             _animator.SetTrigger(Died);
 
+        public void PlayRevive() =>
+            _animator.SetTrigger(Revive);
+
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
@@ -89,45 +98,7 @@ namespace CodeBase.Logic.Player
         public void Pause() =>
             _animator.enabled = false;
 
-
-        private AnimatorState StateFor(int stateHash)
-        {
-            AnimatorState state;
-            if (stateHash == _idleStateHash)
-            {
-                state = AnimatorState.Idle;
-            }
-            else if (stateHash == _runStateHash)
-            {
-                state = AnimatorState.Run;
-            }
-            else if (stateHash == _fallStateHash)
-            {
-                state = AnimatorState.Fall;
-            }
-            else if (stateHash == _jumpStateHash)
-            {
-                state = AnimatorState.Jump;
-            }
-            else if (stateHash == _landStateHash)
-            {
-                state = AnimatorState.Land;
-            }
-            else if (stateHash == _dodgeStateHash)
-            {
-                state = AnimatorState.Dodge;
-            }
-            else if (stateHash == _diedStateHash)
-            {
-                state = AnimatorState.Died;
-            }
-            else
-            {
-                state = AnimatorState.Unknown;
-            }
-
-            // Debug.Log(state);
-            return state;
-        }
+        private AnimatorState StateFor(int stateHash) =>
+            _states.TryGetValue(stateHash, out AnimatorState state) ? state : AnimatorState.Unknown;
     }
 }

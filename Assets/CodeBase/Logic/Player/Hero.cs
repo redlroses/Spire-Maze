@@ -10,6 +10,7 @@ namespace CodeBase.Logic.Player
     public class Hero : MonoBehaviour
     {
         [SerializeField] private PlayerHealth _playerHealth;
+        [SerializeField] private HeroReviver _heroReviver;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private CapsuleCollider _collider;
         [SerializeField] private HeroMover _mover;
@@ -28,6 +29,7 @@ namespace CodeBase.Logic.Player
             _animator ??= GetComponent<HeroAnimator>();
             _collider ??= GetComponent<CapsuleCollider>();
             _customGravityScaler ??= GetComponent<CustomGravityScaler>();
+            _heroReviver ??= GetComponent<HeroReviver>();
         }
 
         private void OnEnable()
@@ -48,16 +50,14 @@ namespace CodeBase.Logic.Player
         public void Construct(IPlayerInputService inputService)
         {
             _inputService = inputService;
-            _stateMachine = new PlayerStateMachine(_animator, _inputService, _mover, _dodge, _jumper);
+            _stateMachine = new PlayerStateMachine(_animator, _inputService, _mover, _playerHealth, _dodge, _jumper);
             _stateMachine.Enter<PlayerIdleState>();
+            _heroReviver.Construct(_stateMachine);
         }
 
         private void OnDied()
         {
-            _inputService.DisableMovementMap();
-            _customGravityScaler.enabled = false;
-            _collider.enabled = false;
-            _animator.PlayDied();
+            _stateMachine.Enter<DiedState>();
         }
     }
 }

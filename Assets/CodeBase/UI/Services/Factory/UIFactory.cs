@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Player;
 using CodeBase.Services.ADS;
 using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
@@ -29,6 +30,7 @@ namespace CodeBase.UI.Services.Factory
         private readonly GameStateMachine _stateMachine;
 
         private Transform _uiRoot;
+        private HeroReviver _hero;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
             IPersistentProgressService progressService, IRankedService rankedService,
@@ -44,6 +46,9 @@ namespace CodeBase.UI.Services.Factory
             _adService = adService;
             _stateMachine = stateMachine;
         }
+
+        public void Init(HeroReviver hero) =>
+            _hero = hero;
 
         public GameObject CreateEditorRewardADPanel() =>
             _assets.Instantiate(AssetPath.EditorRewardADPanel, _uiRoot);
@@ -98,7 +103,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateLose()
         {
             var window = CreateWindow<LoseWindow>(WindowId.Lose);
-            window.Construct(_progressService, _adService, _stateMachine);
+            window.Construct(_progressService, _adService, _hero, _stateMachine);
         }
 
         public GameObject CreateOverviewInterface() =>

@@ -1,12 +1,10 @@
 ﻿using System;
-using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
-using CodeBase.Services;
 using CodeBase.Services.ADS;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
@@ -43,7 +41,6 @@ namespace CodeBase.Infrastructure.States
         private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
         private readonly ICameraOperatorService _cameraOperatorService;
-        private readonly IWindowService _windowService;
         private readonly IADService _adService;
 
         private LoadPayload _loadPayload;
@@ -53,7 +50,6 @@ namespace CodeBase.Infrastructure.States
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
             ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
         {
-            _windowService = windowService;
             _adService = adService;
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -94,11 +90,18 @@ namespace CodeBase.Infrastructure.States
             InitGameWorld();
             ValidateLevelProgress();
             GameObject hero = InitHero();
+            InitReviver(hero);
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
 
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InitReviver(GameObject hero)
+        {
+            HeroReviver reviver = hero.GetComponent<HeroReviver>();
+            _uiFactory.Init(reviver);
         }
 
         // ReSharper disable once InconsistentNaming
@@ -165,8 +168,9 @@ namespace CodeBase.Infrastructure.States
         {
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
+            hero.GetComponent<Hero>();
             hero.GetComponent<Hero>().Construct(_playerInputService);
-            hero.GetComponent<HeroAliveObserver>().Construct(_windowService, _stateMachine);
+            hero.GetComponent<HeroAliveObserver>().Construct(_stateMachine);
             hero.GetComponentInChildren<Stamina>().Construct(_staticData.StaminaForEntity(PlayerKey));
             return hero;
         }

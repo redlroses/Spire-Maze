@@ -18,7 +18,9 @@ namespace CodeBase.Services.Watch
         private bool _isPause;
         private bool _isRun;
 
-        public event Action<float> TimeChanged;
+        public event Action<float> TimeChanged = _ => { };
+
+        public float ElapsedTime => _elapsedTime;
 
         public WatchService(ICoroutineRunner coroutineRunnerRunner, IPersistentProgressService progressService)
         {
@@ -48,11 +50,12 @@ namespace CodeBase.Services.Watch
         public void LoadProgress()
         {
             _elapsedTime = _progressService.Progress.WorldData.LevelAccumulationData.PlayTime;
+            TimeChanged.Invoke(ElapsedTime);
         }
 
         public void UpdateProgress()
         {
-            _progressService.Progress.WorldData.LevelAccumulationData.PlayTime = _elapsedTime;
+            _progressService.Progress.WorldData.LevelAccumulationData.PlayTime = ElapsedTime;
         }
 
         private IEnumerator RunTimer()
@@ -66,8 +69,8 @@ namespace CodeBase.Services.Watch
                     continue;
                 }
 
-                _elapsedTime++;
-                TimeChanged?.Invoke(_elapsedTime);
+                _elapsedTime = ElapsedTime + 1;
+                TimeChanged.Invoke(ElapsedTime);
             }
         }
 

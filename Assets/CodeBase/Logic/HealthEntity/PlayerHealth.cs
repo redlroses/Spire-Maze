@@ -46,11 +46,6 @@ namespace CodeBase.Logic.HealthEntity
 
         private void Validate(int points)
         {
-            if (IsAlive == false)
-            {
-                throw new InvalidOperationException($"Entity {name} already dead");
-            }
-
             if (points <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(points), "Points must be non negative");

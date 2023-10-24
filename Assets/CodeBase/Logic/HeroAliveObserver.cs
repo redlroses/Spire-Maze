@@ -12,8 +12,6 @@ namespace CodeBase.Logic
         [SerializeField] private float _loseWindowShowDelay = 2f;
         [SerializeField] private InterfaceReference<IHealth, MonoBehaviour> _heroHealth;
 
-        private IWindowService _windowService;
-
         private RoutineSequence _openLoseWindowRoutine;
         private GameStateMachine _stateMachine;
 
@@ -23,10 +21,9 @@ namespace CodeBase.Logic
             _heroHealth.Value.Died -= OpenLoseWindow;
         }
 
-        public void Construct(IWindowService windowService, GameStateMachine stateMachine)
+        public void Construct(GameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
-            _windowService = windowService;
 
             _openLoseWindowRoutine = new RoutineSequence()
                 .WaitForSeconds(_loseWindowShowDelay)

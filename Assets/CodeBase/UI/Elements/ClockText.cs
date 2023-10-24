@@ -28,6 +28,7 @@ namespace CodeBase.UI.Elements
             }
 
             _watchService = watchService;
+            SetTime(_watchService.ElapsedTime);
             Subscribe();
         }
 

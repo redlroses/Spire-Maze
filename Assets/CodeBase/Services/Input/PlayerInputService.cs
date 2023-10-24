@@ -92,6 +92,9 @@ namespace CodeBase.Services.Input
         private void OnOverviewMove(InputAction.CallbackContext context) =>
             OverviewMove.Invoke(context.ReadValue<Vector2>());
 
+        private void OnAction(InputAction.CallbackContext context) =>
+            Action.Invoke();
+
         private void OnPause(InputAction.CallbackContext context)
         {
             _pauseService.SetPause(!_pauseService.IsPause);
@@ -99,8 +102,5 @@ namespace CodeBase.Services.Input
             if (_pauseService.IsPause)
                 _windowService.Open(WindowId.Pause);
         }
-
-        private void OnAction(InputAction.CallbackContext context) =>
-            Action.Invoke();
     }
 }
