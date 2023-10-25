@@ -4,23 +4,24 @@ using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.StaticData;
 using Agava.YandexGames;
+using CodeBase.Services.Localization;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools;
 using CodeBase.Tools.Extension;
+using I2.Loc;
 using UnityEngine;
 
 namespace CodeBase.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {
-        private const string Anonymous = "Anonimus";
-
         private readonly string _name;
         private readonly int _topPlayersCount;
         private readonly int _competingPlayersCount;
         private readonly bool _isIncludeSelf;
         private readonly IStaticDataService _staticData;
         private readonly ImageLoader _imageLoader;
+        private readonly LocalizedString _anonymous = "Anon";
 
         private int _unsavedScore;
         private string _unsavedAvatarName;
@@ -171,7 +172,7 @@ namespace CodeBase.Leaderboards
             Sprite flag = _staticData.SpriteByLang(entry.player.lang);
 
             return new SingleRankData(entry.rank, entry.score, avatar,
-                string.IsNullOrEmpty(entry.player.publicName) ? Anonymous : entry.player.publicName, flag);
+                string.IsNullOrEmpty(entry.player.publicName) ? _anonymous : entry.player.publicName, flag);
         }
 
         private async Task<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)

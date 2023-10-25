@@ -55,7 +55,7 @@ namespace CodeBase.Infrastructure.States
         }
 
         private void RegisterServices()
-        { 
+        {
             RegisterStaticDataService();
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssetProvider>(new AssetProvider());

@@ -6,9 +6,9 @@ namespace CodeBase.Services.Localization
 {
     public class LocalizationService : ILocalizationService
     {
-        private Dictionary<LanguageId, string> _locales;
+        private readonly Dictionary<LanguageId, string> _locales;
 
-        public LanguageId Current { get; }
+        public LanguageId Current { get; private set; }
 
         public LocalizationService()
         {
@@ -35,6 +35,7 @@ namespace CodeBase.Services.Localization
 
         public void ChooseLanguage(LanguageId languageId)
         {
+            Current = languageId;
             LocalizationManager.CurrentLanguage = _locales[languageId];
         }
     }
