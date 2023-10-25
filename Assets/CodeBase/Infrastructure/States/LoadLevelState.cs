@@ -5,6 +5,7 @@ using CodeBase.Logic;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
+using CodeBase.Logic.Сollectible;
 using CodeBase.Services.ADS;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
@@ -182,6 +183,7 @@ namespace CodeBase.Infrastructure.States
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
             hud.GetComponentInChildren<InventoryView>().Construct(_uiFactory, hero.GetComponent<HeroInventory>());
+            hud.GetComponentInChildren<ItemCollectedView>().Construct(hero.GetComponent<ItemCollector>());
         }
 
         private void CameraFollow(GameObject hero)

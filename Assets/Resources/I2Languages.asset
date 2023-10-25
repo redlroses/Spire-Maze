@@ -17,6 +17,51 @@ MonoBehaviour:
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
     mTerms:
+    - Term: Anon
+      TermType: 0
+      Description: 
+      Languages:
+      - Anonimus
+      - Bilinmeyen
+      - "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: COMPLETE
+      TermType: 0
+      Description: 
+      Languages:
+      - COMPLETE!
+      - Tamamlamak!
+      - "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u043E!"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: CONTINUE
+      TermType: 0
+      Description: 
+      Languages:
+      - CONTINUE
+      - Devam Et
+      - "\u0418\u0433\u0440\u0430\u0442\u044C"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: DEFEAT
+      TermType: 0
+      Description: 
+      Languages:
+      - DEFEAT
+      - Yenmek
+      - "\u041F\u043E\u0433\u0438\u0431"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: MENU
+      TermType: 0
+      Description: 
+      Languages:
+      - MENU
+      - "Men\xFC"
+      - "\u041C\u0435\u043D\u044E"
+      Flags: 000000
+      Languages_Touch: []
     - Term: Music
       TermType: 0
       Description: Slider
@@ -24,6 +69,42 @@ MonoBehaviour:
       - Music
       - "M\xFCzik"
       - "\u041C\u0443\u0437\u044B\u043A\u0430"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Pause
+      TermType: 0
+      Description: 
+      Languages:
+      - PAUSE
+      - Duraklat
+      - "\u041F\u0430\u0443\u0437\u0430"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: RESTART
+      TermType: 0
+      Description: 
+      Languages:
+      - RESTART
+      - Tekrar
+      - "\u0417\u0430\u043D\u043E\u0432\u043E"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Ranking
+      TermType: 0
+      Description: 
+      Languages:
+      - Ranking
+      - "S\u0131ralama"
+      - "\u0420\u0435\u0439\u0442\u0438\u043D\u0433"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: SCORE
+      TermType: 0
+      Description: 
+      Languages:
+      - SCORE
+      - Gol
+      - "\u0421\u0447\u0435\u0442"
       Flags: 000000
       Languages_Touch: []
     - Term: Settings
@@ -42,87 +123,6 @@ MonoBehaviour:
       - Sound
       - Ses
       - "\u0417\u0432\u0443\u043A"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: Pause
-      TermType: 0
-      Description: 
-      Languages:
-      - PAUSE
-      - Duraklat
-      - "\u041F\u0430\u0443\u0437\u0430"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: CONTINUE
-      TermType: 0
-      Description: 
-      Languages:
-      - CONTINUE
-      - Devam Et
-      - "\u0418\u0433\u0440\u0430\u0442\u044C"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: RESTART
-      TermType: 0
-      Description: 
-      Languages:
-      - RESTART
-      - Tekrar
-      - "\u0417\u0430\u043D\u043E\u0432\u043E"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: MENU
-      TermType: 0
-      Description: 
-      Languages:
-      - MENU
-      - "Men\xFC"
-      - "\u041C\u0435\u043D\u044E"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: COMPLETE
-      TermType: 0
-      Description: 
-      Languages:
-      - COMPLETE!
-      - Tamamlamak!
-      - "\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u043E!"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: SCORE
-      TermType: 0
-      Description: 
-      Languages:
-      - SCORE
-      - Gol
-      - "\u0421\u0447\u0435\u0442"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: Ranking
-      TermType: 0
-      Description: 
-      Languages:
-      - Ranking
-      - "S\u0131ralama"
-      - "\u0420\u0435\u0439\u0442\u0438\u043D\u0433"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: DEFEAT
-      TermType: 0
-      Description: 
-      Languages:
-      - DEFEAT
-      - Yenmek
-      - "\u041F\u043E\u0433\u0438\u0431"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: Anon
-      TermType: 0
-      Description: 
-      Languages:
-      - 
-      - 
-      - 
       Flags: 000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

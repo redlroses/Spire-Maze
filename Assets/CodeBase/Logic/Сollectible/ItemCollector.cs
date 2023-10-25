@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic.Inventory;
+﻿using System;
+using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
 using UnityEngine;
 
@@ -10,9 +11,12 @@ namespace CodeBase.Logic.Сollectible
     {
         [SerializeField] private HeroInventory _heroInventory;
 
+        public event Action<Sprite, Vector3> Collected = (_, _) => { };
+
         protected override void OnTriggerObserverEntered(ICollectible collectible)
         {
             _heroInventory.Inventory.Add(collectible.Item);
+            Collected.Invoke(collectible.Item.Sprite, transform.position);
             collectible.Disable();
         }
     }

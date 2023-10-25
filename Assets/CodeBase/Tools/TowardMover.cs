@@ -10,8 +10,8 @@ namespace CodeBase.Tools
         private readonly Func<TValue, TValue, float, TValue> _lerpFunc;
         private readonly AnimationCurve _curve;
 
-        private readonly TValue _from;
-        private readonly TValue _to;
+        private TValue _from;
+        private TValue _to;
 
         private TValue _begin;
         private TValue _end;
@@ -29,6 +29,36 @@ namespace CodeBase.Tools
             _curve = curve;
 
             Reset();
+        }
+
+        public TowardMover(Func<TValue, TValue, float, TValue> lerp, AnimationCurve curve)
+        {
+            _to = default;
+            _from = default;
+            _lerpFunc = lerp;
+            _curve = curve;
+
+            Reset();
+        }
+
+        public void SetFrom(TValue from)
+        {
+            if (from is null)
+            {
+                throw new ArgumentNullException(nameof(from));
+            }
+
+            _from = from;
+        }
+
+        public void SetTo(TValue to)
+        {
+            if (to is null)
+            {
+                throw new ArgumentNullException(nameof(to));
+            }
+
+            _to = to;
         }
 
         public bool TryUpdate(float deltaTime, out TValue lerpValue)
