@@ -171,7 +171,7 @@ namespace CodeBase.Leaderboards
             Sprite flag = _staticData.SpriteByLang(entry.player.lang);
 
             return new SingleRankData(entry.rank, entry.score, avatar,
-                entry.player.publicName ?? Anonymous, flag);
+                string.IsNullOrEmpty(entry.player.publicName) ? Anonymous : entry.player.publicName, flag);
         }
 
         private async Task<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)
