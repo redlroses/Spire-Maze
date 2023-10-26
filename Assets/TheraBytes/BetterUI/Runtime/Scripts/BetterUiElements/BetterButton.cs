@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace TheraBytes.BetterUi
-{   
+{
     [HelpURL("https://documentation.therabytes.de/better-ui/BetterButton.html")]
     [AddComponentMenu("Better UI/Controls/Better Button", 30)]
     public class BetterButton : Button, IBetterTransitionUiElement
@@ -17,6 +13,8 @@ namespace TheraBytes.BetterUi
 
         [SerializeField, DefaultTransitionStates]
         List<Transitions> betterTransitions = new List<Transitions>();
+
+        public event Action<int> StateChanged = _ => { };
 
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
@@ -29,6 +27,8 @@ namespace TheraBytes.BetterUi
             {
                 info.SetState(state.ToString(), instant);
             }
+
+            StateChanged.Invoke((int) state);
         }
     }
 }
