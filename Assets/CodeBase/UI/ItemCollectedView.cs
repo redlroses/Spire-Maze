@@ -1,4 +1,6 @@
-﻿using CodeBase.DelayRoutines;
+﻿using System;
+using System.Collections.Generic;
+using CodeBase.DelayRoutines;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Tools;
 using CodeBase.Tools.Extension;
@@ -34,6 +36,7 @@ namespace CodeBase.UI
 
         private RoutineSequence _animation;
         private Camera _camera;
+        private Queue<Action> _commandQueue = new Queue<Action>();
 
         private TowardMover<Vector2> _mover;
         private TowardMover<Vector2> _scaler;
@@ -48,7 +51,25 @@ namespace CodeBase.UI
             _mover = new TowardMover<Vector2>(Vector2.Lerp, _moveCurve);
             _scaler = new TowardMover<Vector2>(Vector2.Lerp, _scaleCurve);
 
-            _animation = new RoutineSequence().Then(this.Enable).Then(InitUpscaling).WaitWhile(TryProcess).Then(InitMoving).WaitForSeconds(_delay).WaitWhile(TryProcess).Then(this.Disable);
+            _animation = new RoutineSequence()
+                .Then(InitUpscaling)
+                .WaitWhile(TryProcess)
+                .Then(InitMoving)
+                .WaitForSeconds(_delay)
+                .WaitWhile(TryProcess)
+                .Then(EndAnimation);
+        }
+
+        private void EndAnimation()
+        {
+            if (_commandQueue.TryDequeue(out Action action))
+            {
+                action.Invoke();
+            }
+            else
+            {
+                this.Disable();
+            }
         }
 
         public void Construct(ItemCollector collector)
@@ -63,6 +84,8 @@ namespace CodeBase.UI
 
         private void InitUpscaling()
         {
+            this.Enable();
+
             _mover.SetFrom(_fromPosition);
             _mover.SetTo(_fromPosition.ChangeY(_fromPosition.y + _scalingPositionOffset));
             _mover.Reset();
@@ -96,10 +119,28 @@ namespace CodeBase.UI
 
         private void OnCollected(Sprite icon, Vector3 at)
         {
+            if (_animation.IsActive)
+            {
+                Vector3 position = AsScreenPosition(at);
+                _commandQueue.Enqueue(() => PlayAnimation(icon, position));
+            }
+            else
+            {
+                PlayAnimation(icon, AsScreenPosition(at));
+            }
+        }
+
+        private void PlayAnimation(Sprite icon, Vector3 at)
+        {
             _itemIcon.sprite = icon;
-            Vector3 worldToScreenPoint = _camera.WorldToScreenPoint(at.ChangeY(at.y + _verticalPositionOffset));
-            _fromPosition = _canvas.transform.InverseTransformPoint(worldToScreenPoint);
+            _fromPosition = at.ChangeX(0);
             _animation.Play();
+        }
+
+        private Vector3 AsScreenPosition(Vector3 at)
+        {
+            Vector3 worldToScreenPoint = _camera.WorldToScreenPoint(at.ChangeY(at.y + _verticalPositionOffset));
+            return _canvas.transform.InverseTransformPoint(worldToScreenPoint);
         }
 
         private Vector3 GetDestinationPosition() =>
