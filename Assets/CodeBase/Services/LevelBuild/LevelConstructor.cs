@@ -81,7 +81,8 @@ namespace CodeBase.Services.LevelBuild
         private void CombineCells(Level level)
         {
             var groupsHolder = CombineAllColliders(level);
-            CombineAllMeshes(level.SelfTransform, groupsHolder);
+            //CombineAllMeshes(level.SelfTransform, groupsHolder);
+            NewCombineAllMeshes(level.SelfTransform);
         }
 
         private GameObject CombineAllColliders(Level level)
@@ -131,6 +132,20 @@ namespace CodeBase.Services.LevelBuild
             var combine = CombineInstances(meshFilters);
             ApplyMesh(spire.gameObject, combine, true);
             spire.gameObject.isStatic = true;
+        }
+
+        private void NewCombineAllMeshes(Transform spire)
+        {
+            MeshCombinable[] meshCombinables = spire.GetComponentsInChildren<MeshCombinable>();
+
+            CombineInstance[] combine = CombineInstances(meshCombinables);
+            ApplyMesh(spire.gameObject, combine, true);
+            spire.gameObject.isStatic = true;
+
+            foreach (var meshCombinable in meshCombinables)
+            {
+                meshCombinable.Renderer.enabled = false;
+            }
         }
 
         private void CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder)
@@ -225,6 +240,19 @@ namespace CodeBase.Services.LevelBuild
             {
                 combine[i].mesh = meshesFilters[i].sharedMesh;
                 combine[i].transform = meshesFilters[i].transform.localToWorldMatrix;
+            }
+
+            return combine;
+        }
+
+        private CombineInstance[] CombineInstances(MeshCombinable[] meshCombinables)
+        {
+            var combine = new CombineInstance[meshCombinables.Length];
+
+            for (var i = 0; i < meshCombinables.Length; i++)
+            {
+                combine[i].mesh = meshCombinables[i].Filter.sharedMesh;
+                combine[i].transform = meshCombinables[i].Filter.transform.localToWorldMatrix;
             }
 
             return combine;
