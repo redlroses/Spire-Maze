@@ -15,7 +15,6 @@ namespace CodeBase.Logic.DoorEnvironment
         [SerializeField] private DoorAnimator _animator;
 
         private StorableType _targetKeyColor;
-        private Transform _selfTransform;
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -23,7 +22,6 @@ namespace CodeBase.Logic.DoorEnvironment
         public void Construct(Colors doorColor, int id)
         {
             _targetKeyColor = doorColor.ToStorableType();
-            _selfTransform = transform;
             Id = id;
         }
 
@@ -38,7 +36,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
             if (cellState.IsActivated)
             {
-                _animator.Open(1f);
+                _animator.Open();
                 IsActivated = true;
             }
         }
@@ -61,20 +59,14 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             if (heroInventory.Inventory.TryUse(_targetKeyColor))
             {
-                Open(heroInventory.transform.position);
+                Open();
             }
         }
 
-        private void Open(Vector3 fromPosition)
+        private void Open()
         {
-            _animator.Open(GetDirection(fromPosition));
+            _animator.Open();
             IsActivated = true;
-        }
-
-        private float GetDirection(Vector3 collectorPosition)
-        {
-            Vector3 directionToCollector = collectorPosition - _selfTransform.position;
-            return Vector3.Dot(directionToCollector, _selfTransform.forward);
         }
     }
 }
