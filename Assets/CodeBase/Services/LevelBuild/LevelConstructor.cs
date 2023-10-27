@@ -81,7 +81,7 @@ namespace CodeBase.Services.LevelBuild
         private void CombineCells(Level level)
         {
             var groupsHolder = CombineAllColliders(level);
-            // CombineAllMeshes(level.SelfTransform, groupsHolder);
+            CombineAllMeshes(level.SelfTransform, groupsHolder);
         }
 
         private GameObject CombineAllColliders(Level level)
@@ -245,7 +245,7 @@ namespace CodeBase.Services.LevelBuild
             var mesh = new Mesh {indexFormat = IndexFormat.UInt32};
             meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combine);
-            meshRenderer.material = _gameFactory.CreateMaterial(Spire);
+            meshRenderer.sharedMaterial = _gameFactory.CreateMaterial(Spire);
             meshRenderer.enabled = isEnableRenderer;
             return mesh;
         }
