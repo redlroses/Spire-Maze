@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.5
+  m_fontSize: 10.7
   m_fontSizeBase: 94.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMin: 4.7361107
+  m_fontSizeMax: 18.944443
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -435,10 +435,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.41281, y: 309}
-  m_SizeDelta: {x: 527, y: 84}
+  m_AnchorMin: {x: 0.1482322, y: 0.6832049}
+  m_AnchorMax: {x: 0.8528718, y: 0.88968647}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806340552545350593
 MonoBehaviour:
@@ -543,12 +543,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.65
+  m_fontSize: 14.4
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 83.8125
+  m_fontSizeMin: 7.2999253
+  m_fontSizeMax: 33.18435
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -913,7 +913,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5380340934508542471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -923,8 +923,8 @@ RectTransform:
   - {fileID: 2469965744015496577}
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1650112, y: 0.65167445}
-  m_AnchorMax: {x: 0.83498895, y: 0.91117495}
+  m_AnchorMin: {x: 0.16556296, y: 0.3956508}
+  m_AnchorMax: {x: 0.83554095, y: 0.7226855}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1192,7 +1192,8 @@ GameObject:
   - component: {fileID: 121019580780061826}
   - component: {fileID: 1292250663222034493}
   - component: {fileID: 2844095222820995148}
-  - component: {fileID: 7885532037297444048}
+  - component: {fileID: 3655525742215622168}
+  - component: {fileID: 1099532657156550021}
   m_Layer: 5
   m_Name: Button_Enter
   m_TagString: Untagged
@@ -1215,8 +1216,8 @@ RectTransform:
   - {fileID: 1388764113940571643}
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.14883594, y: 0.09589183}
-  m_AnchorMax: {x: 0.87538624, y: 0.29968268}
+  m_AnchorMin: {x: 0.30728474, y: 0.12910378}
+  m_AnchorMax: {x: 0.69271535, y: 0.35564238}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1257,7 +1258,7 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 0, y: -104.82791, z: 0}
+    - LocalPosition: {x: -0.0000038146973, y: -33.098442, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.30728474, y: 0.12910378}
@@ -1343,7 +1344,7 @@ MonoBehaviour:
     screenConfigName: 
   customSpriteSettings:
     items: []
---- !u!114 &7885532037297444048
+--- !u!114 &3655525742215622168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1352,7 +1353,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6398680194033690383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 266537010df2f7d42a0c51583f328c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1387,6 +1388,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  betterTransitions: []
+--- !u!114 &1099532657156550021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398680194033690383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
+  _player:
+    _underlyingValue: {fileID: 1287790655962928067}
+  _button: {fileID: 3655525742215622168}
+  _clips:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &7651851424420712340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +1427,8 @@ GameObject:
   - component: {fileID: 4259215544104766483}
   - component: {fileID: 8591316548751072892}
   - component: {fileID: 7924183772227084748}
+  - component: {fileID: 8346896997649200654}
+  - component: {fileID: 1287790655962928067}
   m_Layer: 5
   m_Name: EnterLevelPanel
   m_TagString: Untagged
@@ -1469,7 +1495,7 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 22.00003, y: -295.99222, z: 0}
+    - LocalPosition: {x: 7.8222275, y: -93.456795, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.17412029, y: 0.2687772}
@@ -1515,7 +1541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02490dac1294034a59064a5707a5a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enterButton: {fileID: 7885532037297444048}
+  _enterButton: {fileID: 3655525742215622168}
   _showHide:
     _underlyingValue: {fileID: 4259215544104766483}
   _labelSetter: {fileID: 8384103181752898300}
@@ -1561,6 +1587,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _isUseCommandQueue: 0
   _canvasGroup: {fileID: 8591316548751072892}
+  _initialFade: 0
 --- !u!225 &8591316548751072892
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1672,3 +1699,112 @@ MonoBehaviour:
     screenConfigName: 
   customSpriteSettings:
     items: []
+--- !u!82 &8346896997649200654
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651851424420712340}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8683462464998247515, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1287790655962928067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651851424420712340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea7825f5f984fc691c40c423626b0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 8346896997649200654}

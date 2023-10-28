@@ -1,9 +1,11 @@
-﻿using AYellowpaper;
+﻿using System;
+using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Player;
 using CodeBase.Services.ADS;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Sound;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons;
@@ -20,11 +22,21 @@ namespace CodeBase.UI.Windows
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
+        [SerializeField] private AudioPlayer _audioPlayer;
+        [SerializeField] private AudioClip _sound;
 
         private IPersistentProgressService _progressService;
 
+        public event Action Opened; 
+
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
         private WorldData WorldData => _progressService.Progress.WorldData;
+
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            _audioPlayer.PlayOneShot(_sound);
+        }
 
         public void Construct(IPersistentProgressService progressService, IADService adService, HeroReviver reviver,
             GameStateMachine stateMachine)

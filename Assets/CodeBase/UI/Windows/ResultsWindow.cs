@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Sound;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
@@ -21,12 +22,20 @@ namespace CodeBase.UI.Windows
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private StarsView _starsView;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
+        [SerializeField] private AudioPlayer _audioPlayer;
+        [SerializeField] private AudioClip _sound;
 
         private IPersistentProgressService _progressService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
         private WorldData WorldData => _progressService.Progress.WorldData;
 
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            _audioPlayer.PlayOneShot(_sound);
+        }
+        
         public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine)
         {
             _progressService = progressService;

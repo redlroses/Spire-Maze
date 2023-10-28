@@ -27,6 +27,7 @@ namespace TheraBytes.BetterUi
         List<Transitions> betterTransitionsWhenOff = new List<Transitions>();
 
         bool wasOn;
+        public event Action<int> StateChanged = _ => { };
 
         protected override void OnEnable()
         {
@@ -76,6 +77,8 @@ namespace TheraBytes.BetterUi
 
                 info.SetState(state.ToString(), instant);
             }
+            
+            StateChanged.Invoke((int) state);
         }
 
         private void ValueChanged(bool on)

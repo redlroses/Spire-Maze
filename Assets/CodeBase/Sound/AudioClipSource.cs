@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Sound
 {
-    public abstract class AudioClipSource : MonoBehaviour
+    public class AudioClipSource : MonoBehaviour
     {
         [SerializeField] private bool _isEnableAutoSearch = true;
         [SerializeField] [HideIf(nameof(_isEnableAutoSearch))] private InterfaceReference<IAudioPlayer, MonoBehaviour> _player;

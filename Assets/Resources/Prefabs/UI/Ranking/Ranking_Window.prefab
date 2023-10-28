@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.15
+  m_fontSize: 5.05
   m_fontSizeBase: 47.050003
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
+  m_fontSize: 26.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 20
+  m_Spacing: 15.8944435
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -1422,12 +1422,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.19
+  m_fontSize: 17.10999
   m_fontSizeBase: 58.705833
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 10
-  m_fontSizeMax: 54.19
+  m_fontSizeMin: 3.157407
+  m_fontSizeMax: 17.10999
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1646,6 +1646,7 @@ GameObject:
   - component: {fileID: 2412079597607652507}
   - component: {fileID: 8325881247313097795}
   - component: {fileID: 5504681010014185046}
+  - component: {fileID: 5274474925135914415}
   m_Layer: 5
   m_Name: Button_Close
   m_TagString: Untagged
@@ -2151,6 +2152,28 @@ MonoBehaviour:
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5274474925135914415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3992750336934876201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
+  _player:
+    _underlyingValue: {fileID: 624900058269413084}
+  _button: {fileID: 8325881247313097795}
+  _clips:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &3992750337001988673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2580,7 @@ GameObject:
   - component: {fileID: 8104878768360402255}
   - component: {fileID: 4100009649541072114}
   - component: {fileID: 6920396482768294892}
+  - component: {fileID: 5360665591908261527}
   m_Layer: 5
   m_Name: Autorization_Button
   m_TagString: Untagged
@@ -2621,14 +2645,14 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -0.0020751953, y: -592.897, z: 0}
+    - LocalPosition: {x: -0.00074005127, y: -187.20175, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.12975147, y: 0.06414312}
       AnchorMax: {x: 0.8702429, y: 0.16886973}
       Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 0.95, y: 0.95, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      Scale: {x: 1, y: 1, z: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
@@ -3089,6 +3113,28 @@ MonoBehaviour:
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5360665591908261527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275500011694424530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
+  _player:
+    _underlyingValue: {fileID: 624900058269413084}
+  _button: {fileID: 4100009649541072114}
+  _clips:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &5438205000603738243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,6 +3405,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6849384222936105181}
   - component: {fileID: 6511481133268333702}
+  - component: {fileID: 8745321151804260112}
+  - component: {fileID: 624900058269413084}
   m_Layer: 5
   m_Name: Ranking_Window
   m_TagString: Untagged
@@ -3403,6 +3451,115 @@ MonoBehaviour:
   _content: {fileID: 1726214785038297454}
   _loginPanel: {fileID: 7952741614366007654}
   _authorizeButton: {fileID: 4100009649541072114}
+--- !u!82 &8745321151804260112
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849384222936105182}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8683462464998247515, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &624900058269413084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849384222936105182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea7825f5f984fc691c40c423626b0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 8745321151804260112}
 --- !u!1 &7437522749900006015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,11 +4050,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 54493636402283583, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 54493636402283583, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     - target: {fileID: 795649995738132679, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_Pivot.x
@@ -3993,11 +4150,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647850577804191158, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 3647850577804191158, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     - target: {fileID: 4515875491542751275, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSize
@@ -4005,19 +4162,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515875491542751275, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_margin.w
-      value: -30
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 4515875491542751275, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_margin.y
-      value: -30
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 4515875491542751275, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMax
-      value: 45
+      value: 14.208332
       objectReference: {fileID: 0}
     - target: {fileID: 4515875491542751275, guid: 0134866921a66cf4a80beac803b5bb00, type: 3}
       propertyPath: m_fontSizeMin
-      value: 5
+      value: 1.5787035
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4043,11 +4200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5230264486692527199, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 5230264486692527199, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     - target: {fileID: 7676275123049903451, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_Name
@@ -4139,11 +4296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8848443791801712086, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 8848443791801712086, guid: 1f28e87a68972fa42b8eec6000d1ca13, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4521,11 +4678,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6358622086229058245, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMax
-      value: 56.88889
+      value: 17.962137
       objectReference: {fileID: 0}
     - target: {fileID: 6358622086229058245, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMin
-      value: 12.6
+      value: 3.978333
       objectReference: {fileID: 0}
     - target: {fileID: 6615800347539061977, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSize
@@ -4533,11 +4690,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615800347539061977, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 6615800347539061977, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     - target: {fileID: 7081198945892002216, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_Pivot.x
@@ -4625,11 +4782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7606111605101124944, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 15.787035
       objectReference: {fileID: 0}
     - target: {fileID: 7606111605101124944, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_fontSizeMin
-      value: 25
+      value: 7.8935175
       objectReference: {fileID: 0}
     - target: {fileID: 8773628926360557021, guid: 86292a7df204e564f805b28b75e35f44, type: 3}
       propertyPath: m_Name

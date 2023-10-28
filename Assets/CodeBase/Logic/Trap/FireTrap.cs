@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;

@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2872837147564103124}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -110,7 +109,6 @@ RectTransform:
   m_Children:
   - {fileID: 5937510952703572652}
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -279,7 +277,6 @@ RectTransform:
   - {fileID: 7618298676036793518}
   - {fileID: 4472373108585986672}
   m_Father: {fileID: 1609677530949274529}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -351,6 +348,8 @@ MonoBehaviour:
     OptimizedSize: {x: 1, y: 1, z: 1}
     MinSize: {x: 0, y: 0, z: 0}
     MaxSize: {x: 4, y: 4, z: 4}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -370,6 +369,8 @@ MonoBehaviour:
       OptimizedSize: {x: 0.7, y: 0.7, z: 0.7}
       MinSize: {x: 0, y: 0, z: 0}
       MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -387,6 +388,8 @@ MonoBehaviour:
       OptimizedSize: {x: 1, y: 1, z: 1}
       MinSize: {x: 0, y: 0, z: 0}
       MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -437,7 +440,6 @@ RectTransform:
   - {fileID: 4306502963188827809}
   - {fileID: 2486379215823221422}
   m_Father: {fileID: 469043554583445567}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -531,7 +533,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -608,7 +609,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -701,7 +701,6 @@ RectTransform:
   - {fileID: 2816186674756375628}
   - {fileID: 8071966786336043381}
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -868,7 +867,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4306502963188827809}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1005,7 +1003,6 @@ RectTransform:
   - {fileID: 1368469837480524469}
   - {fileID: 5748648387855899568}
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -1081,7 +1078,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4472373108585986672}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.30833346, y: 0.30832213}
   m_AnchorMax: {x: 0.72499985, y: 0.7249664}
@@ -1155,14 +1151,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4472373108585986673}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4472373108518865944}
   m_Father: {fileID: 7352407413306450963}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1213,7 +1208,7 @@ MonoBehaviour:
       AnchorMax: {x: 1, y: 1}
       Pivot: {x: 0.49999988, y: 0.49999994}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Portrate
@@ -1330,6 +1325,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -1379,6 +1375,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -1416,6 +1413,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -1448,6 +1446,8 @@ MonoBehaviour:
         StateObject: Close
     customTransitions:
       states: []
+  betterTransitionsWhenOn: []
+  betterTransitionsWhenOff: []
 --- !u!114 &1533405372836225849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,7 +1734,6 @@ RectTransform:
   - {fileID: 7183605193169028224}
   - {fileID: 7183605193507647374}
   m_Father: {fileID: 469043554583445567}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1830,6 +1829,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -1868,6 +1869,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers:
@@ -1904,6 +1907,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers: []
@@ -1921,6 +1926,8 @@ MonoBehaviour:
     OptimizedSize: {x: 141, y: 140}
     MinSize: {x: 10, y: 10}
     MaxSize: {x: 300, y: 300}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -1937,6 +1944,8 @@ MonoBehaviour:
       OptimizedSize: {x: 120, y: 120}
       MinSize: {x: 10, y: 10}
       MaxSize: {x: 300, y: 300}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -1951,6 +1960,8 @@ MonoBehaviour:
       OptimizedSize: {x: 120, y: 120}
       MinSize: {x: 10, y: 10}
       MaxSize: {x: 300, y: 300}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers: []
@@ -1962,6 +1973,8 @@ MonoBehaviour:
     OptimizedSize: {x: 18, y: 22}
     MinSize: {x: 0, y: 0}
     MaxSize: {x: 300, y: 300}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -1978,6 +1991,8 @@ MonoBehaviour:
       OptimizedSize: {x: 20, y: 20}
       MinSize: {x: 0, y: 0}
       MaxSize: {x: 300, y: 300}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -1992,6 +2007,8 @@ MonoBehaviour:
       OptimizedSize: {x: 20, y: 20}
       MinSize: {x: 0, y: 0}
       MaxSize: {x: 300, y: 300}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers: []
@@ -2073,6 +2090,8 @@ MonoBehaviour:
     OptimizedSize: 490.1
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -2085,6 +2104,8 @@ MonoBehaviour:
     OptimizedSize: 160
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -2096,6 +2117,8 @@ MonoBehaviour:
       OptimizedSize: 180
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -2105,6 +2128,8 @@ MonoBehaviour:
       OptimizedSize: 180
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers: []
@@ -2113,6 +2138,8 @@ MonoBehaviour:
     OptimizedSize: 1200
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -2124,6 +2151,8 @@ MonoBehaviour:
       OptimizedSize: 600
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -2133,6 +2162,8 @@ MonoBehaviour:
       OptimizedSize: 320
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers: []
@@ -2141,6 +2172,8 @@ MonoBehaviour:
     OptimizedSize: 922.38
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -2152,6 +2185,8 @@ MonoBehaviour:
       OptimizedSize: 922.38
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -2161,6 +2196,8 @@ MonoBehaviour:
       OptimizedSize: 891
       MinSize: 0
       MaxSize: 4000
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -2171,6 +2208,8 @@ MonoBehaviour:
     OptimizedSize: {x: 0, y: 0}
     MinSize: {x: -5000, y: -5000}
     MaxSize: {x: 5000, y: 5000}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -2183,6 +2222,7 @@ MonoBehaviour:
         Impact: 1
   paddingSizers:
     items: []
+  treatAsLayoutElement: 1
 --- !u!222 &5247072139945600688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2437,7 +2477,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4531104683362695000}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2514,7 +2553,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5119101386626149935}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2605,7 +2643,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4531104683362695000}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2742,7 +2779,6 @@ RectTransform:
   - {fileID: 7352407413306450963}
   - {fileID: 469043554583445567}
   m_Father: {fileID: 7618298676732440544}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2839,7 +2875,6 @@ RectTransform:
   - {fileID: 5247072139945600693}
   - {fileID: 7618298675328605584}
   m_Father: {fileID: 1609677530949274529}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0005347589, y: 1}
   m_AnchorMax: {x: 0.0005347589, y: 1.0000052}
@@ -2911,6 +2946,8 @@ MonoBehaviour:
     OptimizedSize: {x: 1, y: 1, z: 1}
     MinSize: {x: 0, y: 0, z: 0}
     MaxSize: {x: 4, y: 4, z: 4}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -2930,6 +2967,8 @@ MonoBehaviour:
       OptimizedSize: {x: 1, y: 1, z: 1}
       MinSize: {x: 0, y: 0, z: 0}
       MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -2947,6 +2986,8 @@ MonoBehaviour:
       OptimizedSize: {x: 1, y: 1, z: 1}
       MinSize: {x: 0, y: 0, z: 0}
       MaxSize: {x: 4, y: 4, z: 4}
+      UseMinSize: 0
+      UseMaxSize: 0
       ModX:
         ExponentialScale: 1
         SizeModifiers:
@@ -2992,7 +3033,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100070699441413}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20500001, y: 0.2674777}
   m_AnchorMax: {x: 0.7561796, y: 0.847153}
@@ -3089,7 +3129,6 @@ RectTransform:
   - {fileID: 7616100070607722535}
   - {fileID: 7616100072277936898}
   m_Father: {fileID: 7618298675958664945}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.330292}
   m_AnchorMax: {x: 1, y: 0.6700122}
@@ -3253,6 +3292,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -3567,7 +3607,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071485092412}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3708,7 +3747,6 @@ RectTransform:
   - {fileID: 7616100071080799715}
   - {fileID: 7616100071524515526}
   m_Father: {fileID: 7618298674861292462}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3876,6 +3914,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -3923,6 +3962,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -3955,6 +3995,8 @@ MonoBehaviour:
         StateObject: Close
     customTransitions:
       states: []
+  betterTransitionsWhenOn: []
+  betterTransitionsWhenOff: []
 --- !u!114 &2294773325371864032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4232,7 +4274,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071022635201}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20500001, y: 0.2674777}
   m_AnchorMax: {x: 0.7561796, y: 0.847153}
@@ -4324,7 +4365,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071331877985}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20500001, y: 0.2674777}
   m_AnchorMax: {x: 0.7561796, y: 0.847153}
@@ -4421,7 +4461,6 @@ RectTransform:
   - {fileID: 7616100071241208131}
   - {fileID: 7616100071905051238}
   m_Father: {fileID: 7618298675958664945}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: -0.025547504}
   m_AnchorMax: {x: 1, y: 0.3144769}
@@ -4585,6 +4624,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -4899,7 +4939,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071857979354}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5035,7 +5074,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071485092412}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20500001, y: 0.2674777}
   m_AnchorMax: {x: 0.7561796, y: 0.847153}
@@ -5132,7 +5170,6 @@ RectTransform:
   - {fileID: 7616100071423784734}
   - {fileID: 7616100070912959547}
   m_Father: {fileID: 7618298675329486896}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.000000059715106, y: -0.0031780005}
   m_AnchorMax: {x: 0.46466616, y: 1.003178}
@@ -5541,6 +5578,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -5610,7 +5648,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071022635201}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5746,7 +5783,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071857979354}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20500001, y: 0.2674777}
   m_AnchorMax: {x: 0.7561796, y: 0.847153}
@@ -5843,7 +5879,6 @@ RectTransform:
   - {fileID: 7616100071797652216}
   - {fileID: 7616100071351904733}
   m_Father: {fileID: 7618298675329486896}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.53533363, y: -0.0031780005}
   m_AnchorMax: {x: 0.99999976, y: 1.0116526}
@@ -6252,6 +6287,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -6321,7 +6357,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100071331877985}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6456,7 +6491,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7616100070699441413}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6593,7 +6627,6 @@ RectTransform:
   - {fileID: 7618298676018761485}
   - {fileID: 7616100071022635201}
   m_Father: {fileID: 7618298675958664945}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.0000030585823, y: 0.6836983}
   m_AnchorMax: {x: 0.99999696, y: 1.0237226}
@@ -6687,7 +6720,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7618298676021848442}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6769,7 +6801,6 @@ RectTransform:
   - {fileID: 7618298675830559363}
   - {fileID: 7618298676021848442}
   m_Father: {fileID: 469043554583445567}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7182,6 +7213,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -7231,6 +7263,7 @@ MonoBehaviour:
       target: {fileID: 7618298675328605615}
       colorMultiplier: 1
       fadeDuration: 0.1
+      affectedColor: 0
       states:
       - Name: Normal
         StateObject: {r: 1, g: 1, b: 1, a: 1}
@@ -7278,6 +7311,7 @@ MonoBehaviour:
       target: {fileID: 0}
       colorMultiplier: 0
       fadeDuration: 0
+      affectedColor: 0
       states: []
     color32Transitions:
       target: {fileID: 0}
@@ -7310,6 +7344,8 @@ MonoBehaviour:
         StateObject: Hide
     customTransitions:
       states: []
+  betterTransitionsWhenOn: []
+  betterTransitionsWhenOff: []
 --- !u!1 &7618298675329486899
 GameObject:
   m_ObjectHideFlags: 0
@@ -7345,7 +7381,6 @@ RectTransform:
   - {fileID: 7616100071485092412}
   - {fileID: 7616100071857979354}
   m_Father: {fileID: 7618298676018761485}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1.0030041, y: 0.0064795017}
   m_AnchorMax: {x: 1.415538, y: 1}
@@ -7413,12 +7448,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 7
-    m_Bottom: 5
+    m_Left: 2
+    m_Right: 2
+    m_Top: 2
+    m_Bottom: 2
   m_ChildAlignment: 5
-  m_Spacing: 15
+  m_Spacing: 4.7361107
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -7443,6 +7478,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -7481,6 +7518,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers:
@@ -7517,6 +7556,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers:
@@ -7542,6 +7583,8 @@ MonoBehaviour:
     OptimizedSize: 15
     MinSize: 0
     MaxSize: 300
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -7553,6 +7596,8 @@ MonoBehaviour:
       OptimizedSize: 15
       MinSize: 0
       MaxSize: 300
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -7562,6 +7607,8 @@ MonoBehaviour:
       OptimizedSize: 15
       MinSize: 0
       MaxSize: 300
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -7651,6 +7698,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -7663,6 +7712,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -7675,6 +7726,8 @@ MonoBehaviour:
     OptimizedSize: 1000
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -7687,6 +7740,8 @@ MonoBehaviour:
     OptimizedSize: 1000
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -7699,6 +7754,8 @@ MonoBehaviour:
     OptimizedSize: {x: 0, y: 0}
     MinSize: {x: -5000, y: -5000}
     MaxSize: {x: 5000, y: 5000}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -7711,6 +7768,7 @@ MonoBehaviour:
         Impact: 1
   paddingSizers:
     items: []
+  treatAsLayoutElement: 1
 --- !u!114 &7618298675329486897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7915,7 +7973,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7618298675328605584}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1602563, y: 0.27561522}
   m_AnchorMax: {x: 0.83974355, y: 0.8717949}
@@ -8085,7 +8142,6 @@ RectTransform:
   - {fileID: 7616100071331877985}
   - {fileID: 7616100070699441413}
   m_Father: {fileID: 7618298676036793518}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0000015292911, y: 1.0008439}
   m_AnchorMax: {x: 0.9999978, y: 1.338713}
@@ -8105,12 +8161,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 2
+    m_Right: 2
+    m_Top: 2
+    m_Bottom: 2
   m_ChildAlignment: 1
-  m_Spacing: 20
+  m_Spacing: 6.314814
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -8135,6 +8191,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -8173,6 +8231,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers:
@@ -8209,6 +8269,8 @@ MonoBehaviour:
         right: 1000
         top: 1000
         bottom: 1000
+      UseMinSize: 0
+      UseMaxSize: 0
       ModLeft:
         ExponentialScale: 1
         SizeModifiers:
@@ -8234,6 +8296,8 @@ MonoBehaviour:
     OptimizedSize: 17
     MinSize: 0
     MaxSize: 300
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -8245,6 +8309,8 @@ MonoBehaviour:
       OptimizedSize: 8
       MinSize: 0
       MaxSize: 300
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -8254,6 +8320,8 @@ MonoBehaviour:
       OptimizedSize: 20
       MinSize: 0
       MaxSize: 300
+      UseMinSize: 0
+      UseMaxSize: 0
       Mod:
         ExponentialScale: 1
         SizeModifiers:
@@ -8343,6 +8411,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -8355,6 +8425,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -8367,6 +8439,8 @@ MonoBehaviour:
     OptimizedSize: 1000
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -8379,6 +8453,8 @@ MonoBehaviour:
     OptimizedSize: 1000
     MinSize: 0
     MaxSize: 4000
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -8391,6 +8467,8 @@ MonoBehaviour:
     OptimizedSize: {x: 0, y: 0}
     MinSize: {x: -5000, y: -5000}
     MaxSize: {x: 5000, y: 5000}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -8403,6 +8481,7 @@ MonoBehaviour:
         Impact: 1
   paddingSizers:
     items: []
+  treatAsLayoutElement: 1
 --- !u!114 &7618298675958664846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8665,7 +8744,6 @@ RectTransform:
   m_Children:
   - {fileID: 7618298675329486896}
   m_Father: {fileID: 7618298674861292462}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -4.954096, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -8766,7 +8844,6 @@ RectTransform:
   m_Children:
   - {fileID: 7618298675168925199}
   m_Father: {fileID: 7618298675328605584}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -8844,7 +8921,6 @@ RectTransform:
   m_Children:
   - {fileID: 7618298675958664945}
   m_Father: {fileID: 7352407413306450963}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -8951,12 +9027,11 @@ RectTransform:
   m_GameObject: {fileID: 7618298676732440548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -13.6}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.00028419518, y: 0.00028419518, z: 0.00028419518}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1609677530949274529}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9028,7 +9103,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 31
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -9121,7 +9198,6 @@ RectTransform:
   m_Children:
   - {fileID: 3533620458965627386}
   m_Father: {fileID: 7338896315178360877}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -9197,7 +9273,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4306502963188827809}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9306,6 +9381,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5247072139945600693}
     m_Modifications:
     - target: {fileID: 723083464945246222, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
@@ -9401,6 +9477,9 @@ PrefabInstance:
       value: 20.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!224 &7618298676791754695 stripped
 RectTransform:
@@ -9412,6 +9491,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5247072139945600693}
     m_Modifications:
     - target: {fileID: 723083464945246222, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
@@ -9511,6 +9591,9 @@ PrefabInstance:
       value: 20.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!224 &7183605192306888317 stripped
 RectTransform:
@@ -9522,6 +9605,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5247072139945600693}
     m_Modifications:
     - target: {fileID: 723083464945246222, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
@@ -9621,6 +9705,9 @@ PrefabInstance:
       value: 20.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!224 &7183605193299489448 stripped
 RectTransform:
@@ -9632,6 +9719,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5247072139945600693}
     m_Modifications:
     - target: {fileID: 723083464945246222, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
@@ -9731,6 +9819,9 @@ PrefabInstance:
       value: 20.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!224 &7183605193169028224 stripped
 RectTransform:
@@ -9742,6 +9833,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5247072139945600693}
     m_Modifications:
     - target: {fileID: 723083464945246222, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
@@ -9841,6 +9933,9 @@ PrefabInstance:
       value: 20.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d46df09e39737045977b4aeb0cc94c7, type: 3}
 --- !u!224 &7183605193507647374 stripped
 RectTransform:

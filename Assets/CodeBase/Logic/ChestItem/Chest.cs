@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Services.PersistentProgress;
@@ -16,6 +17,8 @@ namespace CodeBase.Logic.ChestItem
         [SerializeField] private ChestAnimator _animator;
 
         private Collectible _collectibleItem;
+
+        public event Action Opened; 
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -93,6 +96,7 @@ namespace CodeBase.Logic.ChestItem
 
             _collectibleItem.GetComponent<SphereCollider>().enabled = true;
             Open();
+            Opened?.Invoke();
         }
     }
 }

@@ -350,12 +350,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 11.998147
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12.5
-  m_fontSizeMax: 19
+  m_fontSizeMin: 7.8935175
+  m_fontSizeMax: 11.998147
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -599,8 +599,8 @@ RectTransform:
   - {fileID: 8333168727858935455}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.02713102, y: 0.054541647}
-  m_AnchorMax: {x: 0.27519488, y: 1.0423422}
+  m_AnchorMin: {x: -0.05038622, y: 0.09083551}
+  m_AnchorMax: {x: 0.25193977, y: 1.0786357}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -641,11 +641,11 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -302.24075, y: 9.426796, z: 0}
+    - LocalPosition: {x: -106.67561, y: 5.1395836, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.02713102, y: 0.054541647}
-      AnchorMax: {x: 0.27519488, y: 1.0423422}
+      AnchorMin: {x: -0.046510354, y: 0.084786534}
+      AnchorMax: {x: 0.25581563, y: 1.0725868}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1139,15 +1139,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
   _player:
     _underlyingValue: {fileID: 3537765562822314802}
   _button: {fileID: 8333168727994594904}
   _clips:
     _serializedList:
     - Key: 1
-      Value: {fileID: 8300000, guid: 5d2bcd02e8b94f64f91c562e3d3ae147, type: 3}
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
     - Key: 2
-      Value: {fileID: 8300000, guid: 498955e166d27e94ca3e040fb6093292, type: 3}
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &8333168728155525469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,12 +1526,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 11.998147
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12.5
-  m_fontSizeMax: 19
+  m_fontSizeMin: 7.8935175
+  m_fontSizeMax: 11.998147
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2069,6 +2070,7 @@ GameObject:
   - component: {fileID: 8333168729052162526}
   - component: {fileID: 8333168729052162497}
   - component: {fileID: 1876259255487978073}
+  - component: {fileID: 6255355654136815151}
   m_Layer: 5
   m_Name: Button_Quit
   m_TagString: Untagged
@@ -2092,8 +2094,8 @@ RectTransform:
   - {fileID: 8333168729114264082}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6782951, y: 0.030445218}
-  m_AnchorMax: {x: 0.98062074, y: 1.0179453}
+  m_AnchorMin: {x: 0.66279167, y: 0.05464089}
+  m_AnchorMax: {x: 0.96511734, y: 1.042141}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2134,11 +2136,11 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 135.42972, y: 2.407608, z: 0}
+    - LocalPosition: {x: 85.759384, y: 2.7656574, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.6782951, y: 0.030445218}
-      AnchorMax: {x: 0.98062074, y: 1.0179453}
+      AnchorMin: {x: 0.6666675, y: 0.04859197}
+      AnchorMax: {x: 0.9689932, y: 1.036092}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2620,6 +2622,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 8333168729052162496}
+--- !u!114 &6255355654136815151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168729052162515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
+  _player:
+    _underlyingValue: {fileID: 3537765562822314802}
+  _button: {fileID: 8333168729052162496}
+  _clips:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &8333168729059685214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,12 +2944,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
+  m_fontSize: 11.998147
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12.5
-  m_fontSizeMax: 19
+  m_fontSizeMin: 7.8935175
+  m_fontSizeMax: 11.998147
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3271,12 +3295,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
+  m_fontSize: 14.524073
   m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.5
-  m_fontSizeMax: 23
+  m_fontSizeMin: 4.7361107
+  m_fontSizeMax: 14.524073
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3762,6 +3786,7 @@ GameObject:
   - component: {fileID: 8333168729389988951}
   - component: {fileID: 8333168729389988953}
   - component: {fileID: 125269333125251903}
+  - component: {fileID: 6029881085748120230}
   m_Layer: 5
   m_Name: Button_Restart
   m_TagString: Untagged
@@ -3785,8 +3810,8 @@ RectTransform:
   - {fileID: 8333168728494775312}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.325582, y: 0.042543054}
-  m_AnchorMax: {x: 0.6279078, y: 1.0300431}
+  m_AnchorMin: {x: 0.3062026, y: 0.07278764}
+  m_AnchorMax: {x: 0.60852855, y: 1.0602877}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3827,11 +3852,11 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -9.559441, y: 3.6114273, z: 0}
+    - LocalPosition: {x: -9.412315, y: 3.555851, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.325582, y: 0.042543054}
-      AnchorMax: {x: 0.6279078, y: 1.0300431}
+      AnchorMin: {x: 0.31395435, y: 0.060689807}
+      AnchorMax: {x: 0.61628026, y: 1.0481899}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4313,6 +4338,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 8333168729389988952}
+--- !u!114 &6029881085748120230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8333168729389988968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402063acee23464b84182850bc516820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEnableAutoSearch: 1
+  _player:
+    _underlyingValue: {fileID: 3537765562822314802}
+  _button: {fileID: 8333168729389988952}
+  _clips:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
 --- !u!1 &8333168729431474651
 GameObject:
   m_ObjectHideFlags: 0

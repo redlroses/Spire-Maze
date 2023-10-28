@@ -8,7 +8,7 @@ namespace CodeBase.Sound
     {
         [SerializeField] private BetterButton _button;
         [SerializeField] private SerializedDictionary<SelectionState, AudioClip> _clips;
-
+        
         private void OnEnable()
         {
             _button.StateChanged += OnStateChanged;

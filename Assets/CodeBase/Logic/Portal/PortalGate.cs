@@ -32,7 +32,7 @@ namespace CodeBase.Logic.Portal
 
         protected override void OnTriggerObserverEntered(ITeleportable teleporter)
         {
-            if (_isRecipient || IsActivated == false)
+            if (_isRecipient )//|| IsActivated == false)
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace CodeBase.Logic.Portal
             IndexableState cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
-            if (cellState == null || cellState.IsActivated == false)
+            if (cellState == null )//|| cellState.IsActivated == false)
             {
                 return;
             }

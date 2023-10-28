@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
@@ -16,6 +17,8 @@ namespace CodeBase.Logic.DoorEnvironment
 
         private StorableType _targetKeyColor;
         private Transform _selfTransform;
+
+        public event Action Opened; 
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -62,6 +65,7 @@ namespace CodeBase.Logic.DoorEnvironment
             if (heroInventory.Inventory.TryUse(_targetKeyColor))
             {
                 Open(heroInventory.transform.position);
+                Opened?.Invoke();
             }
         }
 

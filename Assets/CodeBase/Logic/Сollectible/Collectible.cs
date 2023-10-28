@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Logic.Items;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace CodeBase.Logic.Сollectible
 {
     public class Collectible : MonoBehaviour, ICollectible, IIndexable, ISavedProgress
     {
+        public event Action Collected; 
+
         public IItem Item { get; private set; }
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -21,6 +24,7 @@ namespace CodeBase.Logic.Сollectible
         {
             IsActivated = true;
             gameObject.SetActive(false);
+            Collected?.Invoke();
         }
 
         public void LoadProgress(PlayerProgress progress)
