@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using AYellowpaper.SerializedCollections;
 using CodeBase.StaticData;
 using NaughtyAttributes;
 using TheraBytes.BetterUi;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Sound
 {
@@ -24,6 +24,7 @@ namespace CodeBase.Sound
 
         private void OnStateChanged(int state)
         {
+            Debug.Log(gameObject.name);
             if (_clipConfig.ButtonClips.TryGetValue((SelectionState) state, out AudioClip clip))
                 PlayOneShot(clip);
         }

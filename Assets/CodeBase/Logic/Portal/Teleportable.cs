@@ -8,7 +8,7 @@ namespace CodeBase.Logic.Portal
     {
         [SerializeField] private Rigidbody _rigidbody;
 
-        public event Action Teleportaded; 
+        public event Action Teleported = () => { };
 
         public Vector3 Forward => _rigidbody.transform.forward;
 
@@ -23,7 +23,7 @@ namespace CodeBase.Logic.Portal
             _rigidbody.position = position;
             _rigidbody.rotation = Quaternion.LookRotation(rotation);
             _rigidbody.WakeUp();
-            Teleportaded?.Invoke();
+            Teleported.Invoke();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Pause;
+using JetBrains.Annotations;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -38,6 +39,8 @@ namespace CodeBase.Logic.Player
 
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
+
+        public event Action StemMoved = () => { };
 
         public AnimatorState State { get; private set; }
 
@@ -97,6 +100,10 @@ namespace CodeBase.Logic.Player
 
         public void Pause() =>
             _animator.enabled = false;
+
+        [UsedImplicitly]
+        private void OnStep() =>
+            StemMoved.Invoke();
 
         private AnimatorState StateFor(int stateHash) =>
             _states.TryGetValue(stateHash, out AnimatorState state) ? state : AnimatorState.Unknown;
