@@ -51,6 +51,11 @@ namespace CodeBase.DelayRoutines
             if (_isAutoKill)
                 LastRoutine.AddNext(new Executor(Kill));
 
+            if (IsActive)
+            {
+                Stop();
+            }
+
             _routines[mode == RoutinePlayMode.AtFirst ? 0 : _currentRoutineIndex].Play();
         }
 

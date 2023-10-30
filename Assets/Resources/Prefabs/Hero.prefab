@@ -7747,6 +7747,8 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 92263568627435714}
   _heroAnimator: {fileID: 989079028364153686}
+  _itemCollector: {fileID: 5771158303944293934}
+  _teleportable: {fileID: 9130773236145860932}
   _clips:
     _serializedList:
     - Key: 3
@@ -7755,9 +7757,7 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: b566d6dc1afa2e14da7b89e98a50ddf0, type: 3}
     - Key: 7
       Value: {fileID: 8300000, guid: e0e4ee6f3e5ab804f900b4eb9438bb16, type: 3}
-  _itemCollector: {fileID: 5771158303944293934}
   _collectSound: {fileID: 8300000, guid: ed62eb839ebc4d748b1c0cb60360379c, type: 3}
-  _teleportable: {fileID: 9130773236145860932}
   _teleportedSound: {fileID: 8300000, guid: 86b89ce539682a94794d9bbc3c311fe1, type: 3}
 --- !u!1 &7591910132656366578
 GameObject:

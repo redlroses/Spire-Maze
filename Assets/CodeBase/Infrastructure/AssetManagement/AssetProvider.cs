@@ -53,9 +53,9 @@ namespace CodeBase.Infrastructure.AssetManagement
             return Object.Instantiate(prefab);
         }
 
-        public Sprite LoadSprite(string path)
+        public TType LoadAsset<TType>(string path) where TType : Object
         {
-            Sprite sprite = Resources.Load<Sprite>(path);
+            TType sprite = Resources.Load<TType>(path);
             return sprite;
         }
 

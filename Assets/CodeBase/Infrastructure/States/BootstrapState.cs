@@ -62,7 +62,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
-            _services.RegisterSingle<ISoundService>(new SoundService());
+            _services.RegisterSingle<ISoundService>(new SoundService(_services.Single<IAssetProvider>()));
             _services.RegisterSingle<IADService>(new ADService(_services.Single<ISoundService>()));
             _services.RegisterSingle<IWatchService>(
                 new WatchService(

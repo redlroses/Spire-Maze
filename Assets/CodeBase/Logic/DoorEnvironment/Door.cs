@@ -18,7 +18,7 @@ namespace CodeBase.Logic.DoorEnvironment
         private StorableType _targetKeyColor;
         private Transform _selfTransform;
 
-        public event Action Opened; 
+        public event Action Opened;
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }

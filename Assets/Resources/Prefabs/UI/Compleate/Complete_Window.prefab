@@ -184,7 +184,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.25
+  m_fontSize: 45
   m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.1
+  m_fontSize: 40
   m_fontSizeBase: 20.25
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.05
+  m_fontSize: 31
   m_fontSizeBase: 28.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.05
+  m_fontSize: 31.05
   m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2888,12 +2888,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 969579441161397169}
   _button: {fileID: 5444690590612338100}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &5444690590686908212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,12 +3472,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 969579441161397169}
   _button: {fileID: 5444690590686908236}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &5444690590695128080
 GameObject:
   m_ObjectHideFlags: 0
@@ -4640,12 +4630,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 969579441161397169}
   _button: {fileID: 5444690591139660980}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &5444690591141037605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,7 +4933,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.55
+  m_fontSize: 25
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6138,7 +6123,7 @@ AudioSource:
   m_GameObject: {fileID: 5444690591657119885}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 8683462464998247515, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
+  OutputAudioMixerGroup: {fileID: 8387825564868173268, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7466,12 +7451,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 969579441161397169}
   _button: {fileID: 7573115014933826961}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &7573115015000947710
 GameObject:
   m_ObjectHideFlags: 0

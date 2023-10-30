@@ -87,10 +87,10 @@ namespace CodeBase.Tools.Extension
             IAssetProvider assetProvider = AllServices.Container.Single<IAssetProvider>();
 
             Sprite avatar = assetProvider
-                .LoadSprite($"{AssetPath.AvatarPath}/{entry.extraData}");
+                .LoadAsset<Sprite>($"{AssetPath.AvatarPath}/{entry.extraData}");
 
             Sprite flag = assetProvider
-                .LoadSprite($"{AssetPath.FlagPath}/{entry.player.lang}");
+                .LoadAsset<Sprite>($"{AssetPath.FlagPath}/{entry.player.lang}");
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);

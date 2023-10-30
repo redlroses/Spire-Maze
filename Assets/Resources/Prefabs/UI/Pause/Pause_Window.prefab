@@ -350,12 +350,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.998147
+  m_fontSize: 76
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.8935175
-  m_fontSizeMax: 11.998147
+  m_fontSizeMin: 50
+  m_fontSizeMax: 76
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -599,8 +599,8 @@ RectTransform:
   - {fileID: 8333168727858935455}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.05038622, y: 0.09083551}
-  m_AnchorMax: {x: 0.25193977, y: 1.0786357}
+  m_AnchorMin: {x: -0.023255153, y: 0.04849267}
+  m_AnchorMax: {x: 0.27907073, y: 1.0362933}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1143,12 +1143,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 3537765562822314802}
   _button: {fileID: 8333168727994594904}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &8333168728155525469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,8 +1177,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0000010486573, y: 0.43813205}
-  m_AnchorMax: {x: 0.3635872, y: 0.5544319}
+  m_AnchorMin: {x: 0.000115570736, y: 0.411511}
+  m_AnchorMax: {x: 0.42113245, y: 0.57763237}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1526,12 +1521,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.998147
+  m_fontSize: 76
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.8935175
-  m_fontSizeMax: 11.998147
+  m_fontSizeMin: 50
+  m_fontSizeMax: 76
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1770,8 +1765,8 @@ RectTransform:
   - {fileID: 8333168729350557411}
   m_Father: {fileID: 8333168729059685209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.37964088}
-  m_AnchorMax: {x: 1, y: 0.62037903}
+  m_AnchorMin: {x: 0, y: 0.25925118}
+  m_AnchorMax: {x: 1, y: 0.7407489}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1894,8 +1889,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
-  m_AnchorMin: {x: 0.6366773, y: 0.4396193}
-  m_AnchorMax: {x: 1.0000043, y: 0.55591905}
+  m_AnchorMin: {x: 0.5774323, y: 0.411511}
+  m_AnchorMax: {x: 0.99997663, y: 0.57763237}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2094,8 +2089,8 @@ RectTransform:
   - {fileID: 8333168729114264082}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.66279167, y: 0.05464089}
-  m_AnchorMax: {x: 0.96511734, y: 1.042141}
+  m_AnchorMin: {x: 0.6821709, y: 0.0243963}
+  m_AnchorMax: {x: 0.9844966, y: 1.0118964}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2638,12 +2633,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 3537765562822314802}
   _button: {fileID: 8333168729052162496}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &8333168729059685214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,9 +2741,9 @@ AudioSource:
   m_GameObject: {fileID: 8333168729059685214}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
+  OutputAudioMixerGroup: {fileID: 8387825564868173268, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2944,12 +2934,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.998147
+  m_fontSize: 76
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.8935175
-  m_fontSizeMax: 11.998147
+  m_fontSizeMin: 50
+  m_fontSizeMax: 76
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3187,8 +3177,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8333168729431474650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.38163054, y: -0.005354166}
-  m_AnchorMax: {x: 0.61798966, y: 0.9918208}
+  m_AnchorMin: {x: 0.43122262, y: -0.005354166}
+  m_AnchorMax: {x: 0.5687907, y: 0.9918209}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3295,12 +3285,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.524073
+  m_fontSize: 42.65
   m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 4.7361107
-  m_fontSizeMax: 14.524073
+  m_fontSizeMin: 40
+  m_fontSizeMax: 92
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3810,8 +3800,8 @@ RectTransform:
   - {fileID: 8333168728494775312}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3062026, y: 0.07278764}
-  m_AnchorMax: {x: 0.60852855, y: 1.0602877}
+  m_AnchorMin: {x: 0.32945788, y: 0.036494136}
+  m_AnchorMax: {x: 0.63178366, y: 1.0239942}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4354,12 +4344,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 3537765562822314802}
   _button: {fileID: 8333168729389988952}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &8333168729431474651
 GameObject:
   m_ObjectHideFlags: 0
@@ -4394,8 +4379,8 @@ RectTransform:
   - {fileID: 8333168729262152848}
   m_Father: {fileID: 8333168728619040858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000038839147, y: 0.65802085}
-  m_AnchorMax: {x: 0.99999994, y: 0.93573433}
+  m_AnchorMin: {x: 0, y: 0.6580762}
+  m_AnchorMax: {x: 0.99999994, y: 0.9357783}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

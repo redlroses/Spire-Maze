@@ -27,13 +27,13 @@ namespace CodeBase.Services.ADS
 
         public void ShowRewardAd(Action onSuccessCallback = null)
         {
-            _soundService.Mute();
+            _soundService.Mute(true);
 
             RewardAd(() =>
                 {
                     onSuccessCallback?.Invoke();
-                    _soundService.UnMute();
-                }, () => _soundService.UnMute()
+                    _soundService.Unmute(true);
+                }, () => _soundService.Unmute(true)
             );
         }
 
@@ -43,13 +43,13 @@ namespace CodeBase.Services.ADS
                 return;
 
             _interstitialAdCooldown.Play();
-            _soundService.Mute();
+            _soundService.Mute(true);
 
             InterstitialAd(() =>
                 {
                     onSuccessCallback?.Invoke();
-                    _soundService.UnMute();
-                }, () => _soundService.UnMute()
+                    _soundService.Unmute(true);
+                }, () => _soundService.Unmute(true)
             );
         }
 

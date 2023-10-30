@@ -1,4 +1,7 @@
-﻿using AYellowpaper.SerializedCollections;
+﻿using System.Diagnostics;
+using AYellowpaper.SerializedCollections;
+using CodeBase.StaticData;
+using NaughtyAttributes;
 using TheraBytes.BetterUi;
 using UnityEngine;
 
@@ -7,8 +10,8 @@ namespace CodeBase.Sound
     public class ButtonClipSource : AudioClipSource
     {
         [SerializeField] private BetterButton _button;
-        [SerializeField] private SerializedDictionary<SelectionState, AudioClip> _clips;
-        
+        [SerializeField] private UiSoundConfig _clipConfig;
+
         private void OnEnable()
         {
             _button.StateChanged += OnStateChanged;
@@ -21,8 +24,14 @@ namespace CodeBase.Sound
 
         private void OnStateChanged(int state)
         {
-            if (_clips.TryGetValue((SelectionState) state, out AudioClip clip))
+            if (_clipConfig.ButtonClips.TryGetValue((SelectionState) state, out AudioClip clip))
                 PlayOneShot(clip);
+        }
+
+        [Conditional("UNITY_EDITOR")] [Button]
+        public void LoadConfig()
+        {
+            _clipConfig = Resources.Load<UiSoundConfig>("StaticData/UiSoundConfig");
         }
     }
 }

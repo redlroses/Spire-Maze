@@ -29,5 +29,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public const string AvatarPath = "Sprite/Avatar";
         public const string FlagPath = "Sprite/Flag";
+
+        public const string AudioMixer = "Audio/MainMixer";
     }
 }

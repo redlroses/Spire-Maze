@@ -26,9 +26,6 @@ namespace CodeBase.UI.Windows
         [SerializeField] private AudioClip _sound;
 
         private IPersistentProgressService _progressService;
-
-        public event Action Opened; 
-
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
         private WorldData WorldData => _progressService.Progress.WorldData;
 

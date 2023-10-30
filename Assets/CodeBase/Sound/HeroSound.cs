@@ -7,15 +7,14 @@ using UnityEngine;
 
 namespace CodeBase.Sound
 {
-    public class HeroSound:AudioClipSource
+    public class HeroSound : AudioClipSource
     {
         [SerializeField] private HeroAnimator _heroAnimator;
-        [SerializeField] private SerializedDictionary<AnimatorState, AudioClip> _clips;
         [SerializeField] private ItemCollector _itemCollector;
-        [SerializeField] private AudioClip _collectSound;
         [SerializeField] private Teleportable _teleportable;
+        [SerializeField] private SerializedDictionary<AnimatorState, AudioClip> _clips;
+        [SerializeField] private AudioClip _collectSound;
         [SerializeField] private AudioClip _teleportedSound;
-        
 
         private void OnEnable()
         {

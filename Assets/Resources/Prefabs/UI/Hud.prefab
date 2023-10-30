@@ -484,10 +484,10 @@ RectTransform:
   - {fileID: 987451686670629884}
   m_Father: {fileID: 6173821700125119479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -60.00001, y: -60.00001}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchorMin: {x: 0.9995039, y: 1}
+  m_AnchorMax: {x: 0.9995039, y: 1}
+  m_AnchoredPosition: {x: -49.612, y: -50}
+  m_SizeDelta: {x: 100.000015, y: 100}
   m_Pivot: {x: 0.49999988, y: 0.49999994}
 --- !u!114 &7377439959878551460
 MonoBehaviour:
@@ -1008,10 +1008,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _toggle: {fileID: 2802063300157641948}
-  _clips:
-    _serializedList:
-    - Key: 2
-      Value: {fileID: 8300000, guid: 94c18e713502cf24d823a02352e94950, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &987451686670629885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,12 +3781,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _button: {fileID: 1884837525220958470}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6491093473965408501
 GameObject:
   m_ObjectHideFlags: 0
@@ -3913,17 +3905,17 @@ RectTransform:
   m_GameObject: {fileID: 6491093473980172349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093474069794076}
   - {fileID: 6491093475622903353}
   m_Father: {fileID: 6493223085243492308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.53533363, y: -0.0031780005}
-  m_AnchorMax: {x: 0.99999976, y: 1.0116526}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 45.00099}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5000003, y: 0.49999994}
 --- !u!114 &7094584098360325184
 MonoBehaviour:
@@ -4382,12 +4374,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _button: {fileID: 6448435054939690805}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6491093474025174403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4779,17 +4766,17 @@ RectTransform:
   m_GameObject: {fileID: 6491093475235474146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6491093475297898435}
   - {fileID: 6491093474667805926}
   m_Father: {fileID: 6493223084009617685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.330292}
-  m_AnchorMax: {x: 1, y: 0.6700122}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.4999999}
 --- !u!114 &3072586701690951661
 MonoBehaviour:
@@ -5248,12 +5235,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _button: {fileID: 5057885320588316028}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6491093475297898444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5999,12 +5981,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _toggle: {fileID: 6493223084188232003}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6491093475449246686
 GameObject:
   m_ObjectHideFlags: 0
@@ -6655,12 +6632,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _button: {fileID: 8895864879602946086}
-  _clips:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 8300000, guid: 9d598e7fb76fb32498d03517222ecfb9, type: 3}
-    - Key: 2
-      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6491093475622903352
 GameObject:
   m_ObjectHideFlags: 0
@@ -7226,12 +7198,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
-    m_Right: 2
-    m_Top: 2
-    m_Bottom: 2
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 1
-  m_Spacing: 6.314814
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -8238,12 +8210,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
-    m_Right: 2
-    m_Top: 2
-    m_Bottom: 2
+    m_Left: 5
+    m_Right: 5
+    m_Top: 7
+    m_Bottom: 5
   m_ChildAlignment: 5
-  m_Spacing: 4.7361107
+  m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -9328,10 +9300,7 @@ MonoBehaviour:
   _player:
     _underlyingValue: {fileID: 796553995184536455}
   _toggle: {fileID: 6493223085243656782}
-  _clips:
-    _serializedList:
-    - Key: 2
-      Value: {fileID: 8300000, guid: 94c18e713502cf24d823a02352e94950, type: 3}
+  _clipConfig: {fileID: 11400000, guid: 86751767bb605084390288471ea0faaa, type: 2}
 --- !u!1 &6493223085370499562
 GameObject:
   m_ObjectHideFlags: 0

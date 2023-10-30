@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Sound
 {
-    public class DoorSound:AudioClipSource
+    public class DoorSound : AudioClipSource
     {
         [SerializeField] private Door _door;
         [SerializeField] private AudioClip _audioClip;

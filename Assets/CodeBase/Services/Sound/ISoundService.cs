@@ -4,7 +4,7 @@
     {
         void MusicVolume(float volume);
         void SoundVolume(float volume);
-        void Mute();
-        void UnMute();
+        void Mute(bool isSmooth = false);
+        void Unmute(bool isSmooth = false);
     }
 }

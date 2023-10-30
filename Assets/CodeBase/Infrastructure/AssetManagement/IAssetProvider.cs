@@ -12,6 +12,6 @@ namespace CodeBase.Infrastructure.AssetManagement
     GameObject Instantiate(string path, Transform inside);
     GameObject Instantiate(string path);
     GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell;
-    Sprite LoadSprite(string path);
+    TType LoadAsset<TType>(string path) where TType : Object;
   }
 }

@@ -77,7 +77,7 @@ namespace TheraBytes.BetterUi
 
                 info.SetState(state.ToString(), instant);
             }
-            
+
             StateChanged.Invoke((int) state);
         }
 
