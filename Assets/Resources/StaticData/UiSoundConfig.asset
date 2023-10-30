@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: UiSoundConfig
   m_EditorClassIdentifier: 
   _buttonClips:
-    _serializedList: []
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: b70f6c24344e7ec43882058d74a30ace, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 28ef5f145c7159b4d843382da4c57766, type: 3}
   _toggleClips:
-    _serializedList: []
-  _sliderClips: {fileID: 0}
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 8300000, guid: b70f6c24344e7ec43882058d74a30ace, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: 0a5fa35603a2ac4458ce1b87b579136f, type: 3}
+  _sliderClip: {fileID: 8300000, guid: 407a31c25fe2fa0408d85d004bccca6b, type: 3}
