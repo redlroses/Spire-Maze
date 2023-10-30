@@ -3,6 +3,7 @@ using CodeBase.StaticData;
 using NaughtyAttributes;
 using TheraBytes.BetterUi;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Sound
 {
@@ -23,6 +24,8 @@ namespace CodeBase.Sound
 
         private void OnStateChanged(int state)
         {
+            Debug.Log($"State: {state}");
+            
             if (_clipConfig.ToggleClips.TryGetValue((SelectionState) state, out AudioClip clip))
                 PlayOneShot(clip);
         }
