@@ -1,4 +1,6 @@
-﻿using CodeBase.StaticData;
+﻿using System.Diagnostics;
+using CodeBase.StaticData;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +24,12 @@ namespace CodeBase.Sound
         private void OnMoved(float value)
         {
             PlayOneShot(_clipConfig.SliderClip);
+        }
+
+        [Conditional("UNITY_EDITOR")] [Button]
+        public void LoadConfig()
+        {
+            _clipConfig = Resources.Load<UiSoundConfig>("StaticData/UiSoundConfig");
         }
     }
 }

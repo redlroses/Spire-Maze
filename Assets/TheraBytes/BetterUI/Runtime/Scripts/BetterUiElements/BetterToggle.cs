@@ -36,7 +36,7 @@ namespace TheraBytes.BetterUi
             DoStateTransition(SelectionState.Normal, true);
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (wasOn != isOn)
             {

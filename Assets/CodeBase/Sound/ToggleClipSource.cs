@@ -3,7 +3,6 @@ using CodeBase.StaticData;
 using NaughtyAttributes;
 using TheraBytes.BetterUi;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Sound
 {
@@ -11,6 +10,8 @@ namespace CodeBase.Sound
     {
         [SerializeField] private BetterToggle _toggle;
         [SerializeField] private UiSoundConfig _clipConfig;
+
+        private bool _wasPressed;
 
         private void OnEnable()
         {
@@ -24,8 +25,20 @@ namespace CodeBase.Sound
 
         private void OnStateChanged(int state)
         {
-            Debug.Log($"State: {state}");
-            
+            if (_wasPressed)
+            {
+                if (state == (int) SelectionState.Highlighted)
+                {
+                    _wasPressed = false;
+                    return;
+                }
+            }
+
+            if ((SelectionState) state == SelectionState.Pressed)
+            {
+                _wasPressed = true;
+            }
+
             if (_clipConfig.ToggleClips.TryGetValue((SelectionState) state, out AudioClip clip))
                 PlayOneShot(clip);
         }
