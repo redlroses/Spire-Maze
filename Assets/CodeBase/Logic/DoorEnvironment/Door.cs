@@ -16,7 +16,6 @@ namespace CodeBase.Logic.DoorEnvironment
         [SerializeField] private DoorAnimator _animator;
 
         private StorableType _targetKeyColor;
-        private Transform _selfTransform;
 
         public event Action Opened;
 
@@ -26,7 +25,6 @@ namespace CodeBase.Logic.DoorEnvironment
         public void Construct(Colors doorColor, int id)
         {
             _targetKeyColor = doorColor.ToStorableType();
-            _selfTransform = transform;
             Id = id;
         }
 
