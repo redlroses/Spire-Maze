@@ -2,9 +2,12 @@
 {
     public interface ISoundService : IService
     {
-        void MusicVolume(float volume);
-        void SoundVolume(float volume);
+        void Load();
+        void SetMusicVolume(float volume);
+        void SetSfxVolume(float volume);
         void Mute(bool isSmooth = false);
         void Unmute(bool isSmooth = false);
+        float SfxVolume { get; }
+        float MusicVolume { get; }
     }
 }

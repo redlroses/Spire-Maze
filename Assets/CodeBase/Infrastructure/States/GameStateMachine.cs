@@ -12,6 +12,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Score;
+using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
@@ -47,7 +48,8 @@ namespace CodeBase.Infrastructure.States
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(),
-                    services.Single<IStaticDataService>()),
+                    services.Single<IStaticDataService>(),
+                    services.Single<ISoundService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(),
                     services.Single<IWatchService>()),

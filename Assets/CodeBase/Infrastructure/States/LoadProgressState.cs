@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 
@@ -14,14 +16,16 @@ namespace CodeBase.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
         private readonly IStaticDataService _staticDataService;
+        private readonly ISoundService _soundService;
 
         public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
-            ISaveLoadService saveLoadProgress, IStaticDataService staticDataService)
+            ISaveLoadService saveLoadProgress, IStaticDataService staticDataService, ISoundService soundService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadProgress = saveLoadProgress;
             _staticDataService = staticDataService;
+            _soundService = soundService;
         }
 
         public void Enter()
@@ -31,6 +35,8 @@ namespace CodeBase.Infrastructure.States
                 _progressService.Progress.WorldData.SceneName,
                 _progressService.Progress.WorldData.SceneName == LevelNames.BuildableLevel,
                 _progressService.Progress.WorldData.LevelState.LevelId));
+
+            _soundService.Load();
         }
 
         public void Exit() { }
@@ -57,8 +63,10 @@ namespace CodeBase.Infrastructure.States
                             .FinishPosition.AsVectorData()),
                     HeroHealthState = new HealthState(_staticDataService.HealthForEntity(PlayerKey).MaxHealth),
                     HeroStaminaState = new StaminaState(_staticDataService.StaminaForEntity(PlayerKey).MaxStamina)
-                }
+                },
             };
+
+            progress.GlobalData.SoundVolume.Reset();
 
             return progress;
         }

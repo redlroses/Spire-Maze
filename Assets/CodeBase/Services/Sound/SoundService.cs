@@ -1,5 +1,6 @@
 ﻿using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,13 +14,18 @@ namespace CodeBase.Services.Sound
         private const float MinVolume = -80f;
         private const float MaxVolume = 20f;
 
+        private readonly IPersistentProgressService _progressService;
         private readonly AudioMixer _mixer;
 
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
-        public SoundService(IAssetProvider assets)
+        public float SfxVolume => _progressService.Progress.GlobalData.SoundVolume.Sfx;
+        public float MusicVolume => _progressService.Progress.GlobalData.SoundVolume.Music;
+
+        public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
+            _progressService = progressService;
             _mixer = assets.LoadAsset<AudioMixer>(AssetPath.AudioMixer);
 
             _smoothMute = new RoutineSequence(RoutineUpdateMod.FixedRun)
@@ -31,13 +37,21 @@ namespace CodeBase.Services.Sound
                 .WaitUntil(TryIncreaseVolume);
         }
 
-        public void MusicVolume(float volume)
+        public void Load()
         {
+            SetMusicVolume(MusicVolume);
+            SetSfxVolume(SfxVolume);
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            _progressService.Progress.GlobalData.SoundVolume.Music = volume;
             _mixer.SetFloat(MusicVolumeProperty, Mathf.Lerp(MinVolume, MaxVolume, volume));
         }
 
-        public void SoundVolume(float volume)
+        public void SetSfxVolume(float volume)
         {
+            _progressService.Progress.GlobalData.SoundVolume.Sfx = volume;
             _mixer.SetFloat(SfxVolumeProperty, Mathf.Lerp(MinVolume, MaxVolume, volume));
         }
 

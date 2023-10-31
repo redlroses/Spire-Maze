@@ -7,10 +7,12 @@ namespace CodeBase.Data
     public class GlobalData
     {
         public List<LevelData> Levels;
+        public SoundVolume SoundVolume;
 
         public GlobalData()
         {
             Levels = new List<LevelData>();
+            SoundVolume = new SoundVolume();
         }
 
         public void UpdateLevelData(int levelId, int score, int stars)

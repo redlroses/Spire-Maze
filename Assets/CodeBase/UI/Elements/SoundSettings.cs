@@ -8,28 +8,35 @@ namespace CodeBase.UI.Elements
     {
         private ISoundService _soundService;
 
-        [SerializeField] private Slider _soundSlider;
+        [SerializeField] private Slider _sfxSlider;
         [SerializeField] private Slider _musicSlider;
+
+        private void OnDestroy()
+        {
+            _sfxSlider.onValueChanged.RemoveAllListeners();
+            _musicSlider.onValueChanged.RemoveAllListeners();
+        }
 
         public void Construct(ISoundService soundService)
         {
             _soundService = soundService;
+
+            _sfxSlider.value = soundService.SfxVolume * _sfxSlider.maxValue;
+            _musicSlider.value = soundService.MusicVolume * _sfxSlider.maxValue;
+
+            Debug.Log(soundService.MusicVolume);
+            Debug.Log(soundService.SfxVolume);
+
             Subscribe();
         }
 
         private void Subscribe()
         {
-            _soundSlider.onValueChanged.AddListener(volume =>
-                _soundService.SoundVolume(volume / _soundSlider.maxValue));
+            _sfxSlider.onValueChanged.AddListener(volume =>
+                _soundService.SetSfxVolume(volume / _sfxSlider.maxValue));
 
             _musicSlider.onValueChanged.AddListener(volume =>
-                _soundService.MusicVolume(volume / _musicSlider.maxValue));
-        }
-
-        private void OnDestroy()
-        {
-            _soundSlider.onValueChanged.RemoveAllListeners();
-            _musicSlider.onValueChanged.RemoveAllListeners();
+                _soundService.SetMusicVolume(volume / _musicSlider.maxValue));
         }
     }
 }
