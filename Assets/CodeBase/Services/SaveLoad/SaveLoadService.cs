@@ -42,7 +42,7 @@ namespace CodeBase.Services.SaveLoad
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
             {
-                CloudSave(saveData);
+                SaveCloud(saveData);
             }
 #endif
         }
@@ -51,17 +51,21 @@ namespace CodeBase.Services.SaveLoad
         {
             string saveData;
 
-#if !UNITY_EDITOR && YANDEX_GAMES
+#if UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
             {
-                saveData = await CloudLoad();
+                saveData = await LoadCloud();
+
+                if (string.IsNullOrEmpty(saveData))
+                {
+                    saveData = LoadLocal();
+                }
             }
             else
             {
-                saveData = PlayerPrefs.GetString(ProgressKey);
+                saveData = LoadLocal();
             }
 #endif
-
 #if UNITY_EDITOR
             saveData = PlayerPrefs.GetString(ProgressKey);
 #endif
@@ -83,6 +87,9 @@ namespace CodeBase.Services.SaveLoad
                 () => Debug.Log("Cloud saved successfully"),
                 error => Debug.Log($"Cloud save error: {error}"));
         }
+
+        private string LoadLocal() =>
+            PlayerPrefs.GetString(ProgressKey);
 
         private async Task<string> LoadCloud()
         {
@@ -109,9 +116,7 @@ namespace CodeBase.Services.SaveLoad
                 await Task.Yield();
             }
 
-            return isError
-                ? PlayerPrefs.GetString(ProgressKey)
-                : saveData;
+            return isError ? null : saveData;
         }
     }
 }
