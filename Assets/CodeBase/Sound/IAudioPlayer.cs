@@ -6,5 +6,6 @@ namespace CodeBase.Sound
     {
         void PlayOneShot(AudioClip clip);
         void PlayOneShot(AudioClip clip, float volume);
+        void Stop();
     }
 }

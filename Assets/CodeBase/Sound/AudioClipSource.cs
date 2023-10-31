@@ -26,5 +26,10 @@ namespace CodeBase.Sound
         {
             _player.Value.PlayOneShot(clip);
         }
+
+        protected void StopPlaying()
+        {
+            _player.Value.Stop();
+        }
     }
 }

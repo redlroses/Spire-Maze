@@ -7633,7 +7633,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8683462464998247515, guid: f17a92ed56159804ab6fae9acf0f61af, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -7746,11 +7746,14 @@ MonoBehaviour:
   _isEnableAutoSearch: 1
   _player:
     _underlyingValue: {fileID: 92263568627435714}
+  _heroHealth: {fileID: 7440742495519906430}
   _heroAnimator: {fileID: 989079028364153686}
   _itemCollector: {fileID: 5771158303944293934}
   _teleportable: {fileID: 9130773236145860932}
   _movementClips:
     _serializedList:
+    - Key: 5
+      Value: {fileID: 8300000, guid: f9a0d5b4a896a16408895adc148ab720, type: 3}
     - Key: 3
       Value: {fileID: 8300000, guid: 195a504056cbd394d820de91b171d059, type: 3}
     - Key: 8
@@ -7759,6 +7762,9 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: e0e4ee6f3e5ab804f900b4eb9438bb16, type: 3}
   _collectSound: {fileID: 8300000, guid: ed62eb839ebc4d748b1c0cb60360379c, type: 3}
   _teleportedSound: {fileID: 8300000, guid: 86b89ce539682a94794d9bbc3c311fe1, type: 3}
+  _periodicDamagedSound: {fileID: 8300000, guid: f0f0b798d9cb79744b895ded04534424, type: 3}
+  _singleDamagedSound: {fileID: 8300000, guid: 365a9af404d6b914294286970243326f, type: 3}
+  _periodicRate: 0.3
   _stepSounds:
   - {fileID: 8300000, guid: fbe5efbcc2349574c9dc2acf88f199c9, type: 3}
   - {fileID: 8300000, guid: f41f9339fdeab694d8f37397bfbf3a76, type: 3}

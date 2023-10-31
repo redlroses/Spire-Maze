@@ -1,5 +1,9 @@
-﻿using AYellowpaper.SerializedCollections;
+﻿using System;
+using Agava.YandexGames;
+using AYellowpaper.SerializedCollections;
+using CodeBase.DelayRoutines;
 using CodeBase.Logic.AnimatorStateMachine;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.Portal;
 using CodeBase.Logic.Сollectible;
@@ -10,29 +14,76 @@ namespace CodeBase.Sound
 {
     public class HeroSound : AudioClipSource
     {
+        [Header("References")]
+        [SerializeField] private PlayerHealth _heroHealth;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private ItemCollector _itemCollector;
         [SerializeField] private Teleportable _teleportable;
+
+        [Space] [Header("AnimationBased")]
         [SerializeField] private SerializedDictionary<AnimatorState, AudioClip> _movementClips;
+
+        [Space] [Header("Other")]
         [SerializeField] private AudioClip _collectSound;
         [SerializeField] private AudioClip _teleportedSound;
+
+        [Space] [Header("Damage")]
+        [SerializeField] private AudioClip _periodicDamagedSound;
+        [SerializeField] private AudioClip _singleDamagedSound;
+        [SerializeField] private float _periodicRate;
+
+        [Space] [Header("Steps Collection")]
         [SerializeField] private AudioClip[] _stepSounds;
+
+        private RoutineSequence _playPeriodicDamageSound;
+
+        private void Awake()
+        {
+            _playPeriodicDamageSound = new RoutineSequence()
+                .WaitForSeconds(_periodicRate)
+                .Then(() => PlayOneShot(_periodicDamagedSound));
+        }
 
         private void OnEnable()
         {
+            _heroHealth.Damaged += OnDamaged;
             _heroAnimator.StateEntered += OnStateEntered;
+            _heroAnimator.StateExited += OnStateExited;
             _heroAnimator.StemMoved += OnStepMoved;
             _itemCollector.SoundPlayed += OnPlaySoundCollected;
             _teleportable.Teleported += OnPlaySoundTeleported;
+        }
+
+        private void OnDamaged(int damage, DamageType type)
+        {
+            if (_heroHealth.IsAlive == false)
+            {
+                return;
+            }
+
+            if (type == DamageType.Periodic)
+            {
+                if (_playPeriodicDamageSound.IsActive == false)
+                {
+                    _playPeriodicDamageSound.Play();
+                }
+            }
+            else
+            {
+                PlayOneShot(_singleDamagedSound);
+            }
         }
 
         private void OnDisable()
         {
             _heroAnimator.StemMoved -= OnStepMoved;
             _heroAnimator.StateEntered -= OnStateEntered;
+            _heroAnimator.StateExited -= OnStateExited;
             _itemCollector.SoundPlayed -= OnPlaySoundCollected;
             _teleportable.Teleported -= OnPlaySoundTeleported;
         }
+
+        private void OnStateExited(AnimatorState state) { }
 
         private void OnStateEntered(AnimatorState state)
         {

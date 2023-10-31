@@ -21,5 +21,10 @@ namespace CodeBase.Sound
         {
             _audioSource.PlayOneShot(clip, volume);
         }
+
+        public void Stop()
+        {
+            _audioSource.Stop();
+        }
     }
 }

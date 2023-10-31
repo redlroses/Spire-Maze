@@ -24,7 +24,6 @@ namespace CodeBase.Sound
 
         private void OnStateChanged(int state)
         {
-            Debug.Log(gameObject.name);
             if (_clipConfig.ButtonClips.TryGetValue((SelectionState) state, out AudioClip clip))
                 PlayOneShot(clip);
         }
