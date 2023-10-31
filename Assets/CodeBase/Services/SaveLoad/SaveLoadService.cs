@@ -12,6 +12,7 @@ namespace CodeBase.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
+        private const string EmptySaveString = "{}";
         private const string ProgressKey = "Progress";
 
         private readonly IPersistentProgressService _progressService;
@@ -36,7 +37,7 @@ namespace CodeBase.Services.SaveLoad
 
             string saveData = _progressService.Progress.ToJson();
 
-            LocalSave(saveData);
+            SaveLocal(saveData);
 
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
@@ -65,34 +66,35 @@ namespace CodeBase.Services.SaveLoad
             saveData = PlayerPrefs.GetString(ProgressKey);
 #endif
 
-            return string.IsNullOrEmpty(saveData)
+            return string.IsNullOrEmpty(saveData) || saveData == EmptySaveString
                 ? null
                 : saveData.ToDeserialized<PlayerProgress>();
         }
 
-        private void LocalSave(string saveData)
+        private void SaveLocal(string saveData)
         {
             PlayerPrefs.SetString(ProgressKey, saveData);
             PlayerPrefs.Save();
         }
 
-        private void CloudSave(string saveData)
+        private void SaveCloud(string saveData)
         {
-            Agava.YandexGames.PlayerPrefs.SetString(ProgressKey, saveData);
-            Agava.YandexGames.PlayerPrefs.Save(
+            PlayerAccount.SetCloudSaveData(saveData,
                 () => Debug.Log("Cloud saved successfully"),
                 error => Debug.Log($"Cloud save error: {error}"));
         }
 
-        private async Task<string> CloudLoad()
+        private async Task<string> LoadCloud()
         {
             bool isError = false;
             bool isLoading = true;
+            string saveData = null;
 
-            Agava.YandexGames.PlayerPrefs.Load(
-                () =>
+            PlayerAccount.GetCloudSaveData(
+                saves =>
                 {
                     Debug.Log("Cloud loaded successfully");
+                    saveData = saves;
                     isLoading = false;
                 },
                 error =>
@@ -109,7 +111,7 @@ namespace CodeBase.Services.SaveLoad
 
             return isError
                 ? PlayerPrefs.GetString(ProgressKey)
-                : Agava.YandexGames.PlayerPrefs.GetString(ProgressKey);
+                : saveData;
         }
     }
 }
