@@ -111,7 +111,6 @@ namespace CodeBase.Infrastructure.States
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IGameFactory>(),
-                    _services.Single<IScoreService>(),
                     _services.Single<IWatchService>()));
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(

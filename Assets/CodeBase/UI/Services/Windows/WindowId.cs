@@ -1,12 +1,12 @@
 ﻿namespace CodeBase.UI.Services.Windows
 {
-  public enum WindowId : byte
-  {
-    None = 0,
-    Leaderboard = 1,
-    Settings = 2,
-    Pause = 3,
-    Results = 4,
-    Lose = 5,
-  }
+    public enum WindowId : byte
+    {
+        None = 0,
+        Leaderboard = 1,
+        Settings = 2,
+        Pause = 3,
+        Results = 4,
+        Lose = 5,
+    }
 }

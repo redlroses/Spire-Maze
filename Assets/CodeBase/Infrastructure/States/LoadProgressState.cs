@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
@@ -28,9 +29,9 @@ namespace CodeBase.Infrastructure.States
             _soundService = soundService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            LoadProgressOrInitNew();
+            await LoadProgressOrInitNew();
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.SceneName,
                 _progressService.Progress.WorldData.SceneName == LevelNames.BuildableLevel,
@@ -41,10 +42,10 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit() { }
 
-        private void LoadProgressOrInitNew()
+        private async Task LoadProgressOrInitNew()
         {
             _progressService.Progress =
-                _saveLoadProgress.LoadProgress()
+                await _saveLoadProgress.LoadProgress()
                 ?? NewProgress();
 
             _progressService.TemporalProgress = new TemporalProgress();

@@ -8,6 +8,8 @@ namespace CodeBase.Data
         public WorldData WorldData;
         public GlobalData GlobalData;
 
+        public int Relevance => GlobalData.Levels.Count;
+
         public PlayerProgress(string initialLevel)
         {
             WorldData = new WorldData(initialLevel);
