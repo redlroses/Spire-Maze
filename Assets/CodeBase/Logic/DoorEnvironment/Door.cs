@@ -41,7 +41,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
             if (cellState.IsActivated)
             {
-                _animator.Open(1f);
+                _animator.Open();
                 IsActivated = true;
             }
         }
@@ -64,21 +64,15 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             if (heroInventory.Inventory.TryUse(_targetKeyColor))
             {
-                Open(heroInventory.transform.position);
                 Opened?.Invoke();
+                Open();
             }
         }
 
-        private void Open(Vector3 fromPosition)
+        private void Open()
         {
-            _animator.Open(GetDirection(fromPosition));
+            _animator.Open();
             IsActivated = true;
-        }
-
-        private float GetDirection(Vector3 collectorPosition)
-        {
-            Vector3 directionToCollector = collectorPosition - _selfTransform.position;
-            return Vector3.Dot(directionToCollector, _selfTransform.forward);
         }
     }
 }
