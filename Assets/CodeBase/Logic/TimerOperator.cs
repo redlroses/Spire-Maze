@@ -20,7 +20,6 @@ namespace CodeBase.Logic
 
         protected override void Run()
         {
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             _timer.Tick(Time.deltaTime);
         }
 
@@ -41,7 +40,10 @@ namespace CodeBase.Logic
             enabled = false;
         }
 
-        public void Play() => enabled = true;
+        public void Play()
+        {
+            enabled = true;
+        }
 
         public void Restart()
         {
