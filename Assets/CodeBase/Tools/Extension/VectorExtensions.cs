@@ -53,7 +53,7 @@ namespace CodeBase.Tools.Extension
 
         public static Vector3 ToWorldDirection(this Vector2 vector, Vector3 position, float radius)
         {
-            float deltaAngle = Mathf.Asin(vector.x * Arithmetic.ToHalf / radius) / Arithmetic.ToHalf;
+            float deltaAngle = Mathf.Asin(vector.x * Arithmetic.Half / radius) / Arithmetic.Half;
             Vector2 currentFlatPosition = position.RemoveY();
             Vector2 rotatedPosition = currentFlatPosition.Rotate(deltaAngle);
             rotatedPosition = rotatedPosition.normalized * radius;

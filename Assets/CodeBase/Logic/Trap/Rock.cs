@@ -162,6 +162,7 @@ namespace CodeBase.Logic.Trap
             }
         }
 
-        private void OnDestroyGameObject() => Object.Destroy(gameObject);
+        private void OnDestroyGameObject() =>
+            Object.Destroy(gameObject);
     }
 }

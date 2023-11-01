@@ -35,6 +35,12 @@ namespace CodeBase.Infrastructure.AssetManagement
             throw new NullReferenceException($"There is no prefab for cell type: {typeof(TCell)}");
         }
 
+        public GameObject Instantiate(string path, Vector3 at, Quaternion rotation)
+        {
+            var prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, at, rotation);
+        }
+
         public GameObject Instantiate(string path, Vector3 at)
         {
             var prefab = Resources.Load<GameObject>(path);

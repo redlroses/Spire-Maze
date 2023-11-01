@@ -92,8 +92,8 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
 
-        public GameObject CreateSpireSegment(Vector3 at) =>
-            _assets.Instantiate(AssetPath.SpireSegment, at);
+        public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
+            _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch

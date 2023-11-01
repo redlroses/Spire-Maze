@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.EditorCells;
+﻿using CodeBase.EditorCells;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 

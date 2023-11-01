@@ -118,7 +118,8 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IStaticDataService>(),
                     _stateMachine,
                     _services.Single<ISaveLoadService>(),
-                    _services.Single<IPersistentProgressService>()));
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IRandomService>()));
         }
 
         private void RegisterStaticDataService()

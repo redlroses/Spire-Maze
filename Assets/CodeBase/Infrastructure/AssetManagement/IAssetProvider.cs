@@ -9,6 +9,7 @@ namespace CodeBase.Infrastructure.AssetManagement
     void LoadCells();
     void Cleanup();
     GameObject Instantiate(string path, Vector3 at);
+    GameObject Instantiate(string path, Vector3 at, Quaternion rotation);
     GameObject Instantiate(string path, Transform inside);
     GameObject Instantiate(string path);
     GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell;

@@ -2,9 +2,12 @@
 
 namespace CodeBase.Services.Randomizer
 {
-  public class RandomService : IRandomService
-  {
-    public int Next(int min, int max) =>
-      Random.Range(min, max);
-  }
+    public class RandomService : IRandomService
+    {
+        public int Range(int min, int max) =>
+            Random.Range(min, max);
+
+        public float Range(float min, float max) =>
+            Random.Range(min, max);
+    }
 }

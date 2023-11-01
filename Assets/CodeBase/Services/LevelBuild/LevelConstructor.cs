@@ -179,7 +179,7 @@ namespace CodeBase.Services.LevelBuild
         {
             if (cells.Count > MaxCellsInCollider)
             {
-                int halfCellsCount = Mathf.FloorToInt(cells.Count * Arithmetic.ToHalf);
+                int halfCellsCount = Mathf.FloorToInt(cells.Count * Arithmetic.Half);
                 CombineColliders(cells.GetRange(0, halfCellsCount), parent);
                 cells = cells.GetRange(halfCellsCount, cells.Count - halfCellsCount);
             }
