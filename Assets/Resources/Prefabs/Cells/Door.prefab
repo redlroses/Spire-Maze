@@ -312,6 +312,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6256d220d6e180c4e913c34eb493ae4a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6256d220d6e180c4e913c34eb493ae4a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6256d220d6e180c4e913c34eb493ae4a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b78766bc3b9a0147814516cc01e63a6, type: 2}
     - target: {fileID: 919132149155446097, guid: 6256d220d6e180c4e913c34eb493ae4a, type: 3}
       propertyPath: m_Name
       value: door1
@@ -419,6 +431,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 98faaaf5008d01646be195952bdf22dd, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 98faaaf5008d01646be195952bdf22dd, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 98faaaf5008d01646be195952bdf22dd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b78766bc3b9a0147814516cc01e63a6, type: 2}
     - target: {fileID: 919132149155446097, guid: 98faaaf5008d01646be195952bdf22dd, type: 3}
       propertyPath: m_Name
       value: arch
