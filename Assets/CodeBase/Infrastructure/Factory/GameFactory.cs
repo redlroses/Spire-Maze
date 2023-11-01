@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
@@ -36,7 +35,6 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IPlayerInputService _inputService;
         private readonly ICameraOperatorService _cameraOperator;
 
-        private readonly Dictionary<Colors, Material> _coloredMaterials;
         private readonly Dictionary<string, Material> _materials;
         private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
@@ -57,7 +55,6 @@ namespace CodeBase.Infrastructure.Factory
             _uiFactory = uiFactory;
             _inputService = inputService;
             _cameraOperator = cameraOperator;
-            _coloredMaterials = new Dictionary<Colors, Material>(4);
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
@@ -70,9 +67,6 @@ namespace CodeBase.Infrastructure.Factory
 
         public void WarmUp() =>
             _assets.LoadCells();
-
-        public Material CreateColoredMaterial(Colors color) =>
-            GetCashed(color, AssetPath.Materials, _coloredMaterials);
 
         public GameObject CreateSpire() =>
             _assets.Instantiate(path: AssetPath.Spire);
@@ -97,6 +91,9 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
+
+        public GameObject CreateSpireSegment(Vector3 at) =>
+            _assets.Instantiate(AssetPath.SpireSegment, at);
 
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch

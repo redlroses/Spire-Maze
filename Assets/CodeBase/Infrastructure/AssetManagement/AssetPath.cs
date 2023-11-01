@@ -31,5 +31,6 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string FlagPath = "Sprite/Flag";
 
         public const string AudioMixer = "Audio/MainMixer";
+        public const string SpireSegment = "Prefabs/SpireSegment";
     }
 }

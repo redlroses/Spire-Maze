@@ -23,7 +23,6 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 var keyData = (Key) cell.CellData;
                 Collectible key = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Collectible>();
-                key.GetComponent<Renderer>().material = gameFactory.CreateColoredMaterial(keyData.Color);
                 key.Construct(cell.Id, gameFactory.CreateItem(_staticDataService.ForStorable(keyData.Color.ToStorableType())));
             }
         }

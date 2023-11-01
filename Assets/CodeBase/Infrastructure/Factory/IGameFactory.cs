@@ -15,7 +15,6 @@ namespace CodeBase.Infrastructure.Factory
         List<ISavedProgress> ProgressWriters { get; }
         void Cleanup();
         void WarmUp();
-        Material CreateColoredMaterial(Colors color);
         GameObject CreateSpire();
         GameObject CreateHero(Vector3 at);
         GameObject CreateEnemy(string prefabPath, Vector3 position);
@@ -26,5 +25,6 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateLobby();
         IItem CreateItem(StorableStaticData itemType);
         GameObject CreateVirtualMover();
+        GameObject CreateSpireSegment(Vector3 at);
     }
 }
