@@ -1,6 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Logic.ChestItem;
 using CodeBase.Logic.Items;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Services.StaticData;
@@ -23,12 +22,10 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (var cell in cells)
             {
                 ItemSpawnPoint itemData = (ItemSpawnPoint) cell.CellData;
-                Chest chest = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Chest>();
-                Collectible itemCell = chest.GetComponentInChildren<Collectible>();
+                Collectible collectible = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Collectible>();
                 StorableStaticData storableStaticData = _staticDataService.ForStorable(itemData.Type);
                 IItem item = gameFactory.CreateItem(storableStaticData);
-                itemCell.Construct(cell.Id, item);
-                chest.Initialize(itemCell);
+                collectible.Construct(cell.Id, item);
             }
         }
     }

@@ -50,7 +50,7 @@ namespace CodeBase.Sound
             _heroAnimator.StateEntered += OnStateEntered;
             _heroAnimator.StateExited += OnStateExited;
             _heroAnimator.StemMoved += OnStepMoved;
-            _itemCollector.SoundPlayed += OnPlaySoundCollected;
+            _itemCollector.Collected += OnPlaySoundCollected;
             _teleportable.Teleported += OnPlaySoundTeleported;
         }
 
@@ -79,7 +79,7 @@ namespace CodeBase.Sound
             _heroAnimator.StemMoved -= OnStepMoved;
             _heroAnimator.StateEntered -= OnStateEntered;
             _heroAnimator.StateExited -= OnStateExited;
-            _itemCollector.SoundPlayed -= OnPlaySoundCollected;
+            _itemCollector.Collected -= OnPlaySoundCollected;
             _teleportable.Teleported -= OnPlaySoundTeleported;
         }
 
@@ -91,7 +91,7 @@ namespace CodeBase.Sound
                 PlayOneShot(clip);
         }
 
-        private void OnPlaySoundCollected()
+        private void OnPlaySoundCollected(Sprite _, Vector3 __)
         {
             PlayOneShot(_collectSound);
         }

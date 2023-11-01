@@ -8,11 +8,16 @@ namespace CodeBase.Logic.Сollectible
 {
     public class Collectible : MonoBehaviour, ICollectible, IIndexable, ISavedProgress
     {
-        public event Action Collected; 
+        [SerializeField] private Collider _trigger;
 
         public IItem Item { get; private set; }
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
+
+        public event Action Collected = () => { };
+
+        protected virtual void OnLoadState(bool isActivated) { }
+        protected virtual void OnCollected() { }
 
         public void Construct(int id, IItem item)
         {
@@ -20,11 +25,12 @@ namespace CodeBase.Logic.Сollectible
             Item = item;
         }
 
-        public void Disable()
+        public void Collect(bool isEmidiately = false)
         {
             IsActivated = true;
-            gameObject.SetActive(false);
-            Collected?.Invoke();
+            _trigger.enabled = false;
+            OnCollected();
+            Collected.Invoke();
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -36,10 +42,9 @@ namespace CodeBase.Logic.Сollectible
                 return;
             }
 
-            if (cellState.IsActivated)
-            {
-                Disable();
-            }
+            _trigger.enabled = !cellState.IsActivated;
+            IsActivated = cellState.IsActivated;
+            OnLoadState(cellState.IsActivated);
         }
 
         public void UpdateProgress(PlayerProgress progress)
