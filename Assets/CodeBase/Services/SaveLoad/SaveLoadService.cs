@@ -51,29 +51,52 @@ namespace CodeBase.Services.SaveLoad
         {
             string saveData;
 
-#if UNITY_EDITOR && YANDEX_GAMES
+#if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
             {
-                saveData = await LoadCloud();
-
-                if (string.IsNullOrEmpty(saveData))
-                {
-                    saveData = LoadLocal();
-                }
-            }
-            else
-            {
-                saveData = LoadLocal();
+                return await GetActualSaveData();
             }
 #endif
-#if UNITY_EDITOR
-            saveData = PlayerPrefs.GetString(ProgressKey);
-#endif
+            saveData = LoadLocal();
 
-            return string.IsNullOrEmpty(saveData) || saveData == EmptySaveString
+            return IsSavesEmpty(saveData)
                 ? null
                 : saveData.ToDeserialized<PlayerProgress>();
         }
+
+        private async Task<PlayerProgress> GetActualSaveData()
+        {
+            string cloudSaveData = await LoadCloud();
+            string localSaveData = LoadLocal();
+
+            bool isCloudSaveEmpty = IsSavesEmpty(cloudSaveData);
+            bool isLocalSaveEmpty = IsSavesEmpty(localSaveData);
+
+            if (isCloudSaveEmpty && isLocalSaveEmpty)
+            {
+                return null;
+            }
+
+            if (isCloudSaveEmpty)
+            {
+                return localSaveData.ToDeserialized<PlayerProgress>();
+            }
+
+            if (isLocalSaveEmpty)
+            {
+                return cloudSaveData.ToDeserialized<PlayerProgress>();
+            }
+
+            PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
+            PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
+
+            return cloudProgress.Relevance > localProgress.Relevance
+                ? cloudProgress
+                : localProgress;
+        }
+
+        private bool IsSavesEmpty(string saveData) =>
+            string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
 
         private void SaveLocal(string saveData)
         {
