@@ -33,7 +33,7 @@ namespace NTC.Global.System
         {
             gameObject.SetActive(true);
         }
-        
+
         public static void Disable(this Component component)
         {
             if (component is MonoBehaviour monoBehaviour)
@@ -45,16 +45,16 @@ namespace NTC.Global.System
                 Disable(component.gameObject);
             }
         }
-        
+
         public static void Disable(this GameObject gameObject)
         {
             gameObject.SetActive(false);
         }
-        
+
         public static void EnableParent(this Component component)
         {
             var parent = component.transform.parent;
-            
+
             if (parent != null)
             {
                 parent.Enable();
@@ -79,7 +79,7 @@ namespace NTC.Global.System
         public static bool TryGetParent(this Component component, out Transform parent)
         {
             var transform = component.transform;
-            
+
             parent = transform.parent;
 
             return parent != null;
@@ -90,13 +90,13 @@ namespace NTC.Global.System
             var transform = component.transform;
             var childCount = transform.childCount;
 
-            child = childCount > 0 
-                ? transform.GetChild(0) 
+            child = childCount > 0
+                ? transform.GetChild(0)
                 : null;
-            
+
             return childCount > 0;
         }
-        
+
         public static T GetNearby<T>(this Component component) where T : Component
         {
             T instance = null;

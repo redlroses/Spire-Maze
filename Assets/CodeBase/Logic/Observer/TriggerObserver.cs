@@ -5,7 +5,7 @@ namespace CodeBase.Logic.Observer
 {
     public class TriggerObserver<TTarget> : MonoBehaviour, ITriggerObserver<TTarget>
     {
-        public event Action<TTarget> Entered;
+        public event Action<TTarget> Entered = _ => { };
 
         private void OnTriggerEnter(Collider other)
         {
@@ -14,7 +14,7 @@ namespace CodeBase.Logic.Observer
                 return;
             }
 
-            Entered?.Invoke(collectible);
+            Entered.Invoke(collectible);
         }
     }
 }

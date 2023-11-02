@@ -12,23 +12,17 @@ namespace CodeBase.Logic.Player
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private HeroReviver _heroReviver;
         [SerializeField] private HeroAnimator _animator;
-        [SerializeField] private CapsuleCollider _collider;
         [SerializeField] private HeroMover _mover;
         [SerializeField] private Dodge _dodge;
         [SerializeField] private Jumper _jumper;
-        [SerializeField] private CustomGravityScaler _customGravityScaler;
 
         private IPlayerInputService _inputService;
         private PlayerStateMachine _stateMachine;
-
-        public IPlayerInputService InputService => _inputService;
 
         private void Awake()
         {
             _playerHealth ??= GetComponentInChildren<PlayerHealth>();
             _animator ??= GetComponent<HeroAnimator>();
-            _collider ??= GetComponent<CapsuleCollider>();
-            _customGravityScaler ??= GetComponent<CustomGravityScaler>();
             _heroReviver ??= GetComponent<HeroReviver>();
         }
 

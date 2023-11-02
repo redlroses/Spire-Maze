@@ -5,7 +5,7 @@ namespace CodeBase.Logic.Observer
 {
     public class TriggerObserverExit<TTarget> : TriggerObserver<TTarget>, ITriggerObserverExit<TTarget>
     {
-        public event Action<TTarget> Exited;
+        public event Action<TTarget> Exited = _ => { };
 
         private void OnTriggerExit(Collider other)
         {
@@ -14,7 +14,7 @@ namespace CodeBase.Logic.Observer
                 return;
             }
 
-            Exited?.Invoke(collectible);
+            Exited.Invoke(collectible);
         }
     }
 }

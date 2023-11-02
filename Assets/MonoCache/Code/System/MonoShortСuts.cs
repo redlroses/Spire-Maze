@@ -12,6 +12,8 @@ namespace NTC.Global.System
         
         public T[] ChildrenGets<T>() => GetComponentsInChildren<T>();
         
+        public T GetNearby<T>() => GetComponentInParent<T>() ?? GetComponentInChildren<T>();
+
         public T ParentGet<T>() => GetComponentInParent<T>();
         
         public T[] ParentGets<T>() => GetComponentsInParent<T>();

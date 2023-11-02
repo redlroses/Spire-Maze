@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Observer;
 using CodeBase.Logic.Portal;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.Logic
@@ -12,6 +13,7 @@ namespace CodeBase.Logic
         [SerializeField] private float _delayDuration;
 
         private GameStateMachine _stateMachine;
+        private GameObject _target;
 
         public event Action Teleported = () => { };
 
@@ -25,11 +27,14 @@ namespace CodeBase.Logic
         {
             _stateMachine.Enter<FinishState, bool>(false);
             Teleported.Invoke();
+            _target.Disable();
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable target)
         {
+            _target = target.gameObject;
             _timer.Restart();
+            _timer.Play();
         }
 
         protected override void OnTriggerObserverExited(ITeleportable target)

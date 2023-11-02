@@ -12,6 +12,11 @@ namespace CodeBase.Logic.Observer
             _observer ??= GetComponent<TObserver>();
         }
 
+        protected virtual void OnValidate()
+        {
+            _observer ??= GetNearby<TObserver>();
+        }
+
         protected override void OnEnabled()
         {
             _observer.Entered += OnTriggerObserverEntered;
