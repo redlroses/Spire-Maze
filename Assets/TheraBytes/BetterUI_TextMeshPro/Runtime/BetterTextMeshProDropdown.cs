@@ -21,6 +21,14 @@ namespace TheraBytes.BetterUi
         [SerializeField, TransitionStates("Show", "Hide")]
         List<Transitions> showHideTransitions = new List<Transitions>();
 
+
+        [SerializeField] private Canvas _topImage;
+
+        protected override void OnValidate()
+        {
+            _topImage ??= GetComponent<Canvas>();
+        }
+
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);
@@ -41,6 +49,8 @@ namespace TheraBytes.BetterUi
                 tr.SetState("Show", false);
             }
 
+            _topImage.overrideSorting = true;
+            
             return base.CreateDropdownList(template);
         }
 
@@ -51,6 +61,8 @@ namespace TheraBytes.BetterUi
                 tr.SetState("Hide", false);
             }
 
+            _topImage.overrideSorting = false;
+            
             base.DestroyDropdownList(dropdownList);
         }
     }
