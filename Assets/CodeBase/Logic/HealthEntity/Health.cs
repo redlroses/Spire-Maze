@@ -30,6 +30,11 @@ namespace CodeBase.Logic.HealthEntity
                 return;
             }
 
+            if (CanDamage() == false)
+            {
+                return;
+            }
+
             Validate(damagePoints);
 
             int newPoints = CurrentPoints - damagePoints;
@@ -50,6 +55,9 @@ namespace CodeBase.Logic.HealthEntity
         }
 
         protected virtual void OnDamaged(int deltaPoints, DamageType damageType) { }
+
+        protected virtual bool CanDamage() =>
+            true;
 
         private void Validate(int points)
         {

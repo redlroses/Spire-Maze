@@ -36,6 +36,7 @@ namespace CodeBase.Logic.HealthEntity
             _damagable = damagable;
             _timer.Restart();
             _timer.Play();
+            OnDamage();
         }
 
         protected override void OnTriggerObserverExited(IDamagable damagable)

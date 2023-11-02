@@ -12,8 +12,8 @@ namespace CodeBase.Logic.HealthEntity
         private void Awake() =>
             _collider ??= GetComponent<Collider>();
 
-        protected override void OnTriggerObserverEntered(IDamagable collectible) =>
-            collectible.Damage(_damage, DamageType.Single);
+        protected override void OnTriggerObserverEntered(IDamagable damagable) =>
+            damagable.Damage(_damage, DamageType.Single);
 
         public void Enable() =>
             _collider.enabled = true;

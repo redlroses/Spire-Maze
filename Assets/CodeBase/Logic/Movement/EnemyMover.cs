@@ -9,7 +9,7 @@ namespace CodeBase.Logic.Movement
         private float _currentBonusSpeed;
         private float _timerBonusSpeed;
         private bool _isBonusSpeedEnabled;
-     
+
         protected override float CalculateSpeed() =>
             Speed + _currentBonusSpeed;
 

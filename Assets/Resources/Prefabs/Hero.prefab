@@ -299,7 +299,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: {fileID: 8291894814252270757}
-  _hitBox: {fileID: 803051217541185496}
   _stamina: {fileID: 8813367137604465016}
   _invulnerabilityTime: 0.7
   _fatigue: 250
@@ -7499,6 +7498,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 7393409988495010679}
   _heroAnimator: {fileID: 989079028364153686}
   _dodge: {fileID: 6587769830596586222}
+  _dodgeSpeedFactor: 1.5
 --- !u!95 &7131724038521599921
 Animator:
   serializedVersion: 5

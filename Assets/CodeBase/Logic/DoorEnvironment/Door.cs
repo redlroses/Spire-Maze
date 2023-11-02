@@ -58,9 +58,9 @@ namespace CodeBase.Logic.DoorEnvironment
             }
         }
 
-        protected override void OnTriggerObserverEntered(HeroInventory heroInventory)
+        protected override void OnTriggerObserverEntered(HeroInventory damagable)
         {
-            if (heroInventory.Inventory.TryUse(_targetKeyColor))
+            if (damagable.Inventory.TryUse(_targetKeyColor))
             {
                 Opened?.Invoke();
                 Open();

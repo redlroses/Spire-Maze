@@ -1,4 +1,3 @@
-using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace CodeBase.Logic.Trap
             CheckIsComplete();
         }
 
-        protected override void Activate(IDamagable damagable)
+        protected override void Activate()
         {
             enabled = true;
         }

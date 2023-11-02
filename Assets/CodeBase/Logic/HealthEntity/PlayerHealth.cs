@@ -1,24 +1,20 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
+using UnityEngine;
 
 namespace CodeBase.Logic.HealthEntity
 {
-    public sealed class PlayerHealth : Health, IHealable, IImmune, ISavedProgress
+    public sealed class PlayerHealth : Health, IHealable, IImmunable, ISavedProgress
     {
-        public event Action<int, DamageType> Damaged;
-        public event Action<int> Healed;
+        public event Action<int, DamageType> Damaged = ((_, _) => { });
+        public event Action<int> Healed = _ => { };
 
         public bool IsImmune { get; set; }
 
-        protected override void OnDamaged(int deltaPoints, DamageType damageType)
-        {
-            Damaged?.Invoke(deltaPoints, damageType);
-        }
-
         public void Heal(int healPoints)
         {
-            Validate(healPoints);
+            ValidateHeal(healPoints);
 
             int newPoints = CurrentPoints + healPoints;
 
@@ -28,7 +24,7 @@ namespace CodeBase.Logic.HealthEntity
             }
 
             int deltaPoints = newPoints - CurrentPoints;
-            Healed?.Invoke(deltaPoints);
+            Healed.Invoke(deltaPoints);
             CurrentPoints = newPoints;
         }
 
@@ -44,7 +40,15 @@ namespace CodeBase.Logic.HealthEntity
             progress.WorldData.HeroHealthState.MaxHP = MaxPoints;
         }
 
-        private void Validate(int points)
+        protected override void OnDamaged(int deltaPoints, DamageType damageType)
+        {
+            Damaged.Invoke(deltaPoints, damageType);
+        }
+
+        protected override bool CanDamage() =>
+            !IsImmune;
+
+        private void ValidateHeal(int points)
         {
             if (points <= 0)
             {

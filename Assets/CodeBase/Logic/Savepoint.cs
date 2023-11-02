@@ -52,7 +52,7 @@ namespace CodeBase.Logic
             }
         }
 
-        protected override void OnTriggerObserverEntered(Hero player)
+        protected override void OnTriggerObserverEntered(Hero damagable)
         {
             IsActivated = true;
             SetColliderState(IsActivated);

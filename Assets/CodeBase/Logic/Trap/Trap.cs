@@ -1,4 +1,3 @@
-using CodeBase.Logic.HealthEntity;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -6,21 +5,21 @@ namespace CodeBase.Logic.Trap
 {
     public abstract class Trap : MonoCache
     {
-        [SerializeField] protected TrapActivator Activator;
+        [SerializeField] protected TrapActivator _activator;
 
-        public TrapActivator TrapActivator => Activator;
+        public TrapActivator TrapActivator => _activator;
 
         public void Construct(TrapActivator activator)
         {
-            Activator = activator;
-            Activator.Activated += Activate;
+            _activator = activator;
+            _activator.Activated += Activate;
         }
 
         private void OnDestroy()
         {
-            Activator.Activated -= Activate;
+            _activator.Activated -= Activate;
         }
 
-        protected abstract void Activate(IDamagable damagable);
+        protected abstract void Activate();
     }
 }

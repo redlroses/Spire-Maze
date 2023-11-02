@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
@@ -11,13 +10,13 @@ namespace CodeBase.Logic.Trap
     {
         [SerializeField]
         [RequireInterface(typeof(IDamageTrigger))] private MonoBehaviour _damageTrigger;
-        [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private ParticleSystem[] _effects;
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private float _turnOffDelay;
 
         private bool _isActivated;
 
-        private IDamageTrigger DamageTrigger => (IDamageTrigger)_damageTrigger;
+        private IDamageTrigger DamageTrigger => (IDamageTrigger) _damageTrigger;
 
         private void Awake() =>
             _timer.SetUp(_turnOffDelay, OnTurnOff);
@@ -25,32 +24,48 @@ namespace CodeBase.Logic.Trap
         public void Resume()
         {
             if (_isActivated)
-                _effect.Play();
+                PlayEffects();
         }
 
         public void Pause()
         {
             if (_isActivated)
-                _effect.Pause();
+                StopEffects();
         }
 
         private void OnTurnOff()
         {
             DamageTrigger.Disable();
-            _effect.Stop();
+            StopEffects();
             _isActivated = false;
         }
 
-        protected override void Activate(IDamagable damagable)
+        protected override void Activate()
         {
             if (_isActivated)
                 return;
 
             _timer.Restart();
             _timer.Play();
-            _effect.Play();
+            PlayEffects();
             DamageTrigger.Enable();
             _isActivated = true;
+        }
+
+        private void PlayEffects()
+        {
+            foreach (var effect in _effects)
+            {
+                effect.Play();
+            }
+        }
+
+        private void StopEffects()
+        {
+            foreach (var effect in _effects)
+            {
+                effect.Stop();
+            }
         }
     }
 }

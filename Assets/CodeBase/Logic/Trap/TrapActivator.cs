@@ -10,16 +10,28 @@ namespace CodeBase.Logic.Trap
     public class TrapActivator : ObserverTarget<DamagableObserver, IDamagable>
     {
         [SerializeField] private TimerOperator _timer;
+        [SerializeField] private float _activationDelay = 0.7f;
         [SerializeField] private float _recoveryTime;
 
         private bool _isActivated;
 
-        public event Action<IDamagable> Activated;
+        public event Action Activated = () => { };
 
         private void Awake()
         {
             _timer ??= GetComponent<TimerOperator>();
+        }
+
+        private void WaitActivationDelay()
+        {
+            _timer.SetUp(_activationDelay, OnDelayPassed);
+            _timer.Play();
+        }
+
+        private void WaitRecoveryTime()
+        {
             _timer.SetUp(_recoveryTime, OnReadyToActivate);
+            _timer.Play();
         }
 
         private void OnReadyToActivate()
@@ -27,17 +39,26 @@ namespace CodeBase.Logic.Trap
             _isActivated = false;
         }
 
-        protected override void OnTriggerObserverEntered(IDamagable collectible)
+        private void OnDelayPassed()
+        {
+            Activate();
+        }
+
+        protected override void OnTriggerObserverEntered(IDamagable _)
         {
             if (_isActivated)
             {
                 return;
             }
 
-            _timer.Restart();
-            _timer.Play();
+            WaitActivationDelay();
+        }
+
+        private void Activate()
+        {
             _isActivated = true;
-            Activated?.Invoke(collectible);
+            Activated.Invoke();
+            WaitRecoveryTime();
         }
     }
 }

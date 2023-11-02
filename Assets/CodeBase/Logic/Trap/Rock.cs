@@ -92,7 +92,7 @@ namespace CodeBase.Logic.Trap
             }
         }
 
-        protected override void Activate(IDamagable damagable)
+        protected override void Activate()
         {
             _mover.Move(_direction);
             _mover.Enable();

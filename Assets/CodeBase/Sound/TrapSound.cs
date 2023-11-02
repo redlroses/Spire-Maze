@@ -1,5 +1,4 @@
-﻿using CodeBase.Logic.HealthEntity;
-using CodeBase.Logic.Trap;
+﻿using CodeBase.Logic.Trap;
 using UnityEngine;
 
 namespace CodeBase.Sound
@@ -19,7 +18,7 @@ namespace CodeBase.Sound
             _trap.TrapActivator.Activated -= OnActivated;
         }
 
-        private void OnActivated(IDamagable obj)
+        private void OnActivated()
         {
             PlayOneShot(_audioClip);
         }

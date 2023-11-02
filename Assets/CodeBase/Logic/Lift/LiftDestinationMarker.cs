@@ -17,7 +17,7 @@ namespace CodeBase.Logic.Lift
             Position = cellPosition;
         }
 
-        protected override void OnTriggerObserverEntered(IPlateMovable collectible)
+        protected override void OnTriggerObserverEntered(IPlateMovable damagable)
         {
             Call?.Invoke(this);
         }

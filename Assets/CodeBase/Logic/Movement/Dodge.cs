@@ -1,4 +1,6 @@
 using System;
+using AYellowpaper;
+using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
@@ -11,7 +13,6 @@ namespace CodeBase.Logic.Movement
     public class Dodge : MonoCache, IDodge, IPauseWatcher
     {
         [SerializeField] private TimerOperator _timer;
-        [SerializeField] private GameObject _hitBox;
         [SerializeField] private PlayerStamina _stamina;
         [SerializeField] private float _invulnerabilityTime = 0.7f;
         [SerializeField] private int _fatigue;
@@ -25,7 +26,7 @@ namespace CodeBase.Logic.Movement
 
         private bool _isDodged;
 
-        public event Action<MoveDirection> Dodged;
+        public event Action<MoveDirection> Dodged = _ => { };
 
         public bool CanDodge => enabled && _isDodged == false && _stamina.TrySpend(_fatigue);
 
@@ -37,8 +38,7 @@ namespace CodeBase.Logic.Movement
 
         public void Evade(MoveDirection direction)
         {
-            _hitBox.SetActive(false);
-            Dodged?.Invoke(direction);
+            Dodged.Invoke(direction);
             _collider.height = _rollCollideHeight;
             _collider.center = _collider.center.ChangeY(_rollCollideCenter);
             _timer.Restart();
@@ -49,7 +49,6 @@ namespace CodeBase.Logic.Movement
         {
             _collider.height = _normalCollideHeight;
             _collider.center = _collider.center.ChangeY(_normalCollideCenter);
-            _hitBox.SetActive(true);
         }
 
         public void Pause() =>

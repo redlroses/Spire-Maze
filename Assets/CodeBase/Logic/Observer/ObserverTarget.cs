@@ -21,6 +21,6 @@ namespace CodeBase.Logic.Observer
             _observer.Entered -= OnTriggerObserverEntered;
         }
 
-        protected abstract void OnTriggerObserverEntered(TTarget inventory);
+        protected abstract void OnTriggerObserverEntered(TTarget damagable);
     }
 }

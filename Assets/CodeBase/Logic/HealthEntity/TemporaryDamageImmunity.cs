@@ -6,12 +6,12 @@ namespace CodeBase.Logic.HealthEntity
     [RequireComponent(typeof(TimerOperator))]
     public class TemporaryDamageImmunity : MonoBehaviour
     {
-        [SerializeField] [RequireInterface(typeof(IImmune))] private MonoBehaviour _health;
+        [SerializeField] [RequireInterface(typeof(IImmunable))] private MonoBehaviour _health;
         [SerializeField] private TimerOperator _timerOperator;
 
         [SerializeField] private float _immunityTime;
 
-        private IImmune Health => (IImmune) _health;
+        private IImmunable Health => (IImmunable) _health;
 
         private void Awake()
         {

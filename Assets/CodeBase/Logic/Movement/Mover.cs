@@ -14,6 +14,7 @@ namespace CodeBase.Logic.Movement
 
         private MoveDirection _direction;
         private Vector3 _currentVelocity;
+        private float _speedFactor = 1f;
 
         protected float Speed => _speed;
         public Rigidbody Rigidbody => _rigidbody;
@@ -27,8 +28,11 @@ namespace CodeBase.Logic.Movement
         protected override void FixedRun() =>
             ApplyMove(_direction);
 
-        public void Move(MoveDirection direction) =>
+        public void Move(MoveDirection direction, float speedFactor = 1f)
+        {
+            _speedFactor = speedFactor;
             _direction = direction;
+        }
 
         public void Resume()
         {
@@ -44,7 +48,7 @@ namespace CodeBase.Logic.Movement
         }
 
         protected virtual float CalculateSpeed() =>
-            _speed;
+            _speed * _speedFactor;
 
         private void ApplyMove(MoveDirection moveDirection)
         {

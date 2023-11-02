@@ -11,6 +11,7 @@ namespace CodeBase.Logic.Movement
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
+        [SerializeField] private float _dodgeSpeedFactor = 1.5f;
 
         protected override void OnEnabled() =>
             _dodge.Dodged += OnDodged;
@@ -45,6 +46,6 @@ namespace CodeBase.Logic.Movement
         }
 
         private void OnDodged(MoveDirection direction) =>
-            Move(direction);
+            Move(direction, _dodgeSpeedFactor);
     }
 }
