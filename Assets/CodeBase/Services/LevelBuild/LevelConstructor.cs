@@ -259,8 +259,6 @@ namespace CodeBase.Services.LevelBuild
             meshFilter.mesh.CombineMeshes(combine);
             meshRenderer.sharedMaterial = _gameFactory.CreateMaterial(Spire);
             meshRenderer.enabled = isEnableRenderer;
-            meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
-            meshRenderer.receiveShadows = false;
             return mesh;
         }
 
