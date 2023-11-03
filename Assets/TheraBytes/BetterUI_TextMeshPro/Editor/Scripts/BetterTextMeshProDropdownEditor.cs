@@ -21,7 +21,7 @@ namespace TheraBytes.BetterUi.Editor
             new BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown>();
 
         BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown> showHideTransitions =
-            new BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown>();
+            new BetterElementHelper<TMP_Dropdown, BetterTextMeshProDropdown>("showHideTransitions");
 
 
         protected override void OnEnable()

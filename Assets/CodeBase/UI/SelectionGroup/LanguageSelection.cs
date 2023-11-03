@@ -15,7 +15,6 @@ namespace CodeBase.UI.SelectionGroup
 
         protected override void OnSelectionChanged(LanguageId languageId)
         {
-            Debug.Log($"Select language: {languageId}");
             _localization.ChooseLanguage(languageId);
         }
     }

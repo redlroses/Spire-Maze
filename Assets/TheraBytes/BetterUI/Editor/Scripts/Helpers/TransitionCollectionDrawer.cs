@@ -83,6 +83,7 @@ namespace TheraBytes.BetterUi.Editor
                 return false;
 
             stateNames = attribute.States;
+
             return true;
         }
 

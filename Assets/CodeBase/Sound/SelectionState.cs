@@ -26,5 +26,15 @@
         /// The UI object cannot be selected.
         /// </summary>
         Disabled,
+
+        /// <summary>
+        /// For Dropdown only
+        /// </summary>
+        Shown,
+
+        /// <summary>
+        /// For Dropdown only
+        /// </summary>
+        Hidden
     }
 }

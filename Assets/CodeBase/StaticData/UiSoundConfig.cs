@@ -10,10 +10,12 @@ namespace CodeBase.StaticData
     {
         [SerializeField] private SerializedDictionary<SelectionState, AudioClip> _buttonClips;
         [SerializeField] private SerializedDictionary<SelectionState, AudioClip> _toggleClips;
+        [SerializeField] private SerializedDictionary<SelectionState, AudioClip> _dropdownClips;
         [SerializeField] AudioClip _sliderClip;
 
         public IReadOnlyDictionary<SelectionState, AudioClip> ButtonClips => _buttonClips;
         public IReadOnlyDictionary<SelectionState, AudioClip> ToggleClips => _toggleClips;
+        public IReadOnlyDictionary<SelectionState, AudioClip> DropdownClips => _dropdownClips;
         public AudioClip SliderClip => _sliderClip;
     }
 }

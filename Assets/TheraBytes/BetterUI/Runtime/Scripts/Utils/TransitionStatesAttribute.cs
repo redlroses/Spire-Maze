@@ -13,6 +13,13 @@ namespace TheraBytes.BetterUi
         { }
     }
 
+    public class ShowHideTransitionStatesAttribute : TransitionStatesAttribute
+    {
+        public ShowHideTransitionStatesAttribute()
+            : base("Show", "Hide")
+        { }
+    }
+    
     public class TransitionStatesAttribute : Attribute
     {
         string[] states;

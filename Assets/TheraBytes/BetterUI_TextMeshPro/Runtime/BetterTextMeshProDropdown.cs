@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TheraBytes.BetterUi
@@ -12,21 +13,26 @@ namespace TheraBytes.BetterUi
     [AddComponentMenu("Better UI/TextMeshPro/Better TextMeshPro - Dropdown", 30)]
     public class BetterTextMeshProDropdown : TMP_Dropdown, IBetterTransitionUiElement
     {
+        private const int ShownState = 5;
+        private const int HiddenState = 6;
+
         public List<Transitions> BetterTransitions { get { return betterTransitions; } }
         public List<Transitions> ShowHideTransitions { get { return showHideTransitions; } }
+
+        [SerializeField, ShowHideTransitionStatesAttribute]
+        List<Transitions> showHideTransitions = new List<Transitions>();
 
         [SerializeField, DefaultTransitionStates]
         List<Transitions> betterTransitions = new List<Transitions>();
 
-        [SerializeField, TransitionStates("Show", "Hide")]
-        List<Transitions> showHideTransitions = new List<Transitions>();
+        [SerializeField] private Canvas _topLayout;
 
-
-        [SerializeField] private Canvas _topImage;
+        public event Action<int> StateChanged = _ => { };
 
         protected override void OnValidate()
         {
-            _topImage ??= GetComponent<Canvas>();
+            base.OnValidate();
+            _topLayout ??= GetComponent<Canvas>();
         }
 
         protected override void DoStateTransition(SelectionState state, bool instant)
@@ -35,6 +41,8 @@ namespace TheraBytes.BetterUi
 
             if (!(base.gameObject.activeInHierarchy))
                 return;
+
+            StateChanged.Invoke((int) state);
 
             foreach (var info in betterTransitions)
             {
@@ -49,8 +57,13 @@ namespace TheraBytes.BetterUi
                 tr.SetState("Show", false);
             }
 
-            _topImage.overrideSorting = true;
-            
+            if (_topLayout != null)
+            {
+                _topLayout.overrideSorting = true;
+            }
+
+            StateChanged.Invoke(ShownState);
+
             return base.CreateDropdownList(template);
         }
 
@@ -61,8 +74,13 @@ namespace TheraBytes.BetterUi
                 tr.SetState("Hide", false);
             }
 
-            _topImage.overrideSorting = false;
-            
+            if (_topLayout != null)
+            {
+                _topLayout.overrideSorting = false;
+            }
+
+            StateChanged.Invoke(HiddenState);
+
             base.DestroyDropdownList(dropdownList);
         }
     }

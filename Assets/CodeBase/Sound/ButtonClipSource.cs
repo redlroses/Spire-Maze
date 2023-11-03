@@ -3,7 +3,6 @@ using CodeBase.StaticData;
 using NaughtyAttributes;
 using TheraBytes.BetterUi;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Sound
 {
