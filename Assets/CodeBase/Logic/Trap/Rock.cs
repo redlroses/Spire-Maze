@@ -7,12 +7,11 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Trap
 {
-    [RequireComponent(typeof(RockMover))]
     public class Rock : Trap, ISavedProgress, IIndexable
     {
         [SerializeField] private CapsuleCollider _collisionCollider;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private RockMover _mover;
+        [SerializeField] private Mover _mover;
         [SerializeField] private SimpleBallRotator _rotator;
         [SerializeField] private Rigidbody[] _fragments;
         [SerializeField] private float _rayDistance;
@@ -54,7 +53,7 @@ namespace CodeBase.Logic.Trap
             base.Construct(activator);
             Id = id;
             _rigidbody ??= GetComponent<Rigidbody>();
-            _mover ??= GetComponent<RockMover>();
+            _mover ??= GetComponent<Mover>();
             _mover.enabled = false;
             _selfTransform = transform;
             _radius = _rigidbody.position.RemoveY().magnitude;

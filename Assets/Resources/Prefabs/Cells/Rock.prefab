@@ -6515,10 +6515,10 @@ GameObject:
   - component: {fileID: 2976654156250728952}
   - component: {fileID: 8340080614926882585}
   - component: {fileID: 3337484362527455217}
-  - component: {fileID: 3763534346131496845}
   - component: {fileID: 9132919717544923177}
   - component: {fileID: 3655441129170313658}
   - component: {fileID: 7887131475049223329}
+  - component: {fileID: 2512823031230340065}
   m_Layer: 7
   m_Name: RockObject
   m_TagString: Untagged
@@ -6609,7 +6609,7 @@ MonoBehaviour:
   _activator: {fileID: 7879863177841329368}
   _collisionCollider: {fileID: 8340080614926882585}
   _rigidbody: {fileID: 2976654156250728952}
-  _mover: {fileID: 3763534346131496845}
+  _mover: {fileID: 0}
   _rotator: {fileID: 5528626663253624133}
   _fragments:
   - {fileID: 3406632704451708255}
@@ -6635,21 +6635,6 @@ MonoBehaviour:
   _stopEffectCallback: {fileID: 198151582450111807}
   _timer: {fileID: 9132919717544923177}
   _timerDelay: 1
---- !u!114 &3763534346131496845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8001022738760582169}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed80c77bce9c8949a7a7b69dfaa574a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  _rotateSpeed: 2
-  _rigidbody: {fileID: 2976654156250728952}
 --- !u!114 &9132919717544923177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6695,6 +6680,21 @@ MonoBehaviour:
   _sphereCaster: {fileID: 3655441129170313658}
   _currentScale: 1
   _defaultScale: 1
+--- !u!114 &2512823031230340065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001022738760582169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b54d9a22965aab41b76ad636fc5effa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _rotateSpeed: 2
+  _rigidbody: {fileID: 2976654156250728952}
 --- !u!1001 &1346821695321976022
 PrefabInstance:
   m_ObjectHideFlags: 0
