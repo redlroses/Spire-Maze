@@ -4,10 +4,12 @@ using System.Linq;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic;
 using CodeBase.Logic.Lift;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
+using UnityEngine;
 using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
 using Object = UnityEngine.Object;
 
@@ -15,11 +17,15 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class MovingPlateMarkerConstructor : ICellConstructor
     {
+        private Spire _spire;
         private Cell[] _markers;
         private Cell[] _movingPlates;
+        private IGameFactory _gameFactory;
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
+            _gameFactory = gameFactory;
+            _spire = cells[0].Container.root.GetComponentInChildren<Spire>();
             _markers = cells;
             _movingPlates = cells.Where(cell => ((MovingMarker) cell.CellData).IsLiftHolder).ToArray();
 
@@ -32,25 +38,45 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell fromCell in _movingPlates)
             {
                 Cell toCell = FindPair(fromCell);
-                // CreateRails(fromCell, toCell);
+                CreateRails(fromCell, toCell);
                 ApplyDestinationMarkers(fromCell, toCell);
             }
         }
 
-        // private void CreateRails(Cell fromCell, Cell toCell)
-        // {
-        //     MovingMarker initialMarker = (MovingMarker) fromCell.CellData;
-        //
-        //     if (initialMarker.Direction == PlateMoveDirection.Left)
-        //     {
-        //         MovingMarker destinationMarker = (MovingMarker) toCell.CellData;
-        //         
-        //         for (int i = fromCell.Position.Angle; i < _markers.Length; i++)
-        //         {
-        //             fromCell.Container.r
-        //         }
-        //     }
-        // }
+        private void CreateRails(Cell fromCell, Cell toCell)
+        {
+            MovingMarker initialMarker = (MovingMarker) fromCell.CellData;
+
+            if (initialMarker.Direction == PlateMoveDirection.Left ||
+                initialMarker.Direction == PlateMoveDirection.Right)
+            {
+                if (initialMarker.Direction == PlateMoveDirection.Left)
+                {
+                    Cell currentCell = _spire.GetLeft(fromCell);
+
+                    do
+                    {
+                        _gameFactory.CreateHorizontalRail(currentCell.Container);
+                        currentCell = _spire.GetLeft(currentCell);
+
+                        Debug.Log($"currentCell: {currentCell.Id}, toCell: {toCell.Id}");
+                    } while (currentCell.Id != toCell.Id);
+                }
+
+                if (initialMarker.Direction == PlateMoveDirection.Right)
+                {
+                    Cell currentCell = _spire.GetRight(fromCell);
+
+                    do
+                    {
+                        _gameFactory.CreateHorizontalRail(currentCell.Container);
+                        currentCell = _spire.GetRight(currentCell);
+
+                        Debug.Log($"currentCell: {currentCell.Id}, toCell: {toCell.Id}");
+                    } while (currentCell.Id != toCell.Id);
+                }
+            }
+        }
 
         private void ApplyDestinationMarkers(Cell fromCell, Cell toCell)
         {

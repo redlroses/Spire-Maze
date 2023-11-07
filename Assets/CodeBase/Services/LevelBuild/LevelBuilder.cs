@@ -67,7 +67,7 @@ namespace CodeBase.Services.LevelBuild
                 spire = _levelContainer.gameObject.AddComponent<Spire>();
             }
 
-            spire.Construct(_level, _levelStaticData.Radius);
+            spire.Construct(_level);
         }
 
         public void Construct()
@@ -109,9 +109,9 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = GetPosition(i * ArchAngle, Radius);
                 Quaternion containerRotation = GetRotation(i * ArchAngle);
-                Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}", container,
+                int cellId = floorIndex * (floorCells.Length) + i;
+                Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}, id: {cellId}", container,
                     containerPosition, containerRotation);
-                int cellId = floorIndex * (floorCells.Length + 1) + i;
                 Cell cell = new Cell(floorCells[i], cellContainer, cellId);
                 floor.Add(cell);
             }

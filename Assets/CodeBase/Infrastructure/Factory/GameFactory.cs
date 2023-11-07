@@ -95,6 +95,12 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 
+        public GameObject CreateHorizontalRail(Transform container)
+        {
+            GameObject cell = _assets.Instantiate(AssetPath.HorizontalRail, container);
+            return cell;
+        }
+
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
             {

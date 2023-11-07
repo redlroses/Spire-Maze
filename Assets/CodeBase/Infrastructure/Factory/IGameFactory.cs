@@ -26,5 +26,6 @@ namespace CodeBase.Infrastructure.Factory
         IItem CreateItem(StorableStaticData itemType);
         GameObject CreateVirtualMover();
         GameObject CreateSpireSegment(Vector3 at, Quaternion quaternion);
+        GameObject CreateHorizontalRail(Transform container);
     }
 }
