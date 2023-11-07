@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;

@@ -50,7 +50,7 @@ namespace CodeBase.Services.LevelBuild
         {
             _levelStaticData = levelStaticData;
             _levelContainer = CreateSpire(levelStaticData);
-            BuildLevel(levelStaticData);
+            CreateLevel(levelStaticData);
             _level.SelfTransform = _levelContainer;
             _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
             _persistentProgressService.TemporalProgress.LevelHeightRange = new Vector2(0, FloorHeight * _level.Height);
@@ -75,7 +75,7 @@ namespace CodeBase.Services.LevelBuild
             _levelStaticData = default;
         }
 
-        private void BuildLevel(LevelStaticData mapData)
+        private void CreateLevel(LevelStaticData mapData)
         {
             _level = new Level(mapData.Height, _levelContainer);
 

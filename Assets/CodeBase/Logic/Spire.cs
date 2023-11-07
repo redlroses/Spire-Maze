@@ -4,11 +4,11 @@ using UnityEngine;
  {
      public class Spire : MonoBehaviour
      {
-         private static Vector3 _position;
- 
          public const float DistanceToCenter = 6f;
- 
-         public static Vector3 Position => _position;
+
+         private Vector3 _position;
+
+         public Vector3 Position => _position;
  
          private void Awake()
          {

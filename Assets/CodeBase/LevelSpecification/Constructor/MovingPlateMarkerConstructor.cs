@@ -29,21 +29,39 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell cell in _markers)
                 gameFactory.CreateCell<MovingPlateMarker>(cell.Container);
 
-            foreach (Cell movingPlates in _movingPlates)
-                ApplyMovingPlate(movingPlates);
+            foreach (Cell fromCell in _movingPlates)
+            {
+                Cell toCell = FindPair(fromCell);
+                // CreateRails(fromCell, toCell);
+                ApplyDestinationMarkers(fromCell, toCell);
+            }
         }
 
-        private void ApplyMovingPlate(Cell movingPlate)
+        // private void CreateRails(Cell fromCell, Cell toCell)
+        // {
+        //     MovingMarker initialMarker = (MovingMarker) fromCell.CellData;
+        //
+        //     if (initialMarker.Direction == PlateMoveDirection.Left)
+        //     {
+        //         MovingMarker destinationMarker = (MovingMarker) toCell.CellData;
+        //         
+        //         for (int i = fromCell.Position.Angle; i < _markers.Length; i++)
+        //         {
+        //             fromCell.Container.r
+        //         }
+        //     }
+        // }
+
+        private void ApplyDestinationMarkers(Cell fromCell, Cell toCell)
         {
-            Cell pairMarker = FindPair(movingPlate);
-            var initialMarker = movingPlate.Container.GetComponentInChildren<LiftDestinationMarker>();
-            var destinationMarker = pairMarker.Container.GetComponentInChildren<LiftDestinationMarker>();
-            var liftPlate = movingPlate.Container.GetComponentInChildren<LiftPlate>();
+            LiftDestinationMarker initialMarker = fromCell.Container.GetComponentInChildren<LiftDestinationMarker>();
+            LiftDestinationMarker destinationMarker = toCell.Container.GetComponentInChildren<LiftDestinationMarker>();
+            LiftPlate liftPlate = fromCell.Container.GetComponentInChildren<LiftPlate>();
 
-            initialMarker.Construct(movingPlate.Position);
-            destinationMarker.Construct(pairMarker.Position);
+            initialMarker.Construct(fromCell.Position);
+            destinationMarker.Construct(toCell.Position);
 
-            PlateMoveDirection plateMoveDirection = ((MovingMarker) movingPlate.CellData).Direction;
+            PlateMoveDirection plateMoveDirection = ((MovingMarker) fromCell.CellData).Direction;
             IPlateMover mover = ChooseMoverComponent(liftPlate, plateMoveDirection);
 
             liftPlate.Construct(initialMarker, destinationMarker, mover);
