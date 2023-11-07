@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.SaveLoad;
@@ -54,8 +55,19 @@ namespace CodeBase.Services.LevelBuild
             _level.SelfTransform = _levelContainer;
             _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
             _persistentProgressService.TemporalProgress.LevelHeightRange = new Vector2(0, FloorHeight * _level.Height);
+            InitSpire();
 
             return _level;
+        }
+
+        private void InitSpire()
+        {
+            if (_levelContainer.TryGetComponent(out Spire spire) == false)
+            {
+                spire = _levelContainer.gameObject.AddComponent<Spire>();
+            }
+
+            spire.Construct(_level, _levelStaticData.Radius);
         }
 
         public void Construct()

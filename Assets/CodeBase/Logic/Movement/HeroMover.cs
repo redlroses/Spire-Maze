@@ -40,7 +40,7 @@ namespace CodeBase.Logic.Movement
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {
             Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
-            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Spire.DistanceToCenter)
+            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Radius)
                 .AddY(uncorrectedPosition.y);
             Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
         }

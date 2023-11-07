@@ -1,5 +1,4 @@
 ﻿using CodeBase.Tools.Constants;
-using CodeBase.Tools.Extension;
 using CodeBase.Tools.PhysicsDebug;
 using UnityEngine;
 
@@ -28,10 +27,10 @@ namespace CodeBase.Logic.Movement
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
                 out _, distance + _colliderHeight * Arithmetic.Half, _mask);
 
-            var from = _rigidbody.position + _collider.center;
+            Vector3 from = _rigidbody.position + _collider.center;
 
             Drawer.DrawRay(from, direction, distance + _colliderHeight * Arithmetic.Half + (_colliderRadius - radiusReduction), Color.red);
-            
+
             return isHit;
         }
 

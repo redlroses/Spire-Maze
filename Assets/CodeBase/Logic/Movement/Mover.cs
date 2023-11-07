@@ -15,14 +15,16 @@ namespace CodeBase.Logic.Movement
         private MoveDirection _direction;
         private Vector3 _currentVelocity;
         private float _speedFactor = 1f;
+        private float _radius;
 
+        protected float Radius => _radius;
         protected float Speed => _speed;
         public Rigidbody Rigidbody => _rigidbody;
 
         private void Awake()
         {
             _rigidbody ??= Get<Rigidbody>();
-            ApplyMove(MoveDirection.Left);
+            _radius = _rigidbody.position.RemoveY().magnitude;
         }
 
         protected override void FixedRun() =>
@@ -58,7 +60,7 @@ namespace CodeBase.Logic.Movement
                 return;
 
             Vector2 direction = new Vector2((int) moveDirection, 0f);
-            Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, Spire.DistanceToCenter) * CalculateSpeed();
+            Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, _radius) * CalculateSpeed();
 
             Rotate(velocity);
             _rigidbody.velocity = velocity.ChangeY(_rigidbody.velocity.y);

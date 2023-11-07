@@ -47,6 +47,7 @@ namespace CodeBase.Logic.Player
             _stateMachine = new PlayerStateMachine(_animator, _inputService, _mover, _playerHealth, _dodge, _jumper);
             _stateMachine.Enter<PlayerIdleState>();
             _heroReviver.Construct(_stateMachine);
+            _mover.Move(MoveDirection.Stop);
         }
 
         private void OnDied()

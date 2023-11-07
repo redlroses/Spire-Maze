@@ -10,11 +10,12 @@ namespace CodeBase.Logic.Movement
 
         private Vector2 _direction;
         private Vector2 _heightRange;
+        private float _radius;
 
         public void Construct(Vector2 heightRange)
         {
-            Debug.Log(heightRange);
             _heightRange = heightRange;
+            _radius = transform.position.RemoveY().magnitude;
         }
 
         public void Move(Vector2 direction)
@@ -26,7 +27,7 @@ namespace CodeBase.Logic.Movement
         protected override void Run()
         {
             Transform selfTransform = transform;
-            Vector3 worldDirection = _direction.ToWorldDirection(selfTransform.position, Spire.DistanceToCenter).ChangeY(_direction.y);
+            Vector3 worldDirection = _direction.ToWorldDirection(selfTransform.position, _radius).ChangeY(_direction.y);
             transform.Translate(worldDirection.normalized * _speed * Time.deltaTime);
 
             if (selfTransform.position.y > _heightRange.y)
