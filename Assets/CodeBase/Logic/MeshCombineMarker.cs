@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Services.LevelBuild
+namespace CodeBase.Logic
 {
-    public class MeshCombinable : MonoBehaviour
+    public class MeshCombineMarker : MonoBehaviour
     {
         [SerializeField] private Renderer _renderer;
         [SerializeField] private MeshFilter _meshFilter;

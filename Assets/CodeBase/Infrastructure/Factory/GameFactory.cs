@@ -11,6 +11,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
@@ -95,11 +96,17 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 
-        public GameObject CreateHorizontalRail(Transform container)
-        {
-            GameObject cell = _assets.Instantiate(AssetPath.HorizontalRail, container);
-            return cell;
-        }
+        public GameObject CreateHorizontalRail(Transform container) =>
+            _assets.Instantiate(AssetPath.HorizontalRail, Vector3.zero.ChangeY(container.position.y), container.rotation, container);
+
+        public GameObject CreateVerticalRail(Transform container) =>
+            _assets.Instantiate(AssetPath.VerticalRail, container);
+
+        public GameObject CreateHorizontalRailLock(Transform container) =>
+            _assets.Instantiate(AssetPath.HorizontalRailLock, Vector3.zero.ChangeY(container.position.y), container.rotation, container);
+
+        public GameObject CreateVerticalRailLock(Transform container) =>
+            _assets.Instantiate(AssetPath.VerticalRailLock, container);
 
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
@@ -177,7 +184,7 @@ namespace CodeBase.Infrastructure.Factory
             if (collection.TryGetValue(key, out TValue value))
                 return value;
 
-            var loaded = Resources.Load<TValue>($"{path}/{key}");
+            TValue loaded = Resources.Load<TValue>($"{path}/{key}");
 
             if (loaded is null)
                 throw new NullReferenceException($"There is no object with key {key}");

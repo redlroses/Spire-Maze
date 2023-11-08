@@ -43,40 +43,47 @@ namespace CodeBase.LevelSpecification.Constructor
             }
         }
 
-        private void CreateRails(Cell fromCell, Cell toCell)
+        private void CreateRails(Cell initialCell, Cell finishCell)
         {
-            MovingMarker initialMarker = (MovingMarker) fromCell.CellData;
+            MovingMarker initialMarker = (MovingMarker) initialCell.CellData;
 
-            if (initialMarker.Direction == PlateMoveDirection.Left ||
-                initialMarker.Direction == PlateMoveDirection.Right)
+            if (IsHorizontalRail(initialMarker))
             {
-                if (initialMarker.Direction == PlateMoveDirection.Left)
+                Cell leftCell = ChooseCellByDirection(initialCell, finishCell, PlateMoveDirection.Right);
+                Cell rightCell = ChooseCellByDirection(initialCell, finishCell, PlateMoveDirection.Left);
+                Cell currentCell = _spire.GetLeftFrom(rightCell);
+
+                do
                 {
-                    Cell currentCell = _spire.GetLeft(fromCell);
+                    _gameFactory.CreateHorizontalRail(currentCell.Container);
+                    currentCell = _spire.GetLeftFrom(currentCell);
+                } while (currentCell.Id != leftCell.Id);
 
-                    do
-                    {
-                        _gameFactory.CreateHorizontalRail(currentCell.Container);
-                        currentCell = _spire.GetLeft(currentCell);
+                _gameFactory.CreateHorizontalRailLock(leftCell.Container).transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
+                _gameFactory.CreateHorizontalRailLock(rightCell.Container);
+            }
+            else
+            {
+                Cell upCell = ChooseCellByDirection(initialCell, finishCell, PlateMoveDirection.Down);
+                Cell downCell = ChooseCellByDirection(initialCell, finishCell, PlateMoveDirection.Up);
+                Cell currentCell = _spire.GetUpFrom(downCell);
 
-                        Debug.Log($"currentCell: {currentCell.Id}, toCell: {toCell.Id}");
-                    } while (currentCell.Id != toCell.Id);
-                }
-
-                if (initialMarker.Direction == PlateMoveDirection.Right)
+                do
                 {
-                    Cell currentCell = _spire.GetRight(fromCell);
+                    _gameFactory.CreateVerticalRail(currentCell.Container);
+                    currentCell = _spire.GetUpFrom(currentCell);
+                } while (currentCell.Id != upCell.Id);
 
-                    do
-                    {
-                        _gameFactory.CreateHorizontalRail(currentCell.Container);
-                        currentCell = _spire.GetRight(currentCell);
-
-                        Debug.Log($"currentCell: {currentCell.Id}, toCell: {toCell.Id}");
-                    } while (currentCell.Id != toCell.Id);
-                }
+                _gameFactory.CreateVerticalRailLock(upCell.Container);
+                _gameFactory.CreateVerticalRailLock(downCell.Container).transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
             }
         }
+
+        private bool IsHorizontalRail(MovingMarker initialMarker) =>
+            initialMarker.Direction is PlateMoveDirection.Left or PlateMoveDirection.Right;
+
+        private Cell ChooseCellByDirection(Cell initialCell, Cell finishCell, PlateMoveDirection plateMoveDirection) =>
+            ((MovingMarker) initialCell.CellData).Direction == plateMoveDirection ? initialCell : finishCell;
 
         private void ApplyDestinationMarkers(Cell fromCell, Cell toCell)
         {
@@ -95,7 +102,7 @@ namespace CodeBase.LevelSpecification.Constructor
 
         private IPlateMover ChooseMoverComponent(LiftPlate liftPlate, PlateMoveDirection direction)
         {
-            if (direction == PlateMoveDirection.Left || direction == PlateMoveDirection.Right)
+            if (direction is PlateMoveDirection.Left or PlateMoveDirection.Right)
             {
                 Object.Destroy(liftPlate.gameObject.GetComponent<PlateVerticalMover>());
                 return liftPlate.gameObject.GetComponent<PlateHorizontalMover>();

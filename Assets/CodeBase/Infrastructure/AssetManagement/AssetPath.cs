@@ -33,6 +33,10 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string AudioMixer = "Audio/MainMixer";
 
         public const string SpireSegment = "Prefabs/SpireSegment";
+
         public const string HorizontalRail = "Prefabs/HorizontalRail";
+        public const string VerticalRail = "Prefabs/VerticalRail";
+        public const string HorizontalRailLock = "Prefabs/HorizontalRailLock";
+        public const string VerticalRailLock = "Prefabs/VerticalRailLock";
     }
 }

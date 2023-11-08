@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CodeBase.EditorCells;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Items;
 using CodeBase.Services;
@@ -27,5 +26,8 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateVirtualMover();
         GameObject CreateSpireSegment(Vector3 at, Quaternion quaternion);
         GameObject CreateHorizontalRail(Transform container);
+        GameObject CreateVerticalRail(Transform container);
+        GameObject CreateHorizontalRailLock(Transform container);
+        GameObject CreateVerticalRailLock(Transform container);
     }
 }

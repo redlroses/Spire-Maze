@@ -35,27 +35,39 @@ namespace CodeBase.Infrastructure.AssetManagement
             throw new NullReferenceException($"There is no prefab for cell type: {typeof(TCell)}");
         }
 
+        public GameObject Instantiate(string path, Vector3 at, Transform inside)
+        {
+            GameObject prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, at, Quaternion.identity, inside);
+        }
+
+        public GameObject Instantiate(string path, Vector3 at, Quaternion rotation, Transform inside)
+        {
+            GameObject prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, at, rotation, inside);
+        }
+
         public GameObject Instantiate(string path, Vector3 at, Quaternion rotation)
         {
-            var prefab = Resources.Load<GameObject>(path);
+            GameObject prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, at, rotation);
         }
 
         public GameObject Instantiate(string path, Vector3 at)
         {
-            var prefab = Resources.Load<GameObject>(path);
+            GameObject prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, at, Quaternion.identity);
         }
 
         public GameObject Instantiate(string path, Transform inside)
         {
-            var prefab = Resources.Load<GameObject>(path);
+            GameObject prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, inside);
         }
 
         public GameObject Instantiate(string path)
         {
-            var prefab = Resources.Load<GameObject>(path);
+            GameObject prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab);
         }
 
@@ -79,10 +91,10 @@ namespace CodeBase.Infrastructure.AssetManagement
 
             _cellsPrefabs = Resources
                 .LoadAll<GameObject>(AssetPath.Cells)
-                .ToDictionary(x => Compare(x.name), x => x);
+                .ToDictionary(x => GetTypeByName(x.name), x => x);
         }
 
-        private Type Compare(string name)
+        private Type GetTypeByName(string name)
         {
             return name switch
             {
