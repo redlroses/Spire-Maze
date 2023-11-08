@@ -8,13 +8,13 @@ namespace CodeBase.Data
     public class LevelState
     {
         public int LevelId;
-        public List<EnemyState> EnemyStates;
+       // public List<EnemyState> EnemyStates;
         public List<IndexableState> Indexables;
 
         public LevelState(int levelId)
         {
             LevelId = levelId;
-            EnemyStates = new List<EnemyState>();
+         //   EnemyStates = new List<EnemyState>();
             Indexables = new List<IndexableState>();
         }
     }

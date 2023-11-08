@@ -19,7 +19,7 @@ namespace CodeBase.Logic.Сollectible
         protected virtual void OnLoadState(bool isActivated) { }
         protected virtual void OnCollected() { }
 
-        public void Construct(int id, IItem item)
+        public virtual void Construct(int id, IItem item)
         {
             Id = id;
             Item = item;

@@ -1,4 +1,5 @@
 ﻿using System;
+using AYellowpaper.SerializedCollections;
 using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Logic.Inventory;
@@ -14,6 +15,7 @@ namespace CodeBase.Logic.DoorEnvironment
     public class Door : ObserverTarget<InventoryObserver, HeroInventory>, ISavedProgress, IIndexable
     {
         [SerializeField] private DoorAnimator _animator;
+        [SerializeField] private SerializedDictionary<StorableType, GameObject> _marks;
 
         private StorableType _targetKeyColor;
 
@@ -25,6 +27,7 @@ namespace CodeBase.Logic.DoorEnvironment
         public void Construct(Colors doorColor, int id)
         {
             _targetKeyColor = doorColor.ToStorableType();
+            EnableMark();
             Id = id;
         }
 
@@ -66,6 +69,9 @@ namespace CodeBase.Logic.DoorEnvironment
                 Open();
             }
         }
+
+        private void EnableMark() => 
+            _marks[_targetKeyColor].SetActive(true);
 
         private void Open()
         {
