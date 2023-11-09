@@ -16,16 +16,18 @@ namespace CodeBase.Logic.Сollectible
 
         public event Action Collected = () => { };
 
+        protected virtual void OnConstruct(IItem item) { }
         protected virtual void OnLoadState(bool isActivated) { }
         protected virtual void OnCollected() { }
 
-        public virtual void Construct(int id, IItem item)
+        public void Construct(int id, IItem item)
         {
             Id = id;
             Item = item;
+            OnConstruct(item);
         }
 
-        public void Collect(bool isEmidiately = false)
+        public void Collect()
         {
             IsActivated = true;
             _trigger.enabled = false;

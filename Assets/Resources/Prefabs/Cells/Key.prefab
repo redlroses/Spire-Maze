@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4614905965591953052}
   - component: {fileID: -5485480087889464709}
   - component: {fileID: 7717549177156900939}
+  - component: {fileID: 2202962176934495495}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trigger: {fileID: 4614905965591953052}
-  _animator: {fileID: 7717549177156900939}
+  _colorSetter: {fileID: 7717549177156900939}
   _objects:
     _serializedList:
     - Key: 3
@@ -81,6 +82,14 @@ MonoBehaviour:
       Value: {fileID: 7776069660508482888}
     - Key: 4
       Value: {fileID: 4714785509526586251}
+  _colors:
+    _serializedList:
+    - Key: 3
+      Value: {r: 0.75, g: 0.2, b: 0.25, a: 1}
+    - Key: 2
+      Value: {r: 0.25, g: 0.75, b: 0.2, a: 1}
+    - Key: 4
+      Value: {r: 0.2, g: 0.25, b: 0.75, a: 1}
 --- !u!114 &7717549177156900939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,15 +104,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particleAura: {fileID: 7283551638840234339}
   _particleStar: {fileID: 7284199849626134481}
-  _colors:
-    _serializedList:
-    - Key: 3
-      Value: {r: 0.75, g: 0.2, b: 0.25, a: 1}
-    - Key: 2
-      Value: {r: 0.25, g: 0.75, b: 0.2, a: 1}
-    - Key: 4
-      Value: {r: 0.2, g: 0.25, b: 0.75, a: 1}
-  _speedRotate: 130
+--- !u!114 &2202962176934495495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191194980414273752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b0a36ae2b7473c997f594ba65ec33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floatingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 0
+    m_RotationOrder: 4
+  _floatingRange: 0.25
+  _floatingSpeed: 0.5
+  _rotationSpeed: 30
 --- !u!1001 &5597729838215528154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337,6 +376,30 @@ PrefabInstance:
     - target: {fileID: 4299952606933750, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198314808193956702, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198314808193956702, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198314808193956702, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199240645737875422, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

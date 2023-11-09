@@ -9,20 +9,20 @@ namespace CodeBase.UI.Elements
     {
         [SerializeField] protected SliderSetter _sliderSetter;
 
-        protected IParameter Parameter;
+        protected IPoints points;
 
         private void OnDestroy()
         {
-            if (Parameter is null)
+            if (points is null)
                 return;
 
-            Parameter.Changed -= OnChanged;
+            points.Changed -= OnChanged;
         }
 
-        public void Construct(IParameter parameter)
+        public void Construct(IPoints points)
         {
-            Parameter = parameter;
-            Parameter.Changed += OnChanged;
+            this.points = points;
+            this.points.Changed += OnChanged;
             OnChanged();
         }
 
@@ -30,6 +30,6 @@ namespace CodeBase.UI.Elements
             _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
 
         private float GetNormalizedBarValue() =>
-            Parameter.CurrentPoints / (float) Parameter.MaxPoints;
+            points.CurrentPoints / (float) points.MaxPoints;
     }
 }

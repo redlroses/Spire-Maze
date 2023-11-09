@@ -8,19 +8,20 @@ namespace CodeBase.Logic
     {
         [SerializeField] private ParticleSystem _particle;
 
-        private Action _callback;
+        private Action _callback = () => { };
 
         private void Awake()
         {
-            var main = _particle.main;
+            ParticleSystem.MainModule main = _particle.main;
             main.stopAction = ParticleSystemStopAction.Callback;
         }
 
-        public void SetCallback(Action action) => _callback = action;
+        public void SetCallback(Action action) =>
+            _callback = action;
 
-        void OnParticleSystemStopped()
+        private void OnParticleSystemStopped()
         {
-            _callback?.Invoke();
+            _callback.Invoke();
         }
     }
 }
