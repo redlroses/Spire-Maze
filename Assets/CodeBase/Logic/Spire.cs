@@ -26,28 +26,24 @@ using UnityEngine;
              throw new ArgumentOutOfRangeException(nameof(position));
          }
 
-         public Cell GetLeft(Cell from)
+         public Cell GetLeftFrom(Cell from)
          {
              int floor = from.Id / _level.Width;
              int floorOffset = _level.Width * floor;
-             int index = from.Id - floorOffset;
-             int leftIndex = (index - 1).ClampRound(0, _level.Width);
+             int indexOnFloor = from.Id - floorOffset;
+             int indexLeft = (indexOnFloor - 1).ClampRound(0, _level.Width);
 
-             Debug.Log($"Floor: {floor}, index: {index}, leftIndex: {leftIndex}");
-
-             return _level.GetCell(_level.Height - 1 - floor, leftIndex);
+             return _level.GetCell(_level.Height - floor - 1, indexLeft);
          }
 
-         public Cell GetRight(Cell from)
+         public Cell GetUpFrom(Cell from)
          {
              int floor = from.Id / _level.Width;
              int floorOffset = _level.Width * floor;
-             int index = from.Id - floorOffset;
-             int leftIndex = (index + 1).ClampRound(0, _level.Width);
+             int indexOnFloor = from.Id - floorOffset;
+             int indexUp = floor + 1;
 
-             Debug.Log($"Floor: {floor}, index: {index}, leftIndex: {leftIndex}");
-
-             return _level.GetCell(_level.Height - 1 - floor, leftIndex);
+             return _level.GetCell(_level.Height - indexUp - 1, indexOnFloor);
          }
 
          public Cell GetCellById(int id) =>

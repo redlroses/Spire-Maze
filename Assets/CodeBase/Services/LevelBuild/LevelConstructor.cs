@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
+using CodeBase.Logic;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Constants;
@@ -130,7 +131,7 @@ namespace CodeBase.Services.LevelBuild
 
         private void CombineAllMeshes(Transform spire)
         {
-            MeshCombinable[] meshCombinables = spire.GetComponentsInChildren<MeshCombinable>();
+            MeshCombineMarker[] meshCombinables = spire.GetComponentsInChildren<MeshCombineMarker>();
 
             CombineInstance[] combine = CombineInstances(meshCombinables);
             ApplyMesh(spire.gameObject, combine, true);
@@ -229,7 +230,7 @@ namespace CodeBase.Services.LevelBuild
             return combine;
         }
 
-        private CombineInstance[] CombineInstances(MeshCombinable[] meshCombinables)
+        private CombineInstance[] CombineInstances(MeshCombineMarker[] meshCombinables)
         {
             CombineInstance[] combine = new CombineInstance[meshCombinables.Length];
 
