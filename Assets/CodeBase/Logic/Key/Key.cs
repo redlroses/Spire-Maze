@@ -2,6 +2,7 @@
 using CodeBase.Logic.Items;
 using CodeBase.Logic.Сollectible;
 using CodeBase.StaticData.Storable;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.Logic.Key
@@ -18,7 +19,7 @@ namespace CodeBase.Logic.Key
         }
 
         protected override void OnCollected() =>
-            gameObject.SetActive(false);
+            gameObject.Disable();
 
         private void EnableKey(StorableType type)
         {

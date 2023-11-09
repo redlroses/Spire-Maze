@@ -7,6 +7,7 @@ using CodeBase.Logic.Observer;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.Logic.DoorEnvironment
@@ -15,11 +16,11 @@ namespace CodeBase.Logic.DoorEnvironment
     public class Door : ObserverTarget<InventoryObserver, HeroInventory>, ISavedProgress, IIndexable
     {
         [SerializeField] private DoorAnimator _animator;
-        [SerializeField] private SerializedDictionary<StorableType, GameObject> _marks;
+        [SerializeField] private SerializedDictionary<StorableType, GameObject> _keySigns;
 
         private StorableType _targetKeyColor;
 
-        public event Action Opened;
+        public event Action Opened = () => { };
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -27,8 +28,8 @@ namespace CodeBase.Logic.DoorEnvironment
         public void Construct(Colors doorColor, int id)
         {
             _targetKeyColor = doorColor.ToStorableType();
-            EnableMark();
             Id = id;
+            EnableSign();
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -65,13 +66,13 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             if (damagable.Inventory.TryUse(_targetKeyColor))
             {
-                Opened?.Invoke();
+                Opened.Invoke();
                 Open();
             }
         }
 
-        private void EnableMark() => 
-            _marks[_targetKeyColor].SetActive(true);
+        private void EnableSign() =>
+            _keySigns[_targetKeyColor].Enable();
 
         private void Open()
         {
