@@ -5,7 +5,7 @@ namespace CodeBase.Logic.Lift.PlateMove
 {
     public sealed class PlateVerticalMover : PlateMover<Vector3>, IPauseWatcher
     {
-        protected override void SetNewPosition(Vector3 from, Vector3 to, float delta) =>
+        protected override void SetNewPosition(Vector3 from, Vector3 to, float delta) => 
             RigidBody.position = Vector3.Lerp(from, to, delta);
 
         protected override float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to) =>

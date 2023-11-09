@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic.Lift.PlateMove;
+﻿using CodeBase.EditorCells;
+using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Observer;
 using UnityEngine;
 
@@ -11,13 +12,14 @@ namespace CodeBase.Logic.Lift
         [SerializeField] private LiftState _state;
         [SerializeField] private float _waitDelay;
         [SerializeField] private TimerOperator _timer;
+        [SerializeField] private LiftAnimator _liftAnimator;
 
         private IPlateMover _plateMover;
         private LiftDestinationMarker _currentMarker;
         private LiftDestinationMarker _destinationMarker;
         public LiftState State => _state;
 
-        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover)
+        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection direction)
         {
             _timer ??= Get<TimerOperator>();
             _currentMarker = initialMarker;
@@ -26,6 +28,7 @@ namespace CodeBase.Logic.Lift
             _destinationMarker.Call += OnCall;
             _plateMover = mover;
             _plateMover.MoveEnded += OnMoveEnded;
+            _liftAnimator.Construct(direction);
             _timer.SetUp(_waitDelay, Move);
         }
 
@@ -52,6 +55,8 @@ namespace CodeBase.Logic.Lift
                 return;
             }
 
+            _liftAnimator.SetRotateDirection();
+            _liftAnimator.StartAnimation();
             _plateMover.Move(_currentMarker, _destinationMarker);
             _state = LiftState.Moving;
             SwitchMarkers();
@@ -76,8 +81,11 @@ namespace CodeBase.Logic.Lift
             _timer.Pause();
         }
 
-        private void OnMoveEnded() =>
+        private void OnMoveEnded()
+        {
             _state = LiftState.Idle;
+            _liftAnimator.StopAnimation();
+        }
 
         private void SwitchMarkers()
         {

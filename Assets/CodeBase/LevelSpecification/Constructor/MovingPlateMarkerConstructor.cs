@@ -97,7 +97,7 @@ namespace CodeBase.LevelSpecification.Constructor
             PlateMoveDirection plateMoveDirection = ((MovingMarker) fromCell.CellData).Direction;
             IPlateMover mover = ChooseMoverComponent(liftPlate, plateMoveDirection);
 
-            liftPlate.Construct(initialMarker, destinationMarker, mover);
+            liftPlate.Construct(initialMarker, destinationMarker, mover, plateMoveDirection);
         }
 
         private IPlateMover ChooseMoverComponent(LiftPlate liftPlate, PlateMoveDirection direction)

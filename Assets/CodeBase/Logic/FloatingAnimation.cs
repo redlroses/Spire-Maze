@@ -1,5 +1,4 @@
-﻿using System;
-using NTC.Global.Cache;
+﻿using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Logic
