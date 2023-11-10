@@ -9,7 +9,6 @@ using CodeBase.Logic.Lift;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 using MovingPlate = CodeBase.LevelSpecification.Cells.MovingPlate;
 using Object = UnityEngine.Object;
 
@@ -59,7 +58,8 @@ namespace CodeBase.LevelSpecification.Constructor
                     currentCell = _spire.GetLeftFrom(currentCell);
                 } while (currentCell.Id != leftCell.Id);
 
-                _gameFactory.CreateHorizontalRailLock(leftCell.Container).transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
+                _gameFactory.CreateHorizontalRailLock(leftCell.Container)
+                    .transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
                 _gameFactory.CreateHorizontalRailLock(rightCell.Container);
             }
             else
@@ -75,7 +75,8 @@ namespace CodeBase.LevelSpecification.Constructor
                 } while (currentCell.Id != upCell.Id);
 
                 _gameFactory.CreateVerticalRailLock(upCell.Container);
-                _gameFactory.CreateVerticalRailLock(downCell.Container).transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
+                _gameFactory.CreateVerticalRailLock(downCell.Container)
+                    .transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
             }
         }
 
@@ -115,7 +116,7 @@ namespace CodeBase.LevelSpecification.Constructor
         private Cell FindPair(Cell movingPlateCell)
         {
             PlateMoveDirection plateMoveDirection = ((MovingMarker) movingPlateCell.CellData).Direction;
-            return plateMoveDirection == PlateMoveDirection.Left || plateMoveDirection == PlateMoveDirection.Right
+            return plateMoveDirection is PlateMoveDirection.Left or PlateMoveDirection.Right
                 ? FindHorizontalPair(movingPlateCell)
                 : FindVerticalPair(movingPlateCell);
         }

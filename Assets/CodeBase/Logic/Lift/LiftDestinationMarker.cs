@@ -8,7 +8,7 @@ namespace CodeBase.Logic.Lift
     [RequireComponent(typeof(PlateMovableObserver))]
     public class LiftDestinationMarker : ObserverTarget<PlateMovableObserver, IPlateMovable>
     {
-        public event Action<LiftDestinationMarker> Call;
+        public event Action<LiftDestinationMarker> Called = _ => { };
 
         public CellPosition Position { get; private set; }
 
@@ -19,7 +19,7 @@ namespace CodeBase.Logic.Lift
 
         protected override void OnTriggerObserverEntered(IPlateMovable damagable)
         {
-            Call?.Invoke(this);
+            Called.Invoke(this);
         }
     }
 }

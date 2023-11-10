@@ -19,47 +19,24 @@ namespace CodeBase.Logic.Lift
         private LiftDestinationMarker _destinationMarker;
         public LiftState State => _state;
 
-        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection direction)
+        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection initialDirection)
         {
-            _timer ??= Get<TimerOperator>();
+            _timer ??= GetComponent<TimerOperator>();
             _currentMarker = initialMarker;
             _destinationMarker = destinationMarker;
-            _currentMarker.Call += OnCall;
-            _destinationMarker.Call += OnCall;
+            _currentMarker.Called += OnCalled;
+            _destinationMarker.Called += OnCalled;
             _plateMover = mover;
             _plateMover.MoveEnded += OnMoveEnded;
-            _liftAnimator.Construct(direction);
+            _liftAnimator.Construct(initialDirection);
             _timer.SetUp(_waitDelay, Move);
-        }
-
-        private void OnCall(LiftDestinationMarker caller)
-        {
-            if (_currentMarker != caller)
-            {
-                Move();
-            }
         }
 
         private void OnDestroy()
         {
             _plateMover.MoveEnded -= OnMoveEnded;
-            _currentMarker.Call -= OnCall;
-            _destinationMarker.Call -= OnCall;
-        }
-
-        [ContextMenu("Move")]
-        public void Move()
-        {
-            if (_state == LiftState.Moving)
-            {
-                return;
-            }
-
-            _liftAnimator.SetRotateDirection();
-            _liftAnimator.StartAnimation();
-            _plateMover.Move(_currentMarker, _destinationMarker);
-            _state = LiftState.Moving;
-            SwitchMarkers();
+            _currentMarker.Called -= OnCalled;
+            _destinationMarker.Called -= OnCalled;
         }
 
         protected override void OnTriggerObserverEntered(IPlateMovable plateMovable)
@@ -81,6 +58,28 @@ namespace CodeBase.Logic.Lift
             _timer.Pause();
         }
 
+        [ContextMenu("Move")]
+        public void Move()
+        {
+            if (_state == LiftState.Moving)
+            {
+                return;
+            }
+
+            _liftAnimator.StartAnimation();
+            _plateMover.Move(_currentMarker, _destinationMarker);
+            _state = LiftState.Moving;
+            SwitchMarkers();
+        }
+
+        private void OnCalled(LiftDestinationMarker caller)
+        {
+            if (_currentMarker != caller)
+            {
+                Move();
+            }
+        }
+
         private void OnMoveEnded()
         {
             _state = LiftState.Idle;
@@ -89,9 +88,7 @@ namespace CodeBase.Logic.Lift
 
         private void SwitchMarkers()
         {
-            LiftDestinationMarker temp = _currentMarker;
-            _currentMarker = _destinationMarker;
-            _destinationMarker = temp;
+            (_currentMarker, _destinationMarker) = (_destinationMarker, _currentMarker);
         }
     }
 }

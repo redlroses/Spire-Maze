@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.EditorCells;
+﻿using CodeBase.EditorCells;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -12,13 +11,15 @@ namespace CodeBase.Logic.Lift
 
         public void Construct(PlateMoveDirection direction)
         {
-            SetStartDirectionGear(direction);
+            SetInitialGearDirection(direction);
         }
 
         public void StartAnimation()
         {
             _gearLeft.enabled = true;
             _gearRight.enabled = true;
+
+            InvertDirection();
         }
 
         public void StopAnimation()
@@ -27,13 +28,13 @@ namespace CodeBase.Logic.Lift
             _gearRight.enabled = false;
         }
 
-        public void SetRotateDirection()
+        private void InvertDirection()
         {
             _gearLeft.InvertRotationDirection();
             _gearRight.InvertRotationDirection();
         }
 
-        private void SetStartDirectionGear(PlateMoveDirection direction)
+        private void SetInitialGearDirection(PlateMoveDirection direction)
         {
             switch (direction)
             {

@@ -11,7 +11,7 @@ namespace CodeBase.Logic.Lift
         {
             transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
         }
-        
+
         public void InvertRotationDirection()
         {
             _rotationSpeed *= -1;
