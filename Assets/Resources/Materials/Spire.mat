@@ -221,10 +221,10 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _1st2nd_Shades_Feather: 0.555
+    - _1st2nd_Shades_Feather: 0.52
     - _1st_ShadeColor_Feather: 0.041
     - _1st_ShadeColor_Step: 0.388
-    - _2nd_ShadeColor_Feather: 0.555
+    - _2nd_ShadeColor_Feather: 0.52
     - _2nd_ShadeColor_Step: 0.789
     - _AORemapMax: 1
     - _AORemapMin: 0
@@ -315,7 +315,7 @@ Material:
     - _Farthest_Distance: 100
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
-    - _GI_Intensity: 0.5
+    - _GI_Intensity: 0.488
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -340,7 +340,7 @@ Material:
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _IsBaseMapAlphaAsClippingMask: 0
-    - _Is_BLD: 1
+    - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
     - _Is_BlendAddToMatCap: 1
@@ -381,8 +381,8 @@ Material:
     - _OUTLINE: 0
     - _ObjectSpaceUVMapping: 0
     - _OcclusionStrength: 1
-    - _Offset_X_Axis_BLD: -1
-    - _Offset_Y_Axis_BLD: 1
+    - _Offset_X_Axis_BLD: 0.19
+    - _Offset_Y_Axis_BLD: 0.24
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
@@ -477,7 +477,7 @@ Material:
     - _Tweak_MatcapMaskLevel: 0
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
-    - _Tweak_SystemShadowsLevel: -0.013
+    - _Tweak_SystemShadowsLevel: 0
     - _Tweak_transparency: 0
     - _TwinkleAmount: 0.8
     - _TwinkleEnabled: 0
@@ -486,7 +486,7 @@ Material:
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVSec: 0
-    - _Unlit_Intensity: 1
+    - _Unlit_Intensity: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _Use_1stAs2nd: 1
