@@ -25,8 +25,8 @@ namespace CodeBase.Logic.Lift.PlateMove
         private Vector3 _prevRotation;
         private bool _isEnabled;
 
-        public event Action<Vector3, Vector3> PositionUpdated;
-        public event Action MoveEnded;
+        public event Action<Vector3, Vector3> PositionUpdated = (_, _) => { };
+        public event Action MoveEnded = () => { };
 
         private Vector3 DeltaPosition => _rigidBody.position - _prevPosition;
         private Vector3 DeltaRotation => _rigidBody.rotation.eulerAngles - _prevRotation;
@@ -50,7 +50,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         protected override void FixedRun()
         {
             Translate();
-            PositionUpdated?.Invoke(DeltaPosition, DeltaRotation);
+            PositionUpdated.Invoke(DeltaPosition, DeltaRotation);
             _prevPosition = _rigidBody.position;
             _prevRotation = _rigidBody.rotation.eulerAngles;
         }
@@ -94,7 +94,7 @@ namespace CodeBase.Logic.Lift.PlateMove
             if (_delta >= FinalTranslateValue)
             {
                 enabled = false;
-                MoveEnded?.Invoke();
+                MoveEnded.Invoke();
             }
         }
     }
