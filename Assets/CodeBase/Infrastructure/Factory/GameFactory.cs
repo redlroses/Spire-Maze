@@ -45,7 +45,8 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService, ICameraOperatorService cameraOperator)
+            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService,
+            ICameraOperatorService cameraOperator)
         {
             _assets = assets;
             _randomService = randomService;
@@ -87,6 +88,14 @@ namespace CodeBase.Infrastructure.Factory
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);
             RegisterPauseWatchers(cell);
+            RandomModels randomizer = cell.GetComponent<RandomModels>();
+            int seed = _randomService.Range(0, 5555555);
+
+            if (randomizer != null)
+            {
+                randomizer.Initialize(_randomService, seed);
+            }
+
             return cell;
         }
 
