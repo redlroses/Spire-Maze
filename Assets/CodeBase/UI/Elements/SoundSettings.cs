@@ -24,9 +24,6 @@ namespace CodeBase.UI.Elements
             _sfxSlider.value = soundService.SfxVolume * _sfxSlider.maxValue;
             _musicSlider.value = soundService.MusicVolume * _sfxSlider.maxValue;
 
-            Debug.Log(soundService.MusicVolume);
-            Debug.Log(soundService.SfxVolume);
-
             Subscribe();
         }
 
