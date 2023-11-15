@@ -19,7 +19,7 @@ namespace CodeBase.Logic.Checkpoint
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
-        public event Action Activated = () => { };
+        public event Action<bool> Activated = _ => { };
 
         public void Construct(int id, ISaveLoadService saveLoadService)
         {
@@ -38,7 +38,7 @@ namespace CodeBase.Logic.Checkpoint
 
             IsActivated = cellState.IsActivated;
             SetColliderState(IsActivated);
-            Activated.Invoke();
+            Activated.Invoke(false);
         }
 
         public void UpdateProgress(PlayerProgress progress)
@@ -60,7 +60,7 @@ namespace CodeBase.Logic.Checkpoint
         {
             IsActivated = true;
             SetColliderState(true);
-            Activated.Invoke();
+            Activated.Invoke(true);
             _saveLoadService.SaveProgress();
         }
 

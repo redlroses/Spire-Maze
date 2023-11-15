@@ -1,9 +1,11 @@
+using System;
 using CodeBase.Data;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools.Extension;
 using NTC.Global.System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Logic.Trap
 {
@@ -17,10 +19,9 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private float _rayDistance;
         [SerializeField] private LayerMask _ground;
         [SerializeField] private LayerMask _wall;
-        [SerializeField] private ParticleSystem _destroyEffect;
-        [SerializeField] private ParticleStopCallback _stopEffectCallback;
+        [SerializeField] private ParticleStopStateObserver _stopEffectStateObserver;
         [SerializeField] private TimerOperator _timer;
-        [SerializeField] private float _timerDelay;
+        [SerializeField] private float _fragmentsLifetime = 1f;
 
         private Transform _selfTransform;
         private MoveDirection _moveDirection;
@@ -31,9 +32,11 @@ namespace CodeBase.Logic.Trap
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
+        public event Action Destroyed = () => { };
+
         protected override void FixedRun()
         {
-            TryDestroy();
+            TryCollapse();
             Rotate();
         }
 
@@ -43,8 +46,8 @@ namespace CodeBase.Logic.Trap
             _mover.Move(_moveDirection);
             _mover.Enable();
             _rotator.Enable();
-            _timer.SetUp(_timerDelay, OnTurnOffFragments);
-            _stopEffectCallback.SetCallback(OnDestroyGameObject);
+            _timer.SetUp(_fragmentsLifetime, TurnOffFragments);
+            _stopEffectStateObserver.SetCallback(DestroyRock);
             IsActivated = true;
         }
 
@@ -57,7 +60,6 @@ namespace CodeBase.Logic.Trap
             _mover.enabled = false;
             _selfTransform = transform;
             _radius = _rigidbody.position.RemoveY().magnitude;
-            Debug.Log(_radius + gameObject.name);
         }
 
         public void SetMoveDirection(bool isDirectionToRight)
@@ -81,7 +83,7 @@ namespace CodeBase.Logic.Trap
 
             if (cellState.IsActivated)
             {
-                OnDestroyGameObject();
+                DestroyRock();
             }
         }
 
@@ -109,7 +111,7 @@ namespace CodeBase.Logic.Trap
             _selfTransform.parent.rotation = lookRotation;
         }
 
-        private void TryDestroy()
+        private void TryCollapse()
         {
             if (IsActivated == false)
                 return;
@@ -122,7 +124,8 @@ namespace CodeBase.Logic.Trap
 
             if (isWallCollision || isGroundCollision && _isNotOnPlate)
             {
-                Destroy();
+                Destroyed.Invoke();
+                Collapse();
             }
 
             _isNotOnPlate = !isGroundCollision;
@@ -131,11 +134,10 @@ namespace CodeBase.Logic.Trap
         private bool CheckCollisionObstacle(Vector3 direction, LayerMask obstacle)
         {
             Ray ray = new Ray(_selfTransform.position, direction);
-            Debug.DrawRay(ray.origin, ray.direction * _rayDistance, Color.blue);
             return Physics.Raycast(ray, _rayDistance, obstacle);
         }
 
-        private void Destroy()
+        private void Collapse()
         {
             _rigidbody.isKinematic = true;
             _mover.Disable();
@@ -149,11 +151,10 @@ namespace CodeBase.Logic.Trap
 
             _timer.Restart();
             _timer.Play();
-            _destroyEffect.Play();
             IsActivated = true;
         }
 
-        private void OnTurnOffFragments()
+        private void TurnOffFragments()
         {
             for (var i = 0; i < _fragments.Length; i++)
             {
@@ -161,7 +162,7 @@ namespace CodeBase.Logic.Trap
             }
         }
 
-        private void OnDestroyGameObject() =>
-            Object.Destroy(gameObject);
+        private void DestroyRock() =>
+            Destroy(gameObject);
     }
 }

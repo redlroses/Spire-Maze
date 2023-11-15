@@ -19,9 +19,13 @@ namespace CodeBase.Sound
             _savepoint.Activated -= OnActivated;
         }
 
-        private void OnActivated()
+        private void OnActivated(bool isTriggerActivation)
         {
-            PlayOneShot(_activationClip);
+            if (isTriggerActivation)
+            {
+                PlayOneShot(_activationClip);
+            }
+
             PlayOneShot(_fireIgnitionClip);
         }
     }
