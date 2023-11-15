@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.SaveLoad;
-using Savepoint = CodeBase.Logic.Savepoint;
+using Savepoint = CodeBase.Logic.Checkpoint.Savepoint;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
