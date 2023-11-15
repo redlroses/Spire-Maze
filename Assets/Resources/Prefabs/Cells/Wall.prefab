@@ -54,16 +54,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0640264dd8aa43fda91db8c79f036f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _environmentDensity: 0.8
-  _models:
-  - {fileID: 7854543807755461959}
-  - {fileID: 6544068486901007088}
-  - {fileID: 7940294092119910408}
-  - {fileID: 4465755806579280649}
-  - {fileID: 8658751794112896362}
-  - {fileID: 8957783798958383388}
-  - {fileID: 8884590689654618205}
-  - {fileID: 1754908957132026550}
+  _modelChances:
+    _serializedList:
+    - Key: {fileID: 7854543807755461959}
+      Value: 0.5
+    - Key: {fileID: 7940294092119910408}
+      Value: 0.5
+    - Key: {fileID: 6544068486901007088}
+      Value: 0.5
+    - Key: {fileID: 4465755806579280649}
+      Value: 0.5
+    - Key: {fileID: 8658751794112896362}
+      Value: 0.5
+    - Key: {fileID: 8957783798958383388}
+      Value: 0.5
+    - Key: {fileID: 8884590689654618205}
+      Value: 0.5
+    - Key: {fileID: 1754908957132026550}
+      Value: 0.5
 --- !u!1 &8314375480930511569
 GameObject:
   m_ObjectHideFlags: 0

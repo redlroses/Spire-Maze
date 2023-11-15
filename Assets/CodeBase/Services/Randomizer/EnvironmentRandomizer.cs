@@ -1,13 +1,16 @@
-﻿using NTC.Global.Cache;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AYellowpaper.SerializedCollections;
+using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.Services.Randomizer
 {
     public class EnvironmentRandomizer : MonoCache
     {
-        [SerializeField] [Range(0f, 1f)] private float _environmentDensity;
-        [SerializeField] private GameObject[] _models;
+        [SerializeField] private SerializedDictionary<GameObject, float> _modelChances;
 
+        
         private IRandomService _randomService;
 
         public void Construct(IRandomService randomService)
@@ -18,10 +21,12 @@ namespace CodeBase.Services.Randomizer
 
         public void EnableRandom()
         {
-            for (int i = 0; i < _models.Length; i++)
+            KeyValuePair<GameObject, float>[] pairs = _modelChances.ToArray();
+
+            for (int i = 0; i < pairs.Length; i++)
             {
-                bool isPass = _randomService.TryPass(_environmentDensity);
-                _models[i].SetActive(isPass);
+                bool isPass = _randomService.TryPass(pairs[i].Value);
+                pairs[i].Key.SetActive(isPass);
             }
         }
     }
