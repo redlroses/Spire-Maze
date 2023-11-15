@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 0
+  m_ActiveColorSpace: 1
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 0
@@ -738,20 +738,20 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: TextMeshPro
-    EmbeddedLinux: TextMeshPro
-    GameCoreXboxOne: TextMeshPro
-    Nintendo Switch: TextMeshPro
-    PS4: TextMeshPro
-    PS5: TextMeshPro
-    QNX: TextMeshPro
-    Stadia: TextMeshPro
-    Standalone: TextMeshPro
-    VisionOS: TextMeshPro
-    WebGL: TextMeshPro;YANDEX_GAMES
-    XboxOne: TextMeshPro
+    Android: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    EmbeddedLinux: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    GameCoreXboxOne: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    Nintendo Switch: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    PS4: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    PS5: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    QNX: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    Stadia: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    Standalone: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    VisionOS: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
+    WebGL: TextMeshPro;YANDEX_GAMES;UNITY_POST_PROCESSING_STACK_V2
+    XboxOne: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
     iPhone: TextMeshPro
-    tvOS: TextMeshPro
+    tvOS: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
   additionalCompilerArguments:
     WebGL: []
   platformArchitecture: {}
@@ -858,7 +858,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
