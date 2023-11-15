@@ -21,6 +21,7 @@ using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
@@ -81,7 +82,11 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Hide();
             _levelBuilder.Clear();
-            _adService.ShowInterstitialAd();
+
+            if (string.Equals(_loadPayload.SceneName, LevelNames.Initial) == false)
+            {
+                _adService.ShowInterstitialAd();
+            }
         }
 
         private void OnLoaded()
