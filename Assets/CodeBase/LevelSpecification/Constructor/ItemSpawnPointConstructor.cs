@@ -19,7 +19,7 @@ namespace CodeBase.LevelSpecification.Constructor
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
                 ItemSpawnPoint itemData = (ItemSpawnPoint) cell.CellData;
                 Collectible collectible = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Collectible>();

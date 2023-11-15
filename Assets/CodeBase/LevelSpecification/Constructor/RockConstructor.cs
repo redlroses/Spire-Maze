@@ -9,7 +9,7 @@ namespace CodeBase.LevelSpecification.Constructor
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
             where TCell : Cell
         {
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
                 EditorCells.Rock rockData = (EditorCells.Rock) cell.CellData;
                 Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Rock>();

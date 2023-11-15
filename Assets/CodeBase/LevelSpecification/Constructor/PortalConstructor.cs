@@ -3,6 +3,7 @@ using System.Linq;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic.Portal;
+using Portal = CodeBase.EditorCells.Portal;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -11,7 +12,7 @@ namespace CodeBase.LevelSpecification.Constructor
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
             where TCell : Cell
         {
-            var portals = new List<Cell>(cells);
+            List<Cell> portals = new List<Cell>(cells);
 
             foreach (var cell in cells)
             {
@@ -20,11 +21,11 @@ namespace CodeBase.LevelSpecification.Constructor
 
             while (portals.Count > 0)
             {
-                var currentPortal = portals[0];
-                var currentPortalData = (EditorCells.Portal) currentPortal.CellData;
-                var linkedPortal = FindLinked(portals, currentPortalData);
-                var currentPortalGate = currentPortal.Container.GetComponentInChildren<PortalGate>();
-                var linkedPortalGate = linkedPortal.Container.GetComponentInChildren<PortalGate>();
+                Cell currentPortal = portals[0];
+                Portal currentPortalData = (Portal) currentPortal.CellData;
+                Cell linkedPortal = FindLinked(portals, currentPortalData);
+                PortalGate currentPortalGate = currentPortal.Container.GetComponentInChildren<PortalGate>();
+                PortalGate linkedPortalGate = linkedPortal.Container.GetComponentInChildren<PortalGate>();
                 currentPortalGate.Construct(currentPortal.Id, linkedPortalGate);
                 linkedPortalGate.Construct(linkedPortal.Id, currentPortalGate);
                 portals.Remove(currentPortal);
@@ -32,11 +33,11 @@ namespace CodeBase.LevelSpecification.Constructor
             }
         }
 
-        private Cell FindLinked(IEnumerable<Cell> portals, EditorCells.Portal currentPortalData)
+        private Cell FindLinked(IEnumerable<Cell> portals, Portal currentPortalData)
         {
             return portals.First(portal =>
-                ((EditorCells.Portal) portal.CellData).Key == currentPortalData.Key &&
-                currentPortalData != (EditorCells.Portal) portal.CellData);
+                ((Portal) portal.CellData).Key == currentPortalData.Key &&
+                currentPortalData != (Portal) portal.CellData);
         }
     }
 }

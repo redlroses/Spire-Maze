@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
+using FireTrap = CodeBase.Logic.Trap.FireTrap;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -8,10 +9,10 @@ namespace CodeBase.LevelSpecification.Constructor
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
             where TCell : Cell
         {
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
-                var fireTrap = gameFactory.CreateCell<TCell>(cell.Container)
-                    .GetComponentInChildren<Logic.Trap.FireTrap>();
+                FireTrap fireTrap = gameFactory.CreateCell<TCell>(cell.Container)
+                    .GetComponentInChildren<FireTrap>();
                 fireTrap.Construct(fireTrap.TrapActivator);
             }
         }

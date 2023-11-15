@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services.Randomizer;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using Door = CodeBase.LevelSpecification.Cells.Door;
@@ -25,13 +26,13 @@ namespace CodeBase.LevelSpecification.Constructor
     {
         private readonly Dictionary<Type, ICellConstructor> _constructors;
 
-        public CellConstructor(GameStateMachine stateMachine, ISaveLoadService saveLoadService, IStaticDataService staticDataService)
+        public CellConstructor(GameStateMachine stateMachine, ISaveLoadService saveLoadService, IStaticDataService staticDataService, IRandomService randomService)
         {
             _constructors = new Dictionary<Type, ICellConstructor>
             {
-                [typeof(Plate)] = new PlateConstructor(),
-                [typeof(Wall)] = new WallConstructor(),
-                [typeof(Wall2)] = new WallConstructor(),
+                [typeof(Plate)] = new PlateConstructor(randomService),
+                [typeof(Wall)] = new WallConstructor(randomService),
+                [typeof(Wall2)] = new WallConstructor(randomService),
                 [typeof(Key)] = new KeyConstructor(staticDataService),
                 [typeof(Door)] = new DoorConstructor(),
                 [typeof(MovingPlateMarker)] = new MovingPlateMarkerConstructor(),

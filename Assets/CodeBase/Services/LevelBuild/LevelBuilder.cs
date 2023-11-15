@@ -44,7 +44,7 @@ namespace CodeBase.Services.LevelBuild
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
             _randomService = randomService;
-            _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService);
+            _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
         }
 
         public Level Build(LevelStaticData levelStaticData)

@@ -7,6 +7,7 @@ using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.LevelSpecification.Constructor;
 using CodeBase.Logic;
+using CodeBase.Services.Randomizer;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Constants;
@@ -41,9 +42,9 @@ namespace CodeBase.Services.LevelBuild
 
         public LevelConstructor(IGameFactory gameFactory,
             IStaticDataService staticData,
-            GameStateMachine stateMachine, ISaveLoadService saveLoadService)
+            GameStateMachine stateMachine, ISaveLoadService saveLoadService, IRandomService randomService)
         {
-            _cellConstructor = new CellConstructor(stateMachine, saveLoadService, staticData);
+            _cellConstructor = new CellConstructor(stateMachine, saveLoadService, staticData, randomService);
             _gameFactory = gameFactory;
         }
 

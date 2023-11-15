@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.SaveLoad;
+using Savepoint = CodeBase.Logic.Savepoint;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -15,9 +16,9 @@ namespace CodeBase.LevelSpecification.Constructor
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
-                var savepoint = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.Savepoint>();
+                Savepoint savepoint = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Savepoint>();
                 savepoint.Construct(cell.Id, _saveLoadService);
             }
         }

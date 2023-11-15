@@ -1,5 +1,4 @@
-﻿using System;
-using Random = UnityEngine.Random;
+﻿using Random = UnityEngine.Random;
 
 namespace CodeBase.Services.Randomizer
 {
@@ -11,10 +10,13 @@ namespace CodeBase.Services.Randomizer
         public float Range(float min, float max) =>
             Random.Range(min, max);
 
-        public int RangeWithSeeding(int min, int max, int seed)
+        public int RangeWithSeed(int min, int max, int seed)
         {
             Random.InitState(seed);
             return Random.Range(min, max);
         }
+
+        public bool TryPass(float chance) =>
+            Random.value <= chance;
     }
 }

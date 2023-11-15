@@ -23,8 +23,6 @@ namespace CodeBase.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory, IHeroLocator
     {
-        private const int MinValueForRandomize = 0;
-        private const int MaxValueForRandomize = 5555555;
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
@@ -90,14 +88,6 @@ namespace CodeBase.Infrastructure.Factory
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);
             RegisterPauseWatchers(cell);
-            
-            RandomModels randomizer = cell.GetComponent<RandomModels>();
-            int seed = _randomService.Range(MinValueForRandomize, MaxValueForRandomize);
-
-            if (randomizer != null)
-            {
-                randomizer.Initialize(_randomService, seed);
-            }
 
             return cell;
         }

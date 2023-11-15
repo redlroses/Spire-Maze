@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
+using Door = CodeBase.EditorCells.Door;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -8,10 +9,10 @@ namespace CodeBase.LevelSpecification.Constructor
     {
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
-                var doorData = (EditorCells.Door) cell.CellData;
-                var door = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
+                Door doorData = (Door) cell.CellData;
+                Logic.DoorEnvironment.Door door = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Logic.DoorEnvironment.Door>();
                 door.Construct(doorData.Color, cell.Id);
             }
         }

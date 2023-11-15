@@ -4,6 +4,7 @@
   {
     int Range(int minValue, int maxValue);
     float Range(float minValue, float maxValue);
-    int RangeWithSeeding(int min, int max, int seed);
+    int RangeWithSeed(int min, int max, int seed);
+    bool TryPass(float chance);
   }
 }
