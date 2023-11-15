@@ -54,14 +54,14 @@ namespace CodeBase.Services.Ranked
         private void UseEditorLeaderboard()
         {
             Debug.Log(nameof(UseEditorLeaderboard));
-            _leaderboard = new EditorLeaderboard(_staticData.ForLeaderboard(EditorName));
+            _leaderboard = new EditorLeaderboard(_staticData.GetForLeaderboard(EditorName));
         }
 
         [Conditional("YANDEX_GAMES")]
         private void UseYandexLeaderboard()
         {
             Debug.Log(nameof(UseYandexLeaderboard));
-            _leaderboard = new YandexLeaderboard(_staticData.ForLeaderboard(YandexName), _staticData);
+            _leaderboard = new YandexLeaderboard(_staticData.GetForLeaderboard(YandexName), _staticData);
         }
     }
 }

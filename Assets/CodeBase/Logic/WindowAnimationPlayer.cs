@@ -2,7 +2,7 @@
 using TheraBytes.BetterUi;
 using UnityEngine;
 
-namespace CodeBase
+namespace CodeBase.Logic
 {
     public class WindowAnimationPlayer : MonoBehaviour
     {

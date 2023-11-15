@@ -124,7 +124,7 @@ namespace CodeBase.UI.Services.Factory
 
         private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase
         {
-            WindowConfig config = _staticData.ForWindow(windowId);
+            WindowConfig config = _staticData.GetForWindow(windowId);
             TWindow window = Object.Instantiate(config.Template, _uiRoot) as TWindow;
             return window;
         }

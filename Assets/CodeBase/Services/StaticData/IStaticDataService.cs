@@ -9,14 +9,15 @@ namespace CodeBase.Services.StaticData
   public interface IStaticDataService : IService
   {
     void Load();
-    LevelStaticData ForLevel(int levelId);
-    HealthStaticData HealthForEntity(string entityKey);
-    StaminaStaticData StaminaForEntity(string entityKey);
-    StorableStaticData ForStorable(StorableType storableType);
-    LeaderboardStaticData ForLeaderboard(string name);
-    WindowConfig ForWindow(WindowId windowId);
-    ScoreConfig ScoreForLevel(int levelId);
-    Sprite SpriteByLang(string lang);
+    LevelStaticData GetForLevel(int levelId);
+    HealthStaticData GetHealthForEntity(string entityKey);
+    StaminaStaticData GetStaminaForEntity(string entityKey);
+    StorableStaticData GetForStorable(StorableType storableType);
+    LeaderboardStaticData GetForLeaderboard(string name);
+    WindowConfig GetForWindow(WindowId windowId);
+    ScoreConfig GetScoreForLevel(int levelId);
+    Sprite GetSpriteByLang(string lang);
     Sprite GetDefaultAvatar();
+    CameraConfig GetCameraConfigByOrientation(string orientation);
   }
 }

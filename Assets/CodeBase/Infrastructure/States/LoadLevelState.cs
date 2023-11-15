@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
+using CodeBase.Logic.Cameras;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
@@ -165,7 +166,7 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
 
         private void BuildLevel() =>
-            _levelBuilder.Build(_staticData.ForLevel(_loadPayload.LevelId));
+            _levelBuilder.Build(_staticData.GetForLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>
             _levelBuilder.Construct();
@@ -177,7 +178,7 @@ namespace CodeBase.Infrastructure.States
             hero.GetComponent<Hero>();
             hero.GetComponent<Hero>().Construct(_playerInputService);
             hero.GetComponent<HeroAliveObserver>().Construct(_stateMachine);
-            hero.GetComponentInChildren<Stamina>().Construct(_staticData.StaminaForEntity(PlayerKey));
+            hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaForEntity(PlayerKey));
             return hero;
         }
 
@@ -196,6 +197,7 @@ namespace CodeBase.Infrastructure.States
             if (Camera.main != null)
             {
                 CameraFollower cameraFollower = Camera.main.GetComponent<CameraFollower>();
+                cameraFollower.Construct(_staticData);
                 _cameraOperatorService.RegisterCamera(cameraFollower);
                 _cameraOperatorService.SetAsDefault(hero.transform);
                 _cameraOperatorService.FocusOnDefault();
@@ -219,8 +221,8 @@ namespace CodeBase.Infrastructure.States
             {
                 LevelState = new LevelState(_loadPayload.LevelId),
                 LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
-                HeroHealthState = new HealthState(_staticData.HealthForEntity(PlayerKey).MaxHealth),
-                HeroStaminaState = new StaminaState(_staticData.StaminaForEntity(PlayerKey).MaxStamina),
+                HeroHealthState = new HealthState(_staticData.GetHealthForEntity(PlayerKey).MaxHealth),
+                HeroStaminaState = new StaminaState(_staticData.GetStaminaForEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
                 LevelAccumulationData = new LevelAccumulationData()
             };
@@ -229,9 +231,9 @@ namespace CodeBase.Infrastructure.States
         }
 
         private Vector3Data GetInitialPosition() =>
-            _staticData.ForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData();
+            _staticData.GetForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData();
 
         private Vector3Data GetFinishPosition() =>
-            _staticData.ForLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
+            _staticData.GetForLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
     }
 }

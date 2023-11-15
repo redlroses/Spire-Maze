@@ -32,7 +32,7 @@ namespace CodeBase.Services.Score
         public int Calculate(bool isLose)
         {
             LevelAccumulationData levelAccumulationData = Progress.WorldData.LevelAccumulationData;
-            ScoreConfig scoreConfig = _staticData.ScoreForLevel(_currentLevelId);
+            ScoreConfig scoreConfig = _staticData.GetScoreForLevel(_currentLevelId);
 
             if (isLose)
             {

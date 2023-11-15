@@ -20,6 +20,7 @@ namespace CodeBase.Services.StaticData
         private const string ScoreConfigPath = "StaticData/ScoreConfig";
         private const string FlagsConfigPath = "StaticData/FlagsConfig";
         private const string DefaultAvatarPath = "StaticData/DefaultAvatar";
+        private const string CameraConfigsPath = "StaticData/CameraConfigs";
 
         private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -28,6 +29,7 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
         private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<int, ScoreConfig> _scoreConfigs;
+        private Dictionary<string, CameraConfig> _cameraConfigs;
 
         private FlagsConfig _flagsConfig;
 
@@ -39,6 +41,8 @@ namespace CodeBase.Services.StaticData
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
             _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.name);
             _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
+            _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
+            _cameraConfigs = LoadFor<CameraConfig, string>(CameraConfigsPath, x => x.Orientation.ToString());
             _windows = Resources
                 .Load<WindowStaticData>(WindowPath)
                 .Configs
@@ -47,34 +51,37 @@ namespace CodeBase.Services.StaticData
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
         }
 
-        public LevelStaticData ForLevel(int levelId) =>
+        public LevelStaticData GetForLevel(int levelId) =>
             GetDataFor(levelId, _levels);
 
-        public HealthStaticData HealthForEntity(string entityKey) =>
+        public HealthStaticData GetHealthForEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
 
-        public StaminaStaticData StaminaForEntity(string entityKey) =>
+        public StaminaStaticData GetStaminaForEntity(string entityKey) =>
             GetDataFor(entityKey, _staminas);
 
-        public StorableStaticData ForStorable(StorableType storableType) =>
+        public StorableStaticData GetForStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
 
-        public LeaderboardStaticData ForLeaderboard(string name) =>
+        public LeaderboardStaticData GetForLeaderboard(string name) =>
             GetDataFor(name, _leaderboards);
 
-        public WindowConfig ForWindow(WindowId windowId) =>
+        public WindowConfig GetForWindow(WindowId windowId) =>
             GetDataFor(windowId, _windows);
 
-        public ScoreConfig ScoreForLevel(int levelId) =>
+        public ScoreConfig GetScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);
 
-        public Sprite SpriteByLang(string lang) =>
+        public Sprite GetSpriteByLang(string lang) =>
             _flagsConfig.Flags.TryGetValue(lang, out Sprite flag)
                 ? flag
                 : _flagsConfig.DefaultFlag;
 
         public Sprite GetDefaultAvatar() =>
             Resources.Load<Sprite>(DefaultAvatarPath);
+
+        public CameraConfig GetCameraConfigByOrientation(string orientation) =>
+            _cameraConfigs[orientation];
 
         private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

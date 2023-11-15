@@ -1,4 +1,4 @@
-﻿using CodeBase.Logic;
+﻿using CodeBase.Logic.Cameras;
 using UnityEngine;
 
 namespace CodeBase.Services.Cameras

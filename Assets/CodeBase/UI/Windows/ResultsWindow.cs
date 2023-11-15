@@ -1,6 +1,7 @@
 ﻿using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
+using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Sound;
 using CodeBase.Tools;

@@ -29,9 +29,8 @@ namespace TheraBytes.BetterUi
 
         public event Action<int> StateChanged = _ => { };
 
-        protected override void OnValidate()
+        protected void OnValidate()
         {
-            base.OnValidate();
             _topLayout ??= GetComponent<Canvas>();
         }
 

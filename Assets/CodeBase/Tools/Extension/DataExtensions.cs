@@ -51,7 +51,7 @@ namespace CodeBase.Tools.Extension
 
             foreach (ItemData itemData in inventoryData.ItemDatas)
             {
-                var item = gameFactory.CreateItem(staticData.ForStorable((StorableType) itemData.StorableType));
+                var item = gameFactory.CreateItem(staticData.GetForStorable((StorableType) itemData.StorableType));
                 itemDatas.Add(new InventoryCell(item, itemData.Count));
             }
 

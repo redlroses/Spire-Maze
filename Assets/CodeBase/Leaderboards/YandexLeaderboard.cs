@@ -169,7 +169,7 @@ namespace CodeBase.Leaderboards
         {
             Sprite avatar = await LoadProfileImage(entry);
 
-            Sprite flag = _staticData.SpriteByLang(entry.player.lang);
+            Sprite flag = _staticData.GetSpriteByLang(entry.player.lang);
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 string.IsNullOrEmpty(entry.player.publicName) ? _anonymous : entry.player.publicName, flag);
