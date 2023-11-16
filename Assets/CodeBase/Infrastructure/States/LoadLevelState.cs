@@ -1,12 +1,15 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification;
 using CodeBase.Logic;
 using CodeBase.Logic.Cameras;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Logic.Сollectible;
+using CodeBase.MeshCombine;
 using CodeBase.Services.ADS;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
@@ -22,7 +25,6 @@ using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
@@ -45,6 +47,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IPauseService _pauseService;
         private readonly ICameraOperatorService _cameraOperatorService;
         private readonly IADService _adService;
+        private readonly MeshCombiner _meshCombiner;
 
         private LoadPayload _loadPayload;
 
@@ -67,6 +70,7 @@ namespace CodeBase.Infrastructure.States
             _pauseService = pauseService;
             _cameraOperatorService = cameraOperatorService;
             _curtain = curtain;
+            _meshCombiner = new MeshCombiner();
         }
 
         public void Enter(LoadPayload payload)
@@ -111,7 +115,6 @@ namespace CodeBase.Infrastructure.States
             _uiFactory.Init(reviver);
         }
 
-        // ReSharper disable once InconsistentNaming
         private void InitUIRoot() =>
             _uiFactory.CreateUIRoot();
 
@@ -151,12 +154,11 @@ namespace CodeBase.Infrastructure.States
         private void InitLobby()
         {
             GameObject lobby = _gameFactory.CreateLobby();
+            _meshCombiner.CombineAllMeshes(lobby.transform, _gameFactory.CreateMaterial(AssetPath.SpireMaterial));
             EnterLevelPanel enterLevelPanel = _uiFactory.CreateEnterLevelPanel().GetComponent<EnterLevelPanel>();
 
             foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
-            {
                 levelTransfer.Construct(_stateMachine, enterLevelPanel, _progressService);
-            }
 
             foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
                 _pauseService.Register(pauseWatchers);

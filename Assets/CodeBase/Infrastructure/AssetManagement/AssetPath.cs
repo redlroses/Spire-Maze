@@ -20,12 +20,12 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string VirtualMover = "Prefabs/VirtualMover";
         public const string Spire = "Prefabs/Spire";
         public const string Cells = "Prefabs/Cells";
-        public const string Lobby = "Prefabs/SpireLobby";
-
-        public const string Loot = "Loot/Loot";
+        public const string Lobby = "Prefabs/Lobby";
 
         public const string Materials = "Materials";
         public const string PhysicMaterials = "Materials/Physics";
+        public const string SpireMaterial = "Spire";
+        public const string GroundMaterial = "Ground";
 
         public const string AvatarPath = "Sprite/Avatar";
         public const string FlagPath = "Sprite/Flag";

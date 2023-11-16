@@ -23,6 +23,11 @@ namespace CodeBase.LevelSpecification.Constructor
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
+            if (cells.Any() == false)
+            {
+                return;
+            }
+
             _gameFactory = gameFactory;
             _spire = cells[0].Container.root.GetComponentInChildren<Spire>();
             _markers = cells;
@@ -68,11 +73,17 @@ namespace CodeBase.LevelSpecification.Constructor
                 Cell downCell = ChooseCellByDirection(initialCell, finishCell, PlateMoveDirection.Up);
                 Cell currentCell = _spire.GetUpFrom(downCell);
 
-                do
+                while (currentCell.Id != upCell.Id)
                 {
                     _gameFactory.CreateVerticalRail(currentCell.Container);
                     currentCell = _spire.GetUpFrom(currentCell);
-                } while (currentCell.Id != upCell.Id);
+                }
+
+                // do
+                // {
+                //     _gameFactory.CreateVerticalRail(currentCell.Container);
+                //     currentCell = _spire.GetUpFrom(currentCell);
+                // } while (currentCell.Id != upCell.Id);
 
                 _gameFactory.CreateVerticalRailLock(upCell.Container);
                 _gameFactory.CreateVerticalRailLock(downCell.Container)

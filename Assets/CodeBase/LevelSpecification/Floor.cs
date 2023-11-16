@@ -6,7 +6,7 @@ namespace CodeBase.LevelSpecification
 {
     public sealed class Floor : CellContainer<Cell>
     {
-        public Floor(int size, Transform selfTransform, List<Cell> container = null) : base(size, selfTransform, container)
+        public Floor(int size, Transform origin, List<Cell> container = null) : base(size, origin, container)
         {
         }
     }

@@ -16,7 +16,7 @@ namespace CodeBase.LevelSpecification
         public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
 
-        public Level(int size, Transform selfTransform, List<Floor> container = null) : base(size, selfTransform, container)
+        public Level(int size, Transform origin, List<Floor> container = null) : base(size, origin, container)
         {
         }
 
@@ -33,7 +33,7 @@ namespace CodeBase.LevelSpecification
         }
 
         IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator() =>
-            new Level(Size, SelfTransform, Container);
+            new Level(Size, Origin, Container);
 
         public IEnumerator GetEnumerator() =>
             this;
