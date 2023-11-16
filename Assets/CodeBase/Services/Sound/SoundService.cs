@@ -10,9 +10,11 @@ namespace CodeBase.Services.Sound
     {
         private const string MusicVolumeProperty = "Music";
         private const string SfxVolumeProperty = "SFX";
+
         private const float VolumeStep = 0.05f;
-        private const float MinVolume = -80f;
-        private const float MaxVolume = 20f;
+        private const float MinVolume = 0.0001f;
+        private const float MaxVolume = 1f;
+        private const float MaxDecibel = 20f;
 
         private readonly IPersistentProgressService _progressService;
         private readonly AudioMixer _mixer;
@@ -20,8 +22,8 @@ namespace CodeBase.Services.Sound
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
-        public float SfxVolume => _progressService.Progress.GlobalData.SoundVolume.Sfx;
-        public float MusicVolume => _progressService.Progress.GlobalData.SoundVolume.Music;
+        public float SfxVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Sfx;
+        public float MusicVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Music;
 
         public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
@@ -39,20 +41,22 @@ namespace CodeBase.Services.Sound
 
         public void Load()
         {
-            SetMusicVolume(MusicVolume);
-            SetSfxVolume(SfxVolume);
+            SetMusicVolume(MusicVolumeLoaded);
+            SetSfxVolume(SfxVolumeLoaded);
         }
 
         public void SetMusicVolume(float volume)
         {
             _progressService.Progress.GlobalData.SoundVolume.Music = volume;
-            _mixer.SetFloat(MusicVolumeProperty, Mathf.Lerp(MinVolume, MaxVolume, volume));
+            _mixer.SetFloat(MusicVolumeProperty, Mathf.Log10(
+                Mathf.Clamp(volume, MinVolume, MaxVolume)) * MaxDecibel);
         }
 
         public void SetSfxVolume(float volume)
         {
             _progressService.Progress.GlobalData.SoundVolume.Sfx = volume;
-            _mixer.SetFloat(SfxVolumeProperty, Mathf.Lerp(MinVolume, MaxVolume, volume));
+            _mixer.SetFloat(SfxVolumeProperty, Mathf.Log10(
+                Mathf.Clamp(volume, MinVolume, MaxVolume)) * MaxDecibel);
         }
 
         public void Mute(bool isSmooth = false)

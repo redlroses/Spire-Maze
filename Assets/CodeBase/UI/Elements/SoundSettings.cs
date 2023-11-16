@@ -21,8 +21,8 @@ namespace CodeBase.UI.Elements
         {
             _soundService = soundService;
 
-            _sfxSlider.value = soundService.SfxVolume * _sfxSlider.maxValue;
-            _musicSlider.value = soundService.MusicVolume * _sfxSlider.maxValue;
+            _sfxSlider.value = soundService.SfxVolumeLoaded * _sfxSlider.maxValue;
+            _musicSlider.value = soundService.MusicVolumeLoaded * _sfxSlider.maxValue;
 
             Subscribe();
         }

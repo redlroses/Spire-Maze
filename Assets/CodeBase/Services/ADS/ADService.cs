@@ -23,6 +23,7 @@ namespace CodeBase.Services.ADS
                 new RoutineSequence(RoutineUpdateMod.FixedRun)
                     .WaitForSeconds(InterstitialAdCooldownSeconds);
             InitAdProvider();
+            _interstitialAdCooldown.Play();
         }
 
         public void ShowRewardAd(Action onSuccessCallback = null)

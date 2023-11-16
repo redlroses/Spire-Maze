@@ -7,7 +7,7 @@
         void SetSfxVolume(float volume);
         void Mute(bool isSmooth = false);
         void Unmute(bool isSmooth = false);
-        float SfxVolume { get; }
-        float MusicVolume { get; }
+        float SfxVolumeLoaded { get; }
+        float MusicVolumeLoaded { get; }
     }
 }
