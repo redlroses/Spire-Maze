@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Tools;
 using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.DelayRoutines
 {
-    public class RoutineSequence : IDisposable
+    public partial class RoutineSequence : IDisposable
     {
         private readonly GlobalUpdate _globalUpdate;
         private readonly List<IRoutine> _routines = new List<IRoutine>();
@@ -64,7 +65,7 @@ namespace CodeBase.DelayRoutines
         /// </summary>
         public void Kill()
         {
-            foreach (var routine in _routines)
+            foreach (IRoutine routine in _routines)
                 routine.Stop();
 
             _routines.Clear();

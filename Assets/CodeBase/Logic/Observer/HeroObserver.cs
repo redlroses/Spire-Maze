@@ -1,8 +1,8 @@
-﻿using CodeBase.Logic.Player;
+﻿using CodeBase.Logic.Hero;
 
 namespace CodeBase.Logic.Observer
 {
-    public class HeroObserver : TriggerObserverExit<Hero>
+    public class HeroObserver : TriggerObserverExit<HeroRoot>
     {
     }
 }

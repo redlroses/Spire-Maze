@@ -19,10 +19,9 @@ namespace CodeBase.Services.Input
         public event Action<Vector2> OverviewMove = _ => { };
         public event Action Jump = () => { };
         public event Action<MoveDirection> Dodge = _ => { };
-        public event Action Action = () => { };
+        public event Action Deactivated = () => { };
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
-        public MoveDirection HorizontalDirection => _direction;
 
         public PlayerInputService(IPauseService pauseService, IWindowService windowService)
         {
@@ -39,26 +38,24 @@ namespace CodeBase.Services.Input
             _inputController.Player.Movement.canceled += OnMove;
             _inputController.Player.Dodge.started += OnDodged;
             _inputController.Player.Pause.started += OnPause;
-            _inputController.Player.Action.started += OnAction;
             _inputController.Overview.ViewTower.performed += OnOverviewMove;
             _inputController.Overview.ViewTower.canceled += OnOverviewMove;
         }
 
         public void Cleanup()
         {
+            Deactivated.Invoke();
+
             _inputController.Player.Jump.performed -= OnJump;
             _inputController.Player.Movement.performed -= OnMove;
             _inputController.Player.Movement.canceled -= OnMove;
             _inputController.Player.Dodge.started -= OnDodged;
             _inputController.Player.Pause.started -= OnPause;
-            _inputController.Player.Action.started -= OnAction;
             _inputController.Overview.ViewTower.performed -= OnOverviewMove;
             _inputController.Overview.ViewTower.canceled -= OnOverviewMove;
 
             DisableOverviewMap();
             DisableMovementMap();
-
-            HorizontalMove.Invoke(MoveDirection.Stop);
         }
 
         public void EnableMovementMap() =>
@@ -91,9 +88,6 @@ namespace CodeBase.Services.Input
 
         private void OnOverviewMove(InputAction.CallbackContext context) =>
             OverviewMove.Invoke(context.ReadValue<Vector2>());
-
-        private void OnAction(InputAction.CallbackContext context) =>
-            Action.Invoke();
 
         private void OnPause(InputAction.CallbackContext context)
         {

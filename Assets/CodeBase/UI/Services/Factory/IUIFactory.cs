@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic.Player;
+﻿using CodeBase.Logic.Hero;
+using CodeBase.Logic.Player;
 using CodeBase.Services;
 using UnityEngine;
 

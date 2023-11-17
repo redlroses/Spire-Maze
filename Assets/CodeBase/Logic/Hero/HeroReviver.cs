@@ -4,7 +4,7 @@ using CodeBase.Logic.StateMachine.States;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 
-namespace CodeBase.Logic.Player
+namespace CodeBase.Logic.Hero
 {
     public class HeroReviver : MonoBehaviour, ISavedProgress
     {

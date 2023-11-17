@@ -2,6 +2,7 @@
 using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Player;
 using CodeBase.Services.ADS;
 using CodeBase.Services.PersistentProgress;

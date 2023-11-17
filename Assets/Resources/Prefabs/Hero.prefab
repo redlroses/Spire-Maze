@@ -7361,8 +7361,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caacb5a3c1f8614bad542f6af2d162e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 7440742495519906430}
+  _heroHealth: {fileID: 7440742495519906430}
   _heroReviver: {fileID: 3195723283148342379}
+  _aliveObserver: {fileID: 8388498137945045302}
   _animator: {fileID: 989079028364153686}
   _mover: {fileID: 1356605512462546074}
   _dodge: {fileID: 6587769830596586222}
@@ -7606,7 +7607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loseWindowShowDelay: 2
-  _heroHealth:
+  _health:
     _underlyingValue: {fileID: 7440742495519906430}
 --- !u!114 &3195723283148342379
 MonoBehaviour:

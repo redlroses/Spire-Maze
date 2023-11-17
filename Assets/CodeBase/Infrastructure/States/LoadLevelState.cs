@@ -7,6 +7,7 @@ using CodeBase.LevelSpecification;
 using CodeBase.Logic;
 using CodeBase.Logic.Cameras;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Logic.Сollectible;
@@ -195,9 +196,7 @@ namespace CodeBase.Infrastructure.States
         {
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
-            hero.GetComponent<Hero>();
-            hero.GetComponent<Hero>().Construct(_playerInputService);
-            hero.GetComponent<HeroAliveObserver>().Construct(_stateMachine);
+            hero.GetComponent<HeroRoot>().Construct(_playerInputService, _stateMachine);
             hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaForEntity(PlayerKey));
             return hero;
         }

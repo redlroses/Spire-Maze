@@ -4,6 +4,7 @@ using AYellowpaper.SerializedCollections;
 using CodeBase.DelayRoutines;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Player;
 using CodeBase.Logic.Portal;
 using CodeBase.Logic.Сollectible;
@@ -15,7 +16,7 @@ namespace CodeBase.Sound
     public class HeroSound : AudioClipSource
     {
         [Header("References")]
-        [SerializeField] private PlayerHealth _heroHealth;
+        [SerializeField] private HeroHealth _heroHealth;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private ItemCollector _itemCollector;
         [SerializeField] private Teleportable _teleportable;

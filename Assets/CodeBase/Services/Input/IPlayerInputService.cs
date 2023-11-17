@@ -11,9 +11,8 @@ namespace CodeBase.Services.Input
         event Action Jump;
         event Action<MoveDirection> Dodge;
         event Action<Vector2> OverviewMove;
-        event Action Action;
+        event Action Deactivated;
         InputActionPhase MovementPhase { get; }
-        MoveDirection HorizontalDirection { get; }
         void Subscribe();
         void Cleanup();
         void EnableMovementMap();

@@ -2,15 +2,14 @@
 using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic.HealthEntity;
-using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
 namespace CodeBase.Logic
 {
-    public class HeroAliveObserver : MonoBehaviour
+    public class AliveObserver : MonoBehaviour
     {
         [SerializeField] private float _loseWindowShowDelay = 2f;
-        [SerializeField] private InterfaceReference<IHealth, MonoBehaviour> _heroHealth;
+        [SerializeField] private InterfaceReference<IHealth, MonoBehaviour> _health;
 
         private RoutineSequence _openLoseWindowRoutine;
         private GameStateMachine _stateMachine;
@@ -18,7 +17,7 @@ namespace CodeBase.Logic
         private void OnDestroy()
         {
             _openLoseWindowRoutine.Kill();
-            _heroHealth.Value.Died -= OpenLoseWindow;
+            _health.Value.Died -= OpenLoseWindow;
         }
 
         public void Construct(GameStateMachine stateMachine)
@@ -29,7 +28,7 @@ namespace CodeBase.Logic
                 .WaitForSeconds(_loseWindowShowDelay)
                 .Then(() => _stateMachine.Enter<FinishState, bool>(true));
 
-            _heroHealth.Value.Died += OpenLoseWindow;
+            _health.Value.Died += OpenLoseWindow;
         }
 
         private void OpenLoseWindow()

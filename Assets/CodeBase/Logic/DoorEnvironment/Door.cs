@@ -1,6 +1,6 @@
-﻿using System;
-using AYellowpaper.SerializedCollections;
+﻿using AYellowpaper.SerializedCollections;
 using CodeBase.Data;
+using CodeBase.DelayRoutines;
 using CodeBase.EditorCells;
 using CodeBase.Logic.Inventory;
 using CodeBase.Logic.Observer;
@@ -18,7 +18,14 @@ namespace CodeBase.Logic.DoorEnvironment
         [SerializeField] private DoorAnimator _animator;
         [SerializeField] private SerializedDictionary<StorableType, GameObject> _keySigns;
 
+        [Space] [Header("No Key Animation")]
+        [SerializeField] private float _scale;
+        [SerializeField] private float _duration;
+        [SerializeField] private AnimationCurve _curve;
+
         private StorableType _targetKeyColor;
+        private GameObject _shownSign;
+        private RoutineSequence _signAnimation;
 
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
@@ -27,7 +34,13 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             _targetKeyColor = doorColor.ToStorableType();
             Id = id;
+            _signAnimation = new RoutineSequence();
             EnableSign();
+            Debug.Log(_shownSign);
+            _scale = 1.2f;
+            _duration = 0.5f;
+            _curve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+            _signAnimation.DoScale(_shownSign.transform, _scale, _duration, _curve, true);
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -60,16 +73,25 @@ namespace CodeBase.Logic.DoorEnvironment
             }
         }
 
-        protected override void OnTriggerObserverEntered(HeroInventory damagable)
+        protected override void OnTriggerObserverEntered(HeroInventory inventory)
         {
-            if (damagable.Inventory.TryUse(_targetKeyColor))
+            if (inventory.Inventory.TryUse(_targetKeyColor))
             {
                 Open();
+            }
+            else
+            {
+                if (_signAnimation.IsActive)
+                {
+                    return;
+                }
+
+                _signAnimation.Play();
             }
         }
 
         private void EnableSign() =>
-            _keySigns[_targetKeyColor].Enable();
+            (_shownSign = _keySigns[_targetKeyColor]).Enable();
 
         private void Open()
         {

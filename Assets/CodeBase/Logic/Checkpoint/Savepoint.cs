@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Observer;
 using CodeBase.Logic.Player;
 using CodeBase.Services.PersistentProgress;
@@ -10,7 +11,7 @@ namespace CodeBase.Logic.Checkpoint
 {
     [RequireComponent(typeof(SavepointObserver))]
     [RequireComponent(typeof(BoxCollider))]
-    public class Savepoint : ObserverTarget<SavepointObserver, Hero>, ISavedProgress, IIndexable
+    public class Savepoint : ObserverTarget<SavepointObserver, HeroRoot>, ISavedProgress, IIndexable
     {
         [SerializeField] private BoxCollider _collider;
 
@@ -56,7 +57,7 @@ namespace CodeBase.Logic.Checkpoint
             }
         }
 
-        protected override void OnTriggerObserverEntered(Hero _)
+        protected override void OnTriggerObserverEntered(HeroRoot _)
         {
             IsActivated = true;
             SetColliderState(true);

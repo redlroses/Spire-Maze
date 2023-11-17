@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.States;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
@@ -14,19 +15,19 @@ namespace CodeBase.Logic.StateMachine.States
         private readonly HeroAnimator _heroAnimator;
         private readonly IPlayerInputService _playerInputService;
         private readonly Dodge _dodge;
-        private readonly PlayerHealth _playerHealth;
+        private readonly HeroHealth _heroHealth;
         private readonly InputController _inputController;
 
         private MoveDirection _lastDirection;
 
         public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService, Dodge dodge, PlayerHealth playerHealth)
+            IPlayerInputService playerInputService, Dodge dodge, HeroHealth heroHealth)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
             _playerInputService = playerInputService;
             _dodge = dodge;
-            _playerHealth = playerHealth;
+            _heroHealth = heroHealth;
         }
 
         public void Enter(MoveDirection payload)
@@ -34,14 +35,14 @@ namespace CodeBase.Logic.StateMachine.States
             _heroAnimator.PlayDodge();
             _dodge.Evade(payload);
             _lastDirection = payload;
-            _playerHealth.IsImmune = true;
+            _heroHealth.IsImmune = true;
             _playerInputService.HorizontalMove += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
         }
 
         public void Exit()
         {
-            _playerHealth.IsImmune = false;
+            _heroHealth.IsImmune = false;
             _heroAnimator.StateExited -= OnStateExited;
             _playerInputService.HorizontalMove -= OnHorizontalMove;
         }

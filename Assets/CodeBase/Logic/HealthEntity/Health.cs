@@ -17,6 +17,11 @@ namespace CodeBase.Logic.HealthEntity
             {
                 _currentPoints = value;
                 Changed.Invoke();
+
+                if (IsAlive == false)
+                {
+                    Died.Invoke();
+                }
             }
         }
 
