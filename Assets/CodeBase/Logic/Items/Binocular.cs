@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.Logic.Items
 {
-    public class BinocularItem : Item, IUsable, IReloadable
+    public class Binocular : Item, IUsable, IReloadable
     {
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerInputService _inputService;
@@ -22,7 +22,7 @@ namespace CodeBase.Logic.Items
         private VirtualMover _virtualMover;
         public float ReloadTime { get; }
 
-        public BinocularItem(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService,
+        public Binocular(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService,
             IGameFactory gameFactory, ICameraOperatorService cameraOperator,
             IPersistentProgressService persistentProgressService) : base(staticData)
         {

@@ -8,6 +8,11 @@
         RedKey,
         BlueKey,
         RgbKey,
-        Binocular
+        Binocular,
+        RuneAlpha,
+        RuneBeta,
+        RuneGamma,
+        RuneDelta,
+        RuneEpsilon,
     }
 }

@@ -36,7 +36,7 @@ namespace CodeBase.UI.Windows
             base.OnAwake();
             _audioPlayer.PlayOneShot(_sound);
         }
-        
+
         public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine)
         {
             _progressService = progressService;

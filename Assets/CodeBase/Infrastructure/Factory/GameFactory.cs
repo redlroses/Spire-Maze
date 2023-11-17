@@ -17,6 +17,8 @@ using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using Compass = CodeBase.Logic.Items.Compass;
+using Key = CodeBase.Logic.Items.Key;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
@@ -113,11 +115,16 @@ namespace CodeBase.Infrastructure.Factory
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
             {
-                StorableType.Compass => new CompassItem(data, _uiFactory, this),
-                StorableType.Binocular => new BinocularItem(data, _uiFactory, _inputService, this, _cameraOperator, _persistentProgressService),
-                StorableType.BlueKey => new KeyItem(data),
-                StorableType.RedKey => new KeyItem(data),
-                StorableType.GreenKey => new KeyItem(data),
+                StorableType.Compass => new Compass(data, _uiFactory, this),
+                StorableType.Binocular => new Binocular(data, _uiFactory, _inputService, this, _cameraOperator, _persistentProgressService),
+                StorableType.BlueKey => new Key(data),
+                StorableType.RedKey => new Key(data),
+                StorableType.GreenKey => new Key(data),
+                StorableType.RuneAlpha => new Rune(data),
+                StorableType.RuneBeta => new Rune(data),
+                StorableType.RuneGamma => new Rune(data),
+                StorableType.RuneDelta => new Rune(data),
+                StorableType.RuneEpsilon => new Rune(data),
                 StorableType.None => throw new Exception("Storable type is not specified"),
                 _ => new Item(data)
             };
