@@ -20,8 +20,6 @@ namespace CodeBase.Logic.DoorEnvironment
 
         private StorableType _targetKeyColor;
 
-        public event Action Opened = () => { };
-
         public int Id { get; private set; }
         public bool IsActivated { get; private set; }
 
@@ -66,7 +64,6 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             if (damagable.Inventory.TryUse(_targetKeyColor))
             {
-                Opened.Invoke();
                 Open();
             }
         }

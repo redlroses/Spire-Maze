@@ -26,10 +26,12 @@ namespace CodeBase.UI
             string text = _labelSetter.ReadText();
             _labelSetter.SetText(String.Format(text, levelId));
             _showHide.Value.Show();
+            _enterButton.interactable = true;
         }
 
         public void Hide()
         {
+            _enterButton.interactable = false;
             _showHide.Value.Hide();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
@@ -160,8 +161,25 @@ namespace CodeBase.Infrastructure.States
             foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
                 levelTransfer.Construct(_stateMachine, enterLevelPanel, _progressService);
 
+            InitLobbyDoors(lobby);
+
             foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
                 _pauseService.Register(pauseWatchers);
+        }
+
+        private void InitLobbyDoors(GameObject lobby)
+        {
+            int lastCompletedLevelId = 0;
+
+            if (_progressService.Progress.GlobalData.Levels.Any())
+            {
+                lastCompletedLevelId = _progressService.Progress.GlobalData.Levels.Max(level => level.Id);
+            }
+
+            foreach (LobbyDoor lobbyDoor in lobby.GetComponentsInChildren<LobbyDoor>())
+            {
+                lobbyDoor.Construct(lastCompletedLevelId);
+            }
         }
 
         private Vector3 GetHeroPosition() =>

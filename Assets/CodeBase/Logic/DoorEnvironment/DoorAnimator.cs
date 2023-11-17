@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using CodeBase.Tools;
 using NaughtyAttributes;
 using NTC.Global.Cache;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic.DoorEnvironment
 {
-    public class DoorAnimator : MonoCache
+    public class DoorAnimator : MonoCache, IActivated
     {
         [SerializeField] private Transform _door;
         [SerializeField] private Vector3 _from;
@@ -15,6 +16,8 @@ namespace CodeBase.Logic.DoorEnvironment
         [SerializeField] private AnimationCurve _curve;
 
         private TowardMover<Vector3> _opening;
+
+        public event Action Activated = () => { };
 
         private void Awake()
         {
@@ -25,6 +28,7 @@ namespace CodeBase.Logic.DoorEnvironment
         public void Open()
         {
             _opening.Reset();
+            Activated.Invoke();
             this.Enable();
         }
 
@@ -39,16 +43,28 @@ namespace CodeBase.Logic.DoorEnvironment
             this.Disable();
         }
 
-        [Button]
+        [Button] [Conditional("UNITY_EDITOR")]
         private void CatchFrom()
         {
             _from = _door.position;
         }
 
-        [Button]
+        [Button] [Conditional("UNITY_EDITOR")]
         private void CatchTo()
         {
             _to = _door.position;
+        }
+
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void SetFrom()
+        {
+            _door.position = _from;
+        }
+
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void SetTo()
+        {
+            _door.position = _to;
         }
     }
 }

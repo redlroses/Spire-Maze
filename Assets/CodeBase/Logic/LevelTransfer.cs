@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
@@ -11,7 +12,8 @@ using UnityEngine;
 
 namespace CodeBase.Logic
 {
-    public class LevelTransfer : ObserverTargetExited<TeleportableObserver, ITeleportable>
+    [RequireComponent(typeof(PortalEffector))]
+    public class LevelTransfer : ObserverTargetExited<TeleportableObserver, ITeleportable>, IActivated
     {
         [SerializeField] private int _toLevelId;
 
@@ -21,6 +23,8 @@ namespace CodeBase.Logic
         private IPersistentProgressService _progressService;
         private LevelData _levelData;
 
+        public event Action Activated = () => { };
+
         public void Construct(GameStateMachine stateMachine, EnterLevelPanel enterLevelPanel,
             IPersistentProgressService progressService)
         {
@@ -29,7 +33,7 @@ namespace CodeBase.Logic
             _enterLevelPanel = enterLevelPanel;
             _stateMachine = stateMachine;
             _levelData = GetLevelData();
-            CheckForActivation();
+            TryActivate();
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable _)
@@ -53,7 +57,7 @@ namespace CodeBase.Logic
             _stateMachine.Enter<LoadLevelState, LoadPayload>(payload);
         }
 
-        private void CheckForActivation()
+        private void TryActivate()
         {
             int lastLevel = 0;
 
@@ -70,8 +74,7 @@ namespace CodeBase.Logic
 
         private void Activate()
         {
-            // Включить портал
-
+            Activated.Invoke();
             enabled = true;
         }
     }

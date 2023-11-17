@@ -5,17 +5,17 @@ namespace CodeBase.Sound
 {
     public class DoorSound : AudioClipSource
     {
-        [SerializeField] private Door _door;
+        [SerializeField] private DoorAnimator _doorAnimator;
         [SerializeField] private AudioClip _audioClip;
 
         private void OnEnable()
         {
-            _door.Opened += OnOpened;
+            _doorAnimator.Activated += OnOpened;
         }
 
         private void OnDisable()
         {
-            _door.Opened -= OnOpened;
+            _doorAnimator.Activated -= OnOpened;
         }
 
         private void OnOpened()
