@@ -65,6 +65,8 @@ namespace CodeBase.Services.Sound
 
         public void Mute(bool isSmooth = false)
         {
+            Debug.Log("Mute");
+            
             _smoothUnmute.Stop();
 
             if (isSmooth)
@@ -79,6 +81,8 @@ namespace CodeBase.Services.Sound
 
         public void Unmute(bool isSmooth = false)
         {
+            Debug.Log("Unmute");
+            
             _smoothMute.Stop();
 
             if (isSmooth)
@@ -117,11 +121,11 @@ namespace CodeBase.Services.Sound
         {
             if (isHidden)
             {
-                Mute(true);
+                Mute();
             }
             else
             {
-                Unmute(true);
+                Unmute();
             }
         }
     }
