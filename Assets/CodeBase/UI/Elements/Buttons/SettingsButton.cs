@@ -7,6 +7,7 @@ namespace CodeBase.UI.Elements.Buttons
     public class SettingsButton : MonoBehaviour
     {
         [SerializeField] private Toggle _toggle;
+        [SerializeField] private PauseToggle _pauseToggle;
 
         private IWindowService _windowService;
 
@@ -20,6 +21,7 @@ namespace CodeBase.UI.Elements.Buttons
         {
             if (isOn)
             {
+                _pauseToggle.EmulateClick();
                 _windowService.Open(WindowId.Settings);
             }
         }

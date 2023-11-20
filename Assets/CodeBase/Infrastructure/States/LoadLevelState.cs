@@ -48,6 +48,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
         private readonly ICameraOperatorService _cameraOperatorService;
+        private readonly IWindowService _windowService;
         private readonly IADService _adService;
         private readonly MeshCombiner _meshCombiner;
 
@@ -71,6 +72,7 @@ namespace CodeBase.Infrastructure.States
             _watchService = watchService;
             _pauseService = pauseService;
             _cameraOperatorService = cameraOperatorService;
+            _windowService = windowService;
             _curtain = curtain;
             _meshCombiner = new MeshCombiner();
         }
@@ -107,6 +109,7 @@ namespace CodeBase.Infrastructure.States
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
+            RegisterWindowsServiceInPauseService();
 
             _stateMachine.Enter<GameLoopState>();
         }
@@ -222,6 +225,9 @@ namespace CodeBase.Infrastructure.States
                 _cameraOperatorService.FocusOnDefault();
             }
         }
+
+        private void RegisterWindowsServiceInPauseService() =>
+            _pauseService.Register(_windowService as IPauseWatcher);
 
         private void ValidateLevelProgress()
         {

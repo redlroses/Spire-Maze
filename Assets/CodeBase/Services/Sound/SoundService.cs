@@ -1,6 +1,7 @@
 ﻿using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Tools;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -22,9 +23,6 @@ namespace CodeBase.Services.Sound
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
-        public float SfxVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Sfx;
-        public float MusicVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Music;
-
         public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
             _progressService = progressService;
@@ -37,7 +35,13 @@ namespace CodeBase.Services.Sound
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .Then(() => AudioListener.pause = false)
                 .WaitUntil(TryIncreaseVolume);
+
+            WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
+
+        public float SfxVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Sfx;
+
+        public float MusicVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Music;
 
         public void Load()
         {
@@ -61,6 +65,8 @@ namespace CodeBase.Services.Sound
 
         public void Mute(bool isSmooth = false)
         {
+            _smoothUnmute.Stop();
+
             if (isSmooth)
             {
                 _smoothMute.Play();
@@ -73,6 +79,8 @@ namespace CodeBase.Services.Sound
 
         public void Unmute(bool isSmooth = false)
         {
+            _smoothMute.Stop();
+
             if (isSmooth)
             {
                 _smoothUnmute.Play();
@@ -103,6 +111,18 @@ namespace CodeBase.Services.Sound
 
             AudioListener.volume += VolumeStep;
             return false;
+        }
+
+        private void OnInBackgroundChanged(bool isHidden)
+        {
+            if (isHidden)
+            {
+                Mute(true);
+            }
+            else
+            {
+                Unmute(true);
+            }
         }
     }
 }

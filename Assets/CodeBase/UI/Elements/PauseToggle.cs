@@ -11,14 +11,12 @@ namespace CodeBase.UI.Elements
         [SerializeField] private LocationAnimations _pauseButtonAnimation;
 
         private IPauseService _pauseService;
-        private IWindowService _windowService;
 
         private void OnDestroy() =>
             _pauseToggle.onValueChanged.RemoveAllListeners();
 
-        public void Construct(IPauseService pauseService, IWindowService windowService)
+        public void Construct(IPauseService pauseService)
         {
-            _windowService = windowService;
             _pauseService = pauseService;
             Subscribe();
         }
@@ -41,7 +39,6 @@ namespace CodeBase.UI.Elements
                 return;
 
             _pauseService.SetPause(isPause);
-            _windowService.Open(WindowId.Pause);
         }
     }
 }

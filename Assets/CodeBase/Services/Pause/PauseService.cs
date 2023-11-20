@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Services.Watch;
-using CodeBase.UI.Services.Windows;
+using CodeBase.Tools;
 
 namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
         private readonly IWatchService _watchService;
-        private readonly IWindowService _windowService;
 
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
@@ -15,6 +14,7 @@ namespace CodeBase.Services.Pause
         public PauseService(IWatchService watchService)
         {
             _watchService = watchService;
+            WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
 
         public bool IsPause { get; private set; }
@@ -78,9 +78,12 @@ namespace CodeBase.Services.Pause
             }
         }
 
-        private void ValidateWatchers()
-        {
+        private void ValidateWatchers() =>
             PauseWatchers.RemoveAll(watcher => watcher.Equals(null));
+
+        private void OnInBackgroundChanged(bool isHidden)
+        {
+            SetPause(isHidden);
         }
     }
 }

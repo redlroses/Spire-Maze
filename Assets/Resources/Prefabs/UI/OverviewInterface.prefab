@@ -305,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.44149807, y: 0.105781734}
   m_AnchorMax: {x: 0.5584954, y: 0.16756648}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_SizeDelta: {x: 0, y: 0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5661682790332512593
 MonoBehaviour:
@@ -334,9 +334,9 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -0.0035247803, y: -784.78394, z: 0}
-      AnchoredPosition: {x: 0, y: 0}
-      SizeDelta: {x: 0, y: 0}
+    - LocalPosition: {x: -0.006286621, y: -372.72925, z: 0}
+      AnchoredPosition: {x: 0, y: 19.66272}
+      SizeDelta: {x: 0, y: 39.3255}
       AnchorMin: {x: 0.44149807, y: 0.105781734}
       AnchorMax: {x: 0.5584954, y: 0.16756648}
       Pivot: {x: 0.5, y: 0.5}
@@ -345,7 +345,7 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -0.0012512207, y: -247.78827, z: 0}
+    - LocalPosition: {x: -0.0035247803, y: -784.78394, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.44149807, y: 0.105781734}

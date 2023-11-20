@@ -66,7 +66,7 @@ namespace CodeBase.Logic.Cameras
             ApplyConfig(_staticData.GetCameraConfigByOrientation(orientationName));
         }
 
-        protected override void FixedRun()
+        protected override void LateRun()
         {
             _followAction.Invoke();
 

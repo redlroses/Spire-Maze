@@ -141,7 +141,7 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHud()
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);
-            hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService, _windowService);
+            hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService);
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
             hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
