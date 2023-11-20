@@ -29,8 +29,6 @@ namespace CodeBase.Logic.Movement
 
             Vector3 from = _rigidbody.position + _collider.center;
 
-            Drawer.DrawRay(from, direction, distance + _colliderHeight * Arithmetic.Half + (_colliderRadius - radiusReduction), Color.red);
-
             return isHit;
         }
 

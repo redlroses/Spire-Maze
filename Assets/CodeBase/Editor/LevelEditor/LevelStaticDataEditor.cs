@@ -332,7 +332,7 @@ namespace CodeBase.Editor.LevelEditor
             {
                 _dataMap.InsertArrayElementAtIndex(fromIndex + i);
                 _dataMap.GetArrayElementAtIndex(fromIndex + i).managedReferenceValue =
-                    new Plate(GetTextureByType<Plate>());
+                    new Air(GetTextureByType<Air>());
             }
 
             _height.intValue++;

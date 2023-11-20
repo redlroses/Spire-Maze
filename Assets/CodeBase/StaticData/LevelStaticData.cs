@@ -33,7 +33,7 @@ namespace CodeBase.StaticData
                 float angle = i % Width * ArchAngle;
                 return GetPosition(angle, Radius).ChangeY(height);
             }
-
+           
             return Vector3.zero;
         }
 

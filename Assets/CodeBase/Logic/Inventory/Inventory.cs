@@ -46,10 +46,8 @@ namespace CodeBase.Logic.Inventory
             if (TryGetInventoryCell(storableType, out InventoryCell inventoryCell) == false)
                 return false;
 
-            if (!(inventoryCell.Item is IUsable usable))
-                return false;
-
-            usable.Use();
+            if (inventoryCell.Item is IUsable usable)
+                usable.Use();
 
             if (inventoryCell.Item is IExpendable)
                 Expend(inventoryCell);

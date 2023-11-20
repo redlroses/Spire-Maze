@@ -3,12 +3,11 @@ using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
-using CodeBase.LevelSpecification;
 using CodeBase.Logic;
 using CodeBase.Logic.Cameras;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Hero;
-using CodeBase.Logic.Player;
+using CodeBase.Logic.Inventory;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Logic.Сollectible;
 using CodeBase.MeshCombine;
@@ -27,7 +26,6 @@ using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
-using HeroInventory = CodeBase.Logic.Inventory.HeroInventory;
 
 namespace CodeBase.Infrastructure.States
 {
