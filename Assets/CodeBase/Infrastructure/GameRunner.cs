@@ -10,7 +10,7 @@ namespace CodeBase.Infrastructure
         private void Awake()
         {
 #if UNITY_EDITOR
-            var bootstrapper = FindObjectOfType<GameBootstrapper>();
+            GameBootstrapper bootstrapper = FindObjectOfType<GameBootstrapper>();
 
             if (bootstrapper == null)
             {
@@ -19,7 +19,6 @@ namespace CodeBase.Infrastructure
 #else
             if (SceneManager.GetActiveScene().name.Equals(LevelNames.Initial))
             {
-                Debug.Log($"Instantiate scene name {SceneManager.GetActiveScene().name}");
                 Instantiate(_bootstrapperPrefab);
             }
 #endif

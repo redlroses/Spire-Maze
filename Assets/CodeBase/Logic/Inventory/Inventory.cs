@@ -29,7 +29,6 @@ namespace CodeBase.Logic.Inventory
             if (TryGetInventoryCell(item.ItemType, out InventoryCell inventoryCell))
             {
                 inventoryCell.Increase();
-                Debug.Log($"Count item {inventoryCell.Count}");
             }
             else
             {
@@ -38,7 +37,6 @@ namespace CodeBase.Logic.Inventory
             }
 
             Updated.Invoke(inventoryCell);
-            Debug.Log($"SetUp {item.Name}");
         }
 
         public bool TryUse(StorableType storableType)
