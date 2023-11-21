@@ -36,10 +36,6 @@ namespace CodeBase.Logic.DoorEnvironment
             Id = id;
             _signAnimation = new RoutineSequence();
             EnableSign();
-            Debug.Log(_shownSign);
-            _scale = 1.2f;
-            _duration = 0.5f;
-            _curve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
             _signAnimation.DoScale(_shownSign.transform, _scale, _duration, _curve, true);
         }
 

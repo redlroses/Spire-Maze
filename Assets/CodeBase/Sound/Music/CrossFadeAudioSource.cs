@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.DelayRoutines;
 using CodeBase.Tools;
+using CodeBase.Tools.Extension;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -64,6 +65,16 @@ namespace CodeBase.Sound.Music
                 _secondAudioSource.volume = volume;
 
                 return isProcess;
+            }).Then(() =>
+            {
+                if (_firstAudioSource.volume.EqualsApproximately(0))
+                {
+                    _firstAudioSource.Stop();
+                }
+                else
+                {
+                    _secondAudioSource.Stop();
+                }
             });
         }
     }

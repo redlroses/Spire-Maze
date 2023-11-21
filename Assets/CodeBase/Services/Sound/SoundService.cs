@@ -93,24 +93,18 @@ namespace CodeBase.Services.Sound
 
         private bool TryDecreaseVolume()
         {
-            if (AudioListener.volume <= 0f)
-            {
-                return true;
-            }
-
-            AudioListener.volume -= VolumeStep;
-            return false;
+            float volume = AudioListener.volume;
+            volume -= VolumeStep;
+            AudioListener.volume = Mathf.Clamp01(volume);
+            return volume <= 0f;
         }
 
         private bool TryIncreaseVolume()
         {
-            if (AudioListener.volume >= 0f)
-            {
-                return true;
-            }
-
-            AudioListener.volume += VolumeStep;
-            return false;
+            float volume = AudioListener.volume;
+            volume += VolumeStep;
+            AudioListener.volume = Mathf.Clamp01(volume);
+            return volume >= 1f;
         }
 
         private void OnInBackgroundChanged(bool isHidden)

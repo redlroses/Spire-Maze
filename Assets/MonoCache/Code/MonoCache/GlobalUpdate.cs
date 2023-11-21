@@ -27,10 +27,11 @@ namespace NTC.Global.Cache
 
         private readonly MonoCacheExceptionsChecker _monoCacheExceptionsChecker = 
             new MonoCacheExceptionsChecker();
-        
+
         private void Awake()
         {
             _monoCacheExceptionsChecker.CheckForExceptions();
+            DontDestroyOnLoad(gameObject);
         }
 
         public void AddRunSystem(IRunSystem runSystem)

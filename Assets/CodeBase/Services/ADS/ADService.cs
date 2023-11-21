@@ -19,9 +19,8 @@ namespace CodeBase.Services.ADS
         public ADService(ISoundService soundService)
         {
             _soundService = soundService;
-            _interstitialAdCooldown =
-                new RoutineSequence(RoutineUpdateMod.FixedRun)
-                    .WaitForSeconds(InterstitialAdCooldownSeconds);
+            _interstitialAdCooldown = new RoutineSequence(RoutineUpdateMod.FixedRun)
+                .WaitForSeconds(InterstitialAdCooldownSeconds);
             InitAdProvider();
             _interstitialAdCooldown.Play();
         }
@@ -33,8 +32,8 @@ namespace CodeBase.Services.ADS
             RewardAd(() =>
                 {
                     onSuccessCallback?.Invoke();
-                    _soundService.Unmute();
-                }, () => _soundService.Unmute()
+                    _soundService.Unmute(true);
+                }, () => _soundService.Unmute(true)
             );
         }
 
@@ -44,13 +43,13 @@ namespace CodeBase.Services.ADS
                 return;
 
             _interstitialAdCooldown.Play();
-            _soundService.Mute();
+            _soundService.Mute(true);
 
             InterstitialAd(() =>
                 {
                     onSuccessCallback?.Invoke();
                     _soundService.Unmute(true);
-                }, () => _soundService.Unmute()
+                }, () => _soundService.Unmute(true)
             );
         }
 
@@ -82,7 +81,7 @@ namespace CodeBase.Services.ADS
             bool isOpened = false;
             bool isRewarded = false;
 
-            onDenyCallback = () => Debug.Log("ShowRewardAd denied");
+            onDenyCallback += () => Debug.Log("ShowRewardAd denied");
 
             Action onOpenCallback = () => isOpened = true;
             Action onRewardedCallback = () => isRewarded = true;
@@ -95,7 +94,7 @@ namespace CodeBase.Services.ADS
 
                 Debug.Log($"ShowRewardAd onClose: is Opened: {isOpened}, isRewarded: {isRewarded}");
             };
-            Action<string> onErrorCallback = _ => onDenyCallback?.Invoke();
+            Action<string> onErrorCallback = _ => onDenyCallback.Invoke();
             _adProvider.ShowRewardAd(onOpenCallback, onRewardedCallback, onCloseCallback, onErrorCallback);
         }
 
@@ -103,7 +102,7 @@ namespace CodeBase.Services.ADS
         {
             bool isOpened = false;
 
-            onDenyCallback = () => Debug.Log("ShowInterstitialAd denied");
+            onDenyCallback += () => Debug.Log("ShowInterstitialAd denied");
 
             Action openCallback = () => isOpened = true;
             Action<bool> closeCallback = isShown =>
@@ -116,7 +115,7 @@ namespace CodeBase.Services.ADS
                 Debug.Log($"ShowInterstitialAd onClose : is Opened: {isOpened}, isShown: {isShown}");
             };
             Action<string> errorCallback = _ => onDenyCallback?.Invoke();
-            Action offlineCallback = () => onDenyCallback?.Invoke();
+            Action offlineCallback = () => onDenyCallback.Invoke();
             _adProvider.ShowInterstitialAd(openCallback, closeCallback, errorCallback, offlineCallback);
         }
     }

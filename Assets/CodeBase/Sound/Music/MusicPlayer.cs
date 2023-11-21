@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CodeBase.Tools.Extension;
+﻿using CodeBase.Tools.Extension;
 using NaughtyAttributes;
 using UnityEngine;
 

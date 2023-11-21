@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Tools;
 using NTC.Global.Cache;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.DelayRoutines
@@ -25,7 +25,7 @@ namespace CodeBase.DelayRoutines
 
         public RoutineSequence(RoutineUpdateMod updateMod = RoutineUpdateMod.Run)
         {
-            _globalUpdate = GlobalUpdate.Instance;
+            _globalUpdate = Singleton<GlobalUpdate>.Instance;
 
             if (updateMod == RoutineUpdateMod.Run)
             {
