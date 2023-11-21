@@ -25,7 +25,7 @@ namespace CodeBase.Sound.Music
         private int _currentTrackId;
         private float _clipLength;
 
-        [Conditional("UNITY_EDITOR")]
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (_trackBar.EqualsApproximately(_trackSlider) == false)
@@ -33,6 +33,7 @@ namespace CodeBase.Sound.Music
                 _audioSource.PlayingSource.time = _clipLength * _trackSlider - float.Epsilon;
             }
         }
+#endif
 
         private void Awake() =>
             DontDestroyOnLoad(gameObject);
