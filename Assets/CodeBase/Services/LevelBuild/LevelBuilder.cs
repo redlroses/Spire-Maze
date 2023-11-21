@@ -123,11 +123,11 @@ namespace CodeBase.Services.LevelBuild
         {
             Transform spireRoot = new GameObject("Spire").transform;
 
-            int segmentCount = Mathf.RoundToInt(levelStaticData.Height * Arithmetic.Half);
+            int segmentCount = Mathf.RoundToInt(levelStaticData.Height * Arithmetic.ToHalf);
 
             for (int i = 0 - _additionalSpireSegmentsCount; i < segmentCount + _additionalSpireSegmentsCount; i++)
             {
-                Vector3 position = Vector3.zero.ChangeY(i * levelStaticData.FloorHeight / Arithmetic.Half);
+                Vector3 position = Vector3.zero.ChangeY(i * levelStaticData.FloorHeight / Arithmetic.ToHalf);
                 Quaternion rotation = Quaternion.Euler(0, _randomService.Range(0f, Trigonometry.TwoPiGrade), 0f);
                 GameObject segment = _gameFactory.CreateSpireSegment(position, rotation);
                 segment.transform.parent = spireRoot;

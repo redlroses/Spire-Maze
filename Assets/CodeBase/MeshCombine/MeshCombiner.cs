@@ -147,7 +147,7 @@ namespace CodeBase.MeshCombine
         {
             if (cells.Count > MaxCellsInCollider)
             {
-                int halfCellsCount = Mathf.FloorToInt(cells.Count * Arithmetic.Half);
+                int halfCellsCount = Mathf.FloorToInt(cells.Count * Arithmetic.ToHalf);
                 CombineColliders(cells.GetRange(0, halfCellsCount), parent);
                 cells = cells.GetRange(halfCellsCount, cells.Count - halfCellsCount);
             }

@@ -2,6 +2,6 @@
 {
     public static class Arithmetic
     {
-        public const float Half = 0.5f;
+        public const float ToHalf = 0.5f;
     }
 }

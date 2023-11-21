@@ -25,7 +25,7 @@ namespace CodeBase.Logic.Movement
         public bool CastSphere(Vector3 direction, float distance, float radiusReduction = 0.1f)
         {
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
-                out _, distance + _colliderHeight * Arithmetic.Half, _mask);
+                out _, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
 
             Vector3 from = _rigidbody.position + _collider.center;
 
@@ -35,7 +35,7 @@ namespace CodeBase.Logic.Movement
         public bool CastSphere(Vector3 direction, float distance, out RaycastHit hitInfo, float radiusReduction = 0.1f)
         {
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
-                out hitInfo, distance + _colliderHeight * Arithmetic.Half, _mask);
+                out hitInfo, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
             return isHit;
         }
     }

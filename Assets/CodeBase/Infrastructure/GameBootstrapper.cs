@@ -28,7 +28,9 @@ namespace CodeBase.Infrastructure
             DontDestroyOnLoad(this);
         }
 
+#if !UNITY_EDITOR
         private void OnApplicationFocus(bool hasFocus) =>
             _webFocusObserver?.UpdateFocus(!hasFocus);
+#endif
     }
 }
