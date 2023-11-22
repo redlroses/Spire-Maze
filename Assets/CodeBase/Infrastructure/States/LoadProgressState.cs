@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
@@ -34,7 +33,7 @@ namespace CodeBase.Infrastructure.States
             await LoadProgressOrInitNew();
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.SceneName,
-                _progressService.Progress.WorldData.SceneName == LevelNames.BuildableLevel,
+                _progressService.Progress.WorldData.SceneName.Equals(LevelNames.BuildableLevel),
                 _progressService.Progress.WorldData.LevelState.LevelId));
 
             _soundService.Load();
@@ -53,14 +52,14 @@ namespace CodeBase.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            PlayerProgress progress = new PlayerProgress(initialLevel: LevelNames.Lobby)
+            PlayerProgress progress = new PlayerProgress(initialLevel: LevelNames.LearningLevel, LevelNames.LearningLevelId)
             {
                 WorldData =
                 {
                     LevelPositions = new LevelPositions(
-                        _staticDataService.GetForLevel(LevelNames.LobbyId)
+                        _staticDataService.GetForLevel(LevelNames.LearningLevelId)
                             .HeroInitialPosition.AsVectorData(),
-                        _staticDataService.GetForLevel(LevelNames.LobbyId)
+                        _staticDataService.GetForLevel(LevelNames.LearningLevelId)
                             .FinishPosition.AsVectorData()),
                     HeroHealthState = new HealthState(_staticDataService.GetHealthForEntity(PlayerKey).MaxHealth),
                     HeroStaminaState = new StaminaState(_staticDataService.GetStaminaForEntity(PlayerKey).MaxStamina)

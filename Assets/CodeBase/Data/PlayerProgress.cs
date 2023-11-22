@@ -10,9 +10,9 @@ namespace CodeBase.Data
 
         public int Relevance => GlobalData.Levels.Count;
 
-        public PlayerProgress(string initialLevel)
+        public PlayerProgress(string initialLevel, int initialLevelId)
         {
-            WorldData = new WorldData(initialLevel);
+            WorldData = new WorldData(initialLevel, initialLevelId);
             GlobalData = new GlobalData();
         }
     }

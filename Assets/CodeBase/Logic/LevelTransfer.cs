@@ -64,12 +64,15 @@ namespace CodeBase.Logic
             if (_progressService.Progress.GlobalData.Levels.Count > 0)
             {
                 lastLevel = _progressService.Progress.GlobalData.Levels.Max(level => level.Id);
+                lastLevel = Mathf.Clamp(lastLevel, 0, int.MaxValue);
             }
 
-            if (_toLevelId <= lastLevel + 1)
+            if (_toLevelId <= ++lastLevel)
             {
                 Activate();
             }
+
+            Debug.Log($"TryActivate {lastLevel}, _toLevelId: {_toLevelId}");
         }
 
         private void Activate()

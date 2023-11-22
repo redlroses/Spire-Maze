@@ -13,11 +13,11 @@ namespace CodeBase.Logic.Сollectible
 
         public event Action<Sprite, Vector3> Collected = (_, _) => { };
 
-        protected override void OnTriggerObserverEntered(ICollectible damagable)
+        protected override void OnTriggerObserverEntered(ICollectible collectible)
         {
-            _heroInventory.Inventory.Add(damagable.Item);
-            Collected.Invoke(damagable.Item.Sprite, transform.position);
-            damagable.Collect();
+            _heroInventory.Inventory.Add(collectible.Item);
+            Collected.Invoke(collectible.Item.Sprite, transform.position);
+            collectible.Collect();
         }
     }
 }

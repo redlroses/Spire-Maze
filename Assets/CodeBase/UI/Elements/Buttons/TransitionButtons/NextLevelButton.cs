@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {
@@ -14,6 +15,8 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         }
 
         protected override LoadPayload TransitionPayload() =>
-            new LoadPayload(LevelNames.BuildableLevel, true, _levelId + 1);
+            SceneManager.GetActiveScene().name.Equals(LevelNames.LearningLevel)
+                ? new LoadPayload(LevelNames.Lobby, false, LevelNames.LobbyId)
+                : new LoadPayload(LevelNames.BuildableLevel, true, _levelId + 1);
     }
 }

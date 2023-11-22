@@ -108,8 +108,11 @@ namespace CodeBase.Services.Score
             levelAccumulationData.Artifacts *
             scoreConfig.PerArtifact;
 
-        private bool IsScorableLevel() =>
-            SceneManager.GetActiveScene().name == LevelNames.BuildableLevel;
+        private bool IsScorableLevel()
+        {
+            string name = SceneManager.GetActiveScene().name;
+            return name.Equals(LevelNames.BuildableLevel) || name.Equals(LevelNames.LearningLevel);
+        }
 
         private int StarsCountFromConfig(ScoreConfig scoreConfig)
         {

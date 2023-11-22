@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
@@ -147,8 +146,11 @@ namespace CodeBase.Infrastructure.States
             }
         }
 
-        private void InitLearningLevel() =>
-            throw new NotImplementedException();
+        private void InitLearningLevel()
+        {
+            BuildLevel();
+            ConstructLevel();
+        }
 
         private void InitLobby()
         {
@@ -210,14 +212,11 @@ namespace CodeBase.Infrastructure.States
 
         private void CameraFollow(GameObject hero)
         {
-            if (Camera.main != null)
-            {
-                CameraFollower cameraFollower = Camera.main.GetComponent<CameraFollower>();
-                cameraFollower.Construct(_staticData);
-                _cameraOperatorService.RegisterCamera(cameraFollower);
-                _cameraOperatorService.SetAsDefault(hero.transform);
-                _cameraOperatorService.FocusOnDefault();
-            }
+            CameraFollower cameraFollower = Camera.main!.GetComponent<CameraFollower>();
+            cameraFollower.Construct(_staticData);
+            _cameraOperatorService.RegisterCamera(cameraFollower);
+            _cameraOperatorService.SetAsDefault(hero.transform);
+            _cameraOperatorService.FocusOnDefault();
         }
 
         private void RegisterWindowsServiceInPauseService() =>
@@ -225,20 +224,17 @@ namespace CodeBase.Infrastructure.States
 
         private void ValidateLevelProgress()
         {
-            if (_progressService.Progress.WorldData.LevelState.LevelId == _loadPayload.LevelId &&
-                _loadPayload.IsClearLoad == false)
+            if (_progressService.Progress.WorldData.LevelState.LevelId != _loadPayload.LevelId ||
+                _loadPayload.IsClearLoad)
             {
-                return;
+                ResetProgress();
             }
-
-            ResetProgress();
         }
 
         private void ResetProgress()
         {
-            _progressService.Progress.WorldData = new WorldData(null)
+            _progressService.Progress.WorldData = new WorldData(_progressService.Progress.WorldData.SceneName, _loadPayload.LevelId)
             {
-                LevelState = new LevelState(_loadPayload.LevelId),
                 LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
                 HeroHealthState = new HealthState(_staticData.GetHealthForEntity(PlayerKey).MaxHealth),
                 HeroStaminaState = new StaminaState(_staticData.GetStaminaForEntity(PlayerKey).MaxStamina),

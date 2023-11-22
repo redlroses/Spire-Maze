@@ -97,6 +97,9 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
 
+        public GameObject CreateLearningLevel() =>
+            InstantiateRegistered(AssetPath.LearningLevel);
+
         public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 

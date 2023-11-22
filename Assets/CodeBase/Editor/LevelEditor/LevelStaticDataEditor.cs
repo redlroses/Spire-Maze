@@ -47,7 +47,7 @@ namespace CodeBase.Editor.LevelEditor
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(InitialPlate)].Tint(_colors[typeof(InitialPlate)])),
                 [typeof(Wall)] = data => _baseTextures[typeof(Wall)].Tint(_colors[typeof(Wall)]),
-                [typeof(Wall2)] = data => _baseTextures[typeof(Wall2)].Tint(_colors[typeof(Wall2)]),
+                [typeof(WallHole)] = data => _baseTextures[typeof(WallHole)].Tint(_colors[typeof(WallHole)]),
                 [typeof(Door)] = data =>
                     _baseTextures[typeof(Plate)].Tint(_colors[typeof(Plate)])
                         .CombineTexture(_baseTextures[typeof(Door)]
@@ -95,7 +95,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Plate)] = Resources.Load<Texture2D>("Textures/PlateIcon"),
                 [typeof(InitialPlate)] = Resources.Load<Texture2D>("Textures/InitialPlateIcon"),
                 [typeof(Wall)] = Resources.Load<Texture2D>("Textures/WallIcon"),
-                [typeof(Wall2)] = Resources.Load<Texture2D>("Textures/WallIcon"),
+                [typeof(WallHole)] = Resources.Load<Texture2D>("Textures/WallIcon"),
                 [typeof(Door)] = Resources.Load<Texture2D>("Textures/DoorIcon"),
                 [typeof(Key)] = Resources.Load<Texture2D>("Textures/KeyIcon"),
                 [typeof(MovingMarker)] = Resources.Load<Texture2D>("Textures/MovingMarkerIcon"),
@@ -116,7 +116,7 @@ namespace CodeBase.Editor.LevelEditor
                 [typeof(Plate)] = new Color32(57, 181, 94, 255),
                 [typeof(InitialPlate)] = new Color32(192, 105, 55, 255),
                 [typeof(Wall)] = new Color32(57, 181, 94, 255),
-                [typeof(Wall2)] = new Color32(57, 81, 194, 255),
+                [typeof(WallHole)] = new Color32(57, 81, 194, 255),
                 [typeof(MovingMarker)] = new Color32(77, 181, 177, 255),
                 [typeof(MovingPlate)] = new Color32(199, 195, 74, 255),
                 [typeof(Portal)] = new Color32(129, 93, 199, 255),
@@ -135,7 +135,7 @@ namespace CodeBase.Editor.LevelEditor
                 new Plate(GetTextureByType<Plate>()),
                 new InitialPlate(GetTextureByType<InitialPlate>()),
                 new Wall(GetTextureByType<Wall>()),
-                new Wall2(GetTextureByType<Wall2>()),
+                new WallHole(GetTextureByType<WallHole>()),
                 new Key(GetTextureByType<Key>()),
                 new Door(GetTextureByType<Door>()),
                 new MovingMarker(GetTextureByType<MovingMarker>()),

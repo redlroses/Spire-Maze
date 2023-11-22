@@ -22,6 +22,7 @@ namespace CodeBase.Infrastructure.Factory
         PhysicMaterial CreatePhysicMaterial(string name);
         GameObject CreateHud();
         GameObject CreateLobby();
+        GameObject CreateLearningLevel();
         IItem CreateItem(StorableStaticData itemType);
         GameObject CreateVirtualMover();
         GameObject CreateSpireSegment(Vector3 at, Quaternion quaternion);

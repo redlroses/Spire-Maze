@@ -22,7 +22,7 @@ using Rock = CodeBase.LevelSpecification.Cells.Rock;
 using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
 using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
 using Wall = CodeBase.LevelSpecification.Cells.Wall;
-using Wall2 = CodeBase.LevelSpecification.Cells.Wall2;
+using WallHole = CodeBase.LevelSpecification.Cells.WallHole;
 
 namespace CodeBase.Services.LevelBuild
 {
@@ -47,8 +47,8 @@ namespace CodeBase.Services.LevelBuild
                 level.Where(cell => cell.CellData is EditorCells.Plate).ToArray());
             _cellConstructor.Construct<Wall>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Wall).ToArray());
-            _cellConstructor.Construct<Wall2>(_gameFactory,
-                level.Where(cell => cell.CellData is EditorCells.Wall2).ToArray());
+            _cellConstructor.Construct<WallHole>(_gameFactory,
+                level.Where(cell => cell.CellData is EditorCells.WallHole).ToArray());
             _cellConstructor.Construct<Key>(_gameFactory,
                 level.Where(cell => cell.CellData is EditorCells.Key).ToArray());
             _cellConstructor.Construct<Door>(_gameFactory,

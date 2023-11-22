@@ -16,11 +16,11 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string EditorInterstitialADPanel = "Prefabs/UI/DebugPanels/EditorInterstitialADPanel";
 
         public const string HeroPath = "Prefabs/Hero";
-        public const string Enemies = "Prefabs/Enemies";
         public const string VirtualMover = "Prefabs/VirtualMover";
         public const string Spire = "Prefabs/Spire";
         public const string Cells = "Prefabs/Cells";
         public const string Lobby = "Prefabs/Lobby";
+        public const string LearningLevel = "Prefabs/Learning";
 
         public const string Materials = "Materials";
         public const string PhysicMaterials = "Materials/Physics";

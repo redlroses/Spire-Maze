@@ -14,10 +14,10 @@ namespace CodeBase.Data
         public LevelAccumulationData LevelAccumulationData;
         public string SceneName;
 
-        public WorldData(string initialScene)
+        public WorldData(string initialScene, int initialLevelId)
         {
             LevelPositions = new LevelPositions();
-            LevelState = new LevelState(LevelNames.LobbyId);
+            LevelState = new LevelState(initialLevelId);
             HeroHealthState = new HealthState();
             HeroStaminaState = new StaminaState();
             HeroInventoryData = new InventoryData();
