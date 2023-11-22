@@ -1,5 +1,4 @@
-﻿using System;
-using NTC.Global.Cache;
+﻿using NTC.Global.Cache;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +9,9 @@ namespace CodeBase.UI.Elements
         [SerializeField] private TextMeshProUGUI _text;
 
         private string _formatText;
+
+        private void OnValidate() =>
+            _text ??= GetComponent<TextMeshProUGUI>();
 
         private void Awake() =>
             _formatText = _text.text;

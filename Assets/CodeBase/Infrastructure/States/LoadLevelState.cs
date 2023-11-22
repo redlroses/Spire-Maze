@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.LevelSpecification;
 using CodeBase.Logic;
 using CodeBase.Logic.Cameras;
 using CodeBase.Logic.HealthEntity;
@@ -129,8 +130,7 @@ namespace CodeBase.Infrastructure.States
         {
             if (_loadPayload.IsBuildable)
             {
-                BuildLevel();
-                ConstructLevel();
+                CreateLevel();
                 return;
             }
 
@@ -146,10 +146,16 @@ namespace CodeBase.Infrastructure.States
             }
         }
 
+        private Level CreateLevel()
+        {
+            Level level = BuildLevel();
+            ConstructLevel();
+            return level;
+        }
+
         private void InitLearningLevel()
         {
-            BuildLevel();
-            ConstructLevel();
+            Level level = CreateLevel();
         }
 
         private void InitLobby()
@@ -185,7 +191,7 @@ namespace CodeBase.Infrastructure.States
         private Vector3 GetHeroPosition() =>
             _progressService.Progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
 
-        private void BuildLevel() =>
+        private Level BuildLevel() =>
             _levelBuilder.Build(_staticData.GetForLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>

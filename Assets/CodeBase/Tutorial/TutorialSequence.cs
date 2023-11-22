@@ -16,25 +16,23 @@ namespace CodeBase.Tutorial
         [SerializeField] private TextSetter _text;
 
         [Space] [Header("Content Settings")]
-        [SerializeField] private TutorialTrigger[] _triggers;
         [SerializeField] private TutorialConfig _tutorialConfig;
 
+        private TutorialTrigger[] _triggers;
         private int _nextPanelIndex;
         private IInputService _inputService;
 
         private void OnValidate() =>
             _triggers ??= GetComponentsInChildren<TutorialTrigger>();
 
-        private void Start() =>
-            Subscribe();
-
         private void OnDestroy() =>
             Unsubscribe();
 
-        public void Construct(IInputService inputService)
+        public void Construct(IInputService inputService, TutorialTrigger[] triggers)
         {
             _inputService = inputService;
-            _hideButton.Subscribe(_inputService.EnableMovementMap);
+            _triggers = triggers;
+            Subscribe();
         }
 
         private void ShowNext()
@@ -55,6 +53,8 @@ namespace CodeBase.Tutorial
         {
             foreach (TutorialTrigger trigger in _triggers)
                 trigger.Triggered += ShowNext;
+
+            _hideButton.Subscribe(_inputService.EnableMovementMap);
         }
 
         private void Unsubscribe()

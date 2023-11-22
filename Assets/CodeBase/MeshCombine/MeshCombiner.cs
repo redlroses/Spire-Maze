@@ -162,8 +162,14 @@ namespace CodeBase.MeshCombine
                 isStatic = true
             };
 
-            MeshCollider[] meshColliders = cells.Select(container => container.Container.GetComponentInChildren<MeshCollider>(true)).ToArray();
-            MeshFilter[] meshesFilters = meshColliders.Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
+            MeshCollider[] meshColliders = cells
+                .Select(container => container.Container.GetComponentInChildren<MeshCollider>(true)).ToArray();
+
+            Debug.Log(meshColliders.Length);
+            Debug.Log(meshColliders[0].name);
+
+            MeshFilter[] meshesFilters = meshColliders
+                .Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
 
             foreach (MeshCollider meshCollider in meshColliders)
             {

@@ -16,33 +16,29 @@ namespace CodeBase.LevelSpecification
         public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
 
-        public Level(int size, Transform origin, List<Floor> container = null) : base(size, origin, container)
-        {
-        }
+        public Level(int size, Transform origin, List<Floor> container = null) : base(size, origin, container) { }
 
-        public bool MoveNext()
-        {
-            _currentIndex++;
-            return _currentIndex < Size;
-        }
+        bool IEnumerator.MoveNext() =>
+            ++_currentIndex < Size;
 
-        public void Reset()
-        {
+        void IEnumerator.Reset() =>
             _currentIndex = -1;
-            MoveNext();
-        }
 
-        IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator() =>
-            new Level(Size, Origin, Container);
+        IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator()
+        {
+            ((IEnumerator) this).Reset();
+            return this;
+        }
 
         public IEnumerator GetEnumerator() =>
             this;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        public Cell GetCell(int floor, int index) =>
-            Container[floor].Container[index];
+        public Cell GetCell(int floor, int onFloorIndex) =>
+            Container[floor].Container[onFloorIndex];
+
+        public Cell GetCell(int index) =>
+            Container[index / Width].Container[_currentIndex % Width];
     }
 }
