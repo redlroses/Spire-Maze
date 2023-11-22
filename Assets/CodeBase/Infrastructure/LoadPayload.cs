@@ -7,7 +7,7 @@
         public readonly bool IsClearLoad;
         public readonly bool IsBuildable;
 
-        public LoadPayload(string sceneName, bool isBuildable, int levelId = -1, bool isClearLoad = false)
+        public LoadPayload(string sceneName, bool isBuildable, int levelId = -2, bool isClearLoad = false)
         {
             SceneName = sceneName;
             LevelId = levelId;

@@ -89,11 +89,7 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Hide();
             _levelBuilder.Clear();
-
-            if (string.Equals(_loadPayload.SceneName, LevelNames.Initial) == false)
-            {
-                _adService.ShowInterstitialAd();
-            }
+            _adService.ShowInterstitialAd();
         }
 
         private void OnLoaded()

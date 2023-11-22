@@ -1,5 +1,7 @@
-﻿using CodeBase.Infrastructure;
+﻿using System;
+using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {
@@ -13,8 +15,27 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             _levelId = levelId;
         }
 
-        protected override LoadPayload TransitionPayload() =>
-            new LoadPayload(LevelNames.BuildableLevel, true,
-                _levelId, true);
+        protected override LoadPayload TransitionPayload()
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            if (sceneName.Equals(LevelNames.BuildableLevel))
+            {
+                return new LoadPayload(LevelNames.BuildableLevel, true,
+                    _levelId, true);
+            }
+
+            return new LoadPayload(sceneName, false, GetLevelId(sceneName));
+        }
+
+        private int GetLevelId(string bySceneName)
+        {
+            return bySceneName switch
+            {
+                LevelNames.Lobby => LevelNames.LobbyId,
+                LevelNames.LearningLevel => LevelNames.LearningLevelId,
+                _ => throw new ArgumentNullException(nameof(bySceneName))
+            };
+        }
     }
 }
