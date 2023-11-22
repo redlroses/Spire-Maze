@@ -156,6 +156,7 @@ namespace CodeBase.Infrastructure.States
         private void InitLearningLevel()
         {
             Level level = CreateLevel();
+            
         }
 
         private void InitLobby()
