@@ -9,17 +9,17 @@ namespace CodeBase.Logic.StateMachine.States
     {
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
-        private readonly IPlayerInputService _playerInputService;
+        private readonly IInputService _inputService;
         private readonly HeroMover _mover;
         private readonly Jumper _jumper;
         private readonly Dodge _dodge;
 
         public PlayerIdleState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService, HeroMover mover, Jumper jumper, Dodge dodge)
+            IInputService inputService, HeroMover mover, Jumper jumper, Dodge dodge)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
-            _playerInputService = playerInputService;
+            _inputService = inputService;
             _mover = mover;
             _jumper = jumper;
             _dodge = dodge;
@@ -28,16 +28,16 @@ namespace CodeBase.Logic.StateMachine.States
         public void Enter()
         {
             _mover.Move(MoveDirection.Stop);
-            _playerInputService.HorizontalMove += OnHorizontalMove;
-            _playerInputService.Jump += OnJump;
-            _playerInputService.Dodge += OnDodge;
+            _inputService.HorizontalMove += OnHorizontalMove;
+            _inputService.Jump += OnJump;
+            _inputService.Dodge += OnDodge;
         }
 
         public void Exit()
         {
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
-            _playerInputService.Jump -= OnJump;
-            _playerInputService.Dodge -= OnDodge;
+            _inputService.HorizontalMove -= OnHorizontalMove;
+            _inputService.Jump -= OnJump;
+            _inputService.Dodge -= OnDodge;
         }
 
         private void OnDodge(MoveDirection direction)

@@ -70,6 +70,18 @@ namespace CodeBase.Logic
             PlayForward();
         }
 
+        protected override void Run()
+        {
+            bool isActive = _towardMover.TryUpdate(Time.smoothDeltaTime * _speed, out TValue lerpValue);
+            ApplyLerpValue(lerpValue);
+
+            if (isActive == enabled)
+                return;
+
+            enabled = isActive;
+            OnEnd();
+        }
+
         public void Hide(Action onHideCallback = null)
         {
             if (onHideCallback is null)
@@ -93,18 +105,6 @@ namespace CodeBase.Logic
 
             AppendCallback(onHideCallback);
             PlayReverse();
-        }
-
-        protected override void Run()
-        {
-            bool isActive = _towardMover.TryUpdate(Time.smoothDeltaTime * _speed, out TValue lerpValue);
-            ApplyLerpValue(lerpValue);
-
-            if (isActive != enabled)
-            {
-                enabled = isActive;
-                OnEnd();
-            }
         }
 
         private void OnEnd()

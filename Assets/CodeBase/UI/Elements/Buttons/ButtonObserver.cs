@@ -16,6 +16,9 @@ namespace CodeBase.UI.Elements.Buttons
             remove => Button.onClick.RemoveListener(value);
         }
 
+        private void OnValidate() =>
+            Awake();
+
         private void Awake() =>
             Button ??= GetComponent<Button>();
 

@@ -96,8 +96,8 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IWindowService>(
                 new WindowService(
                     _services.Single<IUIFactory>()));
-            _services.RegisterSingle<IPlayerInputService>(
-                new PlayerInputService(
+            _services.RegisterSingle<IInputService>(
+                new InputService(
                     _services.Single<IPauseService>(),
                     _services.Single<IWindowService>()));
             _services.RegisterSingle<IGameFactory>(
@@ -109,7 +109,7 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IWindowService>(),
                     _services.Single<IWatchService>(),
                     _services.Single<IUIFactory>(),
-                    _services.Single<IPlayerInputService>(),
+                    _services.Single<IInputService>(),
                     _services.Single<ICameraOperatorService>()));
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(

@@ -14,7 +14,7 @@ namespace CodeBase.Logic.Items
     public class Binocular : Item, IUsable, IReloadable
     {
         private readonly IUIFactory _uiFactory;
-        private readonly IPlayerInputService _inputService;
+        private readonly IInputService _inputService;
         private readonly IGameFactory _gameFactory;
         private readonly ICameraOperatorService _cameraOperator;
         private readonly IPersistentProgressService _persistentProgressService;
@@ -22,7 +22,7 @@ namespace CodeBase.Logic.Items
         private VirtualMover _virtualMover;
         public float ReloadTime { get; }
 
-        public Binocular(StorableStaticData staticData, IUIFactory uiFactory, IPlayerInputService inputService,
+        public Binocular(StorableStaticData staticData, IUIFactory uiFactory, IInputService inputService,
             IGameFactory gameFactory, ICameraOperatorService cameraOperator,
             IPersistentProgressService persistentProgressService) : base(staticData)
         {

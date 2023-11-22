@@ -19,7 +19,7 @@ namespace CodeBase.Logic.Hero
         [SerializeField] private Dodge _dodge;
         [SerializeField] private Jumper _jumper;
 
-        private IPlayerInputService _inputService;
+        private IInputService _inputService;
         private PlayerStateMachine _entityStateMachine;
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace CodeBase.Logic.Hero
             _entityStateMachine.Cleanup();
         }
 
-        public void Construct(IPlayerInputService inputService, GameStateMachine stateMachine)
+        public void Construct(IInputService inputService, GameStateMachine stateMachine)
         {
             _inputService = inputService;
             _aliveObserver.Construct(stateMachine);

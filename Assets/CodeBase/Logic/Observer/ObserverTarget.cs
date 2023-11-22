@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Logic.Observer
 {
     public abstract class ObserverTarget<TObserver, TTarget> : MonoBehaviour where TObserver : ITriggerObserver<TTarget>
     {
         [SerializeField] private TObserver _observer;
+
+        private void OnValidate()
+        {
+            Awake();
+        }
 
         private void Awake()
         {
@@ -21,6 +27,6 @@ namespace CodeBase.Logic.Observer
             _observer.Entered -= OnTriggerObserverEntered;
         }
 
-        protected abstract void OnTriggerObserverEntered(TTarget damagable);
+        protected abstract void OnTriggerObserverEntered(TTarget target);
     }
 }

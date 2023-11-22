@@ -11,11 +11,11 @@ namespace CodeBase.Infrastructure.States
     private readonly IPersistentProgressService _progressService;
     private readonly ISaveLoadService _saveLoadService;
     private readonly GameStateMachine _stateMachine;
-    private readonly IPlayerInputService _inputService;
+    private readonly IInputService _inputService;
     private readonly IWatchService _watchService;
 
     public GameLoopState(GameStateMachine stateMachine, IPersistentProgressService progressService, ISaveLoadService saveLoadService,
-      IPlayerInputService inputService, IWatchService watchService)
+      IInputService inputService, IWatchService watchService)
     {
       _inputService = inputService;
       _stateMachine = stateMachine;

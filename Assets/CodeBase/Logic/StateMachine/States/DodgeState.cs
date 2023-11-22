@@ -13,7 +13,7 @@ namespace CodeBase.Logic.StateMachine.States
     {
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
-        private readonly IPlayerInputService _playerInputService;
+        private readonly IInputService _inputService;
         private readonly Dodge _dodge;
         private readonly HeroHealth _heroHealth;
         private readonly InputController _inputController;
@@ -21,11 +21,11 @@ namespace CodeBase.Logic.StateMachine.States
         private MoveDirection _lastDirection;
 
         public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService, Dodge dodge, HeroHealth heroHealth)
+            IInputService inputService, Dodge dodge, HeroHealth heroHealth)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
-            _playerInputService = playerInputService;
+            _inputService = inputService;
             _dodge = dodge;
             _heroHealth = heroHealth;
         }
@@ -36,7 +36,7 @@ namespace CodeBase.Logic.StateMachine.States
             _dodge.Evade(payload);
             _lastDirection = payload;
             _heroHealth.IsImmune = true;
-            _playerInputService.HorizontalMove += OnHorizontalMove;
+            _inputService.HorizontalMove += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
         }
 
@@ -44,7 +44,7 @@ namespace CodeBase.Logic.StateMachine.States
         {
             _heroHealth.IsImmune = false;
             _heroAnimator.StateExited -= OnStateExited;
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
+            _inputService.HorizontalMove -= OnHorizontalMove;
         }
 
         private void OnHorizontalMove(MoveDirection direction)
@@ -60,7 +60,7 @@ namespace CodeBase.Logic.StateMachine.States
             if (state != AnimatorState.Dodge)
                 return;
 
-            if (_playerInputService.MovementPhase != InputActionPhase.Waiting)
+            if (_inputService.MovementPhase != InputActionPhase.Waiting)
             {
                 _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
             }

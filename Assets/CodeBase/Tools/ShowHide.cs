@@ -19,7 +19,7 @@ namespace CodeBase.Tools
         [SerializeField] [CurveRange(0, 0, 1, 1, EColor.Green)]
         private AnimationCurve _modifyCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
-        [SerializeField] private bool _isUseCommandQueue;
+        [SerializeField] [Label("Use Command Queue")] private bool _isUseCommandQueue;
 
         private RoutineSequence _commandAwaiter;
         private TowardMover<TValue> _towardMover;

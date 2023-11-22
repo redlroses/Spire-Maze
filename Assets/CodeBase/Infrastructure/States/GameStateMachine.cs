@@ -33,7 +33,7 @@ namespace CodeBase.Infrastructure.States
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, coroutineRunner),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     services.Single<IGameFactory>(),
-                    services.Single<IPlayerInputService>(),
+                    services.Single<IInputService>(),
                     services.Single<IUIFactory>(),
                     services.Single<IPersistentProgressService>(),
                     services.Single<IStaticDataService>(),
@@ -51,7 +51,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IStaticDataService>(),
                     services.Single<ISoundService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(), services.Single<IPlayerInputService>(),
+                    services.Single<ISaveLoadService>(), services.Single<IInputService>(),
                     services.Single<IWatchService>()),
                 [typeof(FinishState)] = new FinishState(
                     services.Single<IWindowService>(),

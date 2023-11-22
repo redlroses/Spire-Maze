@@ -35,7 +35,7 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
-        private readonly IPlayerInputService _playerInputService;
+        private readonly IInputService _inputService;
         private readonly IPersistentProgressService _progressService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
@@ -51,7 +51,7 @@ namespace CodeBase.Infrastructure.States
 
         private LoadPayload _loadPayload;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IPlayerInputService playerInputService,
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
             ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
@@ -60,7 +60,7 @@ namespace CodeBase.Infrastructure.States
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
-            _playerInputService = playerInputService;
+            _inputService = inputService;
             _uiFactory = uiFactory;
             _progressService = progressService;
             _staticData = staticDataService;
@@ -195,7 +195,7 @@ namespace CodeBase.Infrastructure.States
         {
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
-            hero.GetComponent<HeroRoot>().Construct(_playerInputService, _stateMachine);
+            hero.GetComponent<HeroRoot>().Construct(_inputService, _stateMachine);
             hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaForEntity(PlayerKey));
             return hero;
         }

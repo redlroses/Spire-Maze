@@ -4,6 +4,6 @@ namespace CodeBase.Tools
 {
     public interface IShowable
     {
-        void Show(Action OnShowCallback = null);
+        void Show(Action onShowCallback = null);
     }
 }

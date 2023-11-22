@@ -35,7 +35,7 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IWindowService _windowService;
         private readonly IWatchService _watchService;
         private readonly IUIFactory _uiFactory;
-        private readonly IPlayerInputService _inputService;
+        private readonly IInputService _inputService;
         private readonly ICameraOperatorService _cameraOperator;
 
         private readonly Dictionary<string, Material> _materials;
@@ -47,7 +47,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameFactory(IAssetProvider assets, IRandomService randomService,
             IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IPlayerInputService inputService,
+            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;

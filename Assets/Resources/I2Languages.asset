@@ -161,6 +161,80 @@ MonoBehaviour:
       - "\u0417\u0432\u0443\u043A"
       Flags: 000000
       Languages_Touch: []
+    - Term: TutorialMove
+      TermType: 0
+      Description: 
+      Languages:
+      - Use the joystick on the right side of the screen to move around
+      - "Hareket etmek i\xE7in ekran\u0131n sa\u011F taraf\u0131ndaki joystick'i
+        kullan\u0131n"
+      - "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u0434\u0436\u043E\u0439\u0441\u0442\u0438\u043A
+        \u0432 \u043F\u0440\u0430\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438
+        \u044D\u043A\u0440\u0430\u043D\u0430 \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialJump
+      TermType: 0
+      Description: 
+      Languages:
+      - To make a jump, click on the "Up" arrow on the left side of the screen
+      - "Atlamak i\xE7in ekran\u0131n sol taraf\u0131ndaki \"Yukar\u0131\" okuna
+        t\u0131klay\u0131n"
+      - "\u0414\u043B\u044F \u0441\u043E\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
+        \u043F\u0440\u044B\u0436\u043A\u0430, \u043D\u0430\u0436\u043C\u0438\u0442\u0435
+        \u043D\u0430 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443 \"\u0412\u0432\u0435\u0440\u0445\"
+        \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u044D\u043A\u0440\u0430\u043D\u0430"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialDoor
+      TermType: 0
+      Description: 
+      Languages:
+      - There are sometimes closed doors along the way. For each door you need to
+        find the corresponding key, which is indicated on the sign.
+      - "Bazen yol boyunca kapal\u0131 kap\u0131lar vard\u0131r. Her kap\u0131 i\xE7in
+        tabelada belirtilen ilgili anahtar\u0131 bulman\u0131z gerekir."
+      - "\u041D\u0430 \u043F\u0443\u0442\u0438 \u0438\u043D\u043E\u0433\u0434\u0430
+        \u0432\u0441\u0442\u0440\u0435\u0447\u0430\u0442\u044C\u0441\u044F \u0437\u0430\u043A\u0440\u044B\u0442\u044B\u0435
+        \u0434\u0432\u0435\u0440\u0438. \u0414\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0439
+        \u0434\u0432\u0435\u0440\u0438 \u043D\u0443\u0436\u043D\u043E \u043D\u0430\u0439\u0442\u0438
+        \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0439
+        \u0435\u0439 \u043A\u043B\u044E\u0447, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
+        \u0443\u043A\u0430\u0437\u0430\u043D \u043D\u0430 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0435."
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialKey
+      TermType: 0
+      Description: 
+      Languages:
+      - All found keys can be viewed in your inventory. To open a door, walk up to
+        the door and the key is used automatically. When you use the key, it disappears
+        from your inventory.
+      - "Bulunan t\xFCm anahtarlar envanterinizde g\xF6r\xFCnt\xFClenebilir. Bir
+        kap\u0131y\u0131 a\xE7mak i\xE7in kap\u0131ya do\u011Fru y\xFCr\xFCy\xFCn
+        ve anahtar otomatik olarak kullan\u0131l\u0131r. Anahtar\u0131 kulland\u0131\u011F\u0131n\u0131zda
+        envanterinizden kaybolur."
+      - "\u0412\u0441\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043D\u044B\u0435
+        \u043A\u043B\u044E\u0447\u0438 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
+        \u0432 \u0441\u0432\u043E\u0451\u043C \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435.
+        \u0427\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C
+        \u0434\u0432\u0435\u0440\u044C, \u043F\u043E\u0434\u043E\u0439\u0434\u0438\u0442\u0435
+        \u043A \u0434\u0432\u0435\u0440\u0438 \u0438 \u043A\u043B\u044E\u0447 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F
+        \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438. 
+        \u041F\u0440\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438
+        \u043A\u043B\u044E\u0447\u0430 \u043E\u043D \u043F\u0440\u043E\u043F\u0430\u0434\u0430\u0435\u0442
+        \u0438\u0437 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F. "
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Okey
+      TermType: 0
+      Description: 
+      Languages:
+      - OK
+      - Tamam
+      - "\u041F\u043E\u043D\u044F\u0442\u043D\u043E"
+      Flags: 000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
@@ -179,7 +253,7 @@ MonoBehaviour:
     Google_WebServiceURL: https://script.google.com/macros/s/AKfycbw1db4_wBecJcloUOLaAOks_hSqzVaLhDMpUDA4vRw5LHhjqpdEKRo4_M4dDgBiNzDA/exec
     Google_SpreadsheetKey: 1ri0ni3PftW21_luR1S7mY1FWMpubnShOzefOawAUO8c
     Google_SpreadsheetName: I2Loc Spyre Maze Localization
-    Google_LastUpdatedVersion: 1699017034535
+    Google_LastUpdatedVersion: 1699017051513
     Google_Password: SpyreMaze
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2

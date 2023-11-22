@@ -4,6 +4,6 @@ namespace CodeBase.Tools
 {
     public interface IHidable
     {
-        void Hide(Action OnHideCallback = null);
+        void Hide(Action onHideCallback = null);
     }
 }

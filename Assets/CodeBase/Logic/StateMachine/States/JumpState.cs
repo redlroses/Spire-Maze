@@ -12,18 +12,18 @@ namespace CodeBase.Logic.StateMachine.States
     {
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
-        private readonly IPlayerInputService _playerInputService;
+        private readonly IInputService _inputService;
         private readonly Jumper _jumper;
         private readonly HeroMover _mover;
 
         private MoveDirection _lastDirection;
 
         public JumpState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IPlayerInputService playerInputService, Jumper jumper, HeroMover mover)
+            IInputService inputService, Jumper jumper, HeroMover mover)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
-            _playerInputService = playerInputService;
+            _inputService = inputService;
             _jumper = jumper;
             _mover = mover;
         }
@@ -34,13 +34,13 @@ namespace CodeBase.Logic.StateMachine.States
             _mover.Move(payload);
             _lastDirection = payload;
             _heroAnimator.StateExited += OnStateExited;
-            _playerInputService.HorizontalMove += OnHorizontalMove;
+            _inputService.HorizontalMove += OnHorizontalMove;
         }
 
         public void Exit()
         {
             _heroAnimator.StateExited -= OnStateExited;
-            _playerInputService.HorizontalMove -= OnHorizontalMove;
+            _inputService.HorizontalMove -= OnHorizontalMove;
         }
 
         private void OnStateExited(AnimatorState state)
@@ -48,7 +48,7 @@ namespace CodeBase.Logic.StateMachine.States
             if (state != AnimatorState.Jump)
                 return;
 
-            if (_playerInputService.MovementPhase != InputActionPhase.Waiting)
+            if (_inputService.MovementPhase != InputActionPhase.Waiting)
             {
                 _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
             }
