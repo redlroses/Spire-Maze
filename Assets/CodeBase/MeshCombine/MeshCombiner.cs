@@ -165,9 +165,6 @@ namespace CodeBase.MeshCombine
             MeshCollider[] meshColliders = cells
                 .Select(container => container.Container.GetComponentInChildren<MeshCollider>(true)).ToArray();
 
-            Debug.Log(meshColliders.Length);
-            Debug.Log(meshColliders[0].name);
-
             MeshFilter[] meshesFilters = meshColliders
                 .Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
 

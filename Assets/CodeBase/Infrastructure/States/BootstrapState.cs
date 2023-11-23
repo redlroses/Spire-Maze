@@ -103,11 +103,8 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
-                    _services.Single<IRandomService>(),
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IPauseService>(),
-                    _services.Single<IWindowService>(),
-                    _services.Single<IWatchService>(),
                     _services.Single<IUIFactory>(),
                     _services.Single<IInputService>(),
                     _services.Single<ICameraOperatorService>()));

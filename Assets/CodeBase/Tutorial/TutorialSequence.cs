@@ -1,7 +1,11 @@
-﻿using CodeBase.Services.Input;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using CodeBase.Services.Input;
 using CodeBase.StaticData;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +19,9 @@ namespace CodeBase.Tutorial
         [SerializeField] private Image _image;
         [SerializeField] private TextSetter _text;
 
-        [Space] [Header("Content Settings")]
-        [SerializeField] private TutorialConfig _tutorialConfig;
-
-        private TutorialTrigger[] _triggers;
-        private int _nextPanelIndex;
+        private TutorialConfig _config;
+        private IReadOnlyCollection<TutorialTrigger> _triggers;
+        private int _nextPanelIndex = -1;
         private IInputService _inputService;
 
         private void OnValidate() =>
@@ -28,25 +30,33 @@ namespace CodeBase.Tutorial
         private void OnDestroy() =>
             Unsubscribe();
 
-        public void Construct(IInputService inputService, TutorialTrigger[] triggers)
+        public void Construct(IInputService inputService, TutorialConfig config, IReadOnlyCollection<TutorialTrigger> triggers)
         {
             _inputService = inputService;
+            _config = config;
             _triggers = triggers;
             Subscribe();
         }
 
         private void ShowNext()
         {
-            _inputService.DisableMovementMap();
-            ApplyContentFromModule();
-            _panel.Show();
+            if (TryApplyContentFromModule())
+            {
+                _inputService.DisableMovementMap();
+                _panel.Show();
+            }
         }
 
-        private void ApplyContentFromModule()
+        private bool TryApplyContentFromModule()
         {
-            TutorialModule module = _tutorialConfig.GetModule(_nextPanelIndex++);
+            if (++_nextPanelIndex > _config.ModulesLength - 1)
+                return false;
+
+            TutorialModule module = _config.GetModule(_nextPanelIndex);
             _image.sprite = module.Sprite;
-            _text.SetText(module.ExplanationText);
+            _text.SetText(module.ExplanationText.TranslateTerm());
+
+            return true;
         }
 
         private void Subscribe()
@@ -54,7 +64,11 @@ namespace CodeBase.Tutorial
             foreach (TutorialTrigger trigger in _triggers)
                 trigger.Triggered += ShowNext;
 
-            _hideButton.Subscribe(_inputService.EnableMovementMap);
+            _hideButton.Subscribe(() =>
+            {
+                _panel.Hide();
+                _inputService.EnableMovementMap();
+            });
         }
 
         private void Unsubscribe()
@@ -63,6 +77,12 @@ namespace CodeBase.Tutorial
                 trigger.Triggered -= ShowNext;
 
             _hideButton.Cleanup();
+        }
+
+        [Button] [Conditional("UNITY_EDITOR")]
+        private void ForceShowNextPanel()
+        {
+            ShowNext();
         }
     }
 }

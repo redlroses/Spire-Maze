@@ -19,5 +19,6 @@ namespace CodeBase.Services.StaticData
     Sprite GetSpriteByLang(string lang);
     Sprite GetDefaultAvatar();
     CameraConfig GetCameraConfigByOrientation(string orientation);
+    TutorialConfig GetTutorialConfig();
   }
 }

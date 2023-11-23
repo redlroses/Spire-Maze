@@ -21,6 +21,7 @@ namespace CodeBase.Services.StaticData
         private const string FlagsConfigPath = "StaticData/FlagsConfig";
         private const string DefaultAvatarPath = "StaticData/DefaultAvatar";
         private const string CameraConfigsPath = "StaticData/CameraConfigs";
+        private const string TutorialConfigPath = "StaticData/TutorialConfig";
 
         private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -32,6 +33,8 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, CameraConfig> _cameraConfigs;
 
         private FlagsConfig _flagsConfig;
+        private TutorialConfig _tutorialConfig;
+
 
         public void Load()
         {
@@ -49,6 +52,7 @@ namespace CodeBase.Services.StaticData
                 .ToDictionary(x => x.WindowId, x => x);
 
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
+            _tutorialConfig = Resources.Load<TutorialConfig>(TutorialConfigPath);
         }
 
         public LevelStaticData GetForLevel(int levelId) =>
@@ -82,6 +86,9 @@ namespace CodeBase.Services.StaticData
 
         public CameraConfig GetCameraConfigByOrientation(string orientation) =>
             _cameraConfigs[orientation];
+
+        public TutorialConfig GetTutorialConfig() =>
+            _tutorialConfig;
 
         private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)

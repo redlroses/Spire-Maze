@@ -21,7 +21,7 @@ namespace I2.Loc
             return new LocalizedString { mTerm = term };
         }
 
-        public LocalizedString (LocalizedString str)
+        public LocalizedString(LocalizedString str)
         {
             mTerm = str.mTerm;
             mRTL_IgnoreArabicFix = str.mRTL_IgnoreArabicFix;
@@ -29,8 +29,6 @@ namespace I2.Loc
             mRTL_ConvertNumbers = str.mRTL_ConvertNumbers;
             m_DontLocalizeParameters = str.m_DontLocalizeParameters;
         }
-
-
 
         public override string ToString()
         {

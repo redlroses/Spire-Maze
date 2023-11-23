@@ -12,6 +12,7 @@ namespace CodeBase.Tools
     {
         private readonly Queue<Action> _commands = new Queue<Action>();
 
+        [Header("Main Settings")]
         [SerializeField] private TValue _from;
         [SerializeField] private TValue _to;
         [SerializeField] private float _speed;
@@ -36,17 +37,19 @@ namespace CodeBase.Tools
                 .WaitWhile(() => enabled)
                 .Then(ExecuteCommand)
                 .LoopWhile(() => _commands.Count > 0);
+
+            OnInitialize();
         }
 
         protected abstract Func<TValue, TValue, float, TValue> GetLerpFunction();
 
         protected abstract void ApplyLerpValue(TValue lerpValue);
 
+        protected virtual void OnInitialize() { }
+
         protected virtual void OnShow() { }
 
         protected virtual void OnHide() { }
-
-        protected virtual void OnInitialize() { }
 
         public void Show(Action onShowCallback = null)
         {

@@ -69,6 +69,9 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateCellView(Transform inside) =>
             InstantiateRegistered(AssetPath.CellView, inside);
 
+        public GameObject CreateTutorialSequence() =>
+            _assets.Instantiate(AssetPath.TutorialPanel, _uiRoot);
+
         public GameObject CreateCompassArrowPanel(Transform hero, float lifetime)
         {
             GameObject panel = _assets.Instantiate(AssetPath.CompassArrowPanel);
@@ -84,26 +87,26 @@ namespace CodeBase.UI.Services.Factory
 
         public void CreateSettings()
         {
-            var window = CreateWindow<SettingsWindow>(WindowId.Settings);
+            SettingsWindow window = CreateWindow<SettingsWindow>(WindowId.Settings);
             window.Construct(_localizationService, _soundService);
         }
 
         public void CreatePause()
         {
-            var window = CreateWindow<PauseWindow>(WindowId.Pause);
+            PauseWindow window = CreateWindow<PauseWindow>(WindowId.Pause);
             window.Construct(_progressService, _pauseService, _stateMachine);
             _pauseService.Register(window);
         }
 
         public void CreateResults()
         {
-            var window = CreateWindow<ResultsWindow>(WindowId.Results);
+            ResultsWindow window = CreateWindow<ResultsWindow>(WindowId.Results);
             window.Construct(_progressService, _stateMachine);
         }
 
         public void CreateLose()
         {
-            var window = CreateWindow<LoseWindow>(WindowId.Lose);
+            LoseWindow window = CreateWindow<LoseWindow>(WindowId.Lose);
             window.Construct(_progressService, _adService, _hero, _stateMachine);
         }
 
@@ -112,13 +115,13 @@ namespace CodeBase.UI.Services.Factory
 
         public void CreateLeaderboard()
         {
-            var window = CreateWindow<LeaderboardWindow>(WindowId.Leaderboard);
+            LeaderboardWindow window = CreateWindow<LeaderboardWindow>(WindowId.Leaderboard);
             window.Construct(_rankedService, this);
         }
 
         public void CreateUIRoot()
         {
-            GameObject root = _assets.Instantiate(AssetPath.UIRootPath);
+            GameObject root = _assets.Instantiate(AssetPath.UIRoot);
             _uiRoot = root.transform;
             root.GetComponent<Canvas>().worldCamera = Camera.main;
         }

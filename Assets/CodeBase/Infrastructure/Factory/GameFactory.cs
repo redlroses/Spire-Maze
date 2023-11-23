@@ -12,8 +12,6 @@ using CodeBase.Services.Randomizer;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
-using CodeBase.UI.Elements;
-using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
@@ -29,11 +27,8 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private readonly IAssetProvider _assets;
-        private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _persistentProgressService;
         private readonly IPauseService _pauseService;
-        private readonly IWindowService _windowService;
-        private readonly IWatchService _watchService;
         private readonly IUIFactory _uiFactory;
         private readonly IInputService _inputService;
         private readonly ICameraOperatorService _cameraOperator;
@@ -45,17 +40,13 @@ namespace CodeBase.Infrastructure.Factory
 
         public Transform Location => _heroTransform;
 
-        public GameFactory(IAssetProvider assets, IRandomService randomService,
-            IPersistentProgressService persistentProgressService, IPauseService pauseService,
-            IWindowService windowService, IWatchService watchService, IUIFactory uiFactory, IInputService inputService,
+        public GameFactory(IAssetProvider assets, IPersistentProgressService persistentProgressService,
+            IPauseService pauseService, IUIFactory uiFactory, IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;
-            _randomService = randomService;
             _persistentProgressService = persistentProgressService;
             _pauseService = pauseService;
-            _windowService = windowService;
-            _watchService = watchService;
             _uiFactory = uiFactory;
             _inputService = inputService;
             _cameraOperator = cameraOperator;
@@ -72,18 +63,12 @@ namespace CodeBase.Infrastructure.Factory
         public void WarmUp() =>
             _assets.LoadCells();
 
-        public GameObject CreateSpire() =>
-            _assets.Instantiate(path: AssetPath.Spire);
-
         public GameObject CreateHero(Vector3 at)
         {
-            GameObject hero = InstantiateRegistered(AssetPath.HeroPath, at);
+            GameObject hero = InstantiateRegistered(AssetPath.Hero, at);
             _heroTransform = hero.transform;
             return hero;
         }
-
-        public GameObject CreateEnemy(string prefabPath, Vector3 position) =>
-            InstantiateRegistered(prefabPath, position);
 
         public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
         {
@@ -96,9 +81,6 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateLobby() =>
             InstantiateRegistered(AssetPath.Lobby);
-
-        public GameObject CreateLearningLevel() =>
-            InstantiateRegistered(AssetPath.LearningLevel);
 
         public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
@@ -114,6 +96,9 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateVerticalRailLock(Transform container) =>
             _assets.Instantiate(AssetPath.VerticalRailLock, container);
+
+        public GameObject CreateTutorialTrigger(Transform container) =>
+            _assets.Instantiate(AssetPath.TutorialTrigger, container);
 
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
@@ -141,16 +126,8 @@ namespace CodeBase.Infrastructure.Factory
         public PhysicMaterial CreatePhysicMaterial(string name) =>
             GetCashed(name, AssetPath.PhysicMaterials, _physicMaterials);
 
-        public GameObject CreateHud()
-        {
-            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
-            hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService);
-            hud.GetComponentInChildren<ClockText>().Construct(_watchService);
-            hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
-            hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
-            hud.GetComponentInChildren<SettingsButton>().Construct(_windowService);
-            return hud;
-        }
+        public GameObject CreateHud() =>
+            InstantiateRegistered(AssetPath.Hud);
 
         private void Register(ISavedProgressReader progressReader)
         {

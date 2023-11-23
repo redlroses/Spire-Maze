@@ -19,7 +19,7 @@ namespace CodeBase.Logic.Items
 
         public void Use()
         {
-            _uiFactory.CreateCompassArrowPanel(_locator.Location, ReloadTime * 1000);
+            _uiFactory.CreateCompassArrowPanel(_locator.Location, ReloadTime);
         }
     }
 }

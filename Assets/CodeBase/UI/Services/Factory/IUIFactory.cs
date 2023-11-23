@@ -1,5 +1,4 @@
 ﻿using CodeBase.Logic.Hero;
-using CodeBase.Logic.Player;
 using CodeBase.Services;
 using UnityEngine;
 
@@ -23,5 +22,6 @@ namespace CodeBase.UI.Services.Factory
         void CreateLose();
         GameObject CreateEditorRewardADPanel();
         GameObject CreateEditorInterstitialADPanel();
+        GameObject CreateTutorialSequence();
     }
 }

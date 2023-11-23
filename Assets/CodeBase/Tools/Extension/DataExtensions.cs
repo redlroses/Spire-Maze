@@ -87,24 +87,13 @@ namespace CodeBase.Tools.Extension
             IAssetProvider assetProvider = AllServices.Container.Single<IAssetProvider>();
 
             Sprite avatar = assetProvider
-                .LoadAsset<Sprite>($"{AssetPath.AvatarPath}/{entry.extraData}");
+                .LoadAsset<Sprite>($"{AssetPath.Avatar}/{entry.extraData}");
 
             Sprite flag = assetProvider
-                .LoadAsset<Sprite>($"{AssetPath.FlagPath}/{entry.player.lang}");
+                .LoadAsset<Sprite>($"{AssetPath.Flag}/{entry.player.lang}");
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);
-        }
-
-        public static LanguageId AsLangId(this string langString)
-        {
-            return langString switch
-            {
-                "ru" => LanguageId.Russian,
-                "en" => LanguageId.English,
-                "tr" => LanguageId.Turkish,
-                _ => LanguageId.English
-            };
         }
     }
 }

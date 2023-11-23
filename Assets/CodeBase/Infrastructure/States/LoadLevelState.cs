@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
@@ -20,9 +21,12 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
+using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
+using CodeBase.Tutorial;
 using CodeBase.UI;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
@@ -155,8 +159,25 @@ namespace CodeBase.Infrastructure.States
 
         private void InitLearningLevel()
         {
+            TutorialConfig config = _staticData.GetTutorialConfig();
             Level level = CreateLevel();
-            
+            IReadOnlyCollection<TutorialTrigger> triggers = SpawnTutorialTriggers(level, config);
+            GameObject sequence = _uiFactory.CreateTutorialSequence();
+            sequence.GetComponent<TutorialSequence>().Construct(_inputService, config, triggers);
+        }
+
+        private IReadOnlyCollection<TutorialTrigger> SpawnTutorialTriggers(Level level, TutorialConfig config)
+        {
+            List<TutorialTrigger> triggers = new List<TutorialTrigger>(config.TriggerCellIndices.Count);
+
+            foreach (int triggerIndex in config.TriggerCellIndices)
+            {
+                Transform triggerContainer = level.GetCell(triggerIndex).Container;
+                GameObject trigger = _gameFactory.CreateTutorialTrigger(triggerContainer);
+                triggers.Add(trigger.GetComponent<TutorialTrigger>());
+            }
+
+            return triggers;
         }
 
         private void InitLobby()
@@ -211,6 +232,11 @@ namespace CodeBase.Infrastructure.States
         {
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
+            hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService);
+            hud.GetComponentInChildren<ClockText>().Construct(_watchService);
+            hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
+            hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
+            hud.GetComponentInChildren<SettingsButton>().Construct(_windowService);
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
             hud.GetComponentInChildren<InventoryView>().Construct(_uiFactory, hero.GetComponent<HeroInventory>());
