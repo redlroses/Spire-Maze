@@ -9,13 +9,15 @@ namespace CodeBase.Editor.LevelEditor
     {
         private readonly SerializedProperty _cellData;
         private readonly LevelStaticDataEditor _editor;
+        private readonly int _index;
 
         private Colors _color;
 
-        public CellSettings(ref SerializedProperty cellData, LevelStaticDataEditor editor)
+        public CellSettings(ref SerializedProperty cellData, LevelStaticDataEditor editor, int index)
         {
             _cellData = cellData;
             _editor = editor;
+            _index = index;
         }
 
         public override Vector2 GetWindowSize() =>
@@ -24,7 +26,7 @@ namespace CodeBase.Editor.LevelEditor
         public override void OnGUI(Rect rect)
         {
             EditorGUIUtility.labelWidth = 90;
-            GUILayout.Label("Cell Settings", EditorStyles.boldLabel);
+            GUILayout.Label($"Cell Settings Id:{_index}", EditorStyles.boldLabel);
 
             switch (_cellData.managedReferenceValue)
             {

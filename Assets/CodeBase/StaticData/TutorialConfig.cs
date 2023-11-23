@@ -9,11 +9,11 @@ namespace CodeBase.StaticData
     [CreateAssetMenu(menuName = "Static Data/Tutorial Config", fileName = "TutorialConfig")]
     public class TutorialConfig : ScriptableObject
     {
-        [SerializeField] [ReorderableList] private int[] _triggerCellIndices;
         [SerializeField] [ReorderableList] private TutorialModule[] _modules;
 
-        public IReadOnlyCollection<int> TriggerCellIndices => _triggerCellIndices;
         public int ModulesLength => _modules.Length;
+
+        public IEnumerable<TutorialModule> Modules => _modules;
 
         public TutorialModule GetModule(int byIndex)
         {

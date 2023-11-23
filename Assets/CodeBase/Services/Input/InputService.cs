@@ -19,7 +19,7 @@ namespace CodeBase.Services.Input
         public event Action<Vector2> OverviewMove = _ => { };
         public event Action Jump = () => { };
         public event Action<MoveDirection> Dodge = _ => { };
-        public event Action Deactivated = () => { };
+        public event Action MoveStopped = () => { };
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
 
@@ -44,8 +44,6 @@ namespace CodeBase.Services.Input
 
         public void Cleanup()
         {
-            Deactivated.Invoke();
-
             _inputController.Player.Jump.performed -= OnJump;
             _inputController.Player.Movement.performed -= OnMove;
             _inputController.Player.Movement.canceled -= OnMove;
@@ -64,8 +62,11 @@ namespace CodeBase.Services.Input
         public void EnableOverviewMap() =>
             _inputController.Overview.Enable();
 
-        public void DisableMovementMap() =>
+        public void DisableMovementMap()
+        {
+            MoveStopped.Invoke();
             _inputController.Player.Disable();
+        }
 
         public void DisableOverviewMap() =>
             _inputController.Overview.Disable();

@@ -168,11 +168,11 @@ namespace CodeBase.Infrastructure.States
 
         private IReadOnlyCollection<TutorialTrigger> SpawnTutorialTriggers(Level level, TutorialConfig config)
         {
-            List<TutorialTrigger> triggers = new List<TutorialTrigger>(config.TriggerCellIndices.Count);
+            List<TutorialTrigger> triggers = new List<TutorialTrigger>(config.ModulesLength);
 
-            foreach (int triggerIndex in config.TriggerCellIndices)
+            foreach (TutorialModule module in config.Modules)
             {
-                Transform triggerContainer = level.GetCell(triggerIndex).Container;
+                Transform triggerContainer = level.GetCell(module.CellIndex).Container;
                 GameObject trigger = _gameFactory.CreateTutorialTrigger(triggerContainer);
                 triggers.Add(trigger.GetComponent<TutorialTrigger>());
             }

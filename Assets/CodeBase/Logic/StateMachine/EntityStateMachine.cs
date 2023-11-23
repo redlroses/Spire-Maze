@@ -15,6 +15,12 @@ namespace CodeBase.Logic.StateMachine
             States = new Dictionary<Type, IExitableState>();
         }
 
+        public virtual void Cleanup()
+        {
+            _activeState?.Exit();
+            _activeState = null;
+        }
+
         public void Enter<TState>() where TState : class, IState
         {
             IState state = ChangeState<TState>();
@@ -25,12 +31,6 @@ namespace CodeBase.Logic.StateMachine
         {
             TState state = ChangeState<TState>();
             state.Enter(payload);
-        }
-
-        public void Cleanup()
-        {
-            _activeState?.Exit();
-            _activeState = null;
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState
