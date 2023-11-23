@@ -20,10 +20,12 @@ namespace CodeBase.UI.Elements
             gameObject.SetActive(Device.IsMobile);
         }
 
+#if UNITY_EDITOR
         private void TrackEditorOrientation()
         {
             Vector2 resolution = ResolutionMonitor.CurrentResolution;
             gameObject.SetActive(resolution.x < resolution.y);
         }
+#endif
     }
 }

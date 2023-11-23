@@ -12,11 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cecc28fabd404cbb1dc3882eb7fcdb, type: 3}
   m_Name: MobileConfig
   m_EditorClassIdentifier: 
-  _triggerCellIndices: 110000001300000000000000
   _modules:
-  - Sprite: {fileID: 21300000, guid: b8578a788b7be4467a1534e386bede56, type: 3}
+  - CellIndex: 17
+    Sprite: {fileID: 21300000, guid: 27540dd4708bed2439c2a676eda0029d, type: 3}
     ExplanationText: TutorialMoveMobile
-  - Sprite: {fileID: 21300000, guid: 1c0f43a2fd5a248218b1d998892f0a31, type: 3}
-    ExplanationText: TutorialJumpMoble
-  - Sprite: {fileID: 21300000, guid: 62e8653778e13431a8c384de9044c20b, type: 3}
+  - CellIndex: 19
+    Sprite: {fileID: 21300000, guid: e99fbad9765eff44fa9c9920214b8634, type: 3}
+    ExplanationText: TutorialJumpMobile
+  - CellIndex: 35
+    Sprite: {fileID: 21300000, guid: 73f34d91c65610146a9a115a730d01cc, type: 3}
+    ExplanationText: TutorialStamina
+  - CellIndex: 33
+    Sprite: {fileID: 21300000, guid: 7489298cb68772c4ea03134cb7c740aa, type: 3}
+    ExplanationText: TutorialDoor
+  - CellIndex: 50
+    Sprite: {fileID: 21300000, guid: 2afcc939b3058034b8257c5a82badbd7, type: 3}
     ExplanationText: TutorialKey
+  - CellIndex: 47
+    Sprite: {fileID: 21300000, guid: 06d0dc1d62807cd4fa09d6acf603b875, type: 3}
+    ExplanationText: TutorialRune
+  - CellIndex: 60
+    Sprite: {fileID: 21300000, guid: 22eb56f528f552e479a09954d489535c, type: 3}
+    ExplanationText: TutorialPortal
+  - CellIndex: 29
+    Sprite: {fileID: 21300000, guid: cbc63fd92acd6e24aa54613c23a032b1, type: 3}
+    ExplanationText: TutorialHealth
+  - CellIndex: 28
+    Sprite: {fileID: 21300000, guid: add0fabf0457cf14189c355770d4443c, type: 3}
+    ExplanationText: TutorialDodgeMobile
+  - CellIndex: 26
+    Sprite: {fileID: 21300000, guid: 687c9881432845348b58ae1641ce644c, type: 3}
+    ExplanationText: TutorialLift
+  - CellIndex: 56
+    Sprite: {fileID: 21300000, guid: 90dbdd68646f4d94a91967b1249ccc36, type: 3}
+    ExplanationText: TutorialSave
+  - CellIndex: 22
+    Sprite: {fileID: 21300000, guid: e05f0e29e1bf33041b8e54a47ef74a7e, type: 3}
+    ExplanationText: TutorialFinish

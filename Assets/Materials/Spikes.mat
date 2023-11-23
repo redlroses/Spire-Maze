@@ -8,22 +8,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spikes
-  m_Shader: {fileID: 4800000, guid: fedf1067191c49548ad94e6287a8610d, type: 3}
+  m_Shader: {fileID: 4800000, guid: 371dee73dabc89140878360402049bfc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _MK_ALBEDO_MAP
-  - _MK_COLOR_GRADING_FINAL_OUTPUT
-  m_InvalidKeywords:
-  - _FRESNELHIGHLIGHTS_ON
   - _MK_ARTISTIC_ANIMATION_STUTTER
+  - _MK_COLOR_GRADING_FINAL_OUTPUT
   - _MK_DETAIL_BLEND_MIX
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_FRESNEL_HIGHLIGHTS
   - _MK_LIGHT_CEL
-  - _MK_RECEIVE_SHADOWS
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
+  m_InvalidKeywords:
+  - _FRESNELHIGHLIGHTS_ON
+  - _MK_RECEIVE_SHADOWS
   - _RECEIVESHADOWS_ON
   - _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 0
@@ -200,7 +200,7 @@ Material:
     - _Brightness: 1
     - _BumpScale: 1
     - _ColorGrading: 2
-    - _Contrast: 1.07
+    - _Contrast: 1
     - _Cutoff: 0.5
     - _DetailBlend: 0
     - _DetailMix: 0.5
@@ -241,7 +241,7 @@ Material:
     - _LightTransmissionIntensity: 1
     - _LightTransmissionSmoothness: 0.5
     - _LightTransmissionThresholdOffset: 0.25
-    - _Metallic: 0
+    - _Metallic: 0.155
     - _Mode: 0
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
@@ -252,7 +252,7 @@ Material:
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
-    - _OutlineSize: 0.5
+    - _OutlineSize: 20
     - _OutlineTab: 1
     - _Parallax: 0.02
     - _ReceiveShadows: 1
@@ -267,9 +267,9 @@ Material:
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _Roughness: 0.5
-    - _Saturation: 1.1
+    - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0
+    - _Smoothness: 0.145
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
     - _SpecularHighlights: 1
