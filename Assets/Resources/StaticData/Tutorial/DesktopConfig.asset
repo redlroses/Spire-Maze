@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56cecc28fabd404cbb1dc3882eb7fcdb, type: 3}
-  m_Name: TutorialConfig
+  m_Name: DesktopConfig
   m_EditorClassIdentifier: 
-  _triggerCellIndices: 020000000400000006000000
+  _triggerCellIndices: 110000001300000000000000
   _modules:
-  - Sprite: {fileID: 21300000, guid: b8578a788b7be4467a1534e386bede56, type: 3}
-    ExplanationText: TutorialMove
+  - Sprite: {fileID: 21300000, guid: e1a3fcd3aee244029b79ec065beff426, type: 3}
+    ExplanationText: TutorialMoveDesktop
   - Sprite: {fileID: 21300000, guid: 1c0f43a2fd5a248218b1d998892f0a31, type: 3}
-    ExplanationText: TutorialJump
+    ExplanationText: TutorialJumpDesktop
   - Sprite: {fileID: 21300000, guid: 62e8653778e13431a8c384de9044c20b, type: 3}
     ExplanationText: TutorialKey

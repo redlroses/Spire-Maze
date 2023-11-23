@@ -39,6 +39,6 @@ namespace CodeBase.LevelSpecification
             Container[floor].Container[onFloorIndex];
 
         public Cell GetCell(int index) =>
-            Container[index / Width].Container[_currentIndex % Width];
+            Container[Height - index / Width - 1].Container[index % Width];
     }
 }

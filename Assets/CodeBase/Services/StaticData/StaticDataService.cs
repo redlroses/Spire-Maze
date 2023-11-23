@@ -21,7 +21,8 @@ namespace CodeBase.Services.StaticData
         private const string FlagsConfigPath = "StaticData/FlagsConfig";
         private const string DefaultAvatarPath = "StaticData/DefaultAvatar";
         private const string CameraConfigsPath = "StaticData/CameraConfigs";
-        private const string TutorialConfigPath = "StaticData/TutorialConfig";
+        private const string MobileTutorialConfigPath = "StaticData/Tutorial/MobileConfig";
+        private const string DesktopTutorialConfigPath = "StaticData/Tutorial/DesktopConfig";
 
         private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
@@ -52,7 +53,7 @@ namespace CodeBase.Services.StaticData
                 .ToDictionary(x => x.WindowId, x => x);
 
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
-            _tutorialConfig = Resources.Load<TutorialConfig>(TutorialConfigPath);
+            _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform ? MobileTutorialConfigPath : DesktopTutorialConfigPath);
         }
 
         public LevelStaticData GetForLevel(int levelId) =>
