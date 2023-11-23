@@ -98,6 +98,15 @@ MonoBehaviour:
       - "\u041C\u0443\u0437\u044B\u043A\u0430"
       Flags: 000000
       Languages_Touch: []
+    - Term: Okey
+      TermType: 0
+      Description: 
+      Languages:
+      - OK
+      - Tamam
+      - "\u041F\u043E\u043D\u044F\u0442\u043D\u043E"
+      Flags: 000000
+      Languages_Touch: []
     - Term: Pause
       TermType: 0
       Description: 
@@ -161,6 +170,41 @@ MonoBehaviour:
       - "\u0417\u0432\u0443\u043A"
       Flags: 000000
       Languages_Touch: []
+    - Term: TutorialDodgeDesktop
+      TermType: 0
+      Description: 
+      Languages:
+      - To bypass the trap and not take damage, you can roll. To do this, press the
+        "S" key or the "Down" arrow
+      - "Tuza\u011F\u0131 atlamak ve hasar almamak i\xE7in yuvarlanabilirsiniz. Bunu
+        yapmak i\xE7in \"S\" tu\u015Funa veya \"A\u015Fa\u011F\u0131\" okuna bas\u0131n"
+      - "\u0427\u0442\u043E\u0431\u044B \u043E\u0431\u043E\u0439\u0442\u0438 \u043B\u043E\u0432\u0443\u0448\u043A\u0443
+        \u0438 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0443\u0440\u043E\u043D,
+        \u043C\u043E\u0436\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C
+        \u043F\u0435\u0440\u0435\u043A\u0430\u0442.  \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E
+        \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\u0443
+        \"\u042B\" \u0438\u043B\u0438 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443
+        \"\u0412\u043D\u0438\u0437\""
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialDodgeMobile
+      TermType: 0
+      Description: 
+      Languages:
+      - To bypass the trap and not take damage, you can roll. To do this, click on
+        the "Down" arrow on the left side of the screen
+      - "Tuza\u011F\u0131 atlamak ve hasar almamak i\xE7in yuvarlanabilirsiniz. Bunu
+        yapmak i\xE7in ekran\u0131n sol taraf\u0131ndaki \"A\u015Fa\u011F\u0131\"
+        okuna t\u0131klay\u0131n"
+      - "\u0427\u0442\u043E\u0431\u044B \u043E\u0431\u043E\u0439\u0442\u0438 \u043B\u043E\u0432\u0443\u0448\u043A\u0443
+        \u0438 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0443\u0440\u043E\u043D,
+        \u043C\u043E\u0436\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C
+        \u043F\u0435\u0440\u0435\u043A\u0430\u0442.  \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E
+        \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443
+        \"\u0412\u043D\u0438\u0437\" \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438
+        \u044D\u043A\u0440\u0430\u043D\u0430"
+      Flags: 000000
+      Languages_Touch: []
     - Term: TutorialDoor
       TermType: 0
       Description: 
@@ -176,6 +220,70 @@ MonoBehaviour:
         \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0439
         \u0435\u0439 \u043A\u043B\u044E\u0447, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
         \u0443\u043A\u0430\u0437\u0430\u043D \u043D\u0430 \u0442\u0430\u0431\u043B\u0438\u0447\u043A\u0435."
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialFinish
+      TermType: 0
+      Description: 
+      Languages:
+      - To successfully complete the level you need to get to the portal with the
+        monument. This portal will send you to the next level, or to the hub level
+      - "Seviyeyi ba\u015Far\u0131yla tamamlamak i\xE7in an\u0131t\u0131n bulundu\u011Fu
+        portala gitmeniz gerekiyor. Bu portal sizi bir sonraki seviyeye veya merkezi
+        konuma g\xF6nderecek"
+      - "\u0414\u043B\u044F \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0433\u043E
+        \u043F\u0440\u043E\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u044F \u0443\u0440\u043E\u0432\u043D\u044F
+        \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0434\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F
+        \u0434\u043E \u043F\u043E\u0440\u0442\u0430\u043B\u0430 \u0441 \u043C\u043E\u043D\u0443\u043C\u0435\u043D\u0442\u043E\u043C.
+        \u042D\u0442\u043E\u0442 \u043F\u043E\u0440\u0442\u0430\u043B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442
+        \u0442\u0435\u0431\u044F \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439
+        \u0443\u0440\u043E\u0432\u0435\u043D\u044C, \u043B\u0438\u0431\u043E \u0432
+        \u0446\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0443\u044E \u043B\u043E\u043A\u0430\u0446\u0438\u044E"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialHealth
+      TermType: 0
+      Description: 
+      Languages:
+      - There are traps along the way that can harm you. Watch your health (red bar),
+        it does not recover over time. No fall damage
+      - "Yol boyunca size zarar verebilecek tuzaklar var. Sa\u011Fl\u0131\u011F\u0131n\u0131za
+        dikkat edin (k\u0131rm\u0131z\u0131 \xE7ubuk), zamanla d\xFCzelmez. D\xFC\u015F\xFC\u015F
+        hasar\u0131 yok"
+      - "\u041D\u0430 \u043F\u0443\u0442\u0438 \u0432\u0441\u0442\u0440\u0435\u0447\u0430\u044E\u0442\u0441\u044F
+        \u043B\u043E\u0432\u0443\u0448\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435
+        \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0432\u0440\u0435\u0434\u0438\u0442\u044C
+        \u0442\u0435\u0431\u0435. \u0421\u043B\u0435\u0434\u0438 \u0437\u0430 \u0441\u0432\u043E\u0438\u043C
+        \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\u043C (\u043A\u0440\u0430\u0441\u043D\u0430\u044F
+        \u043F\u043E\u043B\u043E\u0441\u043A\u0430), \u043E\u043D\u043E \u043D\u0435
+        \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442\u0441\u044F
+        \u0441\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C. \u0423\u0440\u043E\u043D
+        \u043E\u0442 \u043F\u0430\u0434\u0435\u043D\u0438\u044F \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialJumpDesktop
+      TermType: 0
+      Description: 
+      Languages:
+      - To make a jump, press the "W" key or the "Up" arrow
+      - "Atlamak i\xE7in \"W\" tu\u015Funa veya \"Yukar\u0131\" okuna bas\u0131n"
+      - "\u0414\u043B\u044F \u0441\u043E\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
+        \u043F\u0440\u044B\u0436\u043A\u0430, \u043D\u0430\u0436\u043C\u0438\u0442\u0435
+        \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\u0443 \"\u0426\" \u0438\u043B\u0438
+        \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443 \"\u0412\u0432\u0435\u0440\u0445\""
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialJumpMobile
+      TermType: 0
+      Description: 
+      Languages:
+      - To make a jump, click on the "Up" arrow on the left side of the screen
+      - "Atlamak i\xE7in ekran\u0131n sol taraf\u0131ndaki \"Yukar\u0131\" okuna
+        t\u0131klay\u0131n"
+      - "\u0414\u043B\u044F \u0441\u043E\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
+        \u043F\u0440\u044B\u0436\u043A\u0430, \u043D\u0430\u0436\u043C\u0438\u0442\u0435
+        \u043D\u0430 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443 \"\u0412\u0432\u0435\u0440\u0445\"
+        \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u044D\u043A\u0440\u0430\u043D\u0430"
       Flags: 000000
       Languages_Touch: []
     - Term: TutorialKey
@@ -201,26 +309,40 @@ MonoBehaviour:
         \u0438\u0437 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F. "
       Flags: 000000
       Languages_Touch: []
-    - Term: Okey
+    - Term: TutorialLift
       TermType: 0
       Description: 
       Languages:
-      - OK
-      - Tamam
-      - "\u041F\u043E\u043D\u044F\u0442\u043D\u043E"
+      - Moving platforms can be vertical or horizontal. To activate, stand on the
+        platform and wait a bit. The platform can be summoned by approaching the
+        edge of its final position
+      - "Hareketli platformlar dikey veya yatay olabilir. Etkinle\u015Ftirmek i\xE7in
+        platformda durun ve biraz bekleyin. Platform, son konumunun kenar\u0131na
+        yakla\u015F\u0131larak \xE7a\u011Fr\u0131labilir"
+      - "\u0414\u0432\u0438\u0436\u0443\u044E\u0449\u0438\u0435\u0441\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B
+        \u0431\u044B\u0432\u0430\u044E\u0442 \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u043C\u0438
+        \u0438 \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u043C\u0438.
+        \u0414\u043B\u044F \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u0438
+        \u0432\u0441\u0442\u0430\u043D\u044C\u0442\u0435 \u043D\u0430 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443
+        \u0438 \u043D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u043E\u0436\u0434\u0438\u0442\u0435.
+        \u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443 \u043C\u043E\u0436\u043D\u043E
+        \u043F\u0440\u0438\u0437\u0432\u0430\u0442\u044C, \u043F\u043E\u0434\u043E\u0439\u0434\u044F
+        \u043A \u043A\u0440\u0430\u044E \u0435\u0451 \u043A\u043E\u043D\u0435\u0447\u043D\u043E\u0433\u043E
+        \u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
       Flags: 000000
       Languages_Touch: []
     - Term: TutorialMoveDesktop
       TermType: 0
       Description: 
       Languages:
-      - To move left and right, use the A-left and D-right keys or the arrow keys.
-      - "Sola ve sa\u011Fa hareket etmek i\xE7in A-sol ve D-sa\u011F tu\u015Flar\u0131n\u0131
+      - To move left and right, use the "A"-left and "D"-right keys or the arrow
+        keys.
+      - "Sola ve sa\u011Fa hareket etmek i\xE7in \"A\"-sol ve \"D\"-sa\u011F tu\u015Flar\u0131n\u0131
         veya ok tu\u015Flar\u0131n\u0131 kullan\u0131n."
       - "\u0414\u043B\u044F \u043F\u0435\u0440\u0435\u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F
         \u0432\u043B\u0435\u0432\u043E \u0438 \u0432\u043F\u0440\u0430\u0432\u043E
         \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043B\u0430\u0432\u0438\u0448\u0438
-        \u0424-\u0432\u043B\u0435\u0432\u043E \u0438 \u0412-\u0432\u043F\u0440\u0430\u0432\u043E 
+        \"\u0424\"-\u0432\u043B\u0435\u0432\u043E \u0438 \"\u0412\"-\u0432\u043F\u0440\u0430\u0432\u043E 
         \u0438\u043B\u0438 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0438."
       Flags: 000000
       Languages_Touch: []
@@ -228,39 +350,35 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - To move left and right use the double stick on the right side of the screen
+      - To move left and right use the joystick on the right side of the screen
       - "Sola ve sa\u011Fa hareket etmek i\xE7in ekran\u0131n sa\u011F taraf\u0131ndaki
-        \xE7ift \xE7ubu\u011Fu kullan\u0131n"
+        joystick'i kullan\u0131n"
       - "\u0414\u043B\u044F \u043F\u0435\u0440\u0435\u0434\u0432\u0438\u0436\u0435\u043D\u0438\u044F
         \u0432\u043B\u0435\u0432\u043E \u0438 \u0432\u043F\u0440\u0430\u0432\u043E
-        \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439 \u0434\u0432\u043E\u0439\u0441\u0442\u0438\u043A
+        \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u0434\u0436\u043E\u0439\u0441\u0442\u0438\u043A
         \u0432 \u043F\u0440\u0430\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438
         \u044D\u043A\u0440\u0430\u043D\u0430"
       Flags: 000000
       Languages_Touch: []
-    - Term: TutorialJumpMobile
+    - Term: TutorialPortal
       TermType: 0
       Description: 
       Languages:
-      - To make a jump, click on the "Up" arrow on the left side of the screen
-      - "Atlamak i\xE7in ekran\u0131n sol taraf\u0131ndaki \"Yukar\u0131\" okuna
-        t\u0131klay\u0131n"
-      - "\u0414\u043B\u044F \u0441\u043E\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
-        \u043F\u0440\u044B\u0436\u043A\u0430, \u043D\u0430\u0436\u043C\u0438\u0442\u0435
-        \u043D\u0430 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443 \"\u0412\u0432\u0435\u0440\u0445\"
-        \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u044D\u043A\u0440\u0430\u043D\u0430"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialJumpDesktop
-      TermType: 0
-      Description: 
-      Languages:
-      - To make a jump, press the "W" key or the "Up" arrow
-      - "Atlamak i\xE7in \"W\" tu\u015Funa veya \"Yukar\u0131\" okuna bas\u0131n"
-      - "\u0414\u043B\u044F \u0441\u043E\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F
-        \u043F\u0440\u044B\u0436\u043A\u0430, \u043D\u0430\u0436\u043C\u0438\u0442\u0435
-        \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\u0443 \"\u0426\" \u0438\u043B\u0438
-        \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443 \"\u0412\u0432\u0435\u0440\u0445\""
+      - The portal connects two points in space between which you can move in both
+        directions. Each portal is connected to a single portal of the same color.
+      - "Portal, uzayda aralar\u0131nda her iki y\xF6nde de hareket edebilece\u011Finiz
+        iki noktay\u0131 birbirine ba\u011Flar. Her portal ayn\u0131 renkteki tek
+        bir portala ba\u011Flan\u0131r."
+      - "\u041F\u043E\u0440\u0442\u0430\u043B \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u0435\u0442
+        \u043C\u0435\u0436\u0434\u0443 \u0441\u043E\u0431\u043E\u0439 \u0434\u0432\u0435
+        \u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0430,
+        \u043C\u0435\u0436\u0434\u0443 \u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438
+        \u043C\u043E\u0436\u043D\u043E \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C\u0441\u044F
+        \u0432 \u043E\u0431\u0435 \u0441\u0442\u043E\u0440\u043E\u043D\u044B. \u041A\u0430\u0436\u0434\u044B\u0439
+        \u043F\u043E\u0440\u0442\u0430\u043B \u0441\u0432\u044F\u0437\u0430\u043D
+        \u0441 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435
+        \u043F\u043E\u0440\u0442\u0430\u043B\u043E\u043C \u0442\u0430\u043A\u043E\u0433\u043E
+        \u0436\u0435 \u0446\u0432\u0435\u0442\u0430."
       Flags: 000000
       Languages_Touch: []
     - Term: TutorialRune
@@ -286,60 +404,24 @@ MonoBehaviour:
         \u043D\u0430\u0436\u0430\u0432 \u043D\u0430 \u0438\u0445 \u0438\u043A\u043E\u043D\u043A\u0443."
       Flags: 000000
       Languages_Touch: []
-    - Term: TutorialPortal
+    - Term: TutorialSave
       TermType: 0
       Description: 
       Languages:
-      - The portal connects two points in space between which you can move in both
-        directions. Each portal is connected to a single portal of the same color.
-      - "Portal, uzayda aralar\u0131nda her iki y\xF6nde de hareket edebilece\u011Finiz
-        iki noktay\u0131 birbirine ba\u011Flar. Her portal ayn\u0131 renkteki tek
-        bir portala ba\u011Flan\u0131r."
-      - "\u041F\u043E\u0440\u0442\u0430\u043B \u0441\u0432\u044F\u0437\u044B\u0432\u0430\u0435\u0442
-        \u043C\u0435\u0436\u0434\u0443 \u0441\u043E\u0431\u043E\u0439 \u0434\u0432\u0435
-        \u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0430,
-        \u043C\u0435\u0436\u0434\u0443 \u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438
-        \u043C\u043E\u0436\u043D\u043E \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C\u0441\u044F
-        \u0432 \u043E\u0431\u0435 \u0441\u0442\u043E\u0440\u043E\u043D\u044B. \u041A\u0430\u0436\u0434\u044B\u0439
-        \u043F\u043E\u0440\u0442\u0430\u043B \u0441\u0432\u044F\u0437\u0430\u043D
-        \u0441 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435
-        \u043F\u043E\u0440\u0442\u0430\u043B\u043E\u043C \u0442\u0430\u043A\u043E\u0433\u043E
-        \u0436\u0435 \u0446\u0432\u0435\u0442\u0430."
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialDodgeMobile
-      TermType: 0
-      Description: 
-      Languages:
-      - To bypass the trap and not take damage, you can roll. To do this, click on
-        the "Down" arrow on the left side of the screen
-      - "Tuza\u011F\u0131 atlamak ve hasar almamak i\xE7in yuvarlanabilirsiniz. Bunu
-        yapmak i\xE7in ekran\u0131n sol taraf\u0131ndaki \"A\u015Fa\u011F\u0131\"
-        okuna t\u0131klay\u0131n"
-      - "\u0427\u0442\u043E\u0431\u044B \u043E\u0431\u043E\u0439\u0442\u0438 \u043B\u043E\u0432\u0443\u0448\u043A\u0443
-        \u0438 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0443\u0440\u043E\u043D,
-        \u043C\u043E\u0436\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C
-        \u043F\u0435\u0440\u0435\u043A\u0430\u0442.  \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E
-        \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443
-        \"\u0412\u043D\u0438\u0437\" \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438
-        \u044D\u043A\u0440\u0430\u043D\u0430"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialDodgeDesktop
-      TermType: 0
-      Description: 
-      Languages:
-      - To bypass the trap and not take damage, you can roll. To do this, press the
-        "S" key or the "Down" arrow
-      - "Tuza\u011F\u0131 atlamak ve hasar almamak i\xE7in yuvarlanabilirsiniz. Bunu
-        yapmak i\xE7in \"S\" tu\u015Funa veya \"A\u015Fa\u011F\u0131\" okuna bas\u0131n"
-      - "\u0427\u0442\u043E\u0431\u044B \u043E\u0431\u043E\u0439\u0442\u0438 \u043B\u043E\u0432\u0443\u0448\u043A\u0443
-        \u0438 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0443\u0440\u043E\u043D,
-        \u043C\u043E\u0436\u043D\u043E \u0441\u0434\u0435\u043B\u0430\u0442\u044C
-        \u043F\u0435\u0440\u0435\u043A\u0430\u0442.  \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E
-        \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\u0443
-        \"\u042B\" \u0438\u043B\u0438 \u0441\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0443
-        \"\u0412\u043D\u0438\u0437\""
+      - Save points are indicated by torches. When activated, the torch lights up.
+        If your health bar reaches zero, you will appear at the last save point
+      - "Kaydetme noktalar\u0131 fenerlerle g\xF6sterilir. Etkinle\u015Ftirildi\u011Finde
+        fener yanar. Sa\u011Fl\u0131k \xE7ubu\u011Funuz s\u0131f\u0131ra ula\u015F\u0131rsa
+        son kaydetme noktas\u0131nda g\xF6r\xFCneceksiniz"
+      - "\u0422\u043E\u0447\u043A\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F
+        \u043E\u0431\u043E\u0437\u043D\u0430\u0447\u0430\u044E\u0442\u0441\u044F
+        \u0444\u0430\u043A\u0435\u043B\u0430\u043C\u0438. \u041F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u0438
+        \u0444\u0430\u043A\u0435\u043B \u0437\u0430\u0433\u043E\u0440\u0430\u0435\u0442\u0441\u044F.
+        \u0415\u0441\u043B\u0438 \u043F\u043E\u043B\u043E\u0441\u043A\u0430 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F
+        \u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0434\u043E \u043D\u0443\u043B\u044F,
+        \u0442\u044B \u043F\u043E\u044F\u0432\u0438\u0448\u044C\u0441\u044F \u043D\u0430
+        \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0439 \u0442\u043E\u0447\u043A\u0435
+        \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"
       Flags: 000000
       Languages_Touch: []
     - Term: TutorialStamina
@@ -363,87 +445,6 @@ MonoBehaviour:
         \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F"
       Flags: 000000
       Languages_Touch: []
-    - Term: TutorialHealth
-      TermType: 0
-      Description: 
-      Languages:
-      - There are traps along the way that can harm you. Watch your health (red bar),
-        it does not recover over time. No fall damage
-      - "Yol boyunca size zarar verebilecek tuzaklar var. Sa\u011Fl\u0131\u011F\u0131n\u0131za
-        dikkat edin (k\u0131rm\u0131z\u0131 \xE7ubuk), zamanla d\xFCzelmez. D\xFC\u015F\xFC\u015F
-        hasar\u0131 yok"
-      - "\u041D\u0430 \u043F\u0443\u0442\u0438 \u0432\u0441\u0442\u0440\u0435\u0447\u0430\u044E\u0442\u0441\u044F
-        \u043B\u043E\u0432\u0443\u0448\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435
-        \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0432\u0440\u0435\u0434\u0438\u0442\u044C
-        \u0442\u0435\u0431\u0435. \u0421\u043B\u0435\u0434\u0438 \u0437\u0430 \u0441\u0432\u043E\u0438\u043C
-        \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\u043C (\u043A\u0440\u0430\u0441\u043D\u0430\u044F
-        \u043F\u043E\u043B\u043E\u0441\u043A\u0430), \u043E\u043D\u043E \u043D\u0435
-        \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442\u0441\u044F
-        \u0441\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C. \u0423\u0440\u043E\u043D
-        \u043E\u0442 \u043F\u0430\u0434\u0435\u043D\u0438\u044F \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialLift
-      TermType: 0
-      Description: 
-      Languages:
-      - Moving platforms can be vertical or horizontal. To activate, stand on the
-        platform and wait a bit. The platform can be summoned by approaching the
-        edge of its final position
-      - "Hareketli platformlar dikey veya yatay olabilir. Etkinle\u015Ftirmek i\xE7in
-        platformda durun ve biraz bekleyin. Platform, son konumunun kenar\u0131na
-        yakla\u015F\u0131larak \xE7a\u011Fr\u0131labilir"
-      - "\u0414\u0432\u0438\u0436\u0443\u044E\u0449\u0438\u0435\u0441\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B
-        \u0431\u044B\u0432\u0430\u044E\u0442 \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u043C\u0438
-        \u0438 \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u043C\u0438.
-        \u0414\u043B\u044F \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u0438
-        \u0432\u0441\u0442\u0430\u043D\u044C\u0442\u0435 \u043D\u0430 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443
-        \u0438 \u043D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u043E\u0436\u0434\u0438\u0442\u0435.
-        \u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443 \u043C\u043E\u0436\u043D\u043E
-        \u043F\u0440\u0438\u0437\u0432\u0430\u0442\u044C, \u043F\u043E\u0434\u043E\u0439\u0434\u044F
-        \u043A \u043A\u0440\u0430\u044E \u0435\u0451 \u043A\u043E\u043D\u0435\u0447\u043D\u043E\u0433\u043E
-        \u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u044F"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialSave
-      TermType: 0
-      Description: 
-      Languages:
-      - Save points are indicated by torches. When activated, the torch lights up.
-        If your health bar reaches zero, you will appear at the last save point
-      - "Kaydetme noktalar\u0131 fenerlerle g\xF6sterilir. Etkinle\u015Ftirildi\u011Finde
-        fener yanar. Sa\u011Fl\u0131k \xE7ubu\u011Funuz s\u0131f\u0131ra ula\u015F\u0131rsa
-        son kaydetme noktas\u0131nda g\xF6r\xFCneceksiniz"
-      - "\u0422\u043E\u0447\u043A\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F
-        \u043E\u0431\u043E\u0437\u043D\u0430\u0447\u0430\u044E\u0442\u0441\u044F
-        \u0444\u0430\u043A\u0435\u043B\u0430\u043C\u0438. \u041F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u0438
-        \u0444\u0430\u043A\u0435\u043B \u0437\u0430\u0433\u043E\u0440\u0430\u0435\u0442\u0441\u044F.
-        \u0415\u0441\u043B\u0438 \u043F\u043E\u043B\u043E\u0441\u043A\u0430 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F
-        \u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0434\u043E \u043D\u0443\u043B\u044F,
-        \u0442\u044B \u043F\u043E\u044F\u0432\u0438\u0448\u044C\u0441\u044F \u043D\u0430
-        \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0439 \u0442\u043E\u0447\u043A\u0435
-        \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialFinish
-      TermType: 0
-      Description: 
-      Languages:
-      - To successfully complete the level you need to get to the portal with the
-        monument. This portal will send you to the next level, or to the hub level
-      - "Seviyeyi ba\u015Far\u0131yla tamamlamak i\xE7in an\u0131t\u0131n bulundu\u011Fu
-        portala gitmeniz gerekiyor. Bu portal sizi bir sonraki seviyeye veya merkezi
-        konuma g\xF6nderecek"
-      - "\u0414\u043B\u044F \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0433\u043E
-        \u043F\u0440\u043E\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u044F \u0443\u0440\u043E\u0432\u043D\u044F
-        \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0434\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F
-        \u0434\u043E \u043F\u043E\u0440\u0442\u0430\u043B\u0430 \u0441 \u043C\u043E\u043D\u0443\u043C\u0435\u043D\u0442\u043E\u043C.
-        \u042D\u0442\u043E\u0442 \u043F\u043E\u0440\u0442\u0430\u043B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442
-        \u0442\u0435\u0431\u044F \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439
-        \u0443\u0440\u043E\u0432\u0435\u043D\u044C, \u043B\u0438\u0431\u043E \u0432
-        \u0446\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0443\u044E \u043B\u043E\u043A\u0430\u0446\u0438\u044E"
-      Flags: 000000
-      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
@@ -462,7 +463,7 @@ MonoBehaviour:
     Google_WebServiceURL: https://script.google.com/macros/s/AKfycbw1db4_wBecJcloUOLaAOks_hSqzVaLhDMpUDA4vRw5LHhjqpdEKRo4_M4dDgBiNzDA/exec
     Google_SpreadsheetKey: 1ri0ni3PftW21_luR1S7mY1FWMpubnShOzefOawAUO8c
     Google_SpreadsheetName: I2Loc Spyre Maze Localization
-    Google_LastUpdatedVersion: 1699017051513
+    Google_LastUpdatedVersion: 1700748870535
     Google_Password: SpyreMaze
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2
