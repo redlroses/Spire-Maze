@@ -1,6 +1,5 @@
 ﻿using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
-using CodeBase.Logic.Player;
 using CodeBase.Logic.StateMachine.States;
 using CodeBase.Services.Input;
 

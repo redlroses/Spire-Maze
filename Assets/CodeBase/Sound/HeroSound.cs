@@ -5,7 +5,6 @@ using CodeBase.DelayRoutines;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Hero;
-using CodeBase.Logic.Player;
 using CodeBase.Logic.Portal;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Tools.Extension;

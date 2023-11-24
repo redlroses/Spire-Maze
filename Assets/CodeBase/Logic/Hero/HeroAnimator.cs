@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace CodeBase.Logic.Player
+namespace CodeBase.Logic.Hero
 {
     public class HeroAnimator : MonoCache, IAnimationStateReader, IPauseWatcher
     {

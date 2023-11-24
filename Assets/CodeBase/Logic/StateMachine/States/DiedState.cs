@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.States;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
-using CodeBase.Logic.Player;
 
 namespace CodeBase.Logic.StateMachine.States
 {

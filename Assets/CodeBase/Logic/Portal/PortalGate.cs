@@ -1,5 +1,5 @@
+using System;
 using CodeBase.Data;
-using CodeBase.Data.CellStates;
 using CodeBase.Logic.Observer;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
@@ -10,29 +10,34 @@ namespace CodeBase.Logic.Portal
     public class PortalGate : ObserverTargetExited<TeleportableObserver, ITeleportable>, ISavedProgress, IIndexable
     {
         [SerializeField] private float _waitDelay;
-        [SerializeField] private PortalGate _linkedPortalGate;
-        [SerializeField] private ParticleSystem _effect;
         [SerializeField] private TimerOperator _timer;
+        [SerializeField] private PortalGateEffector _effector;
 
+        private PortalGate _linkedPortalGate;
         private ITeleportable _teleportable;
-        private bool _isRecipient;
         private Transform _selfTransform;
+        private bool _isRecipient;
+
+        public event Action Teleported = () => { };
 
         public int Id { get; private set; }
+
         public bool IsActivated { get; private set; }
 
-        public void Construct(int id, PortalGate linked)
+        public void Construct(int id, PortalGate linked, Color32 color)
         {
             Id = id;
             _linkedPortalGate = linked;
             _selfTransform = transform;
+            _effector.Construct(color);
+
             _timer ??= Get<TimerOperator>();
             _timer.SetUp(_waitDelay, Teleport);
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable teleporter)
         {
-            if (_isRecipient )//|| IsActivated == false)
+            if (_isRecipient)
             {
                 return;
             }
@@ -53,7 +58,7 @@ namespace CodeBase.Logic.Portal
             IndexableState cellState = progress.WorldData.LevelState.Indexables
                 .Find(cell => cell.Id == Id);
 
-            if (cellState == null )//|| cellState.IsActivated == false)
+            if (cellState == null)
             {
                 return;
             }
@@ -76,24 +81,24 @@ namespace CodeBase.Logic.Portal
             }
         }
 
-        private void Receive(ITeleportable teleportable, float dotRotation)
-        {
-            _effect.Play();
-            _isRecipient = true;
-            Vector3 forward = _selfTransform.forward;
-            Vector3 rotation = dotRotation > 0 ? forward : forward * -1;
-            teleportable.Teleportation(_selfTransform.position, rotation);
-        }
-
         private void Activate() =>
             IsActivated = true;
+
+        private void Receive(ITeleportable teleportable, float dotRotation)
+        {
+            Teleported.Invoke();
+            _isRecipient = true;
+            Vector3 forward = _selfTransform.forward;
+            Vector3 rotation = dotRotation > 0 ? forward : -forward;
+            teleportable.Teleportation(_selfTransform.position, rotation);
+        }
 
         private void Teleport()
         {
             float dotRotation = Vector3.Dot(_selfTransform.forward, _teleportable.Forward);
             _linkedPortalGate.Activate();
             _linkedPortalGate.Receive(_teleportable, dotRotation);
-            _effect.Play();
+            Teleported.Invoke();
         }
     }
 }

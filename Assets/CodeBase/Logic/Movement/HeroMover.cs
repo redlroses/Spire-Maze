@@ -1,6 +1,6 @@
 ﻿using CodeBase.Data;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Lift.PlateMove;
-using CodeBase.Logic.Player;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools.Extension;
 using UnityEngine;
