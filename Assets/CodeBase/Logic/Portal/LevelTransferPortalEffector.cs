@@ -1,10 +1,9 @@
-﻿using System;
-using AYellowpaper;
+﻿using AYellowpaper;
 using UnityEngine;
 
 namespace CodeBase.Logic.Portal
 {
-    public class PortalEffector : MonoBehaviour
+    public class LevelTransferPortalEffector : MonoBehaviour
     {
         [SerializeField] private InterfaceReference<IActivated, MonoBehaviour> _portal;
         [SerializeField] private ParticleSystem _effect;

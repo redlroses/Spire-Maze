@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic
 {
-    [RequireComponent(typeof(PortalEffector))]
+    [RequireComponent(typeof(LevelTransferPortalEffector))]
     public class LevelTransfer : ObserverTargetExited<TeleportableObserver, ITeleportable>, IActivated
     {
         [SerializeField] private int _toLevelId;
@@ -71,8 +71,6 @@ namespace CodeBase.Logic
             {
                 Activate();
             }
-
-            Debug.Log($"TryActivate {lastLevel}, _toLevelId: {_toLevelId}");
         }
 
         private void Activate()

@@ -1,4 +1,5 @@
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace CodeBase.Logic.Trap
 
         private void PlayEffects()
         {
-            foreach (var effect in _effects)
+            foreach (ParticleSystem effect in _effects)
             {
                 effect.Play();
             }
@@ -62,7 +63,7 @@ namespace CodeBase.Logic.Trap
 
         private void StopEffects()
         {
-            foreach (var effect in _effects)
+            foreach (ParticleSystem effect in _effects)
             {
                 effect.Stop();
             }

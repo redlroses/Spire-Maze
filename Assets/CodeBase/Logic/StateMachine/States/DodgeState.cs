@@ -3,7 +3,6 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
-using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
 using UnityEngine.InputSystem;
 

@@ -4,8 +4,8 @@ using AYellowpaper.SerializedCollections;
 using CodeBase.DelayRoutines;
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Logic.Hero;
-using CodeBase.Logic.Player;
 using CodeBase.Logic.Portal;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Tools.Extension;
@@ -50,7 +50,7 @@ namespace CodeBase.Sound
             _heroHealth.Damaged += OnDamaged;
             _heroAnimator.StateEntered += OnStateEntered;
             _heroAnimator.StateExited += OnStateExited;
-            _heroAnimator.StemMoved += OnStepMoved;
+            _heroAnimator.StepMoved += OnStepMoved;
             _itemCollector.Collected += OnPlaySoundCollected;
             _teleportable.Teleported += OnPlaySoundTeleported;
         }
@@ -77,7 +77,7 @@ namespace CodeBase.Sound
 
         private void OnDisable()
         {
-            _heroAnimator.StemMoved -= OnStepMoved;
+            _heroAnimator.StepMoved -= OnStepMoved;
             _heroAnimator.StateEntered -= OnStateEntered;
             _heroAnimator.StateExited -= OnStateExited;
             _itemCollector.Collected -= OnPlaySoundCollected;

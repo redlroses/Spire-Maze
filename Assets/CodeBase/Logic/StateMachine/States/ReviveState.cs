@@ -2,7 +2,6 @@
 using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Hero;
-using CodeBase.Logic.Player;
 
 namespace CodeBase.Logic.StateMachine.States
 {

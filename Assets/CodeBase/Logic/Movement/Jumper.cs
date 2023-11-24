@@ -1,4 +1,4 @@
-using CodeBase.Logic.Player;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;

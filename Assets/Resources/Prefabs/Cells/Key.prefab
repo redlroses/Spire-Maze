@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 715107513944400482}
   - component: {fileID: 4614905965591953052}
   - component: {fileID: -5485480087889464709}
-  - component: {fileID: 7717549177156900939}
   - component: {fileID: 2202962176934495495}
   m_Layer: 0
   m_Name: Key
@@ -73,7 +72,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trigger: {fileID: 4614905965591953052}
-  _colorSetter: {fileID: 7717549177156900939}
+  _effects:
+  - {fileID: 7283551638840234339}
+  - {fileID: 7284199849626134481}
   _objects:
     _serializedList:
     - Key: 3
@@ -90,20 +91,6 @@ MonoBehaviour:
       Value: {r: 0.25, g: 0.75, b: 0.2, a: 1}
     - Key: 4
       Value: {r: 0.2, g: 0.25, b: 0.75, a: 1}
---- !u!114 &7717549177156900939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191194980414273752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef0c45915c046d59cb6d7f7e67d1abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particleAura: {fileID: 7283551638840234339}
-  _particleStar: {fileID: 7284199849626134481}
 --- !u!114 &2202962176934495495
 MonoBehaviour:
   m_ObjectHideFlags: 0

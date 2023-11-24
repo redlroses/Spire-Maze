@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.States;
 using CodeBase.Logic.AnimatorStateMachine;
+using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
-using CodeBase.Logic.Player;
 using CodeBase.Services.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;

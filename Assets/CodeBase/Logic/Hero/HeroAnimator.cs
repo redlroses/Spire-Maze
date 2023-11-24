@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using NTC.Global.Cache;
 using UnityEngine;
 
-namespace CodeBase.Logic.Player
+namespace CodeBase.Logic.Hero
 {
     public class HeroAnimator : MonoCache, IAnimationStateReader, IPauseWatcher
     {
@@ -40,13 +40,13 @@ namespace CodeBase.Logic.Player
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
 
-        public event Action StemMoved = () => { };
+        public event Action StepMoved = () => { };
 
         public AnimatorState State { get; private set; }
 
         protected override void FixedRun()
         {
-            if ((State == AnimatorState.Fall || State == AnimatorState.Jump) && _gravityScaler.State == GroundState.Grounded)
+            if (State is AnimatorState.Fall or AnimatorState.Jump && _gravityScaler.State == GroundState.Grounded)
             {
                 PlayLand();
             }
@@ -59,6 +59,7 @@ namespace CodeBase.Logic.Player
 
         public void PlayIdle() =>
             _animator.SetTrigger(Idle);
+
         public void PlayFall() =>
             _animator.SetTrigger(Fall);
 
@@ -103,7 +104,7 @@ namespace CodeBase.Logic.Player
 
         [UsedImplicitly]
         private void OnStep() =>
-            StemMoved.Invoke();
+            StepMoved.Invoke();
 
         private AnimatorState StateFor(int stateHash) =>
             _states.TryGetValue(stateHash, out AnimatorState state) ? state : AnimatorState.Unknown;

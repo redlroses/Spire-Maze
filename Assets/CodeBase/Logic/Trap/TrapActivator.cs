@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Logic.Observer;
 using UnityEngine;
 

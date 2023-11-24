@@ -40,7 +40,7 @@ MonoBehaviour:
   - rid: 3578795405725139063
   - rid: 3578795405725139111
   - rid: 3578795405725139112
-  - rid: 3578795405725139113
+  - rid: 3578795451244085249
   - rid: 3578795405725139069
   - rid: 3578795405725139110
   - rid: 3578795405725139108
@@ -72,7 +72,7 @@ MonoBehaviour:
   - rid: 3578795428382244865
   - rid: 3578795428382244869
   - rid: 3578795428382244870
-  - rid: 3578795405725139074
+  - rid: 3578795451244085248
   - rid: 3578795405725139071
   - rid: 3578795405725138998
   - rid: 3578795428382244872
@@ -284,10 +284,6 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
         Color: 2
-    - rid: 3578795405725139074
-      type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 3578795405725139078
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -328,7 +324,7 @@ MonoBehaviour:
         Key: 0
         Color:
           serializedVersion: 2
-          rgba: 4282895401
+          rgba: 4290903808
     - rid: 3578795405725139096
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -385,10 +381,6 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 3578795405725139113
-      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 3578795428382244864
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -425,7 +417,7 @@ MonoBehaviour:
         Key: 0
         Color:
           serializedVersion: 2
-          rgba: 4282895658
+          rgba: 4290903808
     - rid: 3578795428382244878
       type: {class: SpikeTrap, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -438,3 +430,15 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
+    - rid: 3578795451244085248
+      type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        Direction: 3
+        IsLiftHolder: 1
+    - rid: 3578795451244085249
+      type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        Direction: 1
+        IsLiftHolder: 0

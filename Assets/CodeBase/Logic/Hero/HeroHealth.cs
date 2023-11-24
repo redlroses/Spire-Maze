@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Logic.HealthEntity;
+using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Services.PersistentProgress;
 
 namespace CodeBase.Logic.Hero
