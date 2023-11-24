@@ -10,8 +10,11 @@ namespace CodeBase.StaticData.Storable
         public Sprite Sprite;
         public string Name;
         public string Description;
+        public bool IsArtifact;
         public bool IsInteractive;
-        public bool IsExpendable;
-        [HideIf("IsExpendable")] [Range(0, 30f)] public float ReloadTime;
+        public bool IsReloadable;
+
+        [ShowIf(EConditionOperator.And, nameof(IsInteractive), nameof(IsReloadable))] [Range(0, 30f)]
+        public float ReloadTime;
     }
 }

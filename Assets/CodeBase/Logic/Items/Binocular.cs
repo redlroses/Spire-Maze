@@ -22,16 +22,16 @@ namespace CodeBase.Logic.Items
         private VirtualMover _virtualMover;
         public float ReloadTime { get; }
 
-        public Binocular(StorableStaticData staticData, IUIFactory uiFactory, IInputService inputService,
+        public Binocular(StorableStaticData storableData, IUIFactory uiFactory, IInputService inputService,
             IGameFactory gameFactory, ICameraOperatorService cameraOperator,
-            IPersistentProgressService persistentProgressService) : base(staticData)
+            IPersistentProgressService persistentProgressService) : base(storableData)
         {
             _uiFactory = uiFactory;
             _inputService = inputService;
             _gameFactory = gameFactory;
             _cameraOperator = cameraOperator;
             _persistentProgressService = persistentProgressService;
-            ReloadTime = staticData.ReloadTime;
+            ReloadTime = storableData.ReloadTime;
         }
 
         public void Use()

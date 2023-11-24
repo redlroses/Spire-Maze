@@ -10,6 +10,7 @@ namespace CodeBase.Logic.Items
         Sprite Sprite { get; }
         StorableType ItemType { get; }
         bool IsInteractive { get; }
-        bool IsExpendable { get; }
+        bool IsReloadable { get; }
+        bool IsArtifact { get; }
     }
 }

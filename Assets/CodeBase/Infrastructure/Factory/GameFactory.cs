@@ -27,7 +27,7 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         private readonly IAssetProvider _assets;
-        private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IPersistentProgressService _progressService;
         private readonly IPauseService _pauseService;
         private readonly IUIFactory _uiFactory;
         private readonly IInputService _inputService;
@@ -40,12 +40,12 @@ namespace CodeBase.Infrastructure.Factory
 
         public Transform Location => _heroTransform;
 
-        public GameFactory(IAssetProvider assets, IPersistentProgressService persistentProgressService,
+        public GameFactory(IAssetProvider assets, IPersistentProgressService progressService,
             IPauseService pauseService, IUIFactory uiFactory, IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;
-            _persistentProgressService = persistentProgressService;
+            _progressService = progressService;
             _pauseService = pauseService;
             _uiFactory = uiFactory;
             _inputService = inputService;
@@ -103,8 +103,8 @@ namespace CodeBase.Infrastructure.Factory
         public IItem CreateItem(StorableStaticData data) =>
             data.ItemType switch
             {
-                StorableType.Compass => new Compass(data, _uiFactory, this),
-                StorableType.Binocular => new Binocular(data, _uiFactory, _inputService, this, _cameraOperator, _persistentProgressService),
+                StorableType.Compass => new Compass(data, _progressService, _uiFactory, this),
+                StorableType.Binocular => new Binocular(data, _uiFactory, _inputService, this, _cameraOperator, _progressService),
                 StorableType.BlueKey => new Key(data),
                 StorableType.RedKey => new Key(data),
                 StorableType.GreenKey => new Key(data),

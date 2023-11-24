@@ -10,16 +10,18 @@ namespace CodeBase.Logic.Items
         public Sprite Sprite { get; }
         public StorableType ItemType { get; }
         public bool IsInteractive { get; }
-        public bool IsExpendable { get; }
+        public bool IsReloadable { get; }
+        public bool IsArtifact { get; }
 
-        public Item(StorableStaticData staticData)
+        public Item(StorableStaticData storableData)
         {
-            ItemType = staticData.ItemType;
-            Sprite = staticData.Sprite;
-            Name = staticData.Name;
-            Description = staticData.Description;
-            IsInteractive = staticData.IsInteractive;
-            IsExpendable = staticData.IsExpendable;
+            ItemType = storableData.ItemType;
+            Sprite = storableData.Sprite;
+            Name = storableData.Name;
+            Description = storableData.Description;
+            IsInteractive = storableData.IsInteractive;
+            IsReloadable = storableData.IsReloadable;
+            IsArtifact = storableData.IsArtifact;
         }
     }
 }

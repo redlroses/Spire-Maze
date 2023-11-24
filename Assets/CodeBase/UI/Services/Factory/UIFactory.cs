@@ -72,15 +72,8 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateTutorialSequence() =>
             _assets.Instantiate(AssetPath.TutorialPanel, _uiRoot);
 
-        public GameObject CreateCompassArrowPanel(Transform hero, float lifetime)
-        {
-            GameObject panel = _assets.Instantiate(AssetPath.CompassArrowPanel);
-            CompassArrowPanel compassPanel = panel.GetComponent<CompassArrowPanel>();
-            Canvas canvas = panel.GetComponent<Canvas>();
-            canvas.worldCamera = Camera.main;
-            compassPanel.Construct(_progressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector(), hero, lifetime);
-            return panel;
-        }
+        public GameObject CreateCompassArrowPanel(Transform hero) =>
+            _assets.Instantiate(AssetPath.CompassArrowPanel);
 
         public GameObject CreateEnterLevelPanel() =>
             _assets.Instantiate(AssetPath.EnterLevelPanel, _uiRoot);

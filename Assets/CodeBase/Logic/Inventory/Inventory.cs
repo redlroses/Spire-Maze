@@ -14,12 +14,16 @@ namespace CodeBase.Logic.Inventory
 
         public event Action<IReadOnlyInventoryCell> Updated = _ => { };
 
-        public int Count => _storage.Count;
-
         public Inventory(List<InventoryCell> storage)
         {
             _storage = storage;
         }
+
+        public int Count => _storage.Count;
+
+        public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public void Cleanup() =>
             _storage.Clear();
@@ -47,8 +51,8 @@ namespace CodeBase.Logic.Inventory
             if (inventoryCell.Item is IUsable usable)
                 usable.Use();
 
-            if (inventoryCell.Item is IExpendable)
-                Expend(inventoryCell);
+            if (inventoryCell.Item is ISpendable)
+                Spend(inventoryCell);
 
             return true;
         }
@@ -66,7 +70,7 @@ namespace CodeBase.Logic.Inventory
             return existingInventoryCell;
         }
 
-        private void Expend(InventoryCell existingInventoryCell)
+        private void Spend(InventoryCell existingInventoryCell)
         {
             existingInventoryCell.Decrease();
 
@@ -75,9 +79,5 @@ namespace CodeBase.Logic.Inventory
 
             Updated.Invoke(existingInventoryCell);
         }
-
-        public IEnumerator<IReadOnlyInventoryCell> GetEnumerator() => _storage.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

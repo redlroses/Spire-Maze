@@ -11,13 +11,6 @@ namespace CodeBase.UI
         private Vector3 _finishPosition;
         private Transform _hero;
 
-        public void Construct(Vector3 finishPosition, Transform hero, float lifetime)
-        {
-            _hero = hero;
-            _finishPosition = finishPosition;
-            Destroy(gameObject, lifetime);
-        }
-
         protected override void LateRun()
         {
             Vector3 lookDirection = (_finishPosition - (_hero.position + _heroPositionOffset)).normalized;
@@ -25,16 +18,24 @@ namespace CodeBase.UI
             _arrow.rotation = Quaternion.Lerp(_arrow.rotation, rotation, Time.deltaTime);
         }
 
+        public void Construct(Vector3 finishPosition, Transform hero)
+        {
+            _hero = hero;
+            _finishPosition = finishPosition;
+        }
+
+        public void Destroy() =>
+            Destroy(gameObject);
+
         private void OnDrawGizmos()
         {
             if (_hero == null)
-            {
                 return;
-            }
 
-            Gizmos.DrawSphere(_heroPositionOffset + _hero.position, 0.5f);
+            Vector3 heroPosition = _hero.position;
+            Gizmos.DrawSphere(_heroPositionOffset + heroPosition, 0.5f);
             Gizmos.DrawSphere(_finishPosition, 0.5f);
-            Gizmos.DrawLine(_heroPositionOffset + _hero.position, _finishPosition);
+            Gizmos.DrawLine(_heroPositionOffset + heroPosition, _finishPosition);
         }
     }
 }

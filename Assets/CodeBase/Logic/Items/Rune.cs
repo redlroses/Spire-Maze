@@ -4,6 +4,6 @@ namespace CodeBase.Logic.Items
 {
     public class Rune : Item
     {
-        public Rune(StorableStaticData staticData) : base(staticData) { }
+        public Rune(StorableStaticData storableData) : base(storableData) { }
     }
 }

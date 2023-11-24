@@ -2,8 +2,8 @@
 
 namespace CodeBase.Logic.Items
 {
-    public class Key : Item, IExpendable
+    public class Key : Item, ISpendable
     {
-        public Key(StorableStaticData staticData) : base(staticData) { }
+        public Key(StorableStaticData storableData) : base(storableData) { }
     }
 }

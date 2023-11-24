@@ -22,7 +22,7 @@ namespace CodeBase.Logic.Inventory
 
             progress.WorldData.HeroInventoryData = Inventory.AsInventoryData();
             progress.WorldData.LevelAccumulationData.Artifacts = Inventory
-                .Where(inventoryCell => inventoryCell.Item.IsInteractive == false && inventoryCell.Item.IsExpendable == false)
+                .Where(inventoryCell => inventoryCell.Item.IsArtifact)
                 .Sum(inventoryCell => inventoryCell.Count);
         }
     }
