@@ -2,7 +2,5 @@
 
 namespace CodeBase.Logic.Observer
 {
-    public class HeroObserver : TriggerObserverExit<HeroRoot>
-    {
-    }
+    public class HeroObserver : TriggerObserverExit<HeroRoot> { }
 }

@@ -260,11 +260,24 @@ namespace CodeBase.DelayRoutines
         /// <summary>
         /// Creates a while loop from the beginning of the sequence to the current position.
         /// </summary>
-        /// <param name="repeatCondition">Loop exit condition</param>
+        /// <param name="repeatCondition">Loop exit condition function</param>
         /// <returns></returns>
         public RoutineSequence LoopWhile(Func<bool> repeatCondition)
         {
             LoopWhile routine = new LoopWhile(repeatCondition);
+            routine.AddLoopStart(FirstRoutine);
+            AddToSequence(routine);
+            return this;
+        }
+
+        /// <summary>
+        /// Creates a while loop from the beginning of the sequence to the current position.
+        /// </summary>
+        /// <param name="isRepeat">Loop exit condition boolean</param>
+        /// <returns></returns>
+        public RoutineSequence LoopWhile(bool isRepeat)
+        {
+            LoopWhile routine = new LoopWhile(() => isRepeat);
             routine.AddLoopStart(FirstRoutine);
             AddToSequence(routine);
             return this;
