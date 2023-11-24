@@ -1,12 +1,14 @@
-using System.Threading.Tasks;
+#if UNITY_WEBGL && !UNITY_EDITOR
 using Agava.YandexGames;
+using Debug = UnityEngine.Debug;
+#endif
+using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
 using UnityEngine;
-using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 namespace CodeBase.Services.SaveLoad
 {
@@ -19,7 +21,8 @@ namespace CodeBase.Services.SaveLoad
         private readonly IGameFactory _gameFactory;
         private readonly IWatchService _watchService;
 
-        public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory, IWatchService watchService)
+        public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory,
+            IWatchService watchService)
         {
             _progressService = progressService;
             _gameFactory = gameFactory;
@@ -32,9 +35,6 @@ namespace CodeBase.Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             _watchService.UpdateProgress();
-
-            Debug.Log("save");
-
             string saveData = _progressService.Progress.ToJson();
 
             SaveLocal(saveData);
@@ -47,23 +47,36 @@ namespace CodeBase.Services.SaveLoad
 #endif
         }
 
+        private bool IsSavesEmpty(string saveData) =>
+            string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
+
+        private void SaveLocal(string saveData)
+        {
+            PlayerPrefs.SetString(ProgressKey, saveData);
+            PlayerPrefs.Save();
+        }
+
+        private string LoadLocal() =>
+            PlayerPrefs.GetString(ProgressKey);
+
+#pragma warning disable CS1998
         public async Task<PlayerProgress> LoadProgress()
         {
-            string saveData;
-
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
             {
                 return await GetActualSaveData();
             }
 #endif
-            saveData = LoadLocal();
+            string saveData = LoadLocal();
 
             return IsSavesEmpty(saveData)
                 ? null
                 : saveData.ToDeserialized<PlayerProgress>();
         }
+#pragma warning restore CS1998
 
+#if UNITY_WEBGL && !UNITY_EDITOR
         private async Task<PlayerProgress> GetActualSaveData()
         {
             string cloudSaveData = await LoadCloud();
@@ -95,24 +108,12 @@ namespace CodeBase.Services.SaveLoad
                 : localProgress;
         }
 
-        private bool IsSavesEmpty(string saveData) =>
-            string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
-
-        private void SaveLocal(string saveData)
-        {
-            PlayerPrefs.SetString(ProgressKey, saveData);
-            PlayerPrefs.Save();
-        }
-
         private void SaveCloud(string saveData)
         {
             PlayerAccount.SetCloudSaveData(saveData,
                 () => Debug.Log("Cloud saved successfully"),
                 error => Debug.Log($"Cloud save error: {error}"));
         }
-
-        private string LoadLocal() =>
-            PlayerPrefs.GetString(ProgressKey);
 
         private async Task<string> LoadCloud()
         {
@@ -141,5 +142,6 @@ namespace CodeBase.Services.SaveLoad
 
             return isError ? null : saveData;
         }
+#endif
     }
 }
