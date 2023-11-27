@@ -83,7 +83,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.4862015, y: 0.10000001, z: 1.6988883}
-  m_Center: {x: 0.24310076, y: -0.12, z: 0.009394616}
+  m_Center: {x: 0.24310076, y: -0.15, z: 0.009394616}
 --- !u!1 &6286470004713288498
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1001 &525055295966399591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5986154761831275042, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
       propertyPath: m_Center.y
-      value: -0.4422358
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: 5986154761831275042, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
       propertyPath: m_Center.z
