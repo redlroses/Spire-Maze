@@ -44,5 +44,11 @@ namespace CodeBase.Tools.Extension
 
         public static int AsSign(this bool condition) =>
             condition ? 1 : -1;
+
+        public static float NormalizeDecibels(this float decibel) =>
+            Mathf.Pow(10f, decibel / 20f);
+
+        public static float ToDecibels(this float normalizedValue) =>
+            Mathf.Log10(normalizedValue) * 20f;
     }
 }

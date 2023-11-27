@@ -9,7 +9,7 @@ namespace CodeBase.Services.ADS
 {
     public class ADService : IADService
     {
-        private const int InterstitialAdCooldownSeconds = 60;
+        private const int InterstitialAdCooldownSeconds = 5;
 
         private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;
