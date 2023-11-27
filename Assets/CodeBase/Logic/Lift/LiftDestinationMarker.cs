@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CodeBase.Logic.Lift
 {
     [RequireComponent(typeof(PlateMovableObserver))]
-    public class LiftDestinationMarker : ObserverTarget<PlateMovableObserver, IPlateMovable>
+    public class LiftDestinationMarker : ObserverTarget<PlateMovableObserver, IMovableByPlate>
     {
         public event Action<LiftDestinationMarker> Called = _ => { };
 
@@ -17,7 +17,7 @@ namespace CodeBase.Logic.Lift
             Position = cellPosition;
         }
 
-        protected override void OnTriggerObserverEntered(IPlateMovable damagable)
+        protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate)
         {
             Called.Invoke(this);
         }

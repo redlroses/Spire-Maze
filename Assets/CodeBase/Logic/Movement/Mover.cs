@@ -27,8 +27,13 @@ namespace CodeBase.Logic.Movement
             _radius = _rigidbody.position.RemoveY().magnitude;
         }
 
-        protected override void FixedRun() =>
+        protected override void FixedRun()
+        {
             ApplyMove(_direction);
+            OnLateMove();
+        }
+
+        protected virtual void OnLateMove() { }
 
         public void Move(MoveDirection direction, float speedFactor = 1f)
         {

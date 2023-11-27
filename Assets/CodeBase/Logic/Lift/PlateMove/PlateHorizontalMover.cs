@@ -1,16 +1,15 @@
-﻿using CodeBase.Services.Pause;
-using CodeBase.Tools.Constants;
+﻿using CodeBase.Tools.Constants;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift.PlateMove
 {
-    public sealed class PlateHorizontalMover : PlateMover<float>, IPauseWatcher
+    public sealed class PlateHorizontalMover : PlateMover<float>
     {
-        protected override void SetNewPosition(float from, float to, float delta)
+        protected override void UpdatePosition(float from, float to, float delta)
         {
             float deltaAngle = Mathf.Lerp(from, to, delta);
-            RigidBody.rotation = Quaternion.AngleAxis(deltaAngle, Vector3.up);
-            RigidBody.MovePosition(GetPosition(deltaAngle, Radius));
+            Rigidbody.MovePosition(GetPosition(deltaAngle, Radius));
+            Rigidbody.MoveRotation(Quaternion.AngleAxis(deltaAngle, Vector3.up));
         }
 
         protected override float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to) =>
@@ -23,7 +22,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         {
             float posX = Mathf.Cos(-byArcGrade * Mathf.Deg2Rad) * radius;
             float posZ = Mathf.Sin(-byArcGrade * Mathf.Deg2Rad) * radius;
-            return new Vector3(posX, RigidBody.position.y, posZ);
+            return new Vector3(posX, Position.y, posZ);
         }
     }
 }

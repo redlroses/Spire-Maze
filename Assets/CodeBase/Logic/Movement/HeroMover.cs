@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Services.PersistentProgress;
@@ -7,11 +8,14 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class HeroMover : Mover, IPlateMovable, ISavedProgress
+    public class HeroMover : Mover, IMovableByPlate, ISavedProgress
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
         [SerializeField] private float _dodgeSpeedFactor = 1.5f;
+
+        private Vector3 _groundMovingDeltaPosition;
+        private Vector3 _groundMovingDeltaRotation;
 
         protected override void OnEnabled() =>
             _dodge.Dodged += OnDodged;
@@ -19,10 +23,19 @@ namespace CodeBase.Logic.Movement
         protected override void OnDisabled() =>
             _dodge.Dodged -= OnDodged;
 
-        protected override void Run()
+        protected override void OnLateMove()
         {
             _heroAnimator.SetSpeed(Rigidbody.velocity.RemoveY().magnitude);
             _heroAnimator.SetFallSpeed(Mathf.Abs(Rigidbody.velocity.y));
+
+            if (_groundMovingDeltaPosition.Equals(Vector3.zero))
+                return;
+
+            Rigidbody.velocity += _groundMovingDeltaPosition.ChangeY(0) / Time.fixedDeltaTime;
+            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + _groundMovingDeltaRotation);
+
+            _groundMovingDeltaPosition = Vector3.zero;
+            _groundMovingDeltaRotation = Vector3.zero;
         }
 
         public void OnMovingPlatformEnter(IPlateMover plateMover) =>
@@ -39,10 +52,8 @@ namespace CodeBase.Logic.Movement
 
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {
-            Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
-            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Radius)
-                .AddY(uncorrectedPosition.y);
-            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
+            _groundMovingDeltaPosition = deltaPosition;
+            _groundMovingDeltaRotation = deltaRotation;
         }
 
         private void OnDodged(MoveDirection direction) =>
