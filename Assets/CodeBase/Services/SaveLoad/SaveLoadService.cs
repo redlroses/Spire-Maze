@@ -8,7 +8,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
-using UnityEngine;
+using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 namespace CodeBase.Services.SaveLoad
 {
@@ -62,7 +62,7 @@ namespace CodeBase.Services.SaveLoad
 #pragma warning disable CS1998
         public async Task<PlayerProgress> LoadProgress()
         {
-#if !UNITY_EDITOR && YANDEX_GAMES
+#if !UNITY_EDITOR && UNITY_WEBGL
             if (PlayerAccount.IsAuthorized)
             {
                 return await GetActualSaveData();

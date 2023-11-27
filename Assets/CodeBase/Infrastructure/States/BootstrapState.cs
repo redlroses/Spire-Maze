@@ -1,4 +1,7 @@
-﻿using Agava.YandexGames;
+﻿#if UNITY_WEBGL && !UNITY_EDITOR
+using CodeBase.Tools.Extension;
+using Agava.YandexGames;
+#endif
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
@@ -16,7 +19,6 @@ using CodeBase.Services.Score;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 

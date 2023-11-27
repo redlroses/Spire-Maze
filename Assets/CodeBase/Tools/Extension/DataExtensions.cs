@@ -18,6 +18,9 @@ namespace CodeBase.Tools.Extension
     public static class DataExtensions
     {
         private const string Anonymous = "Anonimus";
+        private const string LangStringRu = "ru";
+        private const string LangStringEn = "en";
+        private const string LangStringTr = "tr";
 
         public static Vector3Data AsVectorData(this Vector3 vector) =>
             new Vector3Data(vector.x, vector.y, vector.z);
@@ -94,6 +97,17 @@ namespace CodeBase.Tools.Extension
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);
+        }
+
+        public static LanguageId AsLangId(this string langString)
+        {
+            return langString switch
+            {
+                LangStringRu => LanguageId.Russian,
+                LangStringEn => LanguageId.English,
+                LangStringTr => LanguageId.Turkish,
+                _ => LanguageId.English
+            };
         }
     }
 }

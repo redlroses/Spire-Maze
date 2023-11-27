@@ -40,7 +40,7 @@ MonoBehaviour:
   - rid: 3578795405725139063
   - rid: 3578795405725139111
   - rid: 3578795405725139112
-  - rid: 3578795451244085249
+  - rid: 3578795517687627777
   - rid: 3578795405725139069
   - rid: 3578795405725139110
   - rid: 3578795405725139108
@@ -72,7 +72,7 @@ MonoBehaviour:
   - rid: 3578795428382244865
   - rid: 3578795428382244869
   - rid: 3578795428382244870
-  - rid: 3578795451244085248
+  - rid: 3578795517687627776
   - rid: 3578795405725139071
   - rid: 3578795405725138998
   - rid: 3578795428382244872
@@ -430,15 +430,11 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 3578795451244085248
-      type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+    - rid: 3578795517687627776
+      type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-        Direction: 3
-        IsLiftHolder: 1
-    - rid: 3578795451244085249
-      type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+    - rid: 3578795517687627777
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-        Direction: 1
-        IsLiftHolder: 0

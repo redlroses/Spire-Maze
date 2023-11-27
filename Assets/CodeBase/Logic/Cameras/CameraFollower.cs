@@ -7,6 +7,7 @@ using NaughtyAttributes;
 using NTC.Global.Cache;
 using TheraBytes.BetterUi;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Logic.Cameras
 {
@@ -17,7 +18,7 @@ namespace CodeBase.Logic.Cameras
         [SerializeField] private Vector3 _offsetPosition;
 
         [SerializeField] private float _smoothing;
-        [SerializeField] [Min(0f)] [MaxValue(1f)] private float _power = 0.5f;
+        [SerializeField] [Range(0f, 1f)] private float _lerpPower = 0.5f;
 
         private string _currentOrientation;
         private Transform _followTarget;
@@ -66,7 +67,7 @@ namespace CodeBase.Logic.Cameras
             ApplyConfig(_staticData.GetCameraConfigByOrientation(orientationName));
         }
 
-        protected override void FixedRun()
+        protected override void LateRun()
         {
             _followAction.Invoke();
 
@@ -96,13 +97,13 @@ namespace CodeBase.Logic.Cameras
             rotation = Quaternion.Lerp(
                 rotation,
                 newRotation,
-                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(rotation.eulerAngles, newRotation.eulerAngles), 1f - _power));
+                _smoothing * Time.smoothDeltaTime / Mathf.Pow(Vector3.Distance(rotation.eulerAngles, newRotation.eulerAngles), 1f - _lerpPower));
             _cameraHolder.rotation = rotation;
 
             position = Vector3.Lerp(
                 position,
                 newPosition,
-                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(position, newPosition), 1f - _power));
+                _smoothing * Time.smoothDeltaTime / Mathf.Pow(Vector3.Distance(position, newPosition), 1f - _lerpPower));
             _cameraHolder.position = position;
         }
 

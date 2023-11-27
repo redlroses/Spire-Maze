@@ -7265,7 +7265,6 @@ GameObject:
   - component: {fileID: 2960491418050870100}
   - component: {fileID: 5771158303944293934}
   - component: {fileID: 6953851934803590298}
-  - component: {fileID: 7902642204812287731}
   - component: {fileID: 8388498137945045302}
   - component: {fileID: 3195723283148342379}
   - component: {fileID: 5845492673946329146}
@@ -7344,11 +7343,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!114 &7393409988495010668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7511,7 +7510,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 68923c6eec30d4a40ba4aae6cb5c059c, type: 3}
   m_Controller: {fileID: 9100000, guid: 3dec9f4f521ccb84c9b44899671368d8, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -7573,27 +7572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &7902642204812287731
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7393409988495010675}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.2
-  m_Center: {x: 0, y: 0.18, z: 0}
 --- !u!114 &8388498137945045302
 MonoBehaviour:
   m_ObjectHideFlags: 0
