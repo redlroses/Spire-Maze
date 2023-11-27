@@ -7,7 +7,7 @@ namespace CodeBase.Logic.Lift
 {
     [RequireComponent(typeof(TimerOperator))]
     [RequireComponent(typeof(PlateMovableObserver))]
-    public class LiftPlate : ObserverTargetExited<PlateMovableObserver, IPlateMovable>, ILiftPlate
+    public class LiftPlate : ObserverTargetExited<PlateMovableObserver, IMovableByPlate>, ILiftPlate
     {
         [SerializeField] private LiftState _state;
         [SerializeField] private float _waitDelay;
@@ -22,6 +22,7 @@ namespace CodeBase.Logic.Lift
         public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection initialDirection)
         {
             _timer ??= GetComponent<TimerOperator>();
+            _timer.SetUp(_waitDelay, Move);
             _currentMarker = initialMarker;
             _destinationMarker = destinationMarker;
             _currentMarker.Called += OnCalled;
@@ -29,7 +30,6 @@ namespace CodeBase.Logic.Lift
             _plateMover = mover;
             _plateMover.MoveEnded += OnMoveEnded;
             _liftAnimator.Construct(initialDirection);
-            _timer.SetUp(_waitDelay, Move);
         }
 
         private void OnDestroy()
@@ -39,9 +39,9 @@ namespace CodeBase.Logic.Lift
             _destinationMarker.Called -= OnCalled;
         }
 
-        protected override void OnTriggerObserverEntered(IPlateMovable plateMovable)
+        protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate)
         {
-            plateMovable.OnMovingPlatformEnter(_plateMover);
+            movableByPlate.OnMovingPlatformEnter(_plateMover);
 
             if (_state == LiftState.Moving)
             {
@@ -52,9 +52,9 @@ namespace CodeBase.Logic.Lift
             _timer.Play();
         }
 
-        protected override void OnTriggerObserverExited(IPlateMovable plateMovable)
+        protected override void OnTriggerObserverExited(IMovableByPlate movableByPlate)
         {
-            plateMovable.OnMovingPlatformExit(_plateMover);
+            movableByPlate.OnMovingPlatformExit(_plateMover);
             _timer.Pause();
         }
 

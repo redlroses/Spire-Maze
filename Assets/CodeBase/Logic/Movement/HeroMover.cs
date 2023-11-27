@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
-    public class HeroMover : Mover, IPlateMovable, ISavedProgress
+    public class HeroMover : Mover, IMovableByPlate, ISavedProgress
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private Dodge _dodge;
@@ -40,9 +40,10 @@ namespace CodeBase.Logic.Movement
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {
             Vector3 uncorrectedPosition = Rigidbody.position + deltaPosition;
-            Rigidbody.position = (uncorrectedPosition.RemoveY().normalized * Radius)
+            Vector3 correctedPosition = (uncorrectedPosition.RemoveY().normalized * Radius)
                 .AddY(uncorrectedPosition.y);
-            Rigidbody.rotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
+            Quaternion correctedRotation = Quaternion.Euler(Rigidbody.rotation.eulerAngles + deltaRotation);
+            Rigidbody.Move(correctedPosition, correctedRotation);
         }
 
         private void OnDodged(MoveDirection direction) =>

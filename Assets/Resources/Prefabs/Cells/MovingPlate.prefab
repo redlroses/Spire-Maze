@@ -82,8 +82,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4862015, y: 0.1, z: 2.11}
-  m_Center: {x: 0.24310076, y: -0.12, z: -0.045660973}
+  m_Size: {x: 1.4862015, y: 0.10000001, z: 1.6988883}
+  m_Center: {x: 0.24310076, y: -0.12, z: 0.009394616}
 --- !u!1 &6286470004713288498
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 2191518941159470073}
   - component: {fileID: -770926984297467283}
   - component: {fileID: 470538716943559524}
-  - component: {fileID: 2526695143226658917}
   - component: {fileID: 6811979314399910335}
   - component: {fileID: 5048105065659090017}
   - component: {fileID: -6143057598305293160}
@@ -224,33 +223,6 @@ MonoBehaviour:
   _waitDelay: 1
   _timer: {fileID: 2191518941159470073}
   _liftAnimator: {fileID: 806960712021489796}
---- !u!54 &2526695143226658917
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6334336615449263104}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &6811979314399910335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,8 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8426935375764be2a37a9e4fb11b8914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _rigidBody: {fileID: 2526695143226658917}
+  Speed: 3
+  _selfTransform: {fileID: 3396421926548984122}
 --- !u!114 &-6143057598305293160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87910f2469064c59a02ef4d8bffe3fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _rigidBody: {fileID: 2526695143226658917}
+  Speed: 3
+  _selfTransform: {fileID: 3396421926548984122}
 --- !u!114 &806960712021489796
 MonoBehaviour:
   m_ObjectHideFlags: 0

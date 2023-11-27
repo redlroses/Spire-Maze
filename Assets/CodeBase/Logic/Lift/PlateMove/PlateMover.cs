@@ -6,13 +6,13 @@ using UnityEngine;
 namespace CodeBase.Logic.Lift.PlateMove
 {
     [RequireComponent(typeof(LiftPlate))]
-    [RequireComponent(typeof(Rigidbody))]
     public abstract class PlateMover<T> : MonoCache, IPlateMover, IPauseWatcher
     {
         private const int FinalTranslateValue = 1;
 
-        [SerializeField] protected float _speed = 3f;
-        [SerializeField] private Rigidbody _rigidBody;
+        [SerializeField] protected float Speed = 3f;
+
+        [SerializeField] private Transform _selfTransform;
 
         protected float Radius;
 
@@ -28,14 +28,13 @@ namespace CodeBase.Logic.Lift.PlateMove
         public event Action<Vector3, Vector3> PositionUpdated = (_, _) => { };
         public event Action MoveEnded = () => { };
 
-        private Vector3 DeltaPosition => _rigidBody.position - _prevPosition;
-        private Vector3 DeltaRotation => _rigidBody.rotation.eulerAngles - _prevRotation;
+        public Transform SelfTransform => _selfTransform;
 
-        protected Rigidbody RigidBody => _rigidBody;
+        private Vector3 DeltaPosition => _selfTransform.position - _prevPosition;
+        private Vector3 DeltaRotation => _selfTransform.rotation.eulerAngles - _prevRotation;
 
         private void Awake()
         {
-            _rigidBody ??= Get<Rigidbody>();
             Vector3 parentPosition = transform.parent.position;
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
@@ -43,16 +42,16 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected override void OnEnabled()
         {
-            _prevRotation = _rigidBody.rotation.eulerAngles;
-            _prevPosition = _rigidBody.position;
+            _prevRotation = _selfTransform.rotation.eulerAngles;
+            _prevPosition = _selfTransform.position;
         }
 
-        protected override void FixedRun()
+        protected override void Run()
         {
+            _prevPosition = _selfTransform.position;
+            _prevRotation = _selfTransform.rotation.eulerAngles;
             Translate();
             PositionUpdated.Invoke(DeltaPosition, DeltaRotation);
-            _prevPosition = _rigidBody.position;
-            _prevRotation = _rigidBody.rotation.eulerAngles;
         }
 
         protected abstract T GetTransform(LiftDestinationMarker from);
@@ -87,7 +86,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         }
 
         private void UpdateDelta() =>
-            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, _speed * Time.fixedDeltaTime / _distance);
+            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, Speed * Time.deltaTime / _distance);
 
         private void CheckIsComplete()
         {
