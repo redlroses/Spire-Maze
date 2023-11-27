@@ -7,6 +7,7 @@ namespace CodeBase.Logic.Lift.PlateMove
     {
         event Action<Vector3, Vector3> PositionUpdated;
         event Action MoveEnded;
+        float Velocity { get; }
         void Move(LiftDestinationMarker from, LiftDestinationMarker to);
     }
 }

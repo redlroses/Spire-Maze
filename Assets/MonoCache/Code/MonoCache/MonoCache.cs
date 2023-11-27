@@ -15,7 +15,7 @@ namespace NTC.Global.Cache
     {
         private GlobalUpdate _globalUpdate;
         private bool _isSetup;
-        
+
         private void OnEnable()
         {
             OnEnabled();

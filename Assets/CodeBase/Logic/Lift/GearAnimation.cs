@@ -1,20 +1,23 @@
-﻿using NTC.Global.Cache;
+using CodeBase.Logic.Lift.PlateMove;
+using NTC.Global.Cache.Interfaces;
 using UnityEngine;
 
 namespace CodeBase.Logic.Lift
 {
-    public class GearAnimation : MonoCache
+    public class GearAnimation : IRunSystem
     {
-        [SerializeField] private int _rotationSpeed;
+        private int _rotationSpeed;
+        private IPlateMover _mover;
 
-        protected override void Run()
-        {
-            transform.Rotate(0, _rotationSpeed * Time.deltaTime, 0);
-        }
+        public void Construct(IPlateMover mover) =>
+            _mover = mover;
 
-        public void InvertRotationDirection()
+        public void InvertRotationDirection() =>
+            _rotationSpeed = -_rotationSpeed;
+
+        public void OnRun()
         {
-            _rotationSpeed *= -1;
+            transform.Rotate(0, _rotationSpeed * _mover.Speed * Time.deltaTime, 0);
         }
     }
 }

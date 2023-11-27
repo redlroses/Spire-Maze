@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Tools.Extension
 {
@@ -40,5 +41,8 @@ namespace CodeBase.Tools.Extension
 
             return self;
         }
+
+        public static int AsSign(this bool condition) =>
+            condition ? 1 : -1;
     }
 }

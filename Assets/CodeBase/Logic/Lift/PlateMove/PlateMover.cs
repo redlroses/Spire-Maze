@@ -10,9 +10,9 @@ namespace CodeBase.Logic.Lift.PlateMove
     {
         private const int FinalTranslateValue = 1;
 
-        [SerializeField] protected float Speed = 3f;
-
-        [SerializeField] private Transform _selfTransform;
+        [SerializeField] private float _speed = 3f;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private AnimationCurve _easeInOutCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         protected float Radius;
 
@@ -28,10 +28,14 @@ namespace CodeBase.Logic.Lift.PlateMove
         public event Action<Vector3, Vector3> PositionUpdated = (_, _) => { };
         public event Action MoveEnded = () => { };
 
-        public Transform SelfTransform => _selfTransform;
+        public float Velocity => _rigidbody.velocity.magnitude;
 
-        private Vector3 DeltaPosition => _selfTransform.position - _prevPosition;
-        private Vector3 DeltaRotation => _selfTransform.rotation.eulerAngles - _prevRotation;
+        protected Vector3 Position => Rigidbody.position;
+        private Vector3 Rotation => Rigidbody.rotation.eulerAngles;
+        protected Rigidbody Rigidbody => _rigidbody;
+
+        private Vector3 DeltaPosition => Position - _prevPosition;
+        private Vector3 DeltaRotation => Rotation - _prevRotation;
 
         private void Awake()
         {
@@ -42,21 +46,21 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         protected override void OnEnabled()
         {
-            _prevRotation = _selfTransform.rotation.eulerAngles;
-            _prevPosition = _selfTransform.position;
+            _prevPosition = Position;
+            _prevRotation = Rotation;
         }
 
-        protected override void Run()
+        protected override void FixedRun()
         {
-            _prevPosition = _selfTransform.position;
-            _prevRotation = _selfTransform.rotation.eulerAngles;
             Translate();
             PositionUpdated.Invoke(DeltaPosition, DeltaRotation);
+            _prevPosition = Position;
+            _prevRotation = Rotation;
         }
 
         protected abstract T GetTransform(LiftDestinationMarker from);
 
-        protected abstract void SetNewPosition(T from, T to, float delta);
+        protected abstract void UpdatePosition(T from, T to, float delta);
 
         protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
 
@@ -81,12 +85,15 @@ namespace CodeBase.Logic.Lift.PlateMove
         private void Translate()
         {
             UpdateDelta();
-            SetNewPosition(_from, _to, _delta);
+            UpdatePosition(_from, _to, _easeInOutCurve.Evaluate(_delta));
             CheckIsComplete();
         }
 
-        private void UpdateDelta() =>
-            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, Speed * Time.deltaTime / _distance);
+        private void UpdateDelta()
+        {
+            float maxDelta = _speed * Time.fixedDeltaTime / _distance;
+            _delta = Mathf.MoveTowards(_delta, FinalTranslateValue, maxDelta);
+        }
 
         private void CheckIsComplete()
         {

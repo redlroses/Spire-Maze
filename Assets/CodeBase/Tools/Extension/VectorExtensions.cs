@@ -36,7 +36,7 @@ namespace CodeBase.Tools.Extension
 
         public static Vector3 ToWorldPosition(this Vector2 vector, float radius)
         {
-            float arcLength = 2f * Mathf.PI * radius;
+            float arcLength = Arithmetic.ToHalf * Mathf.PI * radius;
             float clampedX = vector.x.ClampRound(0, arcLength);
             float lerpedX = Mathf.Lerp(0, Trigonometry.TwoPiGrade, clampedX / arcLength);
             float posX = Mathf.Cos(lerpedX * Mathf.Deg2Rad) * radius;

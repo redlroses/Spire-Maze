@@ -29,7 +29,7 @@ namespace CodeBase.Logic.Lift
             _destinationMarker.Called += OnCalled;
             _plateMover = mover;
             _plateMover.MoveEnded += OnMoveEnded;
-            _liftAnimator.Construct(initialDirection);
+            _liftAnimator.Construct(initialDirection, mover);
         }
 
         private void OnDestroy()
