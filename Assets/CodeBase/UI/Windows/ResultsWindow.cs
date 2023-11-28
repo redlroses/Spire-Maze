@@ -3,6 +3,7 @@ using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.StaticData;
 using CodeBase.Sound;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
@@ -36,14 +37,13 @@ namespace CodeBase.UI.Windows
             _audioPlayer.PlayOneShot(_sound);
         }
 
-        public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine)
+        public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine,
+            IStaticDataService staticData)
         {
             _progressService = progressService;
-            _restartButton.Construct(stateMachine);
-            _nextLevelButton.Construct(stateMachine);
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
-            _nextLevelButton.Construct(stateMachine, LevelId);
+            _nextLevelButton.Construct(stateMachine, staticData, LevelId);
         }
 
         protected override void Initialize()

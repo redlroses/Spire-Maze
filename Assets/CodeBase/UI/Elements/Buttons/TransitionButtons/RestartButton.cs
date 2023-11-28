@@ -18,7 +18,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             _levelId = levelId;
         }
 
-        protected override LoadPayload TransitionPayload()
+        protected override LoadPayload CreateTransitionPayload()
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
