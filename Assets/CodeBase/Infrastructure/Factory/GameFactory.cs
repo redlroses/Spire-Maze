@@ -126,6 +126,9 @@ namespace CodeBase.Infrastructure.Factory
         public PhysicMaterial CreatePhysicMaterial(string name) =>
             GetCashed(name, AssetPath.PhysicMaterials, _physicMaterials);
 
+        public GameObject CreateMusicPlayer() =>
+            _assets.Instantiate(AssetPath.MusicPlayer);
+
         public GameObject CreateHud() =>
             InstantiateRegistered(AssetPath.Hud);
 
