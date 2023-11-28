@@ -16,7 +16,6 @@ namespace CodeBase.UI.Windows
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private NextLevelButton _nextLevelButton;
-
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _itemText;
@@ -29,7 +28,7 @@ namespace CodeBase.UI.Windows
         private IPersistentProgressService _progressService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
-        private WorldData WorldData => _progressService.Progress.WorldData;
+        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
 
         protected override void OnAwake()
         {
@@ -49,11 +48,10 @@ namespace CodeBase.UI.Windows
 
         protected override void Initialize()
         {
-            WorldData worldData = WorldData;
-            SetScorePoints(worldData);
-            SetItemsCount(worldData);
-            SetStars(worldData);
-            SetCoins(worldData);
+            SetScorePoints();
+            SetItemsCount();
+            SetStars();
+            SetCoins();
             _showHide.Value.Show();
         }
 
@@ -72,16 +70,16 @@ namespace CodeBase.UI.Windows
             _nextLevelButton.Cleanup();
         }
 
-        private void SetStars(WorldData worldData) =>
-            _starsView.EnableStars(worldData.LevelAccumulationData.Stars);
+        private void SetStars() =>
+            _starsView.EnableStars(TemporalProgress.StarsCount);
 
-        private void SetItemsCount(WorldData worldData) =>
-            _itemText.SetTextAnimated(worldData.LevelAccumulationData.Artifacts);
+        private void SetItemsCount() =>
+            _itemText.SetTextAnimated(TemporalProgress.ArtifactsCount);
 
-        private void SetScorePoints(WorldData worldData) =>
-            _scoreText.SetTextAnimated(worldData.LevelAccumulationData.Score);
+        private void SetScorePoints() =>
+            _scoreText.SetTextAnimated(TemporalProgress.Score);
 
-        private void SetCoins(WorldData worldData) =>
-            _coinsText.SetTextAnimated(worldData.LevelAccumulationData.Coins);
+        private void SetCoins() =>
+            _coinsText.SetTextAnimated(TemporalProgress.CoinsCount);
     }
 }

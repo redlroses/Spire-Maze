@@ -272,7 +272,7 @@ namespace CodeBase.Infrastructure.States
                 HeroHealthState = new HealthState(_staticData.GetHealthForEntity(PlayerKey).MaxHealth),
                 HeroStaminaState = new StaminaState(_staticData.GetStaminaForEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
-                LevelAccumulationData = new LevelAccumulationData()
+                AccumulationData = new AccumulationData()
             };
 
             Debug.Log("Progress was reset");

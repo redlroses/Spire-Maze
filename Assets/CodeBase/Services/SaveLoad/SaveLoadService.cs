@@ -8,6 +8,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
+using UnityEngine;
 using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 namespace CodeBase.Services.SaveLoad
@@ -38,6 +39,8 @@ namespace CodeBase.Services.SaveLoad
             string saveData = _progressService.Progress.ToJson();
 
             SaveLocal(saveData);
+
+            Debug.Log("Save progress");
 
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)

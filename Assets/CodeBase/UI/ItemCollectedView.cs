@@ -60,6 +60,9 @@ namespace CodeBase.UI
                 .Then(EndAnimation);
         }
 
+        private void OnDestroy() =>
+            _animation.Kill();
+
         private void EndAnimation()
         {
             if (_commandQueue.TryDequeue(out Action action))

@@ -2,6 +2,8 @@
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
+using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
@@ -24,15 +26,31 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter(bool isLose)
         {
-            _scoreService.Calculate(isLose);
-            _scoreService.UpdateProgress();
-
-            int fullScore = _progressService.Progress.GlobalData.Levels.Sum(level => level.Score);
-            _rankedService.SetScore(fullScore);
-
+            CountArtifacts();
+            CountLevelScore(isLose);
+            CountGlobalScore();
             _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
         }
 
         public void Exit() { }
+
+        private void CountLevelScore(bool isLose)
+        {
+            _scoreService.Calculate(isLose);
+            _scoreService.UpdateProgress();
+        }
+
+        private void CountGlobalScore()
+        {
+            int fullScore = _progressService.Progress.GlobalData.Levels.Sum(level => level.Score);
+            _rankedService.SetScore(fullScore);
+        }
+
+        private void CountArtifacts()
+        {
+            int artifactsCount = _progressService.Progress.WorldData.HeroInventoryData.ItemsData
+                .Count(item => ((StorableType) item.StorableType).IsArtifact());
+            _progressService.TemporalProgress.ArtifactsCount = artifactsCount;
+        }
     }
 }

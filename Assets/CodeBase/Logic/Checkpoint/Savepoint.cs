@@ -59,7 +59,7 @@ namespace CodeBase.Logic.Checkpoint
         protected override void OnTriggerObserverEntered(HeroRoot _)
         {
             IsActivated = true;
-            SetColliderState(true);
+            // SetColliderState(true);
             Activated.Invoke(true);
             _saveLoadService.SaveProgress();
         }
