@@ -66,7 +66,6 @@ namespace CodeBase.Logic.Trap
         {
             _moveDirection = isDirectionToRight ? MoveDirection.Right : MoveDirection.Left;
             Rotate();
-            _rotator.SetDirection(_moveDirection);
         }
 
         public void LoadProgress(PlayerProgress progress)
