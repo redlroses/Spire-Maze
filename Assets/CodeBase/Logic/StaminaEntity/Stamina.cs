@@ -63,7 +63,8 @@ namespace CodeBase.Logic.StaminaEntity
         private void Spend(int spendStamina)
         {
             _isReplenish = false;
-            CurrentPoints -= spendStamina;
+            int newPoints = CurrentPoints - spendStamina;
+            CurrentPoints = Mathf.Max(newPoints, 0);
 
             if (CurrentPoints < 0)
                 _currentSpeedReplenish = _speedReplenish * _lowerSpeedMultiplier;

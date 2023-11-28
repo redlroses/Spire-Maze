@@ -36,6 +36,7 @@ namespace CodeBase.Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             _watchService.UpdateProgress();
+
             string saveData = _progressService.Progress.ToJson();
 
             SaveLocal(saveData);

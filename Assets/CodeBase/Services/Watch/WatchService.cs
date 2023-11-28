@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using CodeBase.Infrastructure;
-using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 

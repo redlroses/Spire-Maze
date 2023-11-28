@@ -1,13 +1,8 @@
-﻿using System.Linq;
-using CodeBase.Data;
-using CodeBase.Infrastructure;
+﻿using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
-using CodeBase.StaticData.Storable;
-using CodeBase.Tools.Extension;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.Services.Score
 {
@@ -38,6 +33,9 @@ namespace CodeBase.Services.Score
 
         public int Calculate(bool isLose)
         {
+            Cleanup();
+
+            _currentLevelId = WorldData.LevelState.LevelId;
             ScoreConfig scoreConfig = _staticData.GetScoreForLevel(_currentLevelId);
 
             if (isLose)
@@ -58,36 +56,13 @@ namespace CodeBase.Services.Score
                 GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
             }
 
+            UpdateProgress();
+
             return _currentScore;
         }
 
-        public void LoadProgress()
+        private void UpdateProgress()
         {
-            if (IsScorableLevel() == false)
-            {
-                return;
-            }
-
-            Cleanup();
-
-            _currentLevelId = WorldData.LevelState.LevelId;
-
-#if DEBUG
-            LevelData currentLevelData = GlobalData.Levels.Find(level => level.Id == _currentLevelId);
-
-            Debug.Log(currentLevelData == null
-                ? $"Level ID: {_currentLevelId}, LevelData: {currentLevelData}"
-                : $"Level ID: {_currentLevelId}, LevelData: id - {currentLevelData.Id}, best score - {currentLevelData.Score}, stars - {currentLevelData.Stars}");
-#endif
-        }
-
-        public void UpdateProgress()
-        {
-            if (IsScorableLevel() == false)
-            {
-                return;
-            }
-
             TemporalProgress.Score = _currentScore;
             TemporalProgress.StarsCount = _stars;
             TemporalProgress.CoinsCount = _coins;
@@ -109,17 +84,8 @@ namespace CodeBase.Services.Score
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 
-        private int ScorePerArtifacts(ScoreConfig scoreConfig)
-        {
-            int artifactsCount = WorldData.HeroInventoryData.ItemsData.Count(item => ((StorableType) item.StorableType).IsArtifact());
-            return artifactsCount * scoreConfig.PerArtifact;
-        }
-
-        private bool IsScorableLevel()
-        {
-            string name = SceneManager.GetActiveScene().name;
-            return name.Equals(LevelNames.BuildableLevel) || name.Equals(LevelNames.LearningLevel);
-        }
+        private int ScorePerArtifacts(ScoreConfig scoreConfig) =>
+            TemporalProgress.ArtifactsCount * scoreConfig.PerArtifact;
 
         private int StarsCountFromConfig(ScoreConfig scoreConfig)
         {

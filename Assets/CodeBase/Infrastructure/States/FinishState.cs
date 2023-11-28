@@ -34,11 +34,8 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit() { }
 
-        private void CountLevelScore(bool isLose)
-        {
+        private void CountLevelScore(bool isLose) =>
             _scoreService.Calculate(isLose);
-            _scoreService.UpdateProgress();
-        }
 
         private void CountGlobalScore()
         {

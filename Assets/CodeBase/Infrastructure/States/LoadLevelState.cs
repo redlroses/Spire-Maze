@@ -140,7 +140,6 @@ namespace CodeBase.Infrastructure.States
                 progressReader.LoadProgress(_progressService.Progress);
 
             _watchService.LoadProgress();
-            _scoreService.LoadProgress();
         }
 
         private void InitGameWorld()
