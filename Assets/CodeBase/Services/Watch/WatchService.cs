@@ -49,13 +49,13 @@ namespace CodeBase.Services.Watch
 
         public void LoadProgress()
         {
-            _elapsedTime = _progressService.Progress.WorldData.LevelAccumulationData.PlayTime;
+            _elapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
             TimeChanged.Invoke(ElapsedTime);
         }
 
         public void UpdateProgress()
         {
-            _progressService.Progress.WorldData.LevelAccumulationData.PlayTime = ElapsedTime;
+            _progressService.Progress.WorldData.AccumulationData.PlayTime = ElapsedTime;
         }
 
         private IEnumerator RunTimer()

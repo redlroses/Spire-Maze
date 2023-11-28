@@ -6,13 +6,16 @@ namespace CodeBase.Data
     [Serializable]
     public class InventoryData
     {
-        public List<ItemData> ItemDatas = new List<ItemData>();
+        public List<ItemData> ItemsData;
 
-        public InventoryData() { }
-
-        public InventoryData(List<ItemData> itemDatas)
+        public InventoryData()
         {
-            ItemDatas = itemDatas;
+            ItemsData = new List<ItemData>();
+        }
+
+        public InventoryData(List<ItemData> itemsData)
+        {
+            ItemsData = itemsData;
         }
     }
 }

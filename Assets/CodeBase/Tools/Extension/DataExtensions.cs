@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic.Inventory;
+using CodeBase.Logic.Items;
 using CodeBase.Services;
 using CodeBase.Services.Localization;
 using CodeBase.Services.StaticData;
@@ -36,29 +36,29 @@ namespace CodeBase.Tools.Extension
 
         public static InventoryData AsInventoryData(this IInventory inventory)
         {
-            List<ItemData> itemDatas = new List<ItemData>(inventory.Count);
+            List<ItemData> itemsData = new List<ItemData>(inventory.Count);
 
             foreach (IReadOnlyInventoryCell cell in inventory)
             {
-                itemDatas.Add(new ItemData(cell.Count, (int) cell.Item.ItemType));
+                itemsData.Add(new ItemData(cell.Count, (int) cell.Item.ItemType));
             }
 
-            return new InventoryData(itemDatas);
+            return new InventoryData(itemsData);
         }
 
         public static IInventory AsHeroInventory(this InventoryData inventoryData)
         {
             IGameFactory gameFactory = AllServices.Container.Single<IGameFactory>();
             IStaticDataService staticData = AllServices.Container.Single<IStaticDataService>();
-            List<InventoryCell> itemDatas = new List<InventoryCell>(inventoryData.ItemDatas.Count);
+            List<InventoryCell> itemsData = new List<InventoryCell>(inventoryData.ItemsData.Count);
 
-            foreach (ItemData itemData in inventoryData.ItemDatas)
+            foreach (ItemData itemData in inventoryData.ItemsData)
             {
-                var item = gameFactory.CreateItem(staticData.GetForStorable((StorableType) itemData.StorableType));
-                itemDatas.Add(new InventoryCell(item, itemData.Count));
+                IItem item = gameFactory.CreateItem(staticData.GetStorable((StorableType) itemData.StorableType));
+                itemsData.Add(new InventoryCell(item, itemData.Count));
             }
 
-            return new Inventory(itemDatas);
+            return new Inventory(itemsData);
         }
 
         public static StorableType ToStorableType(this Colors colors)
@@ -72,6 +72,13 @@ namespace CodeBase.Tools.Extension
                 _ => throw new ArgumentOutOfRangeException(nameof(colors), colors, null)
             };
         }
+
+        public static bool IsArtifact(this StorableType type) =>
+            type is StorableType.RuneAlpha
+                or StorableType.RuneBeta
+                or StorableType.RuneGamma
+                or StorableType.RuneDelta
+                or StorableType.RuneEpsilon;
 
         public static Colors ToColorsType(this StorableType storableType)
         {

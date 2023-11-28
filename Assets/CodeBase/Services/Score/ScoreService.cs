@@ -1,8 +1,11 @@
-﻿using CodeBase.Data;
+﻿using System.Linq;
+using CodeBase.Data;
 using CodeBase.Infrastructure;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
+using CodeBase.StaticData.Storable;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +24,11 @@ namespace CodeBase.Services.Score
         private int _currentScore;
         private int _coins;
 
-        private PlayerProgress Progress => _progressService.Progress;
+        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+        private GlobalData GlobalData => _progressService.Progress.GlobalData;
+        private WorldData WorldData => _progressService.Progress.WorldData;
+        private AccumulationData AccumulationData => _progressService.Progress.WorldData.AccumulationData;
+
 
         public ScoreService(IStaticDataService staticData, IPersistentProgressService progressService)
         {
@@ -31,17 +38,16 @@ namespace CodeBase.Services.Score
 
         public int Calculate(bool isLose)
         {
-            LevelAccumulationData levelAccumulationData = Progress.WorldData.LevelAccumulationData;
             ScoreConfig scoreConfig = _staticData.GetScoreForLevel(_currentLevelId);
 
             if (isLose)
             {
-                _currentScore = Mathf.RoundToInt(SumScore(levelAccumulationData, scoreConfig) * LoseScoreFactor);
+                _currentScore = Mathf.RoundToInt(SumScore(scoreConfig) * LoseScoreFactor);
                 _stars = 0;
             }
             else
             {
-                _currentScore = SumScore(levelAccumulationData, scoreConfig);
+                _currentScore = SumScore(scoreConfig);
                 _stars = StarsCountFromConfig(scoreConfig);
             }
 
@@ -49,7 +55,7 @@ namespace CodeBase.Services.Score
 
             if (isLose == false)
             {
-                Progress.GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
+                GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
             }
 
             return _currentScore;
@@ -64,10 +70,10 @@ namespace CodeBase.Services.Score
 
             Cleanup();
 
-            _currentLevelId = Progress.WorldData.LevelState.LevelId;
+            _currentLevelId = WorldData.LevelState.LevelId;
 
 #if DEBUG
-            LevelData currentLevelData = Progress.GlobalData.Levels.Find(level => level.Id == _currentLevelId);
+            LevelData currentLevelData = GlobalData.Levels.Find(level => level.Id == _currentLevelId);
 
             Debug.Log(currentLevelData == null
                 ? $"Level ID: {_currentLevelId}, LevelData: {currentLevelData}"
@@ -82,9 +88,9 @@ namespace CodeBase.Services.Score
                 return;
             }
 
-            Progress.WorldData.LevelAccumulationData.Score = _currentScore;
-            Progress.WorldData.LevelAccumulationData.Stars = _stars;
-            Progress.WorldData.LevelAccumulationData.Coins = _coins;
+            TemporalProgress.Score = _currentScore;
+            TemporalProgress.StarsCount = _stars;
+            TemporalProgress.CoinsCount = _coins;
         }
 
         private void Cleanup()
@@ -93,20 +99,21 @@ namespace CodeBase.Services.Score
             _stars = 0;
         }
 
-        private int SumScore(LevelAccumulationData levelAccumulationData, ScoreConfig scoreConfig) =>
-            (int) (ScorePerArtifacts(levelAccumulationData, scoreConfig) +
-                   ScorePerTime(scoreConfig, levelAccumulationData));
+        private int SumScore(ScoreConfig scoreConfig) =>
+            ScorePerArtifacts(scoreConfig) +
+            ScorePerTime(scoreConfig);
 
-        private float ScorePerTime(ScoreConfig scoreConfig, LevelAccumulationData levelAccumulationData)
+        private int ScorePerTime(ScoreConfig scoreConfig)
         {
-            int scorePerTime = scoreConfig.BasePointsOnStart -
-                               (int) levelAccumulationData.PlayTime * scoreConfig.PerSecondReduction;
+            int scorePerTime = scoreConfig.BasePointsOnStart - (int) AccumulationData.PlayTime * scoreConfig.PerSecondReduction;
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 
-        private int ScorePerArtifacts(LevelAccumulationData levelAccumulationData, ScoreConfig scoreConfig) =>
-            levelAccumulationData.Artifacts *
-            scoreConfig.PerArtifact;
+        private int ScorePerArtifacts(ScoreConfig scoreConfig)
+        {
+            int artifactsCount = WorldData.HeroInventoryData.ItemsData.Count(item => ((StorableType) item.StorableType).IsArtifact());
+            return artifactsCount * scoreConfig.PerArtifact;
+        }
 
         private bool IsScorableLevel()
         {

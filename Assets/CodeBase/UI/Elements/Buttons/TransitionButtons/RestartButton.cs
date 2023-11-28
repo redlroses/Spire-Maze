@@ -1,12 +1,15 @@
 ﻿using System;
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {
-    class RestartButton : TransitionButton
+    public class RestartButton : TransitionButton
     {
+        [SerializeField] private bool _isClearLoad;
+
         private int _levelId;
 
         public void Construct(GameStateMachine stateMachine, int levelId)
@@ -15,12 +18,12 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             _levelId = levelId;
         }
 
-        protected override LoadPayload TransitionPayload()
+        protected override LoadPayload CreateTransitionPayload()
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
             return sceneName.Equals(LevelNames.BuildableLevel)
-                ? new LoadPayload(LevelNames.BuildableLevel, true, _levelId, true)
+                ? new LoadPayload(LevelNames.BuildableLevel, true, _levelId, _isClearLoad)
                 : new LoadPayload(sceneName, false, GetLevelId(sceneName), true);
         }
 

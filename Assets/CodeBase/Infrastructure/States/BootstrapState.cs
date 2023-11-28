@@ -47,7 +47,6 @@ namespace CodeBase.Infrastructure.States
         public void Exit()
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            YandexGamesSdk.GameReady();
             _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
 #endif
 #if UNITY_EDITOR

@@ -57,12 +57,12 @@ namespace CodeBase.Infrastructure.States
                 WorldData =
                 {
                     LevelPositions = new LevelPositions(
-                        _staticDataService.GetForLevel(LevelNames.LearningLevelId)
+                        _staticDataService.GetLevel(LevelNames.LearningLevelId)
                             .HeroInitialPosition.AsVectorData(),
-                        _staticDataService.GetForLevel(LevelNames.LearningLevelId)
+                        _staticDataService.GetLevel(LevelNames.LearningLevelId)
                             .FinishPosition.AsVectorData()),
-                    HeroHealthState = new HealthState(_staticDataService.GetHealthForEntity(PlayerKey).MaxHealth),
-                    HeroStaminaState = new StaminaState(_staticDataService.GetStaminaForEntity(PlayerKey).MaxStamina)
+                    HeroHealthState = new HealthState(_staticDataService.GetHealthEntity(PlayerKey).MaxHealth),
+                    HeroStaminaState = new StaminaState(_staticDataService.GetStaminaEntity(PlayerKey).MaxStamina)
                 },
             };
 

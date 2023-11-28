@@ -1,5 +1,4 @@
 using System;
-using CodeBase.Infrastructure;
 
 namespace CodeBase.Data
 {
@@ -11,7 +10,7 @@ namespace CodeBase.Data
         public HealthState HeroHealthState;
         public StaminaState HeroStaminaState;
         public InventoryData HeroInventoryData;
-        public LevelAccumulationData LevelAccumulationData;
+        public AccumulationData AccumulationData;
         public string SceneName;
 
         public WorldData(string initialScene, int initialLevelId)
@@ -21,7 +20,7 @@ namespace CodeBase.Data
             HeroHealthState = new HealthState();
             HeroStaminaState = new StaminaState();
             HeroInventoryData = new InventoryData();
-            LevelAccumulationData = new LevelAccumulationData();
+            AccumulationData = new AccumulationData();
             SceneName = initialScene;
         }
     }

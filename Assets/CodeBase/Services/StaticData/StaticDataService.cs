@@ -26,7 +26,7 @@ namespace CodeBase.Services.StaticData
 
         private Dictionary<int, LevelStaticData> _levels;
         private Dictionary<string, HealthStaticData> _healths;
-        private Dictionary<string, StaminaStaticData> _staminas;
+        private Dictionary<string, StaminaStaticData> _stamins;
         private Dictionary<StorableType, StorableStaticData> _storables;
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
         private Dictionary<WindowId, WindowConfig> _windows;
@@ -41,7 +41,7 @@ namespace CodeBase.Services.StaticData
         {
             _levels = LoadFor<LevelStaticData, int>(LevelsDataPath, x => x.LevelId);
             _healths = LoadFor<HealthStaticData, string>(HealthPath, x => x.EntityKey);
-            _staminas = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
+            _stamins = LoadFor<StaminaStaticData, string>(StaminaPath, x => x.EntityKey);
             _storables = LoadFor<StorableStaticData, StorableType>(StorablePath, x => x.ItemType);
             _leaderboards = LoadFor<LeaderboardStaticData, string>(LeaderboardPath, x => x.name);
             _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
@@ -56,31 +56,32 @@ namespace CodeBase.Services.StaticData
             _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform ? MobileTutorialConfigPath : DesktopTutorialConfigPath);
         }
 
-        public LevelStaticData GetForLevel(int levelId) =>
+        public LevelStaticData GetLevel(int levelId) =>
             GetDataFor(levelId, _levels);
 
-        public HealthStaticData GetHealthForEntity(string entityKey) =>
+        public bool HasLevel(int levelId) =>
+            _levels.ContainsKey(levelId);
+
+        public HealthStaticData GetHealthEntity(string entityKey) =>
             GetDataFor(entityKey, _healths);
 
-        public StaminaStaticData GetStaminaForEntity(string entityKey) =>
-            GetDataFor(entityKey, _staminas);
+        public StaminaStaticData GetStaminaEntity(string entityKey) =>
+            GetDataFor(entityKey, _stamins);
 
-        public StorableStaticData GetForStorable(StorableType storableType) =>
+        public StorableStaticData GetStorable(StorableType storableType) =>
             GetDataFor(storableType, _storables);
 
-        public LeaderboardStaticData GetForLeaderboard(string name) =>
+        public LeaderboardStaticData GetLeaderboard(string name) =>
             GetDataFor(name, _leaderboards);
 
-        public WindowConfig GetForWindow(WindowId windowId) =>
+        public WindowConfig GetWindow(WindowId windowId) =>
             GetDataFor(windowId, _windows);
 
         public ScoreConfig GetScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);
 
         public Sprite GetSpriteByLang(string lang) =>
-            _flagsConfig.Flags.TryGetValue(lang, out Sprite flag)
-                ? flag
-                : _flagsConfig.DefaultFlag;
+            _flagsConfig.Flags.TryGetValue(lang, out Sprite flag) ? flag : _flagsConfig.DefaultFlag;
 
         public Sprite GetDefaultAvatar() =>
             Resources.Load<Sprite>(DefaultAvatarPath);

@@ -39,5 +39,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public const string TutorialTrigger = "Prefabs/TutorialTrigger";
         public const string TutorialPanel = "Prefabs/UI/TutorialPanel";
+
+        public const string MusicPlayer = "Prefabs/MusicPlayer";
     }
 }

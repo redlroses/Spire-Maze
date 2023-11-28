@@ -93,7 +93,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateResults()
         {
             ResultsWindow window = CreateWindow<ResultsWindow>(WindowId.Results);
-            window.Construct(_progressService, _stateMachine);
+            window.Construct(_progressService, _stateMachine, _staticData);
         }
 
         public void CreateLose()
@@ -120,7 +120,7 @@ namespace CodeBase.UI.Services.Factory
 
         private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase
         {
-            WindowConfig config = _staticData.GetForWindow(windowId);
+            WindowConfig config = _staticData.GetWindow(windowId);
             TWindow window = Object.Instantiate(config.Template, _uiRoot) as TWindow;
             return window;
         }

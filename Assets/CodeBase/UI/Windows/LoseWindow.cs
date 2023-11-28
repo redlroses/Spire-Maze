@@ -1,5 +1,4 @@
-﻿using System;
-using AYellowpaper;
+﻿using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Hero;
@@ -26,8 +25,9 @@ namespace CodeBase.UI.Windows
         [SerializeField] private AudioClip _sound;
 
         private IPersistentProgressService _progressService;
+
+        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
-        private WorldData WorldData => _progressService.Progress.WorldData;
 
         protected override void OnAwake()
         {
@@ -69,9 +69,9 @@ namespace CodeBase.UI.Windows
         }
 
         private void SetScore() =>
-            _scoreText.SetTextAnimated(WorldData.LevelAccumulationData.Score);
+            _scoreText.SetTextAnimated(TemporalProgress.Score);
 
         private void SetCoins() =>
-            _coinsText.SetTextAnimated(WorldData.LevelAccumulationData.Coins);
+            _coinsText.SetTextAnimated(TemporalProgress.CoinsCount);
     }
 }

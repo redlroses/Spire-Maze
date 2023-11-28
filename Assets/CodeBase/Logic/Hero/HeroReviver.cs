@@ -36,12 +36,12 @@ namespace CodeBase.Logic.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            progress.WorldData.LevelAccumulationData.TotalReviveTokens = _totalReviveTokens;
+            progress.WorldData.AccumulationData.TotalReviveTokens = _totalReviveTokens;
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            _totalReviveTokens = progress.WorldData.LevelAccumulationData.TotalReviveTokens;
+            _totalReviveTokens = progress.WorldData.AccumulationData.TotalReviveTokens;
         }
     }
 }

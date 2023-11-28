@@ -13,6 +13,7 @@ namespace CodeBase.Sound.Music
     {
         [SerializeField] private AudioSource _firstAudioSource;
         [SerializeField] private AudioSource _secondAudioSource;
+        [SerializeField] [Range(0f, 1f)] private float _maxVolume = 1f;
 
         [SerializeField] [CurveRange(0f, 0f, 1f, 1f, EColor.Indigo)]
         private AnimationCurve _crossCurve =
@@ -52,7 +53,7 @@ namespace CodeBase.Sound.Music
         }
 
         private TowardMover<float> CreateCrossFader() =>
-            new TowardMover<float>(0f, 1f, Mathf.Lerp,
+            new TowardMover<float>(0f, _maxVolume, Mathf.Lerp,
                 _crossCurve);
 
         private RoutineSequence CreateCrossFadeRoutine(float crossFadeTime)
@@ -61,7 +62,7 @@ namespace CodeBase.Sound.Music
             {
                 bool isProcess = _crossFader.TryUpdate(Time.deltaTime / crossFadeTime, out float volume);
 
-                _firstAudioSource.volume = 1f - volume;
+                _firstAudioSource.volume = _maxVolume - volume;
                 _secondAudioSource.volume = volume;
 
                 return isProcess;

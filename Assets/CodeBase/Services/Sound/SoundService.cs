@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -11,11 +12,11 @@ namespace CodeBase.Services.Sound
     {
         private const string MusicVolumeProperty = "Music";
         private const string SfxVolumeProperty = "SFX";
+        private const string MasterVolumeProperty = "Master";
 
         private const float VolumeStep = 0.05f;
         private const float MinVolume = 0.0001f;
         private const float MaxVolume = 1f;
-        private const float MaxDecibel = 20f;
 
         private readonly IPersistentProgressService _progressService;
         private readonly AudioMixer _mixer;
@@ -23,18 +24,18 @@ namespace CodeBase.Services.Sound
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
+        private object _locker;
+
         public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
             _progressService = progressService;
             _mixer = assets.LoadAsset<AudioMixer>(AssetPath.AudioMixer);
 
             _smoothMute = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .WaitUntil(TryDecreaseVolume)
-                .Then(() => AudioListener.pause = true);
+                .WaitUntil(TryDecreaseVolume);
 
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .Then(() => AudioListener.pause = false)
-                .WaitUntil(TryIncreaseVolume);
+                .WaitUntil(TryIncreaseVolume).Then(() => _locker = null);
 
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
@@ -52,19 +53,22 @@ namespace CodeBase.Services.Sound
         public void SetMusicVolume(float volume)
         {
             _progressService.Progress.GlobalData.SoundVolume.Music = volume;
-            _mixer.SetFloat(MusicVolumeProperty, Mathf.Log10(
-                Mathf.Clamp(volume, MinVolume, MaxVolume)) * MaxDecibel);
+            SetVolume(MusicVolumeProperty, volume);
         }
 
         public void SetSfxVolume(float volume)
         {
             _progressService.Progress.GlobalData.SoundVolume.Sfx = volume;
-            _mixer.SetFloat(SfxVolumeProperty, Mathf.Log10(
-                Mathf.Clamp(volume, MinVolume, MaxVolume)) * MaxDecibel);
+            SetVolume(SfxVolumeProperty, volume);
         }
 
-        public void Mute(bool isSmooth = false)
+        public void Mute(bool isSmooth = false, object locker = null)
         {
+            if (_locker is not null)
+                return;
+
+            _locker = locker;
+
             _smoothUnmute.Stop();
 
             if (isSmooth)
@@ -73,12 +77,14 @@ namespace CodeBase.Services.Sound
                 return;
             }
 
-            AudioListener.pause = true;
-            AudioListener.volume = 0f;
+            SetMasterVolume(0f);
         }
 
-        public void Unmute(bool isSmooth = false)
+        public void Unmute(bool isSmooth = false, object locker = null)
         {
+            if (_locker != locker)
+                return;
+
             _smoothMute.Stop();
 
             if (isSmooth)
@@ -87,23 +93,33 @@ namespace CodeBase.Services.Sound
                 return;
             }
 
-            AudioListener.pause = false;
-            AudioListener.volume = 1f;
+            SetMasterVolume(1f);
+            _locker = null;
+        }
+
+        private void SetMasterVolume(float volume) =>
+            SetVolume(MasterVolumeProperty, volume);
+
+        private void SetVolume(string channelName, float volume)
+        {
+            _mixer.SetFloat(channelName, Mathf.Clamp(volume, MinVolume, MaxVolume).ToDecibels());
         }
 
         private bool TryDecreaseVolume()
         {
-            float volume = AudioListener.volume;
+            _mixer.GetFloat(MasterVolumeProperty, out float volume);
+            volume = volume.NormalizeDecibels();
             volume -= VolumeStep;
-            AudioListener.volume = Mathf.Clamp01(volume);
+            SetMasterVolume(Mathf.Clamp01(volume));
             return volume <= 0f;
         }
 
         private bool TryIncreaseVolume()
         {
-            float volume = AudioListener.volume;
+            _mixer.GetFloat(MasterVolumeProperty, out float volume);
+            volume = volume.NormalizeDecibels();
             volume += VolumeStep;
-            AudioListener.volume = Mathf.Clamp01(volume);
+            SetMasterVolume(Mathf.Clamp01(volume));
             return volume >= 1f;
         }
 

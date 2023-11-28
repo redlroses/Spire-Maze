@@ -29,5 +29,6 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateHorizontalRailLock(Transform container);
         GameObject CreateVerticalRailLock(Transform container);
         GameObject CreateTutorialTrigger(Transform container);
+        GameObject CreateMusicPlayer();
     }
 }

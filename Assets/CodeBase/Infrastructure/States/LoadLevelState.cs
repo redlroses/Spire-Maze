@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿#if !UNITY_EDITOR && YANDEX_GAMES
+using Agava.YandexGames;
+#endif
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
@@ -55,6 +58,7 @@ namespace CodeBase.Infrastructure.States
         private readonly MeshCombiner _meshCombiner;
 
         private LoadPayload _loadPayload;
+        private bool _isFirstLoad = true;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
@@ -94,6 +98,14 @@ namespace CodeBase.Infrastructure.States
             _curtain.Hide();
             _levelBuilder.Clear();
             _adService.ShowInterstitialAd();
+
+#if !UNITY_EDITOR && YANDEX_GAMES
+            if (_isFirstLoad)
+            {
+                YandexGamesSdk.GameReady();
+            }
+#endif
+            _isFirstLoad = false;
         }
 
         private void OnLoaded()
@@ -108,6 +120,7 @@ namespace CodeBase.Infrastructure.States
             InformProgressReaders();
             InitHud(hero);
             RegisterWindowsServiceInPauseService();
+            InitMusicPlayer();
 
             _stateMachine.Enter<GameLoopState>();
         }
@@ -214,7 +227,7 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
 
         private Level BuildLevel() =>
-            _levelBuilder.Build(_staticData.GetForLevel(_loadPayload.LevelId));
+            _levelBuilder.Build(_staticData.GetLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>
             _levelBuilder.Construct();
@@ -224,7 +237,7 @@ namespace CodeBase.Infrastructure.States
             Vector3 heroPosition = GetHeroPosition();
             GameObject hero = _gameFactory.CreateHero(heroPosition);
             hero.GetComponent<HeroRoot>().Construct(_inputService, _stateMachine);
-            hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaForEntity(PlayerKey));
+            hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaEntity(PlayerKey));
             return hero;
         }
 
@@ -241,6 +254,12 @@ namespace CodeBase.Infrastructure.States
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
             hud.GetComponentInChildren<InventoryView>().Construct(_uiFactory, hero.GetComponent<HeroInventory>());
             hud.GetComponentInChildren<ItemCollectedView>().Construct(hero.GetComponent<ItemCollector>());
+        }
+
+        private void InitMusicPlayer()
+        {
+            if (_isFirstLoad)
+                _gameFactory.CreateMusicPlayer();
         }
 
         private void CameraFollow(GameObject hero)
@@ -269,19 +288,19 @@ namespace CodeBase.Infrastructure.States
             _progressService.Progress.WorldData = new WorldData(_progressService.Progress.WorldData.SceneName, _loadPayload.LevelId)
             {
                 LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
-                HeroHealthState = new HealthState(_staticData.GetHealthForEntity(PlayerKey).MaxHealth),
-                HeroStaminaState = new StaminaState(_staticData.GetStaminaForEntity(PlayerKey).MaxStamina),
+                HeroHealthState = new HealthState(_staticData.GetHealthEntity(PlayerKey).MaxHealth),
+                HeroStaminaState = new StaminaState(_staticData.GetStaminaEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
-                LevelAccumulationData = new LevelAccumulationData()
+                AccumulationData = new AccumulationData()
             };
 
             Debug.Log("Progress was reset");
         }
 
         private Vector3Data GetInitialPosition() =>
-            _staticData.GetForLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData();
+            _staticData.GetLevel(_loadPayload.LevelId).HeroInitialPosition.AsVectorData();
 
         private Vector3Data GetFinishPosition() =>
-            _staticData.GetForLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
+            _staticData.GetLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
     }
 }

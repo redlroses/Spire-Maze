@@ -50,6 +50,12 @@ namespace CodeBase.Sound.Music
             _trackSlider = _trackBar / _clipLength;
 #endif
 
+            if (_audioSource.PlayingSource.isPlaying == false)
+            {
+                Debug.LogWarning("AudioSource is not playing");
+                PlayNextTrack();
+            }
+
             if (_audioSource.PlayingSource.time >= _clipLength - _crossFadeTime)
             {
                 PlayNextTrack();

@@ -7,7 +7,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
     [RequireComponent(typeof(Button))]
     public class MenuButton : TransitionButton
     {
-        protected override LoadPayload TransitionPayload() =>
+        protected override LoadPayload CreateTransitionPayload() =>
             new LoadPayload(LevelNames.Lobby, false, LevelNames.LobbyId);
     }
 }
