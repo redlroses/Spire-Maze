@@ -1,8 +1,12 @@
-﻿namespace CodeBase.Logic.Lift
+﻿using System;
+using CodeBase.Logic.Lift.PlateMove;
+
+namespace CodeBase.Logic.Lift
 {
     public interface ILiftPlate
     {
         LiftState State { get; }
-        void Move();
+        IPlateMover Mover { get; }
+        event Action<LiftState> StateChanged;
     }
 }

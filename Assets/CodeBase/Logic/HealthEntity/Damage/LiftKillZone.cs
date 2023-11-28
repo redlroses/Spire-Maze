@@ -43,13 +43,11 @@ namespace CodeBase.Logic.HealthEntity.Damage
         {
             if (_gravityScaler.State == GroundState.Grounded)
             {
-                Debug.Log("Disable Collider");
                 _damageTrigger.Value.Enable();
                 _liftSolidCollider.enabled = false;
             }
             else
             {
-                Debug.Log("Enable Collider");
                 _damageTrigger.Value.Disable();
                 _liftSolidCollider.enabled = true;
             }

@@ -1,4 +1,5 @@
-﻿using CodeBase.EditorCells;
+﻿using System;
+using CodeBase.EditorCells;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Logic.Observer;
 using UnityEngine;
@@ -17,7 +18,20 @@ namespace CodeBase.Logic.Lift
         private IPlateMover _plateMover;
         private LiftDestinationMarker _currentMarker;
         private LiftDestinationMarker _destinationMarker;
-        public LiftState State => _state;
+
+        public event Action<LiftState> StateChanged = _ => { };
+
+        public LiftState State
+        {
+            get => _state;
+            private set
+            {
+                _state = value;
+                StateChanged.Invoke(value);
+            }
+        }
+
+        public IPlateMover Mover => _plateMover;
 
         public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection initialDirection)
         {
@@ -28,22 +42,22 @@ namespace CodeBase.Logic.Lift
             _currentMarker.Called += OnCalled;
             _destinationMarker.Called += OnCalled;
             _plateMover = mover;
-            _plateMover.MoveEnded += OnMoveEnded;
+            Mover.MoveEnded += OnMoveEnded;
             _liftAnimator.Construct(initialDirection, mover);
         }
 
         private void OnDestroy()
         {
-            _plateMover.MoveEnded -= OnMoveEnded;
+            Mover.MoveEnded -= OnMoveEnded;
             _currentMarker.Called -= OnCalled;
             _destinationMarker.Called -= OnCalled;
         }
 
         protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate)
         {
-            movableByPlate.OnMovingPlatformEnter(_plateMover);
+            movableByPlate.OnMovingPlatformEnter(Mover);
 
-            if (_state == LiftState.Moving)
+            if (State == LiftState.Moving)
             {
                 return;
             }
@@ -54,21 +68,21 @@ namespace CodeBase.Logic.Lift
 
         protected override void OnTriggerObserverExited(IMovableByPlate movableByPlate)
         {
-            movableByPlate.OnMovingPlatformExit(_plateMover);
+            movableByPlate.OnMovingPlatformExit(Mover);
             _timer.Pause();
         }
 
         [ContextMenu("Move")]
         public void Move()
         {
-            if (_state == LiftState.Moving)
+            if (State == LiftState.Moving)
             {
                 return;
             }
 
             _liftAnimator.StartAnimation();
-            _plateMover.Move(_currentMarker, _destinationMarker);
-            _state = LiftState.Moving;
+            Mover.Move(_currentMarker, _destinationMarker);
+            State = LiftState.Moving;
             SwitchMarkers();
         }
 
@@ -82,7 +96,7 @@ namespace CodeBase.Logic.Lift
 
         private void OnMoveEnded()
         {
-            _state = LiftState.Idle;
+            State = LiftState.Idle;
             _liftAnimator.StopAnimation();
         }
 
