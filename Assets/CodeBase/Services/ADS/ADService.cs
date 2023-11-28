@@ -13,6 +13,7 @@ namespace CodeBase.Services.ADS
 
         private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;
+        private readonly object _soundLocker = new object();
 
         private IADProvider _adProvider;
 
@@ -27,13 +28,13 @@ namespace CodeBase.Services.ADS
 
         public void ShowRewardAd(Action onSuccessCallback = null)
         {
-            _soundService.Mute(true);
+            _soundService.Mute(true, _soundLocker);
 
             RewardAd(() =>
                 {
                     onSuccessCallback?.Invoke();
-                    _soundService.Unmute(true);
-                }, () => _soundService.Unmute(true)
+                    _soundService.Unmute(true, _soundLocker);
+                }, () => _soundService.Unmute(true, _soundLocker)
             );
         }
 
@@ -43,13 +44,13 @@ namespace CodeBase.Services.ADS
                 return;
 
             _interstitialAdCooldown.Play();
-            _soundService.Mute(true);
+            _soundService.Mute(true, _soundLocker);
 
             InterstitialAd(() =>
                 {
                     onSuccessCallback?.Invoke();
-                    _soundService.Unmute(true);
-                }, () => _soundService.Unmute(true)
+                    _soundService.Unmute(true, _soundLocker);
+                }, () => _soundService.Unmute(true, _soundLocker)
             );
         }
 

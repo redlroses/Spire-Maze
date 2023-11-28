@@ -98,7 +98,6 @@ namespace CodeBase.Infrastructure.States
             _curtain.Hide();
             _levelBuilder.Clear();
             _adService.ShowInterstitialAd();
-            _gameFactory.CreateMusicPlayer();
 
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (_isFirstLoad)
