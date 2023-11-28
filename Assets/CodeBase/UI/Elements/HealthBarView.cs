@@ -14,7 +14,7 @@ namespace CodeBase.UI.Elements
 
         private void ApplyTextHealth()
         {
-            _textSetter.SetText($"{points.CurrentPoints}/{points.MaxPoints}");
+            _textSetter.SetText($"{Points.CurrentPoints}/{Points.MaxPoints}");
         }
     }
 }

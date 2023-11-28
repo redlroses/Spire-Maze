@@ -1,6 +1,4 @@
 ﻿namespace CodeBase.Logic.StaminaEntity
 {
-    public interface IStamina : IPoints
-    {
-    }
+    public interface IStamina : IPoints { }
 }

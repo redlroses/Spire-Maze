@@ -33,22 +33,16 @@ namespace CodeBase.UI.Elements
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
         }
 
+        private void OnValidate() =>
+            _curveAnimation ??= new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
+
         protected override void Run() =>
             _slider.SetValueWithoutNotify(_curveAnimation.Update(Time.deltaTime));
 
-        private void OnValidate() =>
-            _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
-
         public void SetNormalizedValue(float value)
         {
-            value = Validate(value);
+            value = Clamp(value);
             ApplyValue(value);
-        }
-
-        public void SetValueImmediately(float value)
-        {
-            value = Validate(value);
-            _slider.SetValueWithoutNotify(value);
         }
 
         private void ApplyValue(float value)
@@ -68,7 +62,7 @@ namespace CodeBase.UI.Elements
             enabled = true;
         }
 
-        private float Validate(float value) =>
+        private float Clamp(float value) =>
             Mathf.Clamp01(value);
 
 #if UNITY_EDITOR

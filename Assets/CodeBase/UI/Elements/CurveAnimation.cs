@@ -8,10 +8,9 @@ namespace CodeBase.UI.Elements
         private readonly float _endAnimationTime;
         private readonly AnimationCurve _curve;
         private readonly float _animationSpeed;
+        private readonly Action _onEndCallback;
 
-        private Action _onEndCallback;
-
-        private float _deltaAnimation;
+        private float _animationTime;
         private float _startAnimationValue;
         private float _endAnimationValue;
         private float _animatedValue;
@@ -27,7 +26,7 @@ namespace CodeBase.UI.Elements
 
         public void StartAnimation(float startValue, float endValue)
         {
-            _deltaAnimation = 0;
+            _animationTime = 0;
             _startAnimationValue = startValue;
             _endAnimationValue = endValue;
             _valueRange = Mathf.Abs(endValue - startValue);
@@ -41,17 +40,17 @@ namespace CodeBase.UI.Elements
 
         private float Translate()
         {
-            float animatedDelta = _curve.Evaluate(_deltaAnimation);
+            float animatedDelta = _curve.Evaluate(_animationTime);
             return Mathf.Lerp(_startAnimationValue, _endAnimationValue, animatedDelta);
         }
 
         private void UpdateDelta(float deltaTime)
         {
-            _deltaAnimation += deltaTime * _animationSpeed / _valueRange;
+            _animationTime += deltaTime * _animationSpeed / _valueRange;
 
-            if (_deltaAnimation >= _endAnimationTime)
+            if (_animationTime >= _endAnimationTime)
             {
-                _deltaAnimation = _endAnimationTime;
+                _animationTime = _endAnimationTime;
                 _onEndCallback.Invoke();
             }
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Logic;
+﻿using CodeBase.Logic;
 using NTC.Global.Cache;
 using UnityEngine;
 
@@ -9,20 +8,20 @@ namespace CodeBase.UI.Elements
     {
         [SerializeField] protected SliderSetter _sliderSetter;
 
-        protected IPoints points;
+        protected IPoints Points;
 
         private void OnDestroy()
         {
-            if (points is null)
+            if (Points is null)
                 return;
 
-            points.Changed -= OnChanged;
+            Points.Changed -= OnChanged;
         }
 
         public void Construct(IPoints points)
         {
-            this.points = points;
-            this.points.Changed += OnChanged;
+            Points = points;
+            Points.Changed += OnChanged;
             OnChanged();
         }
 
@@ -30,6 +29,6 @@ namespace CodeBase.UI.Elements
             _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
 
         private float GetNormalizedBarValue() =>
-            points.CurrentPoints / (float) points.MaxPoints;
+            Points.CurrentPoints / (float) Points.MaxPoints;
     }
 }

@@ -18,7 +18,7 @@ namespace CodeBase.Logic.StaminaEntity
         private int _currentPoints;
         private bool _isReplenish;
 
-        public event Action Changed;
+        public event Action Changed = () => { };
 
         public int CurrentPoints
         {
@@ -26,7 +26,8 @@ namespace CodeBase.Logic.StaminaEntity
             protected set
             {
                 _currentPoints = value;
-                Changed?.Invoke();
+                Changed.Invoke();
+                Debug.Log($"Stamina: {_currentPoints}");
             }
         }
 

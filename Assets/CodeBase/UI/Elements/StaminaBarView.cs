@@ -1,6 +1,4 @@
 ﻿namespace CodeBase.UI.Elements
 {
-    public sealed class StaminaBarView : BarView
-    {
-    }
+    public sealed class StaminaBarView : BarView { }
 }
