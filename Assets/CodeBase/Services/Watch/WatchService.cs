@@ -35,27 +35,29 @@ namespace CodeBase.Services.Watch
             _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
         }
 
-        public void Cleanup()
-        {
+        public void Cleanup() =>
             ResetWatch();
+
+        public void LoadProgress()
+        {
+            _elapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
+            TimeChanged.Invoke(_elapsedTime);
         }
+
+        public void UpdateProgress() =>
+            _progressService.Progress.WorldData.AccumulationData.PlayTime = _elapsedTime;
+
+        public void Resume() =>
+            _isPause = false;
+
+        public void Pause() =>
+            _isPause = true;
 
         private void ResetWatch()
         {
             _isRun = false;
             _coroutineRunner.StopCoroutine(_routine);
             _routine = null;
-        }
-
-        public void LoadProgress()
-        {
-            _elapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
-            TimeChanged.Invoke(ElapsedTime);
-        }
-
-        public void UpdateProgress()
-        {
-            _progressService.Progress.WorldData.AccumulationData.PlayTime = ElapsedTime;
         }
 
         private IEnumerator RunTimer()
@@ -69,19 +71,8 @@ namespace CodeBase.Services.Watch
                     continue;
                 }
 
-                _elapsedTime = ElapsedTime + 1;
-                TimeChanged.Invoke(ElapsedTime);
+                TimeChanged.Invoke(++_elapsedTime);
             }
-        }
-
-        public void Resume()
-        {
-            _isPause = false;
-        }
-
-        public void Pause()
-        {
-            _isPause = true;
         }
     }
 }
