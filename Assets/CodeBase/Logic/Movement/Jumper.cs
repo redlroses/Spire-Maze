@@ -4,11 +4,12 @@ using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using NTC.Global.Cache;
+using NTC.Global.System;
 
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(SphereCaster))]
-    [RequireComponent(typeof(CustomGravityScaler))]
+    [RequireComponent(typeof(GroundChecker))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(HeroAnimator))]
     public class Jumper : MonoCache, IPauseWatcher
@@ -16,10 +17,11 @@ namespace CodeBase.Logic.Movement
         public const float GroundCheckDistance = -0.17f;
         public const float RoofCheckDistance = 0.15f;
 
-        private const float RadiusReduction = 0.3f;
+        private const float CastSphereRadiusReduction = 0.3f;
 
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private CustomGravityScaler _gravityScaler;
+        [SerializeField] private ConstantForce _gravity;
+        [SerializeField] private GroundChecker _groundChecker;
         [SerializeField] private SphereCaster _sphereCaster;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private AnimationCurve _jumpCurve;
@@ -28,8 +30,8 @@ namespace CodeBase.Logic.Movement
         [SerializeField] private float _maxUpVelocity;
         [SerializeField] private float _jumpHeight;
         [SerializeField] private float _velocityScale;
-        [SerializeField] private float _jumpDuration = 1;
-        [SerializeField] private int _fatigue;
+        [SerializeField] private float _jumpDuration;
+        [SerializeField] private int _staminaCosts;
 
         private Vector3 _currentVelocity;
         private float _startHeight;
@@ -39,18 +41,18 @@ namespace CodeBase.Logic.Movement
         private bool _isEnabled;
         private bool _isPause;
 
-        public bool CanJump => IsCanJump();
+        public bool CanJump => IsJumpAvailable();
 
-        private void Awake()
+        private void OnValidate()
         {
-            _gravityScaler ??= Get<CustomGravityScaler>();
-            _sphereCaster ??= Get<SphereCaster>();
+            _groundChecker ??= GetComponent<GroundChecker>();
+            _sphereCaster ??= GetComponent<SphereCaster>();
             _rigidbody ??= GetComponent<Rigidbody>();
-            _heroAnimator ??= Get<HeroAnimator>();
+            _heroAnimator ??= GetComponent<HeroAnimator>();
         }
 
         protected override void FixedRun() =>
-            ApplyJump();
+            ProcessJump();
 
         public void Resume()
         {
@@ -74,10 +76,10 @@ namespace CodeBase.Logic.Movement
             _startHeight = position.y;
             enabled = true;
             _heroAnimator.PlayJump();
-            _gravityScaler.Disable();
+            DisableGravity();
         }
 
-        private bool IsCanJump()
+        private bool IsJumpAvailable()
         {
             if (_isPause)
                 return false;
@@ -85,12 +87,10 @@ namespace CodeBase.Logic.Movement
             if (_isJump)
                 return false;
 
-            bool isInGround = _sphereCaster.CastSphere(Vector3.down, GroundCheckDistance);
-
-            return isInGround && _stamina.TrySpend(_fatigue);
+            return _groundChecker.State == GroundState.Grounded && _stamina.TrySpend(_staminaCosts);
         }
 
-        private void ApplyJump()
+        private void ProcessJump()
         {
             _isJump = true;
             _expiredTime += Time.fixedDeltaTime;
@@ -102,15 +102,14 @@ namespace CodeBase.Logic.Movement
             }
 
             _jumpProgress = Mathf.Clamp01(_expiredTime / _jumpDuration);
+            bool isTouchRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, CastSphereRadiusReduction);
 
-            bool isInRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, RadiusReduction);
-
-            if (isInRoof)
+            if (isTouchRoof)
             {
                 AbortJump();
             }
 
-            VelocityJump();
+            ApplyJumpVelocity();
         }
 
         private void AbortJump()
@@ -118,16 +117,28 @@ namespace CodeBase.Logic.Movement
             _expiredTime = 0;
             _isJump = false;
             enabled = false;
-            _gravityScaler.Enable();
+            EnableGravity();
         }
 
-        private void VelocityJump()
+        private void ApplyJumpVelocity()
         {
             float expectedHeight = _jumpCurve.Evaluate(_jumpProgress) * _jumpHeight + _startHeight;
             float heightDifference = expectedHeight - _rigidbody.position.y;
             float clampedVerticalVelocity =
                 Mathf.Clamp(heightDifference * _velocityScale, -_maxDownVelocity, _maxUpVelocity);
             _rigidbody.velocity = _rigidbody.velocity.ChangeY(clampedVerticalVelocity);
+        }
+
+        private void EnableGravity()
+        {
+            _groundChecker.Enable();
+            _gravity.enabled = true;
+        }
+
+        private void DisableGravity()
+        {
+            _groundChecker.Disable();
+            _gravity.enabled = false;
         }
     }
 }

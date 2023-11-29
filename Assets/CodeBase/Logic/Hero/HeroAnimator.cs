@@ -34,7 +34,7 @@ namespace CodeBase.Logic.Hero
             [Animator.StringToHash("Revive")] = AnimatorState.Revive,
         };
 
-        [SerializeField] private CustomGravityScaler _gravityScaler;
+        [SerializeField] private GroundChecker _gravityScaler;
         [SerializeField] private Animator _animator;
 
         public event Action<AnimatorState> StateEntered;
@@ -51,7 +51,7 @@ namespace CodeBase.Logic.Hero
                 PlayLand();
             }
 
-            if (State == AnimatorState.Run && _gravityScaler.State == GroundState.Falling)
+            if (State == AnimatorState.Run && _gravityScaler.State == GroundState.InAir)
             {
                 PlayFall();
             }

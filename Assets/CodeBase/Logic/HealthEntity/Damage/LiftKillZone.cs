@@ -14,7 +14,7 @@ namespace CodeBase.Logic.HealthEntity.Damage
         [SerializeField] private MeshCollider _liftSolidCollider;
         [SerializeField] private InterfaceReference<IDamageTrigger, MonoBehaviour> _damageTrigger;
 
-        private CustomGravityScaler _gravityScaler;
+        private GroundChecker _gravityScaler;
         private RoutineSequence _killZoneHeroEntryUpdater;
 
         protected override void OnAwake()
@@ -30,7 +30,7 @@ namespace CodeBase.Logic.HealthEntity.Damage
 
         protected override void OnTriggerObserverEntered(HeroRoot target)
         {
-            _gravityScaler = target.GetComponent<CustomGravityScaler>();
+            _gravityScaler = target.GetComponent<GroundChecker>();
             _killZoneHeroEntryUpdater.Play();
         }
 

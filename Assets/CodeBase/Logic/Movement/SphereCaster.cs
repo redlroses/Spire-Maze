@@ -27,7 +27,7 @@ namespace CodeBase.Logic.Movement
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center, _colliderRadius - radiusReduction, direction,
                 out _, distance + _colliderHeight * Arithmetic.ToHalf, _mask);
 
-            Vector3 from = _rigidbody.position + _collider.center;
+            Debug.DrawRay(_rigidbody.position + _collider.center, direction.normalized * (distance + _colliderHeight * Arithmetic.ToHalf + (_colliderRadius - radiusReduction) / 2f), isHit ? Color.red : Color.green);
 
             return isHit;
         }

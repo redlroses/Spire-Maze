@@ -7270,6 +7270,7 @@ GameObject:
   - component: {fileID: 5845492673946329146}
   - component: {fileID: 92263568627435714}
   - component: {fileID: 7058834471837522965}
+  - component: {fileID: 8988951044788560156}
   m_Layer: 11
   m_Name: Hero
   m_TagString: Untagged
@@ -7380,7 +7381,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7393409988495010679}
-  _gravityScaler: {fileID: 7393409988495010669}
+  _gravity: {fileID: 8988951044788560156}
+  _groundChecker: {fileID: 7393409988495010669}
   _sphereCaster: {fileID: 2212661745572598830}
   _heroAnimator: {fileID: 989079028364153686}
   _jumpCurve:
@@ -7422,7 +7424,7 @@ MonoBehaviour:
   _jumpHeight: 2.3
   _velocityScale: 25
   _jumpDuration: 0.55
-  _fatigue: 120
+  _staminaCosts: 120
 --- !u!114 &7393409988495010669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7437,8 +7439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7393409988495010679}
   _sphereCaster: {fileID: 2212661745572598830}
-  _currentScale: 4
-  _defaultScale: 4
+  _coyoteTimeDuration: 0
 --- !u!114 &7393409988495010671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7751,6 +7752,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3ad80133fd5a1bd48a8b1f49fe5ee85f, type: 3}
   - {fileID: 8300000, guid: 61f9d76b6eaca044e9792ba8641cd1c6, type: 3}
   - {fileID: 8300000, guid: 76ecf23c66ac7f84a8d52aaf8516a146, type: 3}
+--- !u!75 &8988951044788560156
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393409988495010675}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -39.24, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &7591910132656366578
 GameObject:
   m_ObjectHideFlags: 0
