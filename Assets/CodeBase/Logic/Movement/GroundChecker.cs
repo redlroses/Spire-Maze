@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Pause;
+﻿using System;
+using CodeBase.Services.Pause;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -10,9 +11,13 @@ namespace CodeBase.Logic.Movement
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private SphereCaster _sphereCaster;
-        [SerializeField] private float _coyoteTimeDuration;
 
-        [ShowNonSerializedField] private float _coyoteTime;
+        [Space]
+        [SerializeField] [Label("EnableCoyoteTime")] private bool _isEnableCoyoteTime;
+        [SerializeField] [ShowIf(nameof(_isEnableCoyoteTime))] private float _coyoteTimeDuration;
+
+        private float _coyoteTime;
+        private Action _groundCheckAction;
 
         [ShowNativeProperty]
         public GroundState State { get; private set; } = GroundState.Grounded;
@@ -22,9 +27,13 @@ namespace CodeBase.Logic.Movement
             _sphereCaster ??= GetComponent<SphereCaster>();
             _rigidbody ??= GetComponent<Rigidbody>();
             _rigidbody.useGravity = false;
+            _groundCheckAction = _isEnableCoyoteTime ? CheckGroundWithCoyoteTime : CheckGround;
         }
 
-        protected override void FixedRun()
+        protected override void FixedRun() =>
+            _groundCheckAction.Invoke();
+
+        private void CheckGroundWithCoyoteTime()
         {
             bool isTouchGround = IsTouchGround();
 
@@ -38,8 +47,14 @@ namespace CodeBase.Logic.Movement
             }
 
             _coyoteTime = 0;
-            State = isTouchGround ? GroundState.Grounded : GroundState.InAir;
+            UpdateState(isTouchGround);
         }
+
+        private void CheckGround() =>
+            UpdateState(IsTouchGround());
+
+        private void UpdateState(bool isTouchGround) =>
+            State = isTouchGround ? GroundState.Grounded : GroundState.InAir;
 
         private bool IsGroundLost(bool isTouchGround) =>
             isTouchGround == false && State == GroundState.Grounded;

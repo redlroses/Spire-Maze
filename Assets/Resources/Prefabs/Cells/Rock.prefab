@@ -1043,7 +1043,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 200
+        scalar: 100
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5967,7 +5967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 2032772290945713816}
-  _speed: 100
+  _speed: 110
 --- !u!82 &7005160983042190141
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6620,6 +6620,7 @@ GameObject:
   - component: {fileID: 2276654293354649879}
   - component: {fileID: 1073935617702947965}
   - component: {fileID: 7946905263298744654}
+  - component: {fileID: 3405263867670622487}
   m_Layer: 7
   m_Name: RockObject
   m_TagString: Untagged
@@ -6712,6 +6713,8 @@ MonoBehaviour:
   _rigidbody: {fileID: 2976654156250728952}
   _mover: {fileID: 2512823031230340065}
   _rotator: {fileID: 5528626663253624133}
+  _damageTrigger:
+    _underlyingValue: {fileID: 4458447923228386771}
   _fragments:
   - {fileID: 3406632704451708255}
   - {fileID: 3406632704196146074}
@@ -6778,8 +6781,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2976654156250728952}
   _sphereCaster: {fileID: 3655441129170313658}
-  _currentScale: 1
-  _defaultScale: 1
+  _isEnableCoyoteTime: 0
+  _coyoteTimeDuration: 0
 --- !u!114 &2512823031230340065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6938,6 +6941,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rock: {fileID: 3337484362527455217}
   _dust: {fileID: 2652488659174017466}
+--- !u!75 &3405263867670622487
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001022738760582169}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -39.24, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1001 &1346821695321976022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7104,6 +7119,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8339359207097360849}
   m_SourcePrefab: {fileID: 100100000, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
+--- !u!114 &4458447923228386771 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5986154761831275041, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
+  m_PrefabInstance: {fileID: 7983913235993362418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458447923228386780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d76f95798a54fcd827b6cb85918d435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4458447923228386780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5986154761831275054, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}

@@ -1,11 +1,12 @@
 using System;
+using AYellowpaper;
 using CodeBase.Data;
+using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools.Extension;
 using NTC.Global.System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Logic.Trap
 {
@@ -15,6 +16,7 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Mover _mover;
         [SerializeField] private SimpleBallRotator _rotator;
+        [SerializeField] private InterfaceReference<IDamageTrigger, MonoBehaviour> _damageTrigger;
         [SerializeField] private Rigidbody[] _fragments;
         [SerializeField] private float _rayDistance;
         [SerializeField] private LayerMask _ground;
@@ -141,6 +143,7 @@ namespace CodeBase.Logic.Trap
             _rigidbody.isKinematic = true;
             _mover.Disable();
             _collisionCollider.enabled = false;
+            _damageTrigger.Value.Disable();
             _rotator.Disable();
 
             for (var i = 0; i < _fragments.Length; i++)
