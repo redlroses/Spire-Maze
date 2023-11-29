@@ -5,8 +5,9 @@ namespace CodeBase.Services.Watch
 {
     public interface IWatchService : IService, IPauseWatcher
     {
-        event Action<float> TimeChanged;
+        event Action<int> SecondTicked;
         float ElapsedTime { get; }
+        int ElapsedSeconds { get; }
         void Start();
         void Cleanup();
         void LoadProgress();

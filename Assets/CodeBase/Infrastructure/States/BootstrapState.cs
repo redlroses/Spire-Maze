@@ -29,14 +29,12 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
-        private readonly ICoroutineRunner _coroutineRunner;
 
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services, ICoroutineRunner coroutineRunner)
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, AllServices services)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _services = services;
-            _coroutineRunner = coroutineRunner;
 
             RegisterServices();
         }
@@ -72,7 +70,6 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<ISoundService>()));
             _services.RegisterSingle<IWatchService>(
                 new WatchService(
-                    _coroutineRunner,
                     _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IScoreService>(
                 new ScoreService(

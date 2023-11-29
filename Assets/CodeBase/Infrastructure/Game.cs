@@ -4,13 +4,13 @@ using CodeBase.Logic;
 
 namespace CodeBase.Infrastructure
 {
-    public class Game
+    public sealed class Game
     {
-        public GameStateMachine StateMachine;
+        public readonly GameStateMachine StateMachine;
 
         public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), AllServices.Container, coroutineRunner, curtain);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), AllServices.Container, curtain);
         }
     }
 }

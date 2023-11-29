@@ -292,8 +292,6 @@ namespace CodeBase.Infrastructure.States
                 HeroInventoryData = new InventoryData(),
                 AccumulationData = new AccumulationData()
             };
-
-            Debug.Log("Progress was reset");
         }
 
         private Vector3Data GetInitialPosition() =>

@@ -28,11 +28,11 @@ namespace CodeBase.UI.Elements
             }
 
             _watchService = watchService;
-            SetTime(_watchService.ElapsedTime);
+            SetTime(_watchService.ElapsedSeconds);
             Subscribe();
         }
 
-        private void SetTime(float seconds)
+        private void SetTime(int seconds)
         {
             _text.text = TimeSpan.FromSeconds(seconds).ToString(_format);
         }
@@ -42,12 +42,12 @@ namespace CodeBase.UI.Elements
             if (_watchService is null)
                 return;
 
-            _watchService.TimeChanged -= SetTime;
+            _watchService.SecondTicked -= SetTime;
         }
 
         private void Subscribe()
         {
-            _watchService.TimeChanged += SetTime;
+            _watchService.SecondTicked += SetTime;
         }
 
         private bool IsBuildableLevel() =>

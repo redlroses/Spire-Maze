@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections;
-using CodeBase.Infrastructure;
+using CodeBase.DelayRoutines;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 
@@ -8,70 +7,67 @@ namespace CodeBase.Services.Watch
 {
     public class WatchService : IWatchService
     {
-        private readonly ICoroutineRunner _coroutineRunner;
         private readonly IPersistentProgressService _progressService;
-        private readonly WaitForSeconds _waitForSeconds = new WaitForSeconds(1f);
+        private readonly RoutineSequence _watchRoutine;
 
-        private Coroutine _routine;
-        private float _elapsedTime;
-        private bool _isPause;
-        private bool _isRun;
-
-        public event Action<float> TimeChanged = _ => { };
-
-        public float ElapsedTime => _elapsedTime;
-
-        public WatchService(ICoroutineRunner coroutineRunnerRunner, IPersistentProgressService progressService)
+        public WatchService(IPersistentProgressService progressService)
         {
-            _coroutineRunner = coroutineRunnerRunner;
             _progressService = progressService;
+
+            _watchRoutine = new RoutineSequence()
+                .WaitWhile(Tick)
+                .Then(() => SecondTicked.Invoke(ElapsedSeconds))
+                .LoopWhile(true);
         }
 
-        public void Start()
-        {
-            Resume();
-            _isRun = true;
-            _routine ??= _coroutineRunner.StartCoroutine(RunTimer());
-        }
+        public event Action<int> SecondTicked = _ => { };
+
+        public float ElapsedTime { get; private set; }
+        public int ElapsedSeconds { get; private set; }
+
+        public void Start() =>
+            _watchRoutine.Play();
 
         public void Cleanup() =>
             ResetWatch();
 
         public void LoadProgress()
         {
-            _elapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
-            TimeChanged.Invoke(_elapsedTime);
+            ElapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
+            ElapsedSeconds = GetSeconds(ElapsedTime);
+            SecondTicked.Invoke(ElapsedSeconds);
         }
 
         public void UpdateProgress() =>
-            _progressService.Progress.WorldData.AccumulationData.PlayTime = _elapsedTime;
+            _progressService.Progress.WorldData.AccumulationData.PlayTime = ElapsedTime;
 
         public void Resume() =>
-            _isPause = false;
+            _watchRoutine.Play();
 
         public void Pause() =>
-            _isPause = true;
+            _watchRoutine.Stop();
 
         private void ResetWatch()
         {
-            _isRun = false;
-            _coroutineRunner.StopCoroutine(_routine);
-            _routine = null;
+            ElapsedTime = 0;
+            ElapsedSeconds = 0;
+            _watchRoutine.Stop();
         }
 
-        private IEnumerator RunTimer()
+        private bool Tick()
         {
-            while (_isRun)
-            {
-                yield return _waitForSeconds;
+            ElapsedTime += Time.deltaTime;
 
-                if (_isPause)
-                {
-                    continue;
-                }
+            int seconds = GetSeconds(ElapsedTime);
 
-                TimeChanged.Invoke(++_elapsedTime);
-            }
+            if (seconds <= ElapsedSeconds)
+                return false;
+
+            ElapsedSeconds = seconds;
+            return true;
         }
+
+        private int GetSeconds(float time) =>
+            Mathf.FloorToInt(time);
     }
 }

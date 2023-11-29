@@ -9,7 +9,7 @@ namespace CodeBase.Logic.StaminaEntity
     [RequireComponent(typeof(TimerOperator))]
     public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
-        [SerializeField] protected TimerOperator _normalDelay;
+        [SerializeField] protected TimerOperator _recoveryDelay;
 
         private float _lowerSpeedMultiplier;
         private float _speedReplenish;
@@ -44,6 +44,12 @@ namespace CodeBase.Logic.StaminaEntity
             Initialize();
         }
 
+        public void Resume() =>
+            enabled = true;
+
+        public void Pause() =>
+            enabled = false;
+
         public bool TrySpend(int spendStamina)
         {
             if (spendStamina <= 0 || CurrentPoints <= 0)
@@ -55,22 +61,23 @@ namespace CodeBase.Logic.StaminaEntity
 
         private void Initialize()
         {
-            _normalDelay ??= Get<TimerOperator>();
+            _recoveryDelay ??= Get<TimerOperator>();
             _currentSpeedReplenish = _speedReplenish;
-            _normalDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
+            _recoveryDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
         }
 
         private void Spend(int spendStamina)
         {
             _isReplenish = false;
             int newPoints = CurrentPoints - spendStamina;
-            CurrentPoints = Mathf.Max(newPoints, 0);
 
             if (CurrentPoints < 0)
                 _currentSpeedReplenish = _speedReplenish * _lowerSpeedMultiplier;
 
-            _normalDelay.Restart();
-            _normalDelay.Play();
+            CurrentPoints = Mathf.Max(newPoints, 0);
+
+            _recoveryDelay.Restart();
+            _recoveryDelay.Play();
         }
 
         private void Replenish()
@@ -90,11 +97,5 @@ namespace CodeBase.Logic.StaminaEntity
 
         private void OnStartReplenish() =>
             _isReplenish = true;
-
-        public void Resume() =>
-            enabled = true;
-
-        public void Pause() =>
-            enabled = false;
     }
 }
