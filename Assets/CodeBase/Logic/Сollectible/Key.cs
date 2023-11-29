@@ -13,13 +13,14 @@ namespace CodeBase.Logic.Сollectible
         [SerializeField] private SerializedDictionary<StorableType, GameObject> _objects;
         [SerializeField] private SerializedDictionary<StorableType, Color> _colors;
 
-        protected override void OnConstruct(IItem item)
-        {
+        protected override void OnConstruct(IItem item) =>
             EnableKey(item.ItemType);
-        }
 
         protected override void OnCollected() =>
             gameObject.Disable();
+
+        protected override void OnProgressLoaded(bool isActivated) =>
+            gameObject.SetActive(isActivated);
 
         private void EnableKey(StorableType type)
         {

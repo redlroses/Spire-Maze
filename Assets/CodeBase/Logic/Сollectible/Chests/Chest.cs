@@ -9,22 +9,16 @@ namespace CodeBase.Logic.Сollectible.Chests
 
         private Collectible _collectibleItem;
 
-        protected override void OnLoadState(bool isActivated)
+        protected override void OnProgressLoaded(bool isActivated)
         {
             if (isActivated)
-            {
                 _animator.Open();
-            }
         }
 
-        protected override void OnCollected()
-        {
+        protected override void OnCollected() =>
             Open();
-        }
 
-        private void Open()
-        {
+        private void Open() =>
             _animator.Open();
-        }
     }
 }
