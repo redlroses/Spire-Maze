@@ -15,7 +15,6 @@ namespace CodeBase.Logic.Lift
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private LiftAnimator _liftAnimator;
 
-        private IPlateMover _plateMover;
         private LiftDestinationMarker _currentMarker;
         private LiftDestinationMarker _destinationMarker;
 
@@ -31,7 +30,14 @@ namespace CodeBase.Logic.Lift
             }
         }
 
-        public IPlateMover Mover => _plateMover;
+        public IPlateMover Mover { get; private set; }
+
+        private void OnDestroy()
+        {
+            Mover.MoveEnded -= OnMoveEnded;
+            _currentMarker.Called -= OnCalled;
+            _destinationMarker.Called -= OnCalled;
+        }
 
         public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection initialDirection)
         {
@@ -41,26 +47,14 @@ namespace CodeBase.Logic.Lift
             _destinationMarker = destinationMarker;
             _currentMarker.Called += OnCalled;
             _destinationMarker.Called += OnCalled;
-            _plateMover = mover;
+            Mover = mover;
             Mover.MoveEnded += OnMoveEnded;
             _liftAnimator.Construct(initialDirection, mover);
-        }
-
-        private void OnDestroy()
-        {
-            Mover.MoveEnded -= OnMoveEnded;
-            _currentMarker.Called -= OnCalled;
-            _destinationMarker.Called -= OnCalled;
         }
 
         protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate)
         {
             movableByPlate.OnMovingPlatformEnter(Mover);
-
-            if (State == LiftState.Moving)
-            {
-                return;
-            }
 
             _timer.Restart();
             _timer.Play();
@@ -72,8 +66,7 @@ namespace CodeBase.Logic.Lift
             _timer.Pause();
         }
 
-        [ContextMenu("Move")]
-        public void Move()
+        private void Move()
         {
             if (State == LiftState.Moving)
             {
@@ -100,9 +93,7 @@ namespace CodeBase.Logic.Lift
             _liftAnimator.StopAnimation();
         }
 
-        private void SwitchMarkers()
-        {
+        private void SwitchMarkers() =>
             (_currentMarker, _destinationMarker) = (_destinationMarker, _currentMarker);
-        }
     }
 }

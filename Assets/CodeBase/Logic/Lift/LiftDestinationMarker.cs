@@ -12,14 +12,10 @@ namespace CodeBase.Logic.Lift
 
         public CellPosition Position { get; private set; }
 
-        public void Construct(CellPosition cellPosition)
-        {
+        public void Construct(CellPosition cellPosition) =>
             Position = cellPosition;
-        }
 
-        protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate)
-        {
+        protected override void OnTriggerObserverEntered(IMovableByPlate movableByPlate) =>
             Called.Invoke(this);
-        }
     }
 }
