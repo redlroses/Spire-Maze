@@ -53,7 +53,10 @@ namespace CodeBase.Services.LevelBuild
             _levelContainer = CreateSpire(levelStaticData);
             CreateLevel(levelStaticData);
             _level.Origin = _levelContainer;
-            _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
+            _levelStaticData.HeroCell =_level.FirstOrDefault(cell => cell.CellData is InitialPlate);
+            _levelStaticData.FinishCell =_level.FirstOrDefault(cell => cell.CellData is FinishPortal);
+            // _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
+            // Debug.Log("Finish position" + _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector());
             _persistentProgressService.TemporalProgress.LevelHeightRange = new Vector2(0, FloorHeight * _level.Height);
             InitSpire();
 

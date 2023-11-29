@@ -1,6 +1,8 @@
 ﻿using CodeBase.EditorCells;
+using CodeBase.LevelSpecification.Cells;
 using CodeBase.Tools.Extension;
 using UnityEngine;
+using FinishPortal = CodeBase.EditorCells.FinishPortal;
 
 namespace CodeBase.StaticData
 {
@@ -17,8 +19,10 @@ namespace CodeBase.StaticData
         [SerializeField] [SerializeReference] public CellData[] CellDataMap;
 
         public int Size => Width * Height;
-        public Vector3 HeroInitialPosition => GetPositionByCellType<InitialPlate>();
-        public Vector3 FinishPosition => GetPositionByCellType<FinishPortal>();
+        public Cell HeroCell;
+        public Cell FinishCell;
+        public Vector3 HeroInitialPosition => HeroCell.Container.position;
+        public Vector3 FinishPosition  => FinishCell.Container.position;
 
         private Vector3 GetPositionByCellType<T>()
         {
@@ -28,12 +32,13 @@ namespace CodeBase.StaticData
                 {
                     continue;
                 }
-
+            
                 float height = i / (float) Width * FloorHeight;
+                Debug.Log($"Type: {typeof(T)} - i {i}; Size {Size}; height {height}");
                 float angle = i % Width * ArchAngle;
                 return GetPosition(angle, Radius).ChangeY(height);
             }
-           
+            
             return Vector3.zero;
         }
 
