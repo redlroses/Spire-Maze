@@ -73,13 +73,6 @@ namespace CodeBase.Tools.Extension
             };
         }
 
-        public static bool IsArtifact(this StorableType type) =>
-            type is StorableType.RuneAlpha
-                or StorableType.RuneBeta
-                or StorableType.RuneGamma
-                or StorableType.RuneDelta
-                or StorableType.RuneEpsilon;
-
         public static Colors ToColorsType(this StorableType storableType)
         {
             return storableType switch

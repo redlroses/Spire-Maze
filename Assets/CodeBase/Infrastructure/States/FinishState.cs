@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using CodeBase.Logic;
+using CodeBase.Logic.Inventory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
@@ -14,11 +16,13 @@ namespace CodeBase.Infrastructure.States
         private readonly IScoreService _scoreService;
         private readonly IRankedService _rankedService;
         private readonly IPersistentProgressService _progressService;
+        private readonly IHeroLocator _heroLocator;
 
         public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService)
+            IPersistentProgressService progressService, IHeroLocator heroLocator)
         {
             _progressService = progressService;
+            _heroLocator = heroLocator;
             _rankedService = rankedService;
             _windowService = windowService;
             _scoreService = scoreService;
@@ -45,8 +49,8 @@ namespace CodeBase.Infrastructure.States
 
         private void CountArtifacts()
         {
-            int artifactsCount = _progressService.Progress.WorldData.HeroInventoryData.ItemsData
-                .Count(item => ((StorableType) item.StorableType).IsArtifact());
+            IInventory inventory = _heroLocator.Location.GetComponentInChildren<HeroInventory>().Inventory;
+            int artifactsCount = inventory.Count(cell => cell.Item.IsArtifact);
             _progressService.TemporalProgress.ArtifactsCount = artifactsCount;
         }
     }
