@@ -4,8 +4,6 @@ using CodeBase.Logic.Inventory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
-using CodeBase.StaticData.Storable;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
