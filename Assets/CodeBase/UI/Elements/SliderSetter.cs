@@ -13,8 +13,8 @@ namespace CodeBase.UI.Elements
         [SerializeField] [ShowIf(nameof(_isAnimated))]
         private float _animationSpeed;
 
-        [SerializeField] [ShowIf(nameof(_isAnimated))]
-        private AnimationCurve _curve;
+        [SerializeField] [ShowIf(nameof(_isAnimated))] [CurveRange(0, 0, 1f, 1f, EColor.Blue)]
+        private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1f, 1f);
 
 #if UNITY_EDITOR
         [SerializeField] [Range(0, 1f)] private float _testValue;
@@ -33,8 +33,11 @@ namespace CodeBase.UI.Elements
             _curveAnimation = new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
         }
 
-        private void OnValidate() =>
+        private void OnValidate()
+        {
+            _curve ??= AnimationCurve.Linear(0, 0, 1f, 1f);
             _curveAnimation ??= new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
+        }
 
         protected override void Run() =>
             _slider.SetValueWithoutNotify(_curveAnimation.Update(Time.deltaTime));
@@ -43,6 +46,12 @@ namespace CodeBase.UI.Elements
         {
             value = Clamp(value);
             ApplyValue(value);
+        }
+
+        public void SetNormalizedValueImmediately(float value)
+        {
+            value = Clamp(value);
+            _slider.SetValueWithoutNotify(value);
         }
 
         private void ApplyValue(float value)
@@ -67,10 +76,8 @@ namespace CodeBase.UI.Elements
 
 #if UNITY_EDITOR
         [Button("TestSet", EButtonEnableMode.Playmode)]
-        private void TestSet()
-        {
+        private void TestSet() =>
             SetNormalizedValue(_testValue);
-        }
 #endif
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.DelayRoutines;
+using CodeBase.Logic;
 using CodeBase.Services.Ranked;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
@@ -15,7 +16,7 @@ namespace CodeBase.UI.Windows
 {
     public class LeaderboardWindow : WindowBase
     {
-        [SerializeField] private LoadingAnimation _loadingAnimation;
+        [SerializeField] private AnimationPlayer _loadingAnimation;
         [SerializeField] private Transform _content;
         [SerializeField] private GameObject _loginPanel;
         [SerializeField] private Button _authorizeButton;

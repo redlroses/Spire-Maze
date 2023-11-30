@@ -1,50 +1,39 @@
-using System.Collections;
+using AYellowpaper;
+using CodeBase.Tools;
+using CodeBase.UI.Elements;
+using NTC.Global.System;
 using UnityEngine;
 
 namespace CodeBase.Logic
 {
     public class LoadingCurtain : MonoBehaviour
     {
-        private const float StepFade = 0.03f;
+        [SerializeField] private InterfaceReference<IShowHide> _showHide;
+        [SerializeField] private SliderSetter _sliderSetter;
+        [SerializeField] private AnimationPlayer _loadingAnimation;
 
-        [SerializeField] private CanvasGroup _curtain;
-
-        private Coroutine _fade;
-        private WaitForSeconds _waitForSeconds = new WaitForSeconds(StepFade);
-
-        private void Awake()
-        {
+        private void Awake() =>
             DontDestroyOnLoad(this);
-        }
 
         public void Show()
         {
-            gameObject.SetActive(true);
-            _curtain.alpha = 1;
+            gameObject.Enable();
+            _loadingAnimation.gameObject.Enable();
+            _loadingAnimation.Play();
+            _sliderSetter.gameObject.Enable();
+            _sliderSetter.SetNormalizedValueImmediately(0);
+            _showHide.Value.Show();
         }
 
-        public void Hide() => StartFade();
-
-        private void StartFade()
+        public void Hide()
         {
-            if (_fade != null)
-            {
-                StopCoroutine(_fade);
-                _fade = null;
-            }
-
-            _fade = StartCoroutine(FadeIn());
+            _loadingAnimation.gameObject.Disable();
+            _loadingAnimation.Stop();
+            _sliderSetter.gameObject.Disable();
+            _showHide.Value.Hide(() => gameObject.Disable());
         }
 
-        private IEnumerator FadeIn()
-        {
-            while (_curtain.alpha > 0)
-            {
-                _curtain.alpha -= StepFade;
-                yield return _waitForSeconds;
-            }
-
-            gameObject.SetActive(false);
-        }
+        public void UpdateLoadProgress(float progress) =>
+            _sliderSetter.SetNormalizedValue(progress);
     }
 }
