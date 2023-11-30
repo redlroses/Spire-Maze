@@ -35,7 +35,7 @@ namespace CodeBase.Editor.LevelEditor
 
         private void OnEnable()
         {
-            _dataMap = serializedObject.FindProperty("CellDataMap");
+            _dataMap = serializedObject.FindProperty("_cellDataMap");
             _width = serializedObject.FindProperty("Width");
             _height = serializedObject.FindProperty("Height");
 

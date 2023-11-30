@@ -1,6 +1,7 @@
 ﻿using CodeBase.EditorCells;
 using CodeBase.Tools.Extension;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.StaticData
 {
@@ -11,14 +12,17 @@ namespace CodeBase.StaticData
         public float Radius = 5.945f;
         public float ArchAngle = 22.5f;
         public float FloorHeight = 2f;
-        [HideInInspector] public int Width = 16;
         public int Height = 0;
+
+        [HideInInspector] public int Width = 16;
         [SerializeField] [SerializeReference] [HideInInspector]
-        public CellData[] CellDataMap;
+        [FormerlySerializedAs("CellDataMap")] private CellData[] _cellDataMap;
 
         public int Size => Width * Height;
         public Vector3 HeroInitialPosition => GetPositionByCellType<InitialPlate>();
         public Vector3 FinishPosition => GetPositionByCellType<FinishPortal>();
+
+        public CellData[] CellDataMap => _cellDataMap;
 
         private Vector3 GetPositionByCellType<T>()
         {
