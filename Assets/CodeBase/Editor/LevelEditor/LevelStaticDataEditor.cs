@@ -36,8 +36,8 @@ namespace CodeBase.Editor.LevelEditor
         private void OnEnable()
         {
             _dataMap = serializedObject.FindProperty("_cellDataMap");
-            _width = serializedObject.FindProperty("Width");
-            _height = serializedObject.FindProperty("Height");
+            _width = serializedObject.FindProperty("_width");
+            _height = serializedObject.FindProperty("_height");
 
             _textures = new Dictionary<Type, Func<CellData, Texture2D>>
             {
