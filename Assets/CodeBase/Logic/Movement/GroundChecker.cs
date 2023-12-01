@@ -22,6 +22,8 @@ namespace CodeBase.Logic.Movement
         [ShowNativeProperty]
         public GroundState State { get; private set; } = GroundState.Grounded;
 
+        public float CoyoteTime => _coyoteTime;
+
         private void Awake()
         {
             _sphereCaster ??= GetComponent<SphereCaster>();
@@ -39,9 +41,9 @@ namespace CodeBase.Logic.Movement
 
             if (IsGroundLost(isTouchGround))
             {
-                if (_coyoteTime < _coyoteTimeDuration)
+                if (CoyoteTime < _coyoteTimeDuration)
                 {
-                    _coyoteTime += Time.fixedDeltaTime;
+                    _coyoteTime = CoyoteTime + Time.fixedDeltaTime;
                     return;
                 }
             }

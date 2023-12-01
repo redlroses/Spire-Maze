@@ -32,7 +32,6 @@ namespace CodeBase.Logic.StateMachine.States
         public void Enter(MoveDirection payload)
         {
             _heroAnimator.PlayDodge();
-            _dodge.Evade(payload);
             _lastDirection = payload;
             _heroHealth.IsImmune = true;
             _inputService.HorizontalMove += OnHorizontalMove;

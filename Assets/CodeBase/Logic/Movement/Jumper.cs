@@ -41,8 +41,6 @@ namespace CodeBase.Logic.Movement
         private bool _isEnabled;
         private bool _isPause;
 
-        public bool CanJump => IsJumpAvailable();
-
         private void OnValidate()
         {
             _groundChecker ??= GetComponent<GroundChecker>();
@@ -70,13 +68,17 @@ namespace CodeBase.Logic.Movement
             _isPause = true;
         }
 
-        public void Jump()
+        public bool TryJump()
         {
+            if (IsJumpAvailable() == false)
+                return false;
+
             Vector3 position = _rigidbody.position;
             _startHeight = position.y;
             enabled = true;
             _heroAnimator.PlayJump();
             DisableGravity();
+            return true;
         }
 
         private bool IsJumpAvailable()

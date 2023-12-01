@@ -13,24 +13,21 @@ namespace CodeBase.Logic.StateMachine.States
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
         private readonly IInputService _inputService;
-        private readonly Jumper _jumper;
         private readonly HeroMover _mover;
 
         private MoveDirection _lastDirection;
 
         public JumpState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IInputService inputService, Jumper jumper, HeroMover mover)
+            IInputService inputService, HeroMover mover)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
             _inputService = inputService;
-            _jumper = jumper;
             _mover = mover;
         }
 
         public void Enter(MoveDirection payload)
         {
-            _jumper.Jump();
             _mover.Move(payload);
             _lastDirection = payload;
             _heroAnimator.StateExited += OnStateExited;

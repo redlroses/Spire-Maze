@@ -42,23 +42,17 @@ namespace CodeBase.Logic.StateMachine.States
 
         private void OnDodge(MoveDirection direction)
         {
-            if (_dodge.CanDodge)
-            {
+            if (_dodge.TryDodge(direction))
                 _entityStateMachine.Enter<DodgeState, MoveDirection>(direction);
-            }
         }
 
         private void OnJump()
         {
-            if (_jumper.CanJump)
-            {
+            if (_jumper.TryJump())
                 _entityStateMachine.Enter<JumpState, MoveDirection>(MoveDirection.Stop);
-            }
         }
 
-        private void OnHorizontalMove(MoveDirection direction)
-        {
+        private void OnHorizontalMove(MoveDirection direction) =>
             _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(direction);
-        }
     }
 }

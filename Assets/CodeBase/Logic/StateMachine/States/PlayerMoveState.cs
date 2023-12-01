@@ -2,14 +2,12 @@
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Input;
-using UnityEngine;
 
 namespace CodeBase.Logic.StateMachine.States
 {
     public sealed class PlayerMoveState : IPayloadedState<MoveDirection>
     {
         private readonly EntityStateMachine _entityStateMachine;
-        private readonly HeroAnimator _heroAnimator;
         private readonly IInputService _inputService;
         private readonly HeroMover _mover;
         private readonly Jumper _jumper;
@@ -17,11 +15,10 @@ namespace CodeBase.Logic.StateMachine.States
 
         private MoveDirection _lastDirection;
 
-        public PlayerMoveState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
+        public PlayerMoveState(EntityStateMachine entityStateMachine,
             IInputService inputService, HeroMover mover, Jumper jumper, Dodge dodge)
         {
             _entityStateMachine = entityStateMachine;
-            _heroAnimator = heroAnimator;
             _inputService = inputService;
             _mover = mover;
             _jumper = jumper;
@@ -46,18 +43,14 @@ namespace CodeBase.Logic.StateMachine.States
 
         private void OnDodge(MoveDirection direction)
         {
-            if (_dodge.CanDodge)
-            {
+            if (_dodge.TryDodge(direction))
                 _entityStateMachine.Enter<DodgeState, MoveDirection>(direction);
-            }
         }
 
         private void OnJump()
         {
-            if (_jumper.CanJump)
-            {
+            if (_jumper.TryJump())
                 _entityStateMachine.Enter<JumpState, MoveDirection>(_lastDirection);
-            }
         }
 
         private void OnHorizontalMove(MoveDirection direction)

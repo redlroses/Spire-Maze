@@ -13,19 +13,17 @@ namespace CodeBase.Logic.StateMachine
         {
             _inputService = inputService;
             States.Add(typeof(PlayerIdleState), new PlayerIdleState(this, heroAnimator, inputService, heroMover, jumper, dodge));
-            States.Add(typeof(PlayerMoveState), new PlayerMoveState(this, heroAnimator, inputService, heroMover, jumper, dodge));
+            States.Add(typeof(PlayerMoveState), new PlayerMoveState(this, inputService, heroMover, jumper, dodge));
             States.Add(typeof(DodgeState), new DodgeState(this, heroAnimator, inputService, dodge, heroHealth));
-            States.Add(typeof(JumpState), new JumpState(this, heroAnimator, inputService, jumper, heroMover));
+            States.Add(typeof(JumpState), new JumpState(this, heroAnimator, inputService, heroMover));
             States.Add(typeof(DiedState), new DiedState(heroAnimator, heroMover));
             States.Add(typeof(ReviveState), new ReviveState(this, heroAnimator, heroHealth));
 
             inputService.MoveStopped += OnMoveStopped;
         }
 
-        private void OnMoveStopped()
-        {
+        private void OnMoveStopped() =>
             Enter<PlayerIdleState>();
-        }
 
         public override void Cleanup()
         {

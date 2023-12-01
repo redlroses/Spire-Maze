@@ -70,7 +70,7 @@ namespace CodeBase.Logic.StaminaEntity
             _isReplenish = false;
             int newPoints = CurrentPoints - spendStamina;
 
-            if (CurrentPoints < 0)
+            if (newPoints < 0)
                 _currentSpeedReplenish = _speedReplenish * _lowerSpeedMultiplier;
 
             CurrentPoints = Mathf.Max(newPoints, 0);

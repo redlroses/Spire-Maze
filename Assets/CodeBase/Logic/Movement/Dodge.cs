@@ -10,7 +10,7 @@ using UnityEngine;
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(TimerOperator))]
-    public class Dodge : MonoCache, IDodge, IPauseWatcher
+    public class Dodge : MonoCache, IPauseWatcher
     {
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private PlayerStamina _stamina;
@@ -28,21 +28,23 @@ namespace CodeBase.Logic.Movement
 
         public event Action<MoveDirection> Dodged = _ => { };
 
-        public bool CanDodge => enabled && _isDodged == false && _stamina.TrySpend(_fatigue);
-
         private void Awake() =>
             enabled = true;
 
         private void Start() =>
             _timer.SetUp(_invulnerabilityTime, OnTurnOff);
 
-        public void Evade(MoveDirection direction)
+        public bool TryDodge(MoveDirection direction)
         {
+            if (IsDodgeAvailable() == false)
+                return false;
+
             Dodged.Invoke(direction);
             _collider.height = _rollCollideHeight;
             _collider.center = _collider.center.ChangeY(_rollCollideCenter);
             _timer.Restart();
             _timer.Play();
+            return true;
         }
 
         private void OnTurnOff()
@@ -56,5 +58,8 @@ namespace CodeBase.Logic.Movement
 
         public void Resume() =>
             enabled = true;
+
+        private bool IsDodgeAvailable() =>
+            enabled && _isDodged == false && _stamina.TrySpend(_fatigue);
     }
 }
