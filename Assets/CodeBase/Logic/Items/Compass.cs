@@ -32,6 +32,7 @@ namespace CodeBase.Logic.Items
             else
             {
                 _arrow.Destroy();
+                _arrow = null;
             }
         }
 
