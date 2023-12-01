@@ -69,11 +69,7 @@ namespace CodeBase.Infrastructure.AssetManagement
             {
                 string path = AssetPath.Combine(AssetPath.Cells, type.Name);
                 ResourceRequest request = Resources.LoadAsync<GameObject>(path);
-                request.completed += _ =>
-                {
-                    _cache.TryAdd(path, request.asset);
-                    Debug.Log($"Asset loaded: {type.Name}");
-                };
+                request.completed += _ => _cache.TryAdd(path, request.asset);
             }
         }
 

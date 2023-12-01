@@ -33,13 +33,9 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
-            _progressService.Progress.WorldData.SceneName = CurrentScene();
             _inputService.Subscribe();
             _inputService.EnableMovementMap();
             _watchService.Start();
         }
-
-        private string CurrentScene() =>
-            SceneManager.GetActiveScene().name;
     }
 }

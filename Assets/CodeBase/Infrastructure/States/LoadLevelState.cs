@@ -34,6 +34,7 @@ using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -103,7 +104,10 @@ namespace CodeBase.Infrastructure.States
             _adService.ShowInterstitialAd();
 
             if (_loadPayload.IsSaveAfterLoad)
+            {
+                _progressService.Progress.WorldData.SceneName = GetCurrentScene();
                 _saveLoadService.SaveProgress();
+            }
 
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (_isFirstLoad)
@@ -148,14 +152,11 @@ namespace CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
-            if (_loadPayload.IsBuildable)
-            {
-                CreateBuildableLevel();
-                return;
-            }
-
             switch (_loadPayload.SceneName)
             {
+                case LevelNames.BuildableLevel:
+                    CreateBuildableLevel();
+                    return;
                 case LevelNames.Lobby:
                     InitLobby();
                     return;
@@ -304,5 +305,8 @@ namespace CodeBase.Infrastructure.States
 
         private Vector3Data GetFinishPosition() =>
             _staticData.GetLevel(_loadPayload.LevelId).FinishPosition.AsVectorData();
+
+        private string GetCurrentScene() =>
+            SceneManager.GetActiveScene().name;
     }
 }

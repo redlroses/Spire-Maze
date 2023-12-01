@@ -33,11 +33,11 @@ namespace CodeBase.Infrastructure.States
         {
             await LoadProgressOrInitNew();
 
-            Debug.Log($"Progress on init. Is buildable level: {_progressService.Progress.WorldData.SceneName.Equals(LevelNames.BuildableLevel)}");
+            Debug.Log(
+                $"Loading level: {_progressService.Progress.WorldData.SceneName}, LevelId: {_progressService.Progress.WorldData.LevelState.LevelId},");
 
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.SceneName,
-                _progressService.Progress.WorldData.SceneName.Equals(LevelNames.BuildableLevel),
                 _progressService.Progress.WorldData.LevelState.LevelId));
 
             _soundService.Load();
