@@ -21,6 +21,7 @@ using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
@@ -45,6 +46,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IInputService _inputService;
         private readonly IPersistentProgressService _progressService;
+        private readonly ISaveLoadService _saveLoadService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
         private readonly IScoreService _scoreService;
@@ -61,7 +63,7 @@ namespace CodeBase.Infrastructure.States
         private bool _isFirstLoad = true;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
-            IUIFactory uiFactory, IPersistentProgressService progressService, IStaticDataService staticDataService,
+            IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
             ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
         {
@@ -72,6 +74,7 @@ namespace CodeBase.Infrastructure.States
             _inputService = inputService;
             _uiFactory = uiFactory;
             _progressService = progressService;
+            _saveLoadService = saveLoadService;
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
             _scoreService = scoreService;
@@ -99,11 +102,12 @@ namespace CodeBase.Infrastructure.States
             _levelBuilder.Clear();
             _adService.ShowInterstitialAd();
 
+            if (_loadPayload.IsSaveAfterLoad)
+                _saveLoadService.SaveProgress();
+
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (_isFirstLoad)
-            {
                 YandexGamesSdk.GameReady();
-            }
 #endif
             _isFirstLoad = false;
         }

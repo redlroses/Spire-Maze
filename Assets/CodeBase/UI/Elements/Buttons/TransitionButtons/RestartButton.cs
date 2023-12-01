@@ -3,12 +3,14 @@ using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {
     public class RestartButton : TransitionButton
     {
-        [SerializeField] private bool _isClearLoad;
+        [FormerlySerializedAs("_isClearLoad")] [SerializeField]
+        private bool _isResetProgressAfterRestart;
 
         private int _levelId;
 
@@ -23,7 +25,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             string sceneName = SceneManager.GetActiveScene().name;
 
             return sceneName.Equals(LevelNames.BuildableLevel)
-                ? new LoadPayload(LevelNames.BuildableLevel, true, _levelId, _isClearLoad)
+                ? new LoadPayload(LevelNames.BuildableLevel, true, _levelId, _isResetProgressAfterRestart, _isResetProgressAfterRestart)
                 : new LoadPayload(sceneName, false, GetLevelId(sceneName), true);
         }
 

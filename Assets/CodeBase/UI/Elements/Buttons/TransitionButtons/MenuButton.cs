@@ -8,6 +8,6 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
     public class MenuButton : TransitionButton
     {
         protected override LoadPayload CreateTransitionPayload() =>
-            new LoadPayload(LevelNames.Lobby, false, LevelNames.LobbyId);
+            new LoadPayload(LevelNames.Lobby, false, LevelNames.LobbyId, true, true);
     }
 }

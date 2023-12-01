@@ -66,7 +66,7 @@ namespace CodeBase.Logic
 
         private void LoadNewLevel()
         {
-            LoadPayload payload = new LoadPayload(LevelNames.BuildableLevel, true, _toLevelId, true);
+            LoadPayload payload = new LoadPayload(LevelNames.BuildableLevel, true, _toLevelId, true, true);
             _stateMachine.Enter<LoadLevelState, LoadPayload>(payload);
         }
 

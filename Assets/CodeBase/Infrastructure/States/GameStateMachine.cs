@@ -36,6 +36,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IInputService>(),
                     services.Single<IUIFactory>(),
                     services.Single<IPersistentProgressService>(),
+                    services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>(),
                     services.Single<ILevelBuilder>(),
                     services.Single<IScoreService>(),
