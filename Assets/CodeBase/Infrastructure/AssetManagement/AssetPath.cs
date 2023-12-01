@@ -2,6 +2,8 @@ namespace CodeBase.Infrastructure.AssetManagement
 {
     public static class AssetPath
     {
+        public const char DirectorySeparator = '/';
+
         public const string UIRoot = "Prefabs/UI/UIRoot";
         public const string Hud = "Prefabs/UI/Hud";
         public const string ExtraLiveView = "Prefabs/UI/ExtraLiveView";
@@ -41,5 +43,8 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string TutorialPanel = "Prefabs/UI/TutorialPanel";
 
         public const string MusicPlayer = "Prefabs/MusicPlayer";
+
+        public static string Combine(string path1, string path2) =>
+            $"{path1}{DirectorySeparator}{path2}";
     }
 }

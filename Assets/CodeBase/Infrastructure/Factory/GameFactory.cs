@@ -61,7 +61,7 @@ namespace CodeBase.Infrastructure.Factory
         }
 
         public void WarmUp() =>
-            _assets.LoadCells();
+            _assets.PreloadCells();
 
         public GameObject CreateHero(Vector3 at)
         {

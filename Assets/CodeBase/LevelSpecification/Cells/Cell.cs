@@ -10,11 +10,10 @@ namespace CodeBase.LevelSpecification.Cells
     {
         public readonly CellData CellData;
         public readonly Transform Container;
-        private readonly int _id;
 
         private CellPosition _position;
 
-        public int Id => _id;
+        public int Id { get; }
         public CellPosition Position => _position;
 
         public Cell(CellData cellData, Transform container, int id)
@@ -22,17 +21,13 @@ namespace CodeBase.LevelSpecification.Cells
             CellData = cellData;
             Container = container;
             _position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
-            _id = id;
+            Id = id;
         }
 
-        public void AddTwoPiToAngle()
-        {
+        public void AddTwoPiToAngle() =>
             _position = new CellPosition(_position.Height, _position.Angle + Trigonometry.TwoPiGrade);
-        }
 
-        public void RemoveTwoPiFromAngle()
-        {
+        public void RemoveTwoPiFromAngle() =>
             _position = new CellPosition(_position.Height, _position.Angle - Trigonometry.TwoPiGrade);
-        }
     }
 }
