@@ -150,23 +150,24 @@ namespace CodeBase.Infrastructure.States
         {
             if (_loadPayload.IsBuildable)
             {
-                CreateLevel();
+                CreateBuildableLevel();
                 return;
             }
 
-            if (string.Equals(_loadPayload.SceneName, LevelNames.Lobby))
+            switch (_loadPayload.SceneName)
             {
-                InitLobby();
-                return;
-            }
-
-            if (string.Equals(_loadPayload.SceneName, LevelNames.LearningLevel))
-            {
-                InitLearningLevel();
+                case LevelNames.Lobby:
+                    InitLobby();
+                    return;
+                case LevelNames.LearningLevel:
+                    InitLearningLevel();
+                    return;
+                default:
+                    throw new System.Exception($"Unknown level name {_loadPayload.SceneName}");
             }
         }
 
-        private Level CreateLevel()
+        private Level CreateBuildableLevel()
         {
             Level level = BuildLevel();
             ConstructLevel();
@@ -176,7 +177,7 @@ namespace CodeBase.Infrastructure.States
         private void InitLearningLevel()
         {
             TutorialConfig config = _staticData.GetTutorialConfig();
-            Level level = CreateLevel();
+            Level level = CreateBuildableLevel();
             IReadOnlyCollection<TutorialTrigger> triggers = SpawnTutorialTriggers(level, config);
             GameObject sequence = _uiFactory.CreateTutorialSequence();
             sequence.GetComponent<TutorialSequence>().Construct(_inputService, config, triggers);

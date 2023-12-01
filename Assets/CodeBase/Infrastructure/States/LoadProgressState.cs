@@ -5,6 +5,7 @@ using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -31,6 +32,9 @@ namespace CodeBase.Infrastructure.States
         public async void Enter()
         {
             await LoadProgressOrInitNew();
+
+            Debug.Log($"Progress on init. Is buildable level: {_progressService.Progress.WorldData.SceneName.Equals(LevelNames.BuildableLevel)}");
+
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.SceneName,
                 _progressService.Progress.WorldData.SceneName.Equals(LevelNames.BuildableLevel),
