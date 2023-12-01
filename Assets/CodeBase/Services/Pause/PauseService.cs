@@ -6,12 +6,12 @@ namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
-        private readonly IWatchService _watchService;
+        private readonly IPauseWatcher _watchService;
 
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
 
-        public PauseService(IWatchService watchService)
+        public PauseService(IPauseWatcher watchService)
         {
             _watchService = watchService;
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;

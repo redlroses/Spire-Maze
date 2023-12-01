@@ -3,7 +3,7 @@ using CodeBase.Services.Pause;
 
 namespace CodeBase.Services.Watch
 {
-    public interface IWatchService : IService, IPauseWatcher
+    public interface IWatchService : IService
     {
         event Action<int> SecondTicked;
         float ElapsedTime { get; }

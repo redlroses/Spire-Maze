@@ -79,7 +79,7 @@ namespace CodeBase.Infrastructure.States
                 new RankedService(
                     _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(
-                new PauseService(_services.Single<IWatchService>()));
+                new PauseService(_services.Single<IWatchService>() as IPauseWatcher));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),

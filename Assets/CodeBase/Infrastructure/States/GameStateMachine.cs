@@ -58,6 +58,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IScoreService>(),
                     services.Single<IRankedService>(),
                     services.Single<IPersistentProgressService>(),
+                    services.Single<IWatchService>(),
                     services.Single<IGameFactory>() as IHeroLocator)
             };
         }

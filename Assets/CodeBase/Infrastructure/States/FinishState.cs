@@ -4,6 +4,7 @@ using CodeBase.Logic.Inventory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
+using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Windows;
 
 namespace CodeBase.Infrastructure.States
@@ -14,24 +15,32 @@ namespace CodeBase.Infrastructure.States
         private readonly IScoreService _scoreService;
         private readonly IRankedService _rankedService;
         private readonly IPersistentProgressService _progressService;
+        private readonly IWatchService _watchService;
         private readonly IHeroLocator _heroLocator;
 
         public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService, IHeroLocator heroLocator)
+            IPersistentProgressService progressService, IWatchService watchService, IHeroLocator heroLocator)
         {
-            _progressService = progressService;
-            _heroLocator = heroLocator;
-            _rankedService = rankedService;
             _windowService = windowService;
             _scoreService = scoreService;
+            _rankedService = rankedService;
+            _progressService = progressService;
+            _watchService = watchService;
+            _heroLocator = heroLocator;
         }
 
         public void Enter(bool isLose)
         {
             CountArtifacts();
+            CountPlayTime();
             CountLevelScore(isLose);
             CountGlobalScore();
             _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
+        }
+
+        private void CountPlayTime()
+        {
+            _progressService.TemporalProgress.PlayTime = _watchService.ElapsedSeconds;
         }
 
         public void Exit() { }

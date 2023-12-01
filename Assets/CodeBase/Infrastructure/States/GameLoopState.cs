@@ -28,7 +28,6 @@ namespace CodeBase.Infrastructure.States
         public void Exit()
         {
             _inputService.Cleanup();
-            _watchService.UpdateProgress();
             _watchService.Cleanup();
         }
 

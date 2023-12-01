@@ -1,11 +1,12 @@
 ﻿using System;
 using CodeBase.DelayRoutines;
+using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 
 namespace CodeBase.Services.Watch
 {
-    public class WatchService : IWatchService
+    public class WatchService : IWatchService, IPauseWatcher
     {
         private readonly IPersistentProgressService _progressService;
         private readonly RoutineSequence _watchRoutine;
