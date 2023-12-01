@@ -73,6 +73,13 @@ namespace CodeBase.Logic.Movement
             if (IsJumpAvailable() == false)
                 return false;
 
+#if DEBUG
+            if (_groundChecker.CoyoteTime > 0)
+            {
+                Debug.Log($"Jumped by coyote time: {_groundChecker.CoyoteTime}/{_groundChecker.CoyoteTimeDuration}");
+            }
+#endif
+
             Vector3 position = _rigidbody.position;
             _startHeight = position.y;
             enabled = true;

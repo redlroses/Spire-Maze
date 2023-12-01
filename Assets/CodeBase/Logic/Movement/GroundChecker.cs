@@ -9,7 +9,6 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(SphereCaster))]
     public class GroundChecker : MonoCache, IPauseWatcher
     {
-        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private SphereCaster _sphereCaster;
 
         [Space]
@@ -23,12 +22,11 @@ namespace CodeBase.Logic.Movement
         public GroundState State { get; private set; } = GroundState.Grounded;
 
         public float CoyoteTime => _coyoteTime;
+        public float CoyoteTimeDuration => _coyoteTimeDuration;
 
         private void Awake()
         {
             _sphereCaster ??= GetComponent<SphereCaster>();
-            _rigidbody ??= GetComponent<Rigidbody>();
-            _rigidbody.useGravity = false;
             _groundCheckAction = _isEnableCoyoteTime ? CheckGroundWithCoyoteTime : CheckGround;
         }
 
@@ -41,9 +39,9 @@ namespace CodeBase.Logic.Movement
 
             if (IsGroundLost(isTouchGround))
             {
-                if (CoyoteTime < _coyoteTimeDuration)
+                if (_coyoteTime <= _coyoteTimeDuration)
                 {
-                    _coyoteTime = CoyoteTime + Time.fixedDeltaTime;
+                    _coyoteTime += Time.fixedDeltaTime;
                     return;
                 }
             }
