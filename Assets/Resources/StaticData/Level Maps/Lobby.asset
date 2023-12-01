@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d62d33e80cbc640b1f69f58ac4f58f, type: 3}
   m_Name: Lobby
   m_EditorClassIdentifier: 
-  LevelName: Lobby
-  LevelId: 0
-  Radius: 5.94
-  ArchAngle: 22.5
-  FloorHeight: 2
-  Width: 16
-  Height: 9
-  CellDataMap:
+  _levelId: 0
+  _radius: 5.94
+  _archAngle: 22.5
+  _floorHeight: 2
+  _height: 9
+  _width: 16
+  _cellDataMap:
   - rid: 3578795270337200341
   - rid: 3578795270337200342
   - rid: 3578795270337200343
@@ -60,7 +59,7 @@ MonoBehaviour:
   - rid: 3578795270337200329
   - rid: 3578795270337200330
   - rid: 3578795270337200478
-  - rid: 3578795517687627778
+  - rid: 5570031378153865222
   - rid: 3578795270337200484
   - rid: 3578795270337200472
   - rid: 3578795270337200335
@@ -798,10 +797,6 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 3578795517687627778
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 3578795517687627793
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -844,5 +839,9 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 3578795517687627803
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031378153865222
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
