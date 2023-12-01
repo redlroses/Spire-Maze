@@ -17,7 +17,7 @@ namespace CodeBase.Logic.Сollectible
         public bool IsActivated { get; private set; }
 
         protected virtual void OnConstruct(IItem item) { }
-        protected virtual void OnProgressLoaded(bool isActivated) { }
+        protected virtual void OnProgressLoaded(bool isCollected) { }
         protected virtual void OnCollected() { }
 
         public void Construct(int id, IItem item)

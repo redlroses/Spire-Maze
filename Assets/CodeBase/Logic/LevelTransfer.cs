@@ -15,6 +15,10 @@ namespace CodeBase.Logic
     [RequireComponent(typeof(LevelTransferPortalEffector))]
     public class LevelTransfer : ObserverTargetExited<TeleportableObserver, ITeleportable>, IActivated
     {
+#if UNITY_EDITOR
+        private const bool IsForceActivate = true;
+#endif
+
         [SerializeField] private int _toLevelId;
 
         private GameStateMachine _stateMachine;
@@ -33,6 +37,15 @@ namespace CodeBase.Logic
             _enterLevelPanel = enterLevelPanel;
             _stateMachine = stateMachine;
             _levelData = GetLevelData();
+
+#if UNITY_EDITOR
+            if (IsForceActivate)
+            {
+                Activate();
+                return;
+            }
+#endif
+
             TryActivate();
         }
 

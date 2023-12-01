@@ -32,6 +32,7 @@ namespace CodeBase.Logic.DoorEnvironment
 
         public void Construct(Colors doorColor, int id)
         {
+            this.Enable();
             _targetKeyColor = doorColor.ToStorableType();
             Id = id;
             _signAnimation = new RoutineSequence();
@@ -44,14 +45,11 @@ namespace CodeBase.Logic.DoorEnvironment
             IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null)
-            {
                 return;
-            }
 
             if (cellState.IsActivated)
             {
-                _animator.Open();
-                IsActivated = true;
+                Open();
             }
         }
 
@@ -78,9 +76,7 @@ namespace CodeBase.Logic.DoorEnvironment
             else
             {
                 if (_signAnimation.IsActive)
-                {
                     return;
-                }
 
                 _signAnimation.Play();
             }
@@ -93,6 +89,7 @@ namespace CodeBase.Logic.DoorEnvironment
         {
             _animator.Open();
             IsActivated = true;
+            this.Disable();
         }
     }
 }

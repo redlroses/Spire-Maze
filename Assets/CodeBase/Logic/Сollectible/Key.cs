@@ -19,8 +19,8 @@ namespace CodeBase.Logic.Сollectible
         protected override void OnCollected() =>
             gameObject.Disable();
 
-        protected override void OnProgressLoaded(bool isActivated) =>
-            gameObject.SetActive(isActivated);
+        protected override void OnProgressLoaded(bool isCollected) =>
+            gameObject.SetActive(!isCollected);
 
         private void EnableKey(StorableType type)
         {
