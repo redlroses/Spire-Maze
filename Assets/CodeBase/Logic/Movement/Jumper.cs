@@ -54,6 +54,7 @@ namespace CodeBase.Logic.Movement
 
         public void Resume()
         {
+            EnableGravity();
             _rigidbody.velocity = _currentVelocity;
             enabled = _isEnabled;
             _isPause = false;
@@ -66,6 +67,7 @@ namespace CodeBase.Logic.Movement
             _isEnabled = enabled;
             enabled = false;
             _isPause = true;
+            DisableGravity();
         }
 
         public bool TryJump()
