@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d62d33e80cbc640b1f69f58ac4f58f, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  LevelName: Level3
-  LevelId: 3
-  Radius: 5.945
-  ArchAngle: 22.5
-  FloorHeight: 2
-  Width: 16
-  Height: 9
-  CellDataMap:
+  _levelId: 3
+  _radius: 5.945
+  _archAngle: 22.5
+  _floorHeight: 2
+  _height: 9
+  _width: 16
+  _cellDataMap:
   - rid: 483409620341883287
   - rid: 483409620341883285
   - rid: 483409620341883286
@@ -90,9 +89,9 @@ MonoBehaviour:
   - rid: 483409620341883431
   - rid: 483409620341883430
   - rid: 483409620341883396
-  - rid: 483409620341883400
-  - rid: 483409620341883399
-  - rid: 483409620341883392
+  - rid: 5570031445691072521
+  - rid: 5570031445691072522
+  - rid: 5570031445691072524
   - rid: 483409620341883200
   - rid: 483409620341883391
   - rid: 483409620341883390
@@ -107,10 +106,10 @@ MonoBehaviour:
   - rid: 483409620341883401
   - rid: 483409620341883398
   - rid: 483409620341883432
-  - rid: 483409620341883214
-  - rid: 483409620341883215
+  - rid: 5570031445691072523
+  - rid: 5570031445691072526
   - rid: 483409620341883216
-  - rid: 483409620341883416
+  - rid: 5570031445691072525
   - rid: 483409620341883415
   - rid: 483409620341883334
   - rid: 483409620341883381
@@ -200,14 +199,6 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
     - rid: 483409620341883208
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 483409620341883214
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 483409620341883215
       type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
@@ -590,24 +581,11 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 483409620341883392
-      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 483409620341883396
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
     - rid: 483409620341883398
-      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 483409620341883399
-      type: {class: Rock, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-        IsDirectionToRight: 1
-    - rid: 483409620341883400
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
@@ -666,10 +644,6 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
     - rid: 483409620341883415
-      type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 483409620341883416
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
@@ -768,6 +742,31 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
     - rid: 483409620341883460
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031445691072521
+      type: {class: Rock, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        IsDirectionToRight: 1
+    - rid: 5570031445691072522
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031445691072523
+      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031445691072524
+      type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031445691072525
+      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031445691072526
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
