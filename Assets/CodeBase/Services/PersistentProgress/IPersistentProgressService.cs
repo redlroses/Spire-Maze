@@ -6,5 +6,10 @@ namespace CodeBase.Services.PersistentProgress
     {
         PlayerProgress Progress { get; set; }
         TemporalProgress TemporalProgress { get; set; }
+
+        void Register(ISavedProgressReader progressReader);
+        void InformReaders();
+        void UpdateWriters();
+        void CleanupReadersAndWriters();
     }
 }

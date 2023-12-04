@@ -39,6 +39,7 @@ namespace CodeBase.UI.Services.Windows
             }
         }
 
+        //TODO: Добавить событие в сервис паузы и подписаться на него в лоад левел стейте
         public void Pause() =>
             Open(WindowId.Pause);
 

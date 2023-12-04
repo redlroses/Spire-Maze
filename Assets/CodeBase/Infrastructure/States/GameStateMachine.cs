@@ -39,7 +39,6 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>(),
                     services.Single<ILevelBuilder>(),
-                    services.Single<IScoreService>(),
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
                     services.Single<ICameraOperatorService>(),

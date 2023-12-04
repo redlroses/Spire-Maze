@@ -4,6 +4,7 @@ using CodeBase.Data;
 using CodeBase.DelayRoutines;
 using CodeBase.Logic;
 using CodeBase.Services.Ranked;
+using CodeBase.Services.SaveLoad;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
 using Cysharp.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace CodeBase.UI.Windows
 
         private IRankedService _rankedService;
         private IUIFactory _gameUiFactory;
+        private ISaveLoadService _saveLoadService;
 
         private List<RankView> _ranksView;
         private bool _isLeaderboardDataReceived;
@@ -30,10 +32,11 @@ namespace CodeBase.UI.Windows
 
         private RoutineSequence _authorizationAwait;
 
-        public void Construct(IRankedService rankedService, IUIFactory gameUiFactory)
+        public void Construct(IRankedService rankedService, IUIFactory gameUiFactory, ISaveLoadService saveLoadService)
         {
             _rankedService = rankedService;
             _gameUiFactory = gameUiFactory;
+            _saveLoadService = saveLoadService;
         }
 
         protected override void Initialize() =>
@@ -50,6 +53,7 @@ namespace CodeBase.UI.Windows
                     await UniTask.Yield();
 
                 await _rankedService.RequestPersonalData();
+                await _saveLoadService.ActualizeProgress();
             }
 
             _loginPanel.Disable();

@@ -79,13 +79,19 @@ namespace CodeBase.Infrastructure.States
                 new RankedService(
                     _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(
-                new PauseService(_services.Single<IWatchService>() as IPauseWatcher));
+                new PauseService(
+                    _services.Single<IWatchService>() as IPauseWatcher));
+            _services.RegisterSingle<ISaveLoadService>(
+                new SaveLoadService(
+                    _services.Single<IPersistentProgressService>(),
+                    _services.Single<IWatchService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IStaticDataService>(),
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IRankedService>(),
+                    _services.Single<ISaveLoadService>(),
                     _services.Single<ILocalizationService>(),
                     _services.Single<ISoundService>(),
                     _services.Single<IPauseService>(),
@@ -106,11 +112,6 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IUIFactory>(),
                     _services.Single<IInputService>(),
                     _services.Single<ICameraOperatorService>()));
-            _services.RegisterSingle<ISaveLoadService>(
-                new SaveLoadService(
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IGameFactory>(),
-                    _services.Single<IWatchService>()));
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),
