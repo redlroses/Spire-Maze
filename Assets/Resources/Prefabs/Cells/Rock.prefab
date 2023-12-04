@@ -371,6 +371,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8534921435241841211}
   _meshFilter: {fileID: 8422045026232593397}
+--- !u!1 &566271834768240633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7245651520670512008}
+  m_Layer: 0
+  m_Name: Rotating
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7245651520670512008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566271834768240633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8090674333564611682}
+  - {fileID: 7879863177841329373}
+  m_Father: {fileID: 8997076709825672432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598535541312706361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6564,8 +6597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8090674333564611682}
-  - {fileID: 7879863177841329373}
+  - {fileID: 7245651520670512008}
   - {fileID: 2118085139743870339}
   - {fileID: 3478033707693123280}
   - {fileID: 6025967842949731854}
@@ -8082,7 +8114,7 @@ Transform:
   - {fileID: 2652488659193370812}
   - {fileID: 2032772290945713816}
   - {fileID: 4458447923228386783}
-  m_Father: {fileID: 8997076709825672432}
+  m_Father: {fileID: 7245651520670512008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2976654156250728952
 Rigidbody:
@@ -8673,7 +8705,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8997076709825672432}
+    m_TransformParent: {fileID: 7245651520670512008}
     m_Modifications:
     - target: {fileID: 4070065932120458288, guid: e8b9bbde6ecec2e448604597fa670507, type: 3}
       propertyPath: m_Size.y
