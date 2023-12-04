@@ -2,6 +2,7 @@
 using CodeBase.DelayRoutines;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Tools.Extension;
 using UnityEngine;
 
 namespace CodeBase.Services.Watch
@@ -40,7 +41,9 @@ namespace CodeBase.Services.Watch
 
         public void LoadProgress()
         {
-            ElapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
+            if (ElapsedTime.EqualsApproximately(0f))
+                ElapsedTime = _progressService.Progress.WorldData.AccumulationData.PlayTime;
+
             ElapsedSeconds = GetSeconds(ElapsedTime);
             SecondTicked.Invoke(ElapsedSeconds);
         }
