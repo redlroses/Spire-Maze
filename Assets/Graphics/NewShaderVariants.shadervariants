@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NewShaderVariants
+  m_Shaders:
+  - first: {fileID: 64, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: SHADOWS_SINGLE_CASCADE SHADOWS_SPLIT_SPHERES
+        passType: 0
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: _ALPHABLEND_ON _FADING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON _ALPHABLEND_ON
+        passType: 8
+      - keywords: SHADOWS_DEPTH _ALPHABLEND_ON
+        passType: 8
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: b68b99c2e57cef4419465c63c527201b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: bd6af5d577c618947b73aa60db554e51, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: OUTLINE_ON UNDERLAY_ON
+        passType: 0
+      - keywords: UNDERLAY_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: c4b4f52ca7499d7458e0eb3577108f71, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 371dee73dabc89140878360402049bfc, type: 3}
+    second:
+      variants:
+      - keywords: _MK_ALBEDO_MAP
+        passType: 0
+      - keywords: _MK_ALBEDO_MAP _MK_OUTLINE_HULL_CLIP
+        passType: 0
+      - keywords: _MK_ALBEDO_MAP _MK_OUTLINE_NOISE
+        passType: 0
+      - keywords: DIRECTIONAL LIGHTPROBE_SH SHADOWS_SCREEN _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_FINAL_OUTPUT _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH SHADOWS_SCREEN _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_NORMAL_MAP _MK_SPECULAR_ISOTROPIC
+          _MK_WORKFLOW_ROUGHNESS _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH SHADOWS_SCREEN _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+          _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH SHADOWS_SCREEN _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH SHADOWS_SCREEN _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_LIGHT_RAMP _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_FINAL_OUTPUT _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_NORMAL_MAP _MK_SPECULAR_ISOTROPIC
+          _MK_WORKFLOW_ROUGHNESS _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+          _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH _MK_ALBEDO_MAP _MK_ARTISTIC_ANIMATION_STUTTER
+          _MK_COLOR_GRADING_FINAL_OUTPUT _MK_DETAIL_BLEND_MIX _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+          _MK_LIGHT_RAMP _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+        passType: 4
+      - keywords: SHADOWS_DEPTH _MK_ALBEDO_MAP
+        passType: 8
+      - keywords: _MK_ALBEDO_MAP
+        passType: 8
+  - first: {fileID: 4800000, guid: 82881a2d011b0964696411c822cdd00b, type: 3}
+    second:
+      variants:
+      - keywords: _ENABLEFOG_ON _ENABLEROTATION_ON
+        passType: 0

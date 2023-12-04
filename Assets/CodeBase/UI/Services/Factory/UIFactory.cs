@@ -6,10 +6,10 @@ using CodeBase.Services.Localization;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Windows;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;
@@ -23,6 +23,7 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
         private readonly IRankedService _rankedService;
+        private readonly ISaveLoadService _saveLoadService;
         private readonly ILocalizationService _localizationService;
         private readonly ISoundService _soundService;
         private readonly IPauseService _pauseService;
@@ -33,13 +34,14 @@ namespace CodeBase.UI.Services.Factory
         private HeroReviver _hero;
 
         public UIFactory(IAssetProvider assets, IStaticDataService staticData,
-            IPersistentProgressService progressService, IRankedService rankedService,
+            IPersistentProgressService progressService, IRankedService rankedService, ISaveLoadService saveLoadService,
             ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, IADService adService, GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
             _rankedService = rankedService;
+            _saveLoadService = saveLoadService;
             _localizationService = localizationService;
             _soundService = soundService;
             _pauseService = pauseService;
@@ -108,7 +110,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateLeaderboard()
         {
             LeaderboardWindow window = CreateWindow<LeaderboardWindow>(WindowId.Leaderboard);
-            window.Construct(_rankedService, this);
+            window.Construct(_rankedService, this, _saveLoadService);
         }
 
         public void CreateUIRoot()

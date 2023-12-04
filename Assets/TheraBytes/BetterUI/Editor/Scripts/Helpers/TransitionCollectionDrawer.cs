@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using TheraBytes.BetterUi.Editor.ThirdParty;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace TheraBytes.BetterUi.Editor

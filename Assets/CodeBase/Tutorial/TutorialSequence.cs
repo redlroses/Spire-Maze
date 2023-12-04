@@ -5,6 +5,7 @@ using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons;
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,10 +80,8 @@ namespace CodeBase.Tutorial
             _hideButton.Cleanup();
         }
 
-        [Button] [Conditional("UNITY_EDITOR")]
-        private void ForceShowNextPanel()
-        {
+        [Button] [Conditional("UNITY_EDITOR")] [UsedImplicitly]
+        private void ForceShowNextPanel() =>
             ShowNext();
-        }
     }
 }

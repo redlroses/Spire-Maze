@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.StaticData;
 using Agava.YandexGames;
-using CodeBase.Services.Localization;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace CodeBase.Leaderboards
 
         public bool IsAuthorized => _isAuthorized;
 
-        public async Task<RanksData> GetRanksData()
+        public async UniTask<RanksData> GetRanksData()
         {
             if (_unsavedScore != 0)
             {
@@ -59,14 +58,12 @@ namespace CodeBase.Leaderboards
                 _isIncludeSelf);
 
             while (_isLeaderboardDataReceived == false)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
 
-        public async Task SetScore(int score, string avatarName)
+        public async UniTask SetScore(int score, string avatarName)
         {
             bool isComplete = false;
 
@@ -80,42 +77,34 @@ namespace CodeBase.Leaderboards
             Leaderboard.GetPlayerEntry(_name, result =>
             {
                 if (result.score >= score)
-                {
                     return;
-                }
 
                 Leaderboard.SetScore(_name, score, () => isComplete = true, _ => isComplete = true, avatarName);
             }, _ => isComplete = true);
 
             while (isComplete == false)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
         }
 
-        public async Task<bool> TryAuthorize()
+        public async UniTask<bool> TryAuthorize()
         {
             bool isSuccess = false;
             bool isError = false;
 
             if (_isAuthorized)
-            {
                 return true;
-            }
 
             PlayerAccount.Authorize(() => isSuccess = true, _ => isError = true);
 
             while (isSuccess == false && isError == false)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
             _isAuthorized = PlayerAccount.IsAuthorized;
             Debug.Log($"{nameof(TryAuthorize)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
         }
 
-        public async Task<bool> TryRequestPersonalData()
+        public async UniTask<bool> TryRequestPersonalData()
         {
             bool isSuccess = false;
             bool isError = false;
@@ -129,9 +118,7 @@ namespace CodeBase.Leaderboards
             PlayerAccount.RequestPersonalProfileDataPermission(() => isSuccess = true, _ => isError = true);
 
             while (isSuccess == false && isError == false)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
             Debug.Log($"{nameof(TryRequestPersonalData)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
@@ -158,24 +145,21 @@ namespace CodeBase.Leaderboards
             _ranksData = new List<SingleRankData>(board.entries.Length);
 
             foreach (LeaderboardEntryResponse entry in board.entries)
-            {
                 _ranksData.Add(await AsSingleRankData(entry));
-            }
 
             _isLeaderboardDataReceived = true;
         }
 
-        private async Task<SingleRankData> AsSingleRankData(LeaderboardEntryResponse entry)
+        private async UniTask<SingleRankData> AsSingleRankData(LeaderboardEntryResponse entry)
         {
             Sprite avatar = await LoadProfileImage(entry);
-
             Sprite flag = _staticData.GetSpriteByLang(entry.player.lang);
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 string.IsNullOrEmpty(entry.player.publicName) ? _anonymous : entry.player.publicName, flag);
         }
 
-        private async Task<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)
+        private async UniTask<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)
         {
             Sprite avatar = null;
             bool isLoading = true;
@@ -193,9 +177,7 @@ namespace CodeBase.Leaderboards
                 });
 
             while (isLoading)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
             return avatar;
         }

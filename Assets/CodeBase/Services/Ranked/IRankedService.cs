@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Services.Ranked
 {
     public interface IRankedService : IService
     {
         bool IsAuthorized { get; }
-        Task<bool> Authorize();
-        Task<RanksData> GetRanksData();
+        UniTask<bool> Authorize();
+        UniTask<RanksData> GetRanksData();
         void SetScore(int score, string avatarName = "Test1");
-        Task<bool> RequestPersonalData();
+        UniTask<bool> RequestPersonalData();
         void InitLeaderboard();
     }
 }

@@ -8,12 +8,9 @@ using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
-using CodeBase.Services.Randomizer;
-using CodeBase.Services.Watch;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
-using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using Compass = CodeBase.Logic.Items.Compass;
 using Key = CodeBase.Logic.Items.Key;
@@ -23,9 +20,6 @@ namespace CodeBase.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory, IHeroLocator
     {
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-
         private readonly IAssetProvider _assets;
         private readonly IPersistentProgressService _progressService;
         private readonly IPauseService _pauseService;
@@ -54,11 +48,8 @@ namespace CodeBase.Infrastructure.Factory
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
 
-        public void Cleanup()
-        {
-            ProgressReaders.Clear();
-            ProgressWriters.Clear();
-        }
+        public void Cleanup() =>
+            _progressService.CleanupReadersAndWriters();
 
         public void WarmUp() =>
             _assets.PreloadCells();
@@ -132,13 +123,8 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateHud() =>
             InstantiateRegistered(AssetPath.Hud);
 
-        private void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
-        }
+        private void Register(ISavedProgressReader progressReader) =>
+            _progressService.Register(progressReader);
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
         {

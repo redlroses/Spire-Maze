@@ -14,10 +14,8 @@ namespace CodeBase.UI.Elements
 
         private IWatchService _watchService;
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             Cleanup();
-        }
 
         public void Construct(IWatchService watchService)
         {
@@ -32,10 +30,8 @@ namespace CodeBase.UI.Elements
             Subscribe();
         }
 
-        private void SetTime(int seconds)
-        {
+        private void SetTime(int seconds) =>
             _text.text = TimeSpan.FromSeconds(seconds).ToString(_format);
-        }
 
         private void Cleanup()
         {
@@ -45,10 +41,8 @@ namespace CodeBase.UI.Elements
             _watchService.SecondTicked -= SetTime;
         }
 
-        private void Subscribe()
-        {
+        private void Subscribe() =>
             _watchService.SecondTicked += SetTime;
-        }
 
         private bool IsBuildableLevel() =>
             string.Equals(SceneManager.GetActiveScene().name, LevelNames.BuildableLevel);

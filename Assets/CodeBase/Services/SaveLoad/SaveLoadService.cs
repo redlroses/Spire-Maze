@@ -1,13 +1,14 @@
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_WEBGL
 using Agava.YandexGames;
 using Debug = UnityEngine.Debug;
 #endif
-using System.Threading.Tasks;
+using System.Linq;
 using CodeBase.Data;
-using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 using PlayerPrefs = UnityEngine.PlayerPrefs;
 
@@ -19,40 +20,61 @@ namespace CodeBase.Services.SaveLoad
         private const string ProgressKey = "Progress";
 
         private readonly IPersistentProgressService _progressService;
-        private readonly IGameFactory _gameFactory;
         private readonly IWatchService _watchService;
 
-        public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory,
+        public SaveLoadService(IPersistentProgressService progressService,
             IWatchService watchService)
         {
             _progressService = progressService;
-            _gameFactory = gameFactory;
             _watchService = watchService;
         }
 
         public void SaveProgress()
         {
-            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
-                progressWriter.UpdateProgress(_progressService.Progress);
-
+            _progressService.UpdateWriters();
             _watchService.UpdateProgress();
-
-            string saveData = _progressService.Progress.ToJson();
-
-            SaveLocal(saveData);
+            Save(_progressService.Progress);
 
             Debug.Log("Save progress");
+        }
 
-#if !UNITY_EDITOR && YANDEX_GAMES
-            if (PlayerAccount.IsAuthorized)
-            {
-                SaveCloud(saveData);
-            }
+#pragma warning disable CS1998
+        public async UniTask ActualizeProgress()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            PlayerProgress actualProgress = await GetActualSaveData();
+            _progressService.Progress = actualProgress;
 #endif
         }
 
         private bool IsSavesEmpty(string saveData) =>
             string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
+
+#pragma warning disable CS1998
+        public async UniTask<PlayerProgress> LoadProgress()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            if (PlayerAccount.IsAuthorized)
+                return await GetActualSaveData();
+#endif
+            string saveData = LoadLocal();
+
+            return IsSavesEmpty(saveData)
+                ? null
+                : saveData.ToDeserialized<PlayerProgress>();
+        }
+
+        private void Save(PlayerProgress progress)
+        {
+            string saveData = progress.ToJson();
+
+            SaveLocal(saveData);
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+            if (PlayerAccount.IsAuthorized)
+                SaveCloud(saveData);
+#endif
+        }
 
         private void SaveLocal(string saveData)
         {
@@ -63,25 +85,10 @@ namespace CodeBase.Services.SaveLoad
         private string LoadLocal() =>
             PlayerPrefs.GetString(ProgressKey);
 
-#pragma warning disable CS1998
-        public async Task<PlayerProgress> LoadProgress()
-        {
-#if !UNITY_EDITOR && UNITY_WEBGL
-            if (PlayerAccount.IsAuthorized)
-            {
-                return await GetActualSaveData();
-            }
-#endif
-            string saveData = LoadLocal();
-
-            return IsSavesEmpty(saveData)
-                ? null
-                : saveData.ToDeserialized<PlayerProgress>();
-        }
 #pragma warning restore CS1998
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-        private async Task<PlayerProgress> GetActualSaveData()
+#if !UNITY_EDITOR && UNITY_WEBGL
+        private async UniTask<PlayerProgress> GetActualSaveData()
         {
             string cloudSaveData = await LoadCloud();
             string localSaveData = LoadLocal();
@@ -90,38 +97,29 @@ namespace CodeBase.Services.SaveLoad
             bool isLocalSaveEmpty = IsSavesEmpty(localSaveData);
 
             if (isCloudSaveEmpty && isLocalSaveEmpty)
-            {
                 return null;
-            }
 
             if (isCloudSaveEmpty)
-            {
                 return localSaveData.ToDeserialized<PlayerProgress>();
-            }
 
             if (isLocalSaveEmpty)
-            {
                 return cloudSaveData.ToDeserialized<PlayerProgress>();
-            }
 
             PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
             PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
 
-            return cloudProgress.Relevance > localProgress.Relevance
-                ? cloudProgress
-                : localProgress;
+            return MergeSaves(localProgress, cloudProgress);
         }
 
         private void SaveCloud(string saveData)
         {
             PlayerAccount.SetCloudSaveData(saveData,
                 () => Debug.Log("Cloud saved successfully"),
-                error => Debug.Log($"Cloud save error: {error}"));
+                error => Debug.LogError($"Cloud save error: {error}"));
         }
 
-        private async Task<string> LoadCloud()
+        private async UniTask<string> LoadCloud()
         {
-            bool isError = false;
             bool isLoading = true;
             string saveData = null;
 
@@ -134,18 +132,44 @@ namespace CodeBase.Services.SaveLoad
                 },
                 error =>
                 {
-                    Debug.Log($"Cloud load error: {error}");
-                    isError = true;
+                    Debug.LogError($"Cloud load error: {error}");
                     isLoading = false;
                 });
 
             while (isLoading)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
-            return isError ? null : saveData;
+            return saveData;
         }
 #endif
+
+        [UsedImplicitly]
+        private PlayerProgress MergeSaves(PlayerProgress prioritized, PlayerProgress secondary)
+        {
+            int largestLevelIndex = Mathf.Max(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
+            int lowestLevelIndexOfBoth = Mathf.Min(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
+
+            LevelData[] mergedLevelsData = new LevelData[largestLevelIndex];
+
+            for (int index = 0; index <= lowestLevelIndexOfBoth; index++)
+            {
+                if (prioritized.GlobalData.Levels[index].Score > secondary.GlobalData.Levels[index].Score)
+                {
+                    mergedLevelsData[index] = prioritized.GlobalData.Levels[index];
+                }
+                else
+                {
+                    mergedLevelsData[index] = secondary.GlobalData.Levels[index];
+                }
+            }
+
+            PlayerProgress actualProgress = prioritized.Relevance > secondary.Relevance ? prioritized : secondary;
+
+            for (int index = lowestLevelIndexOfBoth + 1; index <= largestLevelIndex; index++)
+                mergedLevelsData[index] = actualProgress.GlobalData.Levels[index];
+
+            prioritized.GlobalData.Levels = mergedLevelsData.ToList();
+            return prioritized;
+        }
     }
 }

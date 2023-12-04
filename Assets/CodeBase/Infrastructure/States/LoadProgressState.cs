@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -45,7 +45,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit() { }
 
-        private async Task LoadProgressOrInitNew()
+        private async UniTask LoadProgressOrInitNew()
         {
             _progressService.Progress =
                 await _saveLoadProgress.LoadProgress()

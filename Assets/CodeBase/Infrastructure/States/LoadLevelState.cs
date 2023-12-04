@@ -22,7 +22,6 @@ using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
-using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData;
@@ -50,7 +49,6 @@ namespace CodeBase.Infrastructure.States
         private readonly ISaveLoadService _saveLoadService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
-        private readonly IScoreService _scoreService;
         private readonly IWatchService _watchService;
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
@@ -65,7 +63,7 @@ namespace CodeBase.Infrastructure.States
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IScoreService scoreService, IWatchService watchService, IPauseService pauseService,
+            ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService,
             ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
         {
             _adService = adService;
@@ -78,7 +76,6 @@ namespace CodeBase.Infrastructure.States
             _saveLoadService = saveLoadService;
             _staticData = staticDataService;
             _levelBuilder = levelBuilder;
-            _scoreService = scoreService;
             _watchService = watchService;
             _pauseService = pauseService;
             _cameraOperatorService = cameraOperatorService;
@@ -148,9 +145,7 @@ namespace CodeBase.Infrastructure.States
 
         private void InformProgressReaders()
         {
-            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
-                progressReader.LoadProgress(_progressService.Progress);
-
+            _progressService.InformReaders();
             _watchService.LoadProgress();
         }
 
