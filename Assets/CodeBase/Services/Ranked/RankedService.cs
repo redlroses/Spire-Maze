@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Leaderboards;
 using CodeBase.Services.StaticData;
+using Cysharp.Threading.Tasks;
 using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.Ranked
@@ -35,19 +35,17 @@ namespace CodeBase.Services.Ranked
 #endif
         }
 
-        public async Task<bool> Authorize() =>
+        public async UniTask<bool> Authorize() =>
             await _leaderboard.TryAuthorize();
 
-        public async Task<bool> RequestPersonalData() =>
+        public async UniTask<bool> RequestPersonalData() =>
             await _leaderboard.TryRequestPersonalData();
 
-        public Task<RanksData> GetRanksData() =>
+        public UniTask<RanksData> GetRanksData() =>
             _leaderboard.GetRanksData();
 
-        public void SetScore(int score, string avatarName = "Test1")
-        {
+        public void SetScore(int score, string avatarName = "Test1") =>
             _leaderboard.SetScore(score, avatarName);
-        }
 
 
         [Conditional("UNITY_EDITOR")]

@@ -3,7 +3,6 @@ using System.Collections;
 using Agava.YandexGames;
 using CodeBase.Infrastructure;
 using System.Diagnostics;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace CodeBase.SDK
@@ -16,22 +15,18 @@ namespace CodeBase.SDK
             PlayerAccount.AuthorizedInBackground += OnAuthorizedInBackground;
         }
 
-        public void Start(ICoroutineRunner coroutineRunner, Action onReadyCallback)
-        {
+        public void Start(ICoroutineRunner coroutineRunner, Action onReadyCallback) =>
             coroutineRunner.StartCoroutine(Initialize(onReadyCallback));
-        }
 
-        public void Start(ICoroutineRunner coroutineRunner)
-        {
+        public void Start(ICoroutineRunner coroutineRunner) =>
             coroutineRunner.StartCoroutine(Initialize(null));
-        }
 
         private IEnumerator Initialize(Action onReadyCallback)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
-#if !UNITY_WEBGL || UNITY_EDITOR
+#if UNITY_WEBGL && UNITY_EDITOR
             onReadyCallback?.Invoke();
             yield break;
 #endif
@@ -43,14 +38,10 @@ namespace CodeBase.SDK
             Debug.Log($"Initialize time: {stopWatch.ElapsedMilliseconds}, ticks: {stopWatch.ElapsedTicks}");
         }
 
-        private void OnAuthorizedInBackground()
-        {
+        private void OnAuthorizedInBackground() =>
             Debug.Log($"{nameof(OnAuthorizedInBackground)} {PlayerAccount.IsAuthorized}");
-        }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             PlayerAccount.AuthorizedInBackground -= OnAuthorizedInBackground;
-        }
     }
 }

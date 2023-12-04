@@ -1,13 +1,13 @@
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_WEBGL && UNITY_EDITOR
 using Agava.YandexGames;
 using Debug = UnityEngine.Debug;
 #endif
-using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Watch;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using PlayerPrefs = UnityEngine.PlayerPrefs;
 
@@ -45,9 +45,7 @@ namespace CodeBase.Services.SaveLoad
 
 #if !UNITY_EDITOR && YANDEX_GAMES
             if (PlayerAccount.IsAuthorized)
-            {
                 SaveCloud(saveData);
-            }
 #endif
         }
 
@@ -64,13 +62,11 @@ namespace CodeBase.Services.SaveLoad
             PlayerPrefs.GetString(ProgressKey);
 
 #pragma warning disable CS1998
-        public async Task<PlayerProgress> LoadProgress()
+        public async UniTask<PlayerProgress> LoadProgress()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
             if (PlayerAccount.IsAuthorized)
-            {
                 return await GetActualSaveData();
-            }
 #endif
             string saveData = LoadLocal();
 
@@ -80,8 +76,8 @@ namespace CodeBase.Services.SaveLoad
         }
 #pragma warning restore CS1998
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-        private async Task<PlayerProgress> GetActualSaveData()
+#if !UNITY_WEBGL && UNITY_EDITOR
+        private async UniTask<PlayerProgress> GetActualSaveData()
         {
             string cloudSaveData = await LoadCloud();
             string localSaveData = LoadLocal();
@@ -90,19 +86,13 @@ namespace CodeBase.Services.SaveLoad
             bool isLocalSaveEmpty = IsSavesEmpty(localSaveData);
 
             if (isCloudSaveEmpty && isLocalSaveEmpty)
-            {
                 return null;
-            }
 
             if (isCloudSaveEmpty)
-            {
                 return localSaveData.ToDeserialized<PlayerProgress>();
-            }
 
             if (isLocalSaveEmpty)
-            {
                 return cloudSaveData.ToDeserialized<PlayerProgress>();
-            }
 
             PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
             PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
@@ -116,10 +106,10 @@ namespace CodeBase.Services.SaveLoad
         {
             PlayerAccount.SetCloudSaveData(saveData,
                 () => Debug.Log("Cloud saved successfully"),
-                error => Debug.Log($"Cloud save error: {error}"));
+                error => Debug.LogError($"Cloud save error: {error}"));
         }
 
-        private async Task<string> LoadCloud()
+        private async UniTask<string> LoadCloud()
         {
             bool isError = false;
             bool isLoading = true;
@@ -134,15 +124,13 @@ namespace CodeBase.Services.SaveLoad
                 },
                 error =>
                 {
-                    Debug.Log($"Cloud load error: {error}");
+                    Debug.LogError($"Cloud load error: {error}");
                     isError = true;
                     isLoading = false;
                 });
 
             while (isLoading)
-            {
-                await Task.Yield();
-            }
+                await UniTask.Yield();
 
             return isError ? null : saveData;
         }

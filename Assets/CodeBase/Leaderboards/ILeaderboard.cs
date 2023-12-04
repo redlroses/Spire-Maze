@@ -1,14 +1,14 @@
-using System.Threading.Tasks;
 using CodeBase.Data;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Leaderboards
 {
     public interface ILeaderboard
     {
-        Task<RanksData> GetRanksData();
-        Task SetScore(int score, string avatarName);
+        UniTask<RanksData> GetRanksData();
+        UniTask SetScore(int score, string avatarName);
         bool IsAuthorized { get; }
-        Task<bool> TryAuthorize();
-        Task<bool> TryRequestPersonalData();
+        UniTask<bool> TryAuthorize();
+        UniTask<bool> TryRequestPersonalData();
     }
 }

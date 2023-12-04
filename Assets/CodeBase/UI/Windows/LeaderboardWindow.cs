@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.DelayRoutines;
 using CodeBase.Logic;
 using CodeBase.Services.Ranked;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Factory;
+using Cysharp.Threading.Tasks;
 using NTC.Global.System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,9 +47,7 @@ namespace CodeBase.UI.Windows
                 _authorizeButton.onClick.AddListener(OnClickAuthorized);
 
                 while (_rankedService.IsAuthorized == false)
-                {
-                    await Task.Yield();
-                }
+                    await UniTask.Yield();
 
                 await _rankedService.RequestPersonalData();
             }
@@ -64,9 +61,7 @@ namespace CodeBase.UI.Windows
             SpawnCompetingRanks(ranksData.AroundRanks);
 
             if (_hasMyRankAtTop == false)
-            {
                 SpawnRank(CreateCompetingRankView, ranksData.SelfRank);
-            }
         }
 
         private void OnClickAuthorized()
@@ -78,16 +73,15 @@ namespace CodeBase.UI.Windows
         private void SpawnCompetingRanks(SingleRankData[] aroundRanks)
         {
             for (int i = 0; i < aroundRanks.Length; i++)
-            {
                 SpawnRank(CreateCompetingRankView, aroundRanks[i]);
-            }
         }
 
         private void SpawnTopRanks(SingleRankData[] topThreeRanks)
         {
             for (int i = 0; i < topThreeRanks.Length; i++)
             {
-                SpawnRank(() => CreateTopRankView(i), topThreeRanks[i]);
+                int index = i;
+                SpawnRank(() => CreateTopRankView(index), topThreeRanks[index]);
             }
         }
 
