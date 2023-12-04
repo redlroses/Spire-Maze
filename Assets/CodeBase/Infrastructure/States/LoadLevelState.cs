@@ -91,6 +91,7 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Show();
             _loadPayload = payload;
+            _watchService.Cleanup();
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();

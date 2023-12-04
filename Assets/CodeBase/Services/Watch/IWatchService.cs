@@ -1,5 +1,4 @@
 ﻿using System;
-using CodeBase.Services.Pause;
 
 namespace CodeBase.Services.Watch
 {
@@ -9,6 +8,7 @@ namespace CodeBase.Services.Watch
         float ElapsedTime { get; }
         int ElapsedSeconds { get; }
         void Start();
+        void Stop();
         void Cleanup();
         void LoadProgress();
         void UpdateProgress();

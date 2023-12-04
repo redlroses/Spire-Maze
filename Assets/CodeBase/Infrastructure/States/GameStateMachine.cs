@@ -51,8 +51,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>(),
                     services.Single<ISoundService>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(), services.Single<IInputService>(),
+                [typeof(GameLoopState)] = new GameLoopState(services.Single<IInputService>(),
                     services.Single<IWatchService>()),
                 [typeof(FinishState)] = new FinishState(
                     services.Single<IWindowService>(),

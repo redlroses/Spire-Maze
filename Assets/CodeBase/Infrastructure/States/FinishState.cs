@@ -6,6 +6,7 @@ using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Windows;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -38,12 +39,13 @@ namespace CodeBase.Infrastructure.States
             _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
         }
 
+        public void Exit() { }
+
         private void CountPlayTime()
         {
             _progressService.TemporalProgress.PlayTime = _watchService.ElapsedSeconds;
+            Debug.Log("Play time: " + _progressService.TemporalProgress.PlayTime);
         }
-
-        public void Exit() { }
 
         private void CountLevelScore(bool isLose) =>
             _scoreService.Calculate(isLose);

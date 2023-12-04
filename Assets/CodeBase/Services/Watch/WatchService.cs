@@ -16,7 +16,7 @@ namespace CodeBase.Services.Watch
             _progressService = progressService;
 
             _watchRoutine = new RoutineSequence()
-                .WaitWhile(Tick)
+                .WaitWhile(SecondTick)
                 .Then(() => SecondTicked.Invoke(ElapsedSeconds))
                 .LoopWhile(true);
         }
@@ -29,8 +29,14 @@ namespace CodeBase.Services.Watch
         public void Start() =>
             _watchRoutine.Play();
 
-        public void Cleanup() =>
+        public void Stop() =>
+            _watchRoutine.Stop();
+
+        public void Cleanup()
+        {
             ResetWatch();
+            Stop();
+        }
 
         public void LoadProgress()
         {
@@ -52,10 +58,9 @@ namespace CodeBase.Services.Watch
         {
             ElapsedTime = 0;
             ElapsedSeconds = 0;
-            _watchRoutine.Stop();
         }
 
-        private bool Tick()
+        private bool SecondTick()
         {
             ElapsedTime += Time.deltaTime;
 
