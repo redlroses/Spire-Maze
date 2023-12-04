@@ -8212,7 +8212,7 @@ MonoBehaviour:
     _underlyingValue: {fileID: 4458447923228386771}
   _stopEffectStateObserver: {fileID: 198151582450111807}
   _fragmentsLifetimeTimer: {fileID: 9132919717544923177}
-  _rayDistance: 1.1
+  _rayDistance: 1.15
   _ground:
     serializedVersion: 2
     m_Bits: 8
@@ -8273,8 +8273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b54d9a22965aab41b76ad636fc5effa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
-  _rotateSpeed: 2
+  _speed: 2.8
+  _rotateSpeed: 2.8
   _rigidbody: {fileID: 2976654156250728952}
 --- !u!114 &388280844768047219
 MonoBehaviour:
