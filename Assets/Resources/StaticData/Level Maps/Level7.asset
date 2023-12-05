@@ -140,7 +140,7 @@ MonoBehaviour:
   - rid: 483409710225293430
   - rid: 483409756607741997
   - rid: 483409710225293432
-  - rid: 6961350172272754690
+  - rid: 6961350172272754705
   - rid: 483409756607742129
   - rid: 483409756607742060
   - rid: 483409756607742054
@@ -1086,10 +1086,6 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
         IsDirectionToRight: 0
-    - rid: 6961350172272754690
-      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 6961350172272754698
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -1112,3 +1108,7 @@ MonoBehaviour:
       data:
         Texture: {fileID: 0}
         IsDirectionToRight: 0
+    - rid: 6961350172272754705
+      type: {class: Savepoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
