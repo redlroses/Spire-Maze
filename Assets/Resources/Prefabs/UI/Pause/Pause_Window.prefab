@@ -350,7 +350,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.9
+  m_fontSize: 38
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -599,8 +599,8 @@ RectTransform:
   - {fileID: 8333168727858935455}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.046510354, y: 0.084786534}
-  m_AnchorMax: {x: 0.25581563, y: 1.0725868}
+  m_AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+  m_AnchorMax: {x: 0.3023255, y: 0.9878003}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -630,22 +630,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -628.38934, y: 16.957184, z: 0}
+    - LocalPosition: {x: -294.76764, y: -1.2200394, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.023255153, y: 0.04849267}
-      AnchorMax: {x: 0.27907073, y: 1.0362933}
+      AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+      AnchorMax: {x: 0.3023255, y: 0.9878003}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -106.67561, y: 5.1395836, z: 0}
+    - LocalPosition: {x: -279.06995, y: -1.2200394, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.046510354, y: 0.084786534}
-      AnchorMax: {x: 0.25581563, y: 1.0725868}
+      AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+      AnchorMax: {x: 0.3023255, y: 0.9878003}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf511209ead75448bda470f26a3ea37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRelativeLocations: 1
+  useRelativeLocations: 0
   locations:
   - name: Pressed
     transformFallback:
@@ -898,26 +898,26 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333191, y: 1.2992249, z: 0}
+      - LocalPosition: {x: -294.76764, y: -1.2200394, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: -0, y: 0, z: 0}
-        saveRotationAsEuler: 1
-        screenConfigName: Landscape
-      - LocalPosition: {x: -3.333191, y: 1.2992325, z: 0}
-        AnchoredPosition: {x: 0, y: 0}
-        SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: 0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -279.06995, y: -1.2200394, z: 0}
+        AnchoredPosition: {x: 0, y: 0}
+        SizeDelta: {x: 0, y: 0}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Hovered
@@ -935,26 +935,26 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.3332214, y: 1.2884979, z: 0}
+      - LocalPosition: {x: -294.76764, y: -1.2200394, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539287}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: -0, y: 0, z: 0}
-        saveRotationAsEuler: 1
-        screenConfigName: Landscape
-      - LocalPosition: {x: -3.3332214, y: 1.2885056, z: 0}
-        AnchoredPosition: {x: 0, y: 0}
-        SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539287}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: 0, y: 0, z: 0}
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -279.06995, y: -1.2200394, z: 0}
+        AnchoredPosition: {x: 0, y: 0}
+        SizeDelta: {x: 0, y: 0}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Normal
@@ -972,27 +972,27 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333252, y: 1.2884979, z: 0}
+      - LocalPosition: {x: -294.76764, y: -1.2200394, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.0060489774}
-        AnchorMax: {x: -0.0038758516, y: 0.0060489774}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: -0, y: 0, z: 0}
-        saveRotationAsEuler: 1
-        screenConfigName: Landscape
-      - LocalPosition: {x: -3.333252, y: 1.2885056, z: 0}
-        AnchoredPosition: {x: 0, y: 0}
-        SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.0060489774}
-        AnchorMax: {x: -0.0038758516, y: 0.0060489774}
-        Pivot: {x: 0, y: 0}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
         Scale: {x: 1, y: 1, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: 0, y: 0, z: 0}
-        saveRotationAsEuler: 0
+        saveRotationAsEuler: 1
+        screenConfigName: Landscape
+      - LocalPosition: {x: -279.06995, y: -1.2200394, z: 0}
+        AnchoredPosition: {x: 0, y: 0}
+        SizeDelta: {x: 0, y: 0}
+        AnchorMin: {x: -0.00000036115478, y: -0.00000071525574}
+        AnchorMax: {x: 0.3023255, y: 0.9878003}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1, y: 1, z: 1}
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
         screenConfigName: Portrate
   animations:
   - name: Press
@@ -1110,7 +1110,7 @@ MonoBehaviour:
     animateWithEulerRotation: 0
     timeScale: 10
   startLocation: Normal
-  startUpAnimation: 
+  startUpAnimation: Normal
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
@@ -2089,8 +2089,8 @@ RectTransform:
   - {fileID: 8333168729114264082}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6666675, y: 0.04859197}
-  m_AnchorMax: {x: 0.9689932, y: 1.036092}
+  m_AnchorMin: {x: 0.69767475, y: 0.006250143}
+  m_AnchorMax: {x: 1.0000002, y: 0.99375033}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2120,22 +2120,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: 286.667, y: 3.865364, z: 0}
+    - LocalPosition: {x: 294.76767, y: 0.000045776367, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.6821709, y: 0.0243963}
-      AnchorMax: {x: 0.9844966, y: 1.0118964}
+      AnchorMin: {x: 0.69767475, y: 0.006250143}
+      AnchorMax: {x: 1.0000002, y: 0.99375033}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 85.759384, y: 2.7656574, z: 0}
+    - LocalPosition: {x: 279.06998, y: 0.000045776367, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.6666675, y: 0.04859197}
-      AnchorMax: {x: 0.9689932, y: 1.036092}
+      AnchorMin: {x: 0.69767475, y: 0.006250143}
+      AnchorMax: {x: 1.0000002, y: 0.99375033}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2371,7 +2371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf511209ead75448bda470f26a3ea37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRelativeLocations: 1
+  useRelativeLocations: 0
   locations:
   - name: Pressed
     transformFallback:
@@ -2388,27 +2388,27 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333191, y: 1.2992249, z: 0}
+      - LocalPosition: {x: 294.76767, y: 0.000045776367, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 0
+        screenConfigName: Landscape
+      - LocalPosition: {x: 279.06998, y: 0.000045776367, z: 0}
+        AnchoredPosition: {x: 0, y: 0}
+        SizeDelta: {x: 0, y: 0}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
-        screenConfigName: Landscape
-      - LocalPosition: {x: -3.333191, y: 1.3045502, z: 0}
-        AnchoredPosition: {x: 0, y: 0}
-        SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
-        saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Hovered
     transformFallback:
@@ -2425,27 +2425,27 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.3332214, y: 1.2884979, z: 0}
+      - LocalPosition: {x: 294.76767, y: 0.000045776367, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539287}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 0
+        screenConfigName: Landscape
+      - LocalPosition: {x: 279.06998, y: 0.000045776367, z: 0}
+        AnchoredPosition: {x: 0, y: 0}
+        SizeDelta: {x: 0, y: 0}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
-        screenConfigName: Landscape
-      - LocalPosition: {x: -3.333191, y: 1.2938156, z: 0}
-        AnchoredPosition: {x: 0, y: 0}
-        SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539347}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
-        saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Normal
     transformFallback:
@@ -2462,27 +2462,27 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333252, y: 1.2884979, z: 0}
+      - LocalPosition: {x: 294.76767, y: 0.000045776367, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.0060489774}
-        AnchorMax: {x: -0.0038758516, y: 0.0060489774}
-        Pivot: {x: 0, y: 0}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
         Scale: {x: 1, y: 1, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
         screenConfigName: Landscape
-      - LocalPosition: {x: -3.333191, y: 1.2938004, z: 0}
+      - LocalPosition: {x: 279.06998, y: 0.000045776367, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.006048918}
-        AnchorMax: {x: -0.0038758516, y: 0.006048918}
-        Pivot: {x: 0, y: 0}
+        AnchorMin: {x: 0.69767475, y: 0.006250143}
+        AnchorMax: {x: 1.0000002, y: 0.99375033}
+        Pivot: {x: 0.5, y: 0.5}
         Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
-        saveRotationAsEuler: 0
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
         screenConfigName: Portrate
   animations:
   - name: Press
@@ -2600,7 +2600,7 @@ MonoBehaviour:
     animateWithEulerRotation: 0
     timeScale: 10
   startLocation: Normal
-  startUpAnimation: 
+  startUpAnimation: Normal
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
@@ -2934,7 +2934,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.85
+  m_fontSize: 38
   m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3219,7 +3219,7 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -0.12382507, y: -0.4094181, z: 0}
+    - LocalPosition: {x: -0.20507812, y: -0.97717285, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.38163054, y: -0.005354166}
@@ -3503,7 +3503,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8333168729350557411}
-  - component: {fileID: 8333168729350557415}
   - component: {fileID: 7587794969400898533}
   m_Layer: 5
   m_Name: Group_Buttons
@@ -3529,59 +3528,11 @@ RectTransform:
   - {fileID: 8333168729052162514}
   m_Father: {fileID: 8333168728619040858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5046875, y: 0.4076958}
-  m_AnchorMax: {x: 0.5046875, y: 0.4076958}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8333168729350557415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8333168729350557408}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f894b1af86f7ac641a0678423226d182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformFallback:
-    LocalPosition: {x: -0.000030517578, y: -55.598824, z: 0}
-    AnchoredPosition: {x: 0, y: 0}
-    SizeDelta: {x: 0, y: 0}
-    AnchorMin: {x: 0.2760417, y: 0.18827176}
-    AnchorMax: {x: 0.7239583, y: 0.59789383}
-    Pivot: {x: 0.5, y: 0.5}
-    Scale: {x: 1, y: 1, z: 1}
-    rotation: {x: -0, y: -0, z: -0, w: 1}
-    EulerAngles: {x: -0, y: 0, z: 0}
-    saveRotationAsEuler: 0
-    screenConfigName: 
-  transformConfigs:
-    items:
-    - LocalPosition: {x: 0.000015258789, y: -46.589752, z: 0}
-      AnchoredPosition: {x: 0, y: 0}
-      SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.2760417, y: 0.18827176}
-      AnchorMax: {x: 0.7239583, y: 0.59789383}
-      Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
-      EulerAngles: {x: -0, y: 0, z: 0}
-      saveRotationAsEuler: 0
-      screenConfigName: Landscape
-    - LocalPosition: {x: 0, y: -23.292152, z: 0}
-      AnchoredPosition: {x: 0, y: 0}
-      SizeDelta: {x: -2.1, y: 7.9}
-      AnchorMin: {x: 0.10185187, y: 0.1882664}
-      AnchorMax: {x: 0.8981481, y: 0.5979147}
-      Pivot: {x: 0.5, y: 0.5}
-      Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
-      EulerAngles: {x: -0, y: 0, z: 0}
-      saveRotationAsEuler: 0
-      screenConfigName: Portrate
 --- !u!114 &7587794969400898533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,13 +3553,13 @@ MonoBehaviour:
     screenConfigName: 
   customSettings:
     items:
-    - applyPosX: 0
-      applyPosY: 0
+    - applyPosX: 1
+      applyPosY: 1
       applySizeX: 1
       applySizeY: 1
       screenConfigName: Landscape
-    - applyPosX: 0
-      applyPosY: 0
+    - applyPosX: 1
+      applyPosY: 1
       applySizeX: 1
       applySizeY: 1
       screenConfigName: Portrate
@@ -3626,8 +3577,8 @@ MonoBehaviour:
         Impact: 1
   customAnchorPosXSizers:
     items:
-    - screenConfigName: Portrate
-      OptimizedSize: 100
+    - screenConfigName: Landscape
+      OptimizedSize: 0
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3637,8 +3588,8 @@ MonoBehaviour:
         SizeModifiers:
         - Mode: 0
           Impact: 1
-    - screenConfigName: Landscape
-      OptimizedSize: 100
+    - screenConfigName: Portrate
+      OptimizedSize: 0
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3662,8 +3613,8 @@ MonoBehaviour:
         Impact: 1
   customAnchorPosYSizers:
     items:
-    - screenConfigName: Portrate
-      OptimizedSize: 100
+    - screenConfigName: Landscape
+      OptimizedSize: -55
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3673,8 +3624,8 @@ MonoBehaviour:
         SizeModifiers:
         - Mode: 0
           Impact: 1
-    - screenConfigName: Landscape
-      OptimizedSize: 100
+    - screenConfigName: Portrate
+      OptimizedSize: -40
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3699,7 +3650,7 @@ MonoBehaviour:
   customSizeDeltaXSizers:
     items:
     - screenConfigName: Landscape
-      OptimizedSize: 844.4
+      OptimizedSize: 845
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3710,7 +3661,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 803.9
+      OptimizedSize: 800
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3748,7 +3699,7 @@ MonoBehaviour:
         - Mode: 0
           Impact: 1
     - screenConfigName: Portrate
-      OptimizedSize: 194.6
+      OptimizedSize: 200
       MinSize: 0
       MaxSize: 1000
       UseMinSize: 0
@@ -3800,8 +3751,8 @@ RectTransform:
   - {fileID: 8333168728494775312}
   m_Father: {fileID: 8333168729350557411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.325582, y: 0.042543054}
-  m_AnchorMax: {x: 0.6279078, y: 1.0300431}
+  m_AnchorMin: {x: 0.34883752, y: 0.012498021}
+  m_AnchorMax: {x: 0.6511632, y: 0.99999815}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3831,22 +3782,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -16.363815, y: 6.0488358, z: 0}
+    - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.32945788, y: 0.036494136}
-      AnchorMax: {x: 0.63178366, y: 1.0239942}
+      AnchorMin: {x: 0.34883752, y: 0.012498021}
+      AnchorMax: {x: 0.6511632, y: 0.99999815}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -18.694763, y: 7.0626297, z: 0}
+    - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.325582, y: 0.042543054}
-      AnchorMax: {x: 0.6279078, y: 1.0300431}
+      AnchorMin: {x: 0.34883752, y: 0.012498021}
+      AnchorMax: {x: 0.6511632, y: 0.99999815}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4082,7 +4033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf511209ead75448bda470f26a3ea37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRelativeLocations: 1
+  useRelativeLocations: 0
   locations:
   - name: Pressed
     transformFallback:
@@ -4099,26 +4050,26 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333191, y: 1.2992249, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
         screenConfigName: Landscape
-      - LocalPosition: {x: -3.3331757, y: 1.3045502, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: 0.0019381049, y: 0.029539227}
-        AnchorMax: {x: -0.009689748, y: -0.017340481}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 0.95, y: 0.95, z: 1}
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Hovered
@@ -4136,26 +4087,26 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.3332214, y: 1.2884979, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539287}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
         screenConfigName: Landscape
-      - LocalPosition: {x: -3.333191, y: 1.2938156, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.009689839, y: -0.017441332}
-        AnchorMax: {x: 0.0019381344, y: 0.029539347}
-        Pivot: {x: 0, y: 0}
-        Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
+        Scale: {x: 1.05, y: 1.05, z: 1}
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 0
         screenConfigName: Portrate
   - name: Normal
@@ -4173,27 +4124,27 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items:
-      - LocalPosition: {x: -3.333252, y: 1.2884979, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.0060489774}
-        AnchorMax: {x: -0.0038758516, y: 0.0060489774}
-        Pivot: {x: 0, y: 0}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
         Scale: {x: 1, y: 1, z: 1}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         EulerAngles: {x: -0, y: 0, z: 0}
         saveRotationAsEuler: 1
         screenConfigName: Landscape
-      - LocalPosition: {x: -3.3332062, y: 1.2938004, z: 0}
+      - LocalPosition: {x: 0.00030517578, y: 1.2496185, z: 0}
         AnchoredPosition: {x: 0, y: 0}
         SizeDelta: {x: 0, y: 0}
-        AnchorMin: {x: -0.003875867, y: 0.006048918}
-        AnchorMax: {x: -0.0038758516, y: 0.006048918}
-        Pivot: {x: 0, y: 0}
+        AnchorMin: {x: 0.34883752, y: 0.012498021}
+        AnchorMax: {x: 0.6511632, y: 0.99999815}
+        Pivot: {x: 0.5, y: 0.5}
         Scale: {x: 1, y: 1, z: 1}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        EulerAngles: {x: 0, y: 0, z: 0}
-        saveRotationAsEuler: 0
+        rotation: {x: -0, y: -0, z: -0, w: 1}
+        EulerAngles: {x: -0, y: 0, z: 0}
+        saveRotationAsEuler: 1
         screenConfigName: Portrate
   animations:
   - name: Press
@@ -4311,7 +4262,7 @@ MonoBehaviour:
     animateWithEulerRotation: 0
     timeScale: 10
   startLocation: Normal
-  startUpAnimation: 
+  startUpAnimation: Normal
   actionOnInit:
     m_PersistentCalls:
       m_Calls: []
@@ -4328,7 +4279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 8333168729389988952}
-  _isClearLoad: 1
+  _isResetProgressAfterRestart: 1
 --- !u!114 &6029881085748120230
 MonoBehaviour:
   m_ObjectHideFlags: 0
