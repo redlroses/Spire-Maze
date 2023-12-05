@@ -2320,8 +2320,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5136601264195042547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.08776042, y: 0.25601852}
-  m_AnchorMax: {x: 0.14765625, y: 0.3625}
+  m_AnchorMin: {x: 0.08125, y: 0.24444443}
+  m_AnchorMax: {x: 0.15416667, y: 0.3740741}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.49999976}
@@ -2354,8 +2354,8 @@ MonoBehaviour:
     - LocalPosition: {x: -734, y: -206.00003, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.08776042, y: 0.25601852}
-      AnchorMax: {x: 0.14765625, y: 0.3625}
+      AnchorMin: {x: 0.08125, y: 0.24444443}
+      AnchorMax: {x: 0.15416667, y: 0.3740741}
       Pivot: {x: 0.5, y: 0.49999976}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2396,7 +2396,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.77647066, g: 0.6, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: -50, y: -50, z: -50, w: -50}
+  m_RaycastPadding: {x: -35, y: -35, z: -35, w: -35}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7831,7 +7831,7 @@ RectTransform:
   m_GameObject: {fileID: 6493223084918380544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4462525546855756070}
@@ -7841,8 +7841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 683, y: 384}
-  m_SizeDelta: {x: 1366, y: 768}
+  m_AnchoredPosition: {x: 540, y: 1080}
+  m_SizeDelta: {x: 1080, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508873457668492488
 MonoBehaviour:
@@ -7870,9 +7870,9 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -277, y: -156, z: 0}
-      AnchoredPosition: {x: 683, y: 384}
-      SizeDelta: {x: 1366, y: 768}
+    - LocalPosition: {x: 960, y: 540, z: 0}
+      AnchoredPosition: {x: 960, y: 540}
+      SizeDelta: {x: 1920, y: 1080}
       AnchorMin: {x: 0, y: 0}
       AnchorMax: {x: 0, y: 0}
       Pivot: {x: 0.5, y: 0.5}
@@ -7881,9 +7881,9 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 0, y: 0, z: 0}
-      AnchoredPosition: {x: 540, y: 1080}
-      SizeDelta: {x: 1080, y: 2160}
+    - LocalPosition: {x: 540, y: 960, z: 0}
+      AnchoredPosition: {x: 540, y: 960}
+      SizeDelta: {x: 1080, y: 1920}
       AnchorMin: {x: 0, y: 0}
       AnchorMax: {x: 0, y: 0}
       Pivot: {x: 0.5, y: 0.5}
@@ -9644,8 +9644,8 @@ RectTransform:
   - {fileID: 8908974201287124659}
   m_Father: {fileID: 5136601264195042547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.76145834, y: 0.08611113}
-  m_AnchorMax: {x: 0.94375, y: 0.41018516}
+  m_AnchorMin: {x: 0.7549479, y: 0.07453704}
+  m_AnchorMax: {x: 0.9502604, y: 0.42175925}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9675,22 +9675,22 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: 481.6573, y: -193.42221, z: 0}
+    - LocalPosition: {x: 677, y: -272, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.76145834, y: 0.08611113}
-      AnchorMax: {x: 0.94375, y: 0.41018516}
+      AnchorMin: {x: 0.7549479, y: 0.07453704}
+      AnchorMax: {x: 0.9502604, y: 0.42175925}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: -0, y: -0, z: -0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 282.3, y: -750.7, z: 0}
+    - LocalPosition: {x: 268.9442, y: -750.7001, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.5993518, y: 0.07143515}
-      AnchorMax: {x: 0.9234259, y: 0.23347223}
+      AnchorMin: {x: 0.56383723, y: 0.059861064}
+      AnchorMax: {x: 0.9342076, y: 0.24504626}
       Pivot: {x: 0.5, y: 0.5}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: -0, y: -0, z: -0, w: 1}
@@ -10321,8 +10321,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5136601264195042547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
-  m_AnchorMin: {x: 0.08776042, y: 0.064814806}
-  m_AnchorMax: {x: 0.14765625, y: 0.1712963}
+  m_AnchorMin: {x: 0.08125, y: 0.053240716}
+  m_AnchorMax: {x: 0.15416667, y: 0.18287039}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.50000006}
@@ -10355,20 +10355,20 @@ MonoBehaviour:
     - LocalPosition: {x: -734, y: -412.5, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: 0.08776042, y: 0.064814806}
-      AnchorMax: {x: 0.14765625, y: 0.1712963}
+      AnchorMin: {x: 0.08125, y: 0.053240716}
+      AnchorMax: {x: 0.15416667, y: 0.18287039}
       Pivot: {x: 0.5, y: 0.50000006}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 1, w: 0}
       EulerAngles: {x: -0, y: 0, z: 180}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: -375, y: -877.49994, z: 0}
+    - LocalPosition: {x: -375, y: -950.62494, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.08884657, y: 0.05778873}
       AnchorMax: {x: 0.21670899, y: 0.12971133}
-      Pivot: {x: 0.5, y: 0.49999976}
+      Pivot: {x: 0.5, y: 0.50000006}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 1, w: 0}
       EulerAngles: {x: -0, y: 0, z: 180}
@@ -10397,7 +10397,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.77647066, g: 0.6, b: 0.3254902, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: -50, y: -50, z: -50, w: -50}
+  m_RaycastPadding: {x: -25, y: -25, z: -25, w: -25}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10837,8 +10837,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onScreenStick: {fileID: 1367205445}
-  _rect: {fileID: 8908974201287124659}
+  _handler: {fileID: 8908974201287124659}
+  _rootCanvasScale: {fileID: 6493223084918380550}
   _defaultMovement: 150
+  _power: 0
 --- !u!1 &8895864880177107280
 GameObject:
   m_ObjectHideFlags: 0
