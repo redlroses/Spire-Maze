@@ -14,6 +14,7 @@ namespace CodeBase.Services.Input
         private readonly IWindowService _windowService;
 
         private MoveDirection _direction = MoveDirection.Left;
+        private float _readValue;
 
         public event Action<MoveDirection> HorizontalMove = _ => { };
         public event Action<Vector2> OverviewMove = _ => { };
@@ -73,7 +74,8 @@ namespace CodeBase.Services.Input
 
         private void OnMove(InputAction.CallbackContext context)
         {
-            int moveInput = Mathf.RoundToInt(context.ReadValue<float>());
+            float readValue = context.ReadValue<float>();
+            int moveInput = Mathf.CeilToInt(Mathf.Abs(readValue)) * (int) Mathf.Sign(readValue);
 
             if ((MoveDirection) moveInput != MoveDirection.Stop)
                 _direction = (MoveDirection) moveInput;

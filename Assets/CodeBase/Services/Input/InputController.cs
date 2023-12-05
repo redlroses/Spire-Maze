@@ -169,7 +169,7 @@ namespace CodeBase.Services.Input
                     ""id"": ""ee6fce78-1e91-470a-b138-f8f13dfa5c7e"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.1)"",
+                    ""processors"": ""AxisDeadzone(min=0.05)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
