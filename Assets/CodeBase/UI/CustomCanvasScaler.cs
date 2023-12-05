@@ -1,4 +1,7 @@
-﻿using CodeBase.Logic.Cameras;
+﻿#if !UNITY_EDITOR
+using Agava.WebUtility;
+#endif
+using CodeBase.Logic.Cameras;
 using TheraBytes.BetterUi;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +14,10 @@ namespace CodeBase.UI
         [SerializeField] private float _portraitFactor;
         [SerializeField] private CanvasScaler _canvasScaler;
 
+#if UNITY_EDITOR
+        [SerializeField] private bool _isDebugMobile;
+#endif
+
         private void OnEnable() =>
             Scale();
 
@@ -21,6 +28,14 @@ namespace CodeBase.UI
             _canvasScaler.scaleFactor = IsMobileLandscape() ? _landscapeFactor : _portraitFactor;
 
         private bool IsMobileLandscape() =>
-            Application.isMobilePlatform && ResolutionMonitor.CurrentScreenConfiguration.Name.Equals(Orientations.Portrate.ToString());
+            IsMobile() && ResolutionMonitor.CurrentScreenConfiguration.Name.Equals(Orientations.Landscape.ToString());
+
+#if !UNITY_EDITOR
+        private bool IsMobile() =>
+            Device.IsMobile;
+#else
+        private bool IsMobile() =>
+            _isDebugMobile;
+#endif
     }
 }
