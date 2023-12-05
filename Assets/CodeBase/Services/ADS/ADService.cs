@@ -9,7 +9,11 @@ namespace CodeBase.Services.ADS
 {
     public class ADService : IADService
     {
+#if UNITY_EDITOR
         private const int InterstitialAdCooldownSeconds = 5;
+#else
+        private const int InterstitialAdCooldownSeconds = 60;
+#endif
 
         private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;

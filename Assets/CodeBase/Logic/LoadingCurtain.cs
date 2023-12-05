@@ -10,7 +10,6 @@ namespace CodeBase.Logic
     {
         [SerializeField] private InterfaceReference<IShowHide> _showHide;
         [SerializeField] private SliderSetter _sliderSetter;
-        [SerializeField] private AnimationPlayer _loadingAnimation;
 
         private void Awake() =>
             DontDestroyOnLoad(this);
@@ -18,8 +17,6 @@ namespace CodeBase.Logic
         public void Show()
         {
             gameObject.Enable();
-            _loadingAnimation.gameObject.Enable();
-            _loadingAnimation.Play();
             _sliderSetter.gameObject.Enable();
             _sliderSetter.SetNormalizedValueImmediately(0);
             _showHide.Value.Show();
@@ -27,8 +24,6 @@ namespace CodeBase.Logic
 
         public void Hide()
         {
-            _loadingAnimation.gameObject.Disable();
-            _loadingAnimation.Stop();
             _sliderSetter.gameObject.Disable();
             _showHide.Value.Hide(() => gameObject.Disable());
         }

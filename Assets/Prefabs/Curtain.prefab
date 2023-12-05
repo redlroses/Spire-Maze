@@ -115,7 +115,6 @@ MonoBehaviour:
   _showHide:
     _underlyingValue: {fileID: -1828559807445339410}
   _sliderSetter: {fileID: 7619571470446946197}
-  _loadingAnimation: {fileID: 8394601991829691666}
 --- !u!114 &-1828559807445339410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +322,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -914,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220937589719310153, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 220937589719310155, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
