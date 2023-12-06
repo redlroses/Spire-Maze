@@ -11,8 +11,8 @@ namespace CodeBase.Logic
     {
         private const float FinalProgressLoadValue = 1f;
         private const int HideDelay = 1000;
-        private const float RotationSpeed = 4f;
-        private const int RotationDelay = 20;
+        private const float RotationSpeed = 5;
+        private const int RotationDelay = 10;
 
         [SerializeField] private InterfaceReference<IShowHide> _showHide;
         [SerializeField] private SliderSetter _sliderSetter;
@@ -36,21 +36,20 @@ namespace CodeBase.Logic
         public async void Hide()
         {
             await UniTask.Delay(HideDelay);
+            _loadingIcon.gameObject.Disable();
             _sliderSetter.gameObject.Disable();
             _showHide.Value.Hide(() => gameObject.Disable());
         }
 
-        private void UpdateLoadProgress(float progress)
-        {
+        private void UpdateLoadProgress(float progress) =>
             _sliderSetter.SetNormalizedValue(progress);
-        }
 
         private async void Rotate()
         {
             while (_loadingIcon.gameObject.activeInHierarchy)
             {
                 _loadingIcon.Rotate(0, 0, RotationSpeed);
-                await UniTask.Delay(RotationDelay, DelayType.Realtime, PlayerLoopTiming.TimeUpdate, destroyCancellationToken);
+                await UniTask.Delay(RotationDelay, DelayType.Realtime, PlayerLoopTiming.Update, destroyCancellationToken);
             }
         }
     }
