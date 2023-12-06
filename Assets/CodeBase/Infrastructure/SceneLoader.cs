@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using CodeBase.Logic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,14 +8,12 @@ namespace CodeBase.Infrastructure
     public class SceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
-        private readonly LoadingCurtain _loadingCurtain;
 
         private bool _isInitialized;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
+        public SceneLoader(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
-            _loadingCurtain = loadingCurtain;
         }
 
         public void Load(string name, Action onLoaded = null) =>
@@ -36,10 +33,7 @@ namespace CodeBase.Infrastructure
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)
-            {
-                _loadingCurtain.UpdateLoadProgress(waitNextScene.progress);
                 yield return null;
-            }
 
             onLoaded?.Invoke();
         }

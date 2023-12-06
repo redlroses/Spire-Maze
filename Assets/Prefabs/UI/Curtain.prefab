@@ -115,6 +115,7 @@ MonoBehaviour:
   _showHide:
     _underlyingValue: {fileID: -1828559807445339410}
   _sliderSetter: {fileID: 7619571470446946197}
+  _loadingIcon: {fileID: 724016884352094998}
 --- !u!114 &-1828559807445339410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,25 +130,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _from: 0
   _to: 1
-  _speed: 2
+  _speed: 1
   _modifyCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -402,7 +403,7 @@ MonoBehaviour:
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape
-    - LocalPosition: {x: 4.7628174, y: -221.99994, z: 0}
+    - LocalPosition: {x: 8.467224, y: -110.99997, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.112659596, y: 0.3740741}
@@ -571,7 +572,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!1 &2898302865435841407
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +647,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!1 &4609696893639163486
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -769,15 +770,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 220937589318930866, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8020836
+      value: 0.8020837
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.77623236
+      value: 0.7761301
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_AnchorMin.x
@@ -796,20 +797,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9370691
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.34914395
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -821,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 86.110916
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220937589719310152, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_Pivot.x
@@ -913,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220937589719310153, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 220937589719310155, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
@@ -968,7 +981,7 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: -0.4553299, y: 0.027374268, z: 0}
+    - LocalPosition: {x: -0.8094635, y: 0.013687134, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.418574, y: 0.37608677}
@@ -1006,6 +1019,11 @@ MonoBehaviour:
 --- !u!224 &724016884215963027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 220937589719310152, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
+  m_PrefabInstance: {fileID: 656632828386329307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &724016884352094998 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 220937589318930893, guid: faf2a0e07977f4bbf861f09ee48113e1, type: 3}
   m_PrefabInstance: {fileID: 656632828386329307}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &724016884352095081 stripped
@@ -1085,14 +1103,14 @@ MonoBehaviour:
     screenConfigName: 
   transformConfigs:
     items:
-    - LocalPosition: {x: 1.9073448, y: -1.0282173, z: 0}
+    - LocalPosition: {x: 3.0900726, y: -1.3106308, z: 0}
       AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
       AnchorMin: {x: 0.19791694, y: 0.22376764}
       AnchorMax: {x: 0.8020837, y: 0.7761301}
       Pivot: {x: 0.51644206, y: 0.4912285}
       Scale: {x: 1, y: 1, z: 1}
-      rotation: {x: -0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: -0, y: 0, z: 0}
       saveRotationAsEuler: 0
       screenConfigName: Landscape

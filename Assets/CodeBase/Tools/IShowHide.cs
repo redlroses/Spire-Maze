@@ -1,4 +1,6 @@
 namespace CodeBase.Tools
 {
-    public interface IShowHide : IShowable, IHidable { }
+    public interface IShowHide : IShowable, IHidable
+    {
+    }
 }

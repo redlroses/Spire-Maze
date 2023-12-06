@@ -16,13 +16,10 @@ namespace CodeBase.Logic.Hero
         public void Heal(int healPoints)
         {
             ValidateHeal(healPoints);
-
             int newPoints = CurrentPoints + healPoints;
 
             if (newPoints > MaxPoints)
-            {
                 newPoints = MaxPoints;
-            }
 
             int deltaPoints = newPoints - CurrentPoints;
             Healed.Invoke(deltaPoints);
@@ -41,20 +38,16 @@ namespace CodeBase.Logic.Hero
             progress.WorldData.HeroHealthState.MaxHP = MaxPoints;
         }
 
-        protected override void OnDamaged(int deltaPoints, DamageType damageType)
-        {
+        protected override void OnDamaged(int deltaPoints, DamageType damageType) =>
             Damaged.Invoke(deltaPoints, damageType);
-        }
 
-        protected override bool CanDamage() =>
-            !IsImmune;
+        protected override bool CanDamage(DamageType damageType) =>
+            !IsImmune && damageType != DamageType.Lethal;
 
         private void ValidateHeal(int points)
         {
             if (points <= 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(points), "Points must be non negative");
-            }
         }
     }
 }

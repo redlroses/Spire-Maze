@@ -3,6 +3,7 @@
     public enum DamageType
     {
         Burst,
-        Periodic
+        Periodic,
+        Lethal
     }
 }

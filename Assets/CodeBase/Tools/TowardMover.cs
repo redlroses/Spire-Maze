@@ -79,6 +79,7 @@ namespace CodeBase.Tools
             _begin = _from;
             _end = _to;
             _delta = 0;
+            _isForward = true;
         }
 
         public void Switch()

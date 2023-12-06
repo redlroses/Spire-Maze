@@ -7066,7 +7066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 2032772290945713816}
-  _speed: 110
+  _speed: 150
 --- !u!82 &7005160983042190141
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8106,7 +8106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8001022738760582169}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
@@ -9354,6 +9354,10 @@ PrefabInstance:
       propertyPath: _collider
       value: 
       objectReference: {fileID: 8339359207097360849}
+    - target: {fileID: 5986154761831275041, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
+      propertyPath: _isLethal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5986154761831275053, guid: 6c6ae2f06886e4848a90ecd8816f6985, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

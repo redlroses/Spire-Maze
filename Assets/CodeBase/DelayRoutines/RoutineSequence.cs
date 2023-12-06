@@ -136,6 +136,17 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
+        /// Waits until the condition is false.
+        /// </summary>
+        /// <param name="waitFor">Waiting func</param>
+        /// <returns>elf routine</returns>
+        public RoutineSequence WaitUntil(bool waitFor)
+        {
+            AddToSequence(new UntilAwaiter(() => waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+            return this;
+        }
+
+        /// <summary>
         /// Waits until the condition is met.
         /// </summary>
         /// <param name="waitFor">Waiting func</param>
@@ -143,6 +154,17 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence WaitUntil(Func<bool> waitFor)
         {
             AddToSequence(new UntilAwaiter(waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+            return this;
+        }
+
+        /// <summary>
+        /// Waits while the condition is true/
+        /// </summary>
+        /// <param name="waitFor">Waiting func</param>
+        /// <returns></returns>
+        public RoutineSequence WaitWhile(bool waitFor)
+        {
+            AddToSequence(new WhileAwaiter(() => waitFor, _globalUpdate, _addUpdater, _removeUpdater));
             return this;
         }
 

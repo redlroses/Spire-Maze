@@ -34,9 +34,9 @@ namespace CodeBase.Tools
             _towardMover = new TowardMover<TValue>(_from, _to, GetLerpFunction(), _modifyCurve);
 
             _commandAwaiter = new RoutineSequence()
-                .WaitWhile(() => enabled)
+                .WaitWhile(enabled)
                 .Then(ExecuteCommand)
-                .LoopWhile(() => _commands.Count > 0);
+                .LoopWhile(_commands.Count > 0);
 
             OnInitialize();
         }
@@ -72,8 +72,16 @@ namespace CodeBase.Tools
                 return;
             }
 
-            AppendCallback(onShowCallback);
             PlayForward();
+            AppendCallback(onShowCallback);
+        }
+
+        public void ShowInstantly()
+        {
+            PlayForward();
+            _towardMover.TryUpdate(1f, out TValue lerpValue);
+            ApplyLerpValue(lerpValue);
+            OnShow();
         }
 
         public void Hide(Action onHideCallback = null)
@@ -97,8 +105,16 @@ namespace CodeBase.Tools
                 return;
             }
 
-            AppendCallback(onHideCallback);
             PlayReverse();
+            AppendCallback(onHideCallback);
+        }
+
+        public void HideInstantly()
+        {
+            PlayReverse();
+            _towardMover.TryUpdate(1f, out TValue lerpValue);
+            ApplyLerpValue(lerpValue);
+            OnHide();
         }
 
         protected override void Run()

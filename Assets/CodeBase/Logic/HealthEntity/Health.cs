@@ -26,30 +26,20 @@ namespace CodeBase.Logic.HealthEntity
 
         public void Damage(int damagePoints, DamageType damageType)
         {
-            if (IsAlive == false)
-            {
+            if (IsAlive == false && CanDamage(damageType) == false)
                 return;
-            }
-
-            if (CanDamage() == false)
-            {
-                return;
-            }
 
             Validate(damagePoints);
-
             int newPoints = CurrentPoints - damagePoints;
 
-            if (newPoints <= 0)
-            {
-                Died.Invoke();
+            if (damageType == DamageType.Lethal)
                 newPoints = 0;
-                Debug.Log($"Died!");
-            }
+
+            if (newPoints <= 0)
+                Died.Invoke();
 
             int deltaPoints = CurrentPoints - newPoints;
-            CurrentPoints = newPoints;
-
+            CurrentPoints = Mathf.Max(newPoints, 0);
             OnDamaged(deltaPoints, damageType);
 
             Debug.Log($"Damaged: {deltaPoints}, current health: {CurrentPoints}");
@@ -57,20 +47,13 @@ namespace CodeBase.Logic.HealthEntity
 
         protected virtual void OnDamaged(int deltaPoints, DamageType damageType) { }
 
-        protected virtual bool CanDamage() =>
+        protected virtual bool CanDamage(DamageType damageType) =>
             true;
 
         private void Validate(int points)
         {
-            if (IsAlive == false)
-            {
-                throw new InvalidOperationException($"Entity {name} already dead");
-            }
-
             if (points <= 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(points), "Points must be non negative");
-            }
         }
     }
 }

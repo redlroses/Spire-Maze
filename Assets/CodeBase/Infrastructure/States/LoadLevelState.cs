@@ -100,7 +100,6 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
-            _curtain.Hide();
             _levelBuilder.Clear();
             _adService.ShowInterstitialAd();
 
@@ -115,6 +114,7 @@ namespace CodeBase.Infrastructure.States
                 YandexGamesSdk.GameReady();
 #endif
             _isFirstLoad = false;
+            _curtain.Hide();
         }
 
         private void OnLoaded()

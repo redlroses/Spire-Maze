@@ -6,14 +6,18 @@ namespace CodeBase.Logic.HealthEntity.Damage
     [RequireComponent(typeof(DamagableObserver))]
     public sealed class BurstDamageTrigger : ObserverTarget<DamagableObserver, IDamagable>, IDamageTrigger
     {
-        [SerializeField] private int _damage;
         [SerializeField] private Collider _collider;
+        [SerializeField] private int _damage;
+        [SerializeField] private bool _isLethal;
+
+        protected override void OnValidate() =>
+            _collider ??= GetComponent<Collider>();
 
         private void Awake() =>
             _collider ??= GetComponent<Collider>();
 
         protected override void OnTriggerObserverEntered(IDamagable damagable) =>
-            damagable.Damage(_damage, DamageType.Burst);
+            damagable.Damage(_damage, _isLethal ? DamageType.Lethal : DamageType.Burst);
 
         public void Enable() =>
             _collider.enabled = true;
