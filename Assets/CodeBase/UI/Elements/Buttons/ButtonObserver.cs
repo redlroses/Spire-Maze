@@ -17,7 +17,7 @@ namespace CodeBase.UI.Elements.Buttons
         }
 
         private void OnValidate() =>
-            Awake();
+            Button ??= GetComponent<Button>();
 
         private void Awake() =>
             Button ??= GetComponent<Button>();

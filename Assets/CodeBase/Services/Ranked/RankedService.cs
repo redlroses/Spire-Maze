@@ -1,11 +1,9 @@
-﻿using System.Diagnostics;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Leaderboards;
-using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using Cysharp.Threading.Tasks;
-using Debug = UnityEngine.Debug;
+using System.Diagnostics;
 
 namespace CodeBase.Services.Ranked
 {
@@ -50,17 +48,11 @@ namespace CodeBase.Services.Ranked
 
 
         [Conditional("UNITY_EDITOR")]
-        private void UseEditorLeaderboard()
-        {
-            Debug.Log(nameof(UseEditorLeaderboard));
+        private void UseEditorLeaderboard() =>
             _leaderboard = new EditorLeaderboard(_staticData.GetLeaderboard(EditorName));
-        }
 
         [Conditional("YANDEX_GAMES")]
-        private void UseYandexLeaderboard()
-        {
-            Debug.Log(nameof(UseYandexLeaderboard));
+        private void UseYandexLeaderboard() =>
             _leaderboard = new YandexLeaderboard(_staticData.GetLeaderboard(YandexName), _staticData);
-        }
     }
 }

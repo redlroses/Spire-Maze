@@ -31,19 +31,11 @@ namespace CodeBase.UI
             ScaleRect();
         }
 
-        private void ScaleMovement()
-        {
+        private void ScaleMovement() =>
             _onScreenStick.movementRange =
                 _defaultMovement / _rootCanvasScale.scaleFactor * _handler.rect.height * ToNormalized;
 
-            Debug.Log($"ScaleMovement: {_onScreenStick.movementRange}");
-        }
-
-        private void ScaleRect()
-        {
+        private void ScaleRect() =>
             _handler.transform.localScale = Vector3.one / _rootCanvasScale.scaleFactor;
-
-            Debug.Log($" ScaleRect: {_handler.transform.localScale}");
-        }
     }
 }

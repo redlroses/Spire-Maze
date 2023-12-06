@@ -34,14 +34,19 @@ namespace CodeBase.Tools.Extension
         public static T ToDeserialized<T>(this string json) =>
             JsonUtility.FromJson<T>(json);
 
+        public static DateTime AsDateTime(this DateTimeData dateTimeData) =>
+            new DateTime(dateTimeData.Year, dateTimeData.Month, dateTimeData.Day,
+                dateTimeData.Hour, dateTimeData.Minute, dateTimeData.Second);
+
+        public static DateTimeData AsDateTimeData(this DateTime dateTime) =>
+            new DateTimeData(dateTime);
+
         public static InventoryData AsInventoryData(this IInventory inventory)
         {
             List<ItemData> itemsData = new List<ItemData>(inventory.Count);
 
             foreach (IReadOnlyInventoryCell cell in inventory)
-            {
                 itemsData.Add(new ItemData(cell.Count, (int) cell.Item.ItemType));
-            }
 
             return new InventoryData(itemsData);
         }
@@ -88,12 +93,8 @@ namespace CodeBase.Tools.Extension
         public static SingleRankData ToSingleRankData(this LeaderboardEntryResponse entry)
         {
             IAssetProvider assetProvider = AllServices.Container.Single<IAssetProvider>();
-
-            Sprite avatar = assetProvider
-                .LoadAsset<Sprite>($"{AssetPath.Avatar}/{entry.extraData}");
-
-            Sprite flag = assetProvider
-                .LoadAsset<Sprite>($"{AssetPath.Flag}/{entry.player.lang}");
+            Sprite avatar = assetProvider.LoadAsset<Sprite>($"{AssetPath.Avatar}/{entry.extraData}");
+            Sprite flag = assetProvider.LoadAsset<Sprite>($"{AssetPath.Flag}/{entry.player.lang}");
 
             return new SingleRankData(entry.rank, entry.score, avatar,
                 entry.player.publicName ?? Anonymous, flag);

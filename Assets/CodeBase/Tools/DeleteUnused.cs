@@ -8,7 +8,7 @@ namespace CodeBase.Tools
     public class DeleteUnused : MonoBehaviour
     {
         private List<GameObject> _toDelete = new List<GameObject>();
-        
+
         [Button]
         private void Delete()
         {
@@ -19,7 +19,7 @@ namespace CodeBase.Tools
                 DestroyImmediate(o);
             }
         }
-        
+
         private void DeleteDisabled(Transform parent)
         {
             foreach (Transform child in parent)

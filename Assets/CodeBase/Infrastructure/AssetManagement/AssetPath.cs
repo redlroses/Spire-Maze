@@ -44,6 +44,8 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public const string MusicPlayer = "Prefabs/MusicPlayer";
 
+        public const string BuildInfo = "BuildInfo";
+
         public static string Combine(string path1, string path2) =>
             $"{path1}{DirectorySeparator}{path2}";
     }
