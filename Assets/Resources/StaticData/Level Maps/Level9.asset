@@ -220,8 +220,8 @@ MonoBehaviour:
   - rid: 6961350215496368195
   - rid: 6961350215496368193
   - rid: 6961350215496368194
-  - rid: 6961350215496368217
-  - rid: 6961350215496368218
+  - rid: 6961350215496368410
+  - rid: 6961350215496368413
   - rid: 6961350215496368225
   - rid: 6961350215496368231
   - rid: 6961350215496368399
@@ -237,7 +237,7 @@ MonoBehaviour:
   - rid: 6961350215496368221
   - rid: 6961350215496368219
   - rid: 6961350215496368220
-  - rid: 6961350193137057802
+  - rid: 6961350215496368411
   - rid: 6961350193137057803
   - rid: 6961350215496368232
   - rid: 6961350215496368237
@@ -514,10 +514,6 @@ MonoBehaviour:
       type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 6961350193137057802
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 6961350193137057803
       type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -651,8 +647,8 @@ MonoBehaviour:
       type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-        Direction: 1
-        IsLiftHolder: 0
+        Direction: 3
+        IsLiftHolder: 1
     - rid: 6961350215496368202
       type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -701,15 +697,6 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 6961350215496368214
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 6961350215496368217
-      type: {class: Rock, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-        IsDirectionToRight: 1
-    - rid: 6961350215496368218
-      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
     - rid: 6961350215496368219
@@ -911,8 +898,8 @@ MonoBehaviour:
       type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-        Direction: 1
-        IsLiftHolder: 0
+        Direction: 3
+        IsLiftHolder: 1
     - rid: 6961350215496368292
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -1041,8 +1028,8 @@ MonoBehaviour:
       type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-        Direction: 1
-        IsLiftHolder: 0
+        Direction: 3
+        IsLiftHolder: 1
     - rid: 6961350215496368330
       type: {class: MovingMarker, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -1282,5 +1269,18 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 6961350215496368406
       type: {class: Savepoint, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 6961350215496368410
+      type: {class: Rock, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+        IsDirectionToRight: 1
+    - rid: 6961350215496368411
+      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 6961350215496368413
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
