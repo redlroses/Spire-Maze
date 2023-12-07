@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
-        private readonly WebInitializer _initializer = new WebInitializer();
+        private readonly WebSDKInitializer _initializer = new WebSDKInitializer();
 
         [SerializeField] private LoadingCurtain _curtain;
 

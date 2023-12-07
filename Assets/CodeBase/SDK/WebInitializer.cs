@@ -2,17 +2,15 @@
 using System.Collections;
 using Agava.YandexGames;
 using CodeBase.Infrastructure;
-using System.Diagnostics;
-using Debug = UnityEngine.Debug;
+using GameAnalyticsSDK;
 
 namespace CodeBase.SDK
 {
-    public class WebInitializer : IDisposable
+    public class WebSDKInitializer
     {
-        public WebInitializer()
+        public WebSDKInitializer()
         {
             YandexGamesSdk.CallbackLogging = true;
-            PlayerAccount.AuthorizedInBackground += OnAuthorizedInBackground;
         }
 
         public void Start(ICoroutineRunner coroutineRunner, Action onReadyCallback) =>
@@ -23,25 +21,17 @@ namespace CodeBase.SDK
 
         private IEnumerator Initialize(Action onReadyCallback)
         {
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-
-#if UNITY_WEBGL && UNITY_EDITOR
+#if UNITY_EDITOR
             onReadyCallback?.Invoke();
             yield break;
 #endif
+            GameAnalytics.Initialize();
             yield return YandexGamesSdk.Initialize();
 
+            while (GameAnalytics.Initialized == false)
+                yield return null;
+
             onReadyCallback?.Invoke();
-            stopWatch.Stop();
-
-            Debug.Log($"Initialize time: {stopWatch.ElapsedMilliseconds}, ticks: {stopWatch.ElapsedTicks}");
         }
-
-        private void OnAuthorizedInBackground() =>
-            Debug.Log($"{nameof(OnAuthorizedInBackground)} {PlayerAccount.IsAuthorized}");
-
-        public void Dispose() =>
-            PlayerAccount.AuthorizedInBackground -= OnAuthorizedInBackground;
     }
 }
