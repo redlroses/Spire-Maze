@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d62d33e80cbc640b1f69f58ac4f58f, type: 3}
   m_Name: Level5
   m_EditorClassIdentifier: 
-  LevelName: Level5
-  LevelId: 5
-  Radius: 5.945
-  ArchAngle: 22.5
-  FloorHeight: 2
-  Width: 16
-  Height: 11
-  CellDataMap:
+  _levelId: 5
+  _radius: 5.945
+  _archAngle: 22.5
+  _floorHeight: 2
+  _height: 11
+  _width: 16
+  _cellDataMap:
   - rid: 483409710225293487
   - rid: 483409710225293488
   - rid: 483409710225293486
@@ -73,7 +72,7 @@ MonoBehaviour:
   - rid: 483409710225293796
   - rid: 483409710225293797
   - rid: 483409710225293798
-  - rid: 483409710225293365
+  - rid: 6961350238463328256
   - rid: 483409710225293366
   - rid: 483409710225293830
   - rid: 483409710225293829
@@ -200,10 +199,6 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 483409710225293353
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
-    - rid: 483409710225293365
       type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
@@ -942,5 +937,9 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 483409710225293869
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 6961350238463328256
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
