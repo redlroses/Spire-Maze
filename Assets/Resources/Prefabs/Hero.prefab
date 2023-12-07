@@ -106,8 +106,6 @@ GameObject:
   - component: {fileID: 7671679976408396966}
   - component: {fileID: 5106206129794095672}
   - component: {fileID: 7440742495519906430}
-  - component: {fileID: 1176746167610235285}
-  - component: {fileID: 4291033906773994440}
   m_Layer: 11
   m_Name: HitBox
   m_TagString: Untagged
@@ -163,33 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0c34f6d224672bea7d1b26c57df58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1176746167610235285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803051217541185496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f84cb22b8ef467eb49d72c12fb0acc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4291033906773994440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803051217541185496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd2d9c1de2241fd8acd95ae2d1a268b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 7440742495519906430}
-  _timerOperator: {fileID: 1176746167610235285}
-  _immunityTime: 0.8
 --- !u!1 &964254391397357250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7437,7 +7408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9db619c96e64b25a49fc2f0738de58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 7393409988495010679}
   _sphereCaster: {fileID: 2212661745572598830}
   _isEnableCoyoteTime: 1
   _coyoteTimeDuration: 0.1

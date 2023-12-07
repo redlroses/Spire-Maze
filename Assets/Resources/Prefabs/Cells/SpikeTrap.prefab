@@ -105,22 +105,22 @@ MonoBehaviour:
       inWeight: 0.21965894
       outWeight: 0.16316469
     - serializedVersion: 3
-      time: 0.4
+      time: 0.2
       value: 1
       inSlope: 0.0018137553
-      outSlope: -12.958062
+      outSlope: -8.734137
       tangentMode: 1
       weightedMode: 0
       inWeight: 1
-      outWeight: 0.022883266
+      outWeight: 0.28713956
     - serializedVersion: 3
       time: 0.5740095
       value: 0.0017932225
-      inSlope: -1.9846059
+      inSlope: -0.03585821
       outSlope: -0.02986464
       tangentMode: 1
       weightedMode: 0
-      inWeight: 0.4484942
+      inWeight: 0.25163358
       outWeight: 0.20668258
     - serializedVersion: 3
       time: 1
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _observer: {fileID: 9216659551616710178}
-  _collider: {fileID: 0}
+  _collider: {fileID: 5832980850712663228}
   _damage: 45
   _isLethal: 0
 --- !u!65 &5832980850712663228
@@ -395,8 +395,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.58760244, y: 0.5821532, z: 0.13921513}
-  m_Center: {x: -0.0005906105, y: 0.00015151374, z: 0.06668353}
+  m_Size: {x: 0.6, y: 0.6, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!1001 &5821152820545271941
 PrefabInstance:
   m_ObjectHideFlags: 0

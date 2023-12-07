@@ -6,12 +6,14 @@ using CodeBase.Services.PersistentProgress;
 
 namespace CodeBase.Logic.Hero
 {
-    public sealed class HeroHealth : Health, IHealable, IImmunable, ISavedProgress
+    public sealed class HeroHealth : Health, IHealable, IImmune, ISavedProgress
     {
+        private const string PointsNegativeException = "Points must be non negative";
+
         public event Action<int, DamageType> Damaged = ((_, _) => { });
         public event Action<int> Healed = _ => { };
 
-        public bool IsImmune { get; set; }
+        public bool IsImmune { get; private set; }
 
         public void Heal(int healPoints)
         {
@@ -25,6 +27,12 @@ namespace CodeBase.Logic.Hero
             Healed.Invoke(deltaPoints);
             CurrentPoints = newPoints;
         }
+
+        public void ActivateImmunity() =>
+            IsImmune = true;
+
+        public void DeactivateImmunity() =>
+            IsImmune = false;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -42,12 +50,12 @@ namespace CodeBase.Logic.Hero
             Damaged.Invoke(deltaPoints, damageType);
 
         protected override bool CanDamage(DamageType damageType) =>
-            !IsImmune && damageType != DamageType.Lethal;
+            IsImmune == false && damageType != DamageType.Lethal;
 
         private void ValidateHeal(int points)
         {
             if (points <= 0)
-                throw new ArgumentOutOfRangeException(nameof(points), "Points must be non negative");
+                throw new ArgumentOutOfRangeException(nameof(points), PointsNegativeException);
         }
     }
 }

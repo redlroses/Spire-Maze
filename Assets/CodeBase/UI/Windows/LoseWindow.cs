@@ -20,6 +20,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private ReviveButton _reviveButton;
         [SerializeField] private TextSetterAnimated _scoreText;
         [SerializeField] private TextSetterAnimated _coinsText;
+        [SerializeField] private TextSetterAnimated _itemsText;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
         [SerializeField] private AudioPlayer _audioPlayer;
         [SerializeField] private AudioClip _sound;
@@ -52,6 +53,7 @@ namespace CodeBase.UI.Windows
         {
             SetScore();
             SetCoins();
+            SetItemsCount();
             _showHide.Value.Show();
         }
 
@@ -73,5 +75,11 @@ namespace CodeBase.UI.Windows
 
         private void SetCoins() =>
             _coinsText.SetTextAnimated(TemporalProgress.CoinsCount);
+
+        private void SetItemsCount()
+        {
+            _itemsText.SetStaticText("{0}/" + TemporalProgress.TotalArtifactsCount);
+            _itemsText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private NextLevelButton _nextLevelButton;
         [SerializeField] private WindowAnimationPlayer _windowAnimationPlayer;
         [SerializeField] private TextSetterAnimated _scoreText;
-        [SerializeField] private TextSetterAnimated _itemText;
+        [SerializeField] private TextSetterAnimated _itemsText;
         [SerializeField] private TextSetterAnimated _coinsText;
         [SerializeField] private StarsView _starsView;
         [SerializeField] private InterfaceReference<IShowHide, MonoBehaviour> _showHide;
@@ -73,8 +73,11 @@ namespace CodeBase.UI.Windows
         private void SetStars() =>
             _starsView.EnableStars(TemporalProgress.StarsCount);
 
-        private void SetItemsCount() =>
-            _itemText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
+        private void SetItemsCount()
+        {
+            _itemsText.SetStaticText("{0}/" + TemporalProgress.TotalArtifactsCount);
+            _itemsText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
+        }
 
         private void SetScorePoints() =>
             _scoreText.SetTextAnimated(TemporalProgress.Score);

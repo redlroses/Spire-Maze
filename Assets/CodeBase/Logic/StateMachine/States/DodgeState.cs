@@ -13,34 +13,32 @@ namespace CodeBase.Logic.StateMachine.States
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
         private readonly IInputService _inputService;
-        private readonly Dodge _dodge;
-        private readonly HeroHealth _heroHealth;
+        private readonly IImmune _immune;
         private readonly InputController _inputController;
 
         private MoveDirection _lastDirection;
 
         public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IInputService inputService, Dodge dodge, HeroHealth heroHealth)
+            IInputService inputService, IImmune immune)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
             _inputService = inputService;
-            _dodge = dodge;
-            _heroHealth = heroHealth;
+            _immune = immune;
         }
 
         public void Enter(MoveDirection payload)
         {
             _heroAnimator.PlayDodge();
             _lastDirection = payload;
-            _heroHealth.IsImmune = true;
+            _immune.ActivateImmunity();
             _inputService.HorizontalMove += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
         }
 
         public void Exit()
         {
-            _heroHealth.IsImmune = false;
+            _immune.DeactivateImmunity();
             _heroAnimator.StateExited -= OnStateExited;
             _inputService.HorizontalMove -= OnHorizontalMove;
         }

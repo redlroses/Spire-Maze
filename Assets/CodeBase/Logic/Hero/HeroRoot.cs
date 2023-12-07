@@ -28,15 +28,11 @@ namespace CodeBase.Logic.Hero
             _heroReviver ??= GetComponent<HeroReviver>();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             _heroHealth.Died += OnDied;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _heroHealth.Died -= OnDied;
-        }
 
         private void OnDestroy()
         {
