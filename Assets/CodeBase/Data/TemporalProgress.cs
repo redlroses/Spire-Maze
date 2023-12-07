@@ -5,7 +5,8 @@ namespace CodeBase.Data
     public class TemporalProgress
     {
         public Vector2 LevelHeightRange;
-        public int ArtifactsCount;
+        public int CollectedArtifactsCount;
+        public int TotalArtifactsCount;
         public int PlayTime;
         public int Score;
         public int StarsCount;
@@ -16,7 +17,8 @@ namespace CodeBase.Data
         {
             LevelHeightRange = Vector2.zero;
             PlayTime = 0;
-            ArtifactsCount = 0;
+            CollectedArtifactsCount = 0;
+            TotalArtifactsCount = 0;
             Score = 0;
             StarsCount = 0;
             CoinsCount = 0;

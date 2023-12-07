@@ -74,7 +74,7 @@ namespace CodeBase.UI.Windows
             _starsView.EnableStars(TemporalProgress.StarsCount);
 
         private void SetItemsCount() =>
-            _itemText.SetTextAnimated(TemporalProgress.ArtifactsCount);
+            _itemText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
 
         private void SetScorePoints() =>
             _scoreText.SetTextAnimated(TemporalProgress.Score);

@@ -85,7 +85,7 @@ namespace CodeBase.Services.Score
         }
 
         private int ScorePerArtifacts(ScoreConfig scoreConfig) =>
-            TemporalProgress.ArtifactsCount * scoreConfig.PerArtifact;
+            TemporalProgress.CollectedArtifactsCount * scoreConfig.PerArtifact;
 
         private int StarsCountFromConfig(ScoreConfig scoreConfig)
         {

@@ -28,10 +28,10 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         }
 
         private LoadPayload CreateToNextLevelPayload() =>
-            new LoadPayload(LevelNames.BuildableLevel, _levelId + 1);
+            new LoadPayload(LevelNames.BuildableLevel, _levelId + 1, true, true);
 
         private static LoadPayload CreateToLobbyPayload() =>
-            new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId);
+            new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId, true, true);
 
         private bool IsLastLevel() =>
             !_staticData.HasLevel(_levelId + 1);
