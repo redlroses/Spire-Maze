@@ -12,7 +12,6 @@ namespace CodeBase.Tools.Builds
 
         public void OnPreprocessBuild(BuildReport report)
         {
-            Debug.Log($"Prebuild started at: {report.summary.buildStartedAt}");
             BuildInfo buildInfo = Resources.Load<BuildInfo>(AssetPath.BuildInfo);
             buildInfo.BuildDateTime = report.summary.buildStartedAt.AddHours(5);
         }
