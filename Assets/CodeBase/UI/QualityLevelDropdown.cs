@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.UI
 {
-    public class GraphicLevelDropdown : MonoBehaviour
+    public class QualityLevelDropdown : MonoBehaviour
     {
         [SerializeField] private TMP_Dropdown _dropdown;
 
@@ -13,14 +13,10 @@ namespace CodeBase.UI
             _dropdown.onValueChanged.AddListener(OnLevelChanged);
         }
 
-        private void OnDestroy()
-        {
-            _dropdown.onValueChanged.RemoveAllListeners();
-        }
+        private void OnDestroy() =>
+            _dropdown.onValueChanged.RemoveListener(OnLevelChanged);
 
-        private void OnLevelChanged(int level)
-        {
+        private void OnLevelChanged(int level) =>
             QualitySettings.SetQualityLevel(level);
-        }
     }
 }

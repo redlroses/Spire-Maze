@@ -1,6 +1,7 @@
-﻿#if UNITY_WEBGL && !UNITY_EDITOR
+﻿#if !UNITY_EDITOR && UNITY_WEBGL
 using CodeBase.Tools.Extension;
 using Agava.YandexGames;
+using Agava.WebUtility;
 #endif
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
@@ -21,6 +22,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -44,13 +46,13 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_WEBGL
             _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
-#endif
-#if UNITY_EDITOR
+#else
             _services.Single<ILocalizationService>().ChooseLanguage(LanguageId.Russian);
 #endif
             _services.Single<IRankedService>().InitLeaderboard();
+            ChooseQualityLevel();
         }
 
         private void RegisterServices()
@@ -132,6 +134,16 @@ namespace CodeBase.Infrastructure.States
         private void EnterLoadProgress()
         {
             _stateMachine.Enter<LoadProgressState>();
+        }
+
+        private void ChooseQualityLevel()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            if (Device.IsMobile == false)
+                QualitySettings.IncreaseLevel();
+#else
+            QualitySettings.IncreaseLevel();
+#endif
         }
     }
 }
