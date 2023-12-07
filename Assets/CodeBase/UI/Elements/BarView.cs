@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class BarView : MonoCache
+    public class BarView : MonoBehaviour
     {
         [SerializeField] protected SliderSetter _sliderSetter;
 

@@ -26,7 +26,6 @@ namespace CodeBase.Logic.StaminaEntity
             protected set
             {
                 _currentPoints = value;
-                Debug.Log($"Stamina: {_currentPoints}");
                 Changed.Invoke();
             }
         }

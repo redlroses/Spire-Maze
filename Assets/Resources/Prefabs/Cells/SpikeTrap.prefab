@@ -99,28 +99,37 @@ MonoBehaviour:
       time: 0.1
       value: 1
       inSlope: 1.9958454
-      outSlope: 0.009454938
+      outSlope: -0.02387551
       tangentMode: 1
       weightedMode: 0
       inWeight: 0.21965894
-      outWeight: 0.99569595
+      outWeight: 0.16316469
     - serializedVersion: 3
-      time: 0.6
+      time: 0.4
       value: 1
       inSlope: 0.0018137553
-      outSlope: -6.2298145
+      outSlope: -12.958062
       tangentMode: 1
       weightedMode: 0
       inWeight: 1
-      outWeight: 0.03300251
+      outWeight: 0.022883266
+    - serializedVersion: 3
+      time: 0.5740095
+      value: 0.0017932225
+      inSlope: -1.9846059
+      outSlope: -0.02986464
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.4484942
+      outWeight: 0.20668258
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.023569167
+      outSlope: -0.023569167
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.16818136
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -364,8 +373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _observer: {fileID: 9216659551616710178}
-  _damage: 45
   _collider: {fileID: 0}
+  _damage: 45
+  _isLethal: 0
 --- !u!65 &5832980850712663228
 BoxCollider:
   m_ObjectHideFlags: 0

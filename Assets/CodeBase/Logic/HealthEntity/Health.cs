@@ -26,7 +26,7 @@ namespace CodeBase.Logic.HealthEntity
 
         public void Damage(int damagePoints, DamageType damageType)
         {
-            if (IsAlive == false && CanDamage(damageType) == false)
+            if (IsAlive == false || CanDamage(damageType) == false)
                 return;
 
             Validate(damagePoints);
