@@ -55,7 +55,7 @@ namespace CodeBase.Leaderboards
             _isLeaderboardDataReceived = false;
             Leaderboard.GetPlayerEntry(_name, OnGetPlayerEntry, _ => OnGetPlayerEntry(null), ProfilePictureSize.small);
             Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, _ => isError = true, _topPlayersCount, _competingPlayersCount,
-                _isIncludeSelf);
+                _isIncludeSelf, ProfilePictureSize.small);
 
             while (_isLeaderboardDataReceived == false)
             {
