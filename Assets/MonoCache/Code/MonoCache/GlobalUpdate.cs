@@ -16,7 +16,7 @@ namespace NTC.Global.Cache
     {
         public const string OnEnableMethodName = "OnEnable";
         public const string OnDisableMethodName = "OnDisable";
-        
+
         public const string UpdateMethodName = nameof(Update);
         public const string FixedUpdateMethodName = nameof(FixedUpdate);
         public const string LateUpdateMethodName = nameof(LateUpdate);
