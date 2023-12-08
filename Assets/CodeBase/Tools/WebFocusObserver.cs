@@ -16,6 +16,12 @@ namespace CodeBase.Tools
             WebApplication.InBackgroundChangeEvent += OnFocusChange;
         }
 
+        public void Unfocus() =>
+            OnFocusChange(true);
+
+        public void Focus() =>
+            OnFocusChange(false);
+
         private void OnFocusChange(bool isHidden)
         {
             if (isHidden == _isHidden)
@@ -24,11 +30,5 @@ namespace CodeBase.Tools
             InBackgroundChangeEvent.Invoke(isHidden);
             _isHidden = isHidden;
         }
-
-        public void Unfocus() =>
-            OnFocusChange(true);
-
-        public void Focus() =>
-            OnFocusChange(false);
     }
 }

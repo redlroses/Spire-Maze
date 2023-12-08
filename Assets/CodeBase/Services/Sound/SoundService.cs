@@ -38,7 +38,8 @@ namespace CodeBase.Services.Sound
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitUntil(TryIncreaseVolume).Then(() => _locker = null);
 
-            WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
+            // WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
+            WebApplication.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
 
         public float SfxVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Sfx;
