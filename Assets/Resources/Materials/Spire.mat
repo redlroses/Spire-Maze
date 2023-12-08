@@ -16,8 +16,8 @@ Material:
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
   - _MK_COLOR_GRADING_FINAL_OUTPUT
+  - _MK_DIFFUSE_OREN_NAYAR
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-  - _MK_FRESNEL_HIGHLIGHTS
   - _MK_LIGHT_CEL
   - _MK_OUTLINE_NOISE
   - _MK_SPECULAR_ISOTROPIC
@@ -25,7 +25,6 @@ Material:
   - LOD_FADE_CROSSFADE
   - _EMISSION
   - _EMISSIVE_SIMPLE
-  - _FRESNELHIGHLIGHTS_ON
   - _IS_ANGELRING_OFF
   - _IS_CLIPPING_OFF
   - _IS_OUTLINE_CLIPPING_NO
@@ -431,8 +430,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailNormalScale: 1
     - _DetailSmoothnessScale: 1
-    - _Diffuse: 0
-    - _DiffuseSmoothness: 0.765
+    - _Diffuse: 1
+    - _DiffuseSmoothness: 1
     - _DiffuseThresholdOffset: 0
     - _DiffusionProfile: 0
     - _DiffusionProfileHash: 0
@@ -476,7 +475,7 @@ Material:
     - _Farthest_Distance: 100
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
-    - _FresnelHighlights: 1
+    - _FresnelHighlights: 0
     - _GI_Intensity: 0.488
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -496,7 +495,7 @@ Material:
     - _HighColor_Power: 0
     - _HighlightOverridden: 0
     - _HighlightVisible: 1
-    - _IndirectFade: 0.924
+    - _IndirectFade: 1
     - _Initialized: 0
     - _InputTab: 1
     - _InvTilingScale: 1
@@ -546,7 +545,7 @@ Material:
     - _LightBands: 12
     - _LightBandsScale: 0.634
     - _LightDirection_MaskOn: 1
-    - _LightThreshold: 0.493
+    - _LightThreshold: 0.67
     - _LightTransmission: 0
     - _LightTransmissionDistortion: 0
     - _LightTransmissionIntensity: 1.06
@@ -569,7 +568,7 @@ Material:
     - _Offset_X_Axis_BLD: 0.19
     - _Offset_Y_Axis_BLD: 0.24
     - _Offset_Z: 0
-    - _OptionsTab: 1
+    - _OptionsTab: 0
     - _Outline: 1
     - _OutlineData: 0
     - _OutlineFadeMax: 2
@@ -633,7 +632,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity: 1
     - _SpecularOcclusionMode: 1
-    - _SpecularSmoothness: 0.584
+    - _SpecularSmoothness: 0.43
     - _SpecularThresholdOffset: 0.25
     - _SrcBlend: 1
     - _Stencil: 1

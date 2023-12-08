@@ -8,20 +8,20 @@ namespace CodeBase.UI.Elements
         private readonly float _endAnimationTime;
         private readonly AnimationCurve _curve;
         private readonly float _animationSpeed;
-        private readonly Action _onEndCallback;
-
+        
         private float _animationTime;
         private float _startAnimationValue;
         private float _endAnimationValue;
         private float _animatedValue;
         private float _valueRange;
+        private Action _onEndCallback;
 
         public CurveAnimation(AnimationCurve curve, float animationSpeed, Action onEndCallback)
         {
+            _onEndCallback = onEndCallback;
             _curve = curve;
             _animationSpeed = animationSpeed;
             _endAnimationTime = _curve[_curve.length - 1].time;
-            _onEndCallback = onEndCallback;
         }
 
         public void StartAnimation(float startValue, float endValue)
