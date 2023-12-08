@@ -5,7 +5,6 @@ using CodeBase.StaticData;
 using Agava.YandexGames;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools;
-using CodeBase.Tools.Extension;
 using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace CodeBase.Leaderboards
         private readonly bool _isIncludeSelf;
         private readonly IStaticDataService _staticData;
         private readonly ImageLoader _imageLoader;
-        private readonly LocalizedString _anonymous = "Anon";
+        private readonly LocalizedString _anonymousName = "Anon";
 
         private int _unsavedScore;
         private string _unsavedAvatarName;
@@ -52,15 +51,32 @@ namespace CodeBase.Leaderboards
                 _unsavedScore = 0;
             }
 
+            bool isError = false;
             _isLeaderboardDataReceived = false;
-            Leaderboard.GetPlayerEntry(_name, result => _selfRanksData = result.ToSingleRankData());
-            Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, null, _topPlayersCount, _competingPlayersCount,
+            Leaderboard.GetPlayerEntry(_name, OnGetPlayerEntry, _ => OnGetPlayerEntry(null), ProfilePictureSize.small);
+            Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, _ => isError = true, _topPlayersCount, _competingPlayersCount,
                 _isIncludeSelf);
 
             while (_isLeaderboardDataReceived == false)
+            {
+                if (isError)
+                    throw new TimeoutException("Can't get leaderboard data");
+
                 await UniTask.Yield();
+            }
 
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
+        }
+
+        private async void OnGetPlayerEntry(LeaderboardEntryResponse result)
+        {
+            if (result.Equals(null))
+            {
+                _selfRanksData = new SingleRankData(0, 0, _staticData.GetDefaultAvatar(), _anonymousName,
+                    _staticData.GetSpriteByLang(YandexGamesSdk.Environment.browser.lang));
+            }
+
+            _selfRanksData = await LoadSingleRankData(result);
         }
 
         public async UniTask SetScore(int score, string avatarName)
@@ -124,11 +140,8 @@ namespace CodeBase.Leaderboards
             return isSuccess;
         }
 
-        private void CheckAuthorization()
-        {
-            Debug.Log($"CheckAuthorization invoke: {PlayerAccount.IsAuthorized}");
+        private void CheckAuthorization() =>
             _isAuthorized = PlayerAccount.IsAuthorized;
-        }
 
         private SingleRankData[] GetCompetingRanks() =>
             _ranksData.Count > _topPlayersCount
@@ -145,18 +158,18 @@ namespace CodeBase.Leaderboards
             _ranksData = new List<SingleRankData>(board.entries.Length);
 
             foreach (LeaderboardEntryResponse entry in board.entries)
-                _ranksData.Add(await AsSingleRankData(entry));
+                _ranksData.Add(await LoadSingleRankData(entry));
 
             _isLeaderboardDataReceived = true;
         }
 
-        private async UniTask<SingleRankData> AsSingleRankData(LeaderboardEntryResponse entry)
+        private async UniTask<SingleRankData> LoadSingleRankData(LeaderboardEntryResponse entry)
         {
             Sprite avatar = await LoadProfileImage(entry);
             Sprite flag = _staticData.GetSpriteByLang(entry.player.lang);
 
             return new SingleRankData(entry.rank, entry.score, avatar,
-                string.IsNullOrEmpty(entry.player.publicName) ? _anonymous : entry.player.publicName, flag);
+                string.IsNullOrEmpty(entry.player.publicName) ? _anonymousName : entry.player.publicName, flag);
         }
 
         private async UniTask<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)
