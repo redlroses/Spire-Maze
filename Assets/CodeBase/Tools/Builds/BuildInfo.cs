@@ -17,11 +17,8 @@ namespace CodeBase.Tools.Builds
             set => _buildDateTimeString = value.AsDateTimeData().ToJson();
         }
 
-        private void OnValidate() =>
-            SetNow();
-
         [Button]
-        private void SetNow() =>
+        public void SetNow() =>
             BuildDateTime = DateTime.Now;
     }
 }

@@ -13,7 +13,8 @@ namespace CodeBase.Tools.Builds
         public void OnPreprocessBuild(BuildReport report)
         {
             BuildInfo buildInfo = Resources.Load<BuildInfo>(AssetPath.BuildInfo);
-            buildInfo.BuildDateTime = report.summary.buildStartedAt.AddHours(5);
+            buildInfo.SetNow();
+            Debug.Log($"Build started at {buildInfo.BuildDateTime}");
         }
     }
 }

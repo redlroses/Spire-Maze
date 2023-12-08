@@ -63,23 +63,18 @@ namespace CodeBase.Services.ADS
 #if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
             UseYandexAd();
 #endif
-
 #if UNITY_EDITOR
             UseEditorAd();
 #endif
         }
 
         [Conditional("UNITY_EDITOR")]
-        private void UseEditorAd()
-        {
+        private void UseEditorAd() =>
             _adProvider = new EditorAD();
-        }
 
         [Conditional("YANDEX_GAMES")]
-        private void UseYandexAd()
-        {
+        private void UseYandexAd() =>
             _adProvider = new YandexAD();
-        }
 
         private void RewardAd(Action onCompleteCallback = null, Action onDenyCallback = null)
         {

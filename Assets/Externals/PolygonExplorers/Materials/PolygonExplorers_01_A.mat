@@ -16,8 +16,9 @@ Material:
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_COLOR_GRADING_FINAL_OUTPUT
   - _MK_DETAIL_BLEND_MIX
+  - _MK_DIFFUSE_OREN_NAYAR
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-  - _MK_LIGHT_CEL
+  - _MK_LIGHT_BANDED
   - _MK_SPECULAR_ISOTROPIC
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
@@ -429,7 +430,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailNormalScale: 1
     - _DetailSmoothnessScale: 1
-    - _Diffuse: 0
+    - _Diffuse: 1
     - _DiffuseSmoothness: 1
     - _DiffuseThresholdOffset: 0.25
     - _DiffusionProfile: 0
@@ -537,11 +538,11 @@ Material:
     - _Is_UseTweakMatCapOnShadow: 0
     - _Is_ViewCoord_Scroll: 0
     - _Is_ViewShift: 0
-    - _Light: 1
-    - _LightBands: 4
-    - _LightBandsScale: 0.5
+    - _Light: 2
+    - _LightBands: 5
+    - _LightBandsScale: 0.095
     - _LightDirection_MaskOn: 0
-    - _LightThreshold: 1
+    - _LightThreshold: 0.854
     - _LightTransmission: 0
     - _LightTransmissionDistortion: 0.25
     - _LightTransmissionIntensity: 1
@@ -622,7 +623,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity: 1
     - _SpecularOcclusionMode: 1
-    - _SpecularSmoothness: 0.416
+    - _SpecularSmoothness: 0
     - _SpecularThresholdOffset: 0.25
     - _SrcBlend: 1
     - _Stencil: 1

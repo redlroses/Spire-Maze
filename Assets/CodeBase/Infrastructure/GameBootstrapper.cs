@@ -13,24 +13,41 @@ namespace CodeBase.Infrastructure
         [SerializeField] private LoadingCurtain _curtain;
 
         private Game _game;
-        private WebFocusObserver _webFocusObserver;
+        private WebFocusObserver _webFocusObserver = new WebFocusObserver();
 
         private void Awake()
         {
             LoadingCurtain curtain = Instantiate(_curtain);
             _game = new Game(this, curtain);
-            _initializer.Start(this, () =>
-            {
-                _game.StateMachine.Enter<BootstrapState>();
-                _webFocusObserver = new WebFocusObserver();
-            });
+            _initializer.Start(this, () => _game.StateMachine.Enter<BootstrapState>());
 
             DontDestroyOnLoad(this);
         }
 
-// #if !UNITY_EDITOR
-//         private void OnApplicationFocus(bool hasFocus) =>
-//             _webFocusObserver?.UpdateFocus(!hasFocus);
-// #endif
+#if !UNITY_EDITOR
+        private void OnApplicationPause(bool isPaused)
+        {
+            if (isPaused)
+            {
+                _webFocusObserver.Unfocus();
+            }
+            else
+            {
+                _webFocusObserver.Focus();
+            }
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+            {
+                _webFocusObserver.Focus();
+            }
+            else
+            {
+                _webFocusObserver.Unfocus();
+            }
+        }
+#endif
     }
 }

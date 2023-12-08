@@ -1,4 +1,5 @@
-﻿using CodeBase.DelayRoutines;
+﻿using Agava.WebUtility;
+using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
@@ -100,10 +101,8 @@ namespace CodeBase.Services.Sound
         private void SetMasterVolume(float volume) =>
             SetVolume(MasterVolumeProperty, volume);
 
-        private void SetVolume(string channelName, float volume)
-        {
+        private void SetVolume(string channelName, float volume) =>
             _mixer.SetFloat(channelName, Mathf.Clamp(volume, MinVolume, MaxVolume).ToDecibels());
-        }
 
         private bool TryDecreaseVolume()
         {
@@ -125,6 +124,8 @@ namespace CodeBase.Services.Sound
 
         private void OnInBackgroundChanged(bool isHidden)
         {
+            Debug.Log($"OnInBackgroundChanged: {isHidden}");
+
             if (isHidden)
             {
                 Mute();
