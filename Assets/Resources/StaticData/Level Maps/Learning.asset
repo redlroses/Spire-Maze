@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d62d33e80cbc640b1f69f58ac4f58f, type: 3}
   m_Name: Learning
   m_EditorClassIdentifier: 
-  LevelName: Learning
-  LevelId: -1
-  Radius: 5.945
-  ArchAngle: 22.5
-  FloorHeight: 2
-  Width: 16
-  Height: 5
-  CellDataMap:
+  _levelId: -1
+  _radius: 5.945
+  _archAngle: 22.5
+  _floorHeight: 2
+  _height: 5
+  _width: 16
+  _cellDataMap:
   - rid: 3578795405725139039
   - rid: 3578795405725139038
   - rid: 3578795517687627820
@@ -39,7 +38,7 @@ MonoBehaviour:
   - rid: 3578795405725139056
   - rid: 3578795405725139063
   - rid: 3578795405725139111
-  - rid: 3578795517687627805
+  - rid: 5570031565337264128
   - rid: 3578795517687627777
   - rid: 3578795405725139069
   - rid: 3578795405725139110
@@ -382,10 +381,6 @@ MonoBehaviour:
       type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
-    - rid: 3578795517687627805
-      type: {class: Air, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
-      data:
-        Texture: {fileID: 0}
     - rid: 3578795517687627820
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
@@ -436,5 +431,9 @@ MonoBehaviour:
         Texture: {fileID: 0}
     - rid: 3578795517687627832
       type: {class: Wall, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
+      data:
+        Texture: {fileID: 0}
+    - rid: 5570031565337264128
+      type: {class: Plate, ns: CodeBase.EditorCells, asm: Assembly-CSharp}
       data:
         Texture: {fileID: 0}
