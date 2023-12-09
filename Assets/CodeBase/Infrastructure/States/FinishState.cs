@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using CodeBase.Data;
 using CodeBase.EditorCells;
 using CodeBase.Logic;
 using CodeBase.Logic.Inventory;
+using CodeBase.Services.Analytics;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
 using CodeBase.Services.Score;
@@ -24,9 +26,11 @@ namespace CodeBase.Infrastructure.States
         private readonly IWatchService _watchService;
         private readonly IHeroLocator _heroLocator;
         private readonly IStaticDataService _staticData;
+        private readonly IAnalyticsService _analytics;
 
         public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService, IWatchService watchService, IHeroLocator heroLocator, IStaticDataService staticData)
+            IPersistentProgressService progressService, IWatchService watchService, IHeroLocator heroLocator,
+            IStaticDataService staticData, IAnalyticsService analytics)
         {
             _windowService = windowService;
             _scoreService = scoreService;
@@ -35,7 +39,15 @@ namespace CodeBase.Infrastructure.States
             _watchService = watchService;
             _heroLocator = heroLocator;
             _staticData = staticData;
+            _analytics = analytics;
         }
+
+        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+        private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+        private int StarsCount => TemporalProgress.StarsCount;
+        private int Score => TemporalProgress.Score;
+        private int CollectedArtifactsCount => TemporalProgress.CollectedArtifactsCount;
+        private int PlayTime => TemporalProgress.PlayTime;
 
         public void Enter(bool isLose)
         {
@@ -45,6 +57,7 @@ namespace CodeBase.Infrastructure.States
             CountLevelScore(isLose);
             CountGlobalScore();
             _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
+            CollectAnalytics(isLose);
         }
 
         public void Exit() { }
@@ -81,5 +94,13 @@ namespace CodeBase.Infrastructure.States
 
         private bool IsArtifact(StorableType type) =>
             _staticData.GetStorable(type).IsArtifact;
+
+        private void CollectAnalytics(bool isLose)
+        {
+            if (isLose)
+                _analytics.TrackLevelLose(LevelId, StarsCount, PlayTime, CollectedArtifactsCount, Score);
+            else
+                _analytics.TrackLevelComplete(LevelId, StarsCount, PlayTime, CollectedArtifactsCount, Score);
+        }
     }
 }

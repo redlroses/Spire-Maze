@@ -7,6 +7,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.Services.ADS;
+using CodeBase.Services.Analytics;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
@@ -63,6 +64,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
+            _services.RegisterSingle<IAnalyticsService>(new AnalyticsService());
             _services.RegisterSingle<ISoundService>(
                 new SoundService(
                     _services.Single<IAssetProvider>(),
