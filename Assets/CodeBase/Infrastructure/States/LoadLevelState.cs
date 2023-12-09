@@ -16,6 +16,7 @@ using CodeBase.Logic.StaminaEntity;
 using CodeBase.Logic.Сollectible;
 using CodeBase.MeshCombine;
 using CodeBase.Services.ADS;
+using CodeBase.Services.Analytics;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
@@ -53,6 +54,7 @@ namespace CodeBase.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
+        private readonly IAnalyticsService _analytics;
         private readonly ICameraOperatorService _cameraOperatorService;
         private readonly IWindowService _windowService;
         private readonly IADService _adService;
@@ -63,7 +65,7 @@ namespace CodeBase.Infrastructure.States
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService,
+            ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService, IAnalyticsService analytics,
             ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
         {
             _adService = adService;
@@ -78,6 +80,7 @@ namespace CodeBase.Infrastructure.States
             _levelBuilder = levelBuilder;
             _watchService = watchService;
             _pauseService = pauseService;
+            _analytics = analytics;
             _cameraOperatorService = cameraOperatorService;
             _windowService = windowService;
             _curtain = curtain;
@@ -90,7 +93,10 @@ namespace CodeBase.Infrastructure.States
             _loadPayload = payload;
 
             if (payload.IsClearLoad)
+            {
+                _analytics.TrackLevelStart(payload.LevelId);
                 _watchService.Cleanup();
+            }
 
             _pauseService.Cleanup();
             _gameFactory.Cleanup();

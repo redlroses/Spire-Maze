@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Services;
 using CodeBase.Services.ADS;
+using CodeBase.Services.Analytics;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.LevelBuild;
@@ -41,6 +42,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ILevelBuilder>(),
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
+                    services.Single<IAnalyticsService>(),
                     services.Single<ICameraOperatorService>(),
                     services.Single<IWindowService>(),
                     services.Single<IADService>(),
@@ -59,7 +61,8 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IPersistentProgressService>(),
                     services.Single<IWatchService>(),
                     services.Single<IGameFactory>() as IHeroLocator,
-                    services.Single<IStaticDataService>())
+                    services.Single<IStaticDataService>(),
+                    services.Single<IAnalyticsService>())
             };
         }
 
