@@ -37,7 +37,7 @@ namespace CodeBase.UI.Windows
 
         protected override void SubscribeUpdates()
         {
-            _unpauseButton.Subscribe(() => _pauseService.SetPause(false));
+            _unpauseButton.Clicked += () => _pauseService.SetPause(false);
             _menuButton.Subscribe();
             _restartButton.Subscribe();
         }

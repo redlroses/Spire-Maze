@@ -1,6 +1,4 @@
-﻿using CodeBase.Data;
-using CodeBase.Services.PersistentProgress;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows
@@ -8,14 +6,6 @@ namespace CodeBase.UI.Windows
     public abstract class WindowBase : MonoBehaviour
     {
         [SerializeField] private Button _closeButton;
-
-        private IPersistentProgressService _progressService;
-        protected PlayerProgress Progress => _progressService.Progress;
-
-        public void Construct(IPersistentProgressService progressService)
-        {
-            _progressService = progressService;
-        }
 
         private void Awake()
         {

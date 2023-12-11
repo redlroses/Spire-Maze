@@ -65,11 +65,11 @@ namespace CodeBase.Tutorial
             foreach (TutorialTrigger trigger in _triggers)
                 trigger.Triggered += ShowNext;
 
-            _hideButton.Subscribe(() =>
+            _hideButton.Clicked += () =>
             {
                 _panel.Hide();
                 _inputService.EnableMovementMap();
-            });
+            };
         }
 
         private void Unsubscribe()

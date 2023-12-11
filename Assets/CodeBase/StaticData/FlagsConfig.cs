@@ -1,4 +1,5 @@
-﻿using AYellowpaper.SerializedCollections;
+﻿using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 namespace CodeBase.StaticData
@@ -8,7 +9,9 @@ namespace CodeBase.StaticData
     {
         private const string Default = "default";
 
-        public SerializedDictionary<string, Sprite> Flags;
+        [SerializeField] private SerializedDictionary<string, Sprite> _flags;
+
+        public IReadOnlyDictionary<string, Sprite> Flags => _flags;
         public Sprite DefaultFlag => Flags[Default];
     }
 }

@@ -104,6 +104,12 @@ namespace CodeBase.UI.Services.Factory
             window.Construct(_progressService, _adService, _hero, _stateMachine);
         }
 
+        public void CreateTutorial()
+        {
+            TutorialWindow window = CreateWindow<TutorialWindow>(WindowId.Tutorial);
+            window.Construct(_staticData);
+        }
+
         public GameObject CreateOverviewInterface() =>
             _assets.Instantiate(AssetPath.OverviewInterface, _uiRoot);
 
@@ -122,8 +128,8 @@ namespace CodeBase.UI.Services.Factory
 
         private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase
         {
-            WindowConfig config = _staticData.GetWindow(windowId);
-            TWindow window = Object.Instantiate(config.Template, _uiRoot) as TWindow;
+            GameObject template = _staticData.GetWindow(windowId);
+            TWindow window = Object.Instantiate(template, _uiRoot).GetComponent<TWindow>();
             return window;
         }
 

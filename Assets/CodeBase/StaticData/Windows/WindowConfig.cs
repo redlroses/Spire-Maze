@@ -1,13 +1,15 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using CodeBase.UI.Services.Windows;
-using CodeBase.UI.Windows;
+using UnityEngine;
 
 namespace CodeBase.StaticData.Windows
 {
-  [Serializable]
-  public class WindowConfig
-  {
-    public WindowId WindowId;
-    public WindowBase Template;
-  }
+    [CreateAssetMenu(menuName = "Static Data/Window Configs", fileName = "WindowConfigs")]
+    public class WindowConfig : ScriptableObject
+    {
+        [SerializeField] private SerializedDictionary<WindowId, GameObject> _windows;
+
+        public IReadOnlyDictionary<WindowId, GameObject> Windows => _windows;
+    }
 }

@@ -29,10 +29,10 @@ namespace CodeBase.Services.StaticData
         private Dictionary<string, StaminaStaticData> _stamins;
         private Dictionary<StorableType, StorableStaticData> _storables;
         private Dictionary<string, LeaderboardStaticData> _leaderboards;
-        private Dictionary<WindowId, WindowConfig> _windows;
         private Dictionary<int, ScoreConfig> _scoreConfigs;
         private Dictionary<string, CameraConfig> _cameraConfigs;
 
+        private WindowConfig _windowsConfig;
         private FlagsConfig _flagsConfig;
         private TutorialConfig _tutorialConfig;
 
@@ -47,11 +47,8 @@ namespace CodeBase.Services.StaticData
             _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
             _scoreConfigs = LoadFor<ScoreConfig, int>(ScoreConfigPath, x => x.LevelId);
             _cameraConfigs = LoadFor<CameraConfig, string>(CameraConfigsPath, x => x.Orientation.ToString());
-            _windows = Resources
-                .Load<WindowStaticData>(WindowPath)
-                .Configs
-                .ToDictionary(x => x.WindowId, x => x);
 
+            _windowsConfig = Resources.Load<WindowConfig>(WindowPath);
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
             _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform ? MobileTutorialConfigPath : DesktopTutorialConfigPath);
         }
@@ -74,8 +71,10 @@ namespace CodeBase.Services.StaticData
         public LeaderboardStaticData GetLeaderboard(string name) =>
             GetDataFor(name, _leaderboards);
 
-        public WindowConfig GetWindow(WindowId windowId) =>
-            GetDataFor(windowId, _windows);
+        public GameObject GetWindow(WindowId windowId) =>
+            _windowsConfig.Windows.TryGetValue(windowId, out GameObject window)
+                ? window
+                : throw new NullReferenceException($"There is no {windowId} window");
 
         public ScoreConfig GetScoreForLevel(int levelId) =>
             GetDataFor(levelId, _scoreConfigs);

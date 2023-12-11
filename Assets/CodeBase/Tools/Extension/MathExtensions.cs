@@ -1,10 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.Tools.Extension
 {
     public static class MathExtensions
     {
+        private const float DecibelBase = 10f;
+        private const float DecibelFactor = 20f;
+
         public static bool EqualsApproximately(this float self, float to) =>
             Mathf.Approximately(self, to);
 
@@ -46,9 +48,9 @@ namespace CodeBase.Tools.Extension
             condition ? 1 : -1;
 
         public static float NormalizeDecibels(this float decibel) =>
-            Mathf.Pow(10f, decibel / 20f);
+            Mathf.Pow(DecibelBase, decibel / DecibelFactor);
 
         public static float ToDecibels(this float normalizedValue) =>
-            Mathf.Log10(normalizedValue) * 20f;
+            Mathf.Log10(normalizedValue) * DecibelFactor;
     }
 }

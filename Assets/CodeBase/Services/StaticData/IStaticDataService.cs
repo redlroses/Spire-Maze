@@ -14,7 +14,7 @@ namespace CodeBase.Services.StaticData
     StaminaStaticData GetStaminaEntity(string entityKey);
     StorableStaticData GetStorable(StorableType storableType);
     LeaderboardStaticData GetLeaderboard(string name);
-    WindowConfig GetWindow(WindowId windowId);
+    GameObject GetWindow(WindowId windowId);
     ScoreConfig GetScoreForLevel(int levelId);
     Sprite GetSpriteByLang(string lang);
     Sprite GetDefaultAvatar();

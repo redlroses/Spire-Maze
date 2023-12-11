@@ -259,9 +259,10 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
             hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService);
-            hud.GetComponentInChildren<MuteButton>().Construct(_soundService);
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
+            hud.GetComponentInChildren<MuteButton>().Construct(_soundService);
+            hud.GetComponentInChildren<TutorialButton>().Construct(_windowService);
             hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
             hud.GetComponentInChildren<SettingsButton>().Construct(_windowService);
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());

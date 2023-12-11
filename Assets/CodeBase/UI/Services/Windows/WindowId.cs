@@ -8,5 +8,6 @@
         Pause = 3,
         Results = 4,
         Lose = 5,
+        Tutorial = 6,
     }
 }
