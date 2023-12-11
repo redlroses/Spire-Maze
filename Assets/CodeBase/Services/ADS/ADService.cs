@@ -17,7 +17,7 @@ namespace CodeBase.Services.ADS
 
         private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;
-        private readonly object _soundLocker = new object();
+        private readonly SoundLocker _soundLocker = new SoundLocker(nameof(ADService));
 
         private IADProvider _adProvider;
 

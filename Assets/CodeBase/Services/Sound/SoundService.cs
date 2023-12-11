@@ -1,4 +1,4 @@
-﻿using Agava.WebUtility;
+﻿using System;
 using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
@@ -25,7 +25,7 @@ namespace CodeBase.Services.Sound
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
-        private object _locker;
+        private SoundLocker _locker;
 
         public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
@@ -38,18 +38,19 @@ namespace CodeBase.Services.Sound
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitUntil(TryIncreaseVolume).Then(() => _locker = null);
 
-            // WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
-            WebApplication.InBackgroundChangeEvent += OnInBackgroundChanged;
+            WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
 
-        public float SfxVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Sfx;
+        public float SfxDefaultVolume => _progressService.Progress.GlobalData.SoundVolume.Sfx;
 
-        public float MusicVolumeLoaded => _progressService.Progress.GlobalData.SoundVolume.Music;
+        public float MusicDefaultVolume => _progressService.Progress.GlobalData.SoundVolume.Music;
+
+        public bool IsMuted => _mixer.GetFloat(MasterVolumeProperty, out float volume) && volume.NormalizeDecibels() <= MinVolume + float.Epsilon;
 
         public void Load()
         {
-            SetMusicVolume(MusicVolumeLoaded);
-            SetSfxVolume(SfxVolumeLoaded);
+            SetMusicVolume(MusicDefaultVolume);
+            SetSfxVolume(SfxDefaultVolume);
         }
 
         public void SetMusicVolume(float volume)
@@ -64,7 +65,7 @@ namespace CodeBase.Services.Sound
             SetVolume(SfxVolumeProperty, volume);
         }
 
-        public void Mute(bool isSmooth = false, object locker = null)
+        public void Mute(bool isSmooth = false, SoundLocker locker = null)
         {
             if (_locker is not null)
                 return;
@@ -82,7 +83,7 @@ namespace CodeBase.Services.Sound
             SetMasterVolume(0f);
         }
 
-        public void Unmute(bool isSmooth = false, object locker = null)
+        public void Unmute(bool isSmooth = false, SoundLocker locker = null)
         {
             if (_locker != locker)
                 return;

@@ -23,6 +23,7 @@ using CodeBase.Services.LevelBuild;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData;
@@ -46,18 +47,19 @@ namespace CodeBase.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IInputService _inputService;
+        private readonly IUIFactory _uiFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IStaticDataService _staticData;
         private readonly ILevelBuilder _levelBuilder;
         private readonly IWatchService _watchService;
-        private readonly LoadingCurtain _curtain;
-        private readonly IUIFactory _uiFactory;
         private readonly IPauseService _pauseService;
         private readonly IAnalyticsService _analytics;
         private readonly ICameraOperatorService _cameraOperatorService;
         private readonly IWindowService _windowService;
         private readonly IADService _adService;
+        private readonly ISoundService _soundService;
+        private readonly LoadingCurtain _curtain;
         private readonly MeshCombiner _meshCombiner;
 
         private LoadPayload _loadPayload;
@@ -66,9 +68,8 @@ namespace CodeBase.Infrastructure.States
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
             IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
             ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService, IAnalyticsService analytics,
-            ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, LoadingCurtain curtain)
+            ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, ISoundService soundService, LoadingCurtain curtain)
         {
-            _adService = adService;
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -83,6 +84,8 @@ namespace CodeBase.Infrastructure.States
             _analytics = analytics;
             _cameraOperatorService = cameraOperatorService;
             _windowService = windowService;
+            _adService = adService;
+            _soundService = soundService;
             _curtain = curtain;
             _meshCombiner = new MeshCombiner();
         }
@@ -256,6 +259,7 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponent<Canvas>().worldCamera = Camera.main;
             hud.GetComponentInChildren<PauseToggle>().Construct(_pauseService);
+            hud.GetComponentInChildren<MuteButton>().Construct(_soundService);
             hud.GetComponentInChildren<ClockText>().Construct(_watchService);
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
             hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);

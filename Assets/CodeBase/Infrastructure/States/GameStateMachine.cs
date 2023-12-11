@@ -46,6 +46,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ICameraOperatorService>(),
                     services.Single<IWindowService>(),
                     services.Single<IADService>(),
+                    services.Single<ISoundService>(),
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
