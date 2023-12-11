@@ -9,7 +9,6 @@ using CodeBase.Services.Ranked;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
-using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;
@@ -61,7 +60,7 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateExtraLiveView(Transform inside) =>
             _assets.Instantiate(AssetPath.ExtraLiveView, inside);
 
-        public GameObject CreateTopRankView(int rank, Transform inside) =>
+        public GameObject CreateTopRankView(Transform inside) =>
             _assets.Instantiate(AssetPath.TopRankView, inside);
 
         public GameObject CreateRankView(Transform inside) =>

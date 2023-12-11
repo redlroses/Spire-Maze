@@ -11,7 +11,6 @@ namespace CodeBase.UI.Elements
         [SerializeField] private Slider _slider;
         [SerializeField] private bool _isAnimated;
         [SerializeField] [ShowIf(nameof(_isAnimated))] private float _animationSpeed = 1f;
-        
         [SerializeField] [ShowIf(nameof(_isAnimated))] [CurveRange(0, 0, 1f, 1f, EColor.Blue)]
         private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1f, 1f);
 
@@ -23,21 +22,16 @@ namespace CodeBase.UI.Elements
         private float _endAnimationTime;
         private float _startAnimationValue;
         private float _endAnimationValue;
-        //  private CurveAnimation _curveAnimation;
         private TowardMover<float> _animation;
 
         private void Awake()
         {
             enabled = false;
-            //   _curveAnimation = new CurveAnimation(_curve, _animationSpeed,() => enabled = false);
             _animation = new TowardMover<float>(Mathf.Lerp, _curve);
         }
 
-        private void OnValidate()
-        {
+        private void OnValidate() =>
             _curve ??= AnimationCurve.Linear(0, 0, 1f, 1f);
-            //   _curveAnimation ??= new CurveAnimation(_curve, _animationSpeed, () => enabled = false);
-        }
 
         protected override void Run()
         {
@@ -48,17 +42,11 @@ namespace CodeBase.UI.Elements
                 enabled = false;
         }
 
-        public void SetNormalizedValue(float value)
-        {
-            value = Clamp(value);
-            ApplyValue(value);
-        }
+        public void SetNormalizedValue(float value) =>
+            ApplyValue(Mathf.Clamp01(value));
 
-        public void SetNormalizedValueImmediately(float value)
-        {
-            value = Clamp(value);
-            _slider.SetValueWithoutNotify(value);
-        }
+        public void SetNormalizedValueImmediately(float value) =>
+            _slider.SetValueWithoutNotify(Mathf.Clamp01(value));
 
         private void ApplyValue(float value)
         {
@@ -73,15 +61,11 @@ namespace CodeBase.UI.Elements
 
         private void StartAnimation(float endValue)
         {
-            //  _curveAnimation.StartAnimation(_slider.value, endValue);
             _animation.SetFrom(_slider.value);
             _animation.SetTo(endValue);
             _animation.Reset();
             enabled = true;
         }
-
-        private float Clamp(float value) =>
-            Mathf.Clamp01(value);
 
 #if UNITY_EDITOR
         [Button("TestSet", EButtonEnableMode.Playmode)]

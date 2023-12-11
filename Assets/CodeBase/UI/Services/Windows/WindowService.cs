@@ -34,6 +34,9 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Lose:
                     _uiFactory.CreateLose();
                     break;
+                case WindowId.Tutorial:
+                    _uiFactory.CreateTutorial();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null);
             }

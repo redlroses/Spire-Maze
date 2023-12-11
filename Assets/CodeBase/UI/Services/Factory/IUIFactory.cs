@@ -10,7 +10,7 @@ namespace CodeBase.UI.Services.Factory
         void CreateLeaderboard();
         void CreateUIRoot();
         GameObject CreateExtraLiveView(Transform inside);
-        GameObject CreateTopRankView(int rank, Transform inside);
+        GameObject CreateTopRankView(Transform inside);
         GameObject CreateRankView(Transform inside);
         GameObject CreateCellView(Transform selfTransform);
         GameObject CreateCompassArrowPanel(Transform hero);
@@ -23,5 +23,6 @@ namespace CodeBase.UI.Services.Factory
         GameObject CreateEditorRewardADPanel();
         GameObject CreateEditorInterstitialADPanel();
         GameObject CreateTutorialSequence();
+        void CreateTutorial();
     }
 }

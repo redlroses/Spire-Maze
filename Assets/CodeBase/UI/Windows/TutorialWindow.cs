@@ -20,42 +20,64 @@ namespace CodeBase.UI.Windows
         [SerializeField] private SimpleButton _buttonBack;
 
         [Space] [Header("Indication")]
-        [SerializeField] private SliderSetter _sliderSetter;
+        [SerializeField] private PageIndicator _pageIndicator;
 
         private TutorialConfig _tutorialConfig;
-        private int _currentModuleIndex;
 
-        public void Construct(IStaticDataService staticData) =>
-            _tutorialConfig = staticData.GetTutorialConfig();
+        private int _currentModuleIndex;
 
         protected override void Initialize()
         {
             _currentModuleIndex = 0;
             SetModule(_currentModuleIndex);
+            _pageIndicator.Construct(_tutorialConfig.ModulesLength + 1);
+            _pageIndicator.PageIndexUpdated += OnPageUpdated;
             _buttonBack.Clicked += Back;
             _buttonNext.Clicked += Next;
         }
 
+        protected override void Cleanup()
+        {
+            _pageIndicator.PageIndexUpdated -= OnPageUpdated;
+            _buttonBack.Clicked -= Back;
+            _buttonNext.Clicked -= Next;
+        }
+
+        public void Construct(IStaticDataService staticData) =>
+            _tutorialConfig = staticData.GetTutorialConfig();
+
         private void Next() =>
-            SetModule(_currentModuleIndex++);
+            SetModule(NextIndex());
 
         private void Back() =>
-            SetModule(_currentModuleIndex--);
+            SetModule(PreviousIndex());
+
+        private int PreviousIndex() =>
+            (--_currentModuleIndex).ClampRound(0, _tutorialConfig.ModulesLength);
+
+        private int NextIndex() =>
+            (++_currentModuleIndex).ClampRound(0, _tutorialConfig.ModulesLength);
 
         private void SetModule(int moduleIndex)
         {
-            moduleIndex.ClampRound(0, _tutorialConfig.ModulesLength);
             ApplyModulePayload(_tutorialConfig.GetModule(moduleIndex));
             UpdateIndication(moduleIndex);
+            Debug.Log($"Set module {moduleIndex}");
         }
 
         private void ApplyModulePayload(TutorialModule module)
         {
             _image.sprite = module.Sprite;
-            _textSetter.SetText(module.ExplanationText);
+            _textSetter.SetText(module.ExplanationText.TranslateTerm());
         }
 
         private void UpdateIndication(int index) =>
-            _sliderSetter.SetNormalizedValue(index / (float) _tutorialConfig.ModulesLength);
+            _pageIndicator.SetPage(index);
+
+        private void OnPageUpdated(int index)
+        {
+            _currentModuleIndex = index;
+            SetModule(index);
+        }
     }
 }

@@ -97,7 +97,7 @@ namespace CodeBase.UI.Windows
 
         private GameObject CreateTopRankView(int i)
         {
-            GameObject rankViewObject = _gameUiFactory.CreateTopRankView(i, _content);
+            GameObject rankViewObject = _gameUiFactory.CreateTopRankView(_content);
             rankViewObject.GetComponent<TopRankViewConfigurator>().SetUp(i);
             return rankViewObject;
         }
