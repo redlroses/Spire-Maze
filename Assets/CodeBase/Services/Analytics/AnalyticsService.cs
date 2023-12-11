@@ -12,14 +12,26 @@ namespace CodeBase.Services.Analytics
         private const string ScoreLabel = "Score";
         private const string ArtifactLabel = "Artifact";
 
-        public void TrackLevelComplete(int levelId, int stars, int playTime, int artifacts, int score) =>
+        public void TrackLevelComplete(int levelId, int stars, int playTime, int artifacts, int score)
+        {
+#if !UNITY_EDITOR
             TrackLevelFinish(levelId, stars, playTime, artifacts, score, GAProgressionStatus.Complete);
+#endif
+        }
 
-        public void TrackLevelLose(int levelId, int stars, int playTime, int artifacts, int score) =>
+        public void TrackLevelLose(int levelId, int stars, int playTime, int artifacts, int score)
+        {
+#if !UNITY_EDITOR
             TrackLevelFinish(levelId, stars, playTime, artifacts, score, GAProgressionStatus.Fail);
+#endif
+        }
 
-        public void TrackLevelStart(int levelId) =>
+        public void TrackLevelStart(int levelId)
+        {
+#if !UNITY_EDITOR
             GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, GetLevelName(levelId));
+#endif
+        }
 
         private void TrackLevelFinish(int levelId, int stars, int playTime, int artifacts, int score, GAProgressionStatus status)
         {
