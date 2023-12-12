@@ -83,8 +83,7 @@ namespace CodeBase.Infrastructure.States
                 new RankedService(
                     _services.Single<IStaticDataService>()));
             _services.RegisterSingle<IPauseService>(
-                new PauseService(
-                    _services.Single<IWatchService>() as IPauseWatcher));
+                new PauseService());
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),

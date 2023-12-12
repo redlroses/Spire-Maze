@@ -6,18 +6,15 @@ namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
-        private readonly IPauseWatcher _watchService;
-
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
 
-        public PauseService(IPauseWatcher watchService)
+        public bool IsPause { get; private set; }
+
+        public PauseService()
         {
-            _watchService = watchService;
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
-
-        public bool IsPause { get; private set; }
 
         public void Register(IPauseWatcher pauseWatcher) =>
             PauseWatchers.Add(pauseWatcher);
@@ -39,9 +36,7 @@ namespace CodeBase.Services.Pause
         public void SetPause(bool isPause)
         {
             if (IsPause == isPause)
-            {
                 return;
-            }
 
             IsPause = isPause;
             ValidateWatchers();
@@ -58,8 +53,6 @@ namespace CodeBase.Services.Pause
 
         private void SendResume()
         {
-            _watchService.Resume();
-
             for (int index = 0; index < PauseWatchers.Count; index++)
             {
                 IPauseWatcher pauseWatcher = PauseWatchers[index];
@@ -69,8 +62,6 @@ namespace CodeBase.Services.Pause
 
         private void SendPause()
         {
-            _watchService.Pause();
-
             for (int index = 0; index < PauseWatchers.Count; index++)
             {
                 IPauseWatcher pauseWatcher = PauseWatchers[index];
@@ -81,9 +72,7 @@ namespace CodeBase.Services.Pause
         private void ValidateWatchers() =>
             PauseWatchers.RemoveAll(watcher => watcher.Equals(null));
 
-        private void OnInBackgroundChanged(bool isHidden)
-        {
+        private void OnInBackgroundChanged(bool isHidden) =>
             SetPause(isHidden);
-        }
     }
 }

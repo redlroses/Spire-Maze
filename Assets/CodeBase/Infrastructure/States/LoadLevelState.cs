@@ -137,7 +137,7 @@ namespace CodeBase.Infrastructure.States
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
-            RegisterWindowsServiceInPauseService();
+            RegisterServicesInPauseService();
             InitMusicPlayer();
 
             _stateMachine.Enter<GameLoopState>();
@@ -226,14 +226,10 @@ namespace CodeBase.Infrastructure.States
             int lastCompletedLevelId = 0;
 
             if (_progressService.Progress.GlobalData.Levels.Any())
-            {
                 lastCompletedLevelId = _progressService.Progress.GlobalData.Levels.Max(level => level.Id);
-            }
 
             foreach (LobbyDoor lobbyDoor in lobby.GetComponentsInChildren<LobbyDoor>())
-            {
                 lobbyDoor.Construct(lastCompletedLevelId);
-            }
         }
 
         private Vector3 GetHeroPosition() =>
@@ -286,8 +282,11 @@ namespace CodeBase.Infrastructure.States
             _cameraOperatorService.FocusOnDefault();
         }
 
-        private void RegisterWindowsServiceInPauseService() =>
+        private void RegisterServicesInPauseService()
+        {
             _pauseService.Register(_windowService as IPauseWatcher);
+            _pauseService.Register(_watchService as IPauseWatcher);
+        }
 
         private void ValidateLevelProgress()
         {

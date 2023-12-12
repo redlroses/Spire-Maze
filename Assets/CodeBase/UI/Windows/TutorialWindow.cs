@@ -62,7 +62,6 @@ namespace CodeBase.UI.Windows
         {
             ApplyModulePayload(_tutorialConfig.GetModule(moduleIndex));
             UpdateIndication(moduleIndex);
-            Debug.Log($"Set module {moduleIndex}");
         }
 
         private void ApplyModulePayload(TutorialModule module)
