@@ -50,7 +50,7 @@ namespace CodeBase.Logic.Hero
             Damaged.Invoke(deltaPoints, damageType);
 
         protected override bool CanDamage(DamageType damageType) =>
-            IsImmune == false && damageType != DamageType.Lethal;
+            IsImmune == false || damageType == DamageType.Lethal;
 
         private void ValidateHeal(int points)
         {
