@@ -31,7 +31,7 @@ namespace CodeBase.Infrastructure.States
 
         public async void Enter()
         {
-            await LoadProgressOrInitNew();
+            await InitProgress();
 
             _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
                 _progressService.Progress.WorldData.SceneName,
@@ -42,12 +42,10 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit() { }
 
-        private async UniTask LoadProgressOrInitNew()
+        private async UniTask InitProgress()
         {
-            _progressService.Progress =
-                await _saveLoadProgress.LoadProgress()
-                ?? NewProgress();
-
+            PlayerProgress loaded = await _saveLoadProgress.LoadProgress();
+            _progressService.Progress = loaded ?? NewProgress();
             _progressService.TemporalProgress = new TemporalProgress();
         }
 

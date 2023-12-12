@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string VerticalRailLock = "Prefabs/VerticalRailLock";
 
         public const string TutorialTrigger = "Prefabs/TutorialTrigger";
-        public const string TutorialPanel = "Prefabs/UI/TutorialPanel";
+        public const string TutorialPanel = "Prefabs/UI/Tutorial/TutorialPanel";
 
         public const string MusicPlayer = "Prefabs/MusicPlayer";
 

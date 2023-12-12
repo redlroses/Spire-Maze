@@ -47,9 +47,6 @@ namespace CodeBase.Services.SaveLoad
 #endif
         }
 
-        private bool IsSavesEmpty(string saveData) =>
-            string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
-
 #pragma warning disable CS1998
         public async UniTask<PlayerProgress> LoadProgress()
         {
@@ -170,6 +167,13 @@ namespace CodeBase.Services.SaveLoad
 
             prioritized.GlobalData.Levels = mergedLevelsData.ToList();
             return prioritized;
+        }
+
+        private bool IsSavesEmpty(string saveData)
+        {
+            Debug.Log($"Testing for empty save: {saveData}");
+            Debug.Log($"Is empty: {string.IsNullOrEmpty(saveData) || saveData == EmptySaveString}");
+            return string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
         }
     }
 }
