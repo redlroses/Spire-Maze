@@ -1,30 +1,32 @@
-﻿using System;
-using AYellowpaper;
+﻿using AYellowpaper;
 using CodeBase.Tools;
+using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CodeBase.UI
 {
     public class EnterLevelPanel : MonoBehaviour
     {
+        private const string LevelTerm = "Level";
+
         [SerializeField] private Button _enterButton;
         [SerializeField] private InterfaceReference<IShowHide> _showHide;
         [SerializeField] private TextSetter _labelSetter;
         [SerializeField] private StarsView _starsView;
 
-        public event Action EnterClick
+        public event UnityAction EnterClick
         {
-            add => _enterButton.onClick.AddListener(value.Invoke);
-            remove => _enterButton.onClick.RemoveAllListeners();
+            add => _enterButton.onClick.AddListener(value);
+            remove => _enterButton.onClick.RemoveListener(value);
         }
 
         public void Show(int starsCount, int levelId)
         {
             _starsView.EnableStars(starsCount);
-            string text = _labelSetter.ReadText();
-            _labelSetter.SetText(String.Format(text, levelId));
+            _labelSetter.SetText(string.Format(LevelTerm.TranslateTerm(), levelId));
             _showHide.Value.Show();
             _enterButton.interactable = true;
         }

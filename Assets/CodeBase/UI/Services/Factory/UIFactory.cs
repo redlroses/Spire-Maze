@@ -51,6 +51,9 @@ namespace CodeBase.UI.Services.Factory
         public void Init(HeroReviver hero) =>
             _hero = hero;
 
+        public GameObject CreateLevelNamePanel() =>
+            _assets.Instantiate(AssetPath.LevelNamePanel, _uiRoot);
+
         public GameObject CreateEditorRewardADPanel() =>
             _assets.Instantiate(AssetPath.EditorRewardADPanel, _uiRoot);
 

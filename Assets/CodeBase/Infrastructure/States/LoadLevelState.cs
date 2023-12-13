@@ -137,6 +137,7 @@ namespace CodeBase.Infrastructure.States
             CameraFollow(hero);
             InformProgressReaders();
             InitHud(hero);
+            InitLevelNamePanel();
             RegisterServicesInPauseService();
             InitMusicPlayer();
 
@@ -265,6 +266,13 @@ namespace CodeBase.Infrastructure.States
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
             hud.GetComponentInChildren<InventoryView>().Construct(_uiFactory, hero.GetComponent<HeroInventory>());
             hud.GetComponentInChildren<ItemCollectedView>().Construct(hero.GetComponent<ItemCollector>());
+        }
+
+        private void InitLevelNamePanel()
+        {
+            LevelNamePanel levelNamePanel = _uiFactory.CreateLevelNamePanel().GetComponent<LevelNamePanel>();
+            int starsCount = _progressService.Progress.GlobalData.Levels.Find(level => level.Id == _loadPayload.LevelId)?.Stars ?? 0;
+            levelNamePanel.Show(starsCount, _loadPayload.LevelId);
         }
 
         private void InitMusicPlayer()

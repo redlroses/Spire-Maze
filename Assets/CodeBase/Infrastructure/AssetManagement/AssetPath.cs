@@ -13,6 +13,7 @@ namespace CodeBase.Infrastructure.AssetManagement
         public const string CompassArrowPanel = "Prefabs/UI/CompassArrowPanel";
         public const string OverviewInterface = "Prefabs/UI/OverviewInterface";
         public const string EnterLevelPanel = "Prefabs/UI/EnterLevelPanel";
+        public const string LevelNamePanel = "Prefabs/UI/LevelNamePanel";
 
         public const string EditorRewardADPanel = "Prefabs/UI/DebugPanels/EditorRewardADPanel";
         public const string EditorInterstitialADPanel = "Prefabs/UI/DebugPanels/EditorInterstitialADPanel";

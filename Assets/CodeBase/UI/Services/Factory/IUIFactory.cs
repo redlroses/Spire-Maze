@@ -16,13 +16,14 @@ namespace CodeBase.UI.Services.Factory
         GameObject CreateCompassArrowPanel(Transform hero);
         GameObject CreateOverviewInterface();
         GameObject CreateEnterLevelPanel();
+        GameObject CreateLevelNamePanel();
+        GameObject CreateEditorRewardADPanel();
+        GameObject CreateEditorInterstitialADPanel();
+        GameObject CreateTutorialSequence();
         void CreateSettings();
         void CreatePause();
         void CreateResults();
         void CreateLose();
-        GameObject CreateEditorRewardADPanel();
-        GameObject CreateEditorInterstitialADPanel();
-        GameObject CreateTutorialSequence();
         void CreateTutorial();
     }
 }
