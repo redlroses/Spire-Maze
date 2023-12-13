@@ -19,6 +19,7 @@ namespace CodeBase.Logic.StaminaEntity
         private bool _isReplenish;
 
         public event Action Changed = () => { };
+        public event Action AttemptToEmptyUsed = () => { };
 
         public int CurrentPoints
         {
@@ -52,7 +53,10 @@ namespace CodeBase.Logic.StaminaEntity
         public bool TrySpend(int spendStamina)
         {
             if (spendStamina <= 0 || CurrentPoints <= 0)
+            {
+                AttemptToEmptyUsed.Invoke();
                 return false;
+            }
 
             Spend(spendStamina);
             return true;

@@ -1,4 +1,9 @@
-﻿namespace CodeBase.Logic.StaminaEntity
+﻿using System;
+
+namespace CodeBase.Logic.StaminaEntity
 {
-    public interface IStamina : IPoints { }
+    public interface IStamina : IPoints
+    {
+        event Action AttemptToEmptyUsed;
+    }
 }

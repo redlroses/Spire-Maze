@@ -1,6 +1,6 @@
-﻿using System;
-using CodeBase.Tools;
+﻿using CodeBase.Tools;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.DelayRoutines
 {
@@ -13,7 +13,7 @@ namespace CodeBase.DelayRoutines
 
             TowardMover<Vector3> towardMover = new TowardMover<Vector3>(initialScale, finishScale, Vector3.Lerp, curve);
 
-            bool ScaleTween()
+            bool Tween()
             {
                 bool isProcess = towardMover.TryUpdate(Time.deltaTime / duration, out Vector3 scale);
                 transform.localScale = scale;
@@ -21,12 +21,35 @@ namespace CodeBase.DelayRoutines
             }
 
             Then(towardMover.Forward);
-            WaitWhile(ScaleTween);
+            WaitWhile(Tween);
 
             if (isPulse)
             {
                 Then(new Executor(() => towardMover.Switch()));
-                WaitWhile(ScaleTween);
+                WaitWhile(Tween);
+            }
+
+            return this;
+        }
+
+        public RoutineSequence DoGradient(Graphic graphics, Gradient gradient, float duration, AnimationCurve curve, bool isPulse = false)
+        {
+            TowardMover<float> towardMover = new TowardMover<float>(0f, 1f, Mathf.Lerp, curve);
+
+            bool Tween()
+            {
+                bool isProcess = towardMover.TryUpdate(Time.deltaTime / duration, out float value);
+                graphics.color = gradient.Evaluate(value);
+                return isProcess;
+            }
+
+            Then(towardMover.Forward);
+            WaitWhile(Tween);
+
+            if (isPulse)
+            {
+                Then(new Executor(() => towardMover.Switch()));
+                WaitWhile(Tween);
             }
 
             return this;

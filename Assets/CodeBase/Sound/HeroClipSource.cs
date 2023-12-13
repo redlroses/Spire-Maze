@@ -4,6 +4,7 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Portal;
+using CodeBase.Logic.StaminaEntity;
 using CodeBase.Logic.Сollectible;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace CodeBase.Sound
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private ItemCollector _itemCollector;
         [SerializeField] private Teleportable _teleportable;
+        [SerializeField] private PlayerStamina _stamina;
 
         [Space] [Header("AnimationBased")]
         [SerializeField] private SerializedDictionary<AnimatorState, AudioClip> _movementClips;
@@ -24,6 +26,7 @@ namespace CodeBase.Sound
         [Space] [Header("Other")]
         [SerializeField] private AudioClip _collectSound;
         [SerializeField] private AudioClip _teleportedSound;
+        [SerializeField] private AudioClip _notEnoughStaminaSound;
 
         [Space] [Header("Damage")]
         [SerializeField] private AudioClip _periodicDamagedSound;
@@ -50,6 +53,17 @@ namespace CodeBase.Sound
             _heroAnimator.StepMoved += OnStepMoved;
             _itemCollector.Collected += OnPlaySoundCollected;
             _teleportable.Teleported += OnPlaySoundTeleported;
+            _stamina.AttemptToEmptyUsed += OnAttemptToEmptyStaminaUsed;
+        }
+
+        private void OnDisable()
+        {
+            _heroAnimator.StepMoved -= OnStepMoved;
+            _heroAnimator.StateEntered -= OnStateEntered;
+            _heroAnimator.StateExited -= OnStateExited;
+            _itemCollector.Collected -= OnPlaySoundCollected;
+            _teleportable.Teleported -= OnPlaySoundTeleported;
+            _stamina.AttemptToEmptyUsed -= OnAttemptToEmptyStaminaUsed;
         }
 
         private void OnDamaged(int damage, DamageType type)
@@ -72,14 +86,8 @@ namespace CodeBase.Sound
             }
         }
 
-        private void OnDisable()
-        {
-            _heroAnimator.StepMoved -= OnStepMoved;
-            _heroAnimator.StateEntered -= OnStateEntered;
-            _heroAnimator.StateExited -= OnStateExited;
-            _itemCollector.Collected -= OnPlaySoundCollected;
-            _teleportable.Teleported -= OnPlaySoundTeleported;
-        }
+        private void OnAttemptToEmptyStaminaUsed() =>
+            PlayOneShot(_notEnoughStaminaSound);
 
         private void OnStateExited(AnimatorState state) { }
 
@@ -89,19 +97,13 @@ namespace CodeBase.Sound
                 PlayOneShot(clip);
         }
 
-        private void OnPlaySoundCollected(Sprite _, Vector3 __)
-        {
+        private void OnPlaySoundCollected(Sprite _, Vector3 __) =>
             PlayOneShot(_collectSound);
-        }
 
-        private void OnPlaySoundTeleported()
-        {
+        private void OnPlaySoundTeleported() =>
             PlayOneShot(_teleportedSound);
-        }
 
-        private void OnStepMoved()
-        {
+        private void OnStepMoved() =>
             PlayOneShot(_stepSounds.GetRandom());
-        }
     }
 }

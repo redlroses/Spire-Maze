@@ -1,14 +1,13 @@
 ﻿using CodeBase.Logic;
-using NTC.Global.Cache;
 using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class BarView : MonoBehaviour
+    public class BarView<TPoints> : MonoBehaviour where TPoints : IPoints
     {
         [SerializeField] protected SliderSetter _sliderSetter;
 
-        protected IPoints Points;
+        protected TPoints Points;
 
         private void OnDestroy()
         {
@@ -16,17 +15,23 @@ namespace CodeBase.UI.Elements
                 return;
 
             Points.Changed -= OnChanged;
+            OnDestroyed();
         }
 
-        public void Construct(IPoints points)
+        protected virtual void OnConstruct() { }
+
+        protected virtual void OnChanged() =>
+            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
+
+        protected virtual void OnDestroyed() { }
+
+        public void Construct(TPoints points)
         {
             Points = points;
             Points.Changed += OnChanged;
             OnChanged();
+            OnConstruct();
         }
-
-        protected virtual void OnChanged() =>
-            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
 
         private float GetNormalizedBarValue() =>
             Points.CurrentPoints / (float) Points.MaxPoints;

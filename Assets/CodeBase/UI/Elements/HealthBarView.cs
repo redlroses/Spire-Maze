@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using CodeBase.Logic.HealthEntity;
+using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public sealed class HealthBarView : BarView
+    public sealed class HealthBarView : BarView<IHealth>
     {
         [SerializeField] private TextSetter _textSetter;
 

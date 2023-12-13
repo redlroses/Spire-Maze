@@ -38,7 +38,7 @@ namespace CodeBase.UI
 
             _showHide.Value.Show();
             await UniTask.WaitForSeconds(_showTime, cancellationToken: gameObject.GetCancellationTokenOnDestroy());
-            _showHide.Value.Hide();
+            _showHide.Value.Hide(() => Destroy(gameObject));
         }
     }
 }

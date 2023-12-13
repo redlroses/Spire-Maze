@@ -7699,6 +7699,7 @@ MonoBehaviour:
   _heroAnimator: {fileID: 989079028364153686}
   _itemCollector: {fileID: 5771158303944293934}
   _teleportable: {fileID: 9130773236145860932}
+  _stamina: {fileID: 8813367137604465016}
   _movementClips:
     _serializedList:
     - Key: 5
@@ -7711,6 +7712,7 @@ MonoBehaviour:
       Value: {fileID: 8300000, guid: e0e4ee6f3e5ab804f900b4eb9438bb16, type: 3}
   _collectSound: {fileID: 8300000, guid: ed62eb839ebc4d748b1c0cb60360379c, type: 3}
   _teleportedSound: {fileID: 8300000, guid: 86b89ce539682a94794d9bbc3c311fe1, type: 3}
+  _notEnoughStaminaSound: {fileID: 8300000, guid: 3429979d31dcd84479307a88b0e06ac9, type: 3}
   _periodicDamagedSound: {fileID: 8300000, guid: f0f0b798d9cb79744b895ded04534424, type: 3}
   _singleDamagedSound: {fileID: 8300000, guid: 365a9af404d6b914294286970243326f, type: 3}
   _periodicRate: 0.3
