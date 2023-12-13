@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Services.Watch;
 using CodeBase.Tools;
+using Tayx.Graphy.Utils.NumString;
+using UnityEngine;
 
 namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
+        private Locker _cachedLocker;
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
 
@@ -31,24 +34,32 @@ namespace CodeBase.Services.Pause
         {
             PauseWatchers.Clear();
             UnregisteredPauseWatchers.Clear();
+            _cachedLocker = null;
+            IsPause = false;
         }
 
-        public void SetPause(bool isPause)
+        public void EnablePause(Locker locker = null)
         {
-            if (IsPause == isPause)
+            if (IsPause || _cachedLocker is not null)
                 return;
 
-            IsPause = isPause;
+            IsPause = true;
+            Debug.Log(IsPause);
+            _cachedLocker = locker;
             ValidateWatchers();
+            SendPause();
+        }
 
-            if (isPause)
-            {
-                SendPause();
-            }
-            else
-            {
-                SendResume();
-            }
+        public void DisablePause(Locker locker = null)
+        {
+            if (IsPause == false || _cachedLocker != locker)
+                return;
+
+            IsPause = false;
+            Debug.Log(IsPause);
+            _cachedLocker = null;
+            ValidateWatchers();
+            SendResume();
         }
 
         private void SendResume()
@@ -72,7 +83,12 @@ namespace CodeBase.Services.Pause
         private void ValidateWatchers() =>
             PauseWatchers.RemoveAll(watcher => watcher.Equals(null));
 
-        private void OnInBackgroundChanged(bool isHidden) =>
-            SetPause(isHidden);
+        private void OnInBackgroundChanged(bool isHidden)
+        {
+            if (isHidden)
+                EnablePause();
+            else
+                DisablePause();
+        }
     }
 }

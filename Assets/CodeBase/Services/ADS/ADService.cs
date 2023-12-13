@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using CodeBase.DelayRoutines;
 using CodeBase.SDK.ADS;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Sound;
+using CodeBase.Tools;
 using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.ADS
@@ -15,15 +17,17 @@ namespace CodeBase.Services.ADS
         private const int InterstitialAdCooldownSeconds = 60;
 #endif
 
-        private readonly RoutineSequence _interstitialAdCooldown;
         private readonly ISoundService _soundService;
-        private readonly SoundLocker _soundLocker = new SoundLocker(nameof(ADService));
+        private readonly IPauseService _pauseService;
+        private readonly RoutineSequence _interstitialAdCooldown;
+        private readonly Locker _selfLocker = new Locker(nameof(ADService));
 
         private IADProvider _adProvider;
 
-        public ADService(ISoundService soundService)
+        public ADService(ISoundService soundService, IPauseService pauseService)
         {
             _soundService = soundService;
+            _pauseService = pauseService;
             _interstitialAdCooldown = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitForSeconds(InterstitialAdCooldownSeconds);
             InitAdProvider();
@@ -32,14 +36,13 @@ namespace CodeBase.Services.ADS
 
         public void ShowRewardAd(Action onSuccessCallback = null)
         {
-            _soundService.Mute(true, _soundLocker);
+            OnAddOpened();
 
             RewardAd(() =>
-                {
-                    onSuccessCallback?.Invoke();
-                    _soundService.Unmute(true, _soundLocker);
-                }, () => _soundService.Unmute(true, _soundLocker)
-            );
+            {
+                OnAdClosed();
+                onSuccessCallback?.Invoke();
+            }, OnAdClosed);
         }
 
         public void ShowInterstitialAd(Action onSuccessCallback = null)
@@ -48,14 +51,13 @@ namespace CodeBase.Services.ADS
                 return;
 
             _interstitialAdCooldown.Play();
-            _soundService.Mute(true, _soundLocker);
+            OnAddOpened();
 
             InterstitialAd(() =>
-                {
-                    onSuccessCallback?.Invoke();
-                    _soundService.Unmute(true, _soundLocker);
-                }, () => _soundService.Unmute(true, _soundLocker)
-            );
+            {
+                OnAdClosed();
+                onSuccessCallback?.Invoke();
+            }, OnAdClosed);
         }
 
         private void InitAdProvider()
@@ -117,6 +119,18 @@ namespace CodeBase.Services.ADS
             Action<string> errorCallback = _ => onDenyCallback?.Invoke();
             Action offlineCallback = () => onDenyCallback.Invoke();
             _adProvider.ShowInterstitialAd(openCallback, closeCallback, errorCallback, offlineCallback);
+        }
+
+        private void OnAddOpened()
+        {
+            _soundService.Mute(true, _selfLocker);
+            _pauseService.EnablePause(_selfLocker);
+        }
+
+        private void OnAdClosed()
+        {
+            _soundService.Unmute(true, _selfLocker);
+            _pauseService.DisablePause(_selfLocker);
         }
     }
 }

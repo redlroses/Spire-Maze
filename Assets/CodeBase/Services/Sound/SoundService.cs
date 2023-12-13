@@ -25,7 +25,7 @@ namespace CodeBase.Services.Sound
         private readonly RoutineSequence _smoothMute;
         private readonly RoutineSequence _smoothUnmute;
 
-        private SoundLocker _locker;
+        private Locker _cachedLocker;
 
         public SoundService(IAssetProvider assets, IPersistentProgressService progressService)
         {
@@ -36,7 +36,7 @@ namespace CodeBase.Services.Sound
                 .WaitUntil(TryDecreaseVolume);
 
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .WaitUntil(TryIncreaseVolume).Then(() => _locker = null);
+                .WaitUntil(TryIncreaseVolume).Then(() => _cachedLocker = null);
 
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
@@ -65,12 +65,12 @@ namespace CodeBase.Services.Sound
             SetVolume(SfxVolumeProperty, volume);
         }
 
-        public void Mute(bool isSmooth = false, SoundLocker locker = null)
+        public void Mute(bool isSmooth = false, Locker locker = null)
         {
-            if (_locker is not null)
+            if (_cachedLocker is not null)
                 return;
 
-            _locker = locker;
+            _cachedLocker = locker;
 
             _smoothUnmute.Stop();
 
@@ -83,9 +83,9 @@ namespace CodeBase.Services.Sound
             SetMasterVolume(0f);
         }
 
-        public void Unmute(bool isSmooth = false, SoundLocker locker = null)
+        public void Unmute(bool isSmooth = false, Locker locker = null)
         {
-            if (_locker != locker)
+            if (_cachedLocker != locker)
                 return;
 
             _smoothMute.Stop();
@@ -97,7 +97,7 @@ namespace CodeBase.Services.Sound
             }
 
             SetMasterVolume(1f);
-            _locker = null;
+            _cachedLocker = null;
         }
 
         private void SetMasterVolume(float volume) =>

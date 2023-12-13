@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Pause;
-using CodeBase.UI.Services.Windows;
+using CodeBase.Tools;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Services.Input
@@ -11,7 +11,7 @@ namespace CodeBase.Services.Input
     {
         private readonly InputController _inputController;
         private readonly IPauseService _pauseService;
-        private readonly IWindowService _windowService;
+        private readonly Locker _selfLocker = new Locker(nameof(InputService));
 
         private MoveDirection _direction = MoveDirection.Left;
         private float _readValue;
@@ -24,12 +24,10 @@ namespace CodeBase.Services.Input
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
 
-        public InputService(IPauseService pauseService, IWindowService windowService)
+        public InputService(IPauseService pauseService)
         {
-            _windowService = windowService;
             _pauseService = pauseService;
             _inputController = new InputController();
-            Subscribe();
         }
 
         public void Subscribe()
@@ -94,10 +92,10 @@ namespace CodeBase.Services.Input
 
         private void OnPause(InputAction.CallbackContext context)
         {
-            _pauseService.SetPause(!_pauseService.IsPause);
-
             if (_pauseService.IsPause)
-                _windowService.Open(WindowId.Pause);
+                _pauseService.DisablePause(_selfLocker);
+            else
+                _pauseService.EnablePause(_selfLocker);
         }
     }
 }

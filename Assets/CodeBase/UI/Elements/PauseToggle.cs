@@ -1,4 +1,6 @@
-﻿using CodeBase.Services.Pause;
+﻿using CodeBase.Services.Input;
+using CodeBase.Services.Pause;
+using CodeBase.Tools;
 using CodeBase.UI.Services.Windows;
 using TheraBytes.BetterUi;
 using UnityEngine;
@@ -7,10 +9,13 @@ namespace CodeBase.UI.Elements
 {
     public class PauseToggle : MonoBehaviour, IPauseWatcher
     {
+        private readonly Locker _inputLocker = new Locker(nameof(InputService));
+
         [SerializeField] private BetterToggle _pauseToggle;
         [SerializeField] private LocationAnimations _pauseButtonAnimation;
 
         private IPauseService _pauseService;
+
 
         private void OnDestroy() =>
             _pauseToggle.onValueChanged.RemoveAllListeners();
@@ -22,7 +27,7 @@ namespace CodeBase.UI.Elements
         }
 
         public void EmulateClick() =>
-            _pauseToggle.isOn = !_pauseToggle.isOn;
+            _pauseToggle.SetIsOnWithoutNotify(!_pauseToggle.isOn);
 
         public void Resume() =>
             _pauseToggle.isOn = false;
@@ -35,10 +40,10 @@ namespace CodeBase.UI.Elements
 
         private void OnPauseToggle(bool isPause)
         {
-            if (_pauseService.IsPause)
-                return;
-
-            _pauseService.SetPause(isPause);
+            if (isPause)
+                _pauseService.EnablePause(_inputLocker);
+            else
+                _pauseService.DisablePause(_inputLocker);
         }
     }
 }

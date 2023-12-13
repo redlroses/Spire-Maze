@@ -1,6 +1,8 @@
 ﻿using CodeBase.Infrastructure.States;
+using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Tools;
 using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Elements.Buttons.TransitionButtons;
 using UnityEngine;
@@ -9,6 +11,8 @@ namespace CodeBase.UI.Windows
 {
     public class PauseWindow : WindowBase, IPauseWatcher
     {
+        private readonly Locker _inputLocker = new Locker(nameof(InputService));
+
         [SerializeField] private SimpleButton _unpauseButton;
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private MenuButton _menuButton;
@@ -37,7 +41,7 @@ namespace CodeBase.UI.Windows
 
         protected override void SubscribeUpdates()
         {
-            _unpauseButton.Clicked += () => _pauseService.SetPause(false);
+            _unpauseButton.Clicked += () => _pauseService.DisablePause(_inputLocker);
             _menuButton.Subscribe();
             _restartButton.Subscribe();
         }

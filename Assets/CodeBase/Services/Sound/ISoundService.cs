@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Services.Sound
+﻿using CodeBase.Tools;
+
+namespace CodeBase.Services.Sound
 {
     public interface ISoundService : IService
     {
@@ -8,7 +10,7 @@
         void Load();
         void SetMusicVolume(float volume);
         void SetSfxVolume(float volume);
-        void Mute(bool isSmooth = false, SoundLocker locker = null);
-        void Unmute(bool isSmooth = false, SoundLocker locker = null);
+        void Mute(bool isSmooth = false, Locker locker = null);
+        void Unmute(bool isSmooth = false, Locker locker = null);
     }
 }

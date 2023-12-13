@@ -110,7 +110,6 @@ namespace CodeBase.Infrastructure.States
         public void Exit()
         {
             _levelBuilder.Clear();
-            _adService.ShowInterstitialAd();
 
             if (_loadPayload.IsSaveAfterLoad)
             {
@@ -124,11 +123,11 @@ namespace CodeBase.Infrastructure.States
 #endif
             _isFirstLoad = false;
             _curtain.Hide();
+            _adService.ShowInterstitialAd();
         }
 
         private void OnLoaded()
         {
-            _pauseService.SetPause(false);
             InitUIRoot();
             InitGameWorld();
             ValidateLevelProgress();

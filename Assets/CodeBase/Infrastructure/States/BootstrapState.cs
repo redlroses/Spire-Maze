@@ -69,9 +69,6 @@ namespace CodeBase.Infrastructure.States
                 new SoundService(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IPersistentProgressService>()));
-            _services.RegisterSingle<IADService>(
-                new ADService(
-                    _services.Single<ISoundService>()));
             _services.RegisterSingle<IWatchService>(
                 new WatchService(
                     _services.Single<IPersistentProgressService>()));
@@ -88,6 +85,10 @@ namespace CodeBase.Infrastructure.States
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IWatchService>()));
+            _services.RegisterSingle<IADService>(
+                new ADService(
+                    _services.Single<ISoundService>(),
+                    _services.Single<IPauseService>()));
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
@@ -105,8 +106,7 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IUIFactory>()));
             _services.RegisterSingle<IInputService>(
                 new InputService(
-                    _services.Single<IPauseService>(),
-                    _services.Single<IWindowService>()));
+                    _services.Single<IPauseService>()));
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),

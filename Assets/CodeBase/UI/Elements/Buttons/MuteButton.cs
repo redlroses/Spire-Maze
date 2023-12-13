@@ -1,4 +1,5 @@
 ﻿using CodeBase.Services.Sound;
+using CodeBase.Tools;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ namespace CodeBase.UI.Elements.Buttons
 {
     public class MuteButton : ButtonObserver
     {
-        private readonly SoundLocker _locker = new SoundLocker(nameof(MuteButton));
+        private readonly Locker _locker = new Locker(nameof(MuteButton));
 
         [SerializeField] private Image _buttonIcon;
 
