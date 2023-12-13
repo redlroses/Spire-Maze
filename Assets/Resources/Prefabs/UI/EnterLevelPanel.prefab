@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1388764113940571643}
   - component: {fileID: 6492897006260317519}
   - component: {fileID: 3671875415342591731}
+  - component: {fileID: 9218894110329690978}
   m_Layer: 5
   m_Name: Text_Enter
   m_TagString: Untagged
@@ -65,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter
+  m_text: "\u0412\u043E\u0439\u0442\u0438"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9fe018fe5f9f045c7811bf5459e2e4d6, type: 2}
-  m_sharedMaterial: {fileID: 6447333859754382329, guid: 9fe018fe5f9f045c7811bf5459e2e4d6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
+  m_sharedMaterial: {fileID: 2739131358734986699, guid: 8b328b2bf6bbd5e43a4ec4e43f3310b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,12 +93,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.65
+  m_fontSize: 71.35
   m_fontSizeBase: 94.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.5
-  m_fontSizeMax: 30
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -251,6 +252,45 @@ MonoBehaviour:
         SizeModifiers:
         - Mode: 0
           Impact: 1
+--- !u!114 &9218894110329690978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148878234501938421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Enter
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &746165056486109744
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +476,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1482322, y: 0.6832049}
-  m_AnchorMax: {x: 0.8528718, y: 0.88968647}
+  m_AnchorMin: {x: 0.06762976, y: 0.6671996}
+  m_AnchorMax: {x: 0.93237025, y: 0.91855407}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -544,12 +584,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 80
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 7.95
-  m_fontSizeMax: 25
+  m_fontSizeMin: 32
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -953,7 +993,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5380340934508542471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -13}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -963,8 +1003,8 @@ RectTransform:
   - {fileID: 2469965744015496577}
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.16556296, y: 0.3956508}
-  m_AnchorMax: {x: 0.83554095, y: 0.7226855}
+  m_AnchorMin: {x: 0.16501123, y: 0.40767384}
+  m_AnchorMax: {x: 0.834989, y: 0.7052136}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1256,8 +1296,8 @@ RectTransform:
   - {fileID: 1388764113940571643}
   m_Father: {fileID: 1673074828455991015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.30728474, y: 0.12910378}
-  m_AnchorMax: {x: 0.69271535, y: 0.35564238}
+  m_AnchorMin: {x: 0.24309212, y: 0.17612576}
+  m_AnchorMax: {x: 0.7569078, y: 0.3575806}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
