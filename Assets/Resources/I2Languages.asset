@@ -15,7 +15,7 @@ MonoBehaviour:
   mSource:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
-    GoogleLiveSyncIsUptoDate: 0
+    GoogleLiveSyncIsUptoDate: 1
     mTerms:
     - Term: Anon
       TermType: 0
@@ -62,6 +62,24 @@ MonoBehaviour:
       - "\u0412\u044B\u0441\u043E\u043A\u043E\u0435"
       Flags: 000000
       Languages_Touch: []
+    - Term: HubLevelName
+      TermType: 0
+      Description: 
+      Languages:
+      - Llobby
+      - Lobi
+      - "\u0426\u0435\u043D\u0442\u0440"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Level
+      TermType: 0
+      Description: 
+      Languages:
+      - Level {0}
+      - Seviye {0}
+      - "\u0423\u0440\u043E\u0432\u0435\u043D\u044C {0}"
+      Flags: 000000
+      Languages_Touch: []
     - Term: LowQuality
       TermType: 0
       Description: 
@@ -75,9 +93,9 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - MENU
-      - "Men\xFC"
-      - "\u041C\u0435\u043D\u044E"
+      - Lobby
+      - Lobi
+      - "\u0414\u043E\u043C\u043E\u0439"
       Flags: 000000
       Languages_Touch: []
     - Term: MediumQuality
@@ -309,6 +327,24 @@ MonoBehaviour:
         \u0438\u0437 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F. "
       Flags: 000000
       Languages_Touch: []
+    - Term: TutorialLabel
+      TermType: 0
+      Description: 
+      Languages:
+      - Tutorial
+      - "\xD6\u011Fretici"
+      - "\u041E\u0431\u0443\u0447\u0435\u043D\u0438\u0435"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: TutorialLevelName
+      TermType: 0
+      Description: 
+      Languages:
+      - Tutorial
+      - "\xD6\u011Fretici"
+      - "\u041E\u0431\u0443\u0447\u0435\u043D\u0438\u0435"
+      Flags: 000000
+      Languages_Touch: []
     - Term: TutorialLift
       TermType: 0
       Description: 
@@ -445,42 +481,6 @@ MonoBehaviour:
         \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F"
       Flags: 000000
       Languages_Touch: []
-    - Term: TutorialLabel
-      TermType: 0
-      Description: 
-      Languages:
-      - Tutorial
-      - "\xD6\u011Fretici"
-      - "\u041E\u0431\u0443\u0447\u0435\u043D\u0438\u0435"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: Level
-      TermType: 0
-      Description: 
-      Languages:
-      - Level {0}
-      - Seviye {0}
-      - "\u0423\u0440\u043E\u0432\u0435\u043D\u044C {0}"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: TutorialLevelName
-      TermType: 0
-      Description: 
-      Languages:
-      - Tutorial
-      - "E\u011Fitim"
-      - "\u041E\u0431\u0443\u0447\u0435\u043D\u0438\u0435"
-      Flags: 000000
-      Languages_Touch: []
-    - Term: HubLevelName
-      TermType: 0
-      Description: 
-      Languages:
-      - 
-      - 
-      - 
-      Flags: 000000
-      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
@@ -499,7 +499,7 @@ MonoBehaviour:
     Google_WebServiceURL: https://script.google.com/macros/s/AKfycbw1db4_wBecJcloUOLaAOks_hSqzVaLhDMpUDA4vRw5LHhjqpdEKRo4_M4dDgBiNzDA/exec
     Google_SpreadsheetKey: 1ri0ni3PftW21_luR1S7mY1FWMpubnShOzefOawAUO8c
     Google_SpreadsheetName: I2Loc Spyre Maze Localization
-    Google_LastUpdatedVersion: 1700748870535
+    Google_LastUpdatedVersion: 1702460490826
     Google_Password: SpyreMaze
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2
