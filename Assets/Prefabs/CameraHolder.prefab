@@ -108,8 +108,8 @@ MonoBehaviour:
   _cameraHolder: {fileID: 1138244703130485939}
   _offsetRotetion: {x: 0, y: -0.44, z: 0}
   _offsetPosition: {x: 0, y: 0, z: -14}
-  _smoothing: 100
-  _lerpPower: 0.6
+  _smoothing: 5
+  _smoothPower: 0.5
 --- !u!1 &6100388733154383599
 GameObject:
   m_ObjectHideFlags: 0

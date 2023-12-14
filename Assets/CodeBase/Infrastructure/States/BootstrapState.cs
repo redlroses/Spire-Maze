@@ -140,8 +140,8 @@ namespace CodeBase.Infrastructure.States
         private void ChooseQualityLevel()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            if (Device.IsMobile == false)
-                QualitySettings.IncreaseLevel();
+            if (Device.IsMobile)
+                QualitySettings.DecreaseLevel();
 #else
             QualitySettings.IncreaseLevel();
 #endif
