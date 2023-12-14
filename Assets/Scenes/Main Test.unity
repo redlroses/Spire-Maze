@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5267578784342201173, guid: 58d8a470a0697524d874177f54d0a1ec, type: 3}
+      propertyPath: _smoothing
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6100388733154383599, guid: 58d8a470a0697524d874177f54d0a1ec, type: 3}
       propertyPath: m_Name
       value: CameraHolder
@@ -209,7 +213,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.9351415, b: 0.740566, a: 1}
-  m_Intensity: 1.1
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

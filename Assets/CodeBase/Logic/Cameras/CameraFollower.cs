@@ -14,7 +14,7 @@ namespace CodeBase.Logic.Cameras
         [SerializeField] private Vector3 _offsetPosition;
 
         [SerializeField] private float _smoothing;
-        [SerializeField] [Range(0f, 1f)] private float _lerpPower = 0.5f;
+        [SerializeField] [Range(0, 1f)] private float _smoothPower = 0.5f;
 
         private string _currentOrientation;
         private Transform _followTarget;
@@ -36,28 +36,20 @@ namespace CodeBase.Logic.Cameras
         public void OnResolutionChanged()
         {
             if (Application.isPlaying == false)
-            {
                 return;
-            }
 
             if (_staticData == null)
-            {
                 return;
-            }
 
             ScreenTypeConditions currentScreenConfiguration = ResolutionMonitor.CurrentScreenConfiguration;
 
             if (currentScreenConfiguration == null)
-            {
                 return;
-            }
 
             string orientationName = currentScreenConfiguration.Name;
 
             if (orientationName == _currentOrientation)
-            {
                 return;
-            }
 
             _currentOrientation = orientationName;
             ApplyConfig(_staticData.GetCameraConfigByOrientation(orientationName));
@@ -94,16 +86,18 @@ namespace CodeBase.Logic.Cameras
             rotation = Quaternion.Lerp(
                 rotation,
                 newRotation,
-                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(rotation.eulerAngles, newRotation.eulerAngles),
-                    1f - _lerpPower));
+                GetLerpFactor(rotation.eulerAngles, newRotation.eulerAngles));
             _cameraHolder.rotation = rotation;
 
             position = Vector3.Lerp(
                 position,
                 newPosition,
-                _smoothing * Time.deltaTime / Mathf.Pow(Vector3.Distance(position, newPosition), 1f - _lerpPower));
+                GetLerpFactor(position, newPosition));
             _cameraHolder.position = position;
         }
+
+        private float GetLerpFactor(Vector3 position, Vector3 newPosition) =>
+            _smoothing * Time.deltaTime * Mathf.Pow(Vector3.Distance(position, newPosition), _smoothPower);
 
         private void ApplyConfig(CameraConfig config)
         {

@@ -5,7 +5,7 @@ namespace CodeBase.Data
     [Serializable]
     public class SoundVolume
     {
-        private const float DefaultVolume = 0.8f;
+        private const float DefaultVolume = 0.5f;
 
         public float Music;
         public float Sfx;
