@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Logic.Inventory;
+using CodeBase.Services.Input;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Factory;
 using TheraBytes.BetterUi;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace CodeBase.UI.Elements
 {
@@ -17,12 +20,15 @@ namespace CodeBase.UI.Elements
         private IUIFactory _uiFactory;
         private Transform _selfTransform;
 
+        private InputController _inputController;
+
         private void OnDestroy()
         {
             if (_inventory == null)
                 return;
 
             _inventory.Updated -= OnUpdatedInventory;
+            _inputController.Player.OpenInventory.started -= OnOpenInventory;
         }
 
         public void Construct(IUIFactory uiFactory, HeroInventory heroInventory)
@@ -32,6 +38,9 @@ namespace CodeBase.UI.Elements
             _inventory = heroInventory.Inventory;
             _inventory.Updated += OnUpdatedInventory;
             InitializeCell();
+            _inputController = new InputController();
+            _inputController.Player.Enable();
+            _inputController.Player.OpenInventory.started += OnOpenInventory;
         }
 
         private void InitializeCell()
@@ -89,5 +98,11 @@ namespace CodeBase.UI.Elements
 
         private InventoryCellView FirstOrDefaultCell(IReadOnlyInventoryCell readOnlyInventoryCell) =>
             _cellViews.FirstOrDefault(cell => cell.ItemType == readOnlyInventoryCell.Item.ItemType);
+
+        private void OnOpenInventory(InputAction.CallbackContext context)
+        {
+            Debug.Log("OnOpenInventory");
+            _inventoryShowToggle.EmulateClick();
+        }
     }
 }

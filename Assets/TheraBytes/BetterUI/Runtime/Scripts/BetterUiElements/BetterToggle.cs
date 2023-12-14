@@ -81,6 +81,12 @@ namespace TheraBytes.BetterUi
             StateChanged.Invoke((int) state);
         }
 
+        public void EmulateClick()
+        {
+            OnSubmit(null);
+            StateChanged.Invoke((int) SelectionState.Pressed);
+        }
+
         private void ValueChanged(bool on)
         {
             ValueChanged(on, false);
