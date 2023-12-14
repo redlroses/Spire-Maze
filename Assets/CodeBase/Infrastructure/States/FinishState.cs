@@ -65,7 +65,7 @@ namespace CodeBase.Infrastructure.States
         private void CountCollectedArtifacts()
         {
             IInventory inventory = _heroLocator.Location.GetComponentInChildren<HeroInventory>().Inventory;
-            int artifactsCount = inventory.Count(cell => cell.Item.IsArtifact);
+            int artifactsCount = inventory.Where(cell => cell.Item.IsArtifact).Sum(cell => cell.Count);
             _progressService.TemporalProgress.CollectedArtifactsCount = artifactsCount;
         }
 
