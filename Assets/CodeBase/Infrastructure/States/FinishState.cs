@@ -74,14 +74,10 @@ namespace CodeBase.Infrastructure.States
             LevelStaticData levelData = _staticData.GetLevel(_progressService.Progress.WorldData.LevelState.LevelId);
             int artifactsCount = levelData.CellDataMap.OfType<ItemSpawnPoint>().Count(item => IsArtifact(item.Type));
             _progressService.TemporalProgress.TotalArtifactsCount = artifactsCount;
-            Debug.Log($"Total artifacts: {artifactsCount}");
         }
 
-        private void CountPlayTime()
-        {
+        private void CountPlayTime() =>
             _progressService.TemporalProgress.PlayTime = _watchService.ElapsedSeconds;
-            Debug.Log("Play time: " + _progressService.TemporalProgress.PlayTime);
-        }
 
         private void CountLevelScore(bool isLose) =>
             _scoreService.Calculate(isLose);

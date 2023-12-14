@@ -132,10 +132,8 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle(staticData);
         }
 
-        private void EnterLoadProgress()
-        {
+        private void EnterLoadProgress() =>
             _stateMachine.Enter<LoadProgressState>();
-        }
 
         private void ChooseQualityLevel()
         {
