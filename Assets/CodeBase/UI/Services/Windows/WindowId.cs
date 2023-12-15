@@ -7,7 +7,7 @@
         Settings = 2,
         Pause = 3,
         Results = 4,
-        Lose = 5,
+        Loss = 5,
         Tutorial = 6,
     }
 }

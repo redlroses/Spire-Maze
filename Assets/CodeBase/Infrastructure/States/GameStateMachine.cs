@@ -60,6 +60,7 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IScoreService>(),
                     services.Single<IRankedService>(),
                     services.Single<IPersistentProgressService>(),
+                    services.Single<ISaveLoadService>(),
                     services.Single<IWatchService>(),
                     services.Single<IGameFactory>() as IHeroLocator,
                     services.Single<IStaticDataService>(),
@@ -75,7 +76,7 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            var state = ChangeState<TState>();
+            TState state = ChangeState<TState>();
             state.Enter(payload);
         }
 

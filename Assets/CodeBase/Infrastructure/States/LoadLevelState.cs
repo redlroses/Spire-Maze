@@ -90,21 +90,21 @@ namespace CodeBase.Infrastructure.States
             _meshCombiner = new MeshCombiner();
         }
 
-        public void Enter(LoadPayload payload)
+        public void Enter(LoadPayload isLoss)
         {
             _curtain.Show();
-            _loadPayload = payload;
+            _loadPayload = isLoss;
 
-            if (payload.IsClearLoad)
+            if (isLoss.IsClearLoad)
             {
-                _analytics.TrackLevelStart(payload.LevelId);
+                _analytics.TrackLevelStart(isLoss.LevelId);
                 _watchService.Cleanup();
             }
 
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
-            _sceneLoader.Load(payload.SceneName, OnLoaded);
+            _sceneLoader.Load(isLoss.SceneName, OnLoaded);
         }
 
         public void Exit()

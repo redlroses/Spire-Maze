@@ -25,10 +25,10 @@ namespace CodeBase.Logic.StateMachine.States
             _dodge = dodge;
         }
 
-        public void Enter(MoveDirection payload)
+        public void Enter(MoveDirection isLoss)
         {
-            _mover.Move(payload);
-            _lastDirection = payload;
+            _mover.Move(isLoss);
+            _lastDirection = isLoss;
             _inputService.HorizontalMove += OnHorizontalMove;
             _inputService.Jump += OnJump;
             _inputService.Dodge += OnDodge;

@@ -31,7 +31,7 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Results:
                     _uiFactory.CreateResults();
                     break;
-                case WindowId.Lose:
+                case WindowId.Loss:
                     _uiFactory.CreateLose();
                     break;
                 case WindowId.Tutorial:

@@ -102,7 +102,7 @@ namespace CodeBase.UI.Services.Factory
 
         public void CreateLose()
         {
-            LoseWindow window = CreateWindow<LoseWindow>(WindowId.Lose);
+            LoseWindow window = CreateWindow<LoseWindow>(WindowId.Loss);
             window.Construct(_progressService, _adService, _hero, _stateMachine);
         }
 

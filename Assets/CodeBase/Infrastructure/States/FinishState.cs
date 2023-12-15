@@ -6,6 +6,7 @@ using CodeBase.Logic.Inventory;
 using CodeBase.Services.Analytics;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.Ranked;
+using CodeBase.Services.SaveLoad;
 using CodeBase.Services.Score;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
@@ -23,19 +24,21 @@ namespace CodeBase.Infrastructure.States
         private readonly IScoreService _scoreService;
         private readonly IRankedService _rankedService;
         private readonly IPersistentProgressService _progressService;
+        private readonly ISaveLoadService _saveLoad;
         private readonly IWatchService _watchService;
         private readonly IHeroLocator _heroLocator;
         private readonly IStaticDataService _staticData;
         private readonly IAnalyticsService _analytics;
 
         public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService, IWatchService watchService, IHeroLocator heroLocator,
+            IPersistentProgressService progressService, ISaveLoadService saveLoad, IWatchService watchService, IHeroLocator heroLocator,
             IStaticDataService staticData, IAnalyticsService analytics)
         {
             _windowService = windowService;
             _scoreService = scoreService;
             _rankedService = rankedService;
             _progressService = progressService;
+            _saveLoad = saveLoad;
             _watchService = watchService;
             _heroLocator = heroLocator;
             _staticData = staticData;
@@ -49,15 +52,25 @@ namespace CodeBase.Infrastructure.States
         private int CollectedArtifactsCount => TemporalProgress.CollectedArtifactsCount;
         private int PlayTime => TemporalProgress.PlayTime;
 
-        public void Enter(bool isLose)
+        public void Enter(bool isLoss)
         {
             CountCollectedArtifacts();
             CountTotalArtifacts();
             CountPlayTime();
-            CountLevelScore(isLose);
+            CountLevelScore(isLoss);
             CountGlobalScore();
-            _windowService.Open(isLose ? WindowId.Lose : WindowId.Results);
-            CollectAnalytics(isLose);
+
+            if (isLoss)
+            {
+                _windowService.Open(WindowId.Loss);
+            }
+            else
+            {
+                _saveLoad.SaveProgress();
+                _windowService.Open(WindowId.Results);
+            }
+
+            CollectAnalytics(isLoss);
         }
 
         public void Exit() { }
