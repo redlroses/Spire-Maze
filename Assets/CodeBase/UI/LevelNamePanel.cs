@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AYellowpaper;
 using CodeBase.Tools;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Elements;
 using Cysharp.Threading.Tasks;
+using I2.Loc;
 using NTC.Global.System;
 using UnityEngine;
 
@@ -11,10 +11,11 @@ namespace CodeBase.UI
 {
     public class LevelNamePanel : MonoBehaviour
     {
-        private readonly Dictionary<int, string> _levelTerms = new Dictionary<int, string>
+        private readonly LocalizedString _levelName = "Level";
+        private readonly Dictionary<int, LocalizedString> _levelTerms = new Dictionary<int, LocalizedString>
         {
-            [-1] = "TutorialLevelName",
-            [0] = "HubLevelName",
+            [-1] = new LocalizedString("TutorialLevelName"),
+            [0] = new LocalizedString("HubLevelName"),
         };
 
         [SerializeField] private InterfaceReference<IShowHide> _showHide;
@@ -24,15 +25,14 @@ namespace CodeBase.UI
 
         public async UniTaskVoid Show(int starsCount, int levelId)
         {
-            if (_levelTerms.TryGetValue(levelId, out string term))
+            if (_levelTerms.TryGetValue(levelId, out LocalizedString localizedString))
             {
-                _labelSetter.SetText(term.TranslateTerm());
+                _labelSetter.SetText(localizedString);
                 _starsView.gameObject.Disable();
             }
             else
             {
-                string text = _labelSetter.ReadText();
-                _labelSetter.SetText(string.Format(text, levelId));
+                _labelSetter.SetText(string.Format(_levelName, levelId));
                 _starsView.EnableStars(starsCount);
             }
 

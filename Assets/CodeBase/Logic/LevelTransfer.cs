@@ -52,13 +52,13 @@ namespace CodeBase.Logic
         protected override void OnTriggerObserverEntered(ITeleportable _)
         {
             _enterLevelPanel.Show(_levelData is null ? 0 : _levelData.Stars, _toLevelId);
-            _enterLevelPanel.EnterClick += LoadNewLevel;
+            _enterLevelPanel.EnterClicked += LoadNewLevel;
         }
 
         protected override void OnTriggerObserverExited(ITeleportable _)
         {
             _enterLevelPanel.Hide();
-            _enterLevelPanel.EnterClick -= LoadNewLevel;
+            _enterLevelPanel.EnterClicked -= LoadNewLevel;
         }
 
         private LevelData GetLevelData() =>
@@ -81,9 +81,7 @@ namespace CodeBase.Logic
             }
 
             if (_toLevelId <= ++lastLevel)
-            {
                 Activate();
-            }
         }
 
         private void Activate()
