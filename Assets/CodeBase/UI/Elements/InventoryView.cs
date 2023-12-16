@@ -99,10 +99,7 @@ namespace CodeBase.UI.Elements
         private InventoryCellView FirstOrDefaultCell(IReadOnlyInventoryCell readOnlyInventoryCell) =>
             _cellViews.FirstOrDefault(cell => cell.ItemType == readOnlyInventoryCell.Item.ItemType);
 
-        private void OnOpenInventory(InputAction.CallbackContext context)
-        {
-            Debug.Log("OnOpenInventory");
+        private void OnOpenInventory(InputAction.CallbackContext context) =>
             _inventoryShowToggle.EmulateClick();
-        }
     }
 }

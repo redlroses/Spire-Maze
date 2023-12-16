@@ -34,8 +34,6 @@ namespace CodeBase.Services.SaveLoad
             _progressService.UpdateWriters();
             _watchService.UpdateProgress();
             Save(_progressService.Progress);
-
-            Debug.Log("Save progress");
         }
 
 #pragma warning disable CS1998
@@ -111,7 +109,7 @@ namespace CodeBase.Services.SaveLoad
         private void SaveCloud(string saveData)
         {
             PlayerAccount.SetCloudSaveData(saveData,
-                () => Debug.Log("Cloud saved successfully"),
+                null,
                 error => Debug.LogError($"Cloud save error: {error}"));
         }
 
@@ -123,13 +121,11 @@ namespace CodeBase.Services.SaveLoad
             PlayerAccount.GetCloudSaveData(
                 saves =>
                 {
-                    Debug.Log("Cloud loaded successfully");
                     saveData = saves;
                     isLoading = false;
                 },
                 error =>
                 {
-                    Debug.LogError($"Cloud load error: {error}");
                     isLoading = false;
                 });
 
@@ -169,11 +165,7 @@ namespace CodeBase.Services.SaveLoad
             return prioritized;
         }
 
-        private bool IsSavesEmpty(string saveData)
-        {
-            Debug.Log($"Testing for empty save: {saveData}");
-            Debug.Log($"Is empty: {string.IsNullOrEmpty(saveData) || saveData == EmptySaveString}");
-            return string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
-        }
+        private bool IsSavesEmpty(string saveData) =>
+            string.IsNullOrEmpty(saveData) || saveData == EmptySaveString;
     }
 }

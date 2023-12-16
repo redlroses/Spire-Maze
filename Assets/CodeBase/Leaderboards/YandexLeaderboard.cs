@@ -116,7 +116,6 @@ namespace CodeBase.Leaderboards
                 await UniTask.Yield();
 
             _isAuthorized = PlayerAccount.IsAuthorized;
-            Debug.Log($"{nameof(TryAuthorize)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
         }
 
@@ -136,7 +135,6 @@ namespace CodeBase.Leaderboards
             while (isSuccess == false && isError == false)
                 await UniTask.Yield();
 
-            Debug.Log($"{nameof(TryRequestPersonalData)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
         }
 

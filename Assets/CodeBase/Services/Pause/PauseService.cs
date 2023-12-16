@@ -44,7 +44,6 @@ namespace CodeBase.Services.Pause
                 return;
 
             IsPause = true;
-            Debug.Log(IsPause);
             _cachedLocker = locker;
             ValidateWatchers();
             SendPause();
@@ -56,7 +55,6 @@ namespace CodeBase.Services.Pause
                 return;
 
             IsPause = false;
-            Debug.Log(IsPause);
             _cachedLocker = null;
             ValidateWatchers();
             SendResume();

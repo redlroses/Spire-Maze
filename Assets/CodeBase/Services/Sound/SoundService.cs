@@ -126,16 +126,10 @@ namespace CodeBase.Services.Sound
 
         private void OnInBackgroundChanged(bool isHidden)
         {
-            Debug.Log($"OnInBackgroundChanged: {isHidden}");
-
             if (isHidden)
-            {
                 Mute();
-            }
             else
-            {
                 Unmute();
-            }
         }
     }
 }

@@ -41,8 +41,6 @@ namespace CodeBase.Logic.HealthEntity
             int deltaPoints = CurrentPoints - newPoints;
             CurrentPoints = Mathf.Max(newPoints, 0);
             OnDamaged(deltaPoints, damageType);
-
-            Debug.Log($"Damaged: {deltaPoints}, current health: {CurrentPoints}");
         }
 
         protected virtual void OnDamaged(int deltaPoints, DamageType damageType) { }
