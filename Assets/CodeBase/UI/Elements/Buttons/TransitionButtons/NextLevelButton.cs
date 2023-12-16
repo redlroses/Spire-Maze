@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.StaticData;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
@@ -33,7 +34,10 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         private static LoadPayload CreateToLobbyPayload() =>
             new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId, true, true);
 
-        private bool IsLastLevel() =>
-            !_staticData.HasLevel(_levelId + 1);
+        private bool IsLastLevel()
+        {
+            Debug.Log($"IsLastLevel {!_staticData.HasLevel(_levelId + 1)}");
+            return !_staticData.HasLevel(_levelId + 1);
+        }
     }
 }

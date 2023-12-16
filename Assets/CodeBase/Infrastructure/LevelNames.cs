@@ -7,7 +7,7 @@
         public const string Lobby = "Lobby";
         public const string LearningLevel = "Learning";
 
-        public const int LobbyId = 0;
-        public const int LearningLevelId = -1;
+        public const int LobbyId = -1;
+        public const int LearningLevelId = 0;
     }
 }
