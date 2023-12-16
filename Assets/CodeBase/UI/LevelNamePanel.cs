@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AYellowpaper;
+using CodeBase.Infrastructure;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using Cysharp.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace CodeBase.UI
         private readonly LocalizedString _levelName = "Level";
         private readonly Dictionary<int, LocalizedString> _levelTerms = new Dictionary<int, LocalizedString>
         {
-            [-1] = new LocalizedString("TutorialLevelName"),
-            [0] = new LocalizedString("HubLevelName"),
+            [LevelNames.LearningLevelId] = new LocalizedString("TutorialLevelName"),
+            [LevelNames.LobbyId] = new LocalizedString("HubLevelName"),
         };
 
         [SerializeField] private InterfaceReference<IShowHide> _showHide;

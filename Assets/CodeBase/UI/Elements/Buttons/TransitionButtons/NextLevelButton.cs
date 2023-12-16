@@ -18,15 +18,8 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             _levelId = levelId;
         }
 
-        protected override LoadPayload CreateTransitionPayload()
-        {
-            if (IsLastLevel())
-                return CreateToLobbyPayload();
-
-            return SceneManager.GetActiveScene().name.Equals(LevelNames.LearningLevel)
-                ? CreateToLobbyPayload()
-                : CreateToNextLevelPayload();
-        }
+        protected override LoadPayload CreateTransitionPayload() =>
+            IsLastLevel() ? CreateToLobbyPayload() : CreateToNextLevelPayload();
 
         private LoadPayload CreateToNextLevelPayload() =>
             new LoadPayload(LevelNames.BuildableLevel, _levelId + 1, true, true);
@@ -34,10 +27,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         private static LoadPayload CreateToLobbyPayload() =>
             new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId, true, true);
 
-        private bool IsLastLevel()
-        {
-            Debug.Log($"IsLastLevel {!_staticData.HasLevel(_levelId + 1)}");
-            return !_staticData.HasLevel(_levelId + 1);
-        }
+        private bool IsLastLevel() =>
+            !_staticData.HasLevel(_levelId + 1);
     }
 }
