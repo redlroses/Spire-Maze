@@ -1,4 +1,6 @@
 ﻿namespace CodeBase.EditorCells
 {
-    public class MovingPlate { }
+    public class MovingPlate
+    {
+    }
 }

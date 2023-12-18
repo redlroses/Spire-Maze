@@ -8,8 +8,6 @@ namespace CodeBase.Services.Localization
     {
         private readonly Dictionary<LanguageId, string> _locales;
 
-        public LanguageId Current { get; private set; }
-
         public LocalizationService()
         {
             LocalizationManager.InitializeIfNeeded();
@@ -23,6 +21,14 @@ namespace CodeBase.Services.Localization
             };
         }
 
+        public LanguageId Current { get; private set; }
+
+        public void ChooseLanguage(LanguageId languageId)
+        {
+            Current = languageId;
+            LocalizationManager.CurrentLanguage = _locales[languageId];
+        }
+
         private string ParseLanguage(List<string> languages, LanguageId languageId)
         {
             string languageName = languageId.ToString();
@@ -31,12 +37,6 @@ namespace CodeBase.Services.Localization
                 return languageName;
 
             throw new ArgumentException($"LocalizationManager does not contains language with id - {languageId}");
-        }
-
-        public void ChooseLanguage(LanguageId languageId)
-        {
-            Current = languageId;
-            LocalizationManager.CurrentLanguage = _locales[languageId];
         }
     }
 }

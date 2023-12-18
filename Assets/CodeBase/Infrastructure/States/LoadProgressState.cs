@@ -5,7 +5,6 @@ using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -16,11 +15,14 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
-        private readonly IStaticDataService _staticDataService;
         private readonly ISoundService _soundService;
+        private readonly IStaticDataService _staticDataService;
 
-        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
-            ISaveLoadService saveLoadProgress, IStaticDataService staticDataService, ISoundService soundService)
+        public LoadProgressState(GameStateMachine gameStateMachine,
+            IPersistentProgressService progressService,
+            ISaveLoadService saveLoadProgress,
+            IStaticDataService staticDataService,
+            ISoundService soundService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
@@ -40,7 +42,9 @@ namespace CodeBase.Infrastructure.States
             _soundService.Load();
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
         private async UniTask InitProgress()
         {
@@ -51,19 +55,20 @@ namespace CodeBase.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            PlayerProgress progress = new PlayerProgress(initialLevel: LevelNames.LearningLevel, LevelNames.LearningLevelId)
-            {
-                WorldData =
+            PlayerProgress progress =
+                new PlayerProgress(LevelNames.LearningLevel, LevelNames.LearningLevelId)
                 {
-                    LevelPositions = new LevelPositions(
-                        _staticDataService.GetLevel(LevelNames.LearningLevelId)
-                            .HeroInitialPosition.AsVectorData(),
-                        _staticDataService.GetLevel(LevelNames.LearningLevelId)
-                            .FinishPosition.AsVectorData()),
-                    HeroHealthState = new HealthState(_staticDataService.GetHealthEntity(PlayerKey).MaxHealth),
-                    HeroStaminaState = new StaminaState(_staticDataService.GetStaminaEntity(PlayerKey).MaxStamina)
-                },
-            };
+                    WorldData =
+                    {
+                        LevelPositions = new LevelPositions(
+                            _staticDataService.GetLevel(LevelNames.LearningLevelId)
+                                .HeroInitialPosition.AsVectorData(),
+                            _staticDataService.GetLevel(LevelNames.LearningLevelId)
+                                .FinishPosition.AsVectorData()),
+                        HeroHealthState = new HealthState(_staticDataService.GetHealthEntity(PlayerKey).MaxHealth),
+                        HeroStaminaState = new StaminaState(_staticDataService.GetStaminaEntity(PlayerKey).MaxStamina),
+                    },
+                };
 
             progress.GlobalData.SoundVolume.Reset();
 

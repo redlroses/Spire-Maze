@@ -6,7 +6,6 @@ using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Factory;
 using TheraBytes.BetterUi;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.UI.Elements
@@ -16,11 +15,10 @@ namespace CodeBase.UI.Elements
         [SerializeField] private BetterToggle _inventoryShowToggle;
 
         private List<InventoryCellView> _cellViews;
-        private IInventory _inventory;
-        private IUIFactory _uiFactory;
-        private Transform _selfTransform;
-
         private InputController _inputController;
+        private IInventory _inventory;
+        private Transform _selfTransform;
+        private IUIFactory _uiFactory;
 
         private void OnDestroy()
         {
@@ -48,9 +46,7 @@ namespace CodeBase.UI.Elements
             _cellViews = new List<InventoryCellView>();
 
             foreach (IReadOnlyInventoryCell cell in _inventory)
-            {
                 BuildCellView(cell);
-            }
         }
 
         private void BuildCellView(IReadOnlyInventoryCell cell)

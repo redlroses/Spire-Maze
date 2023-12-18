@@ -10,19 +10,19 @@ namespace CodeBase.Logic.HealthEntity.Damage
         [SerializeField] private int _damage;
         [SerializeField] private bool _isLethal;
 
-        protected override void OnValidate() =>
-            _collider ??= GetComponent<Collider>();
-
         private void Awake() =>
             _collider ??= GetComponent<Collider>();
 
-        protected override void OnTriggerObserverEntered(IDamagable damagable) =>
-            damagable.Damage(_damage, _isLethal ? DamageType.Lethal : DamageType.Burst);
+        protected override void OnValidate() =>
+            _collider ??= GetComponent<Collider>();
 
         public void Enable() =>
             _collider.enabled = true;
 
         public void Disable() =>
             _collider.enabled = false;
+
+        protected override void OnTriggerObserverEntered(IDamagable damagable) =>
+            damagable.Damage(_damage, _isLethal ? DamageType.Lethal : DamageType.Burst);
     }
 }

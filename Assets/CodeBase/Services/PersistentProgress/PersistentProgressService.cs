@@ -13,6 +13,7 @@ namespace CodeBase.Services.PersistentProgress
         }
 
         public PlayerProgress Progress { get; set; }
+
         public TemporalProgress TemporalProgress { get; set; }
 
         public void Register(ISavedProgressReader progressReader) =>

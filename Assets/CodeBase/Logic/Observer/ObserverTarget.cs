@@ -17,7 +17,10 @@ namespace CodeBase.Logic.Observer
         }
 
         protected abstract void OnTriggerObserverEntered(TTarget target);
-        protected virtual void OnAwake() { }
+
+        protected virtual void OnAwake()
+        {
+        }
 
         protected override void OnEnabled() =>
             _observer.Entered += OnTriggerObserverEntered;

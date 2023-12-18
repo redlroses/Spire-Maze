@@ -15,6 +15,8 @@ namespace CodeBase.UI.Windows
 {
     public class LoseWindow : WindowBase
     {
+        private const string StaticTextFormat = "{0}/";
+
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private ReviveButton _reviveButton;
@@ -28,25 +30,30 @@ namespace CodeBase.UI.Windows
         private IPersistentProgressService _progressService;
 
         private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
 
-        protected override void OnAwake()
-        {
-            base.OnAwake();
-            _audioPlayer.PlayOneShot(_sound);
-        }
-
-        public void Construct(IPersistentProgressService progressService, IADService adService, HeroReviver reviver,
+        public void Construct(IPersistentProgressService progressService,
+            IADService adService,
+            HeroReviver reviver,
             GameStateMachine stateMachine)
         {
             _progressService = progressService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
-            _reviveButton.Construct(adService, reviver, () =>
-            {
-                Close();
-                stateMachine.Enter<GameLoopState>();
-            });
+            _reviveButton.Construct(adService,
+                reviver,
+                () =>
+                {
+                    Close();
+                    stateMachine.Enter<GameLoopState>();
+                });
+        }
+
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            _audioPlayer.PlayOneShot(_sound);
         }
 
         protected override void Initialize()
@@ -78,7 +85,7 @@ namespace CodeBase.UI.Windows
 
         private void SetItemsCount()
         {
-            _itemsText.SetStaticText("{0}/" + TemporalProgress.TotalArtifactsCount);
+            _itemsText.SetStaticText(StaticTextFormat + TemporalProgress.TotalArtifactsCount);
             _itemsText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
         }
     }

@@ -1,15 +1,14 @@
 ﻿using CodeBase.Infrastructure.States;
 using CodeBase.Logic.AnimatorStateMachine;
-using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.Hero;
 
 namespace CodeBase.Logic.StateMachine.States
 {
     public class ReviveState : IState
     {
-        private readonly PlayerStateMachine _playerStateMachine;
         private readonly HeroAnimator _heroAnimator;
         private readonly HeroHealth _heroHealth;
+        private readonly PlayerStateMachine _playerStateMachine;
 
         public ReviveState(PlayerStateMachine playerStateMachine, HeroAnimator heroAnimator, HeroHealth heroHealth)
         {
@@ -25,14 +24,16 @@ namespace CodeBase.Logic.StateMachine.States
             _heroAnimator.StateExited += OnExitReviveState;
         }
 
+        public void Exit()
+        {
+        }
+
         private void OnExitReviveState(AnimatorState state)
         {
             if (state == AnimatorState.Revive)
             {
-                _playerStateMachine.Enter<PlayerIdleState>();
+                _playerStateMachine.Enter<IdleState>();
             }
         }
-
-        public void Exit() { }
     }
 }

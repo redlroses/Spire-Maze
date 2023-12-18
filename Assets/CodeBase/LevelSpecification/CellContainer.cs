@@ -6,7 +6,7 @@ namespace CodeBase.LevelSpecification
     public abstract class CellContainer<T>
     {
         public readonly List<T> Container;
-        public Transform Origin;
+        public readonly Transform Origin;
 
         protected CellContainer(int size, Transform origin, List<T> container = null)
         {

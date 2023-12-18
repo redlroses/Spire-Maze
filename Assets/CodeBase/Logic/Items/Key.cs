@@ -4,6 +4,9 @@ namespace CodeBase.Logic.Items
 {
     public class Key : Item, ISpendable
     {
-        public Key(StorableStaticData storableData) : base(storableData) { }
+        public Key(StorableStaticData storableData)
+            : base(storableData)
+        {
+        }
     }
 }

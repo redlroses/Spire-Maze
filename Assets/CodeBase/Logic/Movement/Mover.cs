@@ -1,7 +1,7 @@
 using CodeBase.Services.Pause;
-using UnityEngine;
 using CodeBase.Tools.Extension;
 using NTC.Global.Cache;
+using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
@@ -17,23 +17,13 @@ namespace CodeBase.Logic.Movement
         private float _speedFactor = 1f;
         private float _radius;
 
-        protected float Radius => _radius;
-        protected float Speed => _speed;
-        public Rigidbody Rigidbody => _rigidbody;
+        protected Rigidbody Rigidbody => _rigidbody;
 
         private void Awake()
         {
             _rigidbody ??= Get<Rigidbody>();
             _radius = _rigidbody.position.RemoveY().magnitude;
         }
-
-        protected override void FixedRun()
-        {
-            ApplyMove(_direction);
-            OnLateMove();
-        }
-
-        protected virtual void OnLateMove() { }
 
         public void Move(MoveDirection direction, float speedFactor = 1f)
         {
@@ -54,6 +44,16 @@ namespace CodeBase.Logic.Movement
             enabled = false;
         }
 
+        protected override void FixedRun()
+        {
+            ApplyMove(_direction);
+            OnLateMove();
+        }
+
+        protected virtual void OnLateMove()
+        {
+        }
+
         protected virtual float CalculateSpeed() =>
             _speed * _speedFactor;
 
@@ -64,7 +64,7 @@ namespace CodeBase.Logic.Movement
             if (moveDirection == MoveDirection.Stop)
                 return;
 
-            Vector2 direction = new Vector2((int) moveDirection, 0f);
+            Vector2 direction = new Vector2((int)moveDirection, 0f);
             Vector3 velocity = direction.ToWorldDirection(_rigidbody.position, _radius) * CalculateSpeed();
 
             Rotate(velocity);
@@ -74,7 +74,8 @@ namespace CodeBase.Logic.Movement
         private void Rotate(Vector3 velocity)
         {
             Quaternion lookRotation = Quaternion.LookRotation(velocity);
-            Quaternion targetRotation = Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
+            Quaternion targetRotation =
+                Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
 
             _rigidbody.MoveRotation(targetRotation);
         }

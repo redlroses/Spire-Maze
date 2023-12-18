@@ -4,7 +4,8 @@ namespace CodeBase.EditorCells
 {
     public class Door : ColoredCell
     {
-        public Door(Texture2D texture, Colors colorType = Colors.None) : base(texture, colorType)
+        public Door(Texture2D texture, Colors colorType = Colors.None)
+            : base(texture, colorType)
         {
         }
 

@@ -9,14 +9,14 @@ namespace CodeBase.UI.Elements.Buttons
 
         private IWindowService _windowService;
 
+        private void OnDestroy() =>
+            Cleanup();
+
         public void Construct(IWindowService windowService)
         {
             _windowService = windowService;
             Subscribe();
         }
-
-        private void OnDestroy() =>
-            Cleanup();
 
         protected override void Call()
         {

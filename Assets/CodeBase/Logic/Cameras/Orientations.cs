@@ -3,6 +3,6 @@
     public enum Orientations
     {
         Portrate,
-        Landscape
+        Landscape,
     }
 }

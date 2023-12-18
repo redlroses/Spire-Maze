@@ -23,7 +23,7 @@ namespace CodeBase.UI.Elements
         private UnityAction _onClick = () => { };
         private IReadOnlyInventoryCell _cellItem;
 
-        public event Action<StorableType> ItemUsed = c => { };
+        public event Action<StorableType> ItemUsed = _ => { };
 
         public StorableType ItemType { get; private set; }
 
@@ -55,6 +55,9 @@ namespace CodeBase.UI.Elements
         public void Update() =>
             SetCount(_cellItem);
 
+        public void Remove() =>
+            Destroy(gameObject);
+
         private void SetUpTimers(IReloadable reloadable)
         {
             _visualTimer.SetUp(reloadable.ReloadTime);
@@ -81,8 +84,5 @@ namespace CodeBase.UI.Elements
             _textSetter.gameObject.SetActive(true);
             _textSetter.SetText(cell.Count);
         }
-
-        public void Remove() =>
-            Destroy(gameObject);
     }
 }

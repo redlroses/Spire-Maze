@@ -5,8 +5,10 @@ namespace CodeBase.Logic.Lift
 {
     public interface ILiftPlate
     {
-        LiftState State { get; }
-        IPlateMover Mover { get; }
         event Action<LiftState> StateChanged;
+
+        LiftState State { get; }
+
+        IPlateMover Mover { get; }
     }
 }

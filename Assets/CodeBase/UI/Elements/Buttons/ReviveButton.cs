@@ -1,6 +1,5 @@
 ﻿using System;
 using CodeBase.DelayRoutines;
-using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Hero;
 using CodeBase.Services.ADS;
 using TheraBytes.BetterUi;
@@ -26,8 +25,7 @@ namespace CodeBase.UI.Elements.Buttons
         private RoutineSequence _heartAnimation;
         private LocationAnimations.LocationAnimationEvent _onFinishAnimation;
 
-        public void Construct(IADService adService, HeroReviver reviver,
-            Action onRevived = null)
+        public void Construct(IADService adService, HeroReviver reviver, Action onRevived = null)
         {
             _onRevived = onRevived ?? (() => { });
             _adService = adService;
@@ -39,27 +37,19 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
-        private void HeartBeat()
-        {
+        private void HeartBeat() =>
             _locationAnimations.StartAnimation(BeatAnimationName, _onFinishAnimation);
-        }
 
-        private void UpdateTokens()
-        {
+        private void UpdateTokens() =>
             _tokens.SetText(string.Format(_format, _reviver.LeftReviveTokens));
-        }
 
-        protected override void Call()
-        {
+        protected override void Call() =>
             _adService.ShowRewardAd(OnRewarded);
-        }
 
         private void OnRewarded()
         {
             if (_reviver.TryRevive())
-            {
                 _onRevived.Invoke();
-            }
 
             UpdateTokens();
         }

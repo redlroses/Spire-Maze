@@ -13,12 +13,10 @@ namespace CodeBase.Logic.Сollectible
         public event Action Collected = () => { };
 
         public IItem Item { get; private set; }
-        public int Id { get; private set; }
-        public bool IsActivated { get; private set; }
 
-        protected virtual void OnConstruct(IItem item) { }
-        protected virtual void OnProgressLoaded(bool isCollected) { }
-        protected virtual void OnCollected() { }
+        public int Id { get; private set; }
+
+        public bool IsActivated { get; private set; }
 
         public void Construct(int id, IItem item)
         {
@@ -55,6 +53,18 @@ namespace CodeBase.Logic.Сollectible
                 progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
             else
                 cellState.IsActivated = IsActivated;
+        }
+
+        protected virtual void OnConstruct(IItem item)
+        {
+        }
+
+        protected virtual void OnProgressLoaded(bool isCollected)
+        {
+        }
+
+        protected virtual void OnCollected()
+        {
         }
     }
 }

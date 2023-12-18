@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Lift.PlateMove;
 using CodeBase.Services.PersistentProgress;
@@ -17,11 +16,17 @@ namespace CodeBase.Logic.Movement
         private Vector3 _groundMovingDeltaPosition;
         private Vector3 _groundMovingDeltaRotation;
 
-        protected override void OnEnabled() =>
-            _dodge.Dodged += OnDodged;
+        public void OnMovingPlatformEnter(IPlateMover plateMover) =>
+            plateMover.PositionUpdated += OnPlateMoverPositionUpdated;
 
-        protected override void OnDisabled() =>
-            _dodge.Dodged -= OnDodged;
+        public void OnMovingPlatformExit(IPlateMover plateMover) =>
+            plateMover.PositionUpdated -= OnPlateMoverPositionUpdated;
+
+        public void LoadProgress(PlayerProgress progress) =>
+            Rigidbody.position = progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
+
+        public void UpdateProgress(PlayerProgress progress) =>
+            progress.WorldData.LevelPositions.InitialPosition = Rigidbody.position.AsVectorData();
 
         protected override void OnLateMove()
         {
@@ -38,17 +43,11 @@ namespace CodeBase.Logic.Movement
             _groundMovingDeltaRotation = Vector3.zero;
         }
 
-        public void OnMovingPlatformEnter(IPlateMover plateMover) =>
-            plateMover.PositionUpdated += OnPlateMoverPositionUpdated;
+        protected override void OnEnabled() =>
+            _dodge.Dodged += OnDodged;
 
-        public void OnMovingPlatformExit(IPlateMover plateMover) =>
-            plateMover.PositionUpdated -= OnPlateMoverPositionUpdated;
-
-        public void LoadProgress(PlayerProgress progress) =>
-            Rigidbody.position = progress.WorldData.LevelPositions.InitialPosition.AsUnityVector();
-
-        public void UpdateProgress(PlayerProgress progress) =>
-            progress.WorldData.LevelPositions.InitialPosition = Rigidbody.position.AsVectorData();
+        protected override void OnDisabled() =>
+            _dodge.Dodged -= OnDodged;
 
         private void OnPlateMoverPositionUpdated(Vector3 deltaPosition, Vector3 deltaRotation)
         {

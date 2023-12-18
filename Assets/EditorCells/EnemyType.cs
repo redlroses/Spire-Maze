@@ -4,6 +4,6 @@
     {
         Generic,
         Knight,
-        Archer
+        Archer,
     }
 }

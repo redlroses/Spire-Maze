@@ -13,7 +13,9 @@ namespace CodeBase.UI
         [SerializeField] private RectTransform _handler;
         [SerializeField] private CanvasScaler _rootCanvasScale;
         [SerializeField] private float _defaultMovement;
-        [SerializeField] private float _power;
+
+        private void OnEnable() =>
+            OnResolutionChanged();
 
         private void OnValidate()
         {
@@ -21,9 +23,6 @@ namespace CodeBase.UI
             _handler ??= GetComponent<RectTransform>();
             _rootCanvasScale ??= transform.root.GetComponentInChildren<CanvasScaler>();
         }
-
-        private void OnEnable() =>
-            OnResolutionChanged();
 
         public void OnResolutionChanged()
         {

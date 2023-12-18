@@ -12,14 +12,16 @@ namespace CodeBase.Logic.StateMachine.States
     {
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
-        private readonly IInputService _inputService;
         private readonly IImmune _immune;
         private readonly InputController _inputController;
+        private readonly IInputService _inputService;
 
         private MoveDirection _lastDirection;
 
-        public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IInputService inputService, IImmune immune)
+        public DodgeState(EntityStateMachine entityStateMachine,
+            HeroAnimator heroAnimator,
+            IInputService inputService,
+            IImmune immune)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
@@ -58,11 +60,11 @@ namespace CodeBase.Logic.StateMachine.States
 
             if (_inputService.MovementPhase != InputActionPhase.Waiting)
             {
-                _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
+                _entityStateMachine.Enter<MoveState, MoveDirection>(_lastDirection);
             }
             else
             {
-                _entityStateMachine.Enter<PlayerIdleState>();
+                _entityStateMachine.Enter<IdleState>();
             }
         }
     }

@@ -1,22 +1,24 @@
 ﻿using CodeBase.Infrastructure.States;
-using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Input;
 
 namespace CodeBase.Logic.StateMachine.States
 {
-    public sealed class PlayerMoveState : IPayloadedState<MoveDirection>
+    public sealed class MoveState : IPayloadedState<MoveDirection>
     {
+        private readonly Dodge _dodge;
         private readonly EntityStateMachine _entityStateMachine;
         private readonly IInputService _inputService;
-        private readonly HeroMover _mover;
         private readonly Jumper _jumper;
-        private readonly Dodge _dodge;
+        private readonly HeroMover _mover;
 
         private MoveDirection _lastDirection;
 
-        public PlayerMoveState(EntityStateMachine entityStateMachine,
-            IInputService inputService, HeroMover mover, Jumper jumper, Dodge dodge)
+        public MoveState(EntityStateMachine entityStateMachine,
+            IInputService inputService,
+            HeroMover mover,
+            Jumper jumper,
+            Dodge dodge)
         {
             _entityStateMachine = entityStateMachine;
             _inputService = inputService;
@@ -61,7 +63,7 @@ namespace CodeBase.Logic.StateMachine.States
             if (direction != MoveDirection.Stop)
                 return;
 
-            _entityStateMachine.Enter<PlayerIdleState>();
+            _entityStateMachine.Enter<IdleState>();
         }
     }
 }

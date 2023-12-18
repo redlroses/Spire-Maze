@@ -16,7 +16,7 @@ namespace CodeBase.LevelSpecification.Constructor
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
-            for (var index = 0; index < cells.Length; index++)
+            for (int index = 0; index < cells.Length; index++)
             {
                 Cell cell = cells[index];
                 GameObject cellObject = gameFactory.CreateCell<TCell>(cell.Container);

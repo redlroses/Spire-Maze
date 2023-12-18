@@ -18,17 +18,29 @@ namespace CodeBase.Logic.Movement
         private float _coyoteTime;
         private Action _groundCheckAction;
 
-        [ShowNativeProperty]
-        public GroundState State { get; private set; } = GroundState.Grounded;
-
-        public float CoyoteTime => _coyoteTime;
-        public float CoyoteTimeDuration => _coyoteTimeDuration;
+        [ShowNativeProperty] public GroundState State { get; private set; } = GroundState.Grounded;
 
         private void Awake()
         {
             _sphereCaster ??= GetComponent<SphereCaster>();
+
             _groundCheckAction = _isEnableCoyoteTime ? CheckGroundWithCoyoteTime : CheckGround;
         }
+
+        public void Enable() =>
+            enabled = true;
+
+        public void Disable()
+        {
+            enabled = false;
+            State = GroundState.InAir;
+        }
+
+        public void Resume() =>
+            enabled = true;
+
+        public void Pause() =>
+            enabled = false;
 
         protected override void FixedRun() =>
             _groundCheckAction.Invoke();
@@ -58,21 +70,6 @@ namespace CodeBase.Logic.Movement
 
         private bool IsGroundLost(bool isTouchGround) =>
             isTouchGround == false && State == GroundState.Grounded;
-
-        public void Enable() =>
-            enabled = true;
-
-        public void Disable()
-        {
-            enabled = false;
-            State = GroundState.InAir;
-        }
-
-        public void Resume() =>
-            enabled = true;
-
-        public void Pause() =>
-            enabled = false;
 
         private bool IsTouchGround() =>
             _sphereCaster.CastSphere(Vector3.down, Jumper.GroundCheckDistance);

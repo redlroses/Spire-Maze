@@ -1,4 +1,3 @@
-using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
@@ -17,7 +16,7 @@ namespace CodeBase.Logic.Trap
 
         private bool _isActivated;
 
-        private IDamageTrigger DamageTrigger => (IDamageTrigger) _damageTrigger;
+        private IDamageTrigger DamageTrigger => (IDamageTrigger)_damageTrigger;
 
         private void Awake() =>
             _timer.SetUp(_turnOffDelay, OnTurnOff);
@@ -34,13 +33,6 @@ namespace CodeBase.Logic.Trap
                 StopEffects();
         }
 
-        private void OnTurnOff()
-        {
-            DamageTrigger.Disable();
-            StopEffects();
-            _isActivated = false;
-        }
-
         protected override void Activate()
         {
             if (_isActivated)
@@ -51,6 +43,13 @@ namespace CodeBase.Logic.Trap
             PlayEffects();
             DamageTrigger.Enable();
             _isActivated = true;
+        }
+
+        private void OnTurnOff()
+        {
+            DamageTrigger.Disable();
+            StopEffects();
+            _isActivated = false;
         }
 
         private void PlayEffects()

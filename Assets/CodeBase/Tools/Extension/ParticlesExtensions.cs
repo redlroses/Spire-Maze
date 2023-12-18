@@ -17,8 +17,10 @@ namespace CodeBase.Tools.Extension
 
             foreach (GradientColorKey originalColorKey in lifeTimeGradient.gradient.colorKeys)
             {
-                GradientColorKey newColorKey = new GradientColorKey(modifiedGradient.Evaluate(originalColorKey.time), originalColorKey.time);
-                modifiedGradient.SetKeys(modifiedGradient.colorKeys.Append(newColorKey).ToArray(), modifiedGradient.alphaKeys);
+                GradientColorKey newColorKey = new GradientColorKey(modifiedGradient.Evaluate(originalColorKey.time),
+                    originalColorKey.time);
+                modifiedGradient.SetKeys(modifiedGradient.colorKeys.Append(newColorKey).ToArray(),
+                    modifiedGradient.alphaKeys);
             }
 
             GradientAlphaKey[] alphaKeys = modifiedGradient.alphaKeys;

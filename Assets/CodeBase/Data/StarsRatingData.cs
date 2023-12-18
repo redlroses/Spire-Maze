@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class StarsRatingData
     {
         [Header("Score for")]

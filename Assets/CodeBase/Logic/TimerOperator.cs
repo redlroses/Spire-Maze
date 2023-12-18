@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
 using NTC.Global.Cache;
@@ -9,18 +8,20 @@ namespace CodeBase.Logic
 {
     public class TimerOperator : MonoCache, IPauseWatcher
     {
-        private Timer _timer;
         private Action _callBack;
         private bool _isEnabled;
+        private Timer _timer;
 
-        private void Awake()
-        {
+        private void Awake() =>
             enabled = false;
-        }
 
-        protected override void Run()
+        public void Resume() =>
+            enabled = _isEnabled;
+
+        public void Pause()
         {
-            _timer.Tick(Time.deltaTime);
+            _isEnabled = enabled;
+            enabled = false;
         }
 
         public void SetUp(float duration, Action action)
@@ -29,26 +30,14 @@ namespace CodeBase.Logic
             _callBack = action;
         }
 
-        public void Resume()
-        {
-            enabled = _isEnabled;
-        }
-
-        public void Pause()
-        {
-            _isEnabled = enabled;
-            enabled = false;
-        }
-
-        public void Play()
-        {
+        public void Play() =>
             enabled = true;
-        }
 
-        public void Restart()
-        {
+        public void Restart() =>
             _timer.Reset();
-        }
+
+        protected override void Run() =>
+            _timer.Tick(Time.deltaTime);
 
         private void OnTimeIsOn()
         {

@@ -10,10 +10,8 @@ namespace CodeBase.Logic.Portal
         [SerializeField] private ParticleSystem _teleportedEffect;
         [SerializeField] private ParticleSystem _regularEffect;
 
-        private void OnValidate()
-        {
+        private void OnValidate() =>
             _portal ??= GetComponent<PortalGate>();
-        }
 
         public void Construct(Color32 regularEffectColor)
         {
@@ -21,9 +19,7 @@ namespace CodeBase.Logic.Portal
             _regularEffect.Colorize(regularEffectColor);
         }
 
-        private void OnTeleported()
-        {
+        private void OnTeleported() =>
             _teleportedEffect.Play();
-        }
     }
 }

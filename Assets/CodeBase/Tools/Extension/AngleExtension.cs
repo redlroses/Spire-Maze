@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Tools.Constants;
+using UnityEngine;
 
 namespace CodeBase.Tools.Extension
 {
@@ -6,11 +7,11 @@ namespace CodeBase.Tools.Extension
     {
         public static float Clamp360(this float angle)
         {
-            angle %= Constants.Trigonometry.TwoPiGrade;
+            angle %= Trigonometry.TwoPiGrade;
 
             if (angle < 0)
             {
-                angle += Constants.Trigonometry.TwoPiGrade;
+                angle += Trigonometry.TwoPiGrade;
             }
 
             return angle;
@@ -18,11 +19,11 @@ namespace CodeBase.Tools.Extension
 
         public static Vector3 ClampY360(this Vector3 rotation)
         {
-            float angle = rotation.y % Constants.Trigonometry.TwoPiGrade;
+            float angle = rotation.y % Trigonometry.TwoPiGrade;
 
             if (angle < 0)
             {
-                angle += Constants.Trigonometry.TwoPiGrade;
+                angle += Trigonometry.TwoPiGrade;
             }
 
             return new Vector3(rotation.x, angle, rotation.z);

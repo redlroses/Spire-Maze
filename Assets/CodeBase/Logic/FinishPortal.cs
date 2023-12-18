@@ -23,23 +23,21 @@ namespace CodeBase.Logic
             _stateMachine = stateMachine;
         }
 
+        protected override void OnTriggerObserverEntered(ITeleportable target)
+        {
+            _target = target.GameObject;
+            _timer.Restart();
+            _timer.Play();
+        }
+
+        protected override void OnTriggerObserverExited(ITeleportable target) =>
+            _timer.Pause();
+
         private void EndLevel()
         {
             _stateMachine.Enter<FinishState, bool>(false);
             Teleported.Invoke();
             _target.Disable();
-        }
-
-        protected override void OnTriggerObserverEntered(ITeleportable target)
-        {
-            _target = target.gameObject;
-            _timer.Restart();
-            _timer.Play();
-        }
-
-        protected override void OnTriggerObserverExited(ITeleportable target)
-        {
-            _timer.Pause();
         }
     }
 }

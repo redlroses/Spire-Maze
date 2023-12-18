@@ -10,7 +10,6 @@ namespace CodeBase.Services.Randomizer
     {
         [SerializeField] private SerializedDictionary<GameObject, float> _modelChances;
 
-        
         private IRandomService _randomService;
 
         public void Construct(IRandomService randomService)

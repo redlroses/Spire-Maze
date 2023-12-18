@@ -6,7 +6,9 @@ namespace CodeBase.Services.LevelBuild
     public interface ILevelBuilder : IService
     {
         Level Build(LevelStaticData levelStaticData);
-        void Construct();
+
+        void ConstructLevel();
+
         void Clear();
     }
 }

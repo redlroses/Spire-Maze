@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Logic.Items;
 using CodeBase.StaticData.Storable;
-using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {
@@ -12,12 +11,12 @@ namespace CodeBase.Logic.Inventory
     {
         private readonly List<InventoryCell> _storage;
 
-        public event Action<IReadOnlyInventoryCell> Updated = _ => { };
-
         public Inventory(List<InventoryCell> storage)
         {
             _storage = storage;
         }
+
+        public event Action<IReadOnlyInventoryCell> Updated = _ => { };
 
         public int Count => _storage.Count;
 

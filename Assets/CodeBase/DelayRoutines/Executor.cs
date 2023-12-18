@@ -6,8 +6,10 @@ namespace CodeBase.DelayRoutines
     {
         private readonly Action _action;
 
-        public Executor(Action action) =>
+        public Executor(Action action)
+        {
             _action = action;
+        }
 
         protected override void OnPlay()
         {

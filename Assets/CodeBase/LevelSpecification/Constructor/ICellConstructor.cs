@@ -1,7 +1,5 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using CodeBase.Services.Pause;
-using CodeBase.Services.StaticData;
 
 namespace CodeBase.LevelSpecification.Constructor
 {

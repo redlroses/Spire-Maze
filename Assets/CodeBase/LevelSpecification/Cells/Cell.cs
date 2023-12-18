@@ -1,6 +1,5 @@
 ﻿using CodeBase.EditorCells;
 using CodeBase.Logic;
-using CodeBase.Logic.Lift;
 using CodeBase.Tools.Constants;
 using UnityEngine;
 
@@ -13,9 +12,6 @@ namespace CodeBase.LevelSpecification.Cells
 
         private CellPosition _position;
 
-        public int Id { get; }
-        public CellPosition Position => _position;
-
         public Cell(CellData cellData, Transform container, int id)
         {
             CellData = cellData;
@@ -23,6 +19,10 @@ namespace CodeBase.LevelSpecification.Cells
             _position = new CellPosition(container.position.y, container.rotation.eulerAngles.y);
             Id = id;
         }
+
+        public int Id { get; }
+
+        public CellPosition Position => _position;
 
         public void AddTwoPiToAngle() =>
             _position = new CellPosition(_position.Height, _position.Angle + Trigonometry.TwoPiGrade);

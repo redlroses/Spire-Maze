@@ -32,10 +32,11 @@ namespace CodeBase.Infrastructure.Factory
 
         private Transform _heroTransform;
 
-        public Transform Location => _heroTransform;
-
-        public GameFactory(IAssetProvider assets, IPersistentProgressService progressService,
-            IPauseService pauseService, IUIFactory uiFactory, IInputService inputService,
+        public GameFactory(IAssetProvider assets,
+            IPersistentProgressService progressService,
+            IPauseService pauseService,
+            IUIFactory uiFactory,
+            IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;
@@ -47,6 +48,8 @@ namespace CodeBase.Infrastructure.Factory
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
+
+        Transform IHeroLocator.Location => _heroTransform;
 
         public void Cleanup() =>
             _progressService.CleanupReadersAndWriters();
@@ -77,13 +80,19 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 
         public GameObject CreateHorizontalRail(Transform container) =>
-            _assets.Instantiate(AssetPath.HorizontalRail, Vector3.zero.ChangeY(container.position.y), container.rotation, container);
+            _assets.Instantiate(AssetPath.HorizontalRail,
+                Vector3.zero.ChangeY(container.position.y),
+                container.rotation,
+                container);
 
         public GameObject CreateVerticalRail(Transform container) =>
             _assets.Instantiate(AssetPath.VerticalRail, container);
 
         public GameObject CreateHorizontalRailLock(Transform container) =>
-            _assets.Instantiate(AssetPath.HorizontalRailLock, Vector3.zero.ChangeY(container.position.y), container.rotation, container);
+            _assets.Instantiate(AssetPath.HorizontalRailLock,
+                Vector3.zero.ChangeY(container.position.y),
+                container.rotation,
+                container);
 
         public GameObject CreateVerticalRailLock(Transform container) =>
             _assets.Instantiate(AssetPath.VerticalRailLock, container);
@@ -95,7 +104,12 @@ namespace CodeBase.Infrastructure.Factory
             data.ItemType switch
             {
                 StorableType.Compass => new Compass(data, _progressService, _uiFactory, this),
-                StorableType.Binocular => new Binocular(data, _uiFactory, _inputService, this, _cameraOperator, _progressService),
+                StorableType.Binocular => new Binocular(data,
+                    _uiFactory,
+                    _inputService,
+                    this,
+                    _cameraOperator,
+                    _progressService),
                 StorableType.BlueKey => new Key(data),
                 StorableType.RedKey => new Key(data),
                 StorableType.GreenKey => new Key(data),
@@ -105,7 +119,7 @@ namespace CodeBase.Infrastructure.Factory
                 StorableType.RuneDelta => new Rune(data),
                 StorableType.RuneEpsilon => new Rune(data),
                 StorableType.None => throw new Exception("Storable type is not specified"),
-                _ => new Item(data)
+                _ => new Item(data),
             };
 
         public GameObject CreateVirtualMover() =>
@@ -128,7 +142,7 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
         {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath, at: at);
+            GameObject gameObject = _assets.Instantiate(prefabPath, at);
             RegisterProgressWatchers(gameObject);
             RegisterPauseWatchers(gameObject);
 
@@ -137,7 +151,7 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
-            GameObject gameObject = _assets.Instantiate(path: prefabPath);
+            GameObject gameObject = _assets.Instantiate(prefabPath);
             RegisterProgressWatchers(gameObject);
             RegisterPauseWatchers(gameObject);
 

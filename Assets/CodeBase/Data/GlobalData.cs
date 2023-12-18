@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class GlobalData
     {
         public List<LevelData> Levels;

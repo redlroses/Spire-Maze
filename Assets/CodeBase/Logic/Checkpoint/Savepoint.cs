@@ -16,10 +16,11 @@ namespace CodeBase.Logic.Checkpoint
 
         private ISaveLoadService _saveLoadService;
 
-        public int Id { get; private set; }
-        public bool IsActivated { get; private set; }
-
         public event Action<bool> Activated = _ => { };
+
+        public int Id { get; private set; }
+
+        public bool IsActivated { get; private set; }
 
         public void Construct(int id, ISaveLoadService saveLoadService)
         {
@@ -32,9 +33,7 @@ namespace CodeBase.Logic.Checkpoint
             IndexableState cellState = progress.WorldData.LevelState.Indexables.Find(cell => cell.Id == Id);
 
             if (cellState == null || cellState.IsActivated == false)
-            {
                 return;
-            }
 
             IsActivated = cellState.IsActivated;
             SetColliderState(IsActivated);
@@ -47,13 +46,9 @@ namespace CodeBase.Logic.Checkpoint
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null)
-            {
                 progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
-            }
             else
-            {
                 cellState.IsActivated = IsActivated;
-            }
         }
 
         protected override void OnTriggerObserverEntered(HeroRoot _)

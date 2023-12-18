@@ -5,7 +5,8 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class Key : Cell
     {
-        public Key(CellData cellData, Transform container, int id) : base(cellData, container, id)
+        public Key(CellData cellData, Transform container, int id)
+            : base(cellData, container, id)
         {
         }
     }

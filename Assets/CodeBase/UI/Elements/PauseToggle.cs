@@ -1,7 +1,6 @@
 ﻿using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
-using CodeBase.UI.Services.Windows;
 using TheraBytes.BetterUi;
 using UnityEngine;
 
@@ -12,10 +11,8 @@ namespace CodeBase.UI.Elements
         private readonly Locker _inputLocker = new Locker(nameof(InputService));
 
         [SerializeField] private BetterToggle _pauseToggle;
-        [SerializeField] private LocationAnimations _pauseButtonAnimation;
 
         private IPauseService _pauseService;
-
 
         private void OnDestroy() =>
             _pauseToggle.onValueChanged.RemoveAllListeners();

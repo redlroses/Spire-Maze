@@ -26,13 +26,16 @@ namespace CodeBase.Infrastructure.States
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services,
-            LoadingCurtain curtain)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
+                [typeof(LoadLevelState)] = new LoadLevelState(
+                    this,
+                    services.Single<IADService>(),
+                    services.Single<IAnalyticsService>(),
+                    services.Single<ICameraOperatorService>(),
                     services.Single<IGameFactory>(),
                     services.Single<IInputService>(),
                     services.Single<IUIFactory>(),
@@ -42,29 +45,29 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ILevelBuilder>(),
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
-                    services.Single<IAnalyticsService>(),
-                    services.Single<ICameraOperatorService>(),
                     services.Single<IWindowService>(),
-                    services.Single<IADService>(),
                     services.Single<ISoundService>(),
+                    sceneLoader,
                     curtain),
-                [typeof(LoadProgressState)] = new LoadProgressState(this,
+                [typeof(LoadProgressState)] = new LoadProgressState(
+                    this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>(),
                     services.Single<IStaticDataService>(),
                     services.Single<ISoundService>()),
-                [typeof(GameLoopState)] = new GameLoopState(services.Single<IInputService>(),
+                [typeof(GameLoopState)] = new GameLoopState(
+                    services.Single<IInputService>(),
                     services.Single<IWatchService>()),
                 [typeof(FinishState)] = new FinishState(
-                    services.Single<IWindowService>(),
-                    services.Single<IScoreService>(),
-                    services.Single<IRankedService>(),
-                    services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(),
-                    services.Single<IWatchService>(),
+                    services.Single<IAnalyticsService>(),
                     services.Single<IGameFactory>() as IHeroLocator,
+                    services.Single<IPersistentProgressService>(),
+                    services.Single<IRankedService>(),
+                    services.Single<ISaveLoadService>(),
+                    services.Single<IScoreService>(),
                     services.Single<IStaticDataService>(),
-                    services.Single<IAnalyticsService>())
+                    services.Single<IWatchService>(),
+                    services.Single<IWindowService>()),
             };
         }
 
@@ -84,7 +87,7 @@ namespace CodeBase.Infrastructure.States
         {
             _activeState?.Exit();
 
-            var state = GetState<TState>();
+            TState state = GetState<TState>();
             _activeState = state;
 
             return state;

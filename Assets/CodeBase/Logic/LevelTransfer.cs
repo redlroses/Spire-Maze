@@ -21,32 +21,32 @@ namespace CodeBase.Logic
 
         [SerializeField] private int _toLevelId;
 
-        private GameStateMachine _stateMachine;
         private EnterLevelPanel _enterLevelPanel;
-        private IStaticDataService _staticData;
-        private IPersistentProgressService _progressService;
         private LevelData _levelData;
+        private IPersistentProgressService _progressService;
+        private GameStateMachine _stateMachine;
+        private IStaticDataService _staticData;
 
         public event Action Activated = () => { };
 
-        public void Construct(GameStateMachine stateMachine, EnterLevelPanel enterLevelPanel,
+        public void Construct(GameStateMachine stateMachine,
+            EnterLevelPanel enterLevelPanel,
             IPersistentProgressService progressService)
         {
-            enabled = false;
             _progressService = progressService;
             _enterLevelPanel = enterLevelPanel;
             _stateMachine = stateMachine;
             _levelData = GetLevelData();
+            enabled = false;
 
 #if UNITY_EDITOR
             if (IsForceActivate)
             {
                 Activate();
-                return;
             }
-#endif
-
+#else
             TryActivate();
+#endif
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable _)

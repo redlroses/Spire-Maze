@@ -3,7 +3,6 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Input;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Logic.StateMachine.States
@@ -17,8 +16,10 @@ namespace CodeBase.Logic.StateMachine.States
 
         private MoveDirection _lastDirection;
 
-        public JumpState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
-            IInputService inputService, HeroMover mover)
+        public JumpState(EntityStateMachine entityStateMachine,
+            HeroAnimator heroAnimator,
+            IInputService inputService,
+            HeroMover mover)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;
@@ -47,11 +48,11 @@ namespace CodeBase.Logic.StateMachine.States
 
             if (_inputService.MovementPhase != InputActionPhase.Waiting)
             {
-                _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
+                _entityStateMachine.Enter<MoveState, MoveDirection>(_lastDirection);
             }
             else
             {
-                _entityStateMachine.Enter<PlayerIdleState>();
+                _entityStateMachine.Enter<IdleState>();
             }
         }
 

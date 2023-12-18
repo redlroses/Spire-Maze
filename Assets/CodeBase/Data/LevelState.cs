@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Data.CellStates;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class LevelState
     {
         public int LevelId;

@@ -10,12 +10,15 @@ namespace CodeBase.UI.SelectionGroup
     {
         [SerializeField] private SelectionToggle<TEnum>[] _selectionsToggle;
 
-        private SelectionToggle<TEnum> _currentSelected = default;
+        private SelectionToggle<TEnum> _currentSelected;
 
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             Subscribe();
-        }
+
+        private void OnDisable() =>
+            Unsubscribe();
+
+        protected abstract void OnSelectionChanged(TEnum languageId);
 
         protected void SetDefault(TEnum defaultId)
         {
@@ -23,47 +26,33 @@ namespace CodeBase.UI.SelectionGroup
             _currentSelected.Select();
         }
 
-        private void OnDisable()
-        {
-            Unsubscribe();
-        }
-
-        [Button("Collect Selection Toggles")] [UsedImplicitly]
-        private void CollectSelectionToggles()
-        {
-            _selectionsToggle = GetComponentsInChildren<SelectionToggle<TEnum>>();
-        }
-
         private void Subscribe()
         {
-            foreach (var toggle in _selectionsToggle)
-            {
+            foreach (SelectionToggle<TEnum> toggle in _selectionsToggle)
                 toggle.Selected += OnToggleSelected;
-            }
         }
-        
+
         private void Unsubscribe()
         {
-            foreach (var toggle in _selectionsToggle)
-            {
+            foreach (SelectionToggle<TEnum> toggle in _selectionsToggle)
                 toggle.Selected -= OnToggleSelected;
-            }
         }
 
         private void OnToggleSelected(SelectionToggle<TEnum> selected)
         {
             if (Equals(selected.Id, _currentSelected.Id))
-            {
                 return;
-            }        
-            
+
             _currentSelected.Unselect();
             selected.Select();
             _currentSelected = selected;
-            
+
             OnSelectionChanged(_currentSelected.Id);
         }
 
-        protected abstract void OnSelectionChanged(TEnum languageId);
+        [Button("Collect Selection Toggles")]
+        [UsedImplicitly]
+        private void CollectSelectionToggles() =>
+            _selectionsToggle = GetComponentsInChildren<SelectionToggle<TEnum>>();
     }
 }

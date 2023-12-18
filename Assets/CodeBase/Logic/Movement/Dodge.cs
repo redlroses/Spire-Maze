@@ -1,6 +1,4 @@
 using System;
-using AYellowpaper;
-using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
@@ -47,17 +45,17 @@ namespace CodeBase.Logic.Movement
             return true;
         }
 
-        private void OnTurnOff()
-        {
-            _collider.height = _normalCollideHeight;
-            _collider.center = _collider.center.ChangeY(_normalCollideCenter);
-        }
-
         public void Pause() =>
             enabled = false;
 
         public void Resume() =>
             enabled = true;
+
+        private void OnTurnOff()
+        {
+            _collider.height = _normalCollideHeight;
+            _collider.center = _collider.center.ChangeY(_normalCollideCenter);
+        }
 
         private bool IsDodgeAvailable() =>
             enabled && _isDodged == false && _stamina.TrySpend(_fatigue);

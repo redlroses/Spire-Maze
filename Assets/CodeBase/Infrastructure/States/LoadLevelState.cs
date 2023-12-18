@@ -1,6 +1,7 @@
 ﻿#if !UNITY_EDITOR && YANDEX_GAMES
 using Agava.YandexGames;
 #endif
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
@@ -36,6 +37,7 @@ using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#pragma warning disable CS4014
 
 namespace CodeBase.Infrastructure.States
 {
@@ -43,32 +45,45 @@ namespace CodeBase.Infrastructure.States
     {
         private const string PlayerKey = "Player";
 
-        private readonly GameStateMachine _stateMachine;
-        private readonly SceneLoader _sceneLoader;
-        private readonly IGameFactory _gameFactory;
-        private readonly IInputService _inputService;
-        private readonly IUIFactory _uiFactory;
-        private readonly IPersistentProgressService _progressService;
-        private readonly ISaveLoadService _saveLoadService;
-        private readonly IStaticDataService _staticData;
-        private readonly ILevelBuilder _levelBuilder;
-        private readonly IWatchService _watchService;
-        private readonly IPauseService _pauseService;
+        private readonly IADService _adService;
         private readonly IAnalyticsService _analytics;
         private readonly ICameraOperatorService _cameraOperatorService;
-        private readonly IWindowService _windowService;
-        private readonly IADService _adService;
-        private readonly ISoundService _soundService;
         private readonly LoadingCurtain _curtain;
+        private readonly IGameFactory _gameFactory;
+        private readonly IInputService _inputService;
+        private readonly ILevelBuilder _levelBuilder;
         private readonly MeshCombiner _meshCombiner;
-
-        private LoadPayload _loadPayload;
+        private readonly IPauseService _pauseService;
+        private readonly IPersistentProgressService _progressService;
+        private readonly ISaveLoadService _saveLoadService;
+        private readonly SceneLoader _sceneLoader;
+        private readonly ISoundService _soundService;
+        private readonly GameStateMachine _stateMachine;
+        private readonly IStaticDataService _staticData;
+        private readonly IUIFactory _uiFactory;
+        private readonly IWatchService _watchService;
+        private readonly IWindowService _windowService;
         private bool _isFirstLoad = true;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
-            IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService, IAnalyticsService analytics,
-            ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, ISoundService soundService, LoadingCurtain curtain)
+        private LoadPayload _loadPayload;
+
+        public LoadLevelState(GameStateMachine gameStateMachine,
+            IADService adService,
+            IAnalyticsService analytics,
+            ICameraOperatorService cameraOperatorService,
+            IGameFactory gameFactory,
+            IInputService inputService,
+            IUIFactory uiFactory,
+            IPersistentProgressService progressService,
+            ISaveLoadService saveLoadService,
+            IStaticDataService staticDataService,
+            ILevelBuilder levelBuilder,
+            IWatchService watchService,
+            IPauseService pauseService,
+            IWindowService windowService,
+            ISoundService soundService,
+            SceneLoader sceneLoader,
+            LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -172,7 +187,7 @@ namespace CodeBase.Infrastructure.States
                     InitLearningLevel();
                     return;
                 default:
-                    throw new System.Exception($"Unknown level name {_loadPayload.SceneName}");
+                    throw new Exception($"Unknown level name {_loadPayload.SceneName}");
             }
         }
 
@@ -239,7 +254,7 @@ namespace CodeBase.Infrastructure.States
             _levelBuilder.Build(_staticData.GetLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>
-            _levelBuilder.Construct();
+            _levelBuilder.ConstructLevel();
 
         private GameObject InitHero()
         {
@@ -270,7 +285,8 @@ namespace CodeBase.Infrastructure.States
         private void InitLevelNamePanel()
         {
             LevelNamePanel levelNamePanel = _uiFactory.CreateLevelNamePanel().GetComponent<LevelNamePanel>();
-            int starsCount = _progressService.Progress.GlobalData.Levels.Find(level => level.Id == _loadPayload.LevelId)?.Stars ?? 0;
+            int starsCount = _progressService.Progress.GlobalData.Levels.Find(level => level.Id == _loadPayload.LevelId)
+                ?.Stars ?? 0;
             levelNamePanel.Show(starsCount, _loadPayload.LevelId);
         }
 
@@ -306,14 +322,15 @@ namespace CodeBase.Infrastructure.States
 
         private void ResetProgress()
         {
-            _progressService.Progress.WorldData = new WorldData(_progressService.Progress.WorldData.SceneName, _loadPayload.LevelId)
-            {
-                LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
-                HeroHealthState = new HealthState(_staticData.GetHealthEntity(PlayerKey).MaxHealth),
-                HeroStaminaState = new StaminaState(_staticData.GetStaminaEntity(PlayerKey).MaxStamina),
-                HeroInventoryData = new InventoryData(),
-                AccumulationData = new AccumulationData()
-            };
+            _progressService.Progress.WorldData =
+                new WorldData(_progressService.Progress.WorldData.SceneName, _loadPayload.LevelId)
+                {
+                    LevelPositions = new LevelPositions(GetInitialPosition(), GetFinishPosition()),
+                    HeroHealthState = new HealthState(_staticData.GetHealthEntity(PlayerKey).MaxHealth),
+                    HeroStaminaState = new StaminaState(_staticData.GetStaminaEntity(PlayerKey).MaxStamina),
+                    HeroInventoryData = new InventoryData(),
+                    AccumulationData = new AccumulationData(),
+                };
         }
 
         private Vector3Data GetInitialPosition() =>

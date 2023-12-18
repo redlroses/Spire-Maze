@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Services.Watch;
 using CodeBase.Tools;
-using Tayx.Graphy.Utils.NumString;
 using UnityEngine;
 
 namespace CodeBase.Services.Pause
@@ -9,15 +7,17 @@ namespace CodeBase.Services.Pause
     public class PauseService : IPauseService
     {
         private Locker _cachedLocker;
-        private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
-        private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
-
-        public bool IsPause { get; private set; }
 
         public PauseService()
         {
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
+
+        private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
+
+        private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
+
+        public bool IsPause { get; private set; }
 
         public void Register(IPauseWatcher pauseWatcher) =>
             PauseWatchers.Add(pauseWatcher);

@@ -1,5 +1,4 @@
 using System;
-using CodeBase.Logic.HealthEntity;
 using CodeBase.Logic.HealthEntity.Damage;
 using CodeBase.Logic.Observer;
 using UnityEngine;
@@ -18,9 +17,15 @@ namespace CodeBase.Logic.Trap
 
         public event Action Activated = () => { };
 
-        private void Awake()
-        {
+        private void Awake() =>
             _timer ??= GetComponent<TimerOperator>();
+
+        protected override void OnTriggerObserverEntered(IDamagable _)
+        {
+            if (_isActivated)
+                return;
+
+            WaitActivationDelay();
         }
 
         private void WaitActivationDelay()
@@ -35,25 +40,11 @@ namespace CodeBase.Logic.Trap
             _timer.Play();
         }
 
-        private void OnReadyToActivate()
-        {
+        private void OnReadyToActivate() =>
             _isActivated = false;
-        }
 
-        private void OnDelayPassed()
-        {
+        private void OnDelayPassed() =>
             Activate();
-        }
-
-        protected override void OnTriggerObserverEntered(IDamagable _)
-        {
-            if (_isActivated)
-            {
-                return;
-            }
-
-            WaitActivationDelay();
-        }
 
         private void Activate()
         {

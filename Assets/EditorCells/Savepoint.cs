@@ -4,7 +4,8 @@ namespace CodeBase.EditorCells
 {
     public class Savepoint : Plate
     {
-        public Savepoint(Texture2D texture) : base(texture)
+        public Savepoint(Texture2D texture)
+            : base(texture)
         {
         }
 

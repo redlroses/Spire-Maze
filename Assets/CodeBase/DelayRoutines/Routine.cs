@@ -6,12 +6,12 @@ namespace CodeBase.DelayRoutines
     {
         private Action _executedCallback;
 
-        public bool IsActive { get; private set; }
-
         protected Routine()
         {
             _executedCallback = () => { };
         }
+
+        public bool IsActive { get; private set; }
 
         public void Play()
         {
@@ -30,10 +30,12 @@ namespace CodeBase.DelayRoutines
             IsActive = false;
         }
 
-        protected virtual void OnPlay() { }
-
         public void AddNext(IRoutine routine) =>
             _executedCallback = routine.Play;
+
+        protected virtual void OnPlay()
+        {
+        }
 
         protected void Next()
         {

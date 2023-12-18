@@ -16,15 +16,13 @@ namespace CodeBase.Sound.Music
         [SerializeField] [Range(0f, 1f)] private float _maxVolume = 1f;
 
         [SerializeField] [CurveRange(0f, 0f, 1f, 1f, EColor.Indigo)]
-        private AnimationCurve _crossCurve =
-            AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        private AnimationCurve _crossCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
         private Queue<AudioSource> _audioSourcesQueue;
-        private AudioSource _currentSource;
         private TowardMover<float> _crossFader;
         private RoutineSequence _crossFadeRoutine;
 
-        public AudioSource PlayingSource => _currentSource;
+        public AudioSource PlayingSource { get; private set; }
 
         public void Init(float crossFadeTime)
         {
@@ -38,7 +36,7 @@ namespace CodeBase.Sound.Music
         public void PlayClip(AudioClip clip)
         {
             AudioSource source = _audioSourcesQueue.Dequeue();
-            _currentSource = source;
+            PlayingSource = source;
             source.clip = clip;
             source.time = 0;
             source.Play();
@@ -53,30 +51,31 @@ namespace CodeBase.Sound.Music
         }
 
         private TowardMover<float> CreateCrossFader() =>
-            new TowardMover<float>(0f, _maxVolume, Mathf.Lerp,
-                _crossCurve);
+            new TowardMover<float>(0f, _maxVolume, Mathf.Lerp, _crossCurve);
 
         private RoutineSequence CreateCrossFadeRoutine(float crossFadeTime)
         {
-            return new RoutineSequence().WaitWhile(() =>
-            {
-                bool isProcess = _crossFader.TryUpdate(Time.deltaTime / crossFadeTime, out float volume);
-
-                _firstAudioSource.volume = _maxVolume - volume;
-                _secondAudioSource.volume = volume;
-
-                return isProcess;
-            }).Then(() =>
-            {
-                if (_firstAudioSource.volume.EqualsApproximately(0))
+            return new RoutineSequence()
+                .WaitWhile(() =>
                 {
-                    _firstAudioSource.Stop();
-                }
-                else
+                    bool isProcess = _crossFader.TryUpdate(Time.deltaTime / crossFadeTime, out float volume);
+
+                    _firstAudioSource.volume = _maxVolume - volume;
+                    _secondAudioSource.volume = volume;
+
+                    return isProcess;
+                })
+                .Then(() =>
                 {
-                    _secondAudioSource.Stop();
-                }
-            });
+                    if (_firstAudioSource.volume.EqualsApproximately(0))
+                    {
+                        _firstAudioSource.Stop();
+                    }
+                    else
+                    {
+                        _secondAudioSource.Stop();
+                    }
+                });
         }
     }
 }

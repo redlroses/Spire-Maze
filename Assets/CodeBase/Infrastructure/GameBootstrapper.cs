@@ -19,11 +19,12 @@ namespace CodeBase.Infrastructure
         {
             LoadingCurtain curtain = Instantiate(_curtain);
             _game = new Game(this, curtain);
-            _initializer.Start(this, () =>
-            {
-                _webFocusObserver = new WebFocusObserver();
-                _game.StateMachine.Enter<BootstrapState>();
-            });
+            _initializer.Start(this,
+                () =>
+                {
+                    _webFocusObserver = new WebFocusObserver();
+                    _game.StateMachine.Enter<BootstrapState>();
+                });
 
             DontDestroyOnLoad(this);
         }

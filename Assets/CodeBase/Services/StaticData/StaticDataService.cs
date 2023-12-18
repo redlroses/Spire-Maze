@@ -36,7 +36,6 @@ namespace CodeBase.Services.StaticData
         private FlagsConfig _flagsConfig;
         private TutorialConfig _tutorialConfig;
 
-
         public void Load()
         {
             _levels = LoadFor<LevelStaticData, int>(LevelsDataPath, x => x.LevelId);
@@ -50,7 +49,9 @@ namespace CodeBase.Services.StaticData
 
             _windowsConfig = Resources.Load<WindowConfig>(WindowPath);
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
-            _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform ? MobileTutorialConfigPath : DesktopTutorialConfigPath);
+            _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform
+                ? MobileTutorialConfigPath
+                : DesktopTutorialConfigPath);
         }
 
         public LevelStaticData GetLevel(int levelId) =>
@@ -94,9 +95,11 @@ namespace CodeBase.Services.StaticData
         private TData GetDataFor<TData, TKey>(TKey key, IReadOnlyDictionary<TKey, TData> from) =>
             from.TryGetValue(key, out TData staticData)
                 ? staticData
-                : throw new NullReferenceException($"There is no {from.First().Value.GetType().Name} data with key: {key}");
+                : throw new NullReferenceException(
+                    $"There is no {from.First().Value.GetType().Name} data with key: {key}");
 
-        private Dictionary<TKey, TData> LoadFor<TData, TKey>(string path, Func<TData, TKey> keySelector) where TData : ScriptableObject =>
+        private Dictionary<TKey, TData> LoadFor<TData, TKey>(string path, Func<TData, TKey> keySelector)
+            where TData : ScriptableObject =>
             Resources
                 .LoadAll<TData>(path)
                 .ToDictionary(keySelector, x => x);

@@ -9,6 +9,7 @@ namespace CodeBase.Logic.HealthEntity
         private int _currentPoints;
 
         public event Action Died = () => { };
+
         public event Action Changed = () => { };
 
         public int CurrentPoints
@@ -22,6 +23,7 @@ namespace CodeBase.Logic.HealthEntity
         }
 
         public int MaxPoints { get; protected set; }
+
         public bool IsAlive => _currentPoints > 0;
 
         public void Damage(int damagePoints, DamageType damageType)
@@ -43,7 +45,9 @@ namespace CodeBase.Logic.HealthEntity
             OnDamaged(deltaPoints, damageType);
         }
 
-        protected virtual void OnDamaged(int deltaPoints, DamageType damageType) { }
+        protected virtual void OnDamaged(int deltaPoints, DamageType damageType)
+        {
+        }
 
         protected virtual bool CanDamage(DamageType damageType) =>
             true;

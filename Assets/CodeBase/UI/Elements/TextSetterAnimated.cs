@@ -5,23 +5,34 @@ using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    class TextSetterAnimated : TextSetter
+    public class TextSetterAnimated : TextSetter
     {
+        private const string DefaultStaticText = "{0}";
+
         [SerializeField] private AnimationCurve _curveAnimation;
         [SerializeField] private float _duration;
-
 #if UNITY_EDITOR
         [SerializeField] private int _testNumber;
 #endif
 
-        private string _staticText;
         private float _elapsedTime;
+        private string _staticText;
         private int _targetNumber;
 
         private void Awake()
         {
             enabled = false;
-            _staticText = "{0}";
+            _staticText = DefaultStaticText;
+        }
+
+        public void SetStaticText(string staticText) =>
+            _staticText = staticText;
+
+        public void SetTextAnimated(int number)
+        {
+            _targetNumber = number;
+            _elapsedTime = 0;
+            enabled = true;
         }
 
         protected override void Run()
@@ -38,22 +49,12 @@ namespace CodeBase.UI.Elements
             SetText(text);
         }
 
-        public void SetStaticText(string staticText) =>
-            _staticText = staticText;
-
-        public void SetTextAnimated(int number)
-        {
-            _targetNumber = number;
-            _elapsedTime = 0;
-            enabled = true;
-        }
-
         private int GetAnimatedNumberByTime(float time) =>
-            (int) Math.Round(_curveAnimation.Evaluate(time / _duration) * _targetNumber);
+            (int)Math.Round(_curveAnimation.Evaluate(time / _duration) * _targetNumber);
 
 #if UNITY_EDITOR
-
-        [Conditional("UNITY_EDITOR")] [Button("Set Test Text")]
+        [Conditional("UNITY_EDITOR")]
+        [Button("Set Test Text")]
         private void SetTextNumber()
         {
             SetTextAnimated(_testNumber);

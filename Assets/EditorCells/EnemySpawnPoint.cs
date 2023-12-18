@@ -6,7 +6,8 @@ namespace CodeBase.EditorCells
     {
         public EnemyType Type;
 
-        public EnemySpawnPoint(Texture2D texture, EnemyType type = EnemyType.Generic) : base(texture)
+        public EnemySpawnPoint(Texture2D texture, EnemyType type = EnemyType.Generic)
+            : base(texture)
         {
             Type = type;
         }

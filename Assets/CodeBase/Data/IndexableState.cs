@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Data.Common;
-using CodeBase.Logic;
-using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class IndexableState
     {
         public int Id;

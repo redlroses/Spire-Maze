@@ -1,8 +1,6 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.StaticData;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {
@@ -13,8 +11,8 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 
         public void Construct(GameStateMachine stateMachine, IStaticDataService staticData, int levelId)
         {
+            Construct(stateMachine);
             _staticData = staticData;
-            StateMachine = stateMachine;
             _levelId = levelId;
         }
 
@@ -24,7 +22,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         private LoadPayload CreateToNextLevelPayload() =>
             new LoadPayload(LevelNames.BuildableLevel, _levelId + 1, true, true);
 
-        private static LoadPayload CreateToLobbyPayload() =>
+        private LoadPayload CreateToLobbyPayload() =>
             new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId, true, true);
 
         private bool IsLastLevel() =>

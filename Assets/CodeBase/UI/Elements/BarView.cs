@@ -5,9 +5,9 @@ namespace CodeBase.UI.Elements
 {
     public class BarView<TPoints> : MonoBehaviour where TPoints : IPoints
     {
-        [SerializeField] protected SliderSetter _sliderSetter;
+        [SerializeField] private SliderSetter _sliderSetter;
 
-        protected TPoints Points;
+        protected TPoints Points { get; private set; }
 
         private void OnDestroy()
         {
@@ -18,13 +18,6 @@ namespace CodeBase.UI.Elements
             OnDestroyed();
         }
 
-        protected virtual void OnConstruct() { }
-
-        protected virtual void OnChanged() =>
-            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
-
-        protected virtual void OnDestroyed() { }
-
         public void Construct(TPoints points)
         {
             Points = points;
@@ -33,7 +26,18 @@ namespace CodeBase.UI.Elements
             OnConstruct();
         }
 
+        protected virtual void OnConstruct()
+        {
+        }
+
+        protected virtual void OnDestroyed()
+        {
+        }
+
+        protected virtual void OnChanged() =>
+            _sliderSetter.SetNormalizedValue(GetNormalizedBarValue());
+
         private float GetNormalizedBarValue() =>
-            Points.CurrentPoints / (float) Points.MaxPoints;
+            Points.CurrentPoints / (float)Points.MaxPoints;
     }
 }

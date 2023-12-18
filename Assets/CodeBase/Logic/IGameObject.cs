@@ -4,6 +4,6 @@ namespace CodeBase.Logic
 {
     public interface IGameObject
     {
-        GameObject gameObject { get; }
+        GameObject GameObject => (this as MonoBehaviour)!.gameObject;
     }
 }

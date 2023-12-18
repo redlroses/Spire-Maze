@@ -1,16 +1,15 @@
 ﻿using System;
+using TMPro;
+using UnityEngine;
 #if !UNITY_EDITOR
 using CodeBase.Infrastructure.AssetManagement;
 #endif
-using TMPro;
-using UnityEngine;
 
 namespace CodeBase.Tools.Builds
 {
     public class BuildInfoSetter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _text;
-
 
         private void Awake()
         {
@@ -21,7 +20,6 @@ namespace CodeBase.Tools.Builds
             SetInfo(Resources.Load<BuildInfo>(AssetPath.BuildInfo).BuildDateTime);
 #endif
         }
-
 
         private void SetInfo(DateTime info)
         {

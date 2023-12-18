@@ -19,16 +19,23 @@ namespace CodeBase.StaticData
         [FormerlySerializedAs("CellDataMap")] private CellData[] _cellDataMap;
 
         public int Size => Width * Height;
+
         public Vector3 HeroInitialPosition => GetPositionByCellType<InitialPlate>();
+
         public Vector3 FinishPosition => GetPositionByCellType<FinishPortal>();
 
         public IReadOnlyCollection<CellData> CellDataMap => _cellDataMap;
 
         public int LevelId => _levelId;
+
         public float Radius => _radius;
+
         public float ArchAngle => _archAngle;
+
         public float FloorHeight => _floorHeight;
+
         public int Height => _height;
+
         public int Width => _width;
 
         private Vector3 GetPositionByCellType<T>()

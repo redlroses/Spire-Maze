@@ -20,9 +20,10 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (Cell cell in cells)
             {
-                Key keyData = (Key) cell.CellData;
+                Key keyData = (Key)cell.CellData;
                 Collectible collectible = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Collectible>();
-                collectible.Construct(cell.Id, gameFactory.CreateItem(_staticDataService.GetStorable(keyData.Color.ToStorableType())));
+                collectible.Construct(cell.Id,
+                    gameFactory.CreateItem(_staticDataService.GetStorable(keyData.Color.ToStorableType())));
             }
         }
     }

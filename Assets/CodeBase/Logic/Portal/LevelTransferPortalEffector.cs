@@ -16,7 +16,7 @@ namespace CodeBase.Logic.Portal
                 _portal = new InterfaceReference<IActivated, MonoBehaviour>
                 {
                     UnderlyingValue = GetComponent<LevelTransfer>(),
-                    Value = GetComponent<LevelTransfer>()
+                    Value = GetComponent<LevelTransfer>(),
                 };
             }
 

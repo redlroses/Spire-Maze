@@ -13,30 +13,20 @@ namespace CodeBase.UI.SelectionGroup
         public event Action<SelectionToggle<TEnum>> Selected;
 
         public TEnum Id => _id;
-        
-        private void Awake()
-        {
+
+        private void Awake() =>
             _button.onClick.AddListener(OnSelected);
-        }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _button.onClick.RemoveListener(OnSelected);
-        }
 
-        public void Unselect()
-        {
+        public void Unselect() =>
             _checkMark.enabled = false;
-        }
-        
-        public void Select()
-        {
+
+        public void Select() =>
             _checkMark.enabled = true;
-        }
-        
-        private void OnSelected()
-        {
+
+        private void OnSelected() =>
             Selected?.Invoke(this);
-        }
     }
 }

@@ -6,9 +6,8 @@ namespace CodeBase.Logic.Inventory
     public sealed class InventoryCell : IReadOnlyInventoryCell
     {
         [field: SerializeField] public int Count { get; private set; }
-        [field: SerializeField] public IItem Item { get; }
 
-        public bool IsEmpty => Count <= 0;
+        [field: SerializeField] public IItem Item { get; }
 
         public InventoryCell(IItem item)
         {
@@ -21,6 +20,8 @@ namespace CodeBase.Logic.Inventory
             Count = count;
             Item = item;
         }
+
+        public bool IsEmpty => Count <= 0;
 
         public void Increase() =>
             Count++;

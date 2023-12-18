@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Sound
 {
-    public class RockSound : AudioClipSource
+    public class RockTrapClipSource : AudioClipSource
     {
         [SerializeField] private Rock _rockTrap;
         [SerializeField] private AudioClip _activationClip;

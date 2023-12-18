@@ -12,29 +12,35 @@ using CodeBase.Services.StaticData;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.UI.Services.Factory
 {
     public class UIFactory : IUIFactory
     {
+        private readonly IADService _adService;
         private readonly IAssetProvider _assets;
-        private readonly IStaticDataService _staticData;
+        private readonly ILocalizationService _localizationService;
+        private readonly IPauseService _pauseService;
         private readonly IPersistentProgressService _progressService;
         private readonly IRankedService _rankedService;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly ILocalizationService _localizationService;
         private readonly ISoundService _soundService;
-        private readonly IPauseService _pauseService;
-        private readonly IADService _adService;
         private readonly GameStateMachine _stateMachine;
+        private readonly IStaticDataService _staticData;
 
-        private Transform _uiRoot;
         private HeroReviver _hero;
+        private Transform _uiRoot;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData,
-            IPersistentProgressService progressService, IRankedService rankedService, ISaveLoadService saveLoadService,
-            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, IADService adService, GameStateMachine stateMachine)
+        public UIFactory(IAssetProvider assets,
+            IStaticDataService staticData,
+            IPersistentProgressService progressService,
+            IRankedService rankedService,
+            ISaveLoadService saveLoadService,
+            ILocalizationService localizationService,
+            ISoundService soundService,
+            IPauseService pauseService,
+            IADService adService,
+            GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;

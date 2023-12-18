@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using CodeBase.StaticData;
-using NaughtyAttributes;
+﻿using CodeBase.StaticData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,25 +9,13 @@ namespace CodeBase.Sound
         [SerializeField] private Slider _slider;
         [SerializeField] private UiSoundConfig _clipConfig;
 
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             _slider.onValueChanged.AddListener(OnMoved);
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _slider.onValueChanged.RemoveListener(OnMoved);
-        }
 
-        private void OnMoved(float value)
-        {
+        private void OnMoved(float value) =>
             PlayOneShot(_clipConfig.SliderClip);
-        }
-
-        [Conditional("UNITY_EDITOR")] [Button]
-        public void LoadConfig()
-        {
-            _clipConfig = Resources.Load<UiSoundConfig>("StaticData/UiSoundConfig");
-        }
     }
 }

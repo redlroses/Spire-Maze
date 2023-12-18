@@ -9,7 +9,7 @@ namespace CodeBase.Logic.StaminaEntity
     [RequireComponent(typeof(TimerOperator))]
     public class Stamina : MonoCache, IStamina, IPauseWatcher
     {
-        [SerializeField] protected TimerOperator _recoveryDelay;
+        [SerializeField] private TimerOperator _recoveryDelay;
 
         private float _lowerSpeedMultiplier;
         private float _speedReplenish;
@@ -19,6 +19,7 @@ namespace CodeBase.Logic.StaminaEntity
         private bool _isReplenish;
 
         public event Action Changed = () => { };
+
         public event Action AttemptToEmptyUsed = () => { };
 
         public int CurrentPoints
@@ -33,15 +34,14 @@ namespace CodeBase.Logic.StaminaEntity
 
         public int MaxPoints { get; protected set; }
 
-        protected override void Run() =>
-            Replenish();
-
         public void Construct(StaminaStaticData staminaStaticData)
         {
             _lowerSpeedMultiplier = staminaStaticData.LowerSpeedMultiplier;
             _speedReplenish = staminaStaticData.SpeedReplenish;
             _delayBeforeReplenish = staminaStaticData.DelayBeforeReplenish;
-            Initialize();
+            _recoveryDelay ??= GetComponent<TimerOperator>();
+            _currentSpeedReplenish = _speedReplenish;
+            _recoveryDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
         }
 
         public void Resume() =>
@@ -62,12 +62,8 @@ namespace CodeBase.Logic.StaminaEntity
             return true;
         }
 
-        private void Initialize()
-        {
-            _recoveryDelay ??= Get<TimerOperator>();
-            _currentSpeedReplenish = _speedReplenish;
-            _recoveryDelay.SetUp(_delayBeforeReplenish, OnStartReplenish);
-        }
+        protected override void Run() =>
+            Replenish();
 
         private void Spend(int spendStamina)
         {

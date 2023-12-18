@@ -11,7 +11,6 @@ namespace CodeBase.UI
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _errorButton;
         [SerializeField] private TextSetter _timer;
-
         [SerializeField] private int _showTime;
 
         private int _count;
@@ -24,12 +23,16 @@ namespace CodeBase.UI
 
         public void Open(Action onRewardedCallback, Action onCloseCallback, Action<string> onErrorCallback)
         {
-            new RoutineSequence().WaitForSeconds(1f).Then(() => _timer.SetText(--_count))
-                .LoopWhile(() => _count > 0).Then(() =>
+            new RoutineSequence().WaitForSeconds(1f)
+                .Then(() => _timer.SetText(--_count))
+                .LoopWhile(() => _count > 0)
+                .Then(() =>
                 {
                     onRewardedCallback?.Invoke();
                     _closeButton.interactable = true;
-                }).SetAutoKill(true).Play();
+                })
+                .SetAutoKill(true)
+                .Play();
 
             _errorButton.onClick.AddListener(() =>
             {

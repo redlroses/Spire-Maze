@@ -12,7 +12,6 @@ namespace CodeBase.Logic.Lift
     {
         [SerializeField] private Transform _gearLeft;
         [SerializeField] private Transform _gearRight;
-
         [SerializeField] private float _rotationSpeedFactor;
 
         private IPlateMover _mover;
@@ -26,6 +25,15 @@ namespace CodeBase.Logic.Lift
             this.Disable();
         }
 
+        public void StartAnimation()
+        {
+            this.Enable();
+            InvertDirection();
+        }
+
+        public void StopAnimation() =>
+            this.Disable();
+
         protected override void Run()
         {
             AnimateRotation(_gearLeft, _isGearLeftRotationClockwise);
@@ -33,18 +41,10 @@ namespace CodeBase.Logic.Lift
         }
 
         private void AnimateRotation(Transform gearLeft, bool isGearRotationClockwise) =>
-            gearLeft.Rotate(Vector3.up, _mover.Velocity * _rotationSpeedFactor * isGearRotationClockwise.AsSign() * Time.deltaTime, Space.Self);
-
-        public void StartAnimation()
-        {
-            this.Enable();
-            InvertDirection();
-        }
-
-        public void StopAnimation()
-        {
-            this.Disable();
-        }
+            gearLeft.Rotate(Vector3.up,
+                _mover.Velocity * _rotationSpeedFactor * isGearRotationClockwise.AsSign()
+                * Time.deltaTime,
+                Space.Self);
 
         private void InvertDirection()
         {

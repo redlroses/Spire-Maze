@@ -1,5 +1,4 @@
-﻿using System;
-using AYellowpaper;
+﻿using AYellowpaper;
 using CodeBase.DelayRoutines;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
@@ -17,16 +16,15 @@ namespace CodeBase.Logic.HealthEntity.Damage
         private GroundChecker _gravityScaler;
         private RoutineSequence _killZoneHeroEntryUpdater;
 
+        private void OnDestroy() =>
+            _killZoneHeroEntryUpdater.Kill();
+
         protected override void OnAwake()
         {
             _killZoneHeroEntryUpdater = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .Then(UpdateDamageTriggerState);
-
             _damageTrigger.Value.Disable();
         }
-
-        private void OnDestroy() =>
-            _killZoneHeroEntryUpdater.Kill();
 
         protected override void OnTriggerObserverEntered(HeroRoot target)
         {
@@ -34,10 +32,8 @@ namespace CodeBase.Logic.HealthEntity.Damage
             _killZoneHeroEntryUpdater.Play();
         }
 
-        protected override void OnTriggerObserverExited(HeroRoot target)
-        {
+        protected override void OnTriggerObserverExited(HeroRoot target) =>
             _killZoneHeroEntryUpdater.Stop();
-        }
 
         private void UpdateDamageTriggerState()
         {

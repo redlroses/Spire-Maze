@@ -13,6 +13,13 @@ namespace CodeBase.UI.Services.Windows
             _uiFactory = uiFactory;
         }
 
+        public void Pause() =>
+            Open(WindowId.Pause);
+
+        public void Resume()
+        {
+        }
+
         public void Open(WindowId windowId)
         {
             switch (windowId)
@@ -41,10 +48,5 @@ namespace CodeBase.UI.Services.Windows
                     throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null);
             }
         }
-
-        public void Pause() =>
-            Open(WindowId.Pause);
-
-        public void Resume() { }
     }
 }

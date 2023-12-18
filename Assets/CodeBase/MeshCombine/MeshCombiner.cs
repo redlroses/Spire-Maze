@@ -8,6 +8,8 @@ using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Plate = CodeBase.EditorCells.Plate;
+using Wall = CodeBase.EditorCells.Wall;
 
 namespace CodeBase.MeshCombine
 {
@@ -27,9 +29,7 @@ namespace CodeBase.MeshCombine
             origin.gameObject.isStatic = true;
 
             foreach (MeshCombineMarker meshCombinable in meshCombinables)
-            {
                 meshCombinable.Renderer.enabled = false;
-            }
         }
 
         public void CombineAllColliders(Level level, PhysicMaterial physicMaterial)
@@ -40,12 +40,12 @@ namespace CodeBase.MeshCombine
             {
                 transform =
                 {
-                    parent = level.Origin
-                }
+                    parent = level.Origin,
+                },
             };
 
-            CombineByType<EditorCells.Plate>(level, collidersHolder);
-            CombineByType<EditorCells.Wall>(level, collidersHolder);
+            CombineByType<Plate>(level, collidersHolder);
+            CombineByType<Wall>(level, collidersHolder);
 
             collidersHolder.isStatic = true;
         }
@@ -79,14 +79,10 @@ namespace CodeBase.MeshCombine
         private Mesh ApplyMesh(GameObject holder, CombineInstance[] combine, Material material, bool isEnableRenderer)
         {
             if (holder.TryGetComponent(out MeshFilter meshFilter) == false)
-            {
                 meshFilter = holder.AddComponent<MeshFilter>();
-            }
 
             if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
-            {
                 meshRenderer = holder.AddComponent<MeshRenderer>();
-            }
 
             Mesh mesh = new Mesh {indexFormat = IndexFormat.UInt32};
             meshFilter.mesh = mesh;
@@ -101,9 +97,7 @@ namespace CodeBase.MeshCombine
             for (int i = 0; i < level.Height; i++)
             {
                 if (HasFloorCellType<TCell>(level, i) == false)
-                {
                     continue;
-                }
 
                 int airIndex = FindFirstGap<TCell>(level.Container[i]);
                 CombineColliderGroups<TCell>(level.Container[i], airIndex, collidersHolder.transform);
@@ -128,8 +122,9 @@ namespace CodeBase.MeshCombine
 
                 if (lastGroupIndex < firstGroupIndex)
                 {
-                    List<Cell> combined =
-                        floor.Container.GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
+                    List<Cell> combined = floor.Container
+                        .GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
+
                     combined.AddRange(floor.Container.GetRange(0, lastGroupIndex));
                     CombineColliders(combined, collidersHolder);
                 }
@@ -157,21 +152,20 @@ namespace CodeBase.MeshCombine
             {
                 transform =
                 {
-                    parent = parent
+                    parent = parent,
                 },
-                isStatic = true
+                isStatic = true,
             };
 
             MeshCollider[] meshColliders = cells
-                .Select(container => container.Container.GetComponentInChildren<MeshCollider>(true)).ToArray();
+                .Select(container => container.Container.GetComponentInChildren<MeshCollider>(true))
+                .ToArray();
 
             MeshFilter[] meshesFilters = meshColliders
-                .Select(container => container.gameObject.GetComponent<MeshFilter>()).ToArray();
+                .Select(container => container.gameObject.GetComponent<MeshFilter>())
+                .ToArray();
 
-            foreach (MeshCollider meshCollider in meshColliders)
-            {
-                meshCollider.enabled = false;
-            }
+            foreach (MeshCollider meshCollider in meshColliders) meshCollider.enabled = false;
 
             CombineInstance[] combine = CombineInstances(meshesFilters);
             Mesh mesh = ApplyMesh(colliderHolder, combine, null, false);
@@ -194,9 +188,7 @@ namespace CodeBase.MeshCombine
             while (currentIndex != beginIndex)
             {
                 if (floor.Container[currentIndex].CellData is TCell)
-                {
                     break;
-                }
 
                 currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
             }
@@ -211,9 +203,7 @@ namespace CodeBase.MeshCombine
             while (currentIndex != beginIndex)
             {
                 if (floor.Container[currentIndex].CellData is TCell == false)
-                {
                     break;
-                }
 
                 currentIndex = (currentIndex + 1).ClampRound(0, floor.Container.Count);
             }
@@ -226,9 +216,7 @@ namespace CodeBase.MeshCombine
             for (int i = 0; i < floor.Container.Count; i++)
             {
                 if (floor.Container[i].CellData is TCell == false)
-                {
                     return i;
-                }
             }
 
             return -1;
@@ -239,9 +227,7 @@ namespace CodeBase.MeshCombine
             for (int j = 0; j < level.Width; j++)
             {
                 if (level.GetCell(floor, j).CellData is TCell)
-                {
                     return true;
-                }
             }
 
             return false;

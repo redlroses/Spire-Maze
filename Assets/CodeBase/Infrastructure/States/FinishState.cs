@@ -12,27 +12,31 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
     public class FinishState : IPayloadedState<bool>
     {
-        private readonly IWindowService _windowService;
-        private readonly IScoreService _scoreService;
-        private readonly IRankedService _rankedService;
-        private readonly IPersistentProgressService _progressService;
-        private readonly ISaveLoadService _saveLoad;
-        private readonly IWatchService _watchService;
-        private readonly IHeroLocator _heroLocator;
-        private readonly IStaticDataService _staticData;
         private readonly IAnalyticsService _analytics;
+        private readonly IHeroLocator _heroLocator;
+        private readonly IPersistentProgressService _progressService;
+        private readonly IRankedService _rankedService;
+        private readonly ISaveLoadService _saveLoad;
+        private readonly IScoreService _scoreService;
+        private readonly IStaticDataService _staticData;
+        private readonly IWatchService _watchService;
+        private readonly IWindowService _windowService;
 
-        public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService, ISaveLoadService saveLoad, IWatchService watchService, IHeroLocator heroLocator,
-            IStaticDataService staticData, IAnalyticsService analytics)
+        public FinishState(IAnalyticsService analytics,
+            IHeroLocator heroLocator,
+            IPersistentProgressService progressService,
+            IRankedService rankedService,
+            ISaveLoadService saveLoad,
+            IScoreService scoreService,
+            IStaticDataService staticData,
+            IWatchService watchService,
+            IWindowService windowService)
         {
             _windowService = windowService;
             _scoreService = scoreService;
@@ -46,10 +50,15 @@ namespace CodeBase.Infrastructure.States
         }
 
         private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+
         private int StarsCount => TemporalProgress.StarsCount;
+
         private int Score => TemporalProgress.Score;
+
         private int CollectedArtifactsCount => TemporalProgress.CollectedArtifactsCount;
+
         private int PlayTime => TemporalProgress.PlayTime;
 
         public void Enter(bool isLoss)
@@ -73,7 +82,9 @@ namespace CodeBase.Infrastructure.States
             CollectAnalytics(isLoss);
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
         private void CountCollectedArtifacts()
         {

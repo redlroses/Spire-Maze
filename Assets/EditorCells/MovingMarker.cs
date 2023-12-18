@@ -7,7 +7,10 @@ namespace CodeBase.EditorCells
         public PlateMoveDirection Direction;
         public bool IsLiftHolder;
 
-        public MovingMarker(Texture2D texture, PlateMoveDirection direction = PlateMoveDirection.Up, bool isLiftHolder = false) : base(texture)
+        public MovingMarker(Texture2D texture,
+            PlateMoveDirection direction = PlateMoveDirection.Up,
+            bool isLiftHolder = false)
+            : base(texture)
         {
             IsLiftHolder = isLiftHolder;
             Direction = direction;

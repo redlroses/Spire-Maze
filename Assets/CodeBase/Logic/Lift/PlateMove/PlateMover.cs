@@ -14,27 +14,33 @@ namespace CodeBase.Logic.Lift.PlateMove
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private AnimationCurve _easeInOutCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-        protected float Radius;
-
-        private T _from;
-        private T _to;
         private float _delta;
         private float _distance;
 
-        private Vector3 _prevPosition;
-        private Vector3 _prevRotation;
+        private T _from;
+        private T _to;
+
         private bool _isEnabled;
 
+        private Vector3 _prevPosition;
+        private Vector3 _prevRotation;
+
         public event Action<Vector3, Vector3> PositionUpdated = (_, _) => { };
+
         public event Action MoveEnded = () => { };
 
         public float Velocity => _rigidbody.velocity.magnitude;
 
+        protected float Radius { get; private set; }
+
         protected Vector3 Position => Rigidbody.position;
-        private Vector3 Rotation => Rigidbody.rotation.eulerAngles;
+
         protected Rigidbody Rigidbody => _rigidbody;
 
+        private Vector3 Rotation => Rigidbody.rotation.eulerAngles;
+
         private Vector3 DeltaPosition => Position - _prevPosition;
+
         private Vector3 DeltaRotation => Rotation - _prevRotation;
 
         private void Awake()
@@ -42,35 +48,6 @@ namespace CodeBase.Logic.Lift.PlateMove
             Vector3 parentPosition = transform.parent.position;
             Radius = new Vector2(parentPosition.x, parentPosition.z).magnitude;
             enabled = false;
-        }
-
-        protected override void OnEnabled()
-        {
-            _prevPosition = Position;
-            _prevRotation = Rotation;
-        }
-
-        protected override void FixedRun()
-        {
-            Translate();
-            PositionUpdated.Invoke(DeltaPosition, DeltaRotation);
-            _prevPosition = Position;
-            _prevRotation = Rotation;
-        }
-
-        protected abstract T GetTransform(LiftDestinationMarker from);
-
-        protected abstract void UpdatePosition(T from, T to, float delta);
-
-        protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
-
-        public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
-        {
-            enabled = true;
-            _from = GetTransform(from);
-            _to = GetTransform(to);
-            _distance = GetDistance(from, to);
-            _delta = 0;
         }
 
         public void Resume() =>
@@ -81,6 +58,35 @@ namespace CodeBase.Logic.Lift.PlateMove
             _isEnabled = enabled;
             enabled = false;
         }
+
+        public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
+        {
+            enabled = true;
+            _from = GetTransform(from);
+            _to = GetTransform(to);
+            _distance = GetDistance(from, to);
+            _delta = 0;
+        }
+
+        protected override void FixedRun()
+        {
+            Translate();
+            PositionUpdated.Invoke(DeltaPosition, DeltaRotation);
+            _prevPosition = Position;
+            _prevRotation = Rotation;
+        }
+
+        protected override void OnEnabled()
+        {
+            _prevPosition = Position;
+            _prevRotation = Rotation;
+        }
+
+        protected abstract T GetTransform(LiftDestinationMarker from);
+
+        protected abstract void UpdatePosition(T from, T to, float delta);
+
+        protected abstract float GetDistance(LiftDestinationMarker from, LiftDestinationMarker to);
 
         private void Translate()
         {

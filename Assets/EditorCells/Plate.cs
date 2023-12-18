@@ -4,7 +4,8 @@ namespace CodeBase.EditorCells
 {
     public class Plate : CellData
     {
-        public Plate(Texture2D texture) : base(texture)
+        public Plate(Texture2D texture)
+            : base(texture)
         {
         }
 

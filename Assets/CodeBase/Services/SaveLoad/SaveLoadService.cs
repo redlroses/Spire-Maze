@@ -22,8 +22,7 @@ namespace CodeBase.Services.SaveLoad
         private readonly IPersistentProgressService _progressService;
         private readonly IWatchService _watchService;
 
-        public SaveLoadService(IPersistentProgressService progressService,
-            IWatchService watchService)
+        public SaveLoadService(IPersistentProgressService progressService, IWatchService watchService)
         {
             _progressService = progressService;
             _watchService = watchService;
@@ -139,8 +138,10 @@ namespace CodeBase.Services.SaveLoad
         [UsedImplicitly]
         private PlayerProgress MergeSaves(PlayerProgress prioritized, PlayerProgress secondary)
         {
-            int largestLevelIndex = Mathf.Max(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
-            int lowestLevelIndexOfBoth = Mathf.Min(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
+            int largestLevelIndex =
+                Mathf.Max(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
+            int lowestLevelIndexOfBoth =
+                Mathf.Min(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
 
             LevelData[] mergedLevelsData = new LevelData[largestLevelIndex];
 

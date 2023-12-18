@@ -5,6 +5,9 @@ namespace CodeBase.LevelSpecification.Cells
 {
     public class ItemSpawnPoint : Cell
     {
-        public ItemSpawnPoint(CellData cellData, Transform container, int id) : base(cellData, container, id) { }
+        public ItemSpawnPoint(CellData cellData, Transform container, int id)
+            : base(cellData, container, id)
+        {
+        }
     }
 }

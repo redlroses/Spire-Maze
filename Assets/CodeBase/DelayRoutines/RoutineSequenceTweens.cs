@@ -6,7 +6,11 @@ namespace CodeBase.DelayRoutines
 {
     public partial class RoutineSequence
     {
-        public RoutineSequence DoScale(Transform transform, float toScale, float duration, AnimationCurve curve, bool isPulse = false)
+        public RoutineSequence DoScale(Transform transform,
+            float toScale,
+            float duration,
+            AnimationCurve curve,
+            bool isPulse = false)
         {
             Vector3 initialScale = transform.localScale;
             Vector3 finishScale = initialScale * toScale;
@@ -32,7 +36,11 @@ namespace CodeBase.DelayRoutines
             return this;
         }
 
-        public RoutineSequence DoGradient(Graphic graphics, Gradient gradient, float duration, AnimationCurve curve, bool isPulse = false)
+        public RoutineSequence DoGradient(Graphic graphics,
+            Gradient gradient,
+            float duration,
+            AnimationCurve curve,
+            bool isPulse = false)
         {
             TowardMover<float> towardMover = new TowardMover<float>(0f, 1f, Mathf.Lerp, curve);
 

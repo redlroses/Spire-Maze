@@ -33,7 +33,12 @@ namespace CodeBase.Services.Analytics
 #endif
         }
 
-        private void TrackLevelFinish(int levelId, int stars, int playTime, int artifacts, int score, GAProgressionStatus status)
+        private void TrackLevelFinish(int levelId,
+            int stars,
+            int playTime,
+            int artifacts,
+            int score,
+            GAProgressionStatus status)
         {
             SendProgressEvent(levelId, score, status);
             SendDesignEvent(levelId, StarsLabel, stars, status);
@@ -51,7 +56,7 @@ namespace CodeBase.Services.Analytics
         private void SendProgressEvent(int levelId, int score, GAProgressionStatus status) =>
             GameAnalytics.NewProgressionEvent(status, GetLevelName(levelId), score);
 
-        private static string GetLevelName(int levelId) =>
+        private string GetLevelName(int levelId) =>
             $"{LevelLabel}_{levelId}";
     }
 }

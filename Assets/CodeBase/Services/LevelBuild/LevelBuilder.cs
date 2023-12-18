@@ -22,8 +22,8 @@ namespace CodeBase.Services.LevelBuild
     public class LevelBuilder : ILevelBuilder
     {
         private const string ConstructException = "You must build the level before constructing it";
-
-        private readonly int _additionalSpireSegmentsCount = 2;
+        private const string SpireName = "Spire";
+        private const int AdditionalSpireSegmentsCount = 2;
 
         private readonly LevelConstructor _levelConstructor;
         private readonly IGameFactory _gameFactory;
@@ -34,25 +34,29 @@ namespace CodeBase.Services.LevelBuild
         private Level _level;
         private LevelStaticData _levelStaticData;
 
-        private float FloorHeight => _levelStaticData.FloorHeight;
-        private float Radius => _levelStaticData.Radius;
-        private float ArchAngle => _levelStaticData.ArchAngle;
-
-        public LevelBuilder(IGameFactory gameFactory, IStaticDataService staticData, GameStateMachine stateMachine,
-            ISaveLoadService saveLoadService, IPersistentProgressService persistentProgressService, IRandomService randomService)
+        public LevelBuilder(IGameFactory gameFactory,
+            IStaticDataService staticData,
+            GameStateMachine stateMachine,
+            ISaveLoadService saveLoadService,
+            IPersistentProgressService persistentProgressService,
+            IRandomService randomService)
         {
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
             _randomService = randomService;
-            _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
+            _levelConstructor =
+                new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
         }
+
+        private float FloorHeight => _levelStaticData.FloorHeight;
+        private float Radius => _levelStaticData.Radius;
+        private float ArchAngle => _levelStaticData.ArchAngle;
 
         public Level Build(LevelStaticData levelStaticData)
         {
             _levelStaticData = levelStaticData;
             _levelContainer = CreateSpire(levelStaticData);
             CreateLevel(levelStaticData);
-            _level.Origin = _levelContainer;
             _persistentProgressService.Progress.WorldData.LevelPositions.FinishPosition = GetFinishPosition();
             _persistentProgressService.TemporalProgress.LevelHeightRange = new Vector2(0, FloorHeight * _level.Height);
             InitSpire();
@@ -60,22 +64,10 @@ namespace CodeBase.Services.LevelBuild
             return _level;
         }
 
-        private void InitSpire()
-        {
-            if (_levelContainer.TryGetComponent(out Spire spire) == false)
-            {
-                spire = _levelContainer.gameObject.AddComponent<Spire>();
-            }
-
-            spire.Construct(_level);
-        }
-
-        public void Construct()
+        public void ConstructLevel()
         {
             if (_level == null)
-            {
                 throw new Exception(ConstructException);
-            }
 
             _levelConstructor.Construct(_level);
         }
@@ -85,6 +77,14 @@ namespace CodeBase.Services.LevelBuild
             _level = default;
             _levelContainer = default;
             _levelStaticData = default;
+        }
+
+        private void InitSpire()
+        {
+            if (_levelContainer.TryGetComponent(out Spire spire) == false)
+                spire = _levelContainer.gameObject.AddComponent<Spire>();
+
+            spire.Construct(_level);
         }
 
         private void CreateLevel(LevelStaticData mapData)
@@ -109,9 +109,9 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = GetPosition(i * ArchAngle, Radius);
                 Quaternion containerRotation = GetRotation(i * ArchAngle);
-                int cellId = floorIndex * (floorCells.Length) + i;
-                Transform cellContainer = CreateContainer($"Cell {i + 1}: {floorCells[i]}, id: {cellId}", container,
-                    containerPosition, containerRotation);
+                int cellId = floorIndex * floorCells.Length + i;
+                string name = $"Cell {i + 1}: {floorCells[i]}, id: {cellId}";
+                Transform cellContainer = CreateContainer(name, container, containerPosition, containerRotation);
                 Cell cell = new Cell(floorCells[i], cellContainer, cellId);
                 floor.Add(cell);
             }
@@ -121,11 +121,11 @@ namespace CodeBase.Services.LevelBuild
 
         private Transform CreateSpire(LevelStaticData levelStaticData)
         {
-            Transform spireRoot = new GameObject("Spire").transform;
+            Transform spireRoot = new GameObject(SpireName).transform;
 
             int segmentCount = Mathf.RoundToInt(levelStaticData.Height * Arithmetic.ToHalf);
 
-            for (int i = 0 - _additionalSpireSegmentsCount; i < segmentCount + _additionalSpireSegmentsCount; i++)
+            for (int i = 0 - AdditionalSpireSegmentsCount; i < segmentCount + AdditionalSpireSegmentsCount; i++)
             {
                 Vector3 position = Vector3.zero.ChangeY(i * levelStaticData.FloorHeight / Arithmetic.ToHalf);
                 Quaternion rotation = Quaternion.Euler(0, _randomService.Range(0f, Trigonometry.TwoPiGrade), 0f);

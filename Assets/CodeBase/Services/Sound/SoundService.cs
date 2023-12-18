@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.DelayRoutines;
+﻿using CodeBase.DelayRoutines;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Tools;
@@ -36,7 +35,8 @@ namespace CodeBase.Services.Sound
                 .WaitUntil(TryDecreaseVolume);
 
             _smoothUnmute = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .WaitUntil(TryIncreaseVolume).Then(() => _cachedLocker = null);
+                .WaitUntil(TryIncreaseVolume)
+                .Then(() => _cachedLocker = null);
 
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
@@ -45,7 +45,8 @@ namespace CodeBase.Services.Sound
 
         public float MusicDefaultVolume => _progressService.Progress.GlobalData.SoundVolume.Music;
 
-        public bool IsMuted => _mixer.GetFloat(MasterVolumeProperty, out float volume) && volume.NormalizeDecibels() <= MinVolume + float.Epsilon;
+        public bool IsMuted => _mixer.GetFloat(MasterVolumeProperty, out float volume)
+                               && volume.NormalizeDecibels() <= MinVolume + float.Epsilon;
 
         public void Load()
         {
