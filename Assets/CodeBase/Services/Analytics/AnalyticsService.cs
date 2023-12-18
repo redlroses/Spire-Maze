@@ -51,7 +51,7 @@ namespace CodeBase.Services.Analytics
         private void SendProgressEvent(int levelId, int score, GAProgressionStatus status) =>
             GameAnalytics.NewProgressionEvent(status, GetLevelName(levelId), score);
 
-        private static string GetLevelName(int levelId) =>
+        private string GetLevelName(int levelId) =>
             $"{LevelLabel}_{levelId}";
     }
 }

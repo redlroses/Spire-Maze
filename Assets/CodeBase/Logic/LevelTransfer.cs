@@ -29,7 +29,8 @@ namespace CodeBase.Logic
 
         public event Action Activated = () => { };
 
-        public void Construct(GameStateMachine stateMachine, EnterLevelPanel enterLevelPanel,
+        public void Construct(GameStateMachine stateMachine,
+            EnterLevelPanel enterLevelPanel,
             IPersistentProgressService progressService)
         {
             enabled = false;
@@ -44,9 +45,9 @@ namespace CodeBase.Logic
                 Activate();
                 return;
             }
-#endif
-
+#else
             TryActivate();
+#endif
         }
 
         protected override void OnTriggerObserverEntered(ITeleportable _)

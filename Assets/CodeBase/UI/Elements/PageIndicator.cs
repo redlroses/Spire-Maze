@@ -26,6 +26,10 @@ namespace CodeBase.UI.Elements
             GenerateIndicators(pagesCount);
             _slider.onValueChanged.AddListener(index => PageIndexUpdated.Invoke(Mathf.RoundToInt(index)));
         }
+
+        public void SetPage(int page) =>
+            _slider.SetValueWithoutNotify(page);
+
         private void InitSlider(int pagesCount)
         {
             _slider.minValue = 0;
@@ -39,11 +43,6 @@ namespace CodeBase.UI.Elements
                 Instantiate(_template, _template.parent);
 
             _template.gameObject.Disable();
-        }
-
-        public void SetPage(int page)
-        {
-            _slider.SetValueWithoutNotify(page);
         }
     }
 }

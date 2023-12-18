@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Services.Input
@@ -16,6 +16,12 @@ namespace CodeBase.Services.Input
         private MoveDirection _direction = MoveDirection.Left;
         private float _readValue;
 
+        public InputService(IPauseService pauseService)
+        {
+            _pauseService = pauseService;
+            _inputController = new InputController();
+        }
+
         public event Action<MoveDirection> HorizontalMove = _ => { };
         public event Action<Vector2> OverviewMove = _ => { };
         public event Action Jump = () => { };
@@ -23,12 +29,6 @@ namespace CodeBase.Services.Input
         public event Action MoveStopped = () => { };
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;
-
-        public InputService(IPauseService pauseService)
-        {
-            _pauseService = pauseService;
-            _inputController = new InputController();
-        }
 
         public void Subscribe()
         {
@@ -73,12 +73,12 @@ namespace CodeBase.Services.Input
         private void OnMove(InputAction.CallbackContext context)
         {
             float readValue = context.ReadValue<float>();
-            int moveInput = Mathf.CeilToInt(Mathf.Abs(readValue)) * (int) Mathf.Sign(readValue);
+            int moveInput = Mathf.CeilToInt(Mathf.Abs(readValue)) * (int)Mathf.Sign(readValue);
 
-            if ((MoveDirection) moveInput != MoveDirection.Stop)
-                _direction = (MoveDirection) moveInput;
+            if ((MoveDirection)moveInput != MoveDirection.Stop)
+                _direction = (MoveDirection)moveInput;
 
-            HorizontalMove.Invoke((MoveDirection) moveInput);
+            HorizontalMove.Invoke((MoveDirection)moveInput);
         }
 
         private void OnJump(InputAction.CallbackContext context) =>

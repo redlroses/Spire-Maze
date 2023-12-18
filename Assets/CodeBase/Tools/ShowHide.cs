@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using CodeBase.DelayRoutines;
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using NTC.Global.Cache;
 using UnityEngine;
@@ -40,16 +41,6 @@ namespace CodeBase.Tools
 
             OnInitialize();
         }
-
-        protected abstract Func<TValue, TValue, float, TValue> GetLerpFunction();
-
-        protected abstract void ApplyLerpValue(TValue lerpValue);
-
-        protected virtual void OnInitialize() { }
-
-        protected virtual void OnShow() { }
-
-        protected virtual void OnHide() { }
 
         public void Show(Action onShowCallback = null)
         {
@@ -117,6 +108,22 @@ namespace CodeBase.Tools
             OnHide();
         }
 
+        protected abstract Func<TValue, TValue, float, TValue> GetLerpFunction();
+
+        protected abstract void ApplyLerpValue(TValue lerpValue);
+
+        protected virtual void OnInitialize()
+        {
+        }
+
+        protected virtual void OnShow()
+        {
+        }
+
+        protected virtual void OnHide()
+        {
+        }
+
         protected override void Run()
         {
             bool isActive = _towardMover.TryUpdate(Time.smoothDeltaTime * _speed, out TValue lerpValue);
@@ -158,19 +165,15 @@ namespace CodeBase.Tools
 
         #region Test
 
-        [Button]
+        [Button] [UsedImplicitly]
         [Conditional("UNITY_EDITOR")]
-        private void TestShow()
-        {
+        private void TestShow() =>
             Show();
-        }
 
-        [Button]
+        [Button] [UsedImplicitly]
         [Conditional("UNITY_EDITOR")]
-        private void TestHide()
-        {
+        private void TestHide() =>
             Hide();
-        }
 
         #endregion
     }

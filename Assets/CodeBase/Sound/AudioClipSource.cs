@@ -13,9 +13,7 @@ namespace CodeBase.Sound
         private void OnValidate()
         {
             if (_isEnableAutoSearch == false)
-            {
                 return;
-            }
 
             if (_player == null)
                 return;

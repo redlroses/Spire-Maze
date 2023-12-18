@@ -1,9 +1,9 @@
-﻿using CodeBase.Data;
+﻿using System.Diagnostics;
+using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Leaderboards;
 using CodeBase.Services.StaticData;
 using Cysharp.Threading.Tasks;
-using System.Diagnostics;
 
 namespace CodeBase.Services.Ranked
 {
@@ -17,12 +17,12 @@ namespace CodeBase.Services.Ranked
 
         private ILeaderboard _leaderboard;
 
-        public bool IsAuthorized => _leaderboard.IsAuthorized;
-
         public RankedService(IStaticDataService staticData)
         {
             _staticData = staticData;
         }
+
+        public bool IsAuthorized => _leaderboard.IsAuthorized;
 
         public void InitLeaderboard()
         {
@@ -45,7 +45,6 @@ namespace CodeBase.Services.Ranked
 
         public void SetScore(int score, string avatarName = "Test1") =>
             _leaderboard.SetScore(score, avatarName);
-
 
         [Conditional("UNITY_EDITOR")]
         private void UseEditorLeaderboard() =>

@@ -7,9 +7,14 @@ namespace CodeBase.DelayRoutines
     {
         private readonly Func<bool> _waitFunc;
 
-        protected ActionAwaiter(Func<bool> waitFunc, GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
-            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater) =>
+        protected ActionAwaiter(Func<bool> waitFunc,
+            GlobalUpdate globalUpdate,
+            Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater)
+            : base(globalUpdate, addUpdater, removeUpdater)
+        {
             _waitFunc = waitFunc;
+        }
 
         protected abstract bool IsAwaiting(Func<bool> waitFunc);
 

@@ -23,8 +23,10 @@ namespace CodeBase.UI.Windows
         [SerializeField] private PageIndicator _pageIndicator;
 
         private TutorialConfig _tutorialConfig;
-
         private int _currentModuleIndex;
+
+        public void Construct(IStaticDataService staticData) =>
+            _tutorialConfig = staticData.GetTutorialConfig();
 
         protected override void Initialize()
         {
@@ -42,9 +44,6 @@ namespace CodeBase.UI.Windows
             _buttonBack.Clicked -= Back;
             _buttonNext.Clicked -= Next;
         }
-
-        public void Construct(IStaticDataService staticData) =>
-            _tutorialConfig = staticData.GetTutorialConfig();
 
         private void Next() =>
             SetModule(NextIndex());

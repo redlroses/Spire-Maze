@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class HealthState
     {
         public int CurrentHP;
@@ -14,11 +16,11 @@ namespace CodeBase.Data
             CurrentHP = maxHp;
         }
 
-        public HealthState() { }
-
-        public void ResetHP()
+        public HealthState()
         {
-            CurrentHP = MaxHP;
         }
+
+        public void ResetHp() =>
+            CurrentHP = MaxHP;
     }
 }

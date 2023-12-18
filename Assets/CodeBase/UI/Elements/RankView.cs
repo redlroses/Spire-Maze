@@ -12,7 +12,7 @@ namespace CodeBase.UI.Elements
         [SerializeField] private BetterImage _avatar;
         [SerializeField] private BetterImage _flag;
         [SerializeField] private GameObject _selfIndication;
-        
+
         public void Set(SingleRankData singleRankData)
         {
             _rank.SetText(singleRankData.Rank);
@@ -22,9 +22,7 @@ namespace CodeBase.UI.Elements
             _flag.sprite = singleRankData.Flag;
         }
 
-        public void EnableSelfIndication()
-        {
+        public void EnableSelfIndication() =>
             _selfIndication.SetActive(true);
-        }
     }
 }

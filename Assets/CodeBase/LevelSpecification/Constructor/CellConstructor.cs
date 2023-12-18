@@ -6,18 +6,6 @@ using CodeBase.LevelSpecification.Cells;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
-using Door = CodeBase.LevelSpecification.Cells.Door;
-using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
-using ItemSpawnPoint = CodeBase.LevelSpecification.Cells.ItemSpawnPoint;
-using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
-using FireTrap = CodeBase.LevelSpecification.Cells.FireTrap;
-using Key = CodeBase.LevelSpecification.Cells.Key;
-using Plate = CodeBase.LevelSpecification.Cells.Plate;
-using Portal = CodeBase.LevelSpecification.Cells.Portal;
-using Rock = CodeBase.LevelSpecification.Cells.Rock;
-using Savepoint = CodeBase.LevelSpecification.Cells.Savepoint;
-using SpikeTrap = CodeBase.LevelSpecification.Cells.SpikeTrap;
-using Wall = CodeBase.LevelSpecification.Cells.Wall;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -25,7 +13,10 @@ namespace CodeBase.LevelSpecification.Constructor
     {
         private readonly Dictionary<Type, ICellConstructor> _constructors;
 
-        public CellConstructor(GameStateMachine stateMachine, ISaveLoadService saveLoadService, IStaticDataService staticDataService, IRandomService randomService)
+        public CellConstructor(GameStateMachine stateMachine,
+            ISaveLoadService saveLoadService,
+            IStaticDataService staticDataService,
+            IRandomService randomService)
         {
             _constructors = new Dictionary<Type, ICellConstructor>
             {
@@ -46,9 +37,7 @@ namespace CodeBase.LevelSpecification.Constructor
             };
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
-        {
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell =>
             _constructors[typeof(TCell)].Construct<TCell>(gameFactory, cells);
-        }
     }
 }

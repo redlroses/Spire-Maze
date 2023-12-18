@@ -13,7 +13,6 @@ namespace CodeBase.UI
         [SerializeField] private float _landscapeFactor;
         [SerializeField] private float _portraitFactor;
         [SerializeField] private CanvasScaler _canvasScaler;
-
 #if UNITY_EDITOR
         [SerializeField] private bool _isDebugMobile;
 #endif

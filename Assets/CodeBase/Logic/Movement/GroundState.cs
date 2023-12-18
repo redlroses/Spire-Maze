@@ -3,6 +3,6 @@
     public enum GroundState
     {
         Grounded,
-        InAir
+        InAir,
     }
 }

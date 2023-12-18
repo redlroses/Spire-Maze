@@ -3,6 +3,7 @@
     public interface IDamageTrigger
     {
         void Enable();
+
         void Disable();
     }
 }

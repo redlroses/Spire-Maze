@@ -12,6 +12,7 @@ namespace CodeBase.StaticData
         [SerializeField] private SerializedDictionary<string, Sprite> _flags;
 
         public IReadOnlyDictionary<string, Sprite> Flags => _flags;
+
         public Sprite DefaultFlag => Flags[Default];
     }
 }

@@ -16,13 +16,13 @@ namespace CodeBase.Logic.HealthEntity.Damage
         private void Awake() =>
             _collider ??= GetComponent<Collider>();
 
-        protected override void OnTriggerObserverEntered(IDamagable damagable) =>
-            damagable.Damage(_damage, _isLethal ? DamageType.Lethal : DamageType.Burst);
-
         public void Enable() =>
             _collider.enabled = true;
 
         public void Disable() =>
             _collider.enabled = false;
+
+        protected override void OnTriggerObserverEntered(IDamagable damagable) =>
+            damagable.Damage(_damage, _isLethal ? DamageType.Lethal : DamageType.Burst);
     }
 }

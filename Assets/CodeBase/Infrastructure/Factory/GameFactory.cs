@@ -32,10 +32,11 @@ namespace CodeBase.Infrastructure.Factory
 
         private Transform _heroTransform;
 
-        public Transform Location => _heroTransform;
-
-        public GameFactory(IAssetProvider assets, IPersistentProgressService progressService,
-            IPauseService pauseService, IUIFactory uiFactory, IInputService inputService,
+        public GameFactory(IAssetProvider assets,
+            IPersistentProgressService progressService,
+            IPauseService pauseService,
+            IUIFactory uiFactory,
+            IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;
@@ -47,6 +48,8 @@ namespace CodeBase.Infrastructure.Factory
             _materials = new Dictionary<string, Material>(4);
             _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
+
+        Transform IHeroLocator.Location => _heroTransform;
 
         public void Cleanup() =>
             _progressService.CleanupReadersAndWriters();

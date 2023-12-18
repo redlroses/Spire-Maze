@@ -5,7 +5,7 @@ namespace CodeBase.Logic.Trap
 {
     public abstract class Trap : MonoCache
     {
-        [SerializeField] protected TrapActivator _activator;
+        [SerializeField] private TrapActivator _activator;
 
         public TrapActivator TrapActivator => _activator;
 

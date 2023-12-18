@@ -23,14 +23,8 @@ namespace CodeBase.UI.Elements
         [SerializeField] [BoxGroup("CanvasGroupControl")]
         private bool _isControlRaycastBlockInteractable;
 
-        protected override Func<float, float, float, float> GetLerpFunction() =>
-            Mathf.Lerp;
-
         private void OnValidate() =>
             _canvasGroup ??= GetComponent<CanvasGroup>();
-
-        protected override void ApplyLerpValue(float lerpValue) =>
-            _canvasGroup.alpha = lerpValue;
 
         protected override void OnInitialize()
         {
@@ -60,5 +54,11 @@ namespace CodeBase.UI.Elements
             if (_isControlRaycastBlockInteractable)
                 _canvasGroup.blocksRaycasts = !_canvasGroup.blocksRaycasts;
         }
+
+        protected override Func<float, float, float, float> GetLerpFunction() =>
+            Mathf.Lerp;
+
+        protected override void ApplyLerpValue(float lerpValue) =>
+            _canvasGroup.alpha = lerpValue;
     }
 }

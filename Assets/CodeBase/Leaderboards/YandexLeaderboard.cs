@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using CodeBase.Data;
-using CodeBase.StaticData;
 using Agava.YandexGames;
+using CodeBase.Data;
 using CodeBase.Services.StaticData;
+using CodeBase.StaticData;
 using CodeBase.Tools;
 using Cysharp.Threading.Tasks;
 using I2.Loc;
@@ -27,7 +27,6 @@ namespace CodeBase.Leaderboards
         private List<SingleRankData> _ranksData;
         private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived;
-        private bool _isAuthorized;
 
         public YandexLeaderboard(LeaderboardStaticData leaderboard, IStaticDataService staticData)
         {
@@ -41,7 +40,7 @@ namespace CodeBase.Leaderboards
             PlayerAccount.AuthorizedInBackground += CheckAuthorization;
         }
 
-        public bool IsAuthorized => _isAuthorized;
+        public bool IsAuthorized { get; private set; }
 
         public async UniTask<RanksData> GetRanksData()
         {
@@ -53,8 +52,16 @@ namespace CodeBase.Leaderboards
 
             bool isError = false;
             _isLeaderboardDataReceived = false;
-            Leaderboard.GetPlayerEntry(_name, OnGetPlayerEntry, _ => OnGetPlayerEntry(null), ProfilePictureSize.small);
-            Leaderboard.GetEntries(_name, OnGetLeaderBoardEntries, _ => isError = true, _topPlayersCount, _competingPlayersCount,
+
+            Leaderboard.GetPlayerEntry(_name,
+                OnGetPlayerEntry,
+                _ => OnGetPlayerEntry(null),
+                ProfilePictureSize.small);
+
+            Leaderboard.GetEntries(_name,
+                OnGetLeaderBoardEntries,
+                _ => isError = true, _topPlayersCount,
+                _competingPlayersCount,
                 _isIncludeSelf, ProfilePictureSize.small);
 
             while (_isLeaderboardDataReceived == false)
@@ -68,17 +75,6 @@ namespace CodeBase.Leaderboards
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
 
-        private async void OnGetPlayerEntry(LeaderboardEntryResponse result)
-        {
-            if (result.Equals(null))
-            {
-                _selfRanksData = new SingleRankData(0, 0, _staticData.GetDefaultAvatar(), _anonymousName,
-                    _staticData.GetSpriteByLang(YandexGamesSdk.Environment.browser.lang));
-            }
-
-            _selfRanksData = await LoadSingleRankData(result);
-        }
-
         public async UniTask SetScore(int score, string avatarName)
         {
             bool isComplete = false;
@@ -90,13 +86,19 @@ namespace CodeBase.Leaderboards
                 return;
             }
 
-            Leaderboard.GetPlayerEntry(_name, result =>
-            {
-                if (result.score >= score)
-                    return;
+            Leaderboard.GetPlayerEntry(_name,
+                result =>
+                {
+                    if (result.score >= score)
+                        return;
 
-                Leaderboard.SetScore(_name, score, () => isComplete = true, _ => isComplete = true, avatarName);
-            }, _ => isComplete = true);
+                    Leaderboard.SetScore(_name,
+                        score,
+                        () => isComplete = true,
+                        _ => isComplete = true,
+                        avatarName);
+                },
+                _ => isComplete = true);
 
             while (isComplete == false)
                 await UniTask.Yield();
@@ -107,7 +109,7 @@ namespace CodeBase.Leaderboards
             bool isSuccess = false;
             bool isError = false;
 
-            if (_isAuthorized)
+            if (IsAuthorized)
                 return true;
 
             PlayerAccount.Authorize(() => isSuccess = true, _ => isError = true);
@@ -115,7 +117,7 @@ namespace CodeBase.Leaderboards
             while (isSuccess == false && isError == false)
                 await UniTask.Yield();
 
-            _isAuthorized = PlayerAccount.IsAuthorized;
+            IsAuthorized = PlayerAccount.IsAuthorized;
             Debug.Log($"{nameof(TryAuthorize)}: isSuccess: {isSuccess}, isError: {isError}");
             return isSuccess;
         }
@@ -125,7 +127,7 @@ namespace CodeBase.Leaderboards
             bool isSuccess = false;
             bool isError = false;
 
-            if (_isAuthorized == false)
+            if (IsAuthorized == false)
                 return false;
 
             if (PlayerAccount.HasPersonalProfileDataPermission)
@@ -140,8 +142,19 @@ namespace CodeBase.Leaderboards
             return isSuccess;
         }
 
+        private async void OnGetPlayerEntry(LeaderboardEntryResponse result)
+        {
+            if (result.Equals(null))
+            {
+                _selfRanksData = new SingleRankData(0, 0, _staticData.GetDefaultAvatar(), _anonymousName,
+                    _staticData.GetSpriteByLang(YandexGamesSdk.Environment.browser.lang));
+            }
+
+            _selfRanksData = await LoadSingleRankData(result);
+        }
+
         private void CheckAuthorization() =>
-            _isAuthorized = PlayerAccount.IsAuthorized;
+            IsAuthorized = PlayerAccount.IsAuthorized;
 
         private SingleRankData[] GetCompetingRanks() =>
             _ranksData.Count > _topPlayersCount

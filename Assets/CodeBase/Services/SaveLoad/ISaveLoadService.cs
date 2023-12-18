@@ -6,7 +6,9 @@ namespace CodeBase.Services.SaveLoad
     public interface ISaveLoadService : IService
     {
         void SaveProgress();
+
         UniTask<PlayerProgress> LoadProgress();
+
         UniTask ActualizeProgress();
     }
 }

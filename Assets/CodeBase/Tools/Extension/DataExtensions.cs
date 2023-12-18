@@ -35,8 +35,12 @@ namespace CodeBase.Tools.Extension
             JsonUtility.FromJson<T>(json);
 
         public static DateTime AsDateTime(this DateTimeData dateTimeData) =>
-            new DateTime(dateTimeData.Year, dateTimeData.Month, dateTimeData.Day,
-                dateTimeData.Hour, dateTimeData.Minute, dateTimeData.Second);
+            new DateTime(dateTimeData.Year,
+                dateTimeData.Month,
+                dateTimeData.Day,
+                dateTimeData.Hour,
+                dateTimeData.Minute,
+                dateTimeData.Second);
 
         public static DateTimeData AsDateTimeData(this DateTime dateTime) =>
             new DateTimeData(dateTime);
@@ -46,7 +50,7 @@ namespace CodeBase.Tools.Extension
             List<ItemData> itemsData = new List<ItemData>(inventory.Count);
 
             foreach (IReadOnlyInventoryCell cell in inventory)
-                itemsData.Add(new ItemData(cell.Count, (int) cell.Item.ItemType));
+                itemsData.Add(new ItemData(cell.Count, (int)cell.Item.ItemType));
 
             return new InventoryData(itemsData);
         }
@@ -59,7 +63,7 @@ namespace CodeBase.Tools.Extension
 
             foreach (ItemData itemData in inventoryData.ItemsData)
             {
-                IItem item = gameFactory.CreateItem(staticData.GetStorable((StorableType) itemData.StorableType));
+                IItem item = gameFactory.CreateItem(staticData.GetStorable((StorableType)itemData.StorableType));
                 itemsData.Add(new InventoryCell(item, itemData.Count));
             }
 
@@ -96,8 +100,11 @@ namespace CodeBase.Tools.Extension
             Sprite avatar = assetProvider.LoadAsset<Sprite>($"{AssetPath.Avatar}/{entry.extraData}");
             Sprite flag = assetProvider.LoadAsset<Sprite>($"{AssetPath.Flag}/{entry.player.lang}");
 
-            return new SingleRankData(entry.rank, entry.score, avatar,
-                entry.player.publicName ?? Anonymous, flag);
+            return new SingleRankData(entry.rank,
+                entry.score,
+                avatar,
+                entry.player.publicName ?? Anonymous,
+                flag);
         }
 
         public static LanguageId AsLangId(this string langString)

@@ -16,27 +16,23 @@ namespace CodeBase.Logic.Trap
         private float _delta;
         private bool _isEnabled;
 
-        protected override void Run()
-        {
-            Move();
-            CheckIsComplete();
-        }
-
-        protected override void Activate()
-        {
-            enabled = true;
-        }
-
-        public void Resume()
-        {
+        public void Resume() =>
             enabled = _isEnabled;
-        }
 
         public void Pause()
         {
             _isEnabled = enabled;
             enabled = false;
         }
+
+        protected override void Run()
+        {
+            Move();
+            CheckIsComplete();
+        }
+
+        protected override void Activate() =>
+            enabled = true;
 
         private void Move()
         {

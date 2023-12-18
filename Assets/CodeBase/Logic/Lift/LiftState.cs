@@ -3,6 +3,6 @@
     public enum LiftState
     {
         Idle,
-        Moving
+        Moving,
     }
 }

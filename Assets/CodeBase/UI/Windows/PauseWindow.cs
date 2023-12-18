@@ -22,7 +22,8 @@ namespace CodeBase.UI.Windows
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
 
-        public void Construct(IPersistentProgressService progressService, IPauseService pauseService,
+        public void Construct(IPersistentProgressService progressService,
+            IPauseService pauseService,
             GameStateMachine stateMachine)
         {
             _pauseService = pauseService;
@@ -31,7 +32,9 @@ namespace CodeBase.UI.Windows
             _menuButton.Construct(stateMachine);
         }
 
-        public void Pause() { }
+        public void Pause()
+        {
+        }
 
         public void Resume()
         {

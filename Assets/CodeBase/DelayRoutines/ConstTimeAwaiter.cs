@@ -7,9 +7,14 @@ namespace CodeBase.DelayRoutines
     {
         private readonly float _waitTime;
 
-        public ConstTimeAwaiter(float waitTime, GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
-            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater) =>
+        public ConstTimeAwaiter(float waitTime,
+            GlobalUpdate globalUpdate,
+            Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater)
+            : base(globalUpdate, addUpdater, removeUpdater)
+        {
             _waitTime = waitTime;
+        }
 
         protected override float GetWaitTime() =>
             _waitTime;

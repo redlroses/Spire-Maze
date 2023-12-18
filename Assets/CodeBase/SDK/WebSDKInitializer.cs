@@ -24,7 +24,7 @@ namespace CodeBase.SDK
 #if UNITY_EDITOR
             onReadyCallback?.Invoke();
             yield break;
-#endif
+#else
             GameAnalytics.Initialize();
             yield return YandexGamesSdk.Initialize();
 
@@ -32,6 +32,7 @@ namespace CodeBase.SDK
                 yield return null;
 
             onReadyCallback?.Invoke();
+#endif
         }
     }
 }

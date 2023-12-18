@@ -13,7 +13,6 @@ namespace CodeBase.UI
         [SerializeField] private RectTransform _handler;
         [SerializeField] private CanvasScaler _rootCanvasScale;
         [SerializeField] private float _defaultMovement;
-        [SerializeField] private float _power;
 
         private void OnValidate()
         {

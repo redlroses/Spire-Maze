@@ -44,27 +44,19 @@ namespace CodeBase.Logic.DoorEnvironment
         }
 
         [Button] [Conditional("UNITY_EDITOR")]
-        private void CatchFrom()
-        {
+        private void CatchFrom() =>
             _from = _door.position;
-        }
 
         [Button] [Conditional("UNITY_EDITOR")]
-        private void CatchTo()
-        {
+        private void CatchTo() =>
             _to = _door.position;
-        }
 
         [Button] [Conditional("UNITY_EDITOR")]
-        private void SetFrom()
-        {
+        private void SetFrom() =>
             _door.position = _from;
-        }
 
         [Button] [Conditional("UNITY_EDITOR")]
-        private void SetTo()
-        {
+        private void SetTo() =>
             _door.position = _to;
-        }
     }
 }

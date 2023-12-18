@@ -12,9 +12,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Windows;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -30,9 +28,15 @@ namespace CodeBase.Infrastructure.States
         private readonly IStaticDataService _staticData;
         private readonly IAnalyticsService _analytics;
 
-        public FinishState(IWindowService windowService, IScoreService scoreService, IRankedService rankedService,
-            IPersistentProgressService progressService, ISaveLoadService saveLoad, IWatchService watchService, IHeroLocator heroLocator,
-            IStaticDataService staticData, IAnalyticsService analytics)
+        public FinishState(IWindowService windowService,
+            IScoreService scoreService,
+            IRankedService rankedService,
+            IPersistentProgressService progressService,
+            ISaveLoadService saveLoad,
+            IWatchService watchService,
+            IHeroLocator heroLocator,
+            IStaticDataService staticData,
+            IAnalyticsService analytics)
         {
             _windowService = windowService;
             _scoreService = scoreService;
@@ -46,10 +50,15 @@ namespace CodeBase.Infrastructure.States
         }
 
         private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+
         private int StarsCount => TemporalProgress.StarsCount;
+
         private int Score => TemporalProgress.Score;
+
         private int CollectedArtifactsCount => TemporalProgress.CollectedArtifactsCount;
+
         private int PlayTime => TemporalProgress.PlayTime;
 
         public void Enter(bool isLoss)
@@ -73,7 +82,9 @@ namespace CodeBase.Infrastructure.States
             CollectAnalytics(isLoss);
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
 
         private void CountCollectedArtifacts()
         {

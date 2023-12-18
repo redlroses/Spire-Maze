@@ -1,5 +1,4 @@
-﻿using CodeBase.Logic.HealthEntity;
-using CodeBase.Logic.Hero;
+﻿using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Logic.StateMachine.States;
 using CodeBase.Services.Input;
@@ -10,11 +9,16 @@ namespace CodeBase.Logic.StateMachine
     {
         private readonly IInputService _inputService;
 
-        public PlayerStateMachine(HeroAnimator heroAnimator, IInputService inputService, HeroMover heroMover, HeroHealth heroHealth, Dodge dodge, Jumper jumper)
+        public PlayerStateMachine(HeroAnimator heroAnimator,
+            IInputService inputService,
+            HeroMover heroMover,
+            HeroHealth heroHealth,
+            Dodge dodge,
+            Jumper jumper)
         {
             _inputService = inputService;
-            States.Add(typeof(PlayerIdleState), new PlayerIdleState(this, heroAnimator, inputService, heroMover, jumper, dodge));
-            States.Add(typeof(PlayerMoveState), new PlayerMoveState(this, inputService, heroMover, jumper, dodge));
+            States.Add(typeof(IdleState), new IdleState(this, inputService, heroMover, jumper, dodge));
+            States.Add(typeof(MoveState), new MoveState(this, inputService, heroMover, jumper, dodge));
             States.Add(typeof(DodgeState), new DodgeState(this, heroAnimator, inputService, heroHealth));
             States.Add(typeof(JumpState), new JumpState(this, heroAnimator, inputService, heroMover));
             States.Add(typeof(DiedState), new DiedState(heroAnimator, heroMover));
@@ -23,13 +27,13 @@ namespace CodeBase.Logic.StateMachine
             inputService.MoveStopped += OnMoveStopped;
         }
 
-        private void OnMoveStopped() =>
-            Enter<PlayerIdleState>();
-
         public override void Cleanup()
         {
             base.Cleanup();
             _inputService.MoveStopped -= OnMoveStopped;
         }
+
+        private void OnMoveStopped() =>
+            Enter<IdleState>();
     }
 }

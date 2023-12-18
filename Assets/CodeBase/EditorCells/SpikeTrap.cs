@@ -4,7 +4,8 @@ namespace CodeBase.EditorCells
 {
     public class SpikeTrap : Plate
     {
-        public SpikeTrap(Texture2D texture) : base(texture)
+        public SpikeTrap(Texture2D texture)
+            : base(texture)
         {
         }
 

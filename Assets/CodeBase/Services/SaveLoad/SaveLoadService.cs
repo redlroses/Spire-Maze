@@ -22,8 +22,7 @@ namespace CodeBase.Services.SaveLoad
         private readonly IPersistentProgressService _progressService;
         private readonly IWatchService _watchService;
 
-        public SaveLoadService(IPersistentProgressService progressService,
-            IWatchService watchService)
+        public SaveLoadService(IPersistentProgressService progressService, IWatchService watchService)
         {
             _progressService = progressService;
             _watchService = watchService;

@@ -8,13 +8,13 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
     [RequireComponent(typeof(Button))]
     public abstract class TransitionButton : ButtonObserver
     {
-        protected GameStateMachine StateMachine;
+        private GameStateMachine _stateMachine;
 
         public void Construct(GameStateMachine stateMachine) =>
-            StateMachine = stateMachine;
+            _stateMachine = stateMachine;
 
         protected override void Call() =>
-            StateMachine.Enter<LoadLevelState, LoadPayload>(CreateTransitionPayload());
+            _stateMachine.Enter<LoadLevelState, LoadPayload>(CreateTransitionPayload());
 
         protected abstract LoadPayload CreateTransitionPayload();
     }

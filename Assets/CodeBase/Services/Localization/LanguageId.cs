@@ -4,6 +4,6 @@
     {
         Russian,
         English,
-        Turkish
+        Turkish,
     }
 }

@@ -18,7 +18,7 @@
         Pressed,
 
         /// <summary>
-        /// The UI object is selected
+        /// The UI object is selected.
         /// </summary>
         Selected,
 
@@ -28,13 +28,13 @@
         Disabled,
 
         /// <summary>
-        /// For Dropdown only
+        /// For Dropdown only.
         /// </summary>
         Shown,
 
         /// <summary>
-        /// For Dropdown only
+        /// For Dropdown only.
         /// </summary>
-        Hidden
+        Hidden,
     }
 }

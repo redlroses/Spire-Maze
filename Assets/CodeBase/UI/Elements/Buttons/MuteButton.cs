@@ -11,11 +11,13 @@ namespace CodeBase.UI.Elements.Buttons
         private readonly Locker _locker = new Locker(nameof(MuteButton));
 
         [SerializeField] private Image _buttonIcon;
-
         [SerializeField] [ShowAssetPreview] private Sprite _muteIcon;
         [SerializeField] [ShowAssetPreview] private Sprite _unmuteIcon;
 
         private ISoundService _soundService;
+
+        private void OnDestroy() =>
+            Cleanup();
 
         public void Construct(ISoundService soundService)
         {
@@ -23,9 +25,6 @@ namespace CodeBase.UI.Elements.Buttons
             _buttonIcon.sprite = _soundService.IsMuted ? _muteIcon : _unmuteIcon;
             Subscribe();
         }
-
-        private void OnDestroy() =>
-            Cleanup();
 
         protected override void Call() =>
             SwitchMuteState();

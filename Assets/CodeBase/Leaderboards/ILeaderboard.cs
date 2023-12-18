@@ -5,10 +5,14 @@ namespace CodeBase.Leaderboards
 {
     public interface ILeaderboard
     {
-        UniTask<RanksData> GetRanksData();
-        UniTask SetScore(int score, string avatarName);
         bool IsAuthorized { get; }
+
+        UniTask<RanksData> GetRanksData();
+
+        UniTask SetScore(int score, string avatarName);
+
         UniTask<bool> TryAuthorize();
+
         UniTask<bool> TryRequestPersonalData();
     }
 }

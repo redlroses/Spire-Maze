@@ -2,9 +2,8 @@ using CodeBase.Logic.Hero;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Pause;
 using CodeBase.Tools.Extension;
-using UnityEngine;
 using NTC.Global.Cache;
-using NTC.Global.System;
+using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
@@ -15,8 +14,8 @@ namespace CodeBase.Logic.Movement
     public class Jumper : MonoCache, IPauseWatcher
     {
         public const float GroundCheckDistance = -0.17f;
-        public const float RoofCheckDistance = 0.15f;
 
+        private const float RoofCheckDistance = 0.15f;
         private const float CastSphereRadiusReduction = 0.3f;
 
         [SerializeField] private Rigidbody _rigidbody;
@@ -49,9 +48,6 @@ namespace CodeBase.Logic.Movement
             _heroAnimator ??= GetComponent<HeroAnimator>();
         }
 
-        protected override void FixedRun() =>
-            ProcessJump();
-
         public void Resume()
         {
             EnableGravity();
@@ -75,13 +71,6 @@ namespace CodeBase.Logic.Movement
             if (IsJumpAvailable() == false)
                 return false;
 
-#if DEBUG
-            if (_groundChecker.CoyoteTime > 0)
-            {
-                Debug.Log($"Jumped by coyote time: {_groundChecker.CoyoteTime}/{_groundChecker.CoyoteTimeDuration}");
-            }
-#endif
-
             Vector3 position = _rigidbody.position;
             _startHeight = position.y;
             enabled = true;
@@ -89,6 +78,9 @@ namespace CodeBase.Logic.Movement
             DisableGravity();
             return true;
         }
+
+        protected override void FixedRun() =>
+            ProcessJump();
 
         private bool IsJumpAvailable()
         {
@@ -116,9 +108,7 @@ namespace CodeBase.Logic.Movement
             bool isTouchRoof = _sphereCaster.CastSphere(Vector3.up, RoofCheckDistance, CastSphereRadiusReduction);
 
             if (isTouchRoof)
-            {
                 AbortJump();
-            }
 
             ApplyJumpVelocity();
         }

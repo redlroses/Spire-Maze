@@ -1,6 +1,6 @@
 using CodeBase.Infrastructure.States;
-using CodeBase.Services;
 using CodeBase.Logic;
+using CodeBase.Services;
 
 namespace CodeBase.Infrastructure
 {

@@ -9,10 +9,8 @@ namespace CodeBase.UI
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _errorButton;
 
-        private void Awake()
-        {
+        private void Awake() =>
             _closeButton.interactable = true;
-        }
 
         public void Open(Action<bool> onCloseCallback, Action<string> onErrorCallback)
         {

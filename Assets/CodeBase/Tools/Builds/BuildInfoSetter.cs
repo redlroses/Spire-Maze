@@ -11,7 +11,6 @@ namespace CodeBase.Tools.Builds
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-
         private void Awake()
         {
 #if UNITY_EDITOR
@@ -21,7 +20,6 @@ namespace CodeBase.Tools.Builds
             SetInfo(Resources.Load<BuildInfo>(AssetPath.BuildInfo).BuildDateTime);
 #endif
         }
-
 
         private void SetInfo(DateTime info)
         {

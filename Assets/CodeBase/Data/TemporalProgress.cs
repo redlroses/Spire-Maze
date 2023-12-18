@@ -12,7 +12,6 @@ namespace CodeBase.Data
         public int StarsCount;
         public int CoinsCount;
 
-
         public TemporalProgress()
         {
             LevelHeightRange = Vector2.zero;

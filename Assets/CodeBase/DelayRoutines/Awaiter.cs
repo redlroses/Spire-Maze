@@ -11,12 +11,25 @@ namespace CodeBase.DelayRoutines
         private readonly Action<GlobalUpdate, Awaiter> _addUpdater;
         private readonly Action<GlobalUpdate, Awaiter> _removeUpdater;
 
-        protected Awaiter(GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
+        protected Awaiter(GlobalUpdate globalUpdate,
+            Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)
         {
             _globalUpdate = globalUpdate;
             _addUpdater = addUpdater;
             _removeUpdater = removeUpdater;
+        }
+
+        public void Pause()
+        {
+            if (IsActive)
+                Deactivate();
+        }
+
+        public void Resume()
+        {
+            if (IsActive == false)
+                Activate();
         }
 
         void IRunSystem.OnRun() =>
@@ -35,21 +48,5 @@ namespace CodeBase.DelayRoutines
 
         protected void Deactivate() =>
             _removeUpdater.Invoke(_globalUpdate, this);
-
-        public void Pause()
-        {
-            if (IsActive)
-            {
-                Deactivate();
-            }
-        }
-
-        public void Resume()
-        {
-            if (IsActive == false)
-            {
-                Activate();
-            }
-        }
     }
 }

@@ -11,7 +11,6 @@ namespace CodeBase.UI
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _errorButton;
         [SerializeField] private TextSetter _timer;
-
         [SerializeField] private int _showTime;
 
         private int _count;

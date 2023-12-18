@@ -19,8 +19,6 @@ namespace CodeBase.Tools
         private float _delta;
         private bool _isForward = true;
 
-        private bool IsComplete => _delta >= FinalValue;
-
         public TowardMover(TValue from, TValue to, Func<TValue, TValue, float, TValue> lerp, AnimationCurve curve)
         {
             _to = to;
@@ -41,12 +39,12 @@ namespace CodeBase.Tools
             Reset();
         }
 
+        private bool IsComplete => _delta >= FinalValue;
+
         public void SetFrom(TValue from)
         {
             if (from is null)
-            {
                 throw new ArgumentNullException(nameof(from));
-            }
 
             _from = from;
         }
@@ -54,9 +52,7 @@ namespace CodeBase.Tools
         public void SetTo(TValue to)
         {
             if (to is null)
-            {
                 throw new ArgumentNullException(nameof(to));
-            }
 
             _to = to;
         }

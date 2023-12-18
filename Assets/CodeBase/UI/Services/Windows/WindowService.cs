@@ -45,6 +45,8 @@ namespace CodeBase.UI.Services.Windows
         public void Pause() =>
             Open(WindowId.Pause);
 
-        public void Resume() { }
+        public void Resume()
+        {
+        }
     }
 }

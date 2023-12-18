@@ -5,14 +5,6 @@ namespace CodeBase.Logic.Items
 {
     public class Item : IItem
     {
-        public string Description { get; }
-        public string Name { get; }
-        public Sprite Sprite { get; }
-        public StorableType ItemType { get; }
-        public bool IsInteractive { get; }
-        public bool IsReloadable { get; }
-        public bool IsArtifact { get; }
-
         public Item(StorableStaticData storableData)
         {
             ItemType = storableData.ItemType;
@@ -23,5 +15,13 @@ namespace CodeBase.Logic.Items
             IsReloadable = storableData.IsReloadable;
             IsArtifact = storableData.IsArtifact;
         }
+
+        public string Description { get; }
+        public string Name { get; }
+        public Sprite Sprite { get; }
+        public StorableType ItemType { get; }
+        public bool IsInteractive { get; }
+        public bool IsReloadable { get; }
+        public bool IsArtifact { get; }
     }
 }

@@ -15,13 +15,13 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
-        private void OnDestroy() =>
-            Cleanup();
-
         protected override void Call()
         {
             _windowService.Open(WindowId.Leaderboard);
             _pauseToggle.EmulateClick();
         }
+
+        private void OnDestroy() =>
+            Cleanup();
     }
 }

@@ -1,19 +1,23 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
-  [Serializable]
-  public class LevelPositions
-  {
-    public Vector3Data InitialPosition;
-    public Vector3Data FinishPosition;
-
-    public LevelPositions(Vector3Data initialPosition, Vector3Data finishPosition)
+    [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class LevelPositions
     {
-      InitialPosition = initialPosition;
-      FinishPosition = finishPosition;
-    }
+        public Vector3Data InitialPosition;
+        public Vector3Data FinishPosition;
 
-    public LevelPositions() { }
-  }
+        public LevelPositions(Vector3Data initialPosition, Vector3Data finishPosition)
+        {
+            InitialPosition = initialPosition;
+            FinishPosition = finishPosition;
+        }
+
+        public LevelPositions()
+        {
+        }
+    }
 }

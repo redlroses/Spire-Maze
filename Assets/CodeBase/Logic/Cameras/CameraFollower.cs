@@ -22,10 +22,8 @@ namespace CodeBase.Logic.Cameras
         private Action _followAction = () => { };
         private IStaticDataService _staticData;
 
-        private void Awake()
-        {
+        private void Awake() =>
             enabled = true;
-        }
 
         public void Construct(IStaticDataService staticData)
         {
@@ -55,6 +53,12 @@ namespace CodeBase.Logic.Cameras
             ApplyConfig(_staticData.GetCameraConfigByOrientation(orientationName));
         }
 
+        public void Follow(Transform target)
+        {
+            _followTarget = target;
+            _followAction = FollowToTarget;
+        }
+
         protected override void LateRun()
         {
             _followAction.Invoke();
@@ -65,19 +69,14 @@ namespace CodeBase.Logic.Cameras
 #endif
         }
 
-        public void Follow(Transform target)
-        {
-            _followTarget = target;
-            _followAction = FollowToTarget;
-        }
-
         private void FollowToTarget()
         {
             Vector3 targetPosition = _followTarget.position;
 
             Quaternion newRotation = Quaternion.LookRotation(
-                new Vector3(-targetPosition.x + _offsetRotetion.x, _offsetRotetion.y, -targetPosition.z + _offsetRotetion.z));
-            Vector3 newPosition = new Vector3(0, targetPosition.y, 0);
+                new Vector3(-targetPosition.x + _offsetRotetion.x, _offsetRotetion.y,
+                    -targetPosition.z + _offsetRotetion.z));
+            Vector3 newPosition = new(0, targetPosition.y, 0);
             transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
 
             Vector3 position = _cameraHolder.position;

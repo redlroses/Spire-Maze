@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CodeBase.Services.Pause;
 using CodeBase.Tools;
 using NTC.Global.Cache;
@@ -13,15 +12,8 @@ namespace CodeBase.Logic
         private Action _callBack;
         private bool _isEnabled;
 
-        private void Awake()
-        {
+        private void Awake() =>
             enabled = false;
-        }
-
-        protected override void Run()
-        {
-            _timer.Tick(Time.deltaTime);
-        }
 
         public void SetUp(float duration, Action action)
         {
@@ -29,10 +21,8 @@ namespace CodeBase.Logic
             _callBack = action;
         }
 
-        public void Resume()
-        {
+        public void Resume() =>
             enabled = _isEnabled;
-        }
 
         public void Pause()
         {
@@ -40,15 +30,14 @@ namespace CodeBase.Logic
             enabled = false;
         }
 
-        public void Play()
-        {
+        public void Play() =>
             enabled = true;
-        }
 
-        public void Restart()
-        {
+        public void Restart() =>
             _timer.Reset();
-        }
+
+        protected override void Run() =>
+            _timer.Tick(Time.deltaTime);
 
         private void OnTimeIsOn()
         {

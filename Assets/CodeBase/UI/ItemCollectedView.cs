@@ -37,6 +37,7 @@ namespace CodeBase.UI
         private RoutineSequence _animation;
         private Camera _camera;
         private Queue<Action> _commandQueue = new Queue<Action>();
+        private ItemCollector _collector;
 
         private TowardMover<Vector2> _mover;
         private TowardMover<Vector2> _scaler;
@@ -60,29 +61,27 @@ namespace CodeBase.UI
                 .Then(EndAnimation);
         }
 
-        private void OnDestroy() =>
-            _animation.Kill();
-
-        private void EndAnimation()
+        private void OnDestroy()
         {
-            if (_commandQueue.TryDequeue(out Action action))
-            {
-                action.Invoke();
-            }
-            else
-            {
-                this.Disable();
-            }
+            _collector.Collected -= OnCollected;
+            _animation.Kill();
         }
 
         public void Construct(ItemCollector collector)
         {
+            _collector = collector;
             collector.Collected += OnCollected;
         }
 
-        protected override void Run()
-        {
+        protected override void Run() =>
             _lights.Rotate(Vector3.forward, Time.deltaTime * _rotateSpeed);
+
+        private void EndAnimation()
+        {
+            if (_commandQueue.TryDequeue(out Action action))
+                action.Invoke();
+            else
+                this.Disable();
         }
 
         private void InitUpscaling()

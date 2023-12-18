@@ -4,6 +4,6 @@
     {
         Burst,
         Periodic,
-        Lethal
+        Lethal,
     }
 }

@@ -65,10 +65,23 @@ namespace CodeBase.Infrastructure.States
         private LoadPayload _loadPayload;
         private bool _isFirstLoad = true;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IInputService inputService,
-            IUIFactory uiFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IStaticDataService staticDataService,
-            ILevelBuilder levelBuilder, IWatchService watchService, IPauseService pauseService, IAnalyticsService analytics,
-            ICameraOperatorService cameraOperatorService, IWindowService windowService, IADService adService, ISoundService soundService, LoadingCurtain curtain)
+        public LoadLevelState(GameStateMachine gameStateMachine,
+            SceneLoader sceneLoader,
+            IGameFactory gameFactory,
+            IInputService inputService,
+            IUIFactory uiFactory,
+            IPersistentProgressService progressService,
+            ISaveLoadService saveLoadService,
+            IStaticDataService staticDataService,
+            ILevelBuilder levelBuilder,
+            IWatchService watchService,
+            IPauseService pauseService,
+            IAnalyticsService analytics,
+            ICameraOperatorService cameraOperatorService,
+            IWindowService windowService,
+            IADService adService,
+            ISoundService soundService,
+            LoadingCurtain curtain)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -239,7 +252,7 @@ namespace CodeBase.Infrastructure.States
             _levelBuilder.Build(_staticData.GetLevel(_loadPayload.LevelId));
 
         private void ConstructLevel() =>
-            _levelBuilder.Construct();
+            _levelBuilder.ConstructLevel();
 
         private GameObject InitHero()
         {
@@ -312,7 +325,7 @@ namespace CodeBase.Infrastructure.States
                 HeroHealthState = new HealthState(_staticData.GetHealthEntity(PlayerKey).MaxHealth),
                 HeroStaminaState = new StaminaState(_staticData.GetStaminaEntity(PlayerKey).MaxStamina),
                 HeroInventoryData = new InventoryData(),
-                AccumulationData = new AccumulationData()
+                AccumulationData = new AccumulationData(),
             };
         }
 

@@ -28,6 +28,7 @@ namespace CodeBase.Logic.DoorEnvironment
         private RoutineSequence _signAnimation;
 
         public int Id { get; private set; }
+
         public bool IsActivated { get; private set; }
 
         public void Construct(Colors doorColor, int id)

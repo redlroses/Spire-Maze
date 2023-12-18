@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Leaderboards
 {
-    internal class EditorLeaderboard : ILeaderboard
+    public class EditorLeaderboard : ILeaderboard
     {
         private readonly int _topPlayersCount;
 
@@ -17,21 +17,20 @@ namespace CodeBase.Leaderboards
         private readonly int _additiveScoreFactor = 5;
         private readonly int _millisecondsDelay = 150;
 
-        private List<SingleRankData> _ranksData = new List<SingleRankData>();
+        private readonly List<SingleRankData> _ranksData = new();
         private SingleRankData _selfRanksData;
-        private bool _isLeaderboardDataReceived = false;
-        private bool _isAuthorized;
+        private bool _isLeaderboardDataReceived;
 
         public EditorLeaderboard(LeaderboardStaticData leaderboard)
         {
             _topPlayersCount = leaderboard.TopPlayersCount;
         }
 
-        public bool IsAuthorized => _isAuthorized;
+        public bool IsAuthorized { get; private set; }
 
         public UniTask<bool> TryAuthorize()
         {
-            _isAuthorized = true;
+            IsAuthorized = true;
             return UniTask.FromResult(true);
         }
 
@@ -49,6 +48,9 @@ namespace CodeBase.Leaderboards
             return new RanksData(GetTopRanks(), GetCompetingRanks(), _selfRanksData);
         }
 
+        public UniTask SetScore(int score, string avatarName) =>
+            UniTask.CompletedTask;
+
         private SingleRankData[] GetCompetingRanks() =>
             _ranksData.Count > _topPlayersCount
                 ? _ranksData.GetRange(_topPlayersCount, _ranksData.Count - _topPlayersCount).ToArray()
@@ -59,9 +61,6 @@ namespace CodeBase.Leaderboards
                 ? Array.Empty<SingleRankData>()
                 : _ranksData.GetRange(0, Math.Min(_topPlayersCount, _ranksData.Count)).ToArray();
 
-        public UniTask SetScore(int score, string avatarName) =>
-            UniTask.CompletedTask;
-
         private async void ApplyTestData()
         {
             _ranksData.Clear();
@@ -71,7 +70,7 @@ namespace CodeBase.Leaderboards
 
             for (int i = 1; i <= _ranksDataCount; i++)
             {
-                var data = new LeaderboardEntryResponse
+                LeaderboardEntryResponse data = new LeaderboardEntryResponse
                 {
                     rank = i,
                     extraData = avatars.GetRandom(),
@@ -79,7 +78,7 @@ namespace CodeBase.Leaderboards
                     player = new PlayerAccountProfileDataResponse
                     {
                         lang = langs.GetRandom(),
-                        publicName = $"Name {i}"
+                        publicName = $"Name {i}",
                     },
                 };
 

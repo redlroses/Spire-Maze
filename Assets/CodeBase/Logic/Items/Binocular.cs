@@ -4,7 +4,6 @@ using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
-using CodeBase.Tools.Extension;
 using CodeBase.UI.Services.Factory;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +19,14 @@ namespace CodeBase.Logic.Items
         private readonly IPersistentProgressService _persistentProgressService;
 
         private VirtualMover _virtualMover;
-        public float ReloadTime { get; }
 
-        public Binocular(StorableStaticData storableData, IUIFactory uiFactory, IInputService inputService,
-            IGameFactory gameFactory, ICameraOperatorService cameraOperator,
-            IPersistentProgressService persistentProgressService) : base(storableData)
+        public Binocular(StorableStaticData storableData,
+            IUIFactory uiFactory,
+            IInputService inputService,
+            IGameFactory gameFactory,
+            ICameraOperatorService cameraOperator,
+            IPersistentProgressService persistentProgressService)
+            : base(storableData)
         {
             _uiFactory = uiFactory;
             _inputService = inputService;
@@ -33,6 +35,8 @@ namespace CodeBase.Logic.Items
             _persistentProgressService = persistentProgressService;
             ReloadTime = storableData.ReloadTime;
         }
+
+        public float ReloadTime { get; }
 
         public void Use()
         {

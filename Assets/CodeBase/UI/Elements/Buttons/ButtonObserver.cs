@@ -1,19 +1,22 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Elements.Buttons
 {
     [RequireComponent(typeof(Button))]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public abstract class ButtonObserver : MonoBehaviour
     {
-        [FormerlySerializedAs("_button")] [SerializeField] protected Button Button;
+        [SerializeField] private Button _button;
+
+        protected Button Button => _button;
 
         private void OnValidate() =>
-            Button ??= GetComponent<Button>();
+            _button ??= GetComponent<Button>();
 
         private void Awake() =>
-            Button ??= GetComponent<Button>();
+            _button ??= GetComponent<Button>();
 
         public void Subscribe() =>
             Button.onClick.AddListener(Call);
@@ -24,6 +27,8 @@ namespace CodeBase.UI.Elements.Buttons
         public void Cleanup() =>
             Button.onClick.RemoveAllListeners();
 
-        protected virtual void Call() { }
+        protected virtual void Call()
+        {
+        }
     }
 }

@@ -6,7 +6,6 @@ using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Factory;
 using TheraBytes.BetterUi;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.UI.Elements
@@ -48,9 +47,7 @@ namespace CodeBase.UI.Elements
             _cellViews = new List<InventoryCellView>();
 
             foreach (IReadOnlyInventoryCell cell in _inventory)
-            {
                 BuildCellView(cell);
-            }
         }
 
         private void BuildCellView(IReadOnlyInventoryCell cell)

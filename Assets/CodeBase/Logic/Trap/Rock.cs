@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Trap
 {
+    [RequireComponent(typeof(Mover))]
     public class Rock : Trap, ISavedProgress, IIndexable
     {
         [Space] [Header("Fragments")]
@@ -18,19 +19,19 @@ namespace CodeBase.Logic.Trap
         [SerializeField] private Rigidbody[] _leftWallFragments;
         [SerializeField] private Rigidbody[] _rightWallFragments;
 
-        [Space]
-        [SerializeField] [BoxGroup("References")] private CapsuleCollider _collisionCollider;
-        [SerializeField] [BoxGroup("References")] private Rigidbody _rigidbody;
-        [SerializeField] [BoxGroup("References")] private Mover _mover;
-        [SerializeField] [BoxGroup("References")] private SimpleBallRotator _rotator;
-        [SerializeField] [BoxGroup("References")] private InterfaceReference<IDamageTrigger, MonoBehaviour> _damageTrigger;
-        [SerializeField] [BoxGroup("References")] private ParticleStopStateObserver _stopEffectStateObserver;
-        [SerializeField] [BoxGroup("References")] private TimerOperator _fragmentsLifetimeTimer;
+        [Space] [Header("References")]
+        [SerializeField] private CapsuleCollider _collisionCollider;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Mover _mover;
+        [SerializeField] private SimpleBallRotator _rotator;
+        [SerializeField] private InterfaceReference<IDamageTrigger, MonoBehaviour> _damageTrigger;
+        [SerializeField] private ParticleStopStateObserver _stopEffectStateObserver;
+        [SerializeField] private TimerOperator _fragmentsLifetimeTimer;
 
-        [Space]
-        [SerializeField] [BoxGroup("Settings")] private float _rayDistance;
-        [SerializeField] [BoxGroup("Settings")] [Label("Ground Layer")] private LayerMask _ground;
-        [SerializeField] [BoxGroup("Settings")] private float _fragmentsLifetime = 1f;
+        [Space] [Header("Settings")]
+        [SerializeField] private float _rayDistance;
+        [SerializeField] [Label("Ground Layer")] private LayerMask _ground;
+        [SerializeField] private float _fragmentsLifetime = 1f;
 
         private Transform _selfTransform;
         private MoveDirection _moveDirection;
@@ -38,33 +39,11 @@ namespace CodeBase.Logic.Trap
         private bool _isTargetRotationReached;
         private float _radius;
 
-        public int Id { get; private set; }
-        public bool IsActivated { get; private set; }
-
         public event Action Destroyed = () => { };
 
-        protected override void FixedRun()
-        {
-            TryCollapse();
-            Rotate();
-        }
+        public int Id { get; private set; }
 
-        protected override void Activate()
-        {
-            this.Enable();
-            _mover.Move(_moveDirection);
-            _mover.Enable();
-            _rotator.Enable();
-            _stopEffectStateObserver.SetCallback(DestroyRock);
-            IsActivated = true;
-            DisableKinematic(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
-
-            _fragmentsLifetimeTimer.SetUp(_fragmentsLifetime, () =>
-            {
-                TurnOff(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
-                TurnOff(_rockFragments);
-            });
-        }
+        public bool IsActivated { get; private set; }
 
         public void Construct(int id, TrapActivator activator)
         {
@@ -106,18 +85,37 @@ namespace CodeBase.Logic.Trap
                 .Find(cell => cell.Id == Id);
 
             if (cellState == null)
-            {
                 progress.WorldData.LevelState.Indexables.Add(new IndexableState(Id, IsActivated));
-            }
             else
-            {
                 cellState.IsActivated = IsActivated;
-            }
+        }
+
+        protected override void FixedRun()
+        {
+            TryCollapse();
+            Rotate();
+        }
+
+        protected override void Activate()
+        {
+            this.Enable();
+            _mover.Move(_moveDirection);
+            _mover.Enable();
+            _rotator.Enable();
+            _stopEffectStateObserver.SetCallback(DestroyRock);
+            IsActivated = true;
+            DisableKinematic(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
+
+            _fragmentsLifetimeTimer.SetUp(_fragmentsLifetime, () =>
+            {
+                TurnOff(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
+                TurnOff(_rockFragments);
+            });
         }
 
         private void Rotate()
         {
-            Vector2 direction = new Vector2((int) _moveDirection, 0f);
+            Vector2 direction = new Vector2((int)_moveDirection, 0f);
             Vector3 moveDirection = direction.ToWorldDirection(transform.parent.position, _radius);
             Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
 

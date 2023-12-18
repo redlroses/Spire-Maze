@@ -19,17 +19,17 @@ namespace CodeBase.Services.Score
         private int _currentScore;
         private int _coins;
 
-        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
-        private GlobalData GlobalData => _progressService.Progress.GlobalData;
-        private WorldData WorldData => _progressService.Progress.WorldData;
-        private AccumulationData AccumulationData => _progressService.Progress.WorldData.AccumulationData;
-
-
         public ScoreService(IStaticDataService staticData, IPersistentProgressService progressService)
         {
             _progressService = progressService;
             _staticData = staticData;
         }
+
+        private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
+
+        private GlobalData GlobalData => _progressService.Progress.GlobalData;
+
+        private WorldData WorldData => _progressService.Progress.WorldData;
 
         public int Calculate(bool isLose)
         {
@@ -52,9 +52,7 @@ namespace CodeBase.Services.Score
             _coins = Mathf.RoundToInt(_currentScore * ScoreToCoins);
 
             if (isLose == false)
-            {
                 GlobalData.UpdateLevelData(_currentLevelId, _currentScore, _stars);
-            }
 
             UpdateProgress();
 
@@ -80,7 +78,8 @@ namespace CodeBase.Services.Score
 
         private int ScorePerTime(ScoreConfig scoreConfig)
         {
-            int scorePerTime = scoreConfig.BasePointsOnStart - TemporalProgress.PlayTime * scoreConfig.PerSecondReduction;
+            int scorePerTime = scoreConfig.BasePointsOnStart -
+                               TemporalProgress.PlayTime * scoreConfig.PerSecondReduction;
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 
@@ -92,9 +91,7 @@ namespace CodeBase.Services.Score
             for (int i = scoreConfig.StarsRatingData.Length - 1; i >= 0; i--)
             {
                 if (_currentScore > scoreConfig.StarsRatingData[i])
-                {
                     return i + 1;
-                }
             }
 
             return 0;

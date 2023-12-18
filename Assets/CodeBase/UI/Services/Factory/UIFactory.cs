@@ -32,9 +32,16 @@ namespace CodeBase.UI.Services.Factory
         private Transform _uiRoot;
         private HeroReviver _hero;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData,
-            IPersistentProgressService progressService, IRankedService rankedService, ISaveLoadService saveLoadService,
-            ILocalizationService localizationService, ISoundService soundService, IPauseService pauseService, IADService adService, GameStateMachine stateMachine)
+        public UIFactory(IAssetProvider assets,
+            IStaticDataService staticData,
+            IPersistentProgressService progressService,
+            IRankedService rankedService,
+            ISaveLoadService saveLoadService,
+            ILocalizationService localizationService,
+            ISoundService soundService,
+            IPauseService pauseService,
+            IADService adService,
+            GameStateMachine stateMachine)
         {
             _assets = assets;
             _staticData = staticData;

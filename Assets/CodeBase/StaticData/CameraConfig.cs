@@ -12,8 +12,11 @@ namespace CodeBase.StaticData
         [SerializeField] private Vector3 _offsetPosition;
 
         public Orientations Orientation => _orientation;
+
         public float FieldOfView => _fieldOfView;
+
         public Vector3 OffsetRotation => _offsetRotation;
+
         public Vector3 OffsetPosition => _offsetPosition;
     }
 }

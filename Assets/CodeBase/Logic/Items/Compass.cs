@@ -15,8 +15,11 @@ namespace CodeBase.Logic.Items
 
         private CompassArrowPanel _arrow;
 
-        public Compass(StorableStaticData storableData, IPersistentProgressService progressService,
-            IUIFactory uiFactory, IHeroLocator locator) : base(storableData)
+        public Compass(StorableStaticData storableData,
+            IPersistentProgressService progressService,
+            IUIFactory uiFactory,
+            IHeroLocator locator)
+            : base(storableData)
         {
             _progressService = progressService;
             _locator = locator;

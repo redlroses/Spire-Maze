@@ -7,10 +7,8 @@ namespace CodeBase.Sound
     {
         [SerializeField] private AudioSource _audioSource;
 
-        private void OnValidate()
-        {
+        private void OnValidate() =>
             _audioSource ??= GetComponent<AudioSource>();
-        }
 
         public void Play(AudioClip clip)
         {
@@ -18,34 +16,22 @@ namespace CodeBase.Sound
             _audioSource.Play();
         }
 
-        public void PlayOneShot(AudioClip clip)
-        {
+        public void PlayOneShot(AudioClip clip) =>
             _audioSource.PlayOneShot(clip);
-        }
 
-        public void PlayOneShot(AudioClip clip, float volume)
-        {
+        public void PlayOneShot(AudioClip clip, float volume) =>
             _audioSource.PlayOneShot(clip, volume);
-        }
 
-        public void Stop()
-        {
+        public void Stop() =>
             _audioSource.Stop();
-        }
 
-        public void EnableLoop()
-        {
+        public void EnableLoop() =>
             _audioSource.loop = true;
-        }
 
-        public void DisableLoop()
-        {
+        public void DisableLoop() =>
             _audioSource.loop = false;
-        }
 
-        public void SetVolume(float volume)
-        {
+        public void SetVolume(float volume) =>
             _audioSource.volume = Mathf.Clamp01(volume);
-        }
     }
 }

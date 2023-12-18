@@ -31,9 +31,7 @@ namespace CodeBase.Logic
             _health.Value.Died += OpenLoseWindow;
         }
 
-        private void OpenLoseWindow()
-        {
+        private void OpenLoseWindow() =>
             _openLoseWindowRoutine.Play();
-        }
     }
 }

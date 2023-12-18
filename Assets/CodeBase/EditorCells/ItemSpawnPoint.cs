@@ -7,7 +7,8 @@ namespace CodeBase.EditorCells
     {
         public StorableType Type;
 
-        public ItemSpawnPoint(Texture2D texture, StorableType type = StorableType.None) : base(texture)
+        public ItemSpawnPoint(Texture2D texture, StorableType type = StorableType.None)
+            : base(texture)
         {
             Type = type;
         }

@@ -1,7 +1,6 @@
 ﻿using CodeBase.Infrastructure.States;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
-using UnityEngine;
 
 namespace CodeBase.Logic.StateMachine.States
 {
@@ -22,6 +21,8 @@ namespace CodeBase.Logic.StateMachine.States
             _heroAnimator.PlayDied();
         }
 
-        public void Exit() { }
+        public void Exit()
+        {
+        }
     }
 }

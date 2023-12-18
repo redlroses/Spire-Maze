@@ -14,6 +14,8 @@ namespace CodeBase.UI.Windows
 {
     public class ResultsWindow : WindowBase
     {
+        private const string StaticTextFormat = "{0}/";
+
         [SerializeField] private MenuButton _menuButton;
         [SerializeField] private RestartButton _restartButton;
         [SerializeField] private NextLevelButton _nextLevelButton;
@@ -29,21 +31,23 @@ namespace CodeBase.UI.Windows
         private IPersistentProgressService _progressService;
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
+
         private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
 
-        protected override void OnAwake()
-        {
-            base.OnAwake();
-            _audioPlayer.PlayOneShot(_sound);
-        }
-
-        public void Construct(IPersistentProgressService progressService, GameStateMachine stateMachine,
+        public void Construct(IPersistentProgressService progressService,
+            GameStateMachine stateMachine,
             IStaticDataService staticData)
         {
             _progressService = progressService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
             _nextLevelButton.Construct(stateMachine, staticData, LevelId);
+        }
+
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            _audioPlayer.PlayOneShot(_sound);
         }
 
         protected override void Initialize()
@@ -75,7 +79,7 @@ namespace CodeBase.UI.Windows
 
         private void SetItemsCount()
         {
-            _itemsText.SetStaticText("{0}/" + TemporalProgress.TotalArtifactsCount);
+            _itemsText.SetStaticText(StaticTextFormat + TemporalProgress.TotalArtifactsCount);
             _itemsText.SetTextAnimated(TemporalProgress.CollectedArtifactsCount);
         }
 

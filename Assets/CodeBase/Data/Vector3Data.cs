@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeBase.Data
 {
     [Serializable]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class Vector3Data
     {
         public float X;

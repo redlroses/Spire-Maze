@@ -6,11 +6,12 @@ using CodeBase.Services.PersistentProgress;
 
 namespace CodeBase.Logic.Hero
 {
-    public sealed class HeroHealth : Health, IHealable, IImmune, ISavedProgress
+    public sealed class HeroHealth : Health, IHealable, IImmune, IHealthReactive, ISavedProgress
     {
         private const string PointsNegativeException = "Points must be non negative";
 
-        public event Action<int, DamageType> Damaged = ((_, _) => { });
+        public event Action<int, DamageType> Damaged = (_, _) => { };
+
         public event Action<int> Healed = _ => { };
 
         public bool IsImmune { get; private set; }

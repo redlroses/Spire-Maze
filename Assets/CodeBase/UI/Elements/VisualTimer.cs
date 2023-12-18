@@ -14,22 +14,6 @@ namespace CodeBase.UI.Elements
 
         private bool _cashedEnableState;
 
-        protected override void Run()
-        {
-            _amountTime -= Time.deltaTime;
-
-            if (_amountTime <= 0)
-                enabled = false;
-
-            ApplyFill(_amountTime);
-        }
-
-        private void ApplyFill(float byAmountTime)
-        {
-            float normalizedAmountTime = Mathf.InverseLerp(0, _reloadTime, byAmountTime);
-            _clock.fillAmount = normalizedAmountTime;
-        }
-
         public void SetUp(float reloadTime) =>
             _reloadTime = reloadTime;
 
@@ -47,5 +31,21 @@ namespace CodeBase.UI.Elements
 
         public void Resume() =>
             enabled = _cashedEnableState;
+
+        protected override void Run()
+        {
+            _amountTime -= Time.deltaTime;
+
+            if (_amountTime <= 0)
+                enabled = false;
+
+            ApplyFill(_amountTime);
+        }
+
+        private void ApplyFill(float byAmountTime)
+        {
+            float normalizedAmountTime = Mathf.InverseLerp(0, _reloadTime, byAmountTime);
+            _clock.fillAmount = normalizedAmountTime;
+        }
     }
 }

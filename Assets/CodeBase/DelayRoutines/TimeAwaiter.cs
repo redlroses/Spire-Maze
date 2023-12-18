@@ -7,16 +7,20 @@ namespace CodeBase.DelayRoutines
     {
         private float _elapsedTime;
 
-        protected TimeAwaiter(GlobalUpdate globalUpdate, Action<GlobalUpdate, Awaiter> addUpdater,
-            Action<GlobalUpdate, Awaiter> removeUpdater) : base(globalUpdate, addUpdater, removeUpdater) { }
+        protected TimeAwaiter(GlobalUpdate globalUpdate,
+            Action<GlobalUpdate, Awaiter> addUpdater,
+            Action<GlobalUpdate, Awaiter> removeUpdater)
+            : base(globalUpdate, addUpdater, removeUpdater)
+        {
+        }
+
+        protected abstract float GetWaitTime();
 
         protected override void OnPlay()
         {
             _elapsedTime = GetWaitTime();
             base.OnPlay();
         }
-
-        protected abstract float GetWaitTime();
 
         protected override void OnUpdate(float deltaTime)
         {

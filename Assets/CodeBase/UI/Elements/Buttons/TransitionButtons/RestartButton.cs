@@ -16,7 +16,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 
         public void Construct(GameStateMachine stateMachine, int levelId)
         {
-            StateMachine = stateMachine;
+            Construct(stateMachine);
             _levelId = levelId;
         }
 

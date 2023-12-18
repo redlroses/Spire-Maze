@@ -18,7 +18,8 @@ namespace CodeBase.Logic.StateMachine.States
 
         private MoveDirection _lastDirection;
 
-        public DodgeState(EntityStateMachine entityStateMachine, HeroAnimator heroAnimator,
+        public DodgeState(EntityStateMachine entityStateMachine,
+            HeroAnimator heroAnimator,
             IInputService inputService, IImmune immune)
         {
             _entityStateMachine = entityStateMachine;
@@ -58,11 +59,11 @@ namespace CodeBase.Logic.StateMachine.States
 
             if (_inputService.MovementPhase != InputActionPhase.Waiting)
             {
-                _entityStateMachine.Enter<PlayerMoveState, MoveDirection>(_lastDirection);
+                _entityStateMachine.Enter<MoveState, MoveDirection>(_lastDirection);
             }
             else
             {
-                _entityStateMachine.Enter<PlayerIdleState>();
+                _entityStateMachine.Enter<IdleState>();
             }
         }
     }

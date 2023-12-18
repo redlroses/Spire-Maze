@@ -1,10 +1,11 @@
 ﻿namespace CodeBase.Logic.HealthEntity
 {
-    public interface IImmune : IHealthReactive
+    public interface IImmune
     {
         bool IsImmune { get; }
 
         void ActivateImmunity();
+
         void DeactivateImmunity();
     }
 }

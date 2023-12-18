@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace CodeBase.Sound
 {
-    public class HeroSound : AudioClipSource
+    public class HeroClipSource : AudioClipSource
     {
         [Header("References")]
         [SerializeField] private HeroHealth _heroHealth;
@@ -69,16 +69,12 @@ namespace CodeBase.Sound
         private void OnDamaged(int damage, DamageType type)
         {
             if (_heroHealth.IsAlive == false)
-            {
                 return;
-            }
 
             if (type == DamageType.Periodic)
             {
                 if (_playPeriodicDamageSound.IsActive == false)
-                {
                     _playPeriodicDamageSound.Play();
-                }
             }
             else
             {
@@ -89,7 +85,9 @@ namespace CodeBase.Sound
         private void OnAttemptToEmptyStaminaUsed() =>
             PlayOneShot(_notEnoughStaminaSound);
 
-        private void OnStateExited(AnimatorState state) { }
+        private void OnStateExited(AnimatorState state)
+        {
+        }
 
         private void OnStateEntered(AnimatorState state)
         {

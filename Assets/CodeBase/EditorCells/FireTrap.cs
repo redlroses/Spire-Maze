@@ -4,7 +4,8 @@ namespace CodeBase.EditorCells
 {
     public class FireTrap : Plate
     {
-        public FireTrap(Texture2D texture) : base(texture)
+        public FireTrap(Texture2D texture)
+            : base(texture)
         {
         }
 

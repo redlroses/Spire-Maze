@@ -16,12 +16,10 @@ namespace CodeBase.Logic
             main.stopAction = ParticleSystemStopAction.Callback;
         }
 
+        private void OnParticleSystemStopped() =>
+            _callback.Invoke();
+
         public void SetCallback(Action action) =>
             _callback = action;
-
-        private void OnParticleSystemStopped()
-        {
-            _callback.Invoke();
-        }
     }
 }

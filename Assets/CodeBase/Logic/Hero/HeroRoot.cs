@@ -28,30 +28,26 @@ namespace CodeBase.Logic.Hero
             _heroReviver ??= GetComponent<HeroReviver>();
         }
 
+        public void Construct(IInputService inputService, GameStateMachine stateMachine)
+        {
+            _inputService = inputService;
+            _aliveObserver.Construct(stateMachine);
+            _entityStateMachine = new PlayerStateMachine(_animator, _inputService, _mover, _heroHealth, _dodge, _jumper);
+            _entityStateMachine.Enter<IdleState>();
+            _heroReviver.Construct(_entityStateMachine);
+            _mover.Move(MoveDirection.Stop);
+        }
+
         private void OnEnable() =>
             _heroHealth.Died += OnDied;
 
         private void OnDisable() =>
             _heroHealth.Died -= OnDied;
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _entityStateMachine.Cleanup();
-        }
 
-        public void Construct(IInputService inputService, GameStateMachine stateMachine)
-        {
-            _inputService = inputService;
-            _aliveObserver.Construct(stateMachine);
-            _entityStateMachine = new PlayerStateMachine(_animator, _inputService, _mover, _heroHealth, _dodge, _jumper);
-            _entityStateMachine.Enter<PlayerIdleState>();
-            _heroReviver.Construct(_entityStateMachine);
-            _mover.Move(MoveDirection.Stop);
-        }
-
-        private void OnDied()
-        {
+        private void OnDied() =>
             _entityStateMachine.Enter<DiedState>();
-        }
     }
 }
