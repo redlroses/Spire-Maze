@@ -33,7 +33,9 @@ namespace CodeBase.Infrastructure.States
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 [typeof(LoadLevelState)] = new LoadLevelState(
                     this,
-                    sceneLoader,
+                    services.Single<IADService>(),
+                    services.Single<IAnalyticsService>(),
+                    services.Single<ICameraOperatorService>(),
                     services.Single<IGameFactory>(),
                     services.Single<IInputService>(),
                     services.Single<IUIFactory>(),
@@ -43,11 +45,9 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ILevelBuilder>(),
                     services.Single<IWatchService>(),
                     services.Single<IPauseService>(),
-                    services.Single<IAnalyticsService>(),
-                    services.Single<ICameraOperatorService>(),
                     services.Single<IWindowService>(),
-                    services.Single<IADService>(),
                     services.Single<ISoundService>(),
+                    sceneLoader,
                     curtain),
                 [typeof(LoadProgressState)] = new LoadProgressState(
                     this,
@@ -59,15 +59,15 @@ namespace CodeBase.Infrastructure.States
                     services.Single<IInputService>(),
                     services.Single<IWatchService>()),
                 [typeof(FinishState)] = new FinishState(
-                    services.Single<IWindowService>(),
-                    services.Single<IScoreService>(),
-                    services.Single<IRankedService>(),
-                    services.Single<IPersistentProgressService>(),
-                    services.Single<ISaveLoadService>(),
-                    services.Single<IWatchService>(),
+                    services.Single<IAnalyticsService>(),
                     services.Single<IGameFactory>() as IHeroLocator,
+                    services.Single<IPersistentProgressService>(),
+                    services.Single<IRankedService>(),
+                    services.Single<ISaveLoadService>(),
+                    services.Single<IScoreService>(),
                     services.Single<IStaticDataService>(),
-                    services.Single<IAnalyticsService>()),
+                    services.Single<IWatchService>(),
+                    services.Single<IWindowService>()),
             };
         }
 

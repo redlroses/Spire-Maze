@@ -1,9 +1,9 @@
 ﻿using System;
+using TMPro;
+using UnityEngine;
 #if !UNITY_EDITOR
 using CodeBase.Infrastructure.AssetManagement;
 #endif
-using TMPro;
-using UnityEngine;
 
 namespace CodeBase.Tools.Builds
 {

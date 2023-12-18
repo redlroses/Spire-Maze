@@ -6,7 +6,8 @@ namespace CodeBase.EditorCells
     {
         public bool IsDirectionToRight;
 
-        public Rock(Texture2D texture, bool isDirectionToRight = true) : base(texture)
+        public Rock(Texture2D texture, bool isDirectionToRight = true)
+            : base(texture)
         {
             IsDirectionToRight = isDirectionToRight;
         }

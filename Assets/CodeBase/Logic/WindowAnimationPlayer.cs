@@ -12,12 +12,12 @@ namespace CodeBase.Logic
         [Button]
         public void Play()
         {
-            foreach (var animation in _locationAnimations)
+            foreach (LocationAnimations animation in _locationAnimations)
             {
                 animation.StartAnimation("Show");
             }
 
-            foreach (var particle in _particles)
+            foreach (ParticleSystem particle in _particles)
             {
                 particle.Play();
             }

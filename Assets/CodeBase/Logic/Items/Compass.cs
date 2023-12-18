@@ -9,9 +9,9 @@ namespace CodeBase.Logic.Items
 {
     public sealed class Compass : Item, IUsable
     {
-        private readonly IUIFactory _uiFactory;
-        private readonly IPersistentProgressService _progressService;
         private readonly IHeroLocator _locator;
+        private readonly IPersistentProgressService _progressService;
+        private readonly IUIFactory _uiFactory;
 
         private CompassArrowPanel _arrow;
 

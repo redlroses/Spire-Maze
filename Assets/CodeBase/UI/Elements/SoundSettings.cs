@@ -6,10 +6,10 @@ namespace CodeBase.UI.Elements
 {
     public class SoundSettings : MonoBehaviour
     {
-        private ISoundService _soundService;
-
         [SerializeField] private Slider _sfxSlider;
         [SerializeField] private Slider _musicSlider;
+
+        private ISoundService _soundService;
 
         private void OnDestroy()
         {

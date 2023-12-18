@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using CodeBase.Tools.Constants;
-using CodeBase.Tools.PhysicsDebug;
+﻿using CodeBase.Tools.Constants;
 using UnityEngine;
 
 namespace CodeBase.Tools.Extension

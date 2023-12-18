@@ -12,10 +12,10 @@ namespace CodeBase.UI.Elements.Buttons
 
         protected Button Button => _button;
 
-        private void OnValidate() =>
+        private void Awake() =>
             _button ??= GetComponent<Button>();
 
-        private void Awake() =>
+        private void OnValidate() =>
             _button ??= GetComponent<Button>();
 
         public void Subscribe() =>

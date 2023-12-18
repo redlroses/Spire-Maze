@@ -13,20 +13,19 @@ namespace CodeBase.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {
-        private readonly string _name;
-        private readonly int _topPlayersCount;
-        private readonly int _competingPlayersCount;
-        private readonly bool _isIncludeSelf;
-        private readonly IStaticDataService _staticData;
-        private readonly ImageLoader _imageLoader;
         private readonly LocalizedString _anonymousName = "Anon";
+        private readonly int _competingPlayersCount;
+        private readonly ImageLoader _imageLoader;
+        private readonly bool _isIncludeSelf;
+        private readonly string _name;
+        private readonly IStaticDataService _staticData;
+        private readonly int _topPlayersCount;
 
-        private int _unsavedScore;
-        private string _unsavedAvatarName;
-
+        private bool _isLeaderboardDataReceived;
         private List<SingleRankData> _ranksData;
         private SingleRankData _selfRanksData;
-        private bool _isLeaderboardDataReceived;
+        private string _unsavedAvatarName;
+        private int _unsavedScore;
 
         public YandexLeaderboard(LeaderboardStaticData leaderboard, IStaticDataService staticData)
         {
@@ -60,9 +59,11 @@ namespace CodeBase.Leaderboards
 
             Leaderboard.GetEntries(_name,
                 OnGetLeaderBoardEntries,
-                _ => isError = true, _topPlayersCount,
+                _ => isError = true,
+                _topPlayersCount,
                 _competingPlayersCount,
-                _isIncludeSelf, ProfilePictureSize.small);
+                _isIncludeSelf,
+                ProfilePictureSize.small);
 
             while (_isLeaderboardDataReceived == false)
             {
@@ -146,7 +147,10 @@ namespace CodeBase.Leaderboards
         {
             if (result.Equals(null))
             {
-                _selfRanksData = new SingleRankData(0, 0, _staticData.GetDefaultAvatar(), _anonymousName,
+                _selfRanksData = new SingleRankData(0,
+                    0,
+                    _staticData.GetDefaultAvatar(),
+                    _anonymousName,
                     _staticData.GetSpriteByLang(YandexGamesSdk.Environment.browser.lang));
             }
 
@@ -181,8 +185,11 @@ namespace CodeBase.Leaderboards
             Sprite avatar = await LoadProfileImage(entry);
             Sprite flag = _staticData.GetSpriteByLang(entry.player.lang);
 
-            return new SingleRankData(entry.rank, entry.score, avatar,
-                string.IsNullOrEmpty(entry.player.publicName) ? _anonymousName : entry.player.publicName, flag);
+            return new SingleRankData(entry.rank,
+                entry.score,
+                avatar,
+                string.IsNullOrEmpty(entry.player.publicName) ? _anonymousName : entry.player.publicName,
+                flag);
         }
 
         private async UniTask<Sprite> LoadProfileImage(LeaderboardEntryResponse entry)

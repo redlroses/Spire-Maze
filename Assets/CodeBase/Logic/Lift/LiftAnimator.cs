@@ -41,8 +41,10 @@ namespace CodeBase.Logic.Lift
         }
 
         private void AnimateRotation(Transform gearLeft, bool isGearRotationClockwise) =>
-            gearLeft.Rotate(Vector3.up, _mover.Velocity * _rotationSpeedFactor * isGearRotationClockwise.AsSign()
-                                        * Time.deltaTime, Space.Self);
+            gearLeft.Rotate(Vector3.up,
+                _mover.Velocity * _rotationSpeedFactor * isGearRotationClockwise.AsSign()
+                * Time.deltaTime,
+                Space.Self);
 
         private void InvertDirection()
         {

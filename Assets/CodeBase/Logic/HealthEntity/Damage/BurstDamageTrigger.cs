@@ -10,10 +10,10 @@ namespace CodeBase.Logic.HealthEntity.Damage
         [SerializeField] private int _damage;
         [SerializeField] private bool _isLethal;
 
-        protected override void OnValidate() =>
+        private void Awake() =>
             _collider ??= GetComponent<Collider>();
 
-        private void Awake() =>
+        protected override void OnValidate() =>
             _collider ??= GetComponent<Collider>();
 
         public void Enable() =>

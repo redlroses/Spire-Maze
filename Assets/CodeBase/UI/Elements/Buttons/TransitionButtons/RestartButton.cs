@@ -25,7 +25,10 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             string sceneName = SceneManager.GetActiveScene().name;
 
             return sceneName.Equals(LevelNames.BuildableLevel)
-                ? new LoadPayload(LevelNames.BuildableLevel, _levelId, _isResetProgressAfterRestart, _isResetProgressAfterRestart)
+                ? new LoadPayload(LevelNames.BuildableLevel,
+                    _levelId,
+                    _isResetProgressAfterRestart,
+                    _isResetProgressAfterRestart)
                 : new LoadPayload(sceneName, GetLevelId(sceneName), true);
         }
 
@@ -35,7 +38,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             {
                 LevelNames.Lobby => LevelNames.LobbyId,
                 LevelNames.LearningLevel => LevelNames.LearningLevelId,
-                _ => throw new ArgumentNullException(nameof(bySceneName))
+                _ => throw new ArgumentNullException(nameof(bySceneName)),
             };
         }
     }

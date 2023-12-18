@@ -18,25 +18,25 @@ namespace CodeBase.Infrastructure.States
 {
     public class FinishState : IPayloadedState<bool>
     {
-        private readonly IWindowService _windowService;
-        private readonly IScoreService _scoreService;
-        private readonly IRankedService _rankedService;
-        private readonly IPersistentProgressService _progressService;
-        private readonly ISaveLoadService _saveLoad;
-        private readonly IWatchService _watchService;
-        private readonly IHeroLocator _heroLocator;
-        private readonly IStaticDataService _staticData;
         private readonly IAnalyticsService _analytics;
+        private readonly IHeroLocator _heroLocator;
+        private readonly IPersistentProgressService _progressService;
+        private readonly IRankedService _rankedService;
+        private readonly ISaveLoadService _saveLoad;
+        private readonly IScoreService _scoreService;
+        private readonly IStaticDataService _staticData;
+        private readonly IWatchService _watchService;
+        private readonly IWindowService _windowService;
 
-        public FinishState(IWindowService windowService,
-            IScoreService scoreService,
-            IRankedService rankedService,
-            IPersistentProgressService progressService,
-            ISaveLoadService saveLoad,
-            IWatchService watchService,
+        public FinishState(IAnalyticsService analytics,
             IHeroLocator heroLocator,
+            IPersistentProgressService progressService,
+            IRankedService rankedService,
+            ISaveLoadService saveLoad,
+            IScoreService scoreService,
             IStaticDataService staticData,
-            IAnalyticsService analytics)
+            IWatchService watchService,
+            IWindowService windowService)
         {
             _windowService = windowService;
             _scoreService = scoreService;

@@ -7,14 +7,14 @@ namespace CodeBase.Tools
     {
         private static bool _isHidden;
 
-        public static event Action<bool> InBackgroundChangeEvent = _ => { };
-
-        public static bool InBackground => WebApplication.InBackground || _isHidden;
-
         public WebFocusObserver()
         {
             WebApplication.InBackgroundChangeEvent += OnFocusChange;
         }
+
+        public static bool InBackground => WebApplication.InBackground || _isHidden;
+
+        public static event Action<bool> InBackgroundChangeEvent = _ => { };
 
         public void Unfocus() =>
             OnFocusChange(true);

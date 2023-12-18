@@ -48,8 +48,10 @@ namespace CodeBase.Logic
             while (_loadingIcon.gameObject.activeInHierarchy)
             {
                 _loadingIcon.Rotate(0, 0, RotationSpeed);
-                await UniTask.Delay(RotationDelay, DelayType.Realtime,
-                    PlayerLoopTiming.Update, destroyCancellationToken);
+                await UniTask.Delay(RotationDelay,
+                    DelayType.Realtime,
+                    PlayerLoopTiming.Update,
+                    destroyCancellationToken);
             }
         }
     }

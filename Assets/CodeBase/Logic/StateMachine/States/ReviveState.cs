@@ -6,9 +6,9 @@ namespace CodeBase.Logic.StateMachine.States
 {
     public class ReviveState : IState
     {
-        private readonly PlayerStateMachine _playerStateMachine;
         private readonly HeroAnimator _heroAnimator;
         private readonly HeroHealth _heroHealth;
+        private readonly PlayerStateMachine _playerStateMachine;
 
         public ReviveState(PlayerStateMachine playerStateMachine, HeroAnimator heroAnimator, HeroHealth heroHealth)
         {

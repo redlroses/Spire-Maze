@@ -14,15 +14,15 @@ namespace CodeBase.UI
         [SerializeField] private CanvasScaler _rootCanvasScale;
         [SerializeField] private float _defaultMovement;
 
+        private void OnEnable() =>
+            OnResolutionChanged();
+
         private void OnValidate()
         {
             _onScreenStick ??= GetComponent<OnScreenStick>();
             _handler ??= GetComponent<RectTransform>();
             _rootCanvasScale ??= transform.root.GetComponentInChildren<CanvasScaler>();
         }
-
-        private void OnEnable() =>
-            OnResolutionChanged();
 
         public void OnResolutionChanged()
         {

@@ -20,6 +20,8 @@ namespace CodeBase.Logic.Lift
 
         public event Action<LiftState> StateChanged = _ => { };
 
+        public IPlateMover Mover { get; private set; }
+
         public LiftState State
         {
             get => _state;
@@ -29,8 +31,6 @@ namespace CodeBase.Logic.Lift
                 StateChanged.Invoke(value);
             }
         }
-
-        public IPlateMover Mover { get; private set; }
 
         private void OnDestroy()
         {
@@ -69,9 +69,7 @@ namespace CodeBase.Logic.Lift
         private void Move()
         {
             if (State == LiftState.Moving)
-            {
                 return;
-            }
 
             _liftAnimator.StartAnimation();
             Mover.Move(_currentMarker, _destinationMarker);
@@ -82,9 +80,7 @@ namespace CodeBase.Logic.Lift
         private void OnCalled(LiftDestinationMarker caller)
         {
             if (_currentMarker != caller)
-            {
                 Move();
-            }
         }
 
         private void OnMoveEnded()

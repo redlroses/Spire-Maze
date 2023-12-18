@@ -22,7 +22,8 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 Key keyData = (Key)cell.CellData;
                 Collectible collectible = gameFactory.CreateCell<TCell>(cell.Container).GetComponent<Collectible>();
-                collectible.Construct(cell.Id, gameFactory.CreateItem(_staticDataService.GetStorable(keyData.Color.ToStorableType())));
+                collectible.Construct(cell.Id,
+                    gameFactory.CreateItem(_staticDataService.GetStorable(keyData.Color.ToStorableType())));
             }
         }
     }

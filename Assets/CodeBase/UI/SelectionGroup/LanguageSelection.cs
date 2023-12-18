@@ -1,5 +1,4 @@
 ﻿using CodeBase.Services.Localization;
-using UnityEngine;
 
 namespace CodeBase.UI.SelectionGroup
 {

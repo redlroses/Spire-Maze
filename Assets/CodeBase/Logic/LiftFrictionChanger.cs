@@ -8,7 +8,7 @@ namespace CodeBase.Logic
     {
         [SerializeField] private PhysicMaterial _plateMaterial;
         [SerializeField] private float _normalStaticFriction = 1f;
-        [SerializeField] private float _enteredStaticFriction = 0f;
+        [SerializeField] private float _enteredStaticFriction;
 
         protected override void OnEnabled()
         {

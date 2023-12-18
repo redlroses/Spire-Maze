@@ -15,11 +15,10 @@ namespace CodeBase.UI.Elements
         [SerializeField] private BetterToggle _inventoryShowToggle;
 
         private List<InventoryCellView> _cellViews;
-        private IInventory _inventory;
-        private IUIFactory _uiFactory;
-        private Transform _selfTransform;
-
         private InputController _inputController;
+        private IInventory _inventory;
+        private Transform _selfTransform;
+        private IUIFactory _uiFactory;
 
         private void OnDestroy()
         {

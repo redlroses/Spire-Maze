@@ -106,11 +106,12 @@ namespace CodeBase.Logic.Trap
             IsActivated = true;
             DisableKinematic(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
 
-            _fragmentsLifetimeTimer.SetUp(_fragmentsLifetime, () =>
-            {
-                TurnOff(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
-                TurnOff(_rockFragments);
-            });
+            _fragmentsLifetimeTimer.SetUp(_fragmentsLifetime,
+                () =>
+                {
+                    TurnOff(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
+                    TurnOff(_rockFragments);
+                });
         }
 
         private void Rotate()

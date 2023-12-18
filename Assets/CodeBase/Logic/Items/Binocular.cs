@@ -12,11 +12,11 @@ namespace CodeBase.Logic.Items
 {
     public class Binocular : Item, IUsable, IReloadable
     {
-        private readonly IUIFactory _uiFactory;
-        private readonly IInputService _inputService;
-        private readonly IGameFactory _gameFactory;
         private readonly ICameraOperatorService _cameraOperator;
+        private readonly IGameFactory _gameFactory;
+        private readonly IInputService _inputService;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IUIFactory _uiFactory;
 
         private VirtualMover _virtualMover;
 

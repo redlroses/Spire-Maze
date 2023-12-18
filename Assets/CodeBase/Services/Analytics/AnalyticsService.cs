@@ -33,7 +33,12 @@ namespace CodeBase.Services.Analytics
 #endif
         }
 
-        private void TrackLevelFinish(int levelId, int stars, int playTime, int artifacts, int score, GAProgressionStatus status)
+        private void TrackLevelFinish(int levelId,
+            int stars,
+            int playTime,
+            int artifacts,
+            int score,
+            GAProgressionStatus status)
         {
             SendProgressEvent(levelId, score, status);
             SendDesignEvent(levelId, StarsLabel, stars, status);

@@ -2,7 +2,9 @@
 using System.Collections;
 using Agava.YandexGames;
 using CodeBase.Infrastructure;
+#if !UNITY_EDITOR
 using GameAnalyticsSDK;
+#endif
 
 namespace CodeBase.SDK
 {

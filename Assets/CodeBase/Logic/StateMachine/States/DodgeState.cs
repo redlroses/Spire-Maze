@@ -12,15 +12,16 @@ namespace CodeBase.Logic.StateMachine.States
     {
         private readonly EntityStateMachine _entityStateMachine;
         private readonly HeroAnimator _heroAnimator;
-        private readonly IInputService _inputService;
         private readonly IImmune _immune;
         private readonly InputController _inputController;
+        private readonly IInputService _inputService;
 
         private MoveDirection _lastDirection;
 
         public DodgeState(EntityStateMachine entityStateMachine,
             HeroAnimator heroAnimator,
-            IInputService inputService, IImmune immune)
+            IInputService inputService,
+            IImmune immune)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;

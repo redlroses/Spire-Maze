@@ -1,8 +1,6 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.StaticData;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
 {

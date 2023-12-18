@@ -17,10 +17,10 @@ namespace CodeBase.Logic.Cameras
         [SerializeField] [Range(0, 1f)] private float _smoothPower = 0.5f;
 
         private string _currentOrientation;
-        private Transform _followTarget;
-        private Vector3 _toPosition;
         private Action _followAction = () => { };
+        private Transform _followTarget;
         private IStaticDataService _staticData;
+        private Vector3 _toPosition;
 
         private void Awake() =>
             enabled = true;
@@ -74,9 +74,10 @@ namespace CodeBase.Logic.Cameras
             Vector3 targetPosition = _followTarget.position;
 
             Quaternion newRotation = Quaternion.LookRotation(
-                new Vector3(-targetPosition.x + _offsetRotetion.x, _offsetRotetion.y,
+                new Vector3(-targetPosition.x + _offsetRotetion.x,
+                    _offsetRotetion.y,
                     -targetPosition.z + _offsetRotetion.z));
-            Vector3 newPosition = new(0, targetPosition.y, 0);
+            Vector3 newPosition = new Vector3(0, targetPosition.y, 0);
             transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
 
             Vector3 position = _cameraHolder.position;

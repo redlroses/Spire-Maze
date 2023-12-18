@@ -15,8 +15,8 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadProgress;
-        private readonly IStaticDataService _staticDataService;
         private readonly ISoundService _soundService;
+        private readonly IStaticDataService _staticDataService;
 
         public LoadProgressState(GameStateMachine gameStateMachine,
             IPersistentProgressService progressService,

@@ -43,10 +43,12 @@ namespace CodeBase.DelayRoutines
             Kill();
 
         /// <summary>
-        /// Launch routine.
+        ///     Launch routine.
         /// </summary>
-        /// <param name="mode">Start type: AtFirst - start from the beginning,
-        /// Continue - continue from where it stopped.</param>
+        /// <param name="mode">
+        ///     Start type: AtFirst - start from the beginning,
+        ///     Continue - continue from where it stopped.
+        /// </param>
         public void Play(RoutinePlayMode mode = RoutinePlayMode.AtFirst)
         {
             if (_isAutoKill)
@@ -59,7 +61,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Stops the coroutine, clears the list of tweens.
+        ///     Stops the coroutine, clears the list of tweens.
         /// </summary>
         public void Kill()
         {
@@ -71,7 +73,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Adds a command to stop the routine and unload resources at the end of the sequence (similar to Kill()).
+        ///     Adds a command to stop the routine and unload resources at the end of the sequence (similar to Kill()).
         /// </summary>
         /// <param name="isAutoKill">False by default.</param>
         /// <returns>Self routine.</returns>
@@ -82,7 +84,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Stops the routine but does not reset the pointer to the current tween.
+        ///     Stops the routine but does not reset the pointer to the current tween.
         /// </summary>
         public void Stop() =>
             ActiveRoutine?.Stop();
@@ -90,7 +92,7 @@ namespace CodeBase.DelayRoutines
         #region Wait
 
         /// <summary>
-        /// Waits for the specified amount of time.
+        ///     Waits for the specified amount of time.
         /// </summary>
         /// <param name="seconds">Waiting time.</param>
         /// <returns>Self routine.</returns>
@@ -101,7 +103,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits for a random amount of time from a given range.
+        ///     Waits for a random amount of time from a given range.
         /// </summary>
         /// <param name="timeRange">Random time selection range.</param>
         /// <returns>Self routine.</returns>
@@ -112,7 +114,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Unrealized part.
+        ///     Unrealized part.
         /// </summary>
         /// <param name="action"></param>
         /// <returns>Self routine.</returns>
@@ -123,7 +125,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits for the given time awaiter.
+        ///     Waits for the given time awaiter.
         /// </summary>
         /// <param name="timeAwaiter">Awaiter for wait.</param>
         /// <returns>Self routine.</returns>
@@ -134,7 +136,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits until the condition is false.
+        ///     Waits until the condition is false.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
         /// <returns>Self routine.</returns>
@@ -145,7 +147,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits until the condition is met.
+        ///     Waits until the condition is met.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
         /// <returns>Self routine.</returns>
@@ -156,7 +158,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits while the condition is true.
+        ///     Waits while the condition is true.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
         /// <returns>Self routine</returns>
@@ -167,7 +169,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Waits while the condition is met.
+        ///     Waits while the condition is met.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
         /// <returns>Self routine</returns>
@@ -182,7 +184,7 @@ namespace CodeBase.DelayRoutines
         #region Then
 
         /// <summary>
-        /// Includes an action in a sequence.
+        ///     Includes an action in a sequence.
         /// </summary>
         /// <param name="action">Action to include.</param>
         /// <returns>Self routine</returns>
@@ -193,7 +195,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Includes an Executor in a sequence.
+        ///     Includes an Executor in a sequence.
         /// </summary>
         /// <param name="executor">Given executor.</param>
         /// <returns>Self routine</returns>
@@ -208,7 +210,7 @@ namespace CodeBase.DelayRoutines
         #region LoopFor
 
         /// <summary>
-        /// Creates a loop between the start of the sequence and the current location in the sequence.
+        ///     Creates a loop between the start of the sequence and the current location in the sequence.
         /// </summary>
         /// <param name="times">Iterations count.</param>
         /// <returns>Self routine.</returns>
@@ -221,7 +223,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Includes a loop object in a sequence.
+        ///     Includes a loop object in a sequence.
         /// </summary>
         /// <param name="loopFor">Given loop object.</param>
         /// <returns>Self routine.</returns>
@@ -233,7 +235,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Creates a loop between the given position in the sequence and the current position in the sequence.
+        ///     Creates a loop between the given position in the sequence and the current position in the sequence.
         /// </summary>
         /// <param name="times">Iterations count.</param>
         /// <param name="from">Where to start the loop.</param>
@@ -247,7 +249,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Creates a loop between the given position in the sequence and the current position in the sequence.
+        ///     Creates a loop between the given position in the sequence and the current position in the sequence.
         /// </summary>
         /// <param name="times">Iterations count.</param>
         /// <param name="fromIndex">The index of the object in the sequence from which to start the loop.</param>
@@ -261,7 +263,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Includes the loop object in the sequence from the given position.
+        ///     Includes the loop object in the sequence from the given position.
         /// </summary>
         /// <param name="loopFor">Given loop object.</param>
         /// <param name="from">Where to start the loop.</param>
@@ -278,7 +280,7 @@ namespace CodeBase.DelayRoutines
         #region LoopWhile
 
         /// <summary>
-        /// Creates a while loop from the beginning of the sequence to the current position.
+        ///     Creates a while loop from the beginning of the sequence to the current position.
         /// </summary>
         /// <param name="repeatCondition">Loop exit condition function.</param>
         /// <returns>Self routine.</returns>
@@ -291,7 +293,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Creates a while loop from the beginning of the sequence to the current position.
+        ///     Creates a while loop from the beginning of the sequence to the current position.
         /// </summary>
         /// <param name="isRepeat">Loop exit condition boolean.</param>
         /// <returns>Self routine.</returns>
@@ -304,7 +306,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Creates a while loop from the given position of the sequence to the current position.
+        ///     Creates a while loop from the given position of the sequence to the current position.
         /// </summary>
         /// <param name="repeatCondition">Loop exit condition.</param>
         /// <param name="from">Where to start the loop.</param>
@@ -318,7 +320,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Creates a while loop from the given position of the sequence to the current position.
+        ///     Creates a while loop from the given position of the sequence to the current position.
         /// </summary>
         /// <param name="repeatCondition">Loop exit condition.</param>
         /// <param name="fromIndex">The index of the element in the sequence from which to start the loop.</param>
@@ -332,7 +334,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// Adds a loop object to the sequence.
+        ///     Adds a loop object to the sequence.
         /// </summary>
         /// <param name="loopWhile">Loop object.</param>
         /// <returns>Self routine.</returns>
@@ -344,7 +346,7 @@ namespace CodeBase.DelayRoutines
         }
 
         /// <summary>
-        /// adds the loop object to the sequence starting from the given position.
+        ///     adds the loop object to the sequence starting from the given position.
         /// </summary>
         /// <param name="loopWhile">Loop object.</param>
         /// <param name="fromIndex">The index of the element in the sequence from which to start the loop.</param>

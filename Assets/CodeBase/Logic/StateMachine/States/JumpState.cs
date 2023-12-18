@@ -3,7 +3,6 @@ using CodeBase.Logic.AnimatorStateMachine;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.Movement;
 using CodeBase.Services.Input;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodeBase.Logic.StateMachine.States
@@ -19,7 +18,8 @@ namespace CodeBase.Logic.StateMachine.States
 
         public JumpState(EntityStateMachine entityStateMachine,
             HeroAnimator heroAnimator,
-            IInputService inputService, HeroMover mover)
+            IInputService inputService,
+            HeroMover mover)
         {
             _entityStateMachine = entityStateMachine;
             _heroAnimator = heroAnimator;

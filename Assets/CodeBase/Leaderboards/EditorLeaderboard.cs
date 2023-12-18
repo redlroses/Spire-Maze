@@ -10,16 +10,15 @@ namespace CodeBase.Leaderboards
 {
     public class EditorLeaderboard : ILeaderboard
     {
-        private readonly int _topPlayersCount;
-
-        private readonly int _ranksDataCount = 6;
-        private readonly int _baseScoreFactor = 10;
         private readonly int _additiveScoreFactor = 5;
+        private readonly int _baseScoreFactor = 10;
         private readonly int _millisecondsDelay = 150;
+        private readonly int _ranksDataCount = 6;
+        private readonly int _topPlayersCount;
+        private readonly List<SingleRankData> _ranksData = new List<SingleRankData>();
 
-        private readonly List<SingleRankData> _ranksData = new();
-        private SingleRankData _selfRanksData;
         private bool _isLeaderboardDataReceived;
+        private SingleRankData _selfRanksData;
 
         public EditorLeaderboard(LeaderboardStaticData leaderboard)
         {

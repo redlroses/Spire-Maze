@@ -65,7 +65,7 @@ namespace CodeBase.Tools.Extension
                 PlateMoveDirection.Right => RotateToRight(height, width, textureData, newData),
                 PlateMoveDirection.Left => RotateToLeft(height, width, newData, textureData),
                 PlateMoveDirection.Down => RotateToDown(height, width, newData, textureData),
-                _ => textureData
+                _ => textureData,
             };
 
             Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);
@@ -74,7 +74,10 @@ namespace CodeBase.Tools.Extension
             return newTexture;
         }
 
-        private static NativeArray<Color32> RotateToDown(int height, int width, NativeArray<Color32> newData, NativeArray<Color32> textureData)
+        private static NativeArray<Color32> RotateToDown(int height,
+            int width,
+            NativeArray<Color32> newData,
+            NativeArray<Color32> textureData)
         {
             for (int j = 0; j < height; ++j)
             {
@@ -89,7 +92,10 @@ namespace CodeBase.Tools.Extension
             return newData;
         }
 
-        private static NativeArray<Color32> RotateToLeft(int height, int width, NativeArray<Color32> newData, NativeArray<Color32> textureData)
+        private static NativeArray<Color32> RotateToLeft(int height,
+            int width,
+            NativeArray<Color32> newData,
+            NativeArray<Color32> textureData)
         {
             for (int j = 0; j < height; ++j)
             {
@@ -104,7 +110,10 @@ namespace CodeBase.Tools.Extension
             return newData;
         }
 
-        private static NativeArray<Color32> RotateToRight(int height, int width, NativeArray<Color32> textureData, NativeArray<Color32> newData)
+        private static NativeArray<Color32> RotateToRight(int height,
+            int width,
+            NativeArray<Color32> textureData,
+            NativeArray<Color32> newData)
         {
             for (int j = 0; j < height; ++j)
             {

@@ -28,8 +28,8 @@ namespace CodeBase.Services.LevelBuild
 {
     public class LevelConstructor
     {
-        private readonly IGameFactory _gameFactory;
         private readonly CellConstructor _cellConstructor;
+        private readonly IGameFactory _gameFactory;
         private readonly MeshCombiner _meshCombiner;
 
         public LevelConstructor(IGameFactory gameFactory,

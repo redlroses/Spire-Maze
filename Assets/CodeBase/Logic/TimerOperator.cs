@@ -8,18 +8,12 @@ namespace CodeBase.Logic
 {
     public class TimerOperator : MonoCache, IPauseWatcher
     {
-        private Timer _timer;
         private Action _callBack;
         private bool _isEnabled;
+        private Timer _timer;
 
         private void Awake() =>
             enabled = false;
-
-        public void SetUp(float duration, Action action)
-        {
-            _timer = new Timer(duration, OnTimeIsOn);
-            _callBack = action;
-        }
 
         public void Resume() =>
             enabled = _isEnabled;
@@ -28,6 +22,12 @@ namespace CodeBase.Logic
         {
             _isEnabled = enabled;
             enabled = false;
+        }
+
+        public void SetUp(float duration, Action action)
+        {
+            _timer = new Timer(duration, OnTimeIsOn);
+            _callBack = action;
         }
 
         public void Play() =>

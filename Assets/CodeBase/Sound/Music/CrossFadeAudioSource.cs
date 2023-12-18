@@ -64,7 +64,8 @@ namespace CodeBase.Sound.Music
                     _secondAudioSource.volume = volume;
 
                     return isProcess;
-                }).Then(() =>
+                })
+                .Then(() =>
                 {
                     if (_firstAudioSource.volume.EqualsApproximately(0))
                     {

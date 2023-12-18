@@ -14,16 +14,16 @@ namespace CodeBase.Logic.Lift.PlateMove
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private AnimationCurve _easeInOutCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-        private T _from;
-        private T _to;
-
         private float _delta;
         private float _distance;
 
-        private Vector3 _prevPosition;
-        private Vector3 _prevRotation;
+        private T _from;
+        private T _to;
 
         private bool _isEnabled;
+
+        private Vector3 _prevPosition;
+        private Vector3 _prevRotation;
 
         public event Action<Vector3, Vector3> PositionUpdated = (_, _) => { };
 
@@ -50,15 +50,6 @@ namespace CodeBase.Logic.Lift.PlateMove
             enabled = false;
         }
 
-        public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
-        {
-            enabled = true;
-            _from = GetTransform(from);
-            _to = GetTransform(to);
-            _distance = GetDistance(from, to);
-            _delta = 0;
-        }
-
         public void Resume() =>
             enabled = _isEnabled;
 
@@ -66,6 +57,15 @@ namespace CodeBase.Logic.Lift.PlateMove
         {
             _isEnabled = enabled;
             enabled = false;
+        }
+
+        public void Move(LiftDestinationMarker from, LiftDestinationMarker to)
+        {
+            enabled = true;
+            _from = GetTransform(from);
+            _to = GetTransform(to);
+            _distance = GetDistance(from, to);
+            _delta = 0;
         }
 
         protected override void FixedRun()

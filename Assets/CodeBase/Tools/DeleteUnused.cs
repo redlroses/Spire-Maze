@@ -7,14 +7,14 @@ namespace CodeBase.Tools
     [ExecuteInEditMode]
     public class DeleteUnused : MonoBehaviour
     {
-        private List<GameObject> _toDelete = new List<GameObject>();
+        private readonly List<GameObject> _toDelete = new List<GameObject>();
 
         [Button]
         private void Delete()
         {
             DeleteDisabled(transform);
 
-            foreach (var o in _toDelete)
+            foreach (GameObject o in _toDelete)
             {
                 DestroyImmediate(o);
             }

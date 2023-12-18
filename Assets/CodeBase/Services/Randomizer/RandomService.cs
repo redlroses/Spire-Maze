@@ -1,4 +1,4 @@
-﻿using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 namespace CodeBase.Services.Randomizer
 {

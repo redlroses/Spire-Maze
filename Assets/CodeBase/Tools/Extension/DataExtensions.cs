@@ -78,7 +78,7 @@ namespace CodeBase.Tools.Extension
                 Colors.Green => StorableType.GreenKey,
                 Colors.Blue => StorableType.BlueKey,
                 Colors.Rgb => StorableType.RgbKey,
-                _ => throw new ArgumentOutOfRangeException(nameof(colors), colors, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(colors), colors, null),
             };
         }
 
@@ -90,7 +90,7 @@ namespace CodeBase.Tools.Extension
                 StorableType.GreenKey => Colors.Green,
                 StorableType.BlueKey => Colors.Blue,
                 StorableType.RgbKey => Colors.Rgb,
-                _ => throw new ArgumentOutOfRangeException(nameof(storableType), storableType, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(storableType), storableType, null),
             };
         }
 
@@ -114,7 +114,7 @@ namespace CodeBase.Tools.Extension
                 LangStringRu => LanguageId.Russian,
                 LangStringEn => LanguageId.English,
                 LangStringTr => LanguageId.Turkish,
-                _ => LanguageId.English
+                _ => LanguageId.English,
             };
         }
     }

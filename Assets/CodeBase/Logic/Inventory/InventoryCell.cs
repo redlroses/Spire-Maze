@@ -15,13 +15,13 @@ namespace CodeBase.Logic.Inventory
             Item = item;
         }
 
-        public bool IsEmpty => Count <= 0;
-
         public InventoryCell(IItem item, int count)
         {
             Count = count;
             Item = item;
         }
+
+        public bool IsEmpty => Count <= 0;
 
         public void Increase() =>
             Count++;

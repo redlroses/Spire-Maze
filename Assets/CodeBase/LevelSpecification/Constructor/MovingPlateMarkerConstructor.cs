@@ -16,10 +16,10 @@ namespace CodeBase.LevelSpecification.Constructor
 {
     public class MovingPlateMarkerConstructor : ICellConstructor
     {
-        private Spire _spire;
+        private IGameFactory _gameFactory;
         private Cell[] _markers;
         private Cell[] _movingPlates;
-        private IGameFactory _gameFactory;
+        private Spire _spire;
 
         public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
         {
@@ -62,7 +62,8 @@ namespace CodeBase.LevelSpecification.Constructor
                 } while (currentCell.Id != leftCell.Id);
 
                 _gameFactory.CreateHorizontalRailLock(leftCell.Container)
-                    .transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
+                    .transform.GetChild(0)
+                    .transform.Rotate(Trigonometry.PiGrade, 0, 0);
                 _gameFactory.CreateHorizontalRailLock(rightCell.Container);
             }
             else
@@ -79,7 +80,8 @@ namespace CodeBase.LevelSpecification.Constructor
 
                 _gameFactory.CreateVerticalRailLock(upCell.Container);
                 _gameFactory.CreateVerticalRailLock(downCell.Container)
-                    .transform.GetChild(0).transform.Rotate(Trigonometry.PiGrade, 0, 0);
+                    .transform.GetChild(0)
+                    .transform.Rotate(Trigonometry.PiGrade, 0, 0);
             }
         }
 
@@ -158,11 +160,13 @@ namespace CodeBase.LevelSpecification.Constructor
 
         private Cell GetClosestDownPair(List<Cell> filtered, float movingPlateHeight) =>
             filtered.Where(cell => cell.Position.Height > movingPlateHeight)
-                .OrderBy(cell => cell.Position.Height).Min();
+                .OrderBy(cell => cell.Position.Height)
+                .Min();
 
         private Cell GetClosestUpPair(List<Cell> filtered, float movingPlateHeight) =>
             filtered.Where(cell => cell.Position.Height < movingPlateHeight)
-                .OrderBy(cell => cell.Position.Height).Max();
+                .OrderBy(cell => cell.Position.Height)
+                .Max();
 
         private Cell GetClosestLeftPair(IReadOnlyCollection<Cell> filtered, float movingPlateAngle)
         {
@@ -172,7 +176,8 @@ namespace CodeBase.LevelSpecification.Constructor
             for (int i = 0; i <= 1; i++)
             {
                 possibleMarkers = filtered.Where(cell =>
-                    cell.Position.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0).ToList();
+                        cell.Position.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0)
+                    .ToList();
 
                 if (possibleMarkers.Any())
                     break;
@@ -181,7 +186,8 @@ namespace CodeBase.LevelSpecification.Constructor
             }
 
             Cell target = (possibleMarkers ?? throw new ArgumentNullException(nameof(possibleMarkers)))
-                .OrderBy(cell => cell.Position.Angle).Last();
+                .OrderBy(cell => cell.Position.Angle)
+                .Last();
 
             if (isIncreaseAngle)
                 target.RemoveTwoPiFromAngle();
@@ -197,7 +203,8 @@ namespace CodeBase.LevelSpecification.Constructor
             for (int i = 0; i <= 1; i++)
             {
                 possibleMarkers = filtered.Where(cell =>
-                    cell.Position.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0).ToList();
+                        cell.Position.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0)
+                    .ToList();
 
                 if (possibleMarkers.Any())
                     break;
@@ -206,7 +213,8 @@ namespace CodeBase.LevelSpecification.Constructor
             }
 
             Cell target = (possibleMarkers ?? throw new ArgumentNullException(nameof(possibleMarkers)))
-                .OrderBy(cell => cell.Position.Angle).First();
+                .OrderBy(cell => cell.Position.Angle)
+                .First();
 
             if (isIncreaseAngle)
                 target.AddTwoPiToAngle();
@@ -218,8 +226,9 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             List<Cell> filtered =
                 _markers.Where(cell =>
-                    cell.Position.Height.EqualsApproximately(movingPlateCell.Position.Height) &&
-                    ((MovingMarker)cell.CellData).Direction == type).ToList();
+                        cell.Position.Height.EqualsApproximately(movingPlateCell.Position.Height) &&
+                        ((MovingMarker)cell.CellData).Direction == type)
+                    .ToList();
             return filtered;
         }
 
@@ -227,8 +236,9 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             List<Cell> filtered =
                 _markers.Where(cell =>
-                    cell.Position.Angle.EqualsApproximately(movingPlateCell.Position.Angle) &&
-                    ((MovingMarker)cell.CellData).Direction == type).ToList();
+                        cell.Position.Angle.EqualsApproximately(movingPlateCell.Position.Angle) &&
+                        ((MovingMarker)cell.CellData).Direction == type)
+                    .ToList();
             return filtered;
         }
     }

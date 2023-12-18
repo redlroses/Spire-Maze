@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Logic.Items;
 using CodeBase.StaticData.Storable;
-using UnityEngine;
 
 namespace CodeBase.Logic.Inventory
 {

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using CodeBase.Infrastructure.Factory;
-using CodeBase.Services;
 using CodeBase.UI.Services.Factory;
 using NaughtyAttributes;
 using UnityEngine;
@@ -83,7 +81,8 @@ namespace CodeBase.UI.Elements
         {
             for (int i = CurrentMaxLivesCount; i < targetLivesCount; i++)
             {
-                var extraLifeView = _gameUiFactory.CreateExtraLiveView(_barContainer).GetComponent<ExtraLiveView>();
+                ExtraLiveView extraLifeView =
+                    _gameUiFactory.CreateExtraLiveView(_barContainer).GetComponent<ExtraLiveView>();
                 _extraLives.Add(extraLifeView);
                 extraLifeView.Deactivate();
                 SetActiveLivesCount(_currentActiveLivesCount + 1);
@@ -94,7 +93,7 @@ namespace CodeBase.UI.Elements
         {
             for (int i = CurrentMaxLivesCount; i > targetLivesCount; i--)
             {
-                var extraLife = _extraLives[i - 1];
+                ExtraLiveView extraLife = _extraLives[i - 1];
 
                 if (extraLife.IsActive)
                 {

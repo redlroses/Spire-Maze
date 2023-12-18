@@ -39,10 +39,11 @@ namespace CodeBase.Services.ADS
             OnAddOpened();
 
             RewardAd(() =>
-            {
-                OnAdClosed();
-                onSuccessCallback?.Invoke();
-            }, OnAdClosed);
+                {
+                    OnAdClosed();
+                    onSuccessCallback?.Invoke();
+                },
+                OnAdClosed);
         }
 
         public void ShowInterstitialAd(Action onSuccessCallback = null)
@@ -54,10 +55,11 @@ namespace CodeBase.Services.ADS
             OnAddOpened();
 
             InterstitialAd(() =>
-            {
-                OnAdClosed();
-                onSuccessCallback?.Invoke();
-            }, OnAdClosed);
+                {
+                    OnAdClosed();
+                    onSuccessCallback?.Invoke();
+                },
+                OnAdClosed);
         }
 
         private void InitAdProvider()

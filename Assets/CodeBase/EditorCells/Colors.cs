@@ -6,6 +6,6 @@
         Red,
         Green,
         Blue,
-        Rgb
+        Rgb,
     }
 }

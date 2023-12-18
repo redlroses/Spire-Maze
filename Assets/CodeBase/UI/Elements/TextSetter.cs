@@ -10,11 +10,11 @@ namespace CodeBase.UI.Elements
 
         private string _formatText;
 
-        private void OnValidate() =>
-            _text ??= GetComponent<TextMeshProUGUI>();
-
         private void Awake() =>
             _formatText = _text.text;
+
+        private void OnValidate() =>
+            _text ??= GetComponent<TextMeshProUGUI>();
 
         public void SetText(string text) =>
             _text.text = text;

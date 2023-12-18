@@ -26,7 +26,8 @@ namespace CodeBase.Logic.Movement
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center,
                 _colliderRadius - radiusReduction,
                 direction,
-                out _, distance + _colliderHeight * Arithmetic.ToHalf,
+                out _,
+                distance + _colliderHeight * Arithmetic.ToHalf,
                 _mask);
 
             Debug.DrawRay(_rigidbody.position + _collider.center,
@@ -42,7 +43,8 @@ namespace CodeBase.Logic.Movement
             bool isHit = Physics.SphereCast(_rigidbody.position + _collider.center,
                 _colliderRadius - radiusReduction,
                 direction,
-                out hitInfo, distance + _colliderHeight * Arithmetic.ToHalf,
+                out hitInfo,
+                distance + _colliderHeight * Arithmetic.ToHalf,
                 _mask);
             return isHit;
         }

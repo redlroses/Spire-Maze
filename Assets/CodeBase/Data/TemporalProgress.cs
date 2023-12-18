@@ -4,13 +4,13 @@ namespace CodeBase.Data
 {
     public class TemporalProgress
     {
-        public Vector2 LevelHeightRange;
+        public int CoinsCount;
         public int CollectedArtifactsCount;
-        public int TotalArtifactsCount;
+        public Vector2 LevelHeightRange;
         public int PlayTime;
         public int Score;
         public int StarsCount;
-        public int CoinsCount;
+        public int TotalArtifactsCount;
 
         public TemporalProgress()
         {

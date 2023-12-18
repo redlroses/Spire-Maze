@@ -44,7 +44,8 @@ namespace CodeBase.Services.LevelBuild
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
             _randomService = randomService;
-            _levelConstructor = new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
+            _levelConstructor =
+                new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
         }
 
         private float FloorHeight => _levelStaticData.FloorHeight;
@@ -108,7 +109,7 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = GetPosition(i * ArchAngle, Radius);
                 Quaternion containerRotation = GetRotation(i * ArchAngle);
-                int cellId = floorIndex * (floorCells.Length) + i;
+                int cellId = floorIndex * floorCells.Length + i;
                 string name = $"Cell {i + 1}: {floorCells[i]}, id: {cellId}";
                 Transform cellContainer = CreateContainer(name, container, containerPosition, containerRotation);
                 Cell cell = new Cell(floorCells[i], cellContainer, cellId);

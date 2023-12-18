@@ -9,6 +9,9 @@ namespace CodeBase.UI.Elements.Buttons
 
         private IWindowService _windowService;
 
+        private void OnDestroy() =>
+            Cleanup();
+
         public void Construct(IWindowService windowService)
         {
             _windowService = windowService;
@@ -20,8 +23,5 @@ namespace CodeBase.UI.Elements.Buttons
             _windowService.Open(WindowId.Leaderboard);
             _pauseToggle.EmulateClick();
         }
-
-        private void OnDestroy() =>
-            Cleanup();
     }
 }

@@ -15,8 +15,8 @@ namespace CodeBase.UI.Elements
         [SerializeField] private int _testNumber;
 #endif
 
-        private string _staticText;
         private float _elapsedTime;
+        private string _staticText;
         private int _targetNumber;
 
         private void Awake()

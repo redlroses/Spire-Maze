@@ -11,6 +11,6 @@ namespace CodeBase.Logic.AnimatorStateMachine
         Hit,
         Died,
         Dodge,
-        Revive
+        Revive,
     }
 }

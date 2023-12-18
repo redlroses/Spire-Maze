@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.LevelSpecification.Cells;
-using Rock = CodeBase.Logic.Trap.Rock;
+using Rock = CodeBase.EditorCells.Rock;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
@@ -11,8 +11,9 @@ namespace CodeBase.LevelSpecification.Constructor
         {
             foreach (Cell cell in cells)
             {
-                EditorCells.Rock rockData = (EditorCells.Rock)cell.CellData;
-                Rock rock = gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Rock>();
+                Rock rockData = (Rock)cell.CellData;
+                Logic.Trap.Rock rock = gameFactory.CreateCell<TCell>(cell.Container)
+                    .GetComponentInChildren<Logic.Trap.Rock>();
                 rock.Construct(cell.Id, rock.TrapActivator);
                 rock.SetMoveDirection(rockData.IsDirectionToRight);
             }

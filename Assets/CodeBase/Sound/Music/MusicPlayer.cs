@@ -57,9 +57,7 @@ namespace CodeBase.Sound.Music
             }
 
             if (_audioSource.PlayingSource.time >= _clipLength - _crossFadeTime)
-            {
                 PlayNextTrack();
-            }
         }
 
         [Button(nameof(PlayNextTrack), EButtonEnableMode.Playmode)]

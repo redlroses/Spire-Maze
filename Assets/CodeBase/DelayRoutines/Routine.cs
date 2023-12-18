@@ -4,12 +4,12 @@ namespace CodeBase.DelayRoutines
 {
     public abstract class Routine : IRoutine
     {
+        private Action _executedCallback;
+
         protected Routine()
         {
             _executedCallback = () => { };
         }
-
-        private Action _executedCallback;
 
         public bool IsActive { get; private set; }
 

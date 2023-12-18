@@ -7,8 +7,8 @@ namespace CodeBase.DelayRoutines
 {
     public abstract class Awaiter : Routine, IRunSystem, IFixedRunSystem
     {
-        private readonly GlobalUpdate _globalUpdate;
         private readonly Action<GlobalUpdate, Awaiter> _addUpdater;
+        private readonly GlobalUpdate _globalUpdate;
         private readonly Action<GlobalUpdate, Awaiter> _removeUpdater;
 
         protected Awaiter(GlobalUpdate globalUpdate,
@@ -19,6 +19,12 @@ namespace CodeBase.DelayRoutines
             _addUpdater = addUpdater;
             _removeUpdater = removeUpdater;
         }
+
+        void IFixedRunSystem.OnFixedRun() =>
+            OnUpdate(Time.fixedDeltaTime);
+
+        void IRunSystem.OnRun() =>
+            OnUpdate(Time.deltaTime);
 
         public void Pause()
         {
@@ -31,12 +37,6 @@ namespace CodeBase.DelayRoutines
             if (IsActive == false)
                 Activate();
         }
-
-        void IRunSystem.OnRun() =>
-            OnUpdate(Time.deltaTime);
-
-        void IFixedRunSystem.OnFixedRun() =>
-            OnUpdate(Time.fixedDeltaTime);
 
         protected abstract void OnUpdate(float deltaTime);
 
