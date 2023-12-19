@@ -8,6 +8,16 @@ namespace CodeBase.UI.Elements
 {
     public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPointerUpHandler
     {
+        [FormerlySerializedAs("m_ControlPath")]
+        [InputControl(layout = "Button")]
+        [SerializeField] private string _controlPath;
+
+        protected override string controlPathInternal
+        {
+            get => _controlPath;
+            set => _controlPath = value;
+        }
+
         public void OnPointerUp(PointerEventData eventData)
         {
             SendValueToControl(0.0f);
@@ -16,17 +26,6 @@ namespace CodeBase.UI.Elements
         public void OnPointerDown(PointerEventData eventData)
         {
             SendValueToControl(1.0f);
-        }
-
-        [FormerlySerializedAs("m_ControlPath")]
-        [InputControl(layout = "Button")]
-        [SerializeField]
-        private string _controlPath;
-
-        protected override string controlPathInternal
-        {
-            get => _controlPath;
-            set => _controlPath = value;
         }
     }
 }
