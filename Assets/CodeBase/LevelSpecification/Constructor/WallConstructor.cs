@@ -14,7 +14,8 @@ namespace CodeBase.LevelSpecification.Constructor
             _randomService = randomService;
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+            where TCell : Cell
         {
             for (int index = 0; index < cells.Length; index++)
             {

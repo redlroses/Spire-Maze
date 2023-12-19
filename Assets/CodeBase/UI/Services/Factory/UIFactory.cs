@@ -134,7 +134,8 @@ namespace CodeBase.UI.Services.Factory
             root.GetComponent<Canvas>().worldCamera = Camera.main;
         }
 
-        private TWindow CreateWindow<TWindow>(WindowId windowId) where TWindow : WindowBase
+        private TWindow CreateWindow<TWindow>(WindowId windowId)
+            where TWindow : WindowBase
         {
             GameObject template = _staticData.GetWindow(windowId);
             TWindow window = Object.Instantiate(template, _uiRoot).GetComponent<TWindow>();

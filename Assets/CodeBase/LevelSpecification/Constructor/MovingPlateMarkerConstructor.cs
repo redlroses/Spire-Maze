@@ -21,7 +21,8 @@ namespace CodeBase.LevelSpecification.Constructor
         private Cell[] _movingPlates;
         private Spire _spire;
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+            where TCell : Cell
         {
             if (cells.Any() == false)
                 return;

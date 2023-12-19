@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class BarView<TPoints> : MonoBehaviour where TPoints : IPoints
+    public class BarView<TPoints> : MonoBehaviour
+        where TPoints : IPoints
     {
         [SerializeField] private SliderSetter _sliderSetter;
 

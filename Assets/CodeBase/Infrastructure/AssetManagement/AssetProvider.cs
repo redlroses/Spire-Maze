@@ -11,7 +11,8 @@ namespace CodeBase.Infrastructure.AssetManagement
     {
         private readonly Dictionary<string, Object> _cache = new Dictionary<string, Object>();
 
-        public GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell
+        public GameObject InstantiateCell<TCell>(Transform container)
+            where TCell : Cell
         {
             string cellPath = AssetPath.Combine(AssetPath.Cells, typeof(TCell).Name);
             GameObject asset = LoadCached<GameObject>(cellPath);
@@ -54,7 +55,8 @@ namespace CodeBase.Infrastructure.AssetManagement
             return Object.Instantiate(prefab);
         }
 
-        public TType LoadAsset<TType>(string path) where TType : Object
+        public TType LoadAsset<TType>(string path)
+            where TType : Object
         {
             TType sprite = LoadCached<TType>(path);
             return sprite;
@@ -80,7 +82,8 @@ namespace CodeBase.Infrastructure.AssetManagement
                 Resources.UnloadAsset(asset.Value);
         }
 
-        private T LoadCached<T>(string path) where T : Object
+        private T LoadCached<T>(string path)
+            where T : Object
         {
             if (_cache.TryGetValue(path, out Object cached))
                 return cached as T;

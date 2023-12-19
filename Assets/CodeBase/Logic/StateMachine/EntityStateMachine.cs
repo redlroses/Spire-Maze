@@ -21,19 +21,22 @@ namespace CodeBase.Logic.StateMachine
             _activeState = null;
         }
 
-        public void Enter<TState>() where TState : class, IState
+        public void Enter<TState>()
+            where TState : class, IState
         {
             IState state = ChangeState<TState>();
             state.Enter();
         }
 
-        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
+        public void Enter<TState, TPayload>(TPayload payload)
+            where TState : class, IPayloadedState<TPayload>
         {
             TState state = ChangeState<TState>();
             state.Enter(payload);
         }
 
-        private TState ChangeState<TState>() where TState : class, IExitableState
+        private TState ChangeState<TState>()
+            where TState : class, IExitableState
         {
             _activeState?.Exit();
 
@@ -43,7 +46,8 @@ namespace CodeBase.Logic.StateMachine
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState =>
+        private TState GetState<TState>()
+            where TState : class, IExitableState =>
             States[typeof(TState)] as TState;
     }
 }

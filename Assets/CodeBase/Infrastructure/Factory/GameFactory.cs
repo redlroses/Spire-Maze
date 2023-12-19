@@ -64,7 +64,8 @@ namespace CodeBase.Infrastructure.Factory
             return hero;
         }
 
-        public GameObject CreateCell<TCell>(Transform container) where TCell : Cell
+        public GameObject CreateCell<TCell>(Transform container)
+            where TCell : Cell
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);
             RegisterProgressWatchers(cell);

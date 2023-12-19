@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.SelectionGroup
 {
-    public abstract class SelectionToggle<TEnum> : MonoBehaviour where TEnum : Enum
+    public abstract class SelectionToggle<TEnum> : MonoBehaviour
+        where TEnum : Enum
     {
         [SerializeField] private TEnum _id;
         [SerializeField] private Image _checkMark;

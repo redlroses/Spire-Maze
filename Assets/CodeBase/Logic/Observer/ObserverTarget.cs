@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Observer
 {
-    public abstract class ObserverTarget<TObserver, TTarget> : MonoCache where TObserver : ITriggerObserver<TTarget>
+    public abstract class ObserverTarget<TObserver, TTarget> : MonoCache
+        where TObserver : ITriggerObserver<TTarget>
     {
         [SerializeField] private TObserver _observer;
 

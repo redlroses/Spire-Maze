@@ -14,7 +14,8 @@ namespace CodeBase.Infrastructure.Factory
 
         GameObject CreateHero(Vector3 at);
 
-        GameObject CreateCell<TCell>(Transform container) where TCell : Cell;
+        GameObject CreateCell<TCell>(Transform container)
+            where TCell : Cell;
 
         Material CreateMaterial(string name);
 

@@ -92,7 +92,8 @@ namespace CodeBase.MeshCombine
             return mesh;
         }
 
-        private void CombineByType<TCell>(Level level, GameObject collidersHolder) where TCell : CellData
+        private void CombineByType<TCell>(Level level, GameObject collidersHolder)
+            where TCell : CellData
         {
             for (int i = 0; i < level.Height; i++)
             {
@@ -181,7 +182,8 @@ namespace CodeBase.MeshCombine
             colliderHolder.layer = layer;
         }
 
-        private int FindFirstGroupIndex<TCell>(Floor floor, int beginIndex) where TCell : CellData
+        private int FindFirstGroupIndex<TCell>(Floor floor, int beginIndex)
+            where TCell : CellData
         {
             int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
 
@@ -196,7 +198,8 @@ namespace CodeBase.MeshCombine
             return currentIndex;
         }
 
-        private int FindLastGroupIndex<TCell>(Floor floor, int beginIndex) where TCell : CellData
+        private int FindLastGroupIndex<TCell>(Floor floor, int beginIndex)
+            where TCell : CellData
         {
             int currentIndex = (beginIndex + 1).ClampRound(0, floor.Container.Count);
 
@@ -211,7 +214,8 @@ namespace CodeBase.MeshCombine
             return currentIndex.ClampRound(0, floor.Container.Count);
         }
 
-        private int FindFirstGap<TCell>(Floor floor) where TCell : CellData
+        private int FindFirstGap<TCell>(Floor floor)
+            where TCell : CellData
         {
             for (int i = 0; i < floor.Container.Count; i++)
             {
@@ -222,7 +226,8 @@ namespace CodeBase.MeshCombine
             return -1;
         }
 
-        private bool HasFloorCellType<TCell>(Level level, int floor) where TCell : CellData
+        private bool HasFloorCellType<TCell>(Level level, int floor)
+            where TCell : CellData
         {
             for (int j = 0; j < level.Width; j++)
             {

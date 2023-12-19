@@ -14,7 +14,8 @@ namespace CodeBase.LevelSpecification.Constructor
             _saveLoadService = saveLoadService;
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+            where TCell : Cell
         {
             foreach (Cell cell in cells)
             {

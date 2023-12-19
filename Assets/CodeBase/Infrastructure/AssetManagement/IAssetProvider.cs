@@ -22,8 +22,10 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         GameObject Instantiate(string path, Vector3 at, Quaternion rotation, Transform inside);
 
-        GameObject InstantiateCell<TCell>(Transform container) where TCell : Cell;
+        GameObject InstantiateCell<TCell>(Transform container)
+            where TCell : Cell;
 
-        TType LoadAsset<TType>(string path) where TType : Object;
+        TType LoadAsset<TType>(string path)
+            where TType : Object;
     }
 }

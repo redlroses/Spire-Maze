@@ -37,7 +37,8 @@ namespace CodeBase.LevelSpecification.Constructor
             };
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell =>
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+            where TCell : Cell =>
             _constructors[typeof(TCell)].Construct<TCell>(gameFactory, cells);
     }
 }

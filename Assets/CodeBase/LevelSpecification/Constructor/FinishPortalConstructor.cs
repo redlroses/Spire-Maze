@@ -14,12 +14,11 @@ namespace CodeBase.LevelSpecification.Constructor
             _stateMachine = stateMachine;
         }
 
-        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells) where TCell : Cell
+        public void Construct<TCell>(IGameFactory gameFactory, Cell[] cells)
+            where TCell : Cell
         {
             foreach (Cell cell in cells)
-            {
                 gameFactory.CreateCell<TCell>(cell.Container).GetComponent<FinishPortal>().Construct(_stateMachine);
-            }
         }
     }
 }
