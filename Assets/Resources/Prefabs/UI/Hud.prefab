@@ -2919,7 +2919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.80493164, y: -83.799995}
+  m_AnchoredPosition: {x: -0.80493164, y: -83.79999}
   m_SizeDelta: {x: -1.6098, y: -64.6284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1913220067018966232
@@ -3617,7 +3617,7 @@ GameObject:
   - component: {fileID: 5055386809665924333}
   - component: {fileID: 8958506623790020728}
   - component: {fileID: 6819105150658337249}
-  - component: {fileID: 4261506085067680016}
+  - component: {fileID: 7429571471508752531}
   m_Layer: 5
   m_Name: Jump_button
   m_TagString: Untagged
@@ -3731,7 +3731,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4261506085067680016
+--- !u!114 &7429571471508752531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3740,7 +3740,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3909400989729598063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 962ce898c20d433da0ba3ce638bc6070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Keyboard>/w
@@ -6171,7 +6171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.80493164, y: -83.8}
+  m_AnchoredPosition: {x: -0.80493164, y: -83.80001}
   m_SizeDelta: {x: -1.6098, y: -64.6284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6491093474667805924
@@ -8750,12 +8750,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 9
-    m_Right: 9
-    m_Top: 9
-    m_Bottom: 9
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 1
-  m_Spacing: 10
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -9791,12 +9791,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 9
-    m_Right: 9
-    m_Top: 12
-    m_Bottom: 9
+    m_Left: 5
+    m_Right: 5
+    m_Top: 7
+    m_Bottom: 5
   m_ChildAlignment: 5
-  m_Spacing: 7.5
+  m_Spacing: 15
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -11844,7 +11844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.80493164, y: -83.799995}
+  m_AnchoredPosition: {x: -0.80493164, y: -83.8}
   m_SizeDelta: {x: -1.6098, y: -64.6284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1715214216686445891
@@ -11956,7 +11956,7 @@ GameObject:
   - component: {fileID: 5052806383214298832}
   - component: {fileID: 541878509251060512}
   - component: {fileID: 5951578667175602206}
-  - component: {fileID: 8934536065805418378}
+  - component: {fileID: 3416433045077899203}
   m_Layer: 5
   m_Name: Slide_button
   m_TagString: Untagged
@@ -12070,7 +12070,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8934536065805418378
+--- !u!114 &3416433045077899203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12079,7 +12079,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8381656707602953956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 962ce898c20d433da0ba3ce638bc6070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Keyboard>/s
@@ -12394,7 +12394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovementRange: 75
+  m_MovementRange: 150
   m_DynamicOriginRange: 100
   m_ControlPath: <Gamepad>/leftStick
   m_Behaviour: 0
