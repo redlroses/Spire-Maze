@@ -23,9 +23,13 @@ namespace CodeBase.Services.Input
         }
 
         public event Action<MoveDirection> HorizontalMove = _ => { };
+
         public event Action<Vector2> OverviewMove = _ => { };
+
         public event Action Jump = () => { };
+
         public event Action<MoveDirection> Dodge = _ => { };
+
         public event Action MoveStopped = () => { };
 
         public InputActionPhase MovementPhase => _inputController.Player.Movement.phase;

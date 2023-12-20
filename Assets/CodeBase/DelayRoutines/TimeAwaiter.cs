@@ -7,7 +7,8 @@ namespace CodeBase.DelayRoutines
     {
         private float _elapsedTime;
 
-        protected TimeAwaiter(GlobalUpdate globalUpdate,
+        protected TimeAwaiter(
+            GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)
             : base(globalUpdate, addUpdater, removeUpdater)

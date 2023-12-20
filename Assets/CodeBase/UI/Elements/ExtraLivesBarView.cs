@@ -83,6 +83,7 @@ namespace CodeBase.UI.Elements
             {
                 ExtraLiveView extraLifeView =
                     _gameUiFactory.CreateExtraLiveView(_barContainer).GetComponent<ExtraLiveView>();
+
                 _extraLives.Add(extraLifeView);
                 extraLifeView.Deactivate();
                 SetActiveLivesCount(_currentActiveLivesCount + 1);

@@ -78,6 +78,7 @@ namespace CodeBase.Services.Sound
             if (isSmooth)
             {
                 _smoothMute.Play();
+
                 return;
             }
 
@@ -94,6 +95,7 @@ namespace CodeBase.Services.Sound
             if (isSmooth)
             {
                 _smoothUnmute.Play();
+
                 return;
             }
 
@@ -113,6 +115,7 @@ namespace CodeBase.Services.Sound
             volume = volume.NormalizeDecibels();
             volume -= VolumeStep;
             SetMasterVolume(Mathf.Clamp01(volume));
+
             return volume <= 0f;
         }
 
@@ -122,6 +125,7 @@ namespace CodeBase.Services.Sound
             volume = volume.NormalizeDecibels();
             volume += VolumeStep;
             SetMasterVolume(Mathf.Clamp01(volume));
+
             return volume >= 1f;
         }
 

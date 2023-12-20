@@ -49,6 +49,7 @@ namespace CodeBase.StaticData
 
                 float height = i / Width * FloorHeight;
                 float angle = i % Width * ArchAngle;
+
                 return GetPosition(angle, Radius).ChangeY(height);
             }
 
@@ -59,6 +60,7 @@ namespace CodeBase.StaticData
         {
             float posX = Mathf.Cos(byArcGrade * Mathf.Deg2Rad) * radius;
             float posZ = Mathf.Sin(byArcGrade * Mathf.Deg2Rad) * radius;
+
             return new Vector3(posX, 0, posZ);
         }
     }

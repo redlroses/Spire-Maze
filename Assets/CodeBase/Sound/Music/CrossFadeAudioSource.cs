@@ -56,26 +56,28 @@ namespace CodeBase.Sound.Music
         private RoutineSequence CreateCrossFadeRoutine(float crossFadeTime)
         {
             return new RoutineSequence()
-                .WaitWhile(() =>
-                {
-                    bool isProcess = _crossFader.TryUpdate(Time.deltaTime / crossFadeTime, out float volume);
-
-                    _firstAudioSource.volume = _maxVolume - volume;
-                    _secondAudioSource.volume = volume;
-
-                    return isProcess;
-                })
-                .Then(() =>
-                {
-                    if (_firstAudioSource.volume.EqualsApproximately(0))
+                .WaitWhile(
+                    () =>
                     {
-                        _firstAudioSource.Stop();
-                    }
-                    else
+                        bool isProcess = _crossFader.TryUpdate(Time.deltaTime / crossFadeTime, out float volume);
+
+                        _firstAudioSource.volume = _maxVolume - volume;
+                        _secondAudioSource.volume = volume;
+
+                        return isProcess;
+                    })
+                .Then(
+                    () =>
                     {
-                        _secondAudioSource.Stop();
-                    }
-                });
+                        if (_firstAudioSource.volume.EqualsApproximately(0))
+                        {
+                            _firstAudioSource.Stop();
+                        }
+                        else
+                        {
+                            _secondAudioSource.Stop();
+                        }
+                    });
         }
     }
 }

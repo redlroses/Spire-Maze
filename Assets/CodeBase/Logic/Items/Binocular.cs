@@ -20,7 +20,8 @@ namespace CodeBase.Logic.Items
 
         private VirtualMover _virtualMover;
 
-        public Binocular(StorableStaticData storableData,
+        public Binocular(
+            StorableStaticData storableData,
             IUIFactory uiFactory,
             IInputService inputService,
             IGameFactory gameFactory,
@@ -49,15 +50,16 @@ namespace CodeBase.Logic.Items
             GameObject overviewInterface = _uiFactory.CreateOverviewInterface();
             Button closeButton = overviewInterface.GetComponentInChildren<Button>();
 
-            closeButton.onClick.AddListener(() =>
-            {
-                _cameraOperator.FocusOnDefault();
-                _inputService.OverviewMove -= OnOverviewMove;
-                Object.Destroy(overviewInterface);
-                Object.Destroy(_virtualMover.gameObject);
-                _inputService.DisableOverviewMap();
-                _inputService.EnableMovementMap();
-            });
+            closeButton.onClick.AddListener(
+                () =>
+                {
+                    _cameraOperator.FocusOnDefault();
+                    _inputService.OverviewMove -= OnOverviewMove;
+                    Object.Destroy(overviewInterface);
+                    Object.Destroy(_virtualMover.gameObject);
+                    _inputService.DisableOverviewMap();
+                    _inputService.EnableMovementMap();
+                });
         }
 
         private void OnOverviewMove(Vector2 direction) =>

@@ -25,6 +25,7 @@ namespace CodeBase.SDK
         {
 #if UNITY_EDITOR
             onReadyCallback?.Invoke();
+
             yield break;
 #else
             GameAnalytics.Initialize();

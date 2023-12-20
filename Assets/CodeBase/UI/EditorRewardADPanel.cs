@@ -26,19 +26,22 @@ namespace CodeBase.UI
             new RoutineSequence().WaitForSeconds(1f)
                 .Then(() => _timer.SetText(--_count))
                 .LoopWhile(() => _count > 0)
-                .Then(() =>
-                {
-                    onRewardedCallback?.Invoke();
-                    _closeButton.interactable = true;
-                })
+                .Then(
+                    () =>
+                    {
+                        onRewardedCallback?.Invoke();
+                        _closeButton.interactable = true;
+                    })
                 .SetAutoKill(true)
                 .Play();
 
-            _errorButton.onClick.AddListener(() =>
-            {
-                onErrorCallback.Invoke(string.Empty);
-                Destroy(gameObject);
-            });
+            _errorButton.onClick.AddListener(
+                () =>
+                {
+                    onErrorCallback.Invoke(string.Empty);
+                    Destroy(gameObject);
+                });
+
             _closeButton.onClick.AddListener(onCloseCallback.Invoke);
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
         }

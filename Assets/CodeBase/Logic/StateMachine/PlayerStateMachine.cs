@@ -9,7 +9,8 @@ namespace CodeBase.Logic.StateMachine
     {
         private readonly IInputService _inputService;
 
-        public PlayerStateMachine(HeroAnimator heroAnimator,
+        public PlayerStateMachine(
+            HeroAnimator heroAnimator,
             IInputService inputService,
             HeroMover heroMover,
             HeroHealth heroHealth,

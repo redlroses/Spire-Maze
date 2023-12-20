@@ -33,7 +33,8 @@ namespace CodeBase.Services.Analytics
 #endif
         }
 
-        private void TrackLevelFinish(int levelId,
+        private void TrackLevelFinish(
+            int levelId,
             int stars,
             int playTime,
             int artifacts,

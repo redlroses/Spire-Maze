@@ -140,6 +140,7 @@ namespace CodeBase.Services.SaveLoad
         {
             int largestLevelIndex =
                 Mathf.Max(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
+
             int lowestLevelIndexOfBoth =
                 Mathf.Min(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
 
@@ -163,6 +164,7 @@ namespace CodeBase.Services.SaveLoad
                 mergedLevelsData[index] = actualProgress.GlobalData.Levels[index];
 
             prioritized.GlobalData.Levels = mergedLevelsData.ToList();
+
             return prioritized;
         }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Tools;
-using UnityEngine;
 
 namespace CodeBase.Services.Pause
 {
@@ -13,11 +12,11 @@ namespace CodeBase.Services.Pause
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
 
+        public bool IsPause { get; private set; }
+
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
 
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
-
-        public bool IsPause { get; private set; }
 
         public void Register(IPauseWatcher pauseWatcher) =>
             PauseWatchers.Add(pauseWatcher);

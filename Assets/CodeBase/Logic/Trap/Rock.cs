@@ -47,7 +47,7 @@ namespace CodeBase.Logic.Trap
 
         public void Construct(int id, TrapActivator activator)
         {
-            base.Construct(activator);
+            Construct(activator);
             Id = id;
             _rigidbody ??= GetComponent<Rigidbody>();
             _mover ??= GetComponent<Mover>();
@@ -106,7 +106,8 @@ namespace CodeBase.Logic.Trap
             IsActivated = true;
             DisableKinematic(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
 
-            _fragmentsLifetimeTimer.SetUp(_fragmentsLifetime,
+            _fragmentsLifetimeTimer.SetUp(
+                _fragmentsLifetime,
                 () =>
                 {
                     TurnOff(_moveDirection == MoveDirection.Left ? _leftWallFragments : _rightWallFragments);
@@ -146,6 +147,7 @@ namespace CodeBase.Logic.Trap
         private bool CheckCollisionObstacle(Vector3 direction, LayerMask obstacle)
         {
             Ray ray = new Ray(_selfTransform.position, direction);
+
             return Physics.Raycast(ray, _rayDistance, obstacle);
         }
 

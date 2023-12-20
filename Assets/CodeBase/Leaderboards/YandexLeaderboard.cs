@@ -52,12 +52,14 @@ namespace CodeBase.Leaderboards
             bool isError = false;
             _isLeaderboardDataReceived = false;
 
-            Leaderboard.GetPlayerEntry(_name,
+            Leaderboard.GetPlayerEntry(
+                _name,
                 OnGetPlayerEntry,
                 _ => OnGetPlayerEntry(null),
                 ProfilePictureSize.small);
 
-            Leaderboard.GetEntries(_name,
+            Leaderboard.GetEntries(
+                _name,
                 OnGetLeaderBoardEntries,
                 _ => isError = true,
                 _topPlayersCount,
@@ -84,16 +86,19 @@ namespace CodeBase.Leaderboards
             {
                 _unsavedScore = score;
                 _unsavedAvatarName = avatarName;
+
                 return;
             }
 
-            Leaderboard.GetPlayerEntry(_name,
+            Leaderboard.GetPlayerEntry(
+                _name,
                 result =>
                 {
                     if (result.score >= score)
                         return;
 
-                    Leaderboard.SetScore(_name,
+                    Leaderboard.SetScore(
+                        _name,
                         score,
                         () => isComplete = true,
                         _ => isComplete = true,
@@ -119,6 +124,7 @@ namespace CodeBase.Leaderboards
                 await UniTask.Yield();
 
             IsAuthorized = PlayerAccount.IsAuthorized;
+
             return isSuccess;
         }
 
@@ -145,7 +151,8 @@ namespace CodeBase.Leaderboards
         {
             if (result.Equals(null))
             {
-                _selfRanksData = new SingleRankData(0,
+                _selfRanksData = new SingleRankData(
+                    0,
                     0,
                     _staticData.GetDefaultAvatar(),
                     _anonymousName,
@@ -183,7 +190,8 @@ namespace CodeBase.Leaderboards
             Sprite avatar = await LoadProfileImage(entry);
             Sprite flag = _staticData.GetSpriteByLang(entry.player.lang);
 
-            return new SingleRankData(entry.rank,
+            return new SingleRankData(
+                entry.rank,
                 entry.score,
                 avatar,
                 string.IsNullOrEmpty(entry.player.publicName) ? _anonymousName : entry.player.publicName,
@@ -195,7 +203,8 @@ namespace CodeBase.Leaderboards
             Sprite avatar = null;
             bool isLoading = true;
 
-            _imageLoader.LoadImage(entry.player.profilePicture,
+            _imageLoader.LoadImage(
+                entry.player.profilePicture,
                 sprite =>
                 {
                     avatar = sprite;

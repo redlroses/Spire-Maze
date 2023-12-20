@@ -15,7 +15,8 @@ namespace CodeBase.SDK.ADS
             _uiFactory = AllServices.Container.Single<IUIFactory>();
         }
 
-        public void ShowRewardAd(Action onOpenCallback = null,
+        public void ShowRewardAd(
+            Action onOpenCallback = null,
             Action onRewardedCallback = null,
             Action onCloseCallback = null,
             Action<string> onErrorCallback = null)
@@ -27,7 +28,8 @@ namespace CodeBase.SDK.ADS
             obj.GetComponent<EditorRewardADPanel>().Open(onRewardedCallback, onCloseCallback, onErrorCallback);
         }
 
-        public void ShowInterstitialAd(Action onOpenCallback = null,
+        public void ShowInterstitialAd(
+            Action onOpenCallback = null,
             Action<bool> onCloseCallback = null,
             Action<string> onErrorCallback = null,
             Action onOfflineCallback = null)

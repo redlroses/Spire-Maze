@@ -12,8 +12,10 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell cell in cells)
             {
                 Rock rockData = (Rock)cell.CellData;
+
                 Logic.Trap.Rock rock = gameFactory.CreateCell<TCell>(cell.Container)
                     .GetComponentInChildren<Logic.Trap.Rock>();
+
                 rock.Construct(cell.Id, rock.TrapActivator);
                 rock.SetMoveDirection(rockData.IsDirectionToRight);
             }

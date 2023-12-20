@@ -13,7 +13,8 @@ namespace CodeBase.LevelSpecification.Constructor
     {
         private readonly Dictionary<Type, ICellConstructor> _constructors;
 
-        public CellConstructor(GameStateMachine stateMachine,
+        public CellConstructor(
+            GameStateMachine stateMachine,
             ISaveLoadService saveLoadService,
             IStaticDataService staticDataService,
             IRandomService randomService)

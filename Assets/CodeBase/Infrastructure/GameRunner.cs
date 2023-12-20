@@ -1,5 +1,7 @@
 using UnityEngine;
+#if !UNITY_EDITOR
 using UnityEngine.SceneManagement;
+#endif
 
 namespace CodeBase.Infrastructure
 {

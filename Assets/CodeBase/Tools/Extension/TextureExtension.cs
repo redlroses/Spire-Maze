@@ -34,6 +34,7 @@ namespace CodeBase.Tools.Extension
             Texture2D newTexture = new Texture2D(first.width, first.height, first.format, false);
             newTexture.SetPixelData(newColorData, 0);
             newTexture.Apply();
+
             return newTexture;
         }
 
@@ -50,6 +51,7 @@ namespace CodeBase.Tools.Extension
             Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);
             newTexture.SetPixelData(newData, 0);
             newTexture.Apply();
+
             return newTexture;
         }
 
@@ -71,10 +73,12 @@ namespace CodeBase.Tools.Extension
             Texture2D newTexture = new Texture2D(texture.width, texture.height, texture.format, false);
             newTexture.SetPixelData(newData, 0);
             newTexture.Apply();
+
             return newTexture;
         }
 
-        private static NativeArray<Color32> RotateToDown(int height,
+        private static NativeArray<Color32> RotateToDown(
+            int height,
             int width,
             NativeArray<Color32> newData,
             NativeArray<Color32> textureData)
@@ -92,7 +96,8 @@ namespace CodeBase.Tools.Extension
             return newData;
         }
 
-        private static NativeArray<Color32> RotateToLeft(int height,
+        private static NativeArray<Color32> RotateToLeft(
+            int height,
             int width,
             NativeArray<Color32> newData,
             NativeArray<Color32> textureData)
@@ -110,7 +115,8 @@ namespace CodeBase.Tools.Extension
             return newData;
         }
 
-        private static NativeArray<Color32> RotateToRight(int height,
+        private static NativeArray<Color32> RotateToRight(
+            int height,
             int width,
             NativeArray<Color32> textureData,
             NativeArray<Color32> newData)

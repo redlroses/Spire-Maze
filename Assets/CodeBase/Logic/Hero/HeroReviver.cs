@@ -29,6 +29,7 @@ namespace CodeBase.Logic.Hero
             _totalReviveTokens = 1;
             _leftReviveTokens = _totalReviveTokens;
             _playerStateMachine.Enter<ReviveState>();
+
             return true;
         }
 

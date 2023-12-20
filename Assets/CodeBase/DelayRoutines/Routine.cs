@@ -24,6 +24,7 @@ namespace CodeBase.DelayRoutines
             if (this is Awaiter awaiter)
             {
                 awaiter.Pause();
+
                 return;
             }
 

@@ -42,9 +42,10 @@ namespace CodeBase.LevelSpecification.Constructor
 
         private Cell FindLinked(IEnumerable<Cell> portals, Portal currentPortalData)
         {
-            return portals.First(portal =>
-                ((Portal)portal.CellData).Key == currentPortalData.Key &&
-                currentPortalData != (Portal)portal.CellData);
+            return portals.First(
+                portal =>
+                    ((Portal)portal.CellData).Key == currentPortalData.Key &&
+                    currentPortalData != (Portal)portal.CellData);
         }
     }
 }

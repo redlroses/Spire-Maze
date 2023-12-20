@@ -5,7 +5,8 @@ namespace CodeBase.DelayRoutines
 {
     public class UntilAwaiter : ActionAwaiter
     {
-        public UntilAwaiter(Func<bool> waitFunc,
+        public UntilAwaiter(
+            Func<bool> waitFunc,
             GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)

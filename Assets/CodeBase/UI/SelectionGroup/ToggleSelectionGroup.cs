@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace CodeBase.UI.SelectionGroup
 {
-    public abstract class ToggleSelectionGroup<TEnum> : MonoBehaviour where TEnum : Enum
+    public abstract class ToggleSelectionGroup<TEnum> : MonoBehaviour
+        where TEnum : Enum
     {
         [SerializeField] private SelectionToggle<TEnum>[] _selectionsToggle;
 

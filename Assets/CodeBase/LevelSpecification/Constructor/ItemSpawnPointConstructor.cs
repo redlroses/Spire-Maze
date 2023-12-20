@@ -23,8 +23,10 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell cell in cells)
             {
                 ItemSpawnPoint itemData = (ItemSpawnPoint)cell.CellData;
+
                 Collectible collectible =
                     gameFactory.CreateCell<TCell>(cell.Container).GetComponentInChildren<Collectible>();
+
                 StorableStaticData storableStaticData = _staticDataService.GetStorable(itemData.Type);
                 IItem item = gameFactory.CreateItem(storableStaticData);
                 collectible.Construct(cell.Id, item);

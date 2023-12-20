@@ -28,7 +28,8 @@ namespace CodeBase.Infrastructure.States
         private readonly IWatchService _watchService;
         private readonly IWindowService _windowService;
 
-        public FinishState(IAnalyticsService analytics,
+        public FinishState(
+            IAnalyticsService analytics,
             IHeroLocator heroLocator,
             IPersistentProgressService progressService,
             IRankedService rankedService,

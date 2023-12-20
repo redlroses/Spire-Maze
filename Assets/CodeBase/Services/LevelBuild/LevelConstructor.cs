@@ -32,7 +32,8 @@ namespace CodeBase.Services.LevelBuild
         private readonly IGameFactory _gameFactory;
         private readonly MeshCombiner _meshCombiner;
 
-        public LevelConstructor(IGameFactory gameFactory,
+        public LevelConstructor(
+            IGameFactory gameFactory,
             IStaticDataService staticData,
             GameStateMachine stateMachine,
             ISaveLoadService saveLoadService,
@@ -66,7 +67,8 @@ namespace CodeBase.Services.LevelBuild
             where TCell : Cell
             where TEditor : CellData
         {
-            _cellConstructor.Construct<TCell>(_gameFactory,
+            _cellConstructor.Construct<TCell>(
+                _gameFactory,
                 level.Where(cell => cell.CellData is TEditor).ToArray());
         }
 

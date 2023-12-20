@@ -37,14 +37,14 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
+        protected override void Call() =>
+            _adService.ShowRewardAd(OnRewarded);
+
         private void HeartBeat() =>
             _locationAnimations.StartAnimation(BeatAnimationName, _onFinishAnimation);
 
         private void UpdateTokens() =>
             _tokens.SetText(string.Format(_format, _reviver.LeftReviveTokens));
-
-        protected override void Call() =>
-            _adService.ShowRewardAd(OnRewarded);
 
         private void OnRewarded()
         {

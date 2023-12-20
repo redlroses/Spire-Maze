@@ -9,7 +9,8 @@ namespace CodeBase.DelayRoutines
     {
         private readonly Vector2 _timeRange;
 
-        public RandomTimeAwaiter(Vector2 timeRange,
+        public RandomTimeAwaiter(
+            Vector2 timeRange,
             GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)

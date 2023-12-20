@@ -5,7 +5,8 @@ namespace CodeBase.DelayRoutines
 {
     public class WhileAwaiter : ActionAwaiter
     {
-        public WhileAwaiter(Func<bool> waitFunc,
+        public WhileAwaiter(
+            Func<bool> waitFunc,
             GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)

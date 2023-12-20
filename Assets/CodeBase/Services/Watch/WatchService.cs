@@ -25,6 +25,7 @@ namespace CodeBase.Services.Watch
         public event Action<int> SecondTicked = _ => { };
 
         public float ElapsedTime { get; private set; }
+
         public int ElapsedSeconds { get; private set; }
 
         public void Start() =>
@@ -73,6 +74,7 @@ namespace CodeBase.Services.Watch
                 return false;
 
             ElapsedSeconds = seconds;
+
             return true;
         }
 

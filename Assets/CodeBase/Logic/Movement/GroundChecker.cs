@@ -54,6 +54,7 @@ namespace CodeBase.Logic.Movement
                 if (_coyoteTime <= _coyoteTimeDuration)
                 {
                     _coyoteTime += Time.fixedDeltaTime;
+
                     return;
                 }
             }

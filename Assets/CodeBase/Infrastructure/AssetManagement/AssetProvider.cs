@@ -16,42 +16,49 @@ namespace CodeBase.Infrastructure.AssetManagement
         {
             string cellPath = AssetPath.Combine(AssetPath.Cells, typeof(TCell).Name);
             GameObject asset = LoadCached<GameObject>(cellPath);
+
             return Object.Instantiate(asset, container);
         }
 
         public GameObject Instantiate(string path, Vector3 at, Transform inside)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab, at, Quaternion.identity, inside);
         }
 
         public GameObject Instantiate(string path, Vector3 at, Quaternion rotation, Transform inside)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab, at, rotation, inside);
         }
 
         public GameObject Instantiate(string path, Vector3 at, Quaternion rotation)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab, at, rotation);
         }
 
         public GameObject Instantiate(string path, Vector3 at)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab, at, Quaternion.identity);
         }
 
         public GameObject Instantiate(string path, Transform inside)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab, inside);
         }
 
         public GameObject Instantiate(string path)
         {
             GameObject prefab = LoadCached<GameObject>(path);
+
             return Object.Instantiate(prefab);
         }
 
@@ -59,6 +66,7 @@ namespace CodeBase.Infrastructure.AssetManagement
             where TType : Object
         {
             TType sprite = LoadCached<TType>(path);
+
             return sprite;
         }
 
@@ -90,6 +98,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
             T loaded = Resources.Load<T>(path);
             _cache.Add(path, loaded);
+
             return loaded;
         }
     }

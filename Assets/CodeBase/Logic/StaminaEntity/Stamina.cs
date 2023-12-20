@@ -55,10 +55,12 @@ namespace CodeBase.Logic.StaminaEntity
             if (spendStamina <= 0 || CurrentPoints <= 0)
             {
                 AttemptToEmptyUsed.Invoke();
+
                 return false;
             }
 
             Spend(spendStamina);
+
             return true;
         }
 

@@ -74,9 +74,11 @@ namespace CodeBase.Logic.Cameras
             Vector3 targetPosition = _followTarget.position;
 
             Quaternion newRotation = Quaternion.LookRotation(
-                new Vector3(-targetPosition.x + _offsetRotetion.x,
+                new Vector3(
+                    -targetPosition.x + _offsetRotetion.x,
                     _offsetRotetion.y,
                     -targetPosition.z + _offsetRotetion.z));
+
             Vector3 newPosition = new Vector3(0, targetPosition.y, 0);
             transform.localPosition = new Vector3(_offsetPosition.x, _offsetPosition.y, _offsetPosition.z);
 
@@ -87,12 +89,14 @@ namespace CodeBase.Logic.Cameras
                 rotation,
                 newRotation,
                 GetLerpFactor(rotation.eulerAngles, newRotation.eulerAngles));
+
             _cameraHolder.rotation = rotation;
 
             position = Vector3.Lerp(
                 position,
                 newPosition,
                 GetLerpFactor(position, newPosition));
+
             _cameraHolder.position = position;
         }
 

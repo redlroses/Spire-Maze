@@ -25,7 +25,8 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             string sceneName = SceneManager.GetActiveScene().name;
 
             return sceneName.Equals(LevelNames.BuildableLevel)
-                ? new LoadPayload(LevelNames.BuildableLevel,
+                ? new LoadPayload(
+                    LevelNames.BuildableLevel,
                     _levelId,
                     _isResetProgressAfterRestart,
                     _isResetProgressAfterRestart)

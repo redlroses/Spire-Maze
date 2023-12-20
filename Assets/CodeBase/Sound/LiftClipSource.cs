@@ -29,9 +29,11 @@ namespace CodeBase.Sound
             {
                 case LiftState.Idle:
                     EndPlaying();
+
                     break;
                 case LiftState.Moving:
                     BeginPlaying();
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
@@ -54,11 +56,13 @@ namespace CodeBase.Sound
         private RoutineSequence CreateVolumeUpdater()
         {
             return _volumeUpdater = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .WaitWhile(() =>
-                {
-                    SetVolume(_liftPlate.Value.Mover.Velocity * Arithmetic.ToHalf);
-                    return enabled;
-                });
+                .WaitWhile(
+                    () =>
+                    {
+                        SetVolume(_liftPlate.Value.Mover.Velocity * Arithmetic.ToHalf);
+
+                        return enabled;
+                    });
         }
     }
 }

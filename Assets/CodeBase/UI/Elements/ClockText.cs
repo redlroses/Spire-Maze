@@ -22,6 +22,7 @@ namespace CodeBase.UI.Elements
             if (IsBuildableLevel() == false)
             {
                 gameObject.SetActive(false);
+
                 return;
             }
 

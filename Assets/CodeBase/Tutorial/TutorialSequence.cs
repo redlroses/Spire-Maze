@@ -31,7 +31,10 @@ namespace CodeBase.Tutorial
         private void OnDestroy() =>
             Unsubscribe();
 
-        public void Construct(IInputService inputService, TutorialConfig config, IReadOnlyCollection<TutorialTrigger> triggers)
+        public void Construct(
+            IInputService inputService,
+            TutorialConfig config,
+            IReadOnlyCollection<TutorialTrigger> triggers)
         {
             _inputService = inputService;
             _config = config;

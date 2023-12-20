@@ -34,7 +34,8 @@ namespace CodeBase.UI.Windows
 
         private TemporalProgress TemporalProgress => _progressService.TemporalProgress;
 
-        public void Construct(IPersistentProgressService progressService,
+        public void Construct(
+            IPersistentProgressService progressService,
             GameStateMachine stateMachine,
             IStaticDataService staticData)
         {

@@ -24,6 +24,7 @@ namespace CodeBase.Sound
                 if (state == (int)SelectionState.Highlighted)
                 {
                     _wasPressed = false;
+
                     return;
                 }
             }

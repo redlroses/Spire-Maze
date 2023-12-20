@@ -49,9 +49,11 @@ namespace CodeBase.Services.StaticData
 
             _windowsConfig = Resources.Load<WindowConfig>(WindowPath);
             _flagsConfig = Resources.Load<FlagsConfig>(FlagsConfigPath);
-            _tutorialConfig = Resources.Load<TutorialConfig>(Application.isMobilePlatform
-                ? MobileTutorialConfigPath
-                : DesktopTutorialConfigPath);
+
+            _tutorialConfig = Resources.Load<TutorialConfig>(
+                Application.isMobilePlatform
+                    ? MobileTutorialConfigPath
+                    : DesktopTutorialConfigPath);
         }
 
         public LevelStaticData GetLevel(int levelId) =>

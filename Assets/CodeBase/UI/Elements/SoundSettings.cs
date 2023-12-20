@@ -29,11 +29,13 @@ namespace CodeBase.UI.Elements
 
         private void Subscribe()
         {
-            _sfxSlider.onValueChanged.AddListener(volume =>
-                _soundService.SetSfxVolume(volume / _sfxSlider.maxValue));
+            _sfxSlider.onValueChanged.AddListener(
+                volume =>
+                    _soundService.SetSfxVolume(volume / _sfxSlider.maxValue));
 
-            _musicSlider.onValueChanged.AddListener(volume =>
-                _soundService.SetMusicVolume(volume / _musicSlider.maxValue));
+            _musicSlider.onValueChanged.AddListener(
+                volume =>
+                    _soundService.SetMusicVolume(volume / _musicSlider.maxValue));
         }
     }
 }

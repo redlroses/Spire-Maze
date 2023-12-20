@@ -12,8 +12,10 @@ namespace CodeBase.LevelSpecification.Constructor
             foreach (Cell cell in cells)
             {
                 Door doorData = (Door)cell.CellData;
+
                 Logic.DoorEnvironment.Door door = gameFactory.CreateCell<TCell>(cell.Container)
                     .GetComponent<Logic.DoorEnvironment.Door>();
+
                 door.Construct(doorData.Color, cell.Id);
             }
         }

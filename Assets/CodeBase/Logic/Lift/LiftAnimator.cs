@@ -41,9 +41,12 @@ namespace CodeBase.Logic.Lift
         }
 
         private void AnimateRotation(Transform gearLeft, bool isGearRotationClockwise) =>
-            gearLeft.Rotate(Vector3.up,
-                _mover.Velocity * _rotationSpeedFactor * isGearRotationClockwise.AsSign()
-                * Time.deltaTime,
+            gearLeft.Rotate(
+                Vector3.up,
+                _mover.Velocity *
+                _rotationSpeedFactor *
+                isGearRotationClockwise.AsSign() *
+                Time.deltaTime,
                 Space.Self);
 
         private void InvertDirection()
@@ -58,15 +61,19 @@ namespace CodeBase.Logic.Lift
             {
                 case PlateMoveDirection.Up:
                     SetupDirectionsForUpMovement();
+
                     break;
                 case PlateMoveDirection.Left:
                     SetupDirectionsForLeftMovement();
+
                     break;
                 case PlateMoveDirection.Right:
                     SetupDirectionsForRightMovement();
+
                     break;
                 case PlateMoveDirection.Down:
                     SetupDirectionsForDownMovement();
+
                     break;
                 case PlateMoveDirection.None:
                 default:

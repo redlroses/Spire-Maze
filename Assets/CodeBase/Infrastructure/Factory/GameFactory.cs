@@ -32,7 +32,8 @@ namespace CodeBase.Infrastructure.Factory
 
         private Transform _heroTransform;
 
-        public GameFactory(IAssetProvider assets,
+        public GameFactory(
+            IAssetProvider assets,
             IPersistentProgressService progressService,
             IPauseService pauseService,
             IUIFactory uiFactory,
@@ -61,6 +62,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             GameObject hero = InstantiateRegistered(AssetPath.Hero, at);
             _heroTransform = hero.transform;
+
             return hero;
         }
 
@@ -81,7 +83,8 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
 
         public GameObject CreateHorizontalRail(Transform container) =>
-            _assets.Instantiate(AssetPath.HorizontalRail,
+            _assets.Instantiate(
+                AssetPath.HorizontalRail,
                 Vector3.zero.ChangeY(container.position.y),
                 container.rotation,
                 container);
@@ -90,7 +93,8 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(AssetPath.VerticalRail, container);
 
         public GameObject CreateHorizontalRailLock(Transform container) =>
-            _assets.Instantiate(AssetPath.HorizontalRailLock,
+            _assets.Instantiate(
+                AssetPath.HorizontalRailLock,
                 Vector3.zero.ChangeY(container.position.y),
                 container.rotation,
                 container);
@@ -105,7 +109,8 @@ namespace CodeBase.Infrastructure.Factory
             data.ItemType switch
             {
                 StorableType.Compass => new Compass(data, _progressService, _uiFactory, this),
-                StorableType.Binocular => new Binocular(data,
+                StorableType.Binocular => new Binocular(
+                    data,
                     _uiFactory,
                     _inputService,
                     this,
@@ -183,6 +188,7 @@ namespace CodeBase.Infrastructure.Factory
                 throw new NullReferenceException($"There is no object with key {key}");
 
             collection.Add(key, loaded);
+
             return loaded;
         }
     }

@@ -15,7 +15,8 @@ namespace CodeBase.Logic.Items
 
         private CompassArrowPanel _arrow;
 
-        public Compass(StorableStaticData storableData,
+        public Compass(
+            StorableStaticData storableData,
             IPersistentProgressService progressService,
             IUIFactory uiFactory,
             IHeroLocator locator)
@@ -46,7 +47,9 @@ namespace CodeBase.Logic.Items
             CompassArrowPanel compassPanel = panel.GetComponent<CompassArrowPanel>();
             Canvas canvas = panel.GetComponent<Canvas>();
             canvas.worldCamera = Camera.main;
-            compassPanel.Construct(_progressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector(),
+
+            compassPanel.Construct(
+                _progressService.Progress.WorldData.LevelPositions.FinishPosition.AsUnityVector(),
                 _locator.Location);
 
             return compassPanel;

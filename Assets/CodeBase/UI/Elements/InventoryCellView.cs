@@ -52,7 +52,7 @@ namespace CodeBase.UI.Elements
             }
         }
 
-        public void Update() =>
+        public void UpdateCount() =>
             SetCount(_cellItem);
 
         public void Remove() =>
@@ -78,6 +78,7 @@ namespace CodeBase.UI.Elements
             if (cell.Count <= OnStartShowCount)
             {
                 _textSetter.gameObject.SetActive(false);
+
                 return;
             }
 

@@ -34,7 +34,8 @@ namespace CodeBase.Services.LevelBuild
         private Level _level;
         private LevelStaticData _levelStaticData;
 
-        public LevelBuilder(IGameFactory gameFactory,
+        public LevelBuilder(
+            IGameFactory gameFactory,
             IStaticDataService staticData,
             GameStateMachine stateMachine,
             ISaveLoadService saveLoadService,
@@ -44,12 +45,15 @@ namespace CodeBase.Services.LevelBuild
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
             _randomService = randomService;
+
             _levelConstructor =
                 new LevelConstructor(gameFactory, staticData, stateMachine, saveLoadService, randomService);
         }
 
         private float FloorHeight => _levelStaticData.FloorHeight;
+
         private float Radius => _levelStaticData.Radius;
+
         private float ArchAngle => _levelStaticData.ArchAngle;
 
         public Level Build(LevelStaticData levelStaticData)
@@ -141,6 +145,7 @@ namespace CodeBase.Services.LevelBuild
             Transform floorContainer = new GameObject(name).transform;
             floorContainer.parent = parent;
             floorContainer.localPosition = position;
+
             return floorContainer;
         }
 
@@ -149,6 +154,7 @@ namespace CodeBase.Services.LevelBuild
             Transform floorContainer = new GameObject(name).transform;
             floorContainer.parent = parent;
             floorContainer.SetLocalPositionAndRotation(position, rotation);
+
             return floorContainer;
         }
 
@@ -159,12 +165,14 @@ namespace CodeBase.Services.LevelBuild
         {
             float posX = Mathf.Cos(byArcGrade * Mathf.Deg2Rad) * radius;
             float posZ = Mathf.Sin(byArcGrade * Mathf.Deg2Rad) * radius;
+
             return new Vector3(posX, 0, posZ);
         }
 
         private Vector3Data GetFinishPosition()
         {
             Cell cell = _level.FirstOrDefault(cell => cell.CellData is FinishPortal);
+
             return cell is null ? new Vector3Data() : cell.Container.position.AsVectorData();
         }
     }

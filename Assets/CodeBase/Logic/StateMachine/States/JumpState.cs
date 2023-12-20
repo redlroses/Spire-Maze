@@ -16,7 +16,8 @@ namespace CodeBase.Logic.StateMachine.States
 
         private MoveDirection _lastDirection;
 
-        public JumpState(EntityStateMachine entityStateMachine,
+        public JumpState(
+            EntityStateMachine entityStateMachine,
             HeroAnimator heroAnimator,
             IInputService inputService,
             HeroMover mover)

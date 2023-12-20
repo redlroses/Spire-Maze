@@ -52,6 +52,7 @@ namespace CodeBase.UI.Elements
             if (_isAnimated)
             {
                 StartAnimation(value);
+
                 return;
             }
 

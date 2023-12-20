@@ -29,7 +29,8 @@ namespace CodeBase.Logic
 
         public event Action Activated = () => { };
 
-        public void Construct(GameStateMachine stateMachine,
+        public void Construct(
+            GameStateMachine stateMachine,
             EnterLevelPanel enterLevelPanel,
             IPersistentProgressService progressService)
         {

@@ -12,20 +12,33 @@ namespace CodeBase.Tools.Extension
             ParticleSystem.ColorOverLifetimeModule colorOverLifeTime = effect.colorOverLifetime;
 
             ParticleSystem.MinMaxGradient lifeTimeGradient = colorOverLifeTime.color.gradient;
-            Gradient modifiedGradient = new Gradient();
-            modifiedGradient.alphaKeys = lifeTimeGradient.gradient.alphaKeys;
+
+            Gradient modifiedGradient = new Gradient
+            {
+                alphaKeys = lifeTimeGradient.gradient.alphaKeys,
+            };
 
             foreach (GradientColorKey originalColorKey in lifeTimeGradient.gradient.colorKeys)
             {
-                GradientColorKey newColorKey = new GradientColorKey(modifiedGradient.Evaluate(originalColorKey.time),
+                GradientColorKey newColorKey = new GradientColorKey(
+                    modifiedGradient.Evaluate(originalColorKey.time),
                     originalColorKey.time);
-                modifiedGradient.SetKeys(modifiedGradient.colorKeys.Append(newColorKey).ToArray(),
+
+                modifiedGradient.SetKeys(
+                    modifiedGradient.colorKeys.Append(newColorKey).ToArray(),
                     modifiedGradient.alphaKeys);
             }
 
             GradientAlphaKey[] alphaKeys = modifiedGradient.alphaKeys;
-            lifeTimeGradient = new ParticleSystem.MinMaxGradient(modifiedGradient);
-            lifeTimeGradient.gradient.alphaKeys = alphaKeys;
+
+            lifeTimeGradient = new ParticleSystem.MinMaxGradient(modifiedGradient)
+            {
+                gradient =
+                {
+                    alphaKeys = alphaKeys,
+                },
+            };
+
             colorOverLifeTime.color = lifeTimeGradient;
 
             mainColorGradient.color = color;

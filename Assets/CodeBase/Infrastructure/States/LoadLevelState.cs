@@ -37,6 +37,7 @@ using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 #pragma warning disable CS4014
 
 namespace CodeBase.Infrastructure.States
@@ -67,7 +68,8 @@ namespace CodeBase.Infrastructure.States
 
         private LoadPayload _loadPayload;
 
-        public LoadLevelState(GameStateMachine gameStateMachine,
+        public LoadLevelState(
+            GameStateMachine gameStateMachine,
             IADService adService,
             IAnalyticsService analytics,
             ICameraOperatorService cameraOperatorService,
@@ -179,12 +181,15 @@ namespace CodeBase.Infrastructure.States
             {
                 case LevelNames.BuildableLevel:
                     CreateBuildableLevel();
+
                     return;
                 case LevelNames.Lobby:
                     InitLobby();
+
                     return;
                 case LevelNames.LearningLevel:
                     InitLearningLevel();
+
                     return;
                 default:
                     throw new Exception($"Unknown level name {_loadPayload.SceneName}");
@@ -195,6 +200,7 @@ namespace CodeBase.Infrastructure.States
         {
             Level level = BuildLevel();
             ConstructLevel();
+
             return level;
         }
 
@@ -262,6 +268,7 @@ namespace CodeBase.Infrastructure.States
             GameObject hero = _gameFactory.CreateHero(heroPosition);
             hero.GetComponent<HeroRoot>().Construct(_inputService, _stateMachine);
             hero.GetComponentInChildren<Stamina>().Construct(_staticData.GetStaminaEntity(PlayerKey));
+
             return hero;
         }
 
@@ -285,8 +292,10 @@ namespace CodeBase.Infrastructure.States
         private void InitLevelNamePanel()
         {
             LevelNamePanel levelNamePanel = _uiFactory.CreateLevelNamePanel().GetComponent<LevelNamePanel>();
+
             int starsCount = _progressService.Progress.GlobalData.Levels.Find(level => level.Id == _loadPayload.LevelId)
                 ?.Stars ?? 0;
+
             levelNamePanel.Show(starsCount, _loadPayload.LevelId);
         }
 

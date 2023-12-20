@@ -65,6 +65,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 _gameFactory.CreateHorizontalRailLock(leftCell.Container)
                     .transform.GetChild(0)
                     .transform.Rotate(Trigonometry.PiGrade, 0, 0);
+
                 _gameFactory.CreateHorizontalRailLock(rightCell.Container);
             }
             else
@@ -80,6 +81,7 @@ namespace CodeBase.LevelSpecification.Constructor
                 }
 
                 _gameFactory.CreateVerticalRailLock(upCell.Container);
+
                 _gameFactory.CreateVerticalRailLock(downCell.Container)
                     .transform.GetChild(0)
                     .transform.Rotate(Trigonometry.PiGrade, 0, 0);
@@ -112,16 +114,19 @@ namespace CodeBase.LevelSpecification.Constructor
             if (direction is PlateMoveDirection.Left or PlateMoveDirection.Right)
             {
                 Object.Destroy(liftPlate.gameObject.GetComponent<PlateVerticalMover>());
+
                 return liftPlate.gameObject.GetComponent<PlateHorizontalMover>();
             }
 
             Object.Destroy(liftPlate.gameObject.GetComponent<PlateHorizontalMover>());
+
             return liftPlate.gameObject.GetComponent<PlateVerticalMover>();
         }
 
         private Cell FindPair(Cell movingPlateCell)
         {
             PlateMoveDirection plateMoveDirection = ((MovingMarker)movingPlateCell.CellData).Direction;
+
             return plateMoveDirection is PlateMoveDirection.Left or PlateMoveDirection.Right
                 ? FindHorizontalPair(movingPlateCell)
                 : FindVerticalPair(movingPlateCell);
@@ -134,11 +139,13 @@ namespace CodeBase.LevelSpecification.Constructor
             if (((MovingMarker)movingPlateCell.CellData).Direction == PlateMoveDirection.Up)
             {
                 List<Cell> filtered = GetFilteredByAngle(movingPlateCell, PlateMoveDirection.Down);
+
                 return GetClosestDownPair(filtered, movingPlateHeight);
             }
             else
             {
                 List<Cell> filtered = GetFilteredByAngle(movingPlateCell, PlateMoveDirection.Up);
+
                 return GetClosestUpPair(filtered, movingPlateHeight);
             }
         }
@@ -150,11 +157,13 @@ namespace CodeBase.LevelSpecification.Constructor
             if (((MovingMarker)movingPlateCell.CellData).Direction == PlateMoveDirection.Left)
             {
                 List<Cell> filtered = GetFilteredByHeight(movingPlateCell, PlateMoveDirection.Right);
+
                 return GetClosestRightPair(filtered, movingPlateAngle);
             }
             else
             {
                 List<Cell> filtered = GetFilteredByHeight(movingPlateCell, PlateMoveDirection.Left);
+
                 return GetClosestLeftPair(filtered, movingPlateAngle);
             }
         }
@@ -176,8 +185,9 @@ namespace CodeBase.LevelSpecification.Constructor
 
             for (int i = 0; i <= 1; i++)
             {
-                possibleMarkers = filtered.Where(cell =>
-                        cell.Position.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0)
+                possibleMarkers = filtered.Where(
+                        cell =>
+                            cell.Position.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0)
                     .ToList();
 
                 if (possibleMarkers.Any())
@@ -203,8 +213,9 @@ namespace CodeBase.LevelSpecification.Constructor
 
             for (int i = 0; i <= 1; i++)
             {
-                possibleMarkers = filtered.Where(cell =>
-                        cell.Position.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0)
+                possibleMarkers = filtered.Where(
+                        cell =>
+                            cell.Position.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0)
                     .ToList();
 
                 if (possibleMarkers.Any())
@@ -226,20 +237,24 @@ namespace CodeBase.LevelSpecification.Constructor
         private List<Cell> GetFilteredByHeight(Cell movingPlateCell, PlateMoveDirection type)
         {
             List<Cell> filtered =
-                _markers.Where(cell =>
-                        cell.Position.Height.EqualsApproximately(movingPlateCell.Position.Height) &&
-                        ((MovingMarker)cell.CellData).Direction == type)
+                _markers.Where(
+                        cell =>
+                            cell.Position.Height.EqualsApproximately(movingPlateCell.Position.Height) &&
+                            ((MovingMarker)cell.CellData).Direction == type)
                     .ToList();
+
             return filtered;
         }
 
         private List<Cell> GetFilteredByAngle(Cell movingPlateCell, PlateMoveDirection type)
         {
             List<Cell> filtered =
-                _markers.Where(cell =>
-                        cell.Position.Angle.EqualsApproximately(movingPlateCell.Position.Angle) &&
-                        ((MovingMarker)cell.CellData).Direction == type)
+                _markers.Where(
+                        cell =>
+                            cell.Position.Angle.EqualsApproximately(movingPlateCell.Position.Angle) &&
+                            ((MovingMarker)cell.CellData).Direction == type)
                     .ToList();
+
             return filtered;
         }
     }

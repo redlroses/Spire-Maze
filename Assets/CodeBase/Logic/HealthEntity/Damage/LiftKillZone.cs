@@ -23,6 +23,7 @@ namespace CodeBase.Logic.HealthEntity.Damage
         {
             _killZoneHeroEntryUpdater = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .Then(UpdateDamageTriggerState);
+
             _damageTrigger.Value.Disable();
         }
 

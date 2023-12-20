@@ -39,7 +39,11 @@ namespace CodeBase.Logic.Lift
             _destinationMarker.Called -= OnCalled;
         }
 
-        public void Construct(LiftDestinationMarker initialMarker, LiftDestinationMarker destinationMarker, IPlateMover mover, PlateMoveDirection initialDirection)
+        public void Construct(
+            LiftDestinationMarker initialMarker,
+            LiftDestinationMarker destinationMarker,
+            IPlateMover mover,
+            PlateMoveDirection initialDirection)
         {
             _timer ??= GetComponent<TimerOperator>();
             _timer.SetUp(_waitDelay, Move);

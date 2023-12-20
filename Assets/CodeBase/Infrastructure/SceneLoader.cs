@@ -26,6 +26,7 @@ namespace CodeBase.Infrastructure
                 if (SceneManager.GetActiveScene().name.Equals(LevelNames.Initial))
                 {
                     onLoaded?.Invoke();
+
                     yield break;
                 }
             }

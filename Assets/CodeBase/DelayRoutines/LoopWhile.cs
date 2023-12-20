@@ -17,6 +17,7 @@ namespace CodeBase.DelayRoutines
             if (_repeatCondition.Invoke())
             {
                 Iterate();
+
                 return;
             }
 

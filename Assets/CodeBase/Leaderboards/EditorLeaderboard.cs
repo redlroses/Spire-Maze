@@ -30,6 +30,7 @@ namespace CodeBase.Leaderboards
         public UniTask<bool> TryAuthorize()
         {
             IsAuthorized = true;
+
             return UniTask.FromResult(true);
         }
 
@@ -64,8 +65,8 @@ namespace CodeBase.Leaderboards
         {
             _ranksData.Clear();
 
-            string[] langs = {"ru", "en", "tr"};
-            string[] avatars = {"Test1", "Test2"};
+            string[] langs = { "ru", "en", "tr" };
+            string[] avatars = { "Test1", "Test2" };
 
             for (int i = 1; i <= _ranksDataCount; i++)
             {

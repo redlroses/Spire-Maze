@@ -10,6 +10,7 @@ namespace CodeBase.Tools.Extension
         {
             TElement[] elementsArray = elements.ToArray();
             int randomIndex = Random.Range(0, elementsArray.Length);
+
             return elementsArray[randomIndex];
         }
     }

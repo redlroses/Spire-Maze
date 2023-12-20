@@ -84,11 +84,12 @@ namespace CodeBase.MeshCombine
             if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
                 meshRenderer = holder.AddComponent<MeshRenderer>();
 
-            Mesh mesh = new Mesh {indexFormat = IndexFormat.UInt32};
+            Mesh mesh = new Mesh { indexFormat = IndexFormat.UInt32 };
             meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combine);
             meshRenderer.sharedMaterial = material;
             meshRenderer.enabled = isEnableRenderer;
+
             return mesh;
         }
 
@@ -111,6 +112,7 @@ namespace CodeBase.MeshCombine
             if (beginIndex == -1)
             {
                 CombineColliders(floor.Container.GetRange(0, floor.Container.Count), collidersHolder);
+
                 return;
             }
 
@@ -131,7 +133,8 @@ namespace CodeBase.MeshCombine
                 }
                 else
                 {
-                    CombineColliders(floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex),
+                    CombineColliders(
+                        floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex),
                         collidersHolder);
                 }
 
@@ -149,6 +152,7 @@ namespace CodeBase.MeshCombine
             }
 
             GameObject cell = cells.First().Container.gameObject;
+
             GameObject colliderHolder = new GameObject($"{cell.name} collider")
             {
                 transform =

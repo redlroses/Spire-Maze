@@ -59,6 +59,7 @@ namespace CodeBase.Logic.Inventory
         private bool TryGetInventoryCell(StorableType byType, out InventoryCell inventoryCell)
         {
             inventoryCell = GetExistingInventoryCell(byType);
+
             return inventoryCell != null;
         }
 
@@ -66,6 +67,7 @@ namespace CodeBase.Logic.Inventory
         {
             InventoryCell existingInventoryCell =
                 _storage.FirstOrDefault(inventoryCell => inventoryCell.Item.ItemType == storableType);
+
             return existingInventoryCell;
         }
 

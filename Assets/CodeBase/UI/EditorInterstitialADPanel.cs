@@ -14,11 +14,13 @@ namespace CodeBase.UI
 
         public void Open(Action<bool> onCloseCallback, Action<string> onErrorCallback)
         {
-            _errorButton.onClick.AddListener(() =>
-            {
-                onErrorCallback.Invoke(string.Empty);
-                Destroy(gameObject);
-            });
+            _errorButton.onClick.AddListener(
+                () =>
+                {
+                    onErrorCallback.Invoke(string.Empty);
+                    Destroy(gameObject);
+                });
+
             _closeButton.onClick.AddListener(() => onCloseCallback.Invoke(true));
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
         }

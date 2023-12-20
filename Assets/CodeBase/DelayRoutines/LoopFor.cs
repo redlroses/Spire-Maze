@@ -16,6 +16,7 @@
             if (_remainingTimes > 0)
             {
                 Iterate();
+
                 return;
             }
 

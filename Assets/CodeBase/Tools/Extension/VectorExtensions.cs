@@ -14,18 +14,21 @@ namespace CodeBase.Tools.Extension
         public static Vector3 ChangeY(this Vector3 vector, float to)
         {
             vector.y = to;
+
             return vector;
         }
 
         public static Vector3 ChangeX(this Vector3 vector, float to)
         {
             vector.x = to;
+
             return vector;
         }
 
         public static Vector3 ChangeZ(this Vector3 vector, float to)
         {
             vector.z = to;
+
             return vector;
         }
 
@@ -39,6 +42,7 @@ namespace CodeBase.Tools.Extension
             float lerpedX = Mathf.Lerp(0, Trigonometry.TwoPiGrade, clampedX / arcLength);
             float posX = Mathf.Cos(lerpedX * Mathf.Deg2Rad) * radius;
             float posZ = Mathf.Sin(lerpedX * Mathf.Deg2Rad) * radius;
+
             return new Vector3(posX, vector.y, posZ);
         }
 
@@ -46,6 +50,7 @@ namespace CodeBase.Tools.Extension
         {
             float rotatedX = vector.x * Mathf.Cos(byAngle) - vector.y * Mathf.Sin(byAngle);
             float rotatedY = vector.x * Mathf.Sin(byAngle) + vector.y * Mathf.Cos(byAngle);
+
             return new Vector2(rotatedX, rotatedY);
         }
 
@@ -56,6 +61,7 @@ namespace CodeBase.Tools.Extension
             Vector2 rotatedPosition = currentFlatPosition.Rotate(deltaAngle);
             rotatedPosition = rotatedPosition.normalized * radius;
             Vector2 direction = rotatedPosition - currentFlatPosition;
+
             return new Vector3(direction.x, vector.y, direction.y);
         }
     }

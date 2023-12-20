@@ -18,7 +18,8 @@ namespace CodeBase.Infrastructure.States
         private readonly ISoundService _soundService;
         private readonly IStaticDataService _staticDataService;
 
-        public LoadProgressState(GameStateMachine gameStateMachine,
+        public LoadProgressState(
+            GameStateMachine gameStateMachine,
             IPersistentProgressService progressService,
             ISaveLoadService saveLoadProgress,
             IStaticDataService staticDataService,
@@ -35,9 +36,10 @@ namespace CodeBase.Infrastructure.States
         {
             await InitProgress();
 
-            _gameStateMachine.Enter<LoadLevelState, LoadPayload>(new LoadPayload(
-                _progressService.Progress.WorldData.SceneName,
-                _progressService.Progress.WorldData.LevelState.LevelId));
+            _gameStateMachine.Enter<LoadLevelState, LoadPayload>(
+                new LoadPayload(
+                    _progressService.Progress.WorldData.SceneName,
+                    _progressService.Progress.WorldData.LevelState.LevelId));
 
             _soundService.Load();
         }

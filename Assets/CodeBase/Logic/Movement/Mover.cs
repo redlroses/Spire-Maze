@@ -74,6 +74,7 @@ namespace CodeBase.Logic.Movement
         private void Rotate(Vector3 velocity)
         {
             Quaternion lookRotation = Quaternion.LookRotation(velocity);
+
             Quaternion targetRotation =
                 Quaternion.Slerp(_rigidbody.rotation, lookRotation, _rotateSpeed * Time.fixedDeltaTime);
 

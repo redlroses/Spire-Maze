@@ -41,8 +41,10 @@ namespace CodeBase.Logic.Hero
         {
             _inputService = inputService;
             _aliveObserver.Construct(stateMachine);
+
             _entityStateMachine =
                 new PlayerStateMachine(_animator, _inputService, _mover, _heroHealth, _dodge, _jumper);
+
             _entityStateMachine.Enter<IdleState>();
             _heroReviver.Construct(_entityStateMachine);
             _mover.Move(MoveDirection.Stop);

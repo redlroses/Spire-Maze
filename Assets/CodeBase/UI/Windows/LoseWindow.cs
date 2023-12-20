@@ -33,7 +33,8 @@ namespace CodeBase.UI.Windows
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
 
-        public void Construct(IPersistentProgressService progressService,
+        public void Construct(
+            IPersistentProgressService progressService,
             IADService adService,
             HeroReviver reviver,
             GameStateMachine stateMachine)
@@ -41,7 +42,9 @@ namespace CodeBase.UI.Windows
             _progressService = progressService;
             _menuButton.Construct(stateMachine);
             _restartButton.Construct(stateMachine, LevelId);
-            _reviveButton.Construct(adService,
+
+            _reviveButton.Construct(
+                adService,
                 reviver,
                 () =>
                 {

@@ -80,6 +80,7 @@ namespace CodeBase.Services.Score
         {
             int scorePerTime = scoreConfig.BasePointsOnStart -
                                TemporalProgress.PlayTime * scoreConfig.PerSecondReduction;
+
             return scorePerTime < 0 ? 0 : scorePerTime;
         }
 

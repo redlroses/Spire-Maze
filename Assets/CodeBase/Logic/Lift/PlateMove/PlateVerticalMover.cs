@@ -14,6 +14,7 @@ namespace CodeBase.Logic.Lift.PlateMove
         {
             float posX = Mathf.Cos(-from.Position.Angle * Mathf.Deg2Rad) * Radius;
             float posZ = Mathf.Sin(-from.Position.Angle * Mathf.Deg2Rad) * Radius;
+
             return new Vector3(posX, from.Position.Height, posZ);
         }
     }

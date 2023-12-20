@@ -22,7 +22,8 @@ namespace CodeBase.UI.Windows
 
         private int LevelId => _progressService.Progress.WorldData.LevelState.LevelId;
 
-        public void Construct(IPersistentProgressService progressService,
+        public void Construct(
+            IPersistentProgressService progressService,
             IPauseService pauseService,
             GameStateMachine stateMachine)
         {

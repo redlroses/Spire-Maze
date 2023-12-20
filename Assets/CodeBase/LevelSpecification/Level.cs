@@ -20,18 +20,18 @@ namespace CodeBase.LevelSpecification
 
         public int Size => Height * Width;
 
+        public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
+
         IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator()
         {
             ((IEnumerator)this).Reset();
+
             return this;
         }
 
-        public IEnumerator GetEnumerator() =>
-            this;
-
-        public object Current => GetCell(_currentIndex / Width, _currentIndex % Width);
-
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
+
+        public IEnumerator GetEnumerator() => this;
 
         bool IEnumerator.MoveNext() =>
             ++_currentIndex < Size;

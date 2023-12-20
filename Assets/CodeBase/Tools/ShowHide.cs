@@ -51,11 +51,12 @@ namespace CodeBase.Tools
 
             if (enabled && _isUseCommandQueue)
             {
-                _commands.Enqueue(() =>
-                {
-                    PlayForward();
-                    AppendCallback(onShowCallback);
-                });
+                _commands.Enqueue(
+                    () =>
+                    {
+                        PlayForward();
+                        AppendCallback(onShowCallback);
+                    });
 
                 if (_commandAwaiter.IsActive == false)
                     _commandAwaiter.Play();
@@ -84,11 +85,12 @@ namespace CodeBase.Tools
 
             if (enabled && _isUseCommandQueue)
             {
-                _commands.Enqueue(() =>
-                {
-                    PlayReverse();
-                    AppendCallback(onHideCallback);
-                });
+                _commands.Enqueue(
+                    () =>
+                    {
+                        PlayReverse();
+                        AppendCallback(onHideCallback);
+                    });
 
                 if (_commandAwaiter.IsActive == false)
                     _commandAwaiter.Play();

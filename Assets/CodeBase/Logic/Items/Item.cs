@@ -17,11 +17,17 @@ namespace CodeBase.Logic.Items
         }
 
         public string Description { get; }
+
         public string Name { get; }
+
         public Sprite Sprite { get; }
+
         public StorableType ItemType { get; }
+
         public bool IsInteractive { get; }
+
         public bool IsReloadable { get; }
+
         public bool IsArtifact { get; }
     }
 }

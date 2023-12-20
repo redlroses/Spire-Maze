@@ -36,7 +36,9 @@ namespace CodeBase.DelayRoutines
         public bool IsActive => ActiveRoutine is not null;
 
         private IRoutine FirstRoutine => _routines[0];
+
         private IRoutine LastRoutine => _routines[_currentRoutineIndex];
+
         private IRoutine ActiveRoutine => _routines.Find(routine => routine.IsActive);
 
         void IDisposable.Dispose() =>
@@ -80,6 +82,7 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence SetAutoKill(bool isAutoKill)
         {
             _isAutoKill = isAutoKill;
+
             return this;
         }
 
@@ -99,6 +102,7 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence WaitForSeconds(float seconds)
         {
             AddToSequence(new ConstTimeAwaiter(seconds, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -110,17 +114,19 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence WaitForRandomSeconds(Vector2 timeRange)
         {
             AddToSequence(new RandomTimeAwaiter(timeRange, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
         /// <summary>
         ///     Unrealized part.
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Await action</param>
         /// <returns>Self routine.</returns>
         public RoutineSequence WaitForEvent(Action action)
         {
             AddToSequence(new EventAwaiter(action, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -132,6 +138,7 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence Wait(TimeAwaiter timeAwaiter)
         {
             AddToSequence(timeAwaiter);
+
             return this;
         }
 
@@ -143,6 +150,7 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence WaitUntil(bool waitFor)
         {
             AddToSequence(new UntilAwaiter(() => waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -154,6 +162,7 @@ namespace CodeBase.DelayRoutines
         public RoutineSequence WaitUntil(Func<bool> waitFor)
         {
             AddToSequence(new UntilAwaiter(waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -161,10 +170,11 @@ namespace CodeBase.DelayRoutines
         ///     Waits while the condition is true.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
-        /// <returns>Self routine</returns>
+        /// <returns>Self routine.</returns>
         public RoutineSequence WaitWhile(bool waitFor)
         {
             AddToSequence(new WhileAwaiter(() => waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -172,10 +182,11 @@ namespace CodeBase.DelayRoutines
         ///     Waits while the condition is met.
         /// </summary>
         /// <param name="waitFor">Waiting func.</param>
-        /// <returns>Self routine</returns>
+        /// <returns>Self routine.</returns>
         public RoutineSequence WaitWhile(Func<bool> waitFor)
         {
             AddToSequence(new WhileAwaiter(waitFor, _globalUpdate, _addUpdater, _removeUpdater));
+
             return this;
         }
 
@@ -187,10 +198,11 @@ namespace CodeBase.DelayRoutines
         ///     Includes an action in a sequence.
         /// </summary>
         /// <param name="action">Action to include.</param>
-        /// <returns>Self routine</returns>
+        /// <returns>Self routine.</returns>
         public RoutineSequence Then(Action action)
         {
             AddToSequence(new Executor(action));
+
             return this;
         }
 
@@ -198,10 +210,11 @@ namespace CodeBase.DelayRoutines
         ///     Includes an Executor in a sequence.
         /// </summary>
         /// <param name="executor">Given executor.</param>
-        /// <returns>Self routine</returns>
+        /// <returns>Self routine.</returns>
         public RoutineSequence Then(Executor executor)
         {
             AddToSequence(executor);
+
             return this;
         }
 
@@ -219,6 +232,7 @@ namespace CodeBase.DelayRoutines
             LoopFor routine = new LoopFor(times);
             routine.AddLoopStart(FirstRoutine);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -231,6 +245,7 @@ namespace CodeBase.DelayRoutines
         {
             loopFor.AddLoopStart(FirstRoutine);
             AddToSequence(loopFor);
+
             return this;
         }
 
@@ -245,6 +260,7 @@ namespace CodeBase.DelayRoutines
             LoopFor routine = new LoopFor(times);
             routine.AddLoopStart(from);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -259,6 +275,7 @@ namespace CodeBase.DelayRoutines
             LoopFor routine = new LoopFor(times);
             routine.AddLoopStart(_routines[fromIndex]);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -272,6 +289,7 @@ namespace CodeBase.DelayRoutines
         {
             loopFor.AddLoopStart(from);
             AddToSequence(loopFor);
+
             return this;
         }
 
@@ -289,6 +307,7 @@ namespace CodeBase.DelayRoutines
             LoopWhile routine = new LoopWhile(repeatCondition);
             routine.AddLoopStart(FirstRoutine);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -302,6 +321,7 @@ namespace CodeBase.DelayRoutines
             LoopWhile routine = new LoopWhile(() => isRepeat);
             routine.AddLoopStart(FirstRoutine);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -316,6 +336,7 @@ namespace CodeBase.DelayRoutines
             LoopWhile routine = new LoopWhile(repeatCondition);
             routine.AddLoopStart(from);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -330,6 +351,7 @@ namespace CodeBase.DelayRoutines
             LoopWhile routine = new LoopWhile(repeatCondition);
             routine.AddLoopStart(_routines[fromIndex]);
             AddToSequence(routine);
+
             return this;
         }
 
@@ -342,6 +364,7 @@ namespace CodeBase.DelayRoutines
         {
             loopWhile.AddLoopStart(FirstRoutine);
             AddToSequence(loopWhile);
+
             return this;
         }
 
@@ -355,6 +378,7 @@ namespace CodeBase.DelayRoutines
         {
             loopWhile.AddLoopStart(_routines[fromIndex]);
             AddToSequence(loopWhile);
+
             return this;
         }
 

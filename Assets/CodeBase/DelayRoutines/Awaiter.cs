@@ -11,7 +11,8 @@ namespace CodeBase.DelayRoutines
         private readonly GlobalUpdate _globalUpdate;
         private readonly Action<GlobalUpdate, Awaiter> _removeUpdater;
 
-        protected Awaiter(GlobalUpdate globalUpdate,
+        protected Awaiter(
+            GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)
         {

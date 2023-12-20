@@ -65,30 +65,38 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
             _services.RegisterSingle<ILocalizationService>(new LocalizationService());
             _services.RegisterSingle<IAnalyticsService>(new AnalyticsService());
+
             _services.RegisterSingle<ISoundService>(
                 new SoundService(
                     _services.Single<IAssetProvider>(),
                     _services.Single<IPersistentProgressService>()));
+
             _services.RegisterSingle<IWatchService>(
                 new WatchService(
                     _services.Single<IPersistentProgressService>()));
+
             _services.RegisterSingle<IScoreService>(
                 new ScoreService(
                     _services.Single<IStaticDataService>(),
                     _services.Single<IPersistentProgressService>()));
+
             _services.RegisterSingle<IRankedService>(
                 new RankedService(
                     _services.Single<IStaticDataService>()));
+
             _services.RegisterSingle<IPauseService>(
                 new PauseService());
+
             _services.RegisterSingle<ISaveLoadService>(
                 new SaveLoadService(
                     _services.Single<IPersistentProgressService>(),
                     _services.Single<IWatchService>()));
+
             _services.RegisterSingle<IADService>(
                 new ADService(
                     _services.Single<ISoundService>(),
                     _services.Single<IPauseService>()));
+
             _services.RegisterSingle<IUIFactory>(
                 new UIFactory(
                     _services.Single<IAssetProvider>(),
@@ -101,12 +109,15 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IPauseService>(),
                     _services.Single<IADService>(),
                     _stateMachine));
+
             _services.RegisterSingle<IWindowService>(
                 new WindowService(
                     _services.Single<IUIFactory>()));
+
             _services.RegisterSingle<IInputService>(
                 new InputService(
                     _services.Single<IPauseService>()));
+
             _services.RegisterSingle<IGameFactory>(
                 new GameFactory(
                     _services.Single<IAssetProvider>(),
@@ -115,6 +126,7 @@ namespace CodeBase.Infrastructure.States
                     _services.Single<IUIFactory>(),
                     _services.Single<IInputService>(),
                     _services.Single<ICameraOperatorService>()));
+
             _services.RegisterSingle<ILevelBuilder>(
                 new LevelBuilder(
                     _services.Single<IGameFactory>(),

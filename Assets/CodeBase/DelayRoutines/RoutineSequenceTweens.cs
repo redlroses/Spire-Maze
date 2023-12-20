@@ -6,7 +6,8 @@ namespace CodeBase.DelayRoutines
 {
     public partial class RoutineSequence
     {
-        public RoutineSequence DoScale(Transform transform,
+        public RoutineSequence DoScale(
+            Transform transform,
             float toScale,
             float duration,
             AnimationCurve curve,
@@ -21,6 +22,7 @@ namespace CodeBase.DelayRoutines
             {
                 bool isProcess = towardMover.TryUpdate(Time.deltaTime / duration, out Vector3 scale);
                 transform.localScale = scale;
+
                 return isProcess;
             }
 
@@ -36,7 +38,8 @@ namespace CodeBase.DelayRoutines
             return this;
         }
 
-        public RoutineSequence DoGradient(Graphic graphics,
+        public RoutineSequence DoGradient(
+            Graphic graphics,
             Gradient gradient,
             float duration,
             AnimationCurve curve,
@@ -48,6 +51,7 @@ namespace CodeBase.DelayRoutines
             {
                 bool isProcess = towardMover.TryUpdate(Time.deltaTime / duration, out float value);
                 graphics.color = gradient.Evaluate(value);
+
                 return isProcess;
             }
 

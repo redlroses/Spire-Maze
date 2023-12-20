@@ -35,7 +35,8 @@ namespace CodeBase.Tools.Extension
             JsonUtility.FromJson<T>(json);
 
         public static DateTime AsDateTime(this DateTimeData dateTimeData) =>
-            new DateTime(dateTimeData.Year,
+            new DateTime(
+                dateTimeData.Year,
                 dateTimeData.Month,
                 dateTimeData.Day,
                 dateTimeData.Hour,
@@ -100,7 +101,8 @@ namespace CodeBase.Tools.Extension
             Sprite avatar = assetProvider.LoadAsset<Sprite>($"{AssetPath.Avatar}/{entry.extraData}");
             Sprite flag = assetProvider.LoadAsset<Sprite>($"{AssetPath.Flag}/{entry.player.lang}");
 
-            return new SingleRankData(entry.rank,
+            return new SingleRankData(
+                entry.rank,
                 entry.score,
                 avatar,
                 entry.player.publicName ?? Anonymous,

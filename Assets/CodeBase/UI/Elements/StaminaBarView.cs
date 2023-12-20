@@ -25,7 +25,8 @@ namespace CodeBase.UI.Elements
             Points.AttemptToEmptyUsed += IndicateEmptyUse;
 
             _flashing = new RoutineSequence()
-                .DoGradient(_background,
+                .DoGradient(
+                    _background,
                     _backgroundGradient,
                     _duration,
                     AnimationCurve.Linear(0, 0, 1, 1),

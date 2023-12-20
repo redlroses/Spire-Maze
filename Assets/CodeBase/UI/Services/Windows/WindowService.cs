@@ -28,21 +28,27 @@ namespace CodeBase.UI.Services.Windows
                     break;
                 case WindowId.Leaderboard:
                     _uiFactory.CreateLeaderboard();
+
                     break;
                 case WindowId.Settings:
                     _uiFactory.CreateSettings();
+
                     break;
                 case WindowId.Pause:
                     _uiFactory.CreatePause();
+
                     break;
                 case WindowId.Results:
                     _uiFactory.CreateResults();
+
                     break;
                 case WindowId.Loss:
                     _uiFactory.CreateLose();
+
                     break;
                 case WindowId.Tutorial:
                     _uiFactory.CreateTutorial();
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(windowId), windowId, null);

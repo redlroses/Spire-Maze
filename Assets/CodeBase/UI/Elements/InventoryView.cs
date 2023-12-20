@@ -80,16 +80,18 @@ namespace CodeBase.UI.Elements
             if (targetCellView is null)
             {
                 BuildCellView(readOnlyInventoryCell);
+
                 return;
             }
 
             if (readOnlyInventoryCell.Count <= 0)
             {
                 RemoveCellView(targetCellView);
+
                 return;
             }
 
-            targetCellView.Update();
+            targetCellView.UpdateCount();
         }
 
         private InventoryCellView FirstOrDefaultCell(IReadOnlyInventoryCell readOnlyInventoryCell) =>

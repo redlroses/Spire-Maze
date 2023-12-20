@@ -142,6 +142,7 @@ namespace CodeBase.UI
         private Vector3 AsScreenPosition(Vector3 at)
         {
             Vector3 worldToScreenPoint = _camera.WorldToScreenPoint(at.ChangeY(at.y + _verticalPositionOffset));
+
             return _canvas.transform.InverseTransformPoint(worldToScreenPoint);
         }
 

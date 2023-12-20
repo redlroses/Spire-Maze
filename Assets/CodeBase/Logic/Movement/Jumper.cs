@@ -76,6 +76,7 @@ namespace CodeBase.Logic.Movement
             enabled = true;
             _heroAnimator.PlayJump();
             DisableGravity();
+
             return true;
         }
 
@@ -101,6 +102,7 @@ namespace CodeBase.Logic.Movement
             if (_expiredTime > _jumpDuration)
             {
                 AbortJump();
+
                 return;
             }
 
@@ -125,8 +127,10 @@ namespace CodeBase.Logic.Movement
         {
             float expectedHeight = _jumpCurve.Evaluate(_jumpProgress) * _jumpHeight + _startHeight;
             float heightDifference = expectedHeight - _rigidbody.position.y;
+
             float clampedVerticalVelocity =
                 Mathf.Clamp(heightDifference * _velocityScale, -_maxDownVelocity, _maxUpVelocity);
+
             _rigidbody.velocity = _rigidbody.velocity.ChangeY(clampedVerticalVelocity);
         }
 

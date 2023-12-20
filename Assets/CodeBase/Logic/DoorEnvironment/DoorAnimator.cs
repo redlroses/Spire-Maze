@@ -37,6 +37,7 @@ namespace CodeBase.Logic.DoorEnvironment
             if (_opening.TryUpdate(Time.deltaTime, out Vector3 position))
             {
                 _door.localPosition = position;
+
                 return;
             }
 

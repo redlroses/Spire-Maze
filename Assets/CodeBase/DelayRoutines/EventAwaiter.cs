@@ -8,7 +8,8 @@ namespace CodeBase.DelayRoutines
     {
         private Action _callback;
 
-        public EventAwaiter(Action callback,
+        public EventAwaiter(
+            Action callback,
             GlobalUpdate globalUpdate,
             Action<GlobalUpdate, Awaiter> addUpdater,
             Action<GlobalUpdate, Awaiter> removeUpdater)

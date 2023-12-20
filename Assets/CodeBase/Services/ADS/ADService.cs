@@ -28,8 +28,10 @@ namespace CodeBase.Services.ADS
         {
             _soundService = soundService;
             _pauseService = pauseService;
+
             _interstitialAdCooldown = new RoutineSequence(RoutineUpdateMod.FixedRun)
                 .WaitForSeconds(InterstitialAdCooldownSeconds);
+
             InitAdProvider();
             _interstitialAdCooldown.Play();
         }
@@ -38,7 +40,8 @@ namespace CodeBase.Services.ADS
         {
             OnAddOpened();
 
-            RewardAd(() =>
+            RewardAd(
+                () =>
                 {
                     OnAdClosed();
                     onSuccessCallback?.Invoke();
@@ -54,7 +57,8 @@ namespace CodeBase.Services.ADS
             _interstitialAdCooldown.Play();
             OnAddOpened();
 
-            InterstitialAd(() =>
+            InterstitialAd(
+                () =>
                 {
                     OnAdClosed();
                     onSuccessCallback?.Invoke();
@@ -87,6 +91,7 @@ namespace CodeBase.Services.ADS
 
             Action onOpenCallback = () => isOpened = true;
             Action onRewardedCallback = () => isRewarded = true;
+
             Action onCloseCallback = () =>
             {
                 if (isOpened && isRewarded)
@@ -94,6 +99,7 @@ namespace CodeBase.Services.ADS
                 else
                     onDenyCallback?.Invoke();
             };
+
             Action<string> onErrorCallback = _ => onDenyCallback.Invoke();
             _adProvider.ShowRewardAd(onOpenCallback, onRewardedCallback, onCloseCallback, onErrorCallback);
         }
@@ -103,6 +109,7 @@ namespace CodeBase.Services.ADS
             bool isOpened = false;
 
             Action openCallback = () => isOpened = true;
+
             Action<bool> closeCallback = isShown =>
             {
                 if (isOpened && isShown)
@@ -110,6 +117,7 @@ namespace CodeBase.Services.ADS
                 else
                     onDenyCallback?.Invoke();
             };
+
             Action<string> errorCallback = _ => onDenyCallback?.Invoke();
             Action offlineCallback = () => onDenyCallback.Invoke();
             _adProvider.ShowInterstitialAd(openCallback, closeCallback, errorCallback, offlineCallback);

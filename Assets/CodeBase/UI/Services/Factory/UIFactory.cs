@@ -31,7 +31,8 @@ namespace CodeBase.UI.Services.Factory
         private HeroReviver _hero;
         private Transform _uiRoot;
 
-        public UIFactory(IAssetProvider assets,
+        public UIFactory(
+            IAssetProvider assets,
             IStaticDataService staticData,
             IPersistentProgressService progressService,
             IRankedService rankedService,
@@ -139,6 +140,7 @@ namespace CodeBase.UI.Services.Factory
         {
             GameObject template = _staticData.GetWindow(windowId);
             TWindow window = Object.Instantiate(template, _uiRoot).GetComponent<TWindow>();
+
             return window;
         }
 
@@ -146,6 +148,7 @@ namespace CodeBase.UI.Services.Factory
         {
             GameObject element = _assets.Instantiate(path, inside);
             Register(element);
+
             return element;
         }
 

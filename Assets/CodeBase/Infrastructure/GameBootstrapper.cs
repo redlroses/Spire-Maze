@@ -19,7 +19,9 @@ namespace CodeBase.Infrastructure
         {
             LoadingCurtain curtain = Instantiate(_curtain);
             _game = new Game(this, curtain);
-            _initializer.Start(this,
+
+            _initializer.Start(
+                this,
                 () =>
                 {
                     _webFocusObserver = new WebFocusObserver();
