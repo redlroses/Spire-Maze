@@ -46,7 +46,7 @@ namespace CodeBase.Logic.Items
             _virtualMover = _gameFactory.CreateVirtualMover().GetComponent<VirtualMover>();
             _virtualMover.Construct(_persistentProgressService.TemporalProgress.LevelHeightRange);
             _cameraOperator.Focus(_virtualMover.transform);
-            _inputService.OverviewMove += OnOverviewMove;
+            _inputService.OverviewMoving += OnOverviewMove;
             GameObject overviewInterface = _uiFactory.CreateOverviewInterface();
             Button closeButton = overviewInterface.GetComponentInChildren<Button>();
 
@@ -54,7 +54,7 @@ namespace CodeBase.Logic.Items
                 () =>
                 {
                     _cameraOperator.FocusOnDefault();
-                    _inputService.OverviewMove -= OnOverviewMove;
+                    _inputService.OverviewMoving -= OnOverviewMove;
                     Object.Destroy(overviewInterface);
                     Object.Destroy(_virtualMover.gameObject);
                     _inputService.DisableOverviewMap();

@@ -32,16 +32,16 @@ namespace CodeBase.Logic.StateMachine.States
         {
             _mover.Move(isLoss);
             _lastDirection = isLoss;
-            _inputService.HorizontalMove += OnHorizontalMove;
-            _inputService.Jump += OnJump;
-            _inputService.Dodge += OnDodge;
+            _inputService.HorizontalMoving += OnHorizontalMove;
+            _inputService.Jumped += OnJump;
+            _inputService.Dodged += OnDodge;
         }
 
         public void Exit()
         {
-            _inputService.HorizontalMove -= OnHorizontalMove;
-            _inputService.Jump -= OnJump;
-            _inputService.Dodge -= OnDodge;
+            _inputService.HorizontalMoving -= OnHorizontalMove;
+            _inputService.Jumped -= OnJump;
+            _inputService.Dodged -= OnDodge;
         }
 
         private void OnDodge(MoveDirection direction)

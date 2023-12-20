@@ -9,7 +9,6 @@ namespace CodeBase.Logic
     public class Spire : MonoBehaviour
     {
         private Level _level;
-        private LevelStaticData _levelStaticData;
 
         public Cell GetLeftFrom(Cell from)
         {

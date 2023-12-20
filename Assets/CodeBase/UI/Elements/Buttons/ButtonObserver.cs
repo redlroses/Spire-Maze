@@ -19,15 +19,15 @@ namespace CodeBase.UI.Elements.Buttons
             _button ??= GetComponent<Button>();
 
         public void Subscribe() =>
-            Button.onClick.AddListener(Call);
+            Button.onClick.AddListener(OnCall);
 
         public void Unsubscribe() =>
-            Button.onClick.RemoveListener(Call);
+            Button.onClick.RemoveListener(OnCall);
 
         public void Cleanup() =>
             Button.onClick.RemoveAllListeners();
 
-        protected virtual void Call()
+        protected virtual void OnCall()
         {
         }
     }

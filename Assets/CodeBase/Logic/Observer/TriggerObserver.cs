@@ -1,4 +1,5 @@
 ﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace CodeBase.Logic.Observer
@@ -10,17 +11,13 @@ namespace CodeBase.Logic.Observer
         private void OnValidate()
         {
             if (GetComponent<Collider>() == null)
-            {
                 Debug.LogWarning("TriggerObserver component must be attached to a Collider");
-            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out TTarget collectible) == false)
-            {
                 return;
-            }
 
             Entered.Invoke(collectible);
         }

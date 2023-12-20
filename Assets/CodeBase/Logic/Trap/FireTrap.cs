@@ -33,7 +33,7 @@ namespace CodeBase.Logic.Trap
                 StopEffects();
         }
 
-        protected override void Activate()
+        protected override void OnActivate()
         {
             if (_isActivated)
                 return;

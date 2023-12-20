@@ -3,7 +3,6 @@ using NTC.Global.Cache;
 
 namespace CodeBase.DelayRoutines
 {
-    // Unfinished, better not to use it
     public class EventAwaiter : Awaiter
     {
         private Action _callback;

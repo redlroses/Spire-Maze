@@ -8,6 +8,8 @@ namespace CodeBase.UI
 {
     public class EditorRewardADPanel : MonoBehaviour
     {
+        private const float Delay = 1f;
+
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _errorButton;
         [SerializeField] private TextSetter _timer;
@@ -23,7 +25,7 @@ namespace CodeBase.UI
 
         public void Open(Action onRewardedCallback, Action onCloseCallback, Action<string> onErrorCallback)
         {
-            new RoutineSequence().WaitForSeconds(1f)
+            new RoutineSequence().WaitForSeconds(Delay)
                 .Then(() => _timer.SetText(--_count))
                 .LoopWhile(() => _count > 0)
                 .Then(

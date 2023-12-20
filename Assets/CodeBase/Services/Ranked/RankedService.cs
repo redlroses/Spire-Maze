@@ -13,7 +13,6 @@ namespace CodeBase.Services.Ranked
         private const string EditorName = "Editor";
 
         private readonly IStaticDataService _staticData;
-        private readonly IAssetProvider _assetProvider;
 
         private ILeaderboard _leaderboard;
 

@@ -22,13 +22,13 @@ namespace CodeBase.Services.Input
             _inputController = new InputController();
         }
 
-        public event Action<MoveDirection> HorizontalMove = _ => { };
+        public event Action<MoveDirection> HorizontalMoving = _ => { };
 
-        public event Action<Vector2> OverviewMove = _ => { };
+        public event Action<Vector2> OverviewMoving = _ => { };
 
-        public event Action Jump = () => { };
+        public event Action Jumped = () => { };
 
-        public event Action<MoveDirection> Dodge = _ => { };
+        public event Action<MoveDirection> Dodged = _ => { };
 
         public event Action MoveStopped = () => { };
 
@@ -82,17 +82,17 @@ namespace CodeBase.Services.Input
             if ((MoveDirection)moveInput != MoveDirection.Stop)
                 _direction = (MoveDirection)moveInput;
 
-            HorizontalMove.Invoke((MoveDirection)moveInput);
+            HorizontalMoving.Invoke((MoveDirection)moveInput);
         }
 
         private void OnJump(InputAction.CallbackContext context) =>
-            Jump.Invoke();
+            Jumped.Invoke();
 
         private void OnDodged(InputAction.CallbackContext context) =>
-            Dodge.Invoke(_direction);
+            Dodged.Invoke(_direction);
 
         private void OnOverviewMove(InputAction.CallbackContext context) =>
-            OverviewMove.Invoke(context.ReadValue<Vector2>());
+            OverviewMoving.Invoke(context.ReadValue<Vector2>());
 
         private void OnPause(InputAction.CallbackContext context)
         {

@@ -20,7 +20,7 @@ namespace CodeBase.UI.Services.Factory
 
         GameObject CreateCellView(Transform selfTransform);
 
-        GameObject CreateCompassArrowPanel(Transform hero);
+        GameObject CreateCompassArrowPanel();
 
         GameObject CreateOverviewInterface();
 

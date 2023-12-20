@@ -42,7 +42,7 @@ namespace CodeBase.Tutorial
             Subscribe();
         }
 
-        private void ShowNext()
+        private void OnShowNext()
         {
             if (TryApplyContentFromModule())
             {
@@ -66,7 +66,7 @@ namespace CodeBase.Tutorial
         private void Subscribe()
         {
             foreach (TutorialTrigger trigger in _triggers)
-                trigger.Triggered += ShowNext;
+                trigger.Triggered += OnShowNext;
 
             _hideButton.Clicked += () =>
             {
@@ -78,13 +78,13 @@ namespace CodeBase.Tutorial
         private void Unsubscribe()
         {
             foreach (TutorialTrigger trigger in _triggers)
-                trigger.Triggered -= ShowNext;
+                trigger.Triggered -= OnShowNext;
 
             _hideButton.Cleanup();
         }
 
         [Button] [Conditional("UNITY_EDITOR")] [UsedImplicitly]
         private void ForceShowNextPanel() =>
-            ShowNext();
+            OnShowNext();
     }
 }

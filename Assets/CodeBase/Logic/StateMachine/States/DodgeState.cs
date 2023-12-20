@@ -35,7 +35,7 @@ namespace CodeBase.Logic.StateMachine.States
             _heroAnimator.PlayDodge();
             _lastDirection = isLoss;
             _immune.ActivateImmunity();
-            _inputService.HorizontalMove += OnHorizontalMove;
+            _inputService.HorizontalMoving += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;
         }
 
@@ -43,7 +43,7 @@ namespace CodeBase.Logic.StateMachine.States
         {
             _immune.DeactivateImmunity();
             _heroAnimator.StateExited -= OnStateExited;
-            _inputService.HorizontalMove -= OnHorizontalMove;
+            _inputService.HorizontalMoving -= OnHorizontalMove;
         }
 
         private void OnHorizontalMove(MoveDirection direction)

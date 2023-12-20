@@ -11,7 +11,5 @@
         public float Height { get; }
 
         public float Angle { get; }
-
-        public override string ToString() => $"Height: {Height}, Angle: {Angle}";
     }
 }

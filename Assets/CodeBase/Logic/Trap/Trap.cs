@@ -11,15 +11,15 @@ namespace CodeBase.Logic.Trap
 
         private void OnDestroy()
         {
-            _activator.Activated -= Activate;
+            _activator.Activated -= OnActivate;
         }
 
         public void Construct(TrapActivator activator)
         {
             _activator = activator;
-            _activator.Activated += Activate;
+            _activator.Activated += OnActivate;
         }
 
-        protected abstract void Activate();
+        protected abstract void OnActivate();
     }
 }

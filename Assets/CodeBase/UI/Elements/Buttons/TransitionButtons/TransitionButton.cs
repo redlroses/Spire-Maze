@@ -13,7 +13,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
         public void Construct(GameStateMachine stateMachine) =>
             _stateMachine = stateMachine;
 
-        protected override void Call() =>
+        protected override void OnCall() =>
             _stateMachine.Enter<LoadLevelState, LoadPayload>(CreateTransitionPayload());
 
         protected abstract LoadPayload CreateTransitionPayload();

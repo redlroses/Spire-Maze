@@ -9,8 +9,6 @@ namespace CodeBase.Infrastructure
     {
         private readonly ICoroutineRunner _coroutineRunner;
 
-        private bool _isInitialized;
-
         public SceneLoader(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;

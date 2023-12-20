@@ -9,8 +9,6 @@ namespace CodeBase.Logic
         [SerializeField] private DoorAnimator _animator;
         [SerializeField] private int _targetLevelId;
 
-        private IPersistentProgressService _progressService;
-
         public void Construct(int lastCompletedLevelId)
         {
             TryOpen(lastCompletedLevelId);

@@ -7,8 +7,6 @@ namespace CodeBase.Logic.Сollectible.Chests
     {
         [SerializeField] private ChestAnimator _animator;
 
-        private Collectible _collectibleItem;
-
         protected override void OnProgressLoaded(bool isCollected)
         {
             if (isCollected)

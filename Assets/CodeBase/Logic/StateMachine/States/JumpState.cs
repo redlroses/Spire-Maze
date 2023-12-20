@@ -33,13 +33,13 @@ namespace CodeBase.Logic.StateMachine.States
             _mover.Move(isLoss);
             _lastDirection = isLoss;
             _heroAnimator.StateExited += OnStateExited;
-            _inputService.HorizontalMove += OnHorizontalMove;
+            _inputService.HorizontalMoving += OnHorizontalMove;
         }
 
         public void Exit()
         {
             _heroAnimator.StateExited -= OnStateExited;
-            _inputService.HorizontalMove -= OnHorizontalMove;
+            _inputService.HorizontalMoving -= OnHorizontalMove;
         }
 
         private void OnStateExited(AnimatorState state)

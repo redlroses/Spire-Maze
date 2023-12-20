@@ -23,7 +23,6 @@ namespace CodeBase.Tools.Builds
 
         private void SetInfo(DateTime info)
         {
-            Debug.Log($"Build Time Set: {info:dd/MM/yy HH:mm:ss}");
             _text.text = $"Build DateTime: {info:dd/MM/yy HH:mm:ss}";
         }
     }

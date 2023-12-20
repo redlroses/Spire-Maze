@@ -10,9 +10,7 @@ namespace CodeBase.Logic.Observer
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out TTarget collectible) == false)
-            {
                 return;
-            }
 
             Exited.Invoke(collectible);
         }

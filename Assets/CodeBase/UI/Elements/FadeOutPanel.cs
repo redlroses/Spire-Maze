@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.UI.Elements
 {
-    public class FadeOutPanel : ShowHide<float>, IShowHide
+    public class FadeOutPanel : Curtain<float>, IShowHide
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 

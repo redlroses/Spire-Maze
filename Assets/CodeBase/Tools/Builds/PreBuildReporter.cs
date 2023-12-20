@@ -14,7 +14,6 @@ namespace CodeBase.Tools.Builds
         {
             BuildInfo buildInfo = Resources.Load<BuildInfo>(AssetPath.BuildInfo);
             buildInfo.SetNow();
-            Debug.Log($"Build started at {buildInfo.BuildDateTime}");
         }
     }
 }

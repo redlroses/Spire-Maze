@@ -42,7 +42,7 @@ namespace CodeBase.Logic.Items
 
         private CompassArrowPanel CreateArrow()
         {
-            GameObject panel = _uiFactory.CreateCompassArrowPanel(_locator.Location);
+            GameObject panel = _uiFactory.CreateCompassArrowPanel();
 
             CompassArrowPanel compassPanel = panel.GetComponent<CompassArrowPanel>();
             Canvas canvas = panel.GetComponent<Canvas>();

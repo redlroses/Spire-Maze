@@ -31,7 +31,7 @@ namespace CodeBase.Logic.Trap
             CheckIsComplete();
         }
 
-        protected override void Activate() =>
+        protected override void OnActivate() =>
             enabled = true;
 
         private void Move()

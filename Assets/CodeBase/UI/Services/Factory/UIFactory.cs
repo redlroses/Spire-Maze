@@ -27,7 +27,6 @@ namespace CodeBase.UI.Services.Factory
         private readonly ISoundService _soundService;
         private readonly GameStateMachine _stateMachine;
         private readonly IStaticDataService _staticData;
-
         private HeroReviver _hero;
         private Transform _uiRoot;
 
@@ -82,7 +81,7 @@ namespace CodeBase.UI.Services.Factory
         public GameObject CreateTutorialSequence() =>
             _assets.Instantiate(AssetPath.TutorialPanel, _uiRoot);
 
-        public GameObject CreateCompassArrowPanel(Transform hero) =>
+        public GameObject CreateCompassArrowPanel() =>
             _assets.Instantiate(AssetPath.CompassArrowPanel);
 
         public GameObject CreateEnterLevelPanel() =>

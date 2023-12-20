@@ -26,7 +26,7 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
-        protected override void Call() =>
+        protected override void OnCall() =>
             SwitchMuteState();
 
         private void SwitchMuteState()

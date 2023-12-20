@@ -34,21 +34,21 @@ namespace CodeBase.UI.Windows
             SetModule(_currentModuleIndex);
             _pageIndicator.Construct(_tutorialConfig.ModulesLength + 1);
             _pageIndicator.PageIndexUpdated += OnPageUpdated;
-            _buttonBack.Clicked += Back;
-            _buttonNext.Clicked += Next;
+            _buttonBack.Clicked += OnBack;
+            _buttonNext.Clicked += OnNext;
         }
 
         protected override void Cleanup()
         {
             _pageIndicator.PageIndexUpdated -= OnPageUpdated;
-            _buttonBack.Clicked -= Back;
-            _buttonNext.Clicked -= Next;
+            _buttonBack.Clicked -= OnBack;
+            _buttonNext.Clicked -= OnNext;
         }
 
-        private void Next() =>
+        private void OnNext() =>
             SetModule(NextIndex());
 
-        private void Back() =>
+        private void OnBack() =>
             SetModule(PreviousIndex());
 
         private int PreviousIndex() =>

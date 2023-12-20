@@ -24,8 +24,9 @@ namespace CodeBase.MeshCombine
         {
             MeshCombineMarker[] meshCombinables = origin.GetComponentsInChildren<MeshCombineMarker>();
 
-            CombineInstance[] combine = CombineInstances(meshCombinables);
-            ApplyMesh(origin.gameObject, combine, material, true);
+            CombineInstance[] combine = CreateCombineInstances(meshCombinables);
+            Mesh newMesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+            ConstructMeshHolder(origin.gameObject, combine, material, newMesh, true);
             origin.gameObject.isStatic = true;
 
             foreach (MeshCombineMarker meshCombinable in meshCombinables)
@@ -50,7 +51,7 @@ namespace CodeBase.MeshCombine
             collidersHolder.isStatic = true;
         }
 
-        private CombineInstance[] CombineInstances(MeshCombineMarker[] meshCombinables)
+        private CombineInstance[] CreateCombineInstances(MeshCombineMarker[] meshCombinables)
         {
             CombineInstance[] combine = new CombineInstance[meshCombinables.Length];
 
@@ -63,7 +64,7 @@ namespace CodeBase.MeshCombine
             return combine;
         }
 
-        private CombineInstance[] CombineInstances(MeshFilter[] meshesFilters)
+        private CombineInstance[] CreateCombineInstances(MeshFilter[] meshesFilters)
         {
             CombineInstance[] combine = new CombineInstance[meshesFilters.Length];
 
@@ -76,7 +77,7 @@ namespace CodeBase.MeshCombine
             return combine;
         }
 
-        private Mesh ApplyMesh(GameObject holder, CombineInstance[] combine, Material material, bool isEnableRenderer)
+        private void ConstructMeshHolder(GameObject holder, CombineInstance[] combined, Material material, Mesh mesh, bool isEnableRenderer)
         {
             if (holder.TryGetComponent(out MeshFilter meshFilter) == false)
                 meshFilter = holder.AddComponent<MeshFilter>();
@@ -84,13 +85,10 @@ namespace CodeBase.MeshCombine
             if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
                 meshRenderer = holder.AddComponent<MeshRenderer>();
 
-            Mesh mesh = new Mesh { indexFormat = IndexFormat.UInt32 };
             meshFilter.mesh = mesh;
-            meshFilter.mesh.CombineMeshes(combine);
+            meshFilter.mesh.CombineMeshes(combined);
             meshRenderer.sharedMaterial = material;
             meshRenderer.enabled = isEnableRenderer;
-
-            return mesh;
         }
 
         private void CombineByType<TCell>(Level level, GameObject collidersHolder)
@@ -172,8 +170,9 @@ namespace CodeBase.MeshCombine
 
             foreach (MeshCollider meshCollider in meshColliders) meshCollider.enabled = false;
 
-            CombineInstance[] combine = CombineInstances(meshesFilters);
-            Mesh mesh = ApplyMesh(colliderHolder, combine, null, false);
+            CombineInstance[] combined = CreateCombineInstances(meshesFilters);
+            Mesh mesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+            ConstructMeshHolder(colliderHolder, combined, null, mesh, false);
             CreateMeshCollider(colliderHolder, mesh, cell.transform.GetChild(0).gameObject.layer);
         }
 

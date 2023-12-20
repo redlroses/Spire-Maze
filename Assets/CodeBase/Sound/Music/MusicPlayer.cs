@@ -52,7 +52,6 @@ namespace CodeBase.Sound.Music
 
             if (_audioSource.PlayingSource.isPlaying == false)
             {
-                Debug.LogWarning("AudioSource is not playing");
                 PlayNextTrack();
             }
 

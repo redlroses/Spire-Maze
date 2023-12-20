@@ -18,7 +18,7 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
-        protected override void Call()
+        protected override void OnCall()
         {
             _windowService.Open(WindowId.Tutorial);
             _pauseToggle.EmulateClick();

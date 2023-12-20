@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -16,20 +17,19 @@ namespace CodeBase.Tools
                     or UnityWebRequest.Result.ProtocolError
                     or UnityWebRequest.Result.DataProcessingError)
                 {
-                    Debug.LogError("Error image loading: " + www.error);
                     errorCallback.Invoke();
-                }
-                else
-                {
-                    Texture2D texture = DownloadHandlerTexture.GetContent(www);
 
-                    Sprite sprite = Sprite.Create(
-                        texture,
-                        new Rect(0, 0, texture.width, texture.height),
-                        new Vector2(0.5f, 0.5f));
-
-                    successCallback.Invoke(sprite);
+                    throw new FileLoadException("Error image loading: " + www.error);
                 }
+
+                Texture2D texture = DownloadHandlerTexture.GetContent(www);
+
+                Sprite sprite = Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(0.5f, 0.5f));
+
+                successCallback.Invoke(sprite);
 
                 www.Dispose();
             };

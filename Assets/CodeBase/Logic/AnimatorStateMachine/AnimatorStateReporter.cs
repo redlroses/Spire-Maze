@@ -9,7 +9,7 @@ namespace CodeBase.Logic.AnimatorStateMachine
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateEnter(animator, stateInfo, layerIndex);
-            FindReader(animator);
+            FindAnimationStateReader(animator);
 
             _stateReader.OnEnteredState(stateInfo.shortNameHash);
         }
@@ -17,12 +17,12 @@ namespace CodeBase.Logic.AnimatorStateMachine
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateExit(animator, stateInfo, layerIndex);
-            FindReader(animator);
+            FindAnimationStateReader(animator);
 
             _stateReader.OnExitedState(stateInfo.shortNameHash);
         }
 
-        private void FindReader(Animator animator)
+        private void FindAnimationStateReader(Animator animator)
         {
             if (_stateReader != null)
                 return;

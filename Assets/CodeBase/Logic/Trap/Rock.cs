@@ -96,7 +96,7 @@ namespace CodeBase.Logic.Trap
             Rotate();
         }
 
-        protected override void Activate()
+        protected override void OnActivate()
         {
             this.Enable();
             _mover.Move(_moveDirection);
