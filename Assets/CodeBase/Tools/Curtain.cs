@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CodeBase.Tools
 {
-    public abstract class ShowHide<TValue> : MonoCache, IShowable, IHidable
+    public abstract class Curtain<TValue> : MonoCache, IShowable, IHidable
     {
         private readonly Queue<Action> _commands = new Queue<Action>();
 

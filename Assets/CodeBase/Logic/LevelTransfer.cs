@@ -71,6 +71,7 @@ namespace CodeBase.Logic
             _stateMachine.Enter<LoadLevelState, LoadPayload>(payload);
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void TryActivate()
         {
             int lastLevel = 0;
