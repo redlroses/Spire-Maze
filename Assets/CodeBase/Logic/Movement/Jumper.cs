@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using CodeBase.Logic.Hero;
 using CodeBase.Logic.StaminaEntity;
 using CodeBase.Services.Pause;
@@ -11,6 +12,7 @@ namespace CodeBase.Logic.Movement
     [RequireComponent(typeof(GroundChecker))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(HeroAnimator))]
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class Jumper : MonoCache, IPauseWatcher
     {
         public const float GroundCheckDistance = -0.17f;
@@ -125,7 +127,7 @@ namespace CodeBase.Logic.Movement
 
         private void ApplyJumpVelocity()
         {
-            float expectedHeight = _jumpCurve.Evaluate(_jumpProgress) * _jumpHeight + _startHeight;
+            float expectedHeight = (_jumpCurve.Evaluate(_jumpProgress) * _jumpHeight) + _startHeight;
             float heightDifference = expectedHeight - _rigidbody.position.y;
 
             float clampedVerticalVelocity =

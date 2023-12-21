@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CodeBase.EditorCells;
 using CodeBase.Tools.Extension;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.Serialization;
 namespace CodeBase.StaticData
 {
     [CreateAssetMenu(fileName = "LevelData", menuName = "Static Data/Level")]
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class LevelStaticData : ScriptableObject
     {
         [FormerlySerializedAs("LevelId")] [SerializeField] private int _levelId;
@@ -47,8 +49,8 @@ namespace CodeBase.StaticData
                     continue;
                 }
 
-                float height = i / Width * FloorHeight;
-                float angle = i % Width * ArchAngle;
+                float height = (i / Width) * FloorHeight;
+                float angle = (i % Width) * ArchAngle;
 
                 return GetPosition(angle, Radius).ChangeY(height);
             }

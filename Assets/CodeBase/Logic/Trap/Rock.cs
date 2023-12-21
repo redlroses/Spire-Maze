@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AYellowpaper;
 using CodeBase.Data;
 using CodeBase.Logic.HealthEntity.Damage;
@@ -11,6 +12,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic.Trap
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     [RequireComponent(typeof(Mover))]
     public class Rock : Trap, ISavedProgress, IIndexable
     {
@@ -135,7 +137,7 @@ namespace CodeBase.Logic.Trap
             bool isWallCollision = CheckCollisionObstacle(wallDirection, _ground);
             bool isGroundCollision = CheckCollisionObstacle(groundDirection, _ground);
 
-            if (isWallCollision || isGroundCollision && _isFalling)
+            if (isWallCollision || (isGroundCollision && _isFalling))
             {
                 Destroyed.Invoke();
                 Collapse();

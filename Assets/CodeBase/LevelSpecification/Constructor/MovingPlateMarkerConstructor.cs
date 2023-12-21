@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CodeBase.EditorCells;
 using CodeBase.Infrastructure.Factory;
@@ -14,6 +15,7 @@ using Object = UnityEngine.Object;
 
 namespace CodeBase.LevelSpecification.Constructor
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class MovingPlateMarkerConstructor : ICellConstructor
     {
         private IGameFactory _gameFactory;
@@ -187,7 +189,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 possibleMarkers = filtered.Where(
                         cell =>
-                            cell.Position.Angle - Trigonometry.TwoPiGrade * i - movingPlateAngle < 0)
+                            cell.Position.Angle - (Trigonometry.TwoPiGrade * i) - movingPlateAngle < 0)
                     .ToList();
 
                 if (possibleMarkers.Any())
@@ -215,7 +217,7 @@ namespace CodeBase.LevelSpecification.Constructor
             {
                 possibleMarkers = filtered.Where(
                         cell =>
-                            cell.Position.Angle + Trigonometry.TwoPiGrade * i - movingPlateAngle > 0)
+                            cell.Position.Angle + (Trigonometry.TwoPiGrade * i) - movingPlateAngle > 0)
                     .ToList();
 
                 if (possibleMarkers.Any())

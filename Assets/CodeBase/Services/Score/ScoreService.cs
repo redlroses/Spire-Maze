@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System.Diagnostics.CodeAnalysis;
+using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Services.Score
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class ScoreService : IScoreService
     {
         private const float ScoreToCoins = 0.35f;
@@ -79,7 +81,7 @@ namespace CodeBase.Services.Score
         private int ScorePerTime(ScoreConfig scoreConfig)
         {
             int scorePerTime = scoreConfig.BasePointsOnStart -
-                               TemporalProgress.PlayTime * scoreConfig.PerSecondReduction;
+                               (TemporalProgress.PlayTime * scoreConfig.PerSecondReduction);
 
             return scorePerTime < 0 ? 0 : scorePerTime;
         }

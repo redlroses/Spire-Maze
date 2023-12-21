@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.EditorCells;
@@ -20,6 +21,7 @@ using FinishPortal = CodeBase.EditorCells.FinishPortal;
 
 namespace CodeBase.Services.LevelBuild
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class LevelBuilder : ILevelBuilder
     {
         private const string ConstructException = "You must build the level before constructing it";
@@ -114,7 +116,7 @@ namespace CodeBase.Services.LevelBuild
             {
                 Vector3 containerPosition = GetPosition(i * ArchAngle, Radius);
                 Quaternion containerRotation = GetRotation(i * ArchAngle);
-                int cellId = floorIndex * floorCells.Length + i;
+                int cellId = (floorIndex * floorCells.Length) + i;
                 string name = $"Cell {i + 1}: {floorCells[i]}, id: {cellId}";
                 Transform cellContainer = CreateContainer(name, container, containerPosition, containerRotation);
                 Cell cell = new Cell(floorCells[i], cellContainer, cellId);

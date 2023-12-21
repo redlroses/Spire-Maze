@@ -1,8 +1,10 @@
-﻿using CodeBase.Tools.Constants;
+﻿using System.Diagnostics.CodeAnalysis;
+using CodeBase.Tools.Constants;
 using UnityEngine;
 
 namespace CodeBase.Tools.Extension
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public static class VectorExtensions
     {
         public static Vector3 AddY(this Vector2 vector, float y) =>
@@ -48,8 +50,8 @@ namespace CodeBase.Tools.Extension
 
         public static Vector2 Rotate(this Vector2 vector, float byAngle)
         {
-            float rotatedX = vector.x * Mathf.Cos(byAngle) - vector.y * Mathf.Sin(byAngle);
-            float rotatedY = vector.x * Mathf.Sin(byAngle) + vector.y * Mathf.Cos(byAngle);
+            float rotatedX = (vector.x * Mathf.Cos(byAngle)) - (vector.y * Mathf.Sin(byAngle));
+            float rotatedY = (vector.x * Mathf.Sin(byAngle)) + (vector.y * Mathf.Cos(byAngle));
 
             return new Vector2(rotatedX, rotatedY);
         }

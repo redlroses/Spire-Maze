@@ -12,9 +12,9 @@ namespace CodeBase.Tools
             WebApplication.InBackgroundChangeEvent += OnFocusChange;
         }
 
-        public static bool InBackground => WebApplication.InBackground || _isHidden;
-
         public static event Action<bool> InBackgroundChangeEvent = _ => { };
+
+        public static bool InBackground => WebApplication.InBackground || _isHidden;
 
         public void Unfocus() =>
             OnFocusChange(true);

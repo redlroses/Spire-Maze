@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using CodeBase.EditorCells;
 using TMPro;
 using Unity.Collections;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace CodeBase.Tools.Extension
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public static class TextureExtension
     {
         public static Texture2D CombineTexture(this Texture2D first, Texture2D second)
@@ -87,8 +89,8 @@ namespace CodeBase.Tools.Extension
             {
                 for (int i = 0; i < width; ++i)
                 {
-                    int iRotated = (height - 1 - j) * width + i;
-                    int iOriginal = j * width + i;
+                    int iRotated = (((height - 1) - j) * width) + i;
+                    int iOriginal = (j * width) + i;
                     newData[iRotated] = textureData[iOriginal];
                 }
             }
@@ -106,8 +108,8 @@ namespace CodeBase.Tools.Extension
             {
                 for (int i = 0; i < width; ++i)
                 {
-                    int iRotated = (i + 1) * height - j - 1;
-                    int iOriginal = j * width + i;
+                    int iRotated = (((i + 1) * height) - j) - 1;
+                    int iOriginal = (j * width) + i;
                     newData[iRotated] = textureData[iOriginal];
                 }
             }
@@ -125,8 +127,8 @@ namespace CodeBase.Tools.Extension
             {
                 for (int i = 0; i < width; ++i)
                 {
-                    int iRotated = (i + 1) * height - j - 1;
-                    int iOriginal = textureData.Length - 1 - (j * width + i);
+                    int iRotated = (((i + 1) * height) - j) - 1;
+                    int iOriginal = (textureData.Length - 1) - ((j * width) + i);
                     newData[iRotated] = textureData[iOriginal];
                 }
             }

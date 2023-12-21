@@ -1,9 +1,11 @@
-﻿using CodeBase.Tools.Extension;
+﻿using System.Diagnostics.CodeAnalysis;
+using CodeBase.Tools.Extension;
 using NaughtyAttributes;
 using UnityEngine;
 
 namespace CodeBase.Sound.Music
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class MusicPlayer : MonoBehaviour
     {
         [SerializeField] private CrossFadeAudioSource _audioSource;
@@ -28,9 +30,7 @@ namespace CodeBase.Sound.Music
         private void OnValidate()
         {
             if (_trackBar.EqualsApproximately(_trackSlider) == false)
-            {
-                _audioSource.PlayingSource.time = _clipLength * _trackSlider - float.Epsilon;
-            }
+                _audioSource.PlayingSource.time = (_clipLength * _trackSlider) - float.Epsilon;
         }
 #endif
 
@@ -51,9 +51,7 @@ namespace CodeBase.Sound.Music
 #endif
 
             if (_audioSource.PlayingSource.isPlaying == false)
-            {
                 PlayNextTrack();
-            }
 
             if (_audioSource.PlayingSource.time >= _clipLength - _crossFadeTime)
                 PlayNextTrack();

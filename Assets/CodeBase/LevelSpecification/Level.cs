@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CodeBase.LevelSpecification.Cells;
 using UnityEngine;
 
 namespace CodeBase.LevelSpecification
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public sealed class Level : CellContainer<Floor>, IEnumerable<Cell>, IEnumerator<Cell>
     {
         private int _currentIndex = -1;
@@ -47,6 +49,6 @@ namespace CodeBase.LevelSpecification
             Container[floor].Container[onFloorIndex];
 
         public Cell GetCell(int index) =>
-            Container[Height - index / Width - 1].Container[index % Width];
+            Container[(Height - (index / Width)) - 1].Container[index % Width];
     }
 }

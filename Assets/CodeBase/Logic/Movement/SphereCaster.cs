@@ -1,9 +1,11 @@
-﻿using CodeBase.Tools.Constants;
+﻿using System.Diagnostics.CodeAnalysis;
+using CodeBase.Tools.Constants;
 using UnityEngine;
 
 namespace CodeBase.Logic.Movement
 {
     [RequireComponent(typeof(CapsuleCollider))]
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class SphereCaster : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
@@ -28,7 +30,7 @@ namespace CodeBase.Logic.Movement
                 _colliderRadius - radiusReduction,
                 direction,
                 out _,
-                distance + _colliderHeight * Arithmetic.ToHalf,
+                distance + (_colliderHeight * Arithmetic.ToHalf),
                 _mask);
 
             return isHit;
@@ -41,7 +43,7 @@ namespace CodeBase.Logic.Movement
                 _colliderRadius - radiusReduction,
                 direction,
                 out hitInfo,
-                distance + _colliderHeight * Arithmetic.ToHalf,
+                distance + (_colliderHeight * Arithmetic.ToHalf),
                 _mask);
 
             return isHit;
