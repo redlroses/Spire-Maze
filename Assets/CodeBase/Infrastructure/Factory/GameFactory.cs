@@ -127,7 +127,7 @@ namespace CodeBase.Infrastructure.Factory
             _assets.LoadAsset<Material>(AssetPath.Combine(AssetPath.Materials, name));
 
         public PhysicMaterial CreatePhysicMaterial(string name) =>
-            _assets.LoadAsset<PhysicMaterial>(AssetPath.PhysicMaterials);
+            _assets.LoadAsset<PhysicMaterial>(AssetPath.Combine(AssetPath.PhysicMaterials, name));
 
         public GameObject CreateMusicPlayer() =>
             _assets.Instantiate(AssetPath.MusicPlayer);

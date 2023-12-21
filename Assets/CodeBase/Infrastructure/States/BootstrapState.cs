@@ -59,21 +59,21 @@ namespace CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticDataService();
-            Register(new RandomService());
-            Register(new PersistentProgressService());
-            Register(new PauseService());
-            Register(new AssetProvider(Get<IPersistentProgressService>(), Get<IPauseService>()));
-            Register(new CameraOperatorService());
-            Register(new LocalizationService());
-            Register(new AnalyticsService());
-            Register(new SoundService(Get<IAssetProvider>(), Get<IPersistentProgressService>()));
-            Register(new WatchService(Get<IPersistentProgressService>()));
-            Register(new ScoreService(Get<IStaticDataService>(), Get<IPersistentProgressService>()));
-            Register(new RankedService(Get<IStaticDataService>()));
-            Register(new SaveLoadService(Get<IPersistentProgressService>(), Get<IWatchService>()));
-            Register(new ADService(Get<ISoundService>(), Get<IPauseService>()));
+            Register<IRandomService>(new RandomService());
+            Register<IPersistentProgressService>(new PersistentProgressService());
+            Register<IPauseService>(new PauseService());
+            Register<IAssetProvider>(new AssetProvider(Get<IPersistentProgressService>(), Get<IPauseService>()));
+            Register<ICameraOperatorService>(new CameraOperatorService());
+            Register<ILocalizationService>(new LocalizationService());
+            Register<IAnalyticsService>(new AnalyticsService());
+            Register<ISoundService>(new SoundService(Get<IAssetProvider>(), Get<IPersistentProgressService>()));
+            Register<IWatchService>(new WatchService(Get<IPersistentProgressService>()));
+            Register<IScoreService>(new ScoreService(Get<IStaticDataService>(), Get<IPersistentProgressService>()));
+            Register<IRankedService>(new RankedService(Get<IStaticDataService>()));
+            Register<ISaveLoadService>(new SaveLoadService(Get<IPersistentProgressService>(), Get<IWatchService>()));
+            Register<IADService>(new ADService(Get<ISoundService>(), Get<IPauseService>()));
 
-            Register(
+            Register<IUIFactory>(
                 new UIFactory(
                     Get<IAssetProvider>(),
                     Get<IStaticDataService>(),
@@ -86,10 +86,10 @@ namespace CodeBase.Infrastructure.States
                     Get<IADService>(),
                     _stateMachine));
 
-            Register(new WindowService(Get<IUIFactory>()));
-            Register(new InputService(Get<IPauseService>()));
+            Register<IWindowService>(new WindowService(Get<IUIFactory>()));
+            Register<IInputService>(new InputService(Get<IPauseService>()));
 
-            Register(
+            Register<IGameFactory>(
                 new GameFactory(
                     Get<IAssetProvider>(),
                     Get<IPersistentProgressService>(),
@@ -98,7 +98,7 @@ namespace CodeBase.Infrastructure.States
                     Get<IInputService>(),
                     Get<ICameraOperatorService>()));
 
-            Register(
+            Register<ILevelBuilder>(
                 new LevelBuilder(
                     Get<IGameFactory>(),
                     Get<IStaticDataService>(),
