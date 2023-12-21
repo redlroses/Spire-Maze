@@ -48,104 +48,83 @@ namespace CodeBase.Infrastructure.States
         public void Exit()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            _services.Single<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
+            Get<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
 #else
-            _services.Single<ILocalizationService>().ChooseLanguage(LanguageId.Russian);
+            Get<ILocalizationService>().ChooseLanguage(LanguageId.Russian);
 #endif
-            _services.Single<IRankedService>().InitLeaderboard();
+            Get<IRankedService>().InitLeaderboard();
             ChooseQualityLevel();
         }
 
         private void RegisterServices()
         {
             RegisterStaticDataService();
-            _services.RegisterSingle<IRandomService>(new RandomService());
-            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
-            _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<ICameraOperatorService>(new CameraOperatorService());
-            _services.RegisterSingle<ILocalizationService>(new LocalizationService());
-            _services.RegisterSingle<IAnalyticsService>(new AnalyticsService());
+            Register(new RandomService());
+            Register(new PersistentProgressService());
+            Register(new PauseService());
+            Register(new AssetProvider(Get<IPersistentProgressService>(), Get<IPauseService>()));
+            Register(new CameraOperatorService());
+            Register(new LocalizationService());
+            Register(new AnalyticsService());
+            Register(new SoundService(Get<IAssetProvider>(), Get<IPersistentProgressService>()));
+            Register(new WatchService(Get<IPersistentProgressService>()));
+            Register(new ScoreService(Get<IStaticDataService>(), Get<IPersistentProgressService>()));
+            Register(new RankedService(Get<IStaticDataService>()));
+            Register(new SaveLoadService(Get<IPersistentProgressService>(), Get<IWatchService>()));
+            Register(new ADService(Get<ISoundService>(), Get<IPauseService>()));
 
-            _services.RegisterSingle<ISoundService>(
-                new SoundService(
-                    _services.Single<IAssetProvider>(),
-                    _services.Single<IPersistentProgressService>()));
-
-            _services.RegisterSingle<IWatchService>(
-                new WatchService(
-                    _services.Single<IPersistentProgressService>()));
-
-            _services.RegisterSingle<IScoreService>(
-                new ScoreService(
-                    _services.Single<IStaticDataService>(),
-                    _services.Single<IPersistentProgressService>()));
-
-            _services.RegisterSingle<IRankedService>(
-                new RankedService(
-                    _services.Single<IStaticDataService>()));
-
-            _services.RegisterSingle<IPauseService>(
-                new PauseService());
-
-            _services.RegisterSingle<ISaveLoadService>(
-                new SaveLoadService(
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IWatchService>()));
-
-            _services.RegisterSingle<IADService>(
-                new ADService(
-                    _services.Single<ISoundService>(),
-                    _services.Single<IPauseService>()));
-
-            _services.RegisterSingle<IUIFactory>(
+            Register(
                 new UIFactory(
-                    _services.Single<IAssetProvider>(),
-                    _services.Single<IStaticDataService>(),
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IRankedService>(),
-                    _services.Single<ISaveLoadService>(),
-                    _services.Single<ILocalizationService>(),
-                    _services.Single<ISoundService>(),
-                    _services.Single<IPauseService>(),
-                    _services.Single<IADService>(),
+                    Get<IAssetProvider>(),
+                    Get<IStaticDataService>(),
+                    Get<IPersistentProgressService>(),
+                    Get<IRankedService>(),
+                    Get<ISaveLoadService>(),
+                    Get<ILocalizationService>(),
+                    Get<ISoundService>(),
+                    Get<IPauseService>(),
+                    Get<IADService>(),
                     _stateMachine));
 
-            _services.RegisterSingle<IWindowService>(
-                new WindowService(
-                    _services.Single<IUIFactory>()));
+            Register(new WindowService(Get<IUIFactory>()));
+            Register(new InputService(Get<IPauseService>()));
 
-            _services.RegisterSingle<IInputService>(
-                new InputService(
-                    _services.Single<IPauseService>()));
-
-            _services.RegisterSingle<IGameFactory>(
+            Register(
                 new GameFactory(
-                    _services.Single<IAssetProvider>(),
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IPauseService>(),
-                    _services.Single<IUIFactory>(),
-                    _services.Single<IInputService>(),
-                    _services.Single<ICameraOperatorService>()));
+                    Get<IAssetProvider>(),
+                    Get<IPersistentProgressService>(),
+                    Get<IPauseService>(),
+                    Get<IUIFactory>(),
+                    Get<IInputService>(),
+                    Get<ICameraOperatorService>()));
 
-            _services.RegisterSingle<ILevelBuilder>(
+            Register(
                 new LevelBuilder(
-                    _services.Single<IGameFactory>(),
-                    _services.Single<IStaticDataService>(),
+                    Get<IGameFactory>(),
+                    Get<IStaticDataService>(),
                     _stateMachine,
-                    _services.Single<ISaveLoadService>(),
-                    _services.Single<IPersistentProgressService>(),
-                    _services.Single<IRandomService>()));
+                    Get<ISaveLoadService>(),
+                    Get<IPersistentProgressService>(),
+                    Get<IRandomService>()));
         }
 
         private void RegisterStaticDataService()
         {
             IStaticDataService staticData = new StaticDataService();
             staticData.Load();
-            _services.RegisterSingle(staticData);
+            Register(staticData);
         }
 
         private void EnterLoadProgress() =>
             _stateMachine.Enter<LoadProgressState>();
+
+        private TService Get<TService>()
+            where TService : class, IService =>
+            _services.Single<TService>();
+
+        private void Register<TService>(TService service)
+            where TService : class, IService =>
+            _services.RegisterSingle(service);
 
         private void ChooseQualityLevel()
         {

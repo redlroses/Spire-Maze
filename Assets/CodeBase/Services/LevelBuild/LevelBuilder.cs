@@ -14,6 +14,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.StaticData;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using FinishPortal = CodeBase.EditorCells.FinishPortal;
 
@@ -68,12 +69,12 @@ namespace CodeBase.Services.LevelBuild
             return _level;
         }
 
-        public void ConstructLevel()
+        public async UniTask ConstructLevel()
         {
             if (_level == null)
                 throw new Exception(ConstructException);
 
-            _levelConstructor.Construct(_level);
+            await _levelConstructor.Construct(_level);
         }
 
         public void Clear()

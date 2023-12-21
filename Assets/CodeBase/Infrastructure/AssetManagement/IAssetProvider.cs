@@ -22,6 +22,18 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         GameObject Instantiate(string path, Vector3 at, Quaternion rotation, Transform inside);
 
+        GameObject InstantiateRegistered(string path, Vector3 at, Transform inside);
+
+        GameObject InstantiateRegistered(string path, Vector3 at, Quaternion rotation, Transform inside);
+
+        GameObject InstantiateRegistered(string path, Vector3 at, Quaternion rotation);
+
+        GameObject InstantiateRegistered(string path, Vector3 at);
+
+        GameObject InstantiateRegistered(string path, Transform inside);
+
+        GameObject InstantiateRegistered(string path);
+
         GameObject InstantiateCell<TCell>(Transform container)
             where TCell : Cell;
 

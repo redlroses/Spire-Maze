@@ -14,7 +14,6 @@ using CodeBase.UI.Services.Factory;
 using UnityEngine;
 using Compass = CodeBase.Logic.Items.Compass;
 using Key = CodeBase.Logic.Items.Key;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure.Factory
 {
@@ -26,9 +25,6 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IUIFactory _uiFactory;
         private readonly IInputService _inputService;
         private readonly ICameraOperatorService _cameraOperator;
-
-        private readonly Dictionary<string, Material> _materials;
-        private readonly Dictionary<string, PhysicMaterial> _physicMaterials;
 
         private Transform _heroTransform;
 
@@ -46,8 +42,6 @@ namespace CodeBase.Infrastructure.Factory
             _uiFactory = uiFactory;
             _inputService = inputService;
             _cameraOperator = cameraOperator;
-            _materials = new Dictionary<string, Material>(4);
-            _physicMaterials = new Dictionary<string, PhysicMaterial>(2);
         }
 
         Transform IHeroLocator.Location => _heroTransform;
@@ -60,7 +54,7 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateHero(Vector3 at)
         {
-            GameObject hero = InstantiateRegistered(AssetPath.Hero, at);
+            GameObject hero = _assets.InstantiateRegistered(AssetPath.Hero, at);
             _heroTransform = hero.transform;
 
             return hero;
@@ -70,14 +64,12 @@ namespace CodeBase.Infrastructure.Factory
             where TCell : Cell
         {
             GameObject cell = _assets.InstantiateCell<TCell>(container);
-            RegisterProgressWatchers(cell);
-            RegisterPauseWatchers(cell);
 
             return cell;
         }
 
         public GameObject CreateLobby() =>
-            InstantiateRegistered(AssetPath.Lobby);
+            _assets.InstantiateRegistered(AssetPath.Lobby);
 
         public GameObject CreateSpireSegment(Vector3 at, Quaternion rotation) =>
             _assets.Instantiate(AssetPath.SpireSegment, at, rotation);
@@ -132,64 +124,15 @@ namespace CodeBase.Infrastructure.Factory
             _assets.Instantiate(AssetPath.VirtualMover, _heroTransform.position);
 
         public Material CreateMaterial(string name) =>
-            GetCashed(name, AssetPath.Materials, _materials);
+            _assets.LoadAsset<Material>(AssetPath.Combine(AssetPath.Materials, name));
 
         public PhysicMaterial CreatePhysicMaterial(string name) =>
-            GetCashed(name, AssetPath.PhysicMaterials, _physicMaterials);
+            _assets.LoadAsset<PhysicMaterial>(AssetPath.PhysicMaterials);
 
         public GameObject CreateMusicPlayer() =>
             _assets.Instantiate(AssetPath.MusicPlayer);
 
         public GameObject CreateHud() =>
-            InstantiateRegistered(AssetPath.Hud);
-
-        private void Register(ISavedProgressReader progressReader) =>
-            _progressService.Register(progressReader);
-
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
-        {
-            GameObject gameObject = _assets.Instantiate(prefabPath, at);
-            RegisterProgressWatchers(gameObject);
-            RegisterPauseWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private GameObject InstantiateRegistered(string prefabPath)
-        {
-            GameObject gameObject = _assets.Instantiate(prefabPath);
-            RegisterProgressWatchers(gameObject);
-            RegisterPauseWatchers(gameObject);
-
-            return gameObject;
-        }
-
-        private void RegisterProgressWatchers(GameObject gameObject)
-        {
-            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);
-        }
-
-        private void RegisterPauseWatchers(GameObject gameObject)
-        {
-            foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
-                _pauseService.Register(pauseWatcher);
-        }
-
-        private TValue GetCashed<TKey, TValue>(TKey key, string path, Dictionary<TKey, TValue> collection)
-            where TValue : Object
-        {
-            if (collection.TryGetValue(key, out TValue value))
-                return value;
-
-            TValue loaded = Resources.Load<TValue>($"{path}/{key}");
-
-            if (loaded is null)
-                throw new NullReferenceException($"There is no object with key {key}");
-
-            collection.Add(key, loaded);
-
-            return loaded;
-        }
+            _assets.InstantiateRegistered(AssetPath.Hud);
     }
 }

@@ -35,8 +35,10 @@ using CodeBase.UI.Elements;
 using CodeBase.UI.Elements.Buttons;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 #pragma warning disable CS4014
 
@@ -121,7 +123,7 @@ namespace CodeBase.Infrastructure.States
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
-            _sceneLoader.Load(isLoss.SceneName, OnLoaded);
+            _sceneLoader.Load(isLoss.SceneName, () => OnLoaded());
         }
 
         public void Exit()
@@ -143,10 +145,10 @@ namespace CodeBase.Infrastructure.States
             _adService.ShowInterstitialAd();
         }
 
-        private void OnLoaded()
+        private async UniTaskVoid OnLoaded()
         {
             InitUIRoot();
-            InitGameWorld();
+            await InitGameWorld();
             ValidateLevelProgress();
             GameObject hero = InitHero();
             InitReviver(hero);
@@ -175,12 +177,12 @@ namespace CodeBase.Infrastructure.States
             _watchService.LoadProgress();
         }
 
-        private void InitGameWorld()
+        private async UniTask InitGameWorld()
         {
             switch (_loadPayload.SceneName)
             {
                 case LevelNames.BuildableLevel:
-                    CreateBuildableLevel();
+                    await CreateBuildableLevel();
 
                     return;
                 case LevelNames.Lobby:
@@ -188,7 +190,7 @@ namespace CodeBase.Infrastructure.States
 
                     return;
                 case LevelNames.LearningLevel:
-                    InitLearningLevel();
+                    await InitLearningLevel();
 
                     return;
                 default:
@@ -196,18 +198,18 @@ namespace CodeBase.Infrastructure.States
             }
         }
 
-        private Level CreateBuildableLevel()
+        private async UniTask<Level> CreateBuildableLevel()
         {
             Level level = BuildLevel();
-            ConstructLevel();
+            await ConstructLevel();
 
             return level;
         }
 
-        private void InitLearningLevel()
+        private async UniTask InitLearningLevel()
         {
             TutorialConfig config = _staticData.GetTutorialConfig();
-            Level level = CreateBuildableLevel();
+            Level level = await CreateBuildableLevel();
             IReadOnlyCollection<TutorialTrigger> triggers = SpawnTutorialTriggers(level, config);
             GameObject sequence = _uiFactory.CreateTutorialSequence();
             sequence.GetComponent<TutorialSequence>().Construct(_inputService, config, triggers);
@@ -227,16 +229,18 @@ namespace CodeBase.Infrastructure.States
             return triggers;
         }
 
-        private void InitLobby()
+        private async UniTask InitLobby()
         {
             GameObject lobby = _gameFactory.CreateLobby();
-            _meshCombiner.CombineAllMeshes(lobby.transform, _gameFactory.CreateMaterial(AssetPath.SpireMaterial));
+            await _meshCombiner.CombineAllMeshes(lobby.transform, _gameFactory.CreateMaterial(AssetPath.SpireMaterial));
             EnterLevelPanel enterLevelPanel = _uiFactory.CreateEnterLevelPanel().GetComponent<EnterLevelPanel>();
 
             foreach (LevelTransfer levelTransfer in lobby.GetComponentsInChildren<LevelTransfer>())
                 levelTransfer.Construct(_stateMachine, enterLevelPanel, _progressService);
 
+            await UniTask.Yield();
             InitLobbyDoors(lobby);
+            await UniTask.Yield();
 
             foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
                 _pauseService.Register(pauseWatchers);
@@ -259,8 +263,8 @@ namespace CodeBase.Infrastructure.States
         private Level BuildLevel() =>
             _levelBuilder.Build(_staticData.GetLevel(_loadPayload.LevelId));
 
-        private void ConstructLevel() =>
-            _levelBuilder.ConstructLevel();
+        private async UniTask ConstructLevel() =>
+            await _levelBuilder.ConstructLevel();
 
         private GameObject InitHero()
         {

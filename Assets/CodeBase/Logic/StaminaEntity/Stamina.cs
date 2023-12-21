@@ -15,22 +15,13 @@ namespace CodeBase.Logic.StaminaEntity
         private float _speedReplenish;
         private float _delayBeforeReplenish;
         private float _currentSpeedReplenish;
-        private int _currentPoints;
         private bool _isReplenish;
 
         public event Action Changed = () => { };
 
         public event Action AttemptToEmptyUsed = () => { };
 
-        public int CurrentPoints
-        {
-            get => _currentPoints;
-            protected set
-            {
-                _currentPoints = value;
-                Changed.Invoke();
-            }
-        }
+        public int CurrentPoints { get; protected set; }
 
         public int MaxPoints { get; protected set; }
 
@@ -75,7 +66,9 @@ namespace CodeBase.Logic.StaminaEntity
             if (newPoints < 0)
                 _currentSpeedReplenish = _speedReplenish * _lowerSpeedMultiplier;
 
-            CurrentPoints = Mathf.Max(newPoints, 0);
+            newPoints = Mathf.Max(newPoints, 0);
+            SetCurrentPointsReactive(newPoints);
+            Changed.Invoke();
 
             _recoveryDelay.Restart();
             _recoveryDelay.Play();
@@ -87,13 +80,22 @@ namespace CodeBase.Logic.StaminaEntity
                 return;
 
             int newPoints = CurrentPoints + Mathf.RoundToInt(_currentSpeedReplenish * Time.deltaTime);
-            CurrentPoints = newPoints > MaxPoints ? MaxPoints : newPoints;
+
+            newPoints = newPoints > MaxPoints ? MaxPoints : newPoints;
+            SetCurrentPointsReactive(newPoints);
+            Changed.Invoke();
 
             if (CurrentPoints < MaxPoints)
                 return;
 
             _isReplenish = false;
             _currentSpeedReplenish = _speedReplenish;
+        }
+
+        private void SetCurrentPointsReactive(int currentPoints)
+        {
+            CurrentPoints = currentPoints;
+            Changed.Invoke();
         }
 
         private void OnStartReplenish() =>

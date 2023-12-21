@@ -10,6 +10,7 @@ using CodeBase.MeshCombine;
 using CodeBase.Services.Randomizer;
 using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
+using Cysharp.Threading.Tasks;
 using Door = CodeBase.LevelSpecification.Cells.Door;
 using EnemySpawnPoint = CodeBase.LevelSpecification.Cells.EnemySpawnPoint;
 using FinishPortal = CodeBase.LevelSpecification.Cells.FinishPortal;
@@ -44,7 +45,7 @@ namespace CodeBase.Services.LevelBuild
             _meshCombiner = new MeshCombiner();
         }
 
-        public void Construct(Level level)
+        public async UniTask Construct(Level level)
         {
             InitConstructor<Plate, EditorCells.Plate>(level);
             InitConstructor<Wall, EditorCells.Wall>(level);
@@ -60,7 +61,7 @@ namespace CodeBase.Services.LevelBuild
             InitConstructor<Savepoint, EditorCells.Savepoint>(level);
             InitConstructor<EnemySpawnPoint, EditorCells.EnemySpawnPoint>(level);
             InitConstructor<ItemSpawnPoint, EditorCells.ItemSpawnPoint>(level);
-            CombineCells(level);
+            await CombineCells(level);
         }
 
         private void InitConstructor<TCell, TEditor>(Level level)
@@ -72,10 +73,11 @@ namespace CodeBase.Services.LevelBuild
                 level.Where(cell => cell.CellData is TEditor).ToArray());
         }
 
-        private void CombineCells(Level level)
+        private async UniTask CombineCells(Level level)
         {
-            _meshCombiner.CombineAllColliders(level, _gameFactory.CreatePhysicMaterial(AssetPath.GroundMaterial));
-            _meshCombiner.CombineAllMeshes(level.Origin, _gameFactory.CreateMaterial(AssetPath.SpireMaterial));
+            await UniTask.WhenAll(
+                _meshCombiner.CombineAllColliders(level, _gameFactory.CreatePhysicMaterial(AssetPath.GroundMaterial)),
+                _meshCombiner.CombineAllMeshes(level.Origin, _gameFactory.CreateMaterial(AssetPath.SpireMaterial)));
         }
     }
 }

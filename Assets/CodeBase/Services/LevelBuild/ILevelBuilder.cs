@@ -1,5 +1,6 @@
 ﻿using CodeBase.LevelSpecification;
 using CodeBase.StaticData;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Services.LevelBuild
 {
@@ -7,7 +8,7 @@ namespace CodeBase.Services.LevelBuild
     {
         Level Build(LevelStaticData levelStaticData);
 
-        void ConstructLevel();
+        UniTask ConstructLevel();
 
         void Clear();
     }

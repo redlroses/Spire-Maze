@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.LevelSpecification.Cells;
+using CodeBase.Services.Pause;
+using CodeBase.Services.PersistentProgress;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,15 +11,79 @@ namespace CodeBase.Infrastructure.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {
+        private readonly IPersistentProgressService _progressService;
+        private readonly IPauseService _pauseService;
         private readonly Dictionary<string, Object> _cache = new Dictionary<string, Object>();
+
+        public AssetProvider(IPersistentProgressService progressService, IPauseService pauseService)
+        {
+            _progressService = progressService;
+            _pauseService = pauseService;
+        }
 
         public GameObject InstantiateCell<TCell>(Transform container)
             where TCell : Cell
         {
             string cellPath = AssetPath.Combine(AssetPath.Cells, typeof(TCell).Name);
-            GameObject asset = LoadCached<GameObject>(cellPath);
+            GameObject gameObject = InstantiateRegistered(cellPath, container);
+            RegisterPauseWatchers(gameObject);
+            RegisterProgressWatchers(gameObject);
 
-            return Object.Instantiate(asset, container);
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path, Vector3 at, Transform inside)
+        {
+            GameObject gameObject = Instantiate(path, at, Quaternion.identity, inside);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path, Vector3 at, Quaternion rotation, Transform inside)
+        {
+            GameObject gameObject = Instantiate(path, at, rotation, inside);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path, Vector3 at, Quaternion rotation)
+        {
+            GameObject gameObject = Instantiate(path, at, rotation);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path, Vector3 at)
+        {
+            GameObject gameObject = Instantiate(path, at);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path, Transform inside)
+        {
+            GameObject gameObject = Instantiate(path, inside);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
+        }
+
+        public GameObject InstantiateRegistered(string path)
+        {
+            GameObject gameObject = Instantiate(path);
+            RegisterProgressWatchers(gameObject);
+            RegisterPauseWatchers(gameObject);
+
+            return gameObject;
         }
 
         public GameObject Instantiate(string path, Vector3 at, Transform inside)
@@ -100,6 +166,18 @@ namespace CodeBase.Infrastructure.AssetManagement
             _cache.Add(path, loaded);
 
             return loaded;
+        }
+
+        private void RegisterProgressWatchers(GameObject gameObject)
+        {
+            foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+                _progressService.Register(progressReader);
+        }
+
+        private void RegisterPauseWatchers(GameObject gameObject)
+        {
+            foreach (IPauseWatcher pauseWatcher in gameObject.GetComponentsInChildren<IPauseWatcher>())
+                _pauseService.Register(pauseWatcher);
         }
     }
 }

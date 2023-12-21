@@ -24,6 +24,7 @@ namespace CodeBase.UI.Elements.Buttons
         private Action _onRevived;
         private RoutineSequence _heartAnimation;
         private LocationAnimations.LocationAnimationEvent _onFinishAnimation;
+        private bool _isPressed;
 
         public void Construct(IADService adService, HeroReviver reviver, Action onRevived = null)
         {
@@ -37,8 +38,14 @@ namespace CodeBase.UI.Elements.Buttons
             Subscribe();
         }
 
-        protected override void OnCall() =>
+        protected override void OnCall()
+        {
+            if (_isPressed)
+                return;
+
+            _isPressed = true;
             _adService.ShowRewardAd(OnRewarded);
+        }
 
         private void HeartBeat() =>
             _locationAnimations.StartAnimation(BeatAnimationName, _onFinishAnimation);

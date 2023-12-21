@@ -6,6 +6,7 @@ using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
 using CodeBase.Tools.Constants;
 using CodeBase.Tools.Extension;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Plate = CodeBase.EditorCells.Plate;
@@ -20,9 +21,10 @@ namespace CodeBase.MeshCombine
 
         private PhysicMaterial _physicMaterial;
 
-        public void CombineAllMeshes(Transform origin, Material material)
+        public async UniTask CombineAllMeshes(Transform origin, Material material)
         {
             MeshCombineMarker[] meshCombinables = origin.GetComponentsInChildren<MeshCombineMarker>();
+            await UniTask.Yield();
 
             CombineInstance[] combine = CreateCombineInstances(meshCombinables);
             Mesh newMesh = new Mesh { indexFormat = IndexFormat.UInt32 };
@@ -33,7 +35,7 @@ namespace CodeBase.MeshCombine
                 meshCombinable.Renderer.enabled = false;
         }
 
-        public void CombineAllColliders(Level level, PhysicMaterial physicMaterial)
+        public async UniTask CombineAllColliders(Level level, PhysicMaterial physicMaterial)
         {
             _physicMaterial = physicMaterial;
 
@@ -45,8 +47,8 @@ namespace CodeBase.MeshCombine
                 },
             };
 
-            CombineByType<Plate>(level, collidersHolder);
-            CombineByType<Wall>(level, collidersHolder);
+            await CombineByType<Plate>(level, collidersHolder);
+            await CombineByType<Wall>(level, collidersHolder);
 
             collidersHolder.isStatic = true;
         }
@@ -77,21 +79,7 @@ namespace CodeBase.MeshCombine
             return combine;
         }
 
-        private void ConstructMeshHolder(GameObject holder, CombineInstance[] combined, Material material, Mesh mesh, bool isEnableRenderer)
-        {
-            if (holder.TryGetComponent(out MeshFilter meshFilter) == false)
-                meshFilter = holder.AddComponent<MeshFilter>();
-
-            if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
-                meshRenderer = holder.AddComponent<MeshRenderer>();
-
-            meshFilter.mesh = mesh;
-            meshFilter.mesh.CombineMeshes(combined);
-            meshRenderer.sharedMaterial = material;
-            meshRenderer.enabled = isEnableRenderer;
-        }
-
-        private void CombineByType<TCell>(Level level, GameObject collidersHolder)
+        private async UniTask CombineByType<TCell>(Level level, GameObject collidersHolder)
             where TCell : CellData
         {
             for (int i = 0; i < level.Height; i++)
@@ -100,16 +88,16 @@ namespace CodeBase.MeshCombine
                     continue;
 
                 int airIndex = FindFirstGap<TCell>(level.Container[i]);
-                CombineColliderGroups<TCell>(level.Container[i], airIndex, collidersHolder.transform);
+                await CombineColliderGroups<TCell>(level.Container[i], airIndex, collidersHolder.transform);
             }
         }
 
-        private void CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder)
+        private async UniTask CombineColliderGroups<TCell>(Floor floor, int beginIndex, Transform collidersHolder)
             where TCell : CellData
         {
             if (beginIndex == -1)
             {
-                CombineColliders(floor.Container.GetRange(0, floor.Container.Count), collidersHolder);
+                await CombineColliders(floor.Container.GetRange(0, floor.Container.Count), collidersHolder);
 
                 return;
             }
@@ -127,26 +115,28 @@ namespace CodeBase.MeshCombine
                         .GetRange(firstGroupIndex, floor.Container.Count - firstGroupIndex);
 
                     combined.AddRange(floor.Container.GetRange(0, lastGroupIndex));
-                    CombineColliders(combined, collidersHolder);
+                    await CombineColliders(combined, collidersHolder);
                 }
                 else
                 {
-                    CombineColliders(
+                    await CombineColliders(
                         floor.Container.GetRange(firstGroupIndex, lastGroupIndex - firstGroupIndex),
                         collidersHolder);
                 }
 
                 firstGroupIndex = FindFirstGroupIndex<TCell>(floor, lastGroupIndex);
+                await UniTask.Yield();
             } while (initialGroupIndex != firstGroupIndex);
         }
 
-        private void CombineColliders(List<Cell> cells, Transform parent)
+        private async UniTask CombineColliders(List<Cell> cells, Transform parent)
         {
             if (cells.Count > MaxCellsInCollider)
             {
                 int halfCellsCount = Mathf.FloorToInt(cells.Count * Arithmetic.ToHalf);
-                CombineColliders(cells.GetRange(0, halfCellsCount), parent);
+                await CombineColliders(cells.GetRange(0, halfCellsCount), parent);
                 cells = cells.GetRange(halfCellsCount, cells.Count - halfCellsCount);
+                await UniTask.Yield();
             }
 
             GameObject cell = cells.First().Container.gameObject;
@@ -168,12 +158,27 @@ namespace CodeBase.MeshCombine
                 .Select(container => container.gameObject.GetComponent<MeshFilter>())
                 .ToArray();
 
-            foreach (MeshCollider meshCollider in meshColliders) meshCollider.enabled = false;
+            foreach (MeshCollider meshCollider in meshColliders)
+                meshCollider.enabled = false;
 
             CombineInstance[] combined = CreateCombineInstances(meshesFilters);
-            Mesh mesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+            Mesh mesh = new Mesh { indexFormat = IndexFormat.UInt16 };
             ConstructMeshHolder(colliderHolder, combined, null, mesh, false);
             CreateMeshCollider(colliderHolder, mesh, cell.transform.GetChild(0).gameObject.layer);
+        }
+
+        private void ConstructMeshHolder(GameObject holder, CombineInstance[] combined, Material material, Mesh mesh, bool isEnableRenderer)
+        {
+            if (holder.TryGetComponent(out MeshFilter meshFilter) == false)
+                meshFilter = holder.AddComponent<MeshFilter>();
+
+            if (holder.TryGetComponent(out MeshRenderer meshRenderer) == false)
+                meshRenderer = holder.AddComponent<MeshRenderer>();
+
+            meshFilter.mesh = mesh;
+            meshFilter.mesh.CombineMeshes(combined);
+            meshRenderer.sharedMaterial = material;
+            meshRenderer.enabled = isEnableRenderer;
         }
 
         private void CreateMeshCollider(GameObject colliderHolder, Mesh mesh, int layer)
