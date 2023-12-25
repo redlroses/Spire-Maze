@@ -11,7 +11,9 @@ namespace CodeBase.UI.Elements.Buttons
     {
         private const string BeatAnimationName = "Beat";
 
-        [Header("Token")]
+        [SerializeField] private CanvasGroup _parentCanvasGroup;
+
+        [Header("Token")] [Space]
         [SerializeField] private TextSetter _tokens;
         [SerializeField] private string _format = "X{0}";
 
@@ -44,7 +46,8 @@ namespace CodeBase.UI.Elements.Buttons
                 return;
 
             _isPressed = true;
-            _adService.ShowRewardAd(OnRewarded);
+            _parentCanvasGroup.interactable = false;
+            _adService.ShowRewardAd(OnRewarded, OnDeny);
         }
 
         private void HeartBeat() =>
@@ -58,7 +61,11 @@ namespace CodeBase.UI.Elements.Buttons
             if (_reviver.TryRevive())
                 _onRevived.Invoke();
 
+            _parentCanvasGroup.interactable = true;
             UpdateTokens();
         }
+
+        private void OnDeny() =>
+            _parentCanvasGroup.interactable = true;
     }
 }

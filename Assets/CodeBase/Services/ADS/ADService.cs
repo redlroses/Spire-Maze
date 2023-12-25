@@ -5,7 +5,6 @@ using CodeBase.SDK.ADS;
 using CodeBase.Services.Pause;
 using CodeBase.Services.Sound;
 using CodeBase.Tools;
-using Debug = UnityEngine.Debug;
 
 namespace CodeBase.Services.ADS
 {
@@ -36,7 +35,7 @@ namespace CodeBase.Services.ADS
             _interstitialAdCooldown.Play();
         }
 
-        public void ShowRewardAd(Action onSuccessCallback = null)
+        public void ShowRewardAd(Action onSuccessCallback = null, Action onDenyCallback = null)
         {
             OnAddOpened();
 
@@ -46,10 +45,14 @@ namespace CodeBase.Services.ADS
                     OnAdClosed();
                     onSuccessCallback?.Invoke();
                 },
-                OnAdClosed);
+                () =>
+                {
+                    OnAdClosed();
+                    onDenyCallback?.Invoke();
+                });
         }
 
-        public void ShowInterstitialAd(Action onSuccessCallback = null)
+        public void ShowInterstitialAd(Action onSuccessCallback = null, Action onDenyCallback = null)
         {
             if (_interstitialAdCooldown.IsActive)
                 return;
@@ -63,7 +66,11 @@ namespace CodeBase.Services.ADS
                     OnAdClosed();
                     onSuccessCallback?.Invoke();
                 },
-                OnAdClosed);
+                () =>
+                {
+                    OnAdClosed();
+                    onDenyCallback?.Invoke();
+                });
         }
 
         private void InitAdProvider()
@@ -89,38 +96,48 @@ namespace CodeBase.Services.ADS
             bool isOpened = false;
             bool isRewarded = false;
 
-            Action onOpenCallback = () => isOpened = true;
-            Action onRewardedCallback = () => isRewarded = true;
+            void OnOpenCallback() =>
+                isOpened = true;
 
-            Action onCloseCallback = () =>
+            void OnRewardedCallback() =>
+                isRewarded = true;
+
+            void OnErrorCallback(string error) =>
+                onDenyCallback?.Invoke();
+
+            void OnCloseCallback()
             {
                 if (isOpened && isRewarded)
                     onCompleteCallback?.Invoke();
                 else
                     onDenyCallback?.Invoke();
-            };
+            }
 
-            Action<string> onErrorCallback = _ => onDenyCallback.Invoke();
-            _adProvider.ShowRewardAd(onOpenCallback, onRewardedCallback, onCloseCallback, onErrorCallback);
+            _adProvider.ShowRewardAd(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
         }
 
         private void InterstitialAd(Action onCompleteCallback = null, Action onDenyCallback = null)
         {
             bool isOpened = false;
 
-            Action openCallback = () => isOpened = true;
+            void OpenCallback() =>
+                isOpened = true;
 
-            Action<bool> closeCallback = isShown =>
+            void OfflineCallback() =>
+                onDenyCallback?.Invoke();
+
+            void ErrorCallback(string error) =>
+                onDenyCallback?.Invoke();
+
+            void CloseCallback(bool isShown)
             {
                 if (isOpened && isShown)
                     onCompleteCallback?.Invoke();
                 else
                     onDenyCallback?.Invoke();
-            };
+            }
 
-            Action<string> errorCallback = _ => onDenyCallback?.Invoke();
-            Action offlineCallback = () => onDenyCallback.Invoke();
-            _adProvider.ShowInterstitialAd(openCallback, closeCallback, errorCallback, offlineCallback);
+            _adProvider.ShowInterstitialAd(OpenCallback, CloseCallback, ErrorCallback, OfflineCallback);
         }
 
         private void OnAddOpened()

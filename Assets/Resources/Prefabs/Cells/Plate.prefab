@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0640264dd8aa43fda91db8c79f036f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mobileChanceFactor: 0.5
   _modelChances:
     _serializedList:
     - Key: {fileID: 1614390797214332367}
@@ -2467,6 +2468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2572244872678844773}
     m_Modifications:
+    - target: {fileID: 133100224222075362, guid: bafd1445f32831e4d8a269ae843656ba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5484294956152013983, guid: 096254e8d4758c14b81f0f3114440534, type: 3}
     - target: {fileID: 1713393330678609830, guid: bafd1445f32831e4d8a269ae843656ba, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25
@@ -2485,7 +2490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1713393330678609830, guid: bafd1445f32831e4d8a269ae843656ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15084434
+      value: -0.062
       objectReference: {fileID: 0}
     - target: {fileID: 1713393330678609830, guid: bafd1445f32831e4d8a269ae843656ba, type: 3}
       propertyPath: m_LocalPosition.z

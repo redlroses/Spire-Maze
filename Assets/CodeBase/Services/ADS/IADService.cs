@@ -4,8 +4,8 @@ namespace CodeBase.Services.ADS
 {
     public interface IADService : IService
     {
-        void ShowRewardAd(Action onSuccessCallback = null);
+        void ShowRewardAd(Action onSuccessCallback = null, Action onDenyCallback = null);
 
-        void ShowInterstitialAd(Action onSuccessCallback = null);
+        void ShowInterstitialAd(Action onSuccessCallback = null, Action onDenyCallback = null);
     }
 }

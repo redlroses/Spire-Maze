@@ -26,6 +26,12 @@ namespace CodeBase.LevelSpecification
 
         Cell IEnumerator<Cell>.Current => GetCell(_currentIndex / Width, _currentIndex % Width);
 
+        bool IEnumerator.MoveNext() =>
+            ++_currentIndex < Size;
+
+        void IEnumerator.Reset() =>
+            _currentIndex = -1;
+
         IEnumerator<Cell> IEnumerable<Cell>.GetEnumerator()
         {
             ((IEnumerator)this).Reset();
@@ -34,12 +40,6 @@ namespace CodeBase.LevelSpecification
         }
 
         public IEnumerator GetEnumerator() => this;
-
-        bool IEnumerator.MoveNext() =>
-            ++_currentIndex < Size;
-
-        void IEnumerator.Reset() =>
-            _currentIndex = -1;
 
         public void Dispose()
         {
