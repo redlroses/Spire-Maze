@@ -8,6 +8,7 @@ using CodeBase.Logic.Portal;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.UI;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace CodeBase.Logic
@@ -71,7 +72,7 @@ namespace CodeBase.Logic
             _stateMachine.Enter<LoadLevelState, LoadPayload>(payload);
         }
 
-        // ReSharper disable once UnusedMember.Local
+        [UsedImplicitly]
         private void TryActivate()
         {
             int lastLevel = 0;

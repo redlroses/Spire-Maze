@@ -28,6 +28,7 @@ namespace CodeBase.MeshCombine
 
             CombineInstance[] combine = CreateCombineInstances(meshCombinables);
             Mesh newMesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+
             ConstructMeshHolder(origin.gameObject, combine, material, newMesh, true);
             origin.gameObject.isStatic = true;
 
@@ -177,6 +178,8 @@ namespace CodeBase.MeshCombine
 
             meshFilter.mesh = mesh;
             meshFilter.mesh.CombineMeshes(combined);
+            meshFilter.mesh.OptimizeIndexBuffers();
+            meshFilter.mesh.Optimize();
             meshRenderer.sharedMaterial = material;
             meshRenderer.enabled = isEnableRenderer;
         }

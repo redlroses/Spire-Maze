@@ -28,7 +28,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2772289887685615568}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,6 +38,7 @@ Transform:
   - {fileID: 6456355643066630380}
   - {fileID: 6956502529707819370}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &6814525223496693832
 AudioSource:
@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 7288175028736448055, guid: c5dc2cb2eda0d7946b9c6754360d61ed, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5387163057413025383, guid: d38f708942489db49bde6b6efc971303, type: 3}
     m_RemovedComponents:
     - {fileID: 6975949381269789368, guid: c5dc2cb2eda0d7946b9c6754360d61ed, type: 3}
     m_RemovedGameObjects: []

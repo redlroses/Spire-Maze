@@ -23,7 +23,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2584307483668916137}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.92, z: 0.9}
@@ -32,6 +31,7 @@ Transform:
   - {fileID: 4917035644310342065}
   - {fileID: 8323912056309237319}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4879202285150809690
 PrefabInstance:
@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0b78766bc3b9a0147814516cc01e63a6, type: 2}
+    - target: {fileID: -5754084199372789682, guid: bf2bd2e611364834782d5fea19474f67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2138796739762357153, guid: bf2bd2e611364834782d5fea19474f67, type: 3}
     - target: {fileID: 919132149155446097, guid: bf2bd2e611364834782d5fea19474f67, type: 3}
       propertyPath: m_Name
       value: walls
@@ -206,6 +210,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d850cc2aa37ff0e4f8f106c4922bcbb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d850cc2aa37ff0e4f8f106c4922bcbb5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d850cc2aa37ff0e4f8f106c4922bcbb5, type: 3}
       propertyPath: m_Materials.Array.data[0]

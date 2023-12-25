@@ -10,7 +10,6 @@ namespace CodeBase.Logic.Lift
     [RequireComponent(typeof(PlateMovableObserver))]
     public class LiftPlate : ObserverTargetExited<PlateMovableObserver, IMovableByPlate>, ILiftPlate
     {
-        [SerializeField] private LiftState _state;
         [SerializeField] private float _waitDelay;
         [SerializeField] private TimerOperator _timer;
         [SerializeField] private LiftAnimator _liftAnimator;
@@ -22,15 +21,7 @@ namespace CodeBase.Logic.Lift
 
         public IPlateMover Mover { get; private set; }
 
-        public LiftState State
-        {
-            get => _state;
-            private set
-            {
-                _state = value;
-                StateChanged.Invoke(value);
-            }
-        }
+        public LiftState State { get; private set; }
 
         private void OnDestroy()
         {
@@ -77,7 +68,7 @@ namespace CodeBase.Logic.Lift
 
             _liftAnimator.StartAnimation();
             Mover.Move(_currentMarker, _destinationMarker);
-            State = LiftState.Moving;
+            SetStateReactive(LiftState.Moving);
             SwitchMarkers();
         }
 
@@ -89,11 +80,17 @@ namespace CodeBase.Logic.Lift
 
         private void OnMoveEnded()
         {
-            State = LiftState.Idle;
+            SetStateReactive(LiftState.Idle);
             _liftAnimator.StopAnimation();
         }
 
         private void SwitchMarkers() =>
             (_currentMarker, _destinationMarker) = (_destinationMarker, _currentMarker);
+
+        private void SetStateReactive(LiftState state)
+        {
+            State = state;
+            StateChanged.Invoke(state);
+        }
     }
 }
