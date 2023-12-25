@@ -95,7 +95,7 @@ namespace CodeBase.Sound
                 PlayOneShot(clip);
         }
 
-        private void OnPlaySoundCollected(Sprite _, Vector3 __) =>
+        private void OnPlaySoundCollected(Sprite sprite, Vector3 vector) =>
             PlayOneShot(_collectSound);
 
         private void OnPlaySoundTeleported() =>

@@ -20,7 +20,7 @@ namespace CodeBase.Logic.Trap
         private void Awake() =>
             _timer ??= GetComponent<TimerOperator>();
 
-        protected override void OnTriggerObserverEntered(IDamagable _)
+        protected override void OnTriggerObserverEntered(IDamagable damagable)
         {
             if (_isActivated)
                 return;

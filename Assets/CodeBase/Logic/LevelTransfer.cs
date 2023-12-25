@@ -51,13 +51,13 @@ namespace CodeBase.Logic
 #endif
         }
 
-        protected override void OnTriggerObserverEntered(ITeleportable _)
+        protected override void OnTriggerObserverEntered(ITeleportable interactable)
         {
             _enterLevelPanel.Show(_levelData is null ? 0 : _levelData.Stars, _toLevelId);
             _enterLevelPanel.EnterClicked += LoadNewLevel;
         }
 
-        protected override void OnTriggerObserverExited(ITeleportable _)
+        protected override void OnTriggerObserverExited(ITeleportable interactable)
         {
             _enterLevelPanel.Hide();
             _enterLevelPanel.EnterClicked -= LoadNewLevel;

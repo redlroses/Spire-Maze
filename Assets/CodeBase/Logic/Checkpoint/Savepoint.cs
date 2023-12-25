@@ -51,7 +51,7 @@ namespace CodeBase.Logic.Checkpoint
                 cellState.IsActivated = IsActivated;
         }
 
-        protected override void OnTriggerObserverEntered(HeroRoot _)
+        protected override void OnTriggerObserverEntered(HeroRoot heroRoot)
         {
             IsActivated = true;
             SetColliderState(true);

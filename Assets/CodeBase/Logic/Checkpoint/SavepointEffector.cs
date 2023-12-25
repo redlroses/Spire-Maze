@@ -18,7 +18,7 @@ namespace CodeBase.Logic.Checkpoint
             _savepoint.Activated -= OnActivated;
         }
 
-        private void OnActivated(bool _)
+        private void OnActivated(bool isActivated)
         {
             _fire.gameObject.Enable();
             _fire.Play();
