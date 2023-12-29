@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html onselectstart="return false;" oncontextmenu="return false;">
 
-<head>
+<head class="noselect" onselectstart="return false;" oncontextmenu="return false;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
   <title>{{{ PRODUCT_NAME }}}</title>
 </head>
 
-<body style="margin: 0px; overflow: hidden;" oncontextmenu="return false;">
+<body class="noselect" oncontextmenu="return false;" onselectstart="return false;">
   <canvas id="unity-canvas"
     style="position: fixed; width: 100%; height: 100%; background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}">
   </canvas>
@@ -33,7 +34,7 @@
       productName: "{{{ PRODUCT_NAME }}}",
       productVersion: "{{{ PRODUCT_VERSION }}}",
       matchWebGLToCanvasSize: true,
-      // devicePixelRatio: 2, // Uncomment this line to enable anti-aliasing
+      devicePixelRatio: 1.6, // Uncomment this line to enable anti-aliasing
     };
 
     const progressBar = document.querySelector("#progress-bar");

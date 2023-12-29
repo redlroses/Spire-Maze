@@ -4,6 +4,7 @@ using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using Cysharp.Threading.Tasks;
 using NTC.Global.System;
+using RPGCharacterAnims.Actions;
 using UnityEngine;
 
 namespace CodeBase.Logic
@@ -11,7 +12,6 @@ namespace CodeBase.Logic
     public class LoadingCurtain : MonoBehaviour
     {
         private const float FinalProgressLoadValue = 1f;
-        private const int HideDelay = 1000;
         private const float RotationSpeed = 5;
         private const int RotationDelay = 10;
 
@@ -33,12 +33,13 @@ namespace CodeBase.Logic
             _showHide.Value.ShowInstantly();
         }
 
-        public async UniTaskVoid Hide(Action onComplete = null)
+        public async UniTaskVoid Hide(int delay, Action onBegin = null, Action onComplete = null)
         {
-            await UniTask.Delay(HideDelay);
+            await UniTask.Delay(delay);
             _loadingIcon.gameObject.Disable();
             _sliderSetter.gameObject.Disable();
 
+            onBegin?.Invoke();
             _showHide.Value.Hide(
                 () =>
                 {

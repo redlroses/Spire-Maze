@@ -46,6 +46,8 @@ namespace CodeBase.Infrastructure.States
     public class LoadLevelState : IPayloadedState<LoadPayload>
     {
         private const string PlayerKey = "Player";
+        private const int DefaultLoadDelay = 1000;
+        private const int FirstLoadDelay = 2000;
 
         private readonly IADService _adService;
         private readonly IAnalyticsService _analytics;
@@ -135,17 +137,23 @@ namespace CodeBase.Infrastructure.States
                 _saveLoadService.SaveProgress();
             }
 
-            _curtain.Hide(
-                () =>
-                {
-#if !UNITY_EDITOR && YANDEX_GAMES
-                    if (_isFirstLoad)
+            if (_isFirstLoad)
+            {
+                _curtain.Hide(
+                    FirstLoadDelay,
+                    () =>
                     {
+#if !UNITY_EDITOR && YANDEX_GAMES
                         YandexGamesSdk.GameReady();
-                        _isFirstLoad = false;
-                    }
 #endif
-                });
+                    });
+
+                _isFirstLoad = false;
+            }
+            else
+            {
+                _curtain.Hide(DefaultLoadDelay);
+            }
 
             _adService.ShowInterstitialAd();
         }
@@ -191,7 +199,7 @@ namespace CodeBase.Infrastructure.States
 
                     return;
                 case LevelNames.Lobby:
-                    InitLobby();
+                    await InitLobby();
 
                     return;
                 case LevelNames.LearningLevel:
