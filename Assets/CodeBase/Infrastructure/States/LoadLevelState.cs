@@ -38,7 +38,6 @@ using CodeBase.UI.Services.Windows;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 #pragma warning disable CS4014
 
@@ -109,21 +108,21 @@ namespace CodeBase.Infrastructure.States
             _meshCombiner = new MeshCombiner();
         }
 
-        public void Enter(LoadPayload isLoss)
+        public void Enter(LoadPayload loadPayload)
         {
             _curtain.Show();
-            _loadPayload = isLoss;
+            _loadPayload = loadPayload;
 
-            if (isLoss.IsClearLoad)
+            if (loadPayload.IsClearLoad)
             {
-                _analytics.TrackLevelStart(isLoss.LevelId);
+                _analytics.TrackLevelStart(loadPayload.LevelId);
                 _watchService.Cleanup();
             }
 
             _pauseService.Cleanup();
             _gameFactory.Cleanup();
             _gameFactory.WarmUp();
-            _sceneLoader.Load(isLoss.SceneName, () => OnLoaded());
+            _sceneLoader.Load(loadPayload.SceneName, () => OnLoaded());
         }
 
         public void Exit()
@@ -136,12 +135,18 @@ namespace CodeBase.Infrastructure.States
                 _saveLoadService.SaveProgress();
             }
 
+            _curtain.Hide(
+                () =>
+                {
 #if !UNITY_EDITOR && YANDEX_GAMES
-            if (_isFirstLoad)
-                YandexGamesSdk.GameReady();
+                    if (_isFirstLoad)
+                    {
+                        YandexGamesSdk.GameReady();
+                        _isFirstLoad = false;
+                    }
 #endif
-            _isFirstLoad = false;
-            _curtain.Hide();
+                });
+
             _adService.ShowInterstitialAd();
         }
 

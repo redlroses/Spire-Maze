@@ -1,3 +1,4 @@
+using System;
 using AYellowpaper;
 using CodeBase.Tools;
 using CodeBase.UI.Elements;
@@ -32,18 +33,24 @@ namespace CodeBase.Logic
             _showHide.Value.ShowInstantly();
         }
 
-        public async void Hide()
+        public async UniTaskVoid Hide(Action onComplete = null)
         {
             await UniTask.Delay(HideDelay);
             _loadingIcon.gameObject.Disable();
             _sliderSetter.gameObject.Disable();
-            _showHide.Value.Hide(() => gameObject.Disable());
+
+            _showHide.Value.Hide(
+                () =>
+                {
+                    gameObject.Disable();
+                    onComplete?.Invoke();
+                });
         }
 
         private void UpdateLoadProgress(float progress) =>
             _sliderSetter.SetNormalizedValue(progress);
 
-        private async void Rotate()
+        private async UniTaskVoid Rotate()
         {
             while (_loadingIcon.gameObject.activeInHierarchy)
             {

@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CodeBase.EditorCells;
+using CodeBase.Infrastructure;
 using CodeBase.LevelSpecification;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
@@ -14,23 +18,57 @@ using Wall = CodeBase.EditorCells.Wall;
 
 namespace CodeBase.MeshCombine
 {
+    [SuppressMessage("ReSharper", "ArrangeRedundantParentheses")]
     public class MeshCombiner
     {
         private const string Colliders = "Colliders";
+        private const string MeshHolderName = "MeshHolder";
         private const int MaxCellsInCollider = 8;
 
         private PhysicMaterial _physicMaterial;
 
         public async UniTask CombineAllMeshes(Transform origin, Material material)
         {
-            MeshCombineMarker[] meshCombinables = origin.GetComponentsInChildren<MeshCombineMarker>();
+            List<MeshCombineMarker> meshCombinables = origin.GetComponentsInChildren<MeshCombineMarker>().ToList();
             await UniTask.Yield();
 
-            CombineInstance[] combine = CreateCombineInstances(meshCombinables);
-            Mesh newMesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+            int verticesCount = 0;
+            int meshCombinablesCount = meshCombinables.Count;
 
-            ConstructMeshHolder(origin.gameObject, combine, material, newMesh, true);
-            origin.gameObject.isStatic = true;
+            List<MeshCombineMarker> markersToCombine = new List<MeshCombineMarker>(meshCombinables.Count);
+
+            for (int i = 0; i < meshCombinablesCount; i++)
+            {
+                if (verticesCount + meshCombinables[i].Filter.mesh.vertices.Length + 1 > ushort.MaxValue)
+                {
+                    CombineUInt16Mesh(origin, material, markersToCombine.ToArray());
+                    verticesCount = 0;
+                    markersToCombine.Clear();
+                    await UniTask.Yield();
+                }
+
+                verticesCount += meshCombinables[i].Filter.mesh.vertices.Length + 1;
+                markersToCombine.Add(meshCombinables.ElementAt(i));
+            }
+
+            CombineUInt16Mesh(origin, material, markersToCombine.ToArray());
+        }
+
+        private void CombineUInt16Mesh(Transform origin, Material material, MeshCombineMarker[] meshCombinables)
+        {
+            CombineInstance[] combine = CreateCombineInstances(meshCombinables);
+            Mesh newMesh = new Mesh { indexFormat = IndexFormat.UInt16 };
+
+            GameObject meshHolder = new GameObject(origin.name + MeshHolderName)
+            {
+                transform =
+                {
+                    parent = origin,
+                },
+            };
+
+            ConstructMeshHolder(meshHolder.gameObject, combine, material, newMesh, true);
+            meshHolder.gameObject.isStatic = true;
 
             foreach (MeshCombineMarker meshCombinable in meshCombinables)
                 meshCombinable.Renderer.enabled = false;

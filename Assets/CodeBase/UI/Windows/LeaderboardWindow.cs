@@ -106,6 +106,9 @@ namespace CodeBase.UI.Windows
 
         private void SpawnRank(Func<GameObject> createRankView, SingleRankData rankData)
         {
+            if (rankData == null || rankData.Score == 0)
+                return;
+
             GameObject rankViewObject = createRankView.Invoke();
             RankView rankView = rankViewObject.GetComponent<RankView>();
             rankView.Set(rankData);

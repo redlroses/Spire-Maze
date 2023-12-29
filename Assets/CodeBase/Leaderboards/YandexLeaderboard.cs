@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Services.StaticData;
@@ -94,15 +95,19 @@ namespace CodeBase.Leaderboards
                 _name,
                 result =>
                 {
-                    if (result.score >= score)
-                        return;
-
-                    Leaderboard.SetScore(
-                        _name,
-                        score,
-                        () => isComplete = true,
-                        _ => isComplete = true,
-                        avatarName);
+                    if (result == null || result.score < score)
+                    {
+                        Leaderboard.SetScore(
+                            _name,
+                            score,
+                            () => isComplete = true,
+                            _ => isComplete = true,
+                            avatarName);
+                    }
+                    else
+                    {
+                        isComplete = true;
+                    }
                 },
                 _ => isComplete = true);
 
@@ -147,18 +152,25 @@ namespace CodeBase.Leaderboards
             return isSuccess;
         }
 
-        private async void OnGetPlayerEntry(LeaderboardEntryResponse result)
+        private void OnGetPlayerEntry(LeaderboardEntryResponse result)
         {
             if (result.Equals(null))
             {
                 _selfRanksData = new SingleRankData(
-                    0,
+                    999,
                     0,
                     _staticData.GetDefaultAvatar(),
                     _anonymousName,
                     _staticData.GetSpriteByLang(YandexGamesSdk.Environment.browser.lang));
             }
+            else
+            {
+                LoadSelfPlayerEntry(result);
+            }
+        }
 
+        private async UniTaskVoid LoadSelfPlayerEntry(LeaderboardEntryResponse result)
+        {
             _selfRanksData = await LoadSingleRankData(result);
         }
 

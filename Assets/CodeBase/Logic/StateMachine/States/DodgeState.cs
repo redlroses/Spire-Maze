@@ -30,10 +30,10 @@ namespace CodeBase.Logic.StateMachine.States
             _immune = immune;
         }
 
-        public void Enter(MoveDirection isLoss)
+        public void Enter(MoveDirection loadPayload)
         {
             _heroAnimator.PlayDodge();
-            _lastDirection = isLoss;
+            _lastDirection = loadPayload;
             _immune.ActivateImmunity();
             _inputService.HorizontalMoving += OnHorizontalMove;
             _heroAnimator.StateExited += OnStateExited;

@@ -12,7 +12,7 @@ namespace CodeBase.SDK
     {
         public WebSDKInitializer()
         {
-            YandexGamesSdk.CallbackLogging = true;
+            YandexGamesSdk.CallbackLogging = false;
         }
 
         public void Start(ICoroutineRunner coroutineRunner, Action onReadyCallback) =>

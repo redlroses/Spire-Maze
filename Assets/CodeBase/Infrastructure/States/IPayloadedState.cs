@@ -2,6 +2,6 @@
 {
     public interface IPayloadedState<TPayload> : IExitableState
     {
-        void Enter(TPayload isLoss);
+        void Enter(TPayload loadPayload);
     }
 }

@@ -62,15 +62,15 @@ namespace CodeBase.Infrastructure.States
 
         private int PlayTime => TemporalProgress.PlayTime;
 
-        public void Enter(bool isLoss)
+        public void Enter(bool loadPayload)
         {
             CountCollectedArtifacts();
             CountTotalArtifacts();
             CountPlayTime();
-            CountLevelScore(isLoss);
+            CountLevelScore(loadPayload);
             CountGlobalScore();
 
-            if (isLoss)
+            if (loadPayload)
             {
                 _windowService.Open(WindowId.Loss);
             }
@@ -80,7 +80,7 @@ namespace CodeBase.Infrastructure.States
                 _windowService.Open(WindowId.Results);
             }
 
-            CollectAnalytics(isLoss);
+            CollectAnalytics(loadPayload);
         }
 
         public void Exit()
