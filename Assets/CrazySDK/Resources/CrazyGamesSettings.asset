@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed6a1d62cfa34a408e1069998dc6696, type: 3}
   m_Name: CrazyGamesSettings
   m_EditorClassIdentifier: 
-  whitelistedDomains: []
+  whitelistedDomains:
+  - games.yandex.ru
   accountAvailableResponse: 0
   linkAccountResponse: 0
   getUserResponse: 0
