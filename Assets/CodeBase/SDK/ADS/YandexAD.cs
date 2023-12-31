@@ -6,21 +6,56 @@ namespace CodeBase.SDK.ADS
     public class YandexAD : IADProvider
     {
         public void ShowRewardAd(
-            Action onOpenCallback = null,
-            Action onRewardedCallback = null,
-            Action onCloseCallback = null,
-            Action<string> onErrorCallback = null)
+            Action onCompleteCallback = null,
+            Action<string> onDenyCallback = null)
         {
-            VideoAd.Show(onOpenCallback, onRewardedCallback, onCloseCallback, onErrorCallback);
+            bool isOpened = false;
+            bool isRewarded = false;
+
+            void OnOpenCallback() =>
+                isOpened = true;
+
+            void OnRewardedCallback() =>
+                isRewarded = true;
+
+            void OnErrorCallback(string error) =>
+                onDenyCallback?.Invoke(error);
+
+            void OnCloseCallback()
+            {
+                if (isOpened && isRewarded)
+                    onCompleteCallback?.Invoke();
+                else
+                    onDenyCallback?.Invoke("Ad was not opened");
+            }
+
+            VideoAd.Show(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
         }
 
         public void ShowInterstitialAd(
-            Action onOpenCallback = null,
-            Action<bool> onCloseCallback = null,
-            Action<string> onErrorCallback = null,
-            Action onOfflineCallback = null)
+            Action onCompleteCallback = null,
+            Action<string> onDenyCallback = null)
         {
-            InterstitialAd.Show(onOpenCallback, onCloseCallback, onErrorCallback, onOfflineCallback);
+            bool isOpened = false;
+
+            void OnOpenCallback() =>
+                isOpened = true;
+
+            void OnOfflineCallback() =>
+                onDenyCallback?.Invoke("App is offline");
+
+            void OnErrorCallback(string error) =>
+                onDenyCallback?.Invoke(error);
+
+            void OnCloseCallback(bool isShown)
+            {
+                if (isOpened && isShown)
+                    onCompleteCallback?.Invoke();
+                else
+                    onDenyCallback?.Invoke("Ad was not opened");
+            }
+
+            InterstitialAd.Show(OnOpenCallback, OnCloseCallback, OnErrorCallback, OnOfflineCallback);
         }
     }
 }

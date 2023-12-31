@@ -12,8 +12,10 @@ namespace CodeBase.Services.ADS
     {
 #if UNITY_EDITOR
         private const int InterstitialAdCooldownSeconds = 5;
-#else
+#elif YANDEX_GAMES
         private const int InterstitialAdCooldownSeconds = 60;
+#elif CRAZY_GAMES
+        private const int InterstitialAdCooldownSeconds = 180;
 #endif
 
         private readonly ISoundService _soundService;
@@ -78,6 +80,9 @@ namespace CodeBase.Services.ADS
 #if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
             UseYandexAd();
 #endif
+#if !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
+            UseCrazyGamesAd();
+#endif
 #if UNITY_EDITOR
             UseEditorAd();
 #endif
@@ -91,54 +96,15 @@ namespace CodeBase.Services.ADS
         private void UseYandexAd() =>
             _adProvider = new YandexAD();
 
-        private void RewardAd(Action onCompleteCallback = null, Action onDenyCallback = null)
-        {
-            bool isOpened = false;
-            bool isRewarded = false;
+        [Conditional("YANDEX_GAMES")]
+        private void UseCrazyGamesAd() =>
+            _adProvider = new CrazyGamesAD();
 
-            void OnOpenCallback() =>
-                isOpened = true;
+        private void RewardAd(Action onCompleteCallback = null, Action onDenyCallback = null) =>
+            _adProvider.ShowRewardAd(onCompleteCallback, _ => onDenyCallback?.Invoke());
 
-            void OnRewardedCallback() =>
-                isRewarded = true;
-
-            void OnErrorCallback(string error) =>
-                onDenyCallback?.Invoke();
-
-            void OnCloseCallback()
-            {
-                if (isOpened && isRewarded)
-                    onCompleteCallback?.Invoke();
-                else
-                    onDenyCallback?.Invoke();
-            }
-
-            _adProvider.ShowRewardAd(OnOpenCallback, OnRewardedCallback, OnCloseCallback, OnErrorCallback);
-        }
-
-        private void InterstitialAd(Action onCompleteCallback = null, Action onDenyCallback = null)
-        {
-            bool isOpened = false;
-
-            void OpenCallback() =>
-                isOpened = true;
-
-            void OfflineCallback() =>
-                onDenyCallback?.Invoke();
-
-            void ErrorCallback(string error) =>
-                onDenyCallback?.Invoke();
-
-            void CloseCallback(bool isShown)
-            {
-                if (isOpened && isShown)
-                    onCompleteCallback?.Invoke();
-                else
-                    onDenyCallback?.Invoke();
-            }
-
-            _adProvider.ShowInterstitialAd(OpenCallback, CloseCallback, ErrorCallback, OfflineCallback);
-        }
+        private void InterstitialAd(Action onCompleteCallback = null, Action onDenyCallback = null) =>
+            _adProvider.ShowInterstitialAd(onCompleteCallback, _ => onDenyCallback?.Invoke());
 
         private void OnAddOpened()
         {

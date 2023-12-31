@@ -12,7 +12,7 @@ namespace CodeBase.UI
         private void Awake() =>
             _closeButton.interactable = true;
 
-        public void Open(Action<bool> onCloseCallback, Action<string> onErrorCallback)
+        public void Open(Action onCloseCallback, Action<string> onErrorCallback)
         {
             _errorButton.onClick.AddListener(
                 () =>
@@ -21,7 +21,7 @@ namespace CodeBase.UI
                     Destroy(gameObject);
                 });
 
-            _closeButton.onClick.AddListener(() => onCloseCallback.Invoke(true));
+            _closeButton.onClick.AddListener(onCloseCallback.Invoke);
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
         }
     }

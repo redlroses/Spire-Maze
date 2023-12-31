@@ -16,29 +16,22 @@ namespace CodeBase.SDK.ADS
         }
 
         public void ShowRewardAd(
-            Action onOpenCallback = null,
-            Action onRewardedCallback = null,
-            Action onCloseCallback = null,
-            Action<string> onErrorCallback = null)
+            Action onCompleteCallback = null,
+            Action<string> onDenyCallback = null)
         {
             _uiFactory ??= AllServices.Container.Single<IUIFactory>();
-
-            onOpenCallback?.Invoke();
             GameObject obj = _uiFactory.CreateEditorRewardADPanel();
-            obj.GetComponent<EditorRewardADPanel>().Open(onRewardedCallback, onCloseCallback, onErrorCallback);
+            obj.GetComponent<EditorRewardADPanel>().Open(null, onCompleteCallback, onDenyCallback);
         }
 
         public void ShowInterstitialAd(
-            Action onOpenCallback = null,
-            Action<bool> onCloseCallback = null,
-            Action<string> onErrorCallback = null,
-            Action onOfflineCallback = null)
+            Action onCompleteCallback = null,
+            Action<string> onDenyCallback = null)
         {
             _uiFactory ??= AllServices.Container.Single<IUIFactory>();
 
-            onOpenCallback?.Invoke();
             GameObject obj = _uiFactory.CreateEditorInterstitialADPanel();
-            obj.GetComponent<EditorInterstitialADPanel>().Open(onCloseCallback, onErrorCallback);
+            obj.GetComponent<EditorInterstitialADPanel>().Open(onCompleteCallback, onDenyCallback);
         }
     }
 }
