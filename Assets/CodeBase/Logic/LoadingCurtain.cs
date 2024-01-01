@@ -4,7 +4,6 @@ using CodeBase.Tools;
 using CodeBase.UI.Elements;
 using Cysharp.Threading.Tasks;
 using NTC.Global.System;
-using RPGCharacterAnims.Actions;
 using UnityEngine;
 
 namespace CodeBase.Logic
@@ -35,7 +34,7 @@ namespace CodeBase.Logic
 
         public async UniTaskVoid Hide(int delay, Action onBegin = null, Action onComplete = null)
         {
-            await UniTask.Delay(delay);
+            await UniTask.WaitForSeconds(delay, true, PlayerLoopTiming.TimeUpdate);
             _loadingIcon.gameObject.Disable();
             _sliderSetter.gameObject.Disable();
 

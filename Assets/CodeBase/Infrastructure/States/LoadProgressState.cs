@@ -5,6 +5,7 @@ using CodeBase.Services.Sound;
 using CodeBase.Services.StaticData;
 using CodeBase.Tools.Extension;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {

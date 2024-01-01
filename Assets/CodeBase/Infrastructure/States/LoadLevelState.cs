@@ -46,8 +46,8 @@ namespace CodeBase.Infrastructure.States
     public class LoadLevelState : IPayloadedState<LoadPayload>
     {
         private const string PlayerKey = "Player";
-        private const int DefaultLoadDelay = 1000;
-        private const int FirstLoadDelay = 2000;
+        private const int DefaultLoadDelay = 1;
+        private const int FirstLoadDelay = 2;
 
         private readonly IADService _adService;
         private readonly IAnalyticsService _analytics;
