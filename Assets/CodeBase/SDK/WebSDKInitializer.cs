@@ -29,6 +29,7 @@ namespace CodeBase.SDK
             yield break;
 #else
             GameAnalytics.Initialize();
+
             yield return YandexGamesSdk.Initialize();
 
             while (GameAnalytics.Initialized == false)

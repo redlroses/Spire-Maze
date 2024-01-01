@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.Input;
 using CodeBase.Services.Watch;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -22,9 +23,11 @@ namespace CodeBase.Infrastructure.States
 
         public void Enter()
         {
+            Debug.Log("GameLoopState Enter");
             _inputService.Subscribe();
             _inputService.EnableMovementMap();
             _watchService.Start();
+            Debug.Log("GameLoopState Enter End");
         }
     }
 }

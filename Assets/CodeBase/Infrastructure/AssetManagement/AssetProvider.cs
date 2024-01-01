@@ -138,14 +138,14 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public void PreloadCells()
         {
-            IEnumerable<Type> cellTypes = typeof(Cell).Assembly.ExportedTypes.Where(t => t.BaseType == typeof(Cell));
-
-            foreach (Type type in cellTypes)
-            {
-                string path = AssetPath.Combine(AssetPath.Cells, type.Name);
-                ResourceRequest request = Resources.LoadAsync<GameObject>(path);
-                request.completed += _ => _cache.TryAdd(path, request.asset);
-            }
+            // IEnumerable<Type> cellTypes = typeof(Cell).Assembly.ExportedTypes.Where(t => t.BaseType == typeof(Cell));
+            //
+            // foreach (Type type in cellTypes)
+            // {
+            //     string path = AssetPath.Combine(AssetPath.Cells, type.Name);
+            //     ResourceRequest request = Resources.LoadAsync<GameObject>(path);
+            //     request.completed += _ => _cache.TryAdd(path, request.asset);
+            // }
         }
 
         public void Cleanup()

@@ -69,6 +69,9 @@ namespace CodeBase.MeshCombine
 
             ConstructMeshHolder(meshHolder.gameObject, combine, material, newMesh, true);
             meshHolder.gameObject.isStatic = true;
+            newMesh.Optimize();
+            newMesh.OptimizeIndexBuffers();
+            newMesh.OptimizeReorderVertexBuffer();
 
             foreach (MeshCombineMarker meshCombinable in meshCombinables)
                 meshCombinable.Renderer.enabled = false;
