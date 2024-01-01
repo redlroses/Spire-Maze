@@ -1,8 +1,7 @@
 ﻿#if !UNITY_EDITOR && UNITY_WEBGL
-using CodeBase.Tools.Extension;
-using Agava.YandexGames;
-using Agava.WebUtility;
+using System.Threading.Tasks;
 #endif
+using CodeBase.Tools.Extension;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
@@ -23,6 +22,7 @@ using CodeBase.Services.StaticData;
 using CodeBase.Services.Watch;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -47,13 +47,9 @@ namespace CodeBase.Infrastructure.States
 
         public void Exit()
         {
-#if !UNITY_EDITOR && UNITY_WEBGL
-            Get<ILocalizationService>().ChooseLanguage(YandexGamesSdk.Environment.browser.lang.AsLangId());
-#else
-            Get<ILocalizationService>().ChooseLanguage(LanguageId.Russian);
-#endif
-            Get<IRankedService>().InitLeaderboard();
+            ApplyLanguage();
             ChooseQualityLevel();
+            Get<IRankedService>().InitLeaderboard();
         }
 
         private void RegisterServices()
@@ -126,14 +122,73 @@ namespace CodeBase.Infrastructure.States
             where TService : class, IService =>
             _services.RegisterSingle(service);
 
-        private void ChooseQualityLevel()
+        private async UniTaskVoid ChooseQualityLevel()
         {
-#if !UNITY_EDITOR && UNITY_WEBGL
-            if (Device.IsMobile)
+            if (await IsMobile())
                 QualitySettings.DecreaseLevel();
+            else
+                QualitySettings.IncreaseLevel();
+        }
+
+        private async UniTask<bool> IsMobile()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
+            return Agava.WebUtility.Device.IsMobile;
+#elif !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
+            return = await IsMobileOnCrazyGames();
 #else
-            QualitySettings.IncreaseLevel();
+            return false;
 #endif
+        }
+
+        private async UniTaskVoid ApplyLanguage() =>
+            Get<ILocalizationService>().ChooseLanguage(await GetLanguageId());
+
+        private async UniTask<LanguageId> GetLanguageId()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
+            return Agava.YandexGames.YandexGamesSdk.Environment.browser.lang.AsLangId();
+#elif !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
+            return await GetLangIdOnCrazyGames();
+#else
+            return LanguageId.Russian;
+#endif
+        }
+
+        private async UniTask<LanguageId> GetLangIdOnCrazyGames()
+        {
+            LanguageId langId = LanguageId.English;
+            bool isGet = false;
+
+            CrazyGames.CrazySDK.Instance.GetSystemInfo(
+                systemInfo =>
+                {
+                    isGet = true;
+                    langId = systemInfo.countryCode.ToLower().AsLangId();
+                });
+
+            while (isGet == false)
+                await UniTask.Yield();
+
+            return langId;
+        }
+
+        private async UniTask<bool> IsMobileOnCrazyGames()
+        {
+            bool isMobile = false;
+            bool isGet = false;
+
+            CrazyGames.CrazySDK.Instance.GetSystemInfo(
+                systemInfo =>
+                {
+                    isMobile = systemInfo.device.type is "mobile" or "tablet";
+                    isGet = true;
+                });
+
+            while (isGet == false)
+                await UniTask.Yield();
+
+            return isMobile;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace CodeBase.Services.SaveLoad
             _cloudDataProvider = new YandexCloudSaveDataProvider();
 #endif
 #if !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
-            _cloudDataProvider = new CrazyGamesCloudSaveDataProvider();
+            _cloudDataProvider = new CrazyGamesCloudSaveDataProvider(ProgressKey);
 #endif
         }
 

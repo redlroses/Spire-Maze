@@ -4,6 +4,7 @@ using System.Collections;
 using Agava.YandexGames;
 #endif
 using CodeBase.Infrastructure;
+using UnityEngine;
 #if !UNITY_EDITOR
 using GameAnalyticsSDK;
 #endif
@@ -31,12 +32,13 @@ namespace CodeBase.SDK
             onReadyCallback?.Invoke();
 
             yield break;
-#else
-            GameAnalytics.Initialize();
-
-#if YANDEX_GAMES
+#endif
+#if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
+            Debug.Log("YandexSDK Initialized");
             yield return YandexGamesSdk.Initialize();
 #endif
+#if !UNITY_EDITOR && UNITY_WEBGL
+            GameAnalytics.Initialize();
 
             while (GameAnalytics.Initialized == false)
                 yield return null;

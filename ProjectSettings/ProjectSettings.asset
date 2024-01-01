@@ -134,7 +134,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 708e8912394e5ec4097bde463995e8c3, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -177,7 +178,7 @@ PlayerSettings:
   keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
   strictShaderVariantMatching: 0
-  VertexChannelCompressionMask: 4054
+  VertexChannelCompressionMask: 246
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 12.0
   tvOSSdkVersion: 0
@@ -732,14 +733,14 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: PROJECT:ResizeToFill
+  webGLTemplate: PROJECT:Crazy_2020
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 0
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 1
+  webGLDecompressionFallback: 0
   webGLInitialMemorySize: 32
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
@@ -759,7 +760,7 @@ PlayerSettings:
     Stadia: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
     Standalone: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
     VisionOS: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
-    WebGL: TextMeshPro;YANDEX_GAMES;UNITY_POST_PROCESSING_STACK_V2;AH_SCRIPT_ALLOW
+    WebGL: TextMeshPro;CRAZY_GAMES;UNITY_POST_PROCESSING_STACK_V2;AH_SCRIPT_ALLOW
     XboxOne: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
     iPhone: TextMeshPro
     tvOS: TextMeshPro;UNITY_POST_PROCESSING_STACK_V2
@@ -881,4 +882,4 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 2
