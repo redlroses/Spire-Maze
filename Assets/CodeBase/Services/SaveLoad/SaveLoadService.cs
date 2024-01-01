@@ -1,7 +1,3 @@
-#if !UNITY_EDITOR && UNITY_WEBGL
-using Agava.YandexGames;
-using Debug = UnityEngine.Debug;
-#endif
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
@@ -22,10 +18,23 @@ namespace CodeBase.Services.SaveLoad
         private readonly IPersistentProgressService _progressService;
         private readonly IWatchService _watchService;
 
+        private ICloudSaveDataProvider _cloudDataProvider;
+
         public SaveLoadService(IPersistentProgressService progressService, IWatchService watchService)
         {
             _progressService = progressService;
             _watchService = watchService;
+            InitCloudSaveDataProvider();
+        }
+
+        private void InitCloudSaveDataProvider()
+        {
+#if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
+            _cloudDataProvider = new YandexCloudSaveDataProvider();
+#endif
+#if !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
+            _cloudDataProvider = new CrazyGamesCloudSaveDataProvider();
+#endif
         }
 
         public void SaveProgress()
@@ -48,7 +57,7 @@ namespace CodeBase.Services.SaveLoad
         public async UniTask<PlayerProgress> LoadProgress()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            if (PlayerAccount.IsAuthorized)
+            if (IsPlayerAuthorized())
                 return await GetActualSaveData();
 #endif
             string saveData = LoadLocal();
@@ -65,7 +74,7 @@ namespace CodeBase.Services.SaveLoad
             SaveLocal(saveData);
 
 #if !UNITY_EDITOR && UNITY_WEBGL
-            if (PlayerAccount.IsAuthorized)
+            if (IsPlayerAuthorized())
                 SaveCloud(saveData);
 #endif
         }
@@ -105,35 +114,16 @@ namespace CodeBase.Services.SaveLoad
             return MergeSaves(localProgress, cloudProgress);
         }
 
-        private void SaveCloud(string saveData)
-        {
-            PlayerAccount.SetCloudSaveData(saveData,
-                null,
-                error => Debug.LogError($"Cloud save error: {error}"));
-        }
+        private void SaveCloud(string saveData) =>
+            _cloudDataProvider.Save(saveData);
 
-        private async UniTask<string> LoadCloud()
-        {
-            bool isLoading = true;
-            string saveData = null;
-
-            PlayerAccount.GetCloudSaveData(
-                saves =>
-                {
-                    saveData = saves;
-                    isLoading = false;
-                },
-                error =>
-                {
-                    isLoading = false;
-                });
-
-            while (isLoading)
-                await UniTask.Yield();
-
-            return saveData;
-        }
+        private async UniTask<string> LoadCloud() =>
+            await _cloudDataProvider.Load();
 #endif
+
+        [UsedImplicitly]
+        private bool IsPlayerAuthorized() =>
+            _cloudDataProvider.IsPlayerAuthorized();
 
         [UsedImplicitly]
         private PlayerProgress MergeSaves(PlayerProgress prioritized, PlayerProgress secondary)
@@ -149,13 +139,9 @@ namespace CodeBase.Services.SaveLoad
             for (int index = 0; index <= lowestLevelIndexOfBoth; index++)
             {
                 if (prioritized.GlobalData.Levels[index].Score > secondary.GlobalData.Levels[index].Score)
-                {
                     mergedLevelsData[index] = prioritized.GlobalData.Levels[index];
-                }
                 else
-                {
                     mergedLevelsData[index] = secondary.GlobalData.Levels[index];
-                }
             }
 
             PlayerProgress actualProgress = prioritized.Relevance > secondary.Relevance ? prioritized : secondary;

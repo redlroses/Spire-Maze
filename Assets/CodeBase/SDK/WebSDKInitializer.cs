@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+#if YANDEX_GAMES && UNITY_WEBGL && !UNITY_EDITOR
 using Agava.YandexGames;
+#endif
 using CodeBase.Infrastructure;
 #if !UNITY_EDITOR
 using GameAnalyticsSDK;
@@ -12,7 +14,9 @@ namespace CodeBase.SDK
     {
         public WebSDKInitializer()
         {
+#if YANDEX_GAMES && UNITY_WEBGL && !UNITY_EDITOR
             YandexGamesSdk.CallbackLogging = false;
+#endif
         }
 
         public void Start(ICoroutineRunner coroutineRunner, Action onReadyCallback) =>
@@ -30,7 +34,9 @@ namespace CodeBase.SDK
 #else
             GameAnalytics.Initialize();
 
+#if YANDEX_GAMES
             yield return YandexGamesSdk.Initialize();
+#endif
 
             while (GameAnalytics.Initialized == false)
                 yield return null;
