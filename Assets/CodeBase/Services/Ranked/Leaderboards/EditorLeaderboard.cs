@@ -6,7 +6,7 @@ using CodeBase.StaticData;
 using CodeBase.Tools.Extension;
 using Cysharp.Threading.Tasks;
 
-namespace CodeBase.Leaderboards
+namespace CodeBase.Services.Ranked.Leaderboards
 {
     public class EditorLeaderboard : ILeaderboard
     {

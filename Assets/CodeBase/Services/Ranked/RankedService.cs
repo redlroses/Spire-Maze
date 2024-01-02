@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using CodeBase.Data;
 using CodeBase.Infrastructure.AssetManagement;
-using CodeBase.Leaderboards;
+using CodeBase.Services.Ranked.Leaderboards;
 using CodeBase.Services.StaticData;
 using Cysharp.Threading.Tasks;
 
@@ -11,6 +11,7 @@ namespace CodeBase.Services.Ranked
     {
         private const string YandexName = "Yandex";
         private const string EditorName = "Editor";
+        private const string CrazyName = "Crazy";
 
         private readonly IStaticDataService _staticData;
 
@@ -27,6 +28,9 @@ namespace CodeBase.Services.Ranked
         {
 #if YANDEX_GAMES && UNITY_WEBGL && !UNITY_EDITOR
             UseYandexLeaderboard();
+#endif
+#if CRAZY_GAMES && UNITY_WEBGL && !UNITY_EDITOR
+            UseCrazyLeaderboard();
 #endif
 #if UNITY_EDITOR
             UseEditorLeaderboard();
@@ -52,5 +56,9 @@ namespace CodeBase.Services.Ranked
         [Conditional("YANDEX_GAMES")]
         private void UseYandexLeaderboard() =>
             _leaderboard = new YandexLeaderboard(_staticData.GetLeaderboard(YandexName), _staticData);
+
+        [Conditional("CRAZY_GAMES")]
+        private void UseCrazyLeaderboard() =>
+            _leaderboard = new CrazyLeaderboard();
     }
 }

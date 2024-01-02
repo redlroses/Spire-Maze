@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Agava.YandexGames;
 using CodeBase.Data;
 using CodeBase.Services.StaticData;
@@ -10,7 +9,7 @@ using Cysharp.Threading.Tasks;
 using I2.Loc;
 using UnityEngine;
 
-namespace CodeBase.Leaderboards
+namespace CodeBase.Services.Ranked.Leaderboards
 {
     public class YandexLeaderboard : ILeaderboard
     {

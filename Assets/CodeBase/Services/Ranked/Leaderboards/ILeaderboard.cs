@@ -1,7 +1,7 @@
 using CodeBase.Data;
 using Cysharp.Threading.Tasks;
 
-namespace CodeBase.Leaderboards
+namespace CodeBase.Services.Ranked.Leaderboards
 {
     public interface ILeaderboard
     {
