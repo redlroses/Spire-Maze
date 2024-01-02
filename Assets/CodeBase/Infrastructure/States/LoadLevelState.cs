@@ -307,7 +307,9 @@ namespace CodeBase.Infrastructure.States
             hud.GetComponentInChildren<ExtraLivesBarView>().Construct(_uiFactory);
             hud.GetComponentInChildren<MuteButton>().Construct(_soundService);
             hud.GetComponentInChildren<TutorialButton>().Construct(_windowService);
+#if YANDEX_GAMES
             hud.GetComponentInChildren<LeaderboardButton>().Construct(_windowService);
+#endif
             hud.GetComponentInChildren<SettingsButton>().Construct(_windowService);
             hud.GetComponentInChildren<HealthBarView>().Construct(hero.GetComponentInChildren<IHealthReactive>());
             hud.GetComponentInChildren<StaminaBarView>().Construct(hero.GetComponentInChildren<IStamina>());
