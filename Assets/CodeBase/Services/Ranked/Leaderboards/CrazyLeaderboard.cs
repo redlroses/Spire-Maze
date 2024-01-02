@@ -10,8 +10,17 @@ namespace CodeBase.Services.Ranked.Leaderboards
         public UniTask<RanksData> GetRanksData() =>
             UniTask.FromResult(new RanksData());
 
-        public UniTask SetScore(int score, string avatarName) =>
-            UniTask.CompletedTask;
+        public UniTask SetScore(int score, string avatarName)
+        {
+            CrazyGames.CrazyUser.Instance.GetUser(
+                user =>
+                {
+                    if (user != null)
+                        CrazyGames.CrazyUser.Instance.AddScore(score);
+                });
+
+            return UniTask.CompletedTask;
+        }
 
         public UniTask<bool> TryAuthorize() =>
             UniTask.FromResult(false);

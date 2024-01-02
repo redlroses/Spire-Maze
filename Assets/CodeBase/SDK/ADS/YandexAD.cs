@@ -5,6 +5,8 @@ namespace CodeBase.SDK.ADS
 {
     public class YandexAD : IADProvider
     {
+        public int InterstitialAdCooldownSeconds => 60;
+
         public void ShowRewardAd(
             Action onCompleteCallback = null,
             Action<string> onDenyCallback = null)

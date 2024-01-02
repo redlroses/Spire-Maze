@@ -15,6 +15,8 @@ namespace CodeBase.SDK.ADS
             _uiFactory = AllServices.Container.Single<IUIFactory>();
         }
 
+        public int InterstitialAdCooldownSeconds => 10;
+
         public void ShowRewardAd(
             Action onCompleteCallback = null,
             Action<string> onDenyCallback = null)

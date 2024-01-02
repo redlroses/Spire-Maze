@@ -7,7 +7,7 @@ namespace CodeBase.Tools
 {
     public class ImageLoader
     {
-        public void LoadImage(string imageUrl, Action<Sprite> successCallback, Action errorCallback)
+        public void LoadImage(string imageUrl, Action<Sprite> successCallback = null, Action errorCallback = null)
         {
             UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl);
 
@@ -17,7 +17,7 @@ namespace CodeBase.Tools
                     or UnityWebRequest.Result.ProtocolError
                     or UnityWebRequest.Result.DataProcessingError)
                 {
-                    errorCallback.Invoke();
+                    errorCallback?.Invoke();
 
                     throw new FileLoadException("Error image loading: " + www.error);
                 }
@@ -29,7 +29,7 @@ namespace CodeBase.Tools
                     new Rect(0, 0, texture.width, texture.height),
                     new Vector2(0.5f, 0.5f));
 
-                successCallback.Invoke(sprite);
+                successCallback?.Invoke(sprite);
 
                 www.Dispose();
             };

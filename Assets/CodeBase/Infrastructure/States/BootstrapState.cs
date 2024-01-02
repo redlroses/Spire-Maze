@@ -89,7 +89,6 @@ namespace CodeBase.Infrastructure.States
                 new GameFactory(
                     Get<IAssetProvider>(),
                     Get<IPersistentProgressService>(),
-                    Get<IPauseService>(),
                     Get<IUIFactory>(),
                     Get<IInputService>(),
                     Get<ICameraOperatorService>()));

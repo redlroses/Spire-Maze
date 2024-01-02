@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Infrastructure.States;
 using CodeBase.Tools;
+using UnityEngine;
 
 namespace CodeBase.Services.Pause
 {
@@ -24,8 +25,13 @@ namespace CodeBase.Services.Pause
 
         public bool IsPause { get; private set; }
 
-        public void Register(IPauseWatcher pauseWatcher) =>
+        public void Register(IPauseWatcher pauseWatcher)
+        {
+            if (PauseWatchers.Contains(pauseWatcher))
+                return;
+
             PauseWatchers.Add(pauseWatcher);
+        }
 
         public void Unregister(IPauseWatcher pauseWatcher)
         {
@@ -74,19 +80,13 @@ namespace CodeBase.Services.Pause
         private void SendResume()
         {
             for (int index = 0; index < PauseWatchers.Count; index++)
-            {
-                IPauseWatcher pauseWatcher = PauseWatchers[index];
-                pauseWatcher.Resume();
-            }
+                PauseWatchers[index].Resume();
         }
 
         private void SendPause()
         {
             for (int index = 0; index < PauseWatchers.Count; index++)
-            {
-                IPauseWatcher pauseWatcher = PauseWatchers[index];
-                pauseWatcher.Pause();
-            }
+                PauseWatchers[index].Pause();
         }
 
         private void ValidateWatchers() =>

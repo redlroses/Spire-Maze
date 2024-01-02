@@ -262,10 +262,6 @@ namespace CodeBase.Infrastructure.States
 
             await UniTask.Yield();
             InitLobbyDoors(lobby);
-            await UniTask.Yield();
-
-            foreach (IPauseWatcher pauseWatchers in lobby.GetComponentsInChildren<IPauseWatcher>())
-                _pauseService.Register(pauseWatchers);
         }
 
         private void InitLobbyDoors(GameObject lobby)

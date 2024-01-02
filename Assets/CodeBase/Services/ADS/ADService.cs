@@ -10,14 +10,6 @@ namespace CodeBase.Services.ADS
 {
     public class ADService : IADService
     {
-#if UNITY_EDITOR
-        private const int InterstitialAdCooldownSeconds = 5;
-#elif YANDEX_GAMES
-        private const int InterstitialAdCooldownSeconds = 60;
-#elif CRAZY_GAMES
-        private const int InterstitialAdCooldownSeconds = 180;
-#endif
-
         private readonly ISoundService _soundService;
         private readonly IPauseService _pauseService;
         private readonly RoutineSequence _interstitialAdCooldown;
@@ -29,11 +21,10 @@ namespace CodeBase.Services.ADS
         {
             _soundService = soundService;
             _pauseService = pauseService;
+            InitAdProvider();
 
             _interstitialAdCooldown = new RoutineSequence(RoutineUpdateMod.FixedRun)
-                .WaitForSeconds(InterstitialAdCooldownSeconds);
-
-            InitAdProvider();
+                .WaitForSeconds(_adProvider.InterstitialAdCooldownSeconds);
             _interstitialAdCooldown.Play();
         }
 

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.LevelSpecification.Cells;
 using CodeBase.Logic;
@@ -21,7 +20,6 @@ namespace CodeBase.Infrastructure.Factory
     {
         private readonly IAssetProvider _assets;
         private readonly IPersistentProgressService _progressService;
-        private readonly IPauseService _pauseService;
         private readonly IUIFactory _uiFactory;
         private readonly IInputService _inputService;
         private readonly ICameraOperatorService _cameraOperator;
@@ -31,14 +29,12 @@ namespace CodeBase.Infrastructure.Factory
         public GameFactory(
             IAssetProvider assets,
             IPersistentProgressService progressService,
-            IPauseService pauseService,
             IUIFactory uiFactory,
             IInputService inputService,
             ICameraOperatorService cameraOperator)
         {
             _assets = assets;
             _progressService = progressService;
-            _pauseService = pauseService;
             _uiFactory = uiFactory;
             _inputService = inputService;
             _cameraOperator = cameraOperator;
