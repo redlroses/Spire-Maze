@@ -18,6 +18,10 @@ namespace CodeBase.Infrastructure.States
         {
             _inputService.Cleanup();
             _watchService.Stop();
+
+#if CRAZY_GAMES
+            CrazyGames.CrazyEvents.Instance.GameplayStop();
+#endif
         }
 
         public void Enter()
@@ -25,6 +29,10 @@ namespace CodeBase.Infrastructure.States
             _inputService.Subscribe();
             _inputService.EnableMovementMap();
             _watchService.Start();
+
+#if CRAZY_GAMES
+            CrazyGames.CrazyEvents.Instance.GameplayStart();
+#endif
         }
     }
 }

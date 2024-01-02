@@ -1,22 +1,28 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Infrastructure.States;
 using CodeBase.Tools;
 
 namespace CodeBase.Services.Pause
 {
     public class PauseService : IPauseService
     {
+        private readonly GameStateMachine _gameStateMachine;
+
         private Locker _cachedLocker;
 
-        public PauseService()
+        public PauseService(GameStateMachine gameStateMachine)
         {
+            _gameStateMachine = gameStateMachine;
             WebFocusObserver.InBackgroundChangeEvent += OnInBackgroundChanged;
         }
-
-        public bool IsPause { get; private set; }
 
         private List<IPauseWatcher> PauseWatchers { get; } = new List<IPauseWatcher>();
 
         private List<IPauseWatcher> UnregisteredPauseWatchers { get; } = new List<IPauseWatcher>();
+
+        private bool IsGameLoopState => _gameStateMachine.ActiveState is GameLoopState;
+
+        public bool IsPause { get; private set; }
 
         public void Register(IPauseWatcher pauseWatcher) =>
             PauseWatchers.Add(pauseWatcher);
@@ -42,6 +48,9 @@ namespace CodeBase.Services.Pause
             if (IsPause || _cachedLocker is not null)
                 return;
 
+#if CRAZY_GAMES
+            CrazyGames.CrazyEvents.Instance.GameplayStop();
+#endif
             IsPause = true;
             _cachedLocker = locker;
             ValidateWatchers();
@@ -53,6 +62,9 @@ namespace CodeBase.Services.Pause
             if (IsPause == false || _cachedLocker != locker)
                 return;
 
+#if CRAZY_GAMES
+            CrazyGames.CrazyEvents.Instance.GameplayStart();
+#endif
             IsPause = false;
             _cachedLocker = null;
             ValidateWatchers();

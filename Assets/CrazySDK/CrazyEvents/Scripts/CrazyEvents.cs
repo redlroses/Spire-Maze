@@ -4,6 +4,8 @@ namespace CrazyGames
 {
     public class CrazyEvents : Singleton<CrazyEvents>
     {
+        public bool IsGameplay { get; private set; }
+
         public void HappyTime()
         {
             CrazySDK.Instance.HappyTime();
@@ -11,12 +13,20 @@ namespace CrazyGames
 
         public void GameplayStart()
         {
-            CrazySDK.Instance.GameplayStart();
+            if (IsGameplay == false)
+            {
+                IsGameplay = true;
+                CrazySDK.Instance.GameplayStart();
+            }
         }
 
         public void GameplayStop()
         {
-            CrazySDK.Instance.GameplayStop();
+            if (IsGameplay)
+            {
+                IsGameplay = false;
+                CrazySDK.Instance.GameplayStop();
+            }
         }
 
         public string InviteLink(Dictionary<string, string> parameters)

@@ -38,9 +38,15 @@ namespace CodeBase.UI.Elements
         private void OnPauseToggle(bool isPause)
         {
             if (isPause)
-                _pauseService.EnablePause(_inputLocker);
+            {
+                if (_pauseService.IsPause == false)
+                    _pauseService.EnablePause(_inputLocker);
+            }
             else
-                _pauseService.DisablePause(_inputLocker);
+            {
+                if (_pauseService.IsPause)
+                    _pauseService.DisablePause(_inputLocker);
+            }
         }
     }
 }

@@ -46,8 +46,8 @@ namespace CodeBase.Infrastructure.States
     public class LoadLevelState : IPayloadedState<LoadPayload>
     {
         private const string PlayerKey = "Player";
-        private const int DefaultLoadDelay = 1;
-        private const int FirstLoadDelay = 2;
+        private const float DefaultLoadDelay = 0.5f;
+        private const float FirstLoadDelay = 2f;
 
         private readonly IADService _adService;
         private readonly IAnalyticsService _analytics;
@@ -138,12 +138,19 @@ namespace CodeBase.Infrastructure.States
                 _saveLoadService.SaveProgress();
             }
 
+            if (_loadPayload.IsShowAd)
+                _adService.ShowInterstitialAd();
+        }
+
+        private void HideCurtain(Action onBegin = null)
+        {
             if (_isFirstLoad)
             {
                 _curtain.Hide(
                     FirstLoadDelay,
                     () =>
                     {
+                        onBegin?.Invoke();
 #if !UNITY_EDITOR && YANDEX_GAMES
                         YandexGamesSdk.GameReady();
 #endif
@@ -153,11 +160,10 @@ namespace CodeBase.Infrastructure.States
             }
             else
             {
-                _curtain.Hide(DefaultLoadDelay);
+                _curtain.Hide(
+                    DefaultLoadDelay,
+                    () => onBegin?.Invoke());
             }
-
-            if (_loadPayload.IsShowAd)
-                _adService.ShowInterstitialAd();
         }
 
         private async UniTaskVoid OnLoaded()
@@ -175,8 +181,7 @@ namespace CodeBase.Infrastructure.States
             InitLevelNamePanel();
             RegisterServicesInPauseService();
             InitMusicPlayer();
-
-            _stateMachine.Enter<GameLoopState>();
+            HideCurtain(_stateMachine.Enter<GameLoopState>);
         }
 
         private void InitReviver(GameObject hero)

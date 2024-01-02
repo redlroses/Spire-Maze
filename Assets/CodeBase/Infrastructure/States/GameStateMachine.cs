@@ -71,6 +71,8 @@ namespace CodeBase.Infrastructure.States
             };
         }
 
+        public IExitableState ActiveState => _activeState;
+
         public void Enter<TState>()
             where TState : class, IState
         {

@@ -57,7 +57,7 @@ namespace CodeBase.Infrastructure.States
             RegisterStaticDataService();
             Register<IRandomService>(new RandomService());
             Register<IPersistentProgressService>(new PersistentProgressService());
-            Register<IPauseService>(new PauseService());
+            Register<IPauseService>(new PauseService(_stateMachine));
             Register<IAssetProvider>(new AssetProvider(Get<IPersistentProgressService>(), Get<IPauseService>()));
             Register<ICameraOperatorService>(new CameraOperatorService());
             Register<ILocalizationService>(new LocalizationService());

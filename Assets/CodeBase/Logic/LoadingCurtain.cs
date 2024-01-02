@@ -32,7 +32,7 @@ namespace CodeBase.Logic
             _showHide.Value.ShowInstantly();
         }
 
-        public async UniTaskVoid Hide(int delay, Action onBegin = null, Action onComplete = null)
+        public async UniTaskVoid Hide(float delay, Action onBegin = null, Action onComplete = null)
         {
             await UniTask.WaitForSeconds(delay, true, PlayerLoopTiming.TimeUpdate);
             _loadingIcon.gameObject.Disable();
