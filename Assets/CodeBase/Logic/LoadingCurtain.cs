@@ -23,8 +23,8 @@ namespace CodeBase.Logic
 
         public void Show()
         {
-            _loadingIcon.gameObject.Enable();
             gameObject.Enable();
+            _loadingIcon.gameObject.Enable();
             _sliderSetter.gameObject.Enable();
             _sliderSetter.SetNormalizedValueImmediately(0);
             UpdateLoadProgress(FinalProgressLoadValue);

@@ -42,5 +42,7 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateTutorialTrigger(Transform container);
 
         GameObject CreateMusicPlayer();
+
+        GameObject CreateCamera();
     }
 }

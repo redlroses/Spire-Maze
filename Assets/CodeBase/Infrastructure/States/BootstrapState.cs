@@ -135,7 +135,7 @@ namespace CodeBase.Infrastructure.States
 #if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
             return Agava.WebUtility.Device.IsMobile;
 #elif !UNITY_EDITOR && UNITY_WEBGL && CRAZY_GAMES
-            return = await IsMobileOnCrazyGames();
+            return await IsMobileOnCrazyGames();
 #else
             return false;
 #endif

@@ -160,6 +160,8 @@ namespace CodeBase.Infrastructure.States
 
         private async UniTaskVoid OnLoaded()
         {
+            _gameFactory.CreateCamera();
+            await UniTask.DelayFrame(2);
             InitUIRoot();
             await InitGameWorld();
             ValidateLevelProgress();

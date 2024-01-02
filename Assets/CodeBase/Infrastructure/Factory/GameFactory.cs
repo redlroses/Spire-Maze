@@ -132,6 +132,9 @@ namespace CodeBase.Infrastructure.Factory
         public GameObject CreateMusicPlayer() =>
             _assets.Instantiate(AssetPath.MusicPlayer);
 
+        public GameObject CreateCamera() =>
+            _assets.Instantiate(AssetPath.Camera);
+
         public GameObject CreateHud() =>
             _assets.InstantiateRegistered(AssetPath.Hud);
     }
