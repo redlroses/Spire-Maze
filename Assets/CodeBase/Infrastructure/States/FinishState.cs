@@ -13,11 +13,14 @@ using CodeBase.Services.Watch;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Windows;
+using CrazyGames;
 
 namespace CodeBase.Infrastructure.States
 {
     public class FinishState : IPayloadedState<bool>
     {
+        private const int MaxStarsCount = 3;
+
         private readonly IAnalyticsService _analytics;
         private readonly IHeroLocator _heroLocator;
         private readonly IPersistentProgressService _progressService;
@@ -62,15 +65,15 @@ namespace CodeBase.Infrastructure.States
 
         private int PlayTime => TemporalProgress.PlayTime;
 
-        public void Enter(bool loadPayload)
+        public void Enter(bool islose)
         {
             CountCollectedArtifacts();
             CountTotalArtifacts();
             CountPlayTime();
-            CountLevelScore(loadPayload);
+            CountLevelScore(islose);
             CountGlobalScore();
 
-            if (loadPayload)
+            if (islose)
             {
                 _windowService.Open(WindowId.Loss);
             }
@@ -78,9 +81,14 @@ namespace CodeBase.Infrastructure.States
             {
                 _saveLoad.SaveProgress();
                 _windowService.Open(WindowId.Results);
+
+#if CRAZY_GAMES
+                if (StarsCount >= MaxStarsCount)
+                    CrazyEvents.Instance.HappyTime();
+#endif
             }
 
-            CollectAnalytics(loadPayload);
+            CollectAnalytics(islose);
         }
 
         public void Exit()

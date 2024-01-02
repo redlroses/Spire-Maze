@@ -96,7 +96,7 @@ namespace CodeBase.Services.ADS
         private void UseYandexAd() =>
             _adProvider = new YandexAD();
 
-        [Conditional("YANDEX_GAMES")]
+        [Conditional("CRAZY_GAMES")]
         private void UseCrazyGamesAd() =>
             _adProvider = new CrazyGamesAD();
 

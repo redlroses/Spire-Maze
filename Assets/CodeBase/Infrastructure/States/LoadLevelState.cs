@@ -113,6 +113,7 @@ namespace CodeBase.Infrastructure.States
         public void Enter(LoadPayload loadPayload)
         {
             _curtain.Show();
+
             _loadPayload = loadPayload;
 
             if (loadPayload.IsClearLoad)
@@ -155,7 +156,8 @@ namespace CodeBase.Infrastructure.States
                 _curtain.Hide(DefaultLoadDelay);
             }
 
-            _adService.ShowInterstitialAd();
+            if (_loadPayload.IsShowAd)
+                _adService.ShowInterstitialAd();
         }
 
         private async UniTaskVoid OnLoaded()

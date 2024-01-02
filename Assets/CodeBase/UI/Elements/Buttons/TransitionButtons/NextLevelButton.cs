@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
+using CodeBase.Services.ADS;
 using CodeBase.Services.StaticData;
 
 namespace CodeBase.UI.Elements.Buttons.TransitionButtons
@@ -20,7 +21,7 @@ namespace CodeBase.UI.Elements.Buttons.TransitionButtons
             IsLastLevel() ? CreateToLobbyPayload() : CreateToNextLevelPayload();
 
         private LoadPayload CreateToNextLevelPayload() =>
-            new LoadPayload(LevelNames.BuildableLevel, _levelId + 1, true, true);
+            new LoadPayload(LevelNames.BuildableLevel, _levelId + 1, true, true, true);
 
         private LoadPayload CreateToLobbyPayload() =>
             new LoadPayload(LevelNames.Lobby, LevelNames.LobbyId, true, true);
