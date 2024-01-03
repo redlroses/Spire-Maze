@@ -111,7 +111,7 @@ namespace CodeBase.Services.SaveLoad
             PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
             PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
 
-            return MergeSaves(cloudProgress, localProgress);
+            return MergeSaves(localProgress, cloudProgress);
         }
 
         private void SaveCloud(string saveData) =>
@@ -134,7 +134,7 @@ namespace CodeBase.Services.SaveLoad
             int lowestLevelIndexOfBoth =
                 Mathf.Min(prioritized.GlobalData.Levels.Count, secondary.GlobalData.Levels.Count) - 1;
 
-            LevelData[] mergedLevelsData = new LevelData[largestLevelIndex];
+            LevelData[] mergedLevelsData = new LevelData[largestLevelIndex + 1];
 
             for (int index = 0; index <= lowestLevelIndexOfBoth; index++)
             {

@@ -34,7 +34,6 @@ namespace CodeBase.SDK
             yield break;
 #endif
 #if !UNITY_EDITOR && UNITY_WEBGL && YANDEX_GAMES
-            Debug.Log("YandexSDK Initialized");
             yield return YandexGamesSdk.Initialize();
 #endif
 #if !UNITY_EDITOR && UNITY_WEBGL

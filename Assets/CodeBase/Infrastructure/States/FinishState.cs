@@ -13,7 +13,6 @@ using CodeBase.Services.Watch;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Storable;
 using CodeBase.UI.Services.Windows;
-using CrazyGames;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -84,7 +83,7 @@ namespace CodeBase.Infrastructure.States
 
 #if CRAZY_GAMES
                 if (StarsCount >= MaxStarsCount)
-                    CrazyEvents.Instance.HappyTime();
+                    CrazyGames.CrazyEvents.Instance.HappyTime();
 #endif
             }
 
