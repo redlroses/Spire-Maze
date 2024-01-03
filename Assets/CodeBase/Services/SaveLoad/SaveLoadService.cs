@@ -111,7 +111,7 @@ namespace CodeBase.Services.SaveLoad
             PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
             PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
 
-            return MergeSaves(localProgress, cloudProgress);
+            return MergeSaves(cloudProgress, localProgress);
         }
 
         private void SaveCloud(string saveData) =>

@@ -55,8 +55,6 @@ namespace CodeBase.Logic.Lift.PlateMove
 
         public void Pause()
         {
-            Debug.Log("Pause " + gameObject.GetInstanceID());
-            
             _isEnabled = enabled;
             enabled = false;
         }

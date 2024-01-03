@@ -54,7 +54,7 @@ namespace CrazyGames
         {
             DidRun = true;
 
-#if !UNITY_WEBGL
+#if !UNITY_WEBGL || YANDEX_GAMES
             return;
 #endif
 

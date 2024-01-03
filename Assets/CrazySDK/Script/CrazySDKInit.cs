@@ -7,6 +7,10 @@ namespace CrazyGames
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void OnRuntimeMethodLoad()
         {
+#if !CRAZY_GAMES
+            return;
+#endif
+
             CrazySDK.ResetDomain();
             CrazyAds.ResetDomain();
             CrazyEvents.ResetDomain();
