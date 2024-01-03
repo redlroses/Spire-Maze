@@ -54,7 +54,7 @@ namespace CrazyGames
         {
             DidRun = true;
 
-#if !UNITY_WEBGL
+#if !UNITY_WEBGL || YANDEX_GAMES
             return;
 #endif
 
@@ -159,9 +159,9 @@ namespace CrazyGames
             // check current host against each of the given hosts
             var hostRegex = new Regex(@"^(\w+)://(?<hostname>[^/]+?)(?<port>:\d+)?/");
             var match = hostRegex.Match(Application.absoluteURL);
-            if (!match.Success)
-                // somehow our current url is not a valid url
-                return false;
+            // if (!match.Success)
+            //     // somehow our current url is not a valid url
+            //     return false;
 
             var hostname = match.Groups["hostname"].Value;
             var splittedHost = hostname.Split("."[0]);

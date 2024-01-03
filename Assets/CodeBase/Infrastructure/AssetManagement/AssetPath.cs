@@ -47,6 +47,7 @@ namespace CodeBase.Infrastructure.AssetManagement
 
         public const string BuildInfo = "BuildInfo";
         public const string Camera = "Prefabs/Camera";
+        public const string Menu = "Prefabs/UI/Menu";
 
         public static string Combine(string folder, string name) =>
             $"{folder}{DirectorySeparator}{name}";

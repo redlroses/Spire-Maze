@@ -6,6 +6,7 @@
         public const string Initial = "Initial";
         public const string Lobby = "Lobby";
         public const string LearningLevel = "Learning";
+        public const string Menu = "Menu";
 
         public const int LobbyId = -1;
         public const int LearningLevelId = 0;

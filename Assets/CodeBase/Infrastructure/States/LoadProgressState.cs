@@ -35,13 +35,8 @@ namespace CodeBase.Infrastructure.States
         public async void Enter()
         {
             await InitProgress();
-
-            _gameStateMachine.Enter<LoadLevelState, LoadPayload>(
-                new LoadPayload(
-                    _progressService.Progress.WorldData.SceneName,
-                    _progressService.Progress.WorldData.LevelState.LevelId));
-
             _soundService.Load();
+            _gameStateMachine.Enter<MenuState>();
         }
 
         public void Exit()

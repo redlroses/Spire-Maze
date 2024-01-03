@@ -5,7 +5,6 @@ using CodeBase.Logic;
 using CodeBase.Logic.Items;
 using CodeBase.Services.Cameras;
 using CodeBase.Services.Input;
-using CodeBase.Services.Pause;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData.Storable;
 using CodeBase.Tools.Extension;
@@ -130,6 +129,9 @@ namespace CodeBase.Infrastructure.Factory
 
         public GameObject CreateCamera() =>
             _assets.Instantiate(AssetPath.Camera);
+
+        public GameObject CreateMenu() =>
+            _assets.Instantiate(AssetPath.Menu);
 
         public GameObject CreateHud() =>
             _assets.InstantiateRegistered(AssetPath.Hud);

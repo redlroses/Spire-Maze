@@ -44,5 +44,7 @@ namespace CodeBase.Infrastructure.Factory
         GameObject CreateMusicPlayer();
 
         GameObject CreateCamera();
+
+        GameObject CreateMenu();
     }
 }

@@ -50,6 +50,7 @@ namespace CodeBase.Services.SaveLoad
 #if !UNITY_EDITOR && UNITY_WEBGL
             PlayerProgress actualProgress = await GetActualSaveData();
             _progressService.Progress = actualProgress;
+            Save(_progressService.Progress);
 #endif
         }
 
@@ -111,7 +112,7 @@ namespace CodeBase.Services.SaveLoad
             PlayerProgress cloudProgress = cloudSaveData.ToDeserialized<PlayerProgress>();
             PlayerProgress localProgress = localSaveData.ToDeserialized<PlayerProgress>();
 
-            return MergeSaves(localProgress, cloudProgress);
+            return MergeSaves(cloudProgress, localProgress);
         }
 
         private void SaveCloud(string saveData) =>

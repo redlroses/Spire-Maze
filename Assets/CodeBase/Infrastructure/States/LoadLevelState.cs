@@ -1,7 +1,4 @@
-﻿#if !UNITY_EDITOR && YANDEX_GAMES
-using Agava.YandexGames;
-#endif
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
@@ -144,32 +141,17 @@ namespace CodeBase.Infrastructure.States
 
         private void HideCurtain(Action onBegin = null)
         {
-            if (_isFirstLoad)
-            {
-                _curtain.Hide(
-                    FirstLoadDelay,
-                    () =>
-                    {
-                        onBegin?.Invoke();
-#if !UNITY_EDITOR && YANDEX_GAMES
-                        YandexGamesSdk.GameReady();
-#endif
-                    });
-
-                _isFirstLoad = false;
-            }
-            else
-            {
-                _curtain.Hide(
-                    DefaultLoadDelay,
-                    () => onBegin?.Invoke());
-            }
+            _curtain.Hide(
+                DefaultLoadDelay,
+                () => onBegin?.Invoke());
         }
 
         private async UniTaskVoid OnLoaded()
         {
             _gameFactory.CreateCamera();
+#if CRAZY_GAMES
             await UniTask.DelayFrame(2);
+#endif
             InitUIRoot();
             await InitGameWorld();
             ValidateLevelProgress();
@@ -180,7 +162,6 @@ namespace CodeBase.Infrastructure.States
             InitHud(hero);
             InitLevelNamePanel();
             RegisterServicesInPauseService();
-            InitMusicPlayer();
             HideCurtain(_stateMachine.Enter<GameLoopState>);
         }
 
@@ -321,12 +302,6 @@ namespace CodeBase.Infrastructure.States
                 ?.Stars ?? 0;
 
             levelNamePanel.Show(starsCount, _loadPayload.LevelId);
-        }
-
-        private void InitMusicPlayer()
-        {
-            if (_isFirstLoad)
-                _gameFactory.CreateMusicPlayer();
         }
 
         private void CameraFollow(GameObject hero)
